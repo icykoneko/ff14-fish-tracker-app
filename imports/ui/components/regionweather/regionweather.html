@@ -1,0 +1,29 @@
+<template name="regionweather">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="regionHeading-{{_id}}">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" href="#collapse-{{_id}}">
+          {{region}}
+        </a>
+      </h4>
+    </div>
+    <div id="collapse-{{_id}}" class="panel-collapse collapse in" role="tabpanel">
+      <div class="panel-body">
+        <div class="row">
+          {{#each area}}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="row">
+                <div class="col-md-6 col-sm-7" style="white-space: nowrap; text-overflow: ellipsis; overflow-x: hidden;">{{name}}</div>
+                <div class="col-md-6 col-sm-5" style="white-space: nowrap">
+                  {{#each weather}}
+                    <img src="images/weather/{{this.icon}}" height="20" width="20" title="{{this.name}}"/>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

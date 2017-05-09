@@ -1,0 +1,64 @@
+<template name="fish">
+  <tr class="{{catchabilityStatus}}">
+    <td class="fishCaught" title="Mark fish as caught">
+      <span class="glyphicon glyphicon-{{#if isCaught}}ok{{else}}unchecked{{/if}}"></span>
+    </td>
+    <td><img src="images/fish_n_tackle/{{icon}}" style="float: left; margin-right: 1em;"/>{{name}}<br/><span class="label label-primary">{{patch}}</span></td>
+    <td>
+      {{#if alwaysAvailable}}
+        Always
+      {{else}}
+        <span data-toggle="tooltip" title="{{availability_nextCatchable_earth}}" data-original-title="{{availability_nextCatchable_earth}}">{{availability_nextCatchable}}</span><br/>
+        <span style="font-size: smaller;">
+          <b>Uptime:</b> {{availability_uptime}}% <b>Next:</b> <span data-toggle="tooltip" data-placement="bottom" title="{{next_catch_time_earth}}" data-original-title="{{next_catch_time_earth}}">{{next_catch_time}}</span>
+        </span>
+      {{/if}}
+    </td>
+    <td><a href="http://garlandtools.org/db/#fishing/{{location.id}}" target="_new">{{location.name}}</a><br/><span style="font-size: smaller;">{{location.zoneName}}</span></td>
+    <td>{{> conditions}}</td>
+    <td>{{> bait}}</td>
+  </tr>
+</template>
+
+<template name="conditions">
+  {{#if previousWeatherSet}}
+    {{#each previousWeatherSet}}
+      <img class="weather-icon" title="{{name}}" src="/images/weather/{{icon}}"/>
+    {{/each}}
+    <span class="glyphicon glyphicon-arrow-right"></span>
+  {{/if}}
+  {{#each weatherSet}}
+    <img class="weather-icon" title="{{name}}" src="/images/weather/{{icon}}"/>
+  {{/each}}
+  <br/><span class="glyphicon glyphicon-time"></span> {{startHour}} - {{endHour}}
+</template>
+
+<template name="bait">
+  {{#each predator in predators}}
+    {{#if @index}}
+      <span style="width: 5px;">&nbsp;</span>
+    {{/if}}
+    <!-- TODO: Detect if fishEyes is required for predator -->
+    <span style="font-size: +150%; font-weight: bold;">{{predator.count}}</span> <img title="{{predator.name}}" src="images/fish_n_tackle/{{predator.icon}}"/>
+  {{/each}}
+  {{#if hasPredators}}
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  {{/if}}
+  {{#if fishEyes}}
+    <img style="margin-left: 4px;" title="Fish Eyes" src="images/status/fisheyes.png"/>
+  {{/if}}
+  {{#if snagging}}
+    <img style="margin-left: 4px;" title="Snagging" src="images/status/snagging.png"/>
+  {{/if}}
+  {{#each bestCatchPath}}
+    {{#if @index}}
+      <span class="glyphicon glyphicon-arrow-right"></span>
+      <img title="{{name}}" src="images/fish_n_tackle/{{icon}}"/>
+    {{else}}
+      <a href="http://www.garlandtools.org/db/#item/{{_id}}" target="_new"><img title="{{name}}" src="images/fish_n_tackle/{{icon}}"/></a>
+    {{/if}}
+  {{/each}}
+  {{#if hookset}}
+    <img style="margin-left: 4px;" title="{{hookset.type}}" src="images/action/{{hookset.icon}}"/>
+  {{/if}}
+</template>
