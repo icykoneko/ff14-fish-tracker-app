@@ -1,7 +1,25 @@
 <template name="fish">
   <tr class="{{catchabilityStatus}}">
-    <td class="fishCaught" title="Mark fish as caught">
-      <span class="glyphicon glyphicon-{{#if isCaught}}ok{{else}}unchecked{{/if}}"></span>
+    <td style="width: 34px;">
+      <div class="pull-left">
+        <div class="btn-group-vertical btn-group-xs" role="group">
+          <div type="button" class="fishCaught btn btn-{{#if isCaught}}success{{else}}default{{/if}}" title="Mark fish as caught" data-toggle="tooltip" data-container="body" data-trigger="hover" data-placement="right">
+            <span class="glyphicon glyphicon-ok text-{{#if isCaught}}success{{else}}muted{{/if}}"></span>
+          </div>
+          <div type="button" class="fishPinned btn btn-{{#if isPinned}}danger{{else}}default{{/if}}" title="Pin fish" data-toggle="tooltip" data-container="body" data-trigger="hover" data-placement="right">
+            <span class="glyphicon glyphicon-pushpin text-{{#unless isPinned}}muted{{/unless}}"></span>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div class="pull-left">
+        <div class="btn-group-vertical btn-group-xs" role="group" style="margin: 40% 0">
+          <button type="button" class="fishAlarm btn btn-{{#if hasAlarm}}warning{{else}}default{{/if}}" title="Set alarm for fish" data-toggle="tooltip" data-container="body" data-trigger="hover">
+            <span class="glyphicon glyphicon-bell text-{{#if hasAlarm}}warning{{else}}muted{{/if}}"></span>
+          </button>
+        </div>
+      </div>
+      -->
     </td>
     <td><img src="images/fish_n_tackle/{{icon}}" style="float: left; margin-right: 1em;"/>{{name}}<br/><span class="label label-primary">{{patch}}</span></td>
     <td>

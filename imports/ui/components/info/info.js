@@ -89,6 +89,14 @@ function isFishAlwaysUp(fish) {
 }
 function sortByWindowPeriods(a, b) {
   var result = 0;
+  // PINNED FISH ALWAYS COME FIRST!!!
+  var pinnedA = completionManager.isFishPinned(a._id) ? -1 : 1;
+  var pinnedB = completionManager.isFishPinned(b._id) ? -1 : 1;
+  result = compare(pinnedA, pinnedB);
+  if (result != 0) {
+    return result;
+  }
+
   // Fish which are ALWAYS up should come AFTER fish with limited uptime.
   var limitedA = isFishAlwaysUp(a) ? 1 : -1;
   var limitedB = isFishAlwaysUp(b) ? 1 : -1;
@@ -237,6 +245,9 @@ Template.info.helpers({
     // maxDate = fishWatcher.getFetchDurationAsEorzeaDuration().afterMoment(baseTime);
 
     allFish = Fishes.find({}).fetch();
+    // Collect just the pinned fish, then remove them from the list.
+    pinnedFish = _(allFish).filter((v) => completionManager.isFishPinned(v._id));
+    allFish = _(allFish).reject((v) => completionManager.isFishPinned(v._id));
     // Filter out patches.
     allFish = _(allFish).filter((v) => patchFilter.get(v.patch));
     if (Session.equals('completionFilter', 'uncaught')) {
@@ -245,8 +256,10 @@ Template.info.helpers({
       allFish = _(allFish).filter((v) => completionManager.isFishCaught(v._id));
     }
     console.log("Current Eorzea Time:", +baseTime);
+    // Now, add the pinned fish back into the list, after sorting them of course.
+    // Pinned fish ALWAYS come first!!!
     var theFishes =
-      _(allFish.sort((a, b) => sortByWindowPeriods(a, b))).map((v) => {
+      _(allFish.concat(pinnedFish).sort((a, b) => sortByWindowPeriods(a, b))).map((v) => {
         // Convert the catchableRanges into actual ranges...
         v.catchableRanges =
           _(v.catchableRanges).map((r) => moment.utc(r[0]).twix(moment.utc(r[1])));
@@ -254,10 +267,6 @@ Template.info.helpers({
       });
     //console.log("FISHES =", theFishes);
     return theFishes;
-    //
-    // return Fishes.find({}, {sort: {"isCatchable": -1,
-    //                                "nextWindowStart": 1,
-    //                                "nextWindowLength": 1,}});
   },
   currentAvailRangeLimit() {
     //return fishWatcher.getFetchDuration().humanize();

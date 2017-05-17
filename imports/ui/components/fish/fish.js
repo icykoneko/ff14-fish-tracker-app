@@ -27,8 +27,15 @@ Template.fish.onRendered(function() {
 });
 
 Template.fish.events({
-  'click .fishCaught, click .fishCaught.glyphicon'() {
+  'click .fishCaught, click .fishCaught.glyphicon'(e) {
     completionManager.toggleCaughtState(this._id);
+    // IMPORTANT: Due to visual updates, you need to manually kill the tooltip.
+    $(e.target).closest('[data-toggle="tooltip"]').tooltip('hide');
+  },
+  'click .fishPinned, click .fishPinned.glyphicon'(e) {
+    completionManager.togglePinnedState(this._id);
+    // IMPORTANT: Due to visual updates, you need to manually kill the tooltip.
+    $(e.target).closest('[data-toggle="tooltip"]').tooltip('hide');
   }
 });
 
@@ -39,6 +46,9 @@ function mergeCatchableRanges(crs) {
 Template.fish.helpers({
   isCaught() {
     return completionManager.isFishCaught(this._id);
+  },
+  isPinned() {
+    return completionManager.isFishPinned(this._id);
   },
   catchabilityStatus() {
     if (completionManager.isFishCaught(this._id)) {
