@@ -7,21 +7,24 @@
     <meta name="author" content="Carbuncle Plushy (Balmung)" />
 
     <title>FFX|V Fish Tracker App</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" />
 
     <!-- <script data-main="js/app" src="https://cdn.jsdelivr.net/requirejs/2.1.22/require.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/underscorejs/1.8.3/underscore-min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/dot.js/1.1.1/doT.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/momentjs/2.18.1/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/twix.js/1.1.5/twix.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/rxjs/4.1.0/rx.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/rxjs/4.1.0/rx.lite.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/knockout/3.4.2/knockout.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script> -->
-    <!--<script src="https://cdn.jsdelivr.net/g/semantic-ui@2.2.10,jquery@3.2.1,twix.js@1.1.5,momentjs@2.18.1,dot.js@1.1.1"></script>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.1/doT.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.0.3/jquery.floatThead.min.js"></script>
 
     <style type="text/css">
       .main.container {
@@ -34,358 +37,415 @@
       img {
         vertical-align: middle;
       }
+      .floatThead-container-fishes {
+        background-color: white;
+      }
+
+      /* Style for active fish (unless caught or pinned) */
+      .ui.striped.table > tr.fish-active:hover:not(.fish-caught):not(.fish-pinned),
+      .ui.striped.table tbody tr.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
+        background-color: hsla(180, 50%, 89%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned),
+      .ui.striped.table tbody tr.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
+        background-color: hsla(180, 100%, 89%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-active:not(.fish-caught):not(.fish-pinned),
+      .ui.striped.table tbody tr.fish-active:not(.fish-caught):not(.fish-pinned) {
+        background-color: hsla(180, 50%, 94%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned),
+      .ui.striped.table tbody tr.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
+        background-color: hsla(180, 100%, 94%, 0.8) !important;
+      }
+      .fish-caught {
+        background-color: lightgreen;
+      }
+
+      /* Pinned Fish (styled only when active) */
+      .ui.striped.table > tr.fish-active.fish-pinned:hover,
+      .ui.striped.table tbody tr.fish-active.fish-pinned:hover {
+        background-color: hsla(350, 50%, 83%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-active.fish-pinned:hover:nth-child(2n),
+      .ui.striped.table tbody tr.fish-active.fish-pinned:hover:nth-child(2n) {
+        background-color: hsla(350, 100%, 83%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-active.fish-pinned,
+      .ui.striped.table tbody tr.fish-active.fish-pinned {
+        background-color: hsla(350, 50%, 88%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-active.fish-pinned:nth-child(2n),
+      .ui.striped.table tbody tr.fish-active.fish-pinned:nth-child(2n) {
+        background-color: hsla(350, 100%, 88%, 0.8) !important;
+      }
     </style>
-    <!-- <script type="text/javascript">
-      ko.doTEngine = function () { }
-      ko.doTEngine.prototype = ko.utils.extend(new ko.templateEngine(), {
-        renderTemplateSource: function (templateSource, bindingContext, options) {
-          var precompiled = templateSource.data('precompiled');
-          if (!precompiled) {
-            precompiled = doT.template("{{ with(it) { with(it.$data) { }}" + templateSource.text() + "{{ } } }}");
-            templateSource.data('precompiled', precompiled);
-          }
 
-          var renderedMarkup = precompiled(bindingContext);
-          return ko.utils.parseHtmlFragment(renderedMarkup);
-        },
-        createJavaScriptEvaluatorBlock: function(script) {
-          return "{{= " + script + "}}";
+    <!-- Semantic UI Overrides -->
+    <style type="text/css">
+
+      /* Large Monitor */
+      @media only screen and (min-width: 1200px) and (max-width: 1499) {
+        .ui.container {
+          width: 1127px;
+          margin-left: auto !important;
+          margin-right: auto !important;
         }
-      });
-      ko.setTemplateEngine(new ko.doTEngine());
-    </script> -->
 
-    <script src="js/app/time.js"></script>
-    <script src="js/app/weather.js"></script>
-    <script src="js/app/fish.js"></script>
-    <script src="js/app/fishwatcher.js"></script>
-    <script type="text/javascript">
-      function shouldLog(a, b) {
-        // fishes = _([a,b]).map((x) => x.name());
-        // return _(fishes).contains("Ghost Carp");
-        return false;
-      }
-      function compare(a, b) {
-        return a < b ? -1 : b < a ? 1 : 0;
-      }
-
-      var maxTime = 0x7FFFFFFFFFFF;
-      function getWindowStart(windows, offset) {
-        if (windows === undefined) { return moment(maxTime); }
-        if (windows.length <= offset) { return moment(maxTime); }
-        return windows[offset].start();
-      }
-      function getWindowEnd(windows, offset) {
-        if (windows === undefined) { return moment(maxTime); }
-        if (windows.length <= offset) { return moment(maxTime); }
-        return windows[offset].end();
-      }
-
-      function compareWindows(aStart, bStart, baseTime) {
-        if (moment(aStart).isBefore(baseTime)) {
-          aStart = moment(baseTime);
+        .ui.grid.container {
+          width: calc( 1127px  +  2rem ) !important;
         }
-        if (moment(bStart).isBefore(baseTime)) {
-          bStart = moment(baseTime);
+
+        .ui.relaxed.grid.container {
+          width: calc( 1127px  +  3rem ) !important;
         }
-        if (moment(aStart).isBefore(bStart)) {
-          return -1;
-        } else if (moment(aStart).isAfter(bStart)) {
-          return 1;
-        } else {
-          return 0;
+
+        .ui.very.relaxed.grid.container {
+          width: calc( 1127px  +  5rem ) !important;
+        }
+      }
+      /* Even larger Monitor */
+      @media only screen and (min-width: 1500px) {
+        .ui.container {
+          width: 1427px;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+
+        .ui.grid.container {
+          width: calc( 1427px  +  2rem ) !important;
+        }
+
+        .ui.relaxed.grid.container {
+          width: calc( 1427px  +  3rem ) !important;
+        }
+
+        .ui.very.relaxed.grid.container {
+          width: calc( 1427px  +  5rem ) !important;
         }
       }
 
-      function sortByNextAvailable(a, b, baseTime) {
-        return compareWindows(getWindowStart(a.catchableRanges.peek(), 0),
-                              getWindowStart(b.catchableRanges.peek(), 0),
-                              baseTime);
+
+
+
+      /* Overrides for Semantic UI 2.2.10 - Button */
+      .ui[class*="very compact"].buttons .button,
+      .ui[class*="very compact"].button {
+        padding: 0.58928571em 0.58928571em 0.58928571em;
       }
 
-      function sortByWindowPeriods(a, b, baseTime) {
-        var result = 0;
-        // Fish which are ALWAYS up should come AFTER fish with limited uptime.
-        var limitedA = a.alwaysAvailable() ? 1 : -1;
-        var limitedB = b.alwaysAvailable() ? 1 : -1;
-        result = compare(limitedA, limitedB);
-        if (shouldLog(a, b))
-          console.log("Comparing all-day availability:", result,
-            "\n", a.name, a.alwaysAvailable(),
-            "\n", b.name, b.alwaysAvailable());
-        if (result != 0) {
-          return result;
-        }
-
-        var aRanges = a.catchableRanges.peek();
-        var bRanges = b.catchableRanges.peek();
-
-        // Next, we must consider fish which are CURRENTLY available.
-        result = sortByNextAvailable(a, b, baseTime);
-        if (shouldLog(a, b))
-          console.log("Comparing next available:", result,
-            "\n", a.name, getWindowStart(aRanges, 0).format(),
-            "\n", b.name, getWindowStart(bRanges, 0).format());
-        if (result != 0) {
-          return result;
-        }
-
-        // How long is it up over the next n windows, relative to the other fish!
-        aUptime = a.uptime();
-        bUptime = b.uptime();
-        // Compare uptime (shorter comes first)
-        result = compare(aUptime, bUptime);
-        if (shouldLog(a, b))
-          console.log("Comparing uptime:", result,
-            "\n", a.name, aUptime,
-            "\n", b.name, bUptime);
-        if (result != 0) return result;
-
-        // If both are the same, the fish with the longer time till next window
-        // comes first.
-        result = compare(getWindowStart(bRanges, 1) || 0,
-                         getWindowStart(aRanges, 1) || 0);
-        if (shouldLog(a, b))
-          console.log("Comparing time till next window:", result,
-            "\n", a.name, getWindowStart(aRanges, 1).format(),
-            "\n", b.name, getWindowStart(bRanges, 1).format());
-        if (result == 0) {
-          // Or, which ever fish's window closes first.
-          result = compare(getWindowEnd(aRanges, 0),
-                           getWindowEnd(bRanges, 0));
-          if (shouldLog(a, b))
-            console.log("Comparing remaining window time:", result,
-              "\n", a.name, getWindowEnd(aRanges, 0).format(),
-              "\n", b.name, getWindowEnd(bRanges, 0).format());
-          if (result == 0) {
-            // Ok fine... SORT BY ID!
-            result = compare(a.id, b.id);
-          }
-        }
-
-        return result;
+      .ui[class*="very compact"].table th {
+        padding: 0.2em 0.3em;
       }
 
-      class AppViewModel {
-        constructor() {
-          this.currentTick = ko.observable(0);
-          Rx.Observable.interval(1000 /*ms*/).subscribe(
-            (x) => this.currentTick(x)
-          );
-
-          this.eorzeaTime = ko.computed(() => {
-            var __dummy = this.currentTick();
-            return eorzeaTime.getCurrentEorzeaDate().format("HH:mm");
-          });
-          this.earthTime = ko.computed(() => {
-            var __dummy = this.currentTick();
-            return moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
-          });
-
-          this.filterCompletion = ko.observable('all');
-          this.filterPatch = ko.observableArray([
-            2, 2.1, 2.2, 2.3, 2.4, 2.5,
-            3, 3.1, 3.2, 3.3, 3.4, 3.5
-          ]);
-
-          this.fishes = ko.computed(() => {
-            console.log("Recomputing displayed fish");
-            var baseTime = eorzeaTime.getCurrentEorzeaDate();
-            // Start with ALL the fishies.
-            var fishes = Fishes;
-            // Filter by patch.
-            // var filterPatch = _(this.filterPatch()).map((v) => Number(v));
-            fishes = _(fishes).filter(
-              (f) => _(this.filterPatch()).contains(f.patch));
-            // Sort the fish by rarity.
-            fishes = fishes.sort((a, b) => sortByWindowPeriods(a, b, baseTime));
-
-            return _(fishes).map((x) => {
-              _(x).extend({
-                catchabilityStatus: ko.computed(() => {
-                  if (x.isCatchable()) {
-                    return "blue";
-                  } else {
-                    return "";
-                  }
-                }),
-                isCaught: ko.computed(() => false),
-                availability: {
-                  now: {
-                    duration: ko.computed(() => {
-                      var crs = x.catchableRanges();
-                      if (crs.length > 0) {
-                        if (moment().isBefore(eorzeaTime.toEarth(crs[0].start()))) {
-                          return this.getUpdatedWindowTimer(eorzeaTime.toEarth(crs[0].start()));
-                        } else {
-                          return "closes " + this.getUpdatedWindowTimer(eorzeaTime.toEarth(crs[0].end()));
-                        }
-                      }
-                      return "unknown";
-                    }),
-                    date: ko.computed(() => {
-                      var crs = x.catchableRanges();
-                      if (crs.length > 0) {
-                        if (moment().isBefore(eorzeaTime.toEarth(crs[0].start()))) {
-                          return eorzeaTime.toEarth(crs[0].start()).local().calendar();
-                        } else {
-                          return eorzeaTime.toEarth(crs[0].end()).local().calendar();
-                        }
-                      }
-                    }),
-                  },
-                  next: {
-                    duration: ko.computed(() => {
-                      var crs = x.catchableRanges();
-                      if (crs.length > 1) {
-                        return this.getUpdatedWindowTimer(eorzeaTime.toEarth(crs[1].start()));
-                      }
-                      return "unknown";
-                    }),
-                    date: ko.computed(() => {
-                      var crs = x.catchableRanges();
-                      if (crs.length > 1) {
-                        return eorzeaTime.toEarth(crs[1].start()).local().calendar();
-                      }
-                    }),
-                  }
-                }
-              });
-              return x;
-            });
-          }).extend({ deferred: true });
-        }
-
-        getUpdatedWindowTimer(date) {
-          var __dummy = this.currentTick();
-          return moment(date).fromNow();
-        }
+      .ui[class*="very compact"].table td {
+        padding: 0.2em 0.3em;
       }
-      var viewModel = new AppViewModel();
+
+      [data-tooltip]:before {
+        z-index: 1102;
+      }
+      [data-tooltip]:after {
+        z-index: 1101;
+      }
+    </style>
+
+    <!-- Include the data -->
+    <script type="text/javascript" src="js/app/data.js"></script>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/app/time.js"></script>
+    <script type="text/javascript" src="js/app/fish.js"></script>
+    <script type="text/javascript" src="js/app/weather.js"></script>
+    <script type="text/javascript" src="js/app/fishwatcher.js"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js"></script>
+
+
+    <!-- Templates -->
+    <script id="fish-table-template" type="text/html;x-dot-template">
+      <table id="fishes" class="ui selectable striped very basic very compact table">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>Name</th>
+            <th>Availability</th>
+            <th>Location</th>
+            <th>Conditions</th>
+            <th style="min-width: 200px">Bait</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </script>
 
-    <script type="text/javascript">
-      $(() => {
-        $filterCompletionButtons = $('#filterCompletion .button');
-        $filterPatchButtons = $('#filterPatch .button');
-
-        $filterCompletionButtons.on('click', function() {
-          $(this).addClass('active').siblings().removeClass('active');
-          viewModel.filterCompletion($(this).data('filter'));
-        });
-
-        $filterPatchButtons.on('click', function() {
-          $(this).toggleClass('active');
-          if ($(this).hasClass('active')) {
-            viewModel.filterPatch.push($(this).data('filter'));
-          } else {
-            viewModel.filterPatch.remove($(this).data('filter'));
-          }
-          console.log("Patches:", viewModel.filterPatch());
-        });
-      })
-    </script>
-
-    <!-- <script type="text/javascript">
-      $(() => {
-        var mainTemplate = doT.template($('#main-template').text());
-        $('body').html(mainTemplate());
-      });
-    </script> -->
-
-    <script id="fish-template" type="text/html">
-      <tr data-bind="css: catchabilityStatus">
-        <td class="collapsed">
-          <i data-bind="css: {'checkmark box icon': isCaught}"></i>
-        </td>
-        <td>
-          <img data-bind="attr: { src: 'public/images/fish_n_tackle/' + icon }" style="float: left; margin-right: 1em;"/>
-          <span data-bind="text: name"></span><br/>
-          <div class="ui tiny circular label" data-bind="text: patch"></div>
-        </td>
-        <td>
-          <!-- ko if: alwaysAvailable() === true -->
-            Always
-          <!-- /ko -->
-          <div data-bind="if: alwaysAvailable() !== true">
-            <span data-bind="attr: { 'data-tooltip': availability.now.date }, text: availability.now.duration"></span><br />
-            <span style="font-size: smaller;">
-              <b>Uptime:</b> <span data-bind="text: (uptime() * 100.0).toFixed(1)"></span>%
-              <b>Next:</b> <span data-bind="attr: { 'data-tooltip': availability.next.date }, text: availability.next.duration"></span>
-            </span>
+    <script id="fish-template" type="text/html;x-dot-template">
+      <tr class="fish-entry {{=it.timerState()}} {{?it.caught}}fish-caught{{?}} {{?it.pinned}}fish-pinned{{?}}" data-id="{{=it.id}}">
+        <!-- Buttons to marking fish as caught or pinned, etc -->
+        <td class="collapsing">
+          <div class="ui vertical mini very compact icon buttons">
+            <div class="ui button fishCaught {{?it.caught}}green{{?}}">
+              <i class="checkmark icon"></i>
+            </div>
+            <div class="ui button fishPinned {{?it.pinned}}red{{?}}">
+              <i class="pin icon"></i>
+            </div>
           </div>
         </td>
-        <td>
-          <a data-bind="attr: { href: 'http://garlandtools.org/db/#fishing/' + location.id},
-                        text: location.name" target="#top"></a><br/>
-          <span style="font-size: smaller" data-bind="text: location.zoneName"></span>
+        <!-- Fish icon, name, and patch info -->
+        <td class="collapsing">
+          <img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}"/>
         </td>
-        <td data-bind="template: 'conditions-template'"></td>
-        <td data-bind="template: 'bait-template'"></td>
+        <td>
+          {{=it.name}}<br/>
+          <div class="ui tiny circular label">{{=it.patch}}</div>
+        </td>
+        <!-- Availability -->
+        <td>
+          {{?it.alwaysAvailable()}}
+            Always
+          {{??}}
+            <span class="fish-availability-current" data-val="{{=+it.availability.current.date()}}" data-tooltip="{{var d = it.availability.current.date(); if (d) { out += d.local().calendar(); } }}">
+              {{=it.availability.current.duration()}}
+            </span><br/>
+            <span style="font-size: smaller">
+              <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
+              <b>Next:</b> <span class="fish-availability-upcoming" data-val="{{=+it.availability.upcoming().date()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += d.local().calendar(); } }}">{{=it.availability.upcoming().duration()}}</span>
+            </span>
+          {{?}}
+        </td>
+        <!-- Location -->
+        <td>
+          <a href="http://garlandtools.org/db/#fishing/{{=it.location.id}}"
+             target="cp_gt">{{=it.location.name}}</a><br/>
+          <span style="font-size: smaller">{{=it.location.zoneName}}</span>
+        </td>
+        <!-- Conditions -->
+        <td>
+          {{?it.conditions.previousWeatherSet.length > 0}}
+            {{~it.conditions.previousWeatherSet :weather:windex}}
+              <img class="ui middle aligned image weather-icon"
+                   src="public/images/weather/{{=weather.icon}}"
+                   title="{{=weather.name}}"/>
+            {{~}}
+            <i class="arrow right icon"></i>
+          {{?}}
+          {{~it.conditions.weatherSet :weather:idx}}
+            <img class="ui middle aligned image weather-icon"
+                 src="public/images/weather/{{=weather.icon}}"
+                 title="{{=weather.name}}"/>
+          {{~}}
+          <br/><i class="wait icon"></i>&nbsp;{{=it.startHour + ' - ' + it.endHour}}
+        </td>
+        <!-- Bait / Predators -->
+        <td>
+          {{?it.bait.hasPredators}}
+            {{~it.bait.predators :predator:idx}}
+              <div class="fish-predator">
+                {{=predator.count}}&nbsp;
+                <img class="ui middle aligned image item-icon-40"
+                     src="public/images/fish_n_tackle/{{=predator.icon}}"
+                     title="{{=predator.name}}"/>
+            {{~}}
+            <i class="chevron right icon"></i>
+          {{?}}
+          {{?it.fishEyes}}
+            <img class="ui middle aligned image" title="Fish Eyes" src="public/images/status/fisheyes.png"/>
+          {{?}}
+          {{?it.snagging}}
+            <img class="ui middle aligned image" title="Snagging" src="public/images/status/snagging.png"/>
+          {{?}}
+          {{~it.bait.path :item:idx}}
+            {{?idx == 0}}
+              <a href="http://www.garlandtools.org/db/#item/{{=item._id}}" target="cp_gt">
+            {{??}}
+              <i class="arrow right icon"></i>
+            {{?}}
+            <img class="ui middle aligned image" title="{{=item.name}}" src="public/images/fish_n_tackle/{{=item.icon}}"/>
+            {{?idx == 0}}
+              </a>
+            {{?}}
+          {{~}}
+        </td>
       </tr>
     </script>
 
-    <script id="conditions-template" type="text/html">
-      <!-- ko with: conditions() -->
-        <!-- ko foreach: previousWeatherSet -->
-          <img class="weather-icon" data-bind="attr: { title: name, src: 'public/images/weather/' + icon }"/>
-        <!-- /ko -->
-        <span data-bind="if: previousWeatherSet.length > 0">
-          <i class="arrow right icon"></i>
-        </span>
-        <!-- ko foreach: weatherSet -->
-          <img class="weather-icon" data-bind="attr: { title: name, src: 'public/images/weather/' + icon }"/>
-        <!-- /ko -->
-        <br/><i class="wait icon"></i> <span data-bind="text: startHour + ' - ' + endHour"> </span>
-      <!-- /ko -->
+
+    <script type="text/javascript">
+      $(() => {
+        // Main header needs to display the current time.
+        Rx.Observable.interval(1000 /*ms*/).timestamp().subscribe((x) => {
+          // Update the main header's earth and eorzea times.
+          $("#earthClock").text(moment(x.timestamp).format("dddd, MMMM Do YYYY, h:mm:ss a"));
+          $("#eorzeaClock").text(eorzeaTime.toEorzea(x.timestamp).format("HH:mm"));
+        });
+
+        var fishTableTemplate = doT.template($('#fish-table-template').text());
+        var fishEntryTemplate = doT.template($('#fish-template').text());
+
+        var fishChangedSubject = new Rx.Subject();
+        var filterCompletionSubject = new Rx.BehaviorSubject(viewModel.filter.completion);
+        var filterPatchSubject = new Rx.BehaviorSubject(viewModel.filter.patch);
+
+        $('#fish-table-container').append(fishTableTemplate());
+        var fishTableElement = $('#fishes tbody');
+        // Initialize the table with all the fishies.
+        _(viewModel.updateAll()).each((fish) => {
+          // Create the initial entry.
+          fishTableElement.append(fishEntryTemplate(fish));
+          // Subscribe to the catchableRanges subject.
+          viewModel.subscriptions.push(
+            fish.catchableRangesObserver.debounce(500).subscribe((r) => {
+              //console.log('Detected change in catchableRanges for', fish.name, r);
+              // // Update the element for this fish please.
+              // $('.fish-entry[data-id=' + fish.id + ']')[0].outerHTML =
+              //   fishEntryTemplate(fish);
+              // Pass this to main page observable since we need to sort stuff
+              // and whatnot...
+              fishChangedSubject.onNext(fish.id);
+            }));
+        });
+
+        // Subscribe to updates for EVERY fish...
+
+
+        $('#fishes').floatThead({
+          position: 'fixed',
+          floatContainerClass: 'floatThead-container-fishes',
+          zIndex: 500,
+          top: function () {
+            return this.top = $('#topmenu').outerHeight(true);
+          }
+        });
+
+        // Register for changes.
+        // Things we care about...
+        //   - Changes in the catchable ranges for each fish.
+        //     - Technically, you only really care about the current bell...
+        //       but I'd like to find some way of binding to the fish's
+        //       data (if possible...)
+        //     - This is the most destructive type of change.
+        //   - Changes in filter settings.
+        //     - Should be less destructive, expect for the whole re-sorting bit...
+        //   - Changes in pinned settings.
+        //     - Would require a re-sort
+        //   - Changes to catchable status.
+        //     - Potentially requires visibility change.
+
+        var updatesNeededSource = Rx.Observable.merge(
+          fishChangedSubject.buffer(() => fishChangedSubject.debounce(500)),
+          filterCompletionSubject.tap((x) => console.log("completion-filter changed:", x)),
+          filterPatchSubject.tap((x) => console.log("patch-filter changed:", x)),
+          viewModel.completionManager.rx_completed,
+          viewModel.completionManager.rx_pinned
+        );
+
+        updatesNeededSource.debounce(250).subscribe((x) => {
+        // fishChangedSubject
+        //   .buffer(() => { return fishChangedSubject.debounce(500); })
+        //   .subscribe((ids) => {
+        //     console.log('The following fish have been updated:', ids);
+            console.log("updates needed", x);
+            // // Get the existing entries, staining each as stale.
+            //var fishEntries = $(".fish-entry", fishTableElement).data("stale", true);
+            //var tbodyNode = fishTableElement[0];
+            $(".fish-entry").remove();
+            _(viewModel.updateAll()).each((fish) => {
+              // Generate a new HTML template for the fish...
+              // TODO: Come up with a less destructive means...
+              var fishHtml = fishEntryTemplate(fish);
+
+              // Grab the existing entry for this fish (if present)
+              // var fishElem = fishEntries.filter('*[data-id=' + fish.id + ']');
+              // if (fishElem.length > 0) {
+              //   // Move the existing child (essentially shuffles the node to
+              //   // the end, raising it back to the top as each entry is done)
+              //   fishElem[0].outerHTML = fishHtml;
+              //   tbodyNode.appendChild(fishElem[0]);
+              // } else {
+              //   fishTableElement.append(fishHtml);
+              // }
+              fishTableElement.append(fishHtml);
+              // Subscribe to the catchableRanges subject.
+              viewModel.subscriptions.push(
+                fish.catchableRangesObserver.skip(1).debounce(500).subscribe((r) => {
+                  //console.log('Detected change in catchableRanges for', fish.name, r);
+                  // // Update the element for this fish please.
+                  // $('.fish-entry[data-id=' + fish.id + ']')[0].outerHTML =
+                  //   fishEntryTemplate(fish);
+                  // Pass this to main page observable since we need to sort stuff
+                  // and whatnot...
+                  fishChangedSubject.onNext(fish.id);
+                }));
+            });
+            // $(".fish-entry[data-stale=true]", fishTableElement).remove();
+
+            var $markAsCaughtButtons = $('.fishCaught.button');
+            var $markAsPinnedButtons = $('.fishPinned.button');
+
+            $markAsCaughtButtons.on('click', function() {
+              var f = Number( $(this).closest('.fish-entry').data('id') );
+              viewModel.completionManager.toggleCaughtState(f);
+            });
+            $markAsPinnedButtons.on('click', function() {
+              var f = Number( $(this).closest('.fish-entry').data('id') );
+              viewModel.completionManager.togglePinnedState(f);
+            });
+
+          });
+
+        Rx.Observable.interval(2500 /*ms*/).timestamp().subscribe((x) => {
+          // Every 5 seconds, update the availability times.
+          _($(".fish-entry")).each((e) => {
+            var currentAvail = $(".fish-availability-current", e);
+            var prefix = $(e).hasClass('fish-active') ? "closes " : "";
+            // currentAvail
+            //   .data("tooltip", moment(currentAvail.data("val")).local().calendar())
+            //   .text(prefix + moment(currentAvail.data("val")).fromNow());
+            // currentAvail
+            //   .text(prefix + formatCountdown(new Date(currentAvail.data("val"))));
+            currentAvail.text(prefix + "in " +
+              dateFns.distanceInWordsToNow(currentAvail.data("val"), {includeSeconds: true}));
+            var upcomingAvail = $(".fish-availability-upcoming", e);
+            // upcomingAvail
+            //   .data("tooltip", moment(upcomingAvail.data("val")).local().calendar())
+            //   .text(moment(upcomingAvail.data("val")).fromNow());
+            // upcomingAvail
+            //   .text(formatCountdown(new Date(upcomingAvail.data("val"))));
+            upcomingAvail.text("in " +
+              dateFns.distanceInWordsToNow(upcomingAvail.data("val"), {includeSeconds: true}));
+          });
+        });
+
+        var $filterCompletionButtons = $('#filterCompletion .button');
+        var $filterPatchButtons = $('#filterPatch .button');
+
+        $filterCompletionButtons.on('click', function() {
+          $(this).addClass('active').siblings().removeClass('active');
+          viewModel.filter.completion = $(this).data('filter');
+          filterCompletionSubject.onNext(viewModel.filter.completion);
+        });
+
+        $filterPatchButtons.on('click', function() {
+          var p = Number( $(this).toggleClass('active').data('filter') );
+          if ($(this).hasClass('active')) {
+            viewModel.filter.patch.push(p);
+          } else {
+            viewModel.filter.patch = _(viewModel.filter.patch).without(p);
+          }
+          console.log("Patches:", viewModel.filter.patch);
+          filterPatchSubject.onNext(viewModel.filter.patch);
+        });
+      });
     </script>
 
-    <script id="bait-template" type="text/html">
-      <!-- ko with: bait() -->
-        <!-- ko foreach: predators -->
-          <!-- ko if: $index() > 0 -->
-            <span style="width: 5px;">&nbsp;</span>
-          <!-- /ko -->
-          <span style="font-size: +150%; font-weight: bold;" data-bind="text: count"> </span>
-          <img data-bind="attr: { title: name, src: 'public/images/fish_n_tackle/' + icon }"/>
-        <!-- /ko -->
-        <!-- ko if: hasPredators -->
-          <i class="chevron right icon"></i>
-        <!-- /ko -->
-        <!-- ko if: $parent.fishEyes -->
-          <img style="margin-left: 4px;" title="Fish Eyes" src="public/images/status/fisheyes.png"/>
-        <!-- /ko -->
-        <!-- ko if: $parent.snagging -->
-          <img style="margin-left: 4px;" title="Snagging" src="public/images/status/snagging.png"/>
-        <!-- /ko -->
-        <!-- ko foreach: bestCatchPath -->
-          <!-- ko if: $index() > 0 -->
-            <i class="arrow right icon"></i>
-            <img data-bind="attr: { title: name, src: 'public/images/fish_n_tackle/' + icon }"/>
-          <!-- /ko -->
-          <!-- ko if: $index() == 0 -->
-            <a data-bind="attr: { href: 'http://www.garlandtools.org/db/#item/' + _id }"
-               target="_top"><img data-bind="attr: { title: name, src: 'public/images/fish_n_tackle/' + icon }"/></a>
-          <!-- /ko -->
-        <!-- /ko -->
-        <!-- ko if: $parent.hookset -->
-          <img style="margin-left: 4px;"
-               data-bind="attr: { title: $parent.hookset,
-                                  src: 'public/images/action/' + $parent.hookset.toLowerCase() + '_hookset.png' }"/>
-        <!-- /ko -->
-      <!-- /ko -->
-    </script>
   </head>
   <body>
-    <!-- <div data-bind="template: 'main-template'"></div> -->
-
-    <div class="ui text top fixed menu" style="background-color: white;">
+    <div id="topmenu" class="ui text top fixed menu" style="background-color: white;">
       <div class="ui container">
         <div class="header item">FFX|V Fish Tracker App</div>
         <div class="right item">
-          <b>Current Time:</b>&nbsp;
-          <span data-bind="text: eorzeaTime"></span>&nbsp;
-          (<span data-bind="text: earthTime"></span>)
+          <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
         </div>
       </div>
     </div>
@@ -397,7 +457,7 @@
 
       <div id="filterCompletion">
         <span class="ui">Completion:</span>
-        <div class="ui mini buttons" style="margin-top: 4px;">
+        <div class="ui mini very compact buttons" style="margin-top: 4px;">
           <button class="ui active button" data-filter="all">All</button>
           <button class="ui button" data-filter="caught">Caught</button>
           <button class="ui button" data-filter="uncaught">Uncaught</button>
@@ -405,7 +465,7 @@
       </div>
       <div id="filterPatch">
         <span class="ui">Patch:</span>
-        <div class="ui mini buttons" style="margin-top: 4px;">
+        <div class="ui mini very compact buttons" style="margin-top: 4px;">
           <div class="ui active button" data-filter="2">2.0</div>
           <div class="ui active button" data-filter="2.1">2.1</div>
           <div class="ui active button" data-filter="2.2">2.2</div>
@@ -413,7 +473,7 @@
           <div class="ui active button" data-filter="2.4">2.4</div>
           <div class="ui active button" data-filter="2.5">2.5</div>
         </div>
-        <div class="ui mini buttons">
+        <div class="ui mini very compact buttons">
           <div class="ui active button" data-filter="3">3.0</div>
           <div class="ui active button" data-filter="3.1">3.1</div>
           <div class="ui active button" data-filter="3.2">3.2</div>
@@ -424,25 +484,7 @@
       </div>
 
       <!-- Display the list of fish -->
-      <table id="fishes" class="ui selectable striped very basic very compact table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Availability</th>
-            <th>Location</th>
-            <th>Conditions</th>
-            <th>Bait</th>
-          </tr>
-        </thead>
-        <tbody data-bind="template: { name: 'fish-template',
-                                      foreach: fishes }"></tbody>
-      </table>
+      <div id="fish-table-container"></div>
     </div>
-
-    <script type="text/javascript">
-      ko.applyBindings(viewModel);
-      //fishWatcher.updateFishes();
-    </script>
   </body>
 </html>

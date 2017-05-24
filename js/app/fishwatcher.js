@@ -1,5 +1,3 @@
-// Uses Fishes from fish.js
-
 class FishWatcher {
   constructor() {
     // Total number of windows to keep track of.
@@ -12,17 +10,15 @@ class FishWatcher {
   updateFishes() {
     console.info("FishWatcher is considering updating fishies >< c> |o.o)>");
 
-    // NOTE: We're using Knockout to manage dependency injection on the elements
-    //       of the Fishes array.
-
     // CLEANUP PHASE:
     //   Remove expired windows first.
     var eDate = eorzeaTime.getCurrentEorzeaDate();
     _(Fishes).each((fish) => {
-      if (fish.catchableRanges().length > 0 &&
-          eDate.isSameOrAfter(fish.catchableRanges()[0].end())) {
+      if (fish.catchableRanges.length > 0 &&
+          eDate.isSameOrAfter(fish.catchableRanges[0].end())) {
         // Remove the first entry from the array.
         fish.catchableRanges.shift();
+        fish.notifyCatchableRangesUpdated();
       }
     });
 
@@ -30,14 +26,14 @@ class FishWatcher {
     //   Ensure each fish has at least 'n' windows defined.
     _(Fishes).chain()
       .reject((fish) => fish.alwaysAvailable())
-      .filter((fish) => fish.catchableRanges().length < this.maxWindows)
+      .filter((fish) => fish.catchableRanges.length < this.maxWindows)
       .each((fish) => this.updateRangesForFish(fish));
   }
 
   updateRangesForFish(fish) {
     // Resume from when the last window ended (if possible)
     var startOfWindow = null;
-    var latestWindow = _(fish.catchableRanges()).last();
+    var latestWindow = _(fish.catchableRanges).last();
     if (latestWindow) {
       startOfWindow = moment.utc(latestWindow.end());
       var h = startOfWindow.hour();
@@ -62,7 +58,7 @@ class FishWatcher {
     // Need to know if the last range could span periods.
     var lastRangeSpansPeriods = false;
 
-    while (fish.catchableRanges().length < this.maxWindows) {
+    while (fish.catchableRanges.length < this.maxWindows) {
       var _iterItem = weatherIter.next();
       if (_iterItem.done) {
         console.warn("Stopped iterating early for:", fish);
@@ -78,7 +74,7 @@ class FishWatcher {
       lastRangeSpansPeriods = false;
       // This time, just peek at the NEXT period.
       var iter = weatherService.findWeatherPattern(
-        moment.utc(_(fish.catchableRanges()).last().end()),
+        moment.utc(_(fish.catchableRanges).last().end()),
         fish.location.zoneId,
         fish.previousWeatherSet,
         fish.weatherSet,

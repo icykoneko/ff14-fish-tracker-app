@@ -6,7 +6,7 @@ const MS_IN_A_DAY = 24 * MS_IN_AN_HOUR;
 class EorzeaTime {
   constructor() {
     this.currentBellChanged = Rx.Observable
-      .interval(1 * EARTH_TO_EORZEA /* ms */)
+      .interval(0.75 * EARTH_TO_EORZEA /* ms */)
       .timestamp()
       .map((v) => this.toEorzea(v.timestamp).hour())
       .distinctUntilChanged()
