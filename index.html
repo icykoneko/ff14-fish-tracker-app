@@ -15,7 +15,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.1/doT.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.min.js"></script>
@@ -23,7 +24,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.0.3/jquery.floatThead.min.js"></script>
 
     <style type="text/css">
@@ -42,42 +44,90 @@
       }
 
       /* Style for active fish (unless caught or pinned) */
-      .ui.striped.table > tr.fish-active:hover:not(.fish-caught):not(.fish-pinned),
-      .ui.striped.table tbody tr.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
+      .ui.striped.table > tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned),
+      .ui.striped.table tbody tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
         background-color: hsla(180, 50%, 89%, 0.8) !important;
       }
-      .ui.striped.table > tr.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned),
-      .ui.striped.table tbody tr.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
+      .ui.striped.table > tr.fish-entry.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned),
+      .ui.striped.table tbody tr.fish-entry.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
         background-color: hsla(180, 100%, 89%, 0.8) !important;
       }
-      .ui.striped.table > tr.fish-active:not(.fish-caught):not(.fish-pinned),
-      .ui.striped.table tbody tr.fish-active:not(.fish-caught):not(.fish-pinned) {
+      .ui.striped.table > tr.fish-entry.fish-active:not(.fish-caught):not(.fish-pinned),
+      .ui.striped.table tbody tr.fish-entry.fish-active:not(.fish-caught):not(.fish-pinned) {
         background-color: hsla(180, 50%, 94%, 0.8) !important;
       }
-      .ui.striped.table > tr.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned),
-      .ui.striped.table tbody tr.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
+      .ui.striped.table > tr.fish-entry.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned),
+      .ui.striped.table tbody tr.fish-entry.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
         background-color: hsla(180, 100%, 94%, 0.8) !important;
       }
-      .fish-caught {
-        background-color: lightgreen;
+
+      .ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover,
+      .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover {
+        background-color: hsla(150, 50%, 75%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover:nth-child(2n),
+      .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover:nth-child(2n) {
+        background-color: hsla(150, 100%, 75%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry.fish-active.fish-caught,
+      .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught {
+        background-color: hsla(150, 50%, 80%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry.fish-active.fish-caught:nth-child(2n),
+      .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:nth-child(2n) {
+        background-color: hsla(150, 100%, 80%, 0.8) !important;
+      }
+
+      .ui.striped.table > tr.fish-entry.fish-caught:hover,
+      .ui.striped.table tbody tr.fish-entry.fish-caught:hover {
+        background-color: hsla(120, 50%, 75%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry.fish-caught:hover:nth-child(2n),
+      .ui.striped.table tbody tr.fish-entry.fish-caught:hover:nth-child(2n) {
+        background-color: hsla(120, 100%, 75%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry.fish-caught,
+      .ui.striped.table tbody tr.fish-entry.fish-caught {
+        background-color: hsla(120, 50%, 80%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry.fish-caught:nth-child(2n),
+      .ui.striped.table tbody tr.fish-entry.fish-caught:nth-child(2n) {
+        background-color: hsla(120, 100%, 80%, 0.8) !important;
       }
 
       /* Pinned Fish (styled only when active) */
-      .ui.striped.table > tr.fish-active.fish-pinned:hover,
-      .ui.striped.table tbody tr.fish-active.fish-pinned:hover {
+      .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover,
+      .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover {
         background-color: hsla(350, 50%, 83%, 0.8) !important;
       }
-      .ui.striped.table > tr.fish-active.fish-pinned:hover:nth-child(2n),
-      .ui.striped.table tbody tr.fish-active.fish-pinned:hover:nth-child(2n) {
+      .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover:nth-child(2n),
+      .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover:nth-child(2n) {
         background-color: hsla(350, 100%, 83%, 0.8) !important;
       }
-      .ui.striped.table > tr.fish-active.fish-pinned,
-      .ui.striped.table tbody tr.fish-active.fish-pinned {
+      .ui.striped.table > tr.fish-entry.fish-active.fish-pinned,
+      .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned {
         background-color: hsla(350, 50%, 88%, 0.8) !important;
       }
-      .ui.striped.table > tr.fish-active.fish-pinned:nth-child(2n),
-      .ui.striped.table tbody tr.fish-active.fish-pinned:nth-child(2n) {
+      .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:nth-child(2n),
+      .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:nth-child(2n) {
         background-color: hsla(350, 100%, 88%, 0.8) !important;
+      }
+
+      .ui.striped.table > tr.fish-entry:hover,
+      .ui.striped.table tbody tr.fish-entry:hover {
+        background-color: hsla(50, 50%, 90%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry:hover:nth-child(2n),
+      .ui.striped.table tbody tr.fish-entry:hover:nth-child(2n) {
+        background-color: hsla(50, 50%, 95%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry,
+      .ui.striped.table tbody tr.fish-entry {
+        background-color: hsla(0, 0%, 95%, 0.8) !important;
+      }
+      .ui.striped.table > tr.fish-entry:nth-child(2n),
+      .ui.striped.table tbody tr.fish-entry:nth-child(2n) {
+        background-color: hsla(0, 0%, 100%, 0.8) !important;
       }
     </style>
 
@@ -172,7 +222,7 @@
             <th>Availability</th>
             <th>Location</th>
             <th>Conditions</th>
-            <th style="min-width: 200px">Bait</th>
+            <th style="min-width: 240px;">Bait</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -306,9 +356,6 @@
             }));
         });
 
-        // Subscribe to updates for EVERY fish...
-
-
         $('#fishes').floatThead({
           position: 'fixed',
           floatContainerClass: 'floatThead-container-fishes',
@@ -379,6 +426,7 @@
                 }));
             });
             // $(".fish-entry[data-stale=true]", fishTableElement).remove();
+            $('#fishes').floatThead();
 
             var $markAsCaughtButtons = $('.fishCaught.button');
             var $markAsPinnedButtons = $('.fishPinned.button');
@@ -405,7 +453,7 @@
             // currentAvail
             //   .text(prefix + formatCountdown(new Date(currentAvail.data("val"))));
             currentAvail.text(prefix + "in " +
-              dateFns.distanceInWordsToNow(currentAvail.data("val"), {includeSeconds: true}));
+              dateFns.distanceInWordsToNow(currentAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
             var upcomingAvail = $(".fish-availability-upcoming", e);
             // upcomingAvail
             //   .data("tooltip", moment(upcomingAvail.data("val")).local().calendar())
@@ -413,7 +461,7 @@
             // upcomingAvail
             //   .text(formatCountdown(new Date(upcomingAvail.data("val"))));
             upcomingAvail.text("in " +
-              dateFns.distanceInWordsToNow(upcomingAvail.data("val"), {includeSeconds: true}));
+              dateFns.distanceInWordsToNow(upcomingAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
           });
         });
 

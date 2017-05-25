@@ -223,10 +223,10 @@ class ViewModel {
               if (crs.length > 0) {
                 if (moment().isBefore(eorzeaTime.toEarth(crs[0].start()))) {
                   return "in " + dateFns.distanceInWordsToNow(
-                    +eorzeaTime.toEarth(crs[0].start()), {includeSeconds: true});
+                    +eorzeaTime.toEarth(crs[0].start()), {includeSeconds: true}).replace("about ", "~");
                 } else {
                   return "closes in " + dateFns.distanceInWordsToNow(
-                    +eorzeaTime.toEarth(crs[0].end()), {includeSeconds: true});
+                    +eorzeaTime.toEarth(crs[0].end()), {includeSeconds: true}).replace("about ", "~");
                 }
               }
               return "unknown";
@@ -248,7 +248,7 @@ class ViewModel {
                 var crs = x.catchableRanges;
                 if (crs.length > i) {
                   return "in " + dateFns.distanceInWordsToNow(
-                    +eorzeaTime.toEarth(crs[i].start()), {includeSeconds: true});
+                    +eorzeaTime.toEarth(crs[i].start()), {includeSeconds: true}).replace("about ", "~");
                 }
                 return "unknown";
               },
