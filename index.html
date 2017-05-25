@@ -43,10 +43,14 @@
         background-color: white;
       }
 
+      .fish-predator {
+        float: left;
+      }
+
       /* Style for active fish (unless caught or pinned) */
       .ui.striped.table > tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned),
       .ui.striped.table tbody tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
-        background-color: hsla(180, 50%, 89%, 0.8) !important;
+        background-color: hsla(180, 60%, 89%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned),
       .ui.striped.table tbody tr.fish-entry.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
@@ -54,7 +58,7 @@
       }
       .ui.striped.table > tr.fish-entry.fish-active:not(.fish-caught):not(.fish-pinned),
       .ui.striped.table tbody tr.fish-entry.fish-active:not(.fish-caught):not(.fish-pinned) {
-        background-color: hsla(180, 50%, 94%, 0.8) !important;
+        background-color: hsla(180, 60%, 94%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned),
       .ui.striped.table tbody tr.fish-entry.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
@@ -63,7 +67,7 @@
 
       .ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover,
       .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover {
-        background-color: hsla(150, 50%, 75%, 0.8) !important;
+        background-color: hsla(150, 60%, 75%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover:nth-child(2n),
       .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover:nth-child(2n) {
@@ -71,7 +75,7 @@
       }
       .ui.striped.table > tr.fish-entry.fish-active.fish-caught,
       .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught {
-        background-color: hsla(150, 50%, 80%, 0.8) !important;
+        background-color: hsla(150, 60%, 80%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry.fish-active.fish-caught:nth-child(2n),
       .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:nth-child(2n) {
@@ -80,7 +84,7 @@
 
       .ui.striped.table > tr.fish-entry.fish-caught:hover,
       .ui.striped.table tbody tr.fish-entry.fish-caught:hover {
-        background-color: hsla(120, 50%, 75%, 0.8) !important;
+        background-color: hsla(120, 60%, 75%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry.fish-caught:hover:nth-child(2n),
       .ui.striped.table tbody tr.fish-entry.fish-caught:hover:nth-child(2n) {
@@ -88,7 +92,7 @@
       }
       .ui.striped.table > tr.fish-entry.fish-caught,
       .ui.striped.table tbody tr.fish-entry.fish-caught {
-        background-color: hsla(120, 50%, 80%, 0.8) !important;
+        background-color: hsla(120, 60%, 80%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry.fish-caught:nth-child(2n),
       .ui.striped.table tbody tr.fish-entry.fish-caught:nth-child(2n) {
@@ -98,7 +102,7 @@
       /* Pinned Fish (styled only when active) */
       .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover,
       .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover {
-        background-color: hsla(350, 50%, 83%, 0.8) !important;
+        background-color: hsla(350, 60%, 83%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover:nth-child(2n),
       .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover:nth-child(2n) {
@@ -106,7 +110,7 @@
       }
       .ui.striped.table > tr.fish-entry.fish-active.fish-pinned,
       .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned {
-        background-color: hsla(350, 50%, 88%, 0.8) !important;
+        background-color: hsla(350, 60%, 88%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:nth-child(2n),
       .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:nth-child(2n) {
@@ -115,11 +119,11 @@
 
       .ui.striped.table > tr.fish-entry:hover,
       .ui.striped.table tbody tr.fish-entry:hover {
-        background-color: hsla(50, 50%, 90%, 0.8) !important;
+        background-color: hsla(50, 65%, 90%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry:hover:nth-child(2n),
       .ui.striped.table tbody tr.fish-entry:hover:nth-child(2n) {
-        background-color: hsla(50, 50%, 95%, 0.8) !important;
+        background-color: hsla(50, 65%, 95%, 0.8) !important;
       }
       .ui.striped.table > tr.fish-entry,
       .ui.striped.table tbody tr.fish-entry {
@@ -175,8 +179,10 @@
         }
       }
 
-
-
+      /* Overrides for Semantic UI 2.2.10 - Icon */
+      i.icon {
+        margin: inherit !important;
+      }
 
       /* Overrides for Semantic UI 2.2.10 - Button */
       .ui[class*="very compact"].buttons .button,
@@ -219,7 +225,7 @@
             <th></th>
             <th></th>
             <th>Name</th>
-            <th>Availability</th>
+            <th style="min-width: 200px;">Availability</th>
             <th>Location</th>
             <th>Conditions</th>
             <th style="min-width: 240px;">Bait</th>
@@ -292,10 +298,11 @@
           {{?it.bait.hasPredators}}
             {{~it.bait.predators :predator:idx}}
               <div class="fish-predator">
-                {{=predator.count}}&nbsp;
+                <span style="font-size: +150%">{{=predator.count}}</span>&nbsp;
                 <img class="ui middle aligned image item-icon-40"
                      src="public/images/fish_n_tackle/{{=predator.icon}}"
                      title="{{=predator.name}}"/>
+              </div>
             {{~}}
             <i class="chevron right icon"></i>
           {{?}}
