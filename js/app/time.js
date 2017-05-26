@@ -8,23 +8,21 @@ class EorzeaTime {
     this.currentBellChanged = Rx.Observable
       .interval(0.75 * EARTH_TO_EORZEA /* ms */)
       .timestamp()
-      .map((v) => this.toEorzea(v.timestamp).hour())
+      .map((v) => dateFns.utc.getHours(this.toEorzea(v.timestamp)))
       .distinctUntilChanged()
       .doOnNext((v) => console.log("Current bell is now:", v));
   }
 
   getCurrentEorzeaDate() {
-    return this.toEorzea(moment.utc());
+    return this.toEorzea(Date.now());
   }
 
   toEorzea(earthDate) {
-    var eorzeaMs = earthDate.valueOf() * EARTH_TO_EORZEA;
-    return moment.utc(eorzeaMs);
+    return +earthDate * EARTH_TO_EORZEA;
   }
 
   toEarth(eorzeaDate) {
-    var earthMs = Math.ceil(eorzeaDate.valueOf() * EORZEA_TO_EARTH);
-    return moment.utc(earthMs);
+    return Math.ceil(+eorzeaDate * EORZEA_TO_EARTH);
   }
 }
 

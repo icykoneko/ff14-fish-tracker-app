@@ -15,7 +15,7 @@ class FishWatcher {
     var eDate = eorzeaTime.getCurrentEorzeaDate();
     _(Fishes).each((fish) => {
       if (fish.catchableRanges.length > 0 &&
-          eDate.isSameOrAfter(fish.catchableRanges[0].end())) {
+          dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
         // Remove the first entry from the array.
         fish.catchableRanges.shift();
         fish.notifyCatchableRangesUpdated();
@@ -35,13 +35,13 @@ class FishWatcher {
     var startOfWindow = null;
     var latestWindow = _(fish.catchableRanges).last();
     if (latestWindow) {
-      startOfWindow = moment.utc(latestWindow.end());
-      var h = startOfWindow.hour();
+      startOfWindow = new Date(+latestWindow.end());
+      var h = dateFns.utc.getHours(startOfWindow);
       if (h != 0 && h != 8 && h != 16) {
         // OPTIMIZATION (and safeguard):
         // Since we always check the entire weather period, we need to move to
         // the next period if the last window ended before the period ended.
-        startOfPeriod(startOfWindow).add(8, 'hours');
+        startOfWindow = dateFns.utc.addHours(startOfPeriod(startOfWindow), 8);
       }
     } else {
       // Use the current date as the start time (first run)
@@ -74,7 +74,7 @@ class FishWatcher {
       lastRangeSpansPeriods = false;
       // This time, just peek at the NEXT period.
       var iter = weatherService.findWeatherPattern(
-        moment.utc(_(fish.catchableRanges).last().end()),
+        +_(fish.catchableRanges).last().end(),
         fish.location.zoneId,
         fish.previousWeatherSet,
         fish.weatherSet,
@@ -96,7 +96,7 @@ class FishWatcher {
     }
     // SAFEGUARD! Verify this range hasn't already expired!!!
     // This is more here to prevent any future stupidity...
-    if (nextRange.end().isSameOrBefore(eorzeaTime.getCurrentEorzeaDate())) {
+    if (dateFns.isSameOrBefore(+nextRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
       //console.error("Range has already expired:", nextRange.simpleFormat());
       return false;
     }
@@ -113,7 +113,7 @@ class FishWatcher {
         // Once again, we need to check if the weather right now works for
         // the predator fish.
         var iter = weatherService.findWeatherPattern(
-          nextRange.start(),
+          +nextRange.start(),
           predatorFish.location.zoneId,
           predatorFish.previousWeatherSet,
           predatorFish.weatherSet,
@@ -123,7 +123,7 @@ class FishWatcher {
         var predWindow = _iterItem.value;
         var predRange = predatorFish.availableRangeDuring(predWindow);
         if (!predWindow.overlaps(predRange)) { return nextRange = null; }
-        if (predRange.end().isSameOrBefore(eorzeaTime.getCurrentEorzeaDate())) {
+        if (dateFns.isSameOrBefore(+predRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
           return nextRange = null;
         }
         // Reduce the next range by intersecting with predator's range.
@@ -139,7 +139,7 @@ class FishWatcher {
     // Update the catchable ranges using the intersection of the next range
     // and the window itself. Merge together bordering windows.
     fish.addCatchableRange(nextRange.intersection(window));
-    return nextRange.contains(window.end().add(1));
+    return nextRange.contains(+window.end() + 1);
   }
 }
 

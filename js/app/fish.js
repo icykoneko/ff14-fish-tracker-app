@@ -47,7 +47,7 @@ class Fish {
   isCatchable() {
     var crs = this.catchableRanges;
     if (crs.length > 0) {
-      return moment().isSameOrAfter(eorzeaTime.toEarth(crs[0].start()));
+      return dateFns.isSameOrAfter(Date.now(), eorzeaTime.toEarth(+crs[0].start()));
     }
     return false;
   }
@@ -86,25 +86,29 @@ class Fish {
     }
     // How long is the fish normally available?
     var d = this.dailyDuration;
-    var m = r.start();
+    var m = +r.start();
     if (this.endHour < this.startHour) {
       // Available times wraps around date...
-      if (m.hour() < this.endHour) {
+      if (dateFns.utc.getHours(m) < this.endHour) {
         // Return the *remaining* portion of the catchable range which started
         // yesterday.
-        return d.afterMoment(m.subtract(1, 'day').hour(this.startHour));
+        return d.afterMoment(
+          moment.utc(dateFns.utc.setHours(dateFns.utc.subDays(m, 1), this.startHour)));
       } else {
         // Otherwise, return the window for today.
-        return d.afterMoment(m.hour(this.startHour));
+        return d.afterMoment(
+          moment.utc(dateFns.utc.setHours(m, this.startHour)));
       }
     } else {
       // Available times limited to this date.
-      if (m.hour() < this.endHour) {
+      if (dateFns.utc.getHours(m) < this.endHour) {
         // The fish's *current* range begins (or began) today.
-        return d.afterMoment(m.hour(this.startHour));
+        return d.afterMoment(
+          moment.utc(dateFns.utc.setHours(m, this.startHour)));
       } else {
         // Return tomorrow's range since we're already past today's window.
-        return d.afterMoment(m.add(1, 'day').hour(this.startHour));
+        return d.afterMoment(
+          moment.utc(dateFns.utc.setHours(dateFns.utc.addDays(m, 1), this.startHour)));
       }
     }
   }

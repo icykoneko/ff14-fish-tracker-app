@@ -22,6 +22,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"></script>
+    <script src="js/lib/dateFns.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.js"></script> -->
@@ -256,12 +257,12 @@
           {{?it.alwaysAvailable()}}
             Always
           {{??}}
-            <span class="fish-availability-current" data-val="{{=+it.availability.current.date()}}" data-tooltip="{{var d = it.availability.current.date(); if (d) { out += d.local().calendar(); } }}">
+            <span class="fish-availability-current" data-val="{{=it.availability.current.date()}}" data-tooltip="{{var d = it.availability.current.date(); if (d) { out += moment(d).calendar(); } }}">
               {{=it.availability.current.duration()}}
             </span><br/>
             <span style="font-size: smaller">
               <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
-              <b>Next:</b> <span class="fish-availability-upcoming" data-val="{{=+it.availability.upcoming().date()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += d.local().calendar(); } }}">{{=it.availability.upcoming().duration()}}</span>
+              <b>Next:</b> <span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().duration()}}</span>
             </span>
           {{?}}
         </td>
@@ -328,8 +329,8 @@
         // Main header needs to display the current time.
         Rx.Observable.interval(1000 /*ms*/).timestamp().subscribe((x) => {
           // Update the main header's earth and eorzea times.
-          $("#earthClock").text(moment(x.timestamp).format("dddd, MMMM Do YYYY, h:mm:ss a"));
-          $("#eorzeaClock").text(eorzeaTime.toEorzea(x.timestamp).format("HH:mm"));
+          $("#earthClock").text(dateFns.format(x.timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
+          $("#eorzeaClock").text(moment.utc(eorzeaTime.toEorzea(x.timestamp)).format("HH:mm"));
         });
 
         var fishTableTemplate = doT.template($('#fish-table-template').text());

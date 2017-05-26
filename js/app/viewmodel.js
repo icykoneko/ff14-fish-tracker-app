@@ -58,30 +58,24 @@ sortByWindowPeriods = function() {
 
   var maxTime = 0x7FFFFFFFFFFF;
   function getWindowStart(windows, offset) {
-    if (windows === undefined) { return moment(maxTime); }
-    if (windows.length <= offset) { return moment(maxTime); }
-    return windows[offset].start();
+    if (windows === undefined) { return maxTime; }
+    if (windows.length <= offset) { return maxTime; }
+    return +windows[offset].start();
   }
   function getWindowEnd(windows, offset) {
-    if (windows === undefined) { return moment(maxTime); }
-    if (windows.length <= offset) { return moment(maxTime); }
-    return windows[offset].end();
+    if (windows === undefined) { return maxTime; }
+    if (windows.length <= offset) { return maxTime; }
+    return +windows[offset].end();
   }
 
   function compareWindows(aStart, bStart, baseTime) {
-    if (moment(aStart).isBefore(baseTime)) {
-      aStart = moment(baseTime);
+    if (dateFns.isBefore(aStart, baseTime)) {
+      aStart = baseTime;
     }
-    if (moment(bStart).isBefore(baseTime)) {
-      bStart = moment(baseTime);
+    if (dateFns.isBefore(bStart, baseTime)) {
+      bStart = baseTime;
     }
-    if (moment(aStart).isBefore(bStart)) {
-      return -1;
-    } else if (moment(aStart).isAfter(bStart)) {
-      return 1;
-    } else {
-      return 0;
-    }
+    return dateFns.compareAsc(aStart, bStart);
   }
 
   function sortByNextAvailable(a, b, baseTime) {
@@ -118,8 +112,8 @@ sortByWindowPeriods = function() {
     result = sortByNextAvailable(a, b, baseTime);
     if (shouldLog(a, b))
       console.log("Comparing next available:", result,
-        "\n", a.name, getWindowStart(aRanges, 0).format(),
-        "\n", b.name, getWindowStart(bRanges, 0).format());
+        "\n", a.name, getWindowStart(aRanges, 0).toUTCString(),
+        "\n", b.name, getWindowStart(bRanges, 0).toUTCString());
     if (result != 0) {
       return result;
     }
@@ -141,16 +135,16 @@ sortByWindowPeriods = function() {
                      getWindowStart(aRanges, 1) || 0);
     if (shouldLog(a, b))
       console.log("Comparing time till next window:", result,
-        "\n", a.name, getWindowStart(aRanges, 1).format(),
-        "\n", b.name, getWindowStart(bRanges, 1).format());
+        "\n", a.name, getWindowStart(aRanges, 1).toUTCString(),
+        "\n", b.name, getWindowStart(bRanges, 1).toUTCString());
     if (result == 0) {
       // Or, which ever fish's window closes first.
       result = compare(getWindowEnd(aRanges, 0),
                        getWindowEnd(bRanges, 0));
       if (shouldLog(a, b))
         console.log("Comparing remaining window time:", result,
-          "\n", a.name, getWindowEnd(aRanges, 0).format(),
-          "\n", b.name, getWindowEnd(bRanges, 0).format());
+          "\n", a.name, getWindowEnd(aRanges, 0).toUTCString(),
+          "\n", b.name, getWindowEnd(bRanges, 0).toUTCString());
       if (result == 0) {
         // Ok fine... SORT BY ID!
         result = compare(a.id, b.id);
@@ -221,12 +215,12 @@ class ViewModel {
             duration: () => {
               var crs = x.catchableRanges;
               if (crs.length > 0) {
-                if (moment().isBefore(eorzeaTime.toEarth(crs[0].start()))) {
+                if (dateFns.isFuture(eorzeaTime.toEarth(+crs[0].start()))) {
                   return "in " + dateFns.distanceInWordsToNow(
-                    +eorzeaTime.toEarth(crs[0].start()), {includeSeconds: true}).replace("about ", "~");
+                    eorzeaTime.toEarth(+crs[0].start()), {includeSeconds: true}).replace("about ", "~");
                 } else {
                   return "closes in " + dateFns.distanceInWordsToNow(
-                    +eorzeaTime.toEarth(crs[0].end()), {includeSeconds: true}).replace("about ", "~");
+                    eorzeaTime.toEarth(+crs[0].end()), {includeSeconds: true}).replace("about ", "~");
                 }
               }
               return "unknown";
@@ -234,10 +228,10 @@ class ViewModel {
             date: () => {
               var crs = x.catchableRanges;
               if (crs.length > 0) {
-                if (moment().isBefore(eorzeaTime.toEarth(crs[0].start()))) {
-                  return eorzeaTime.toEarth(crs[0].start());
+                if (dateFns.isFuture(eorzeaTime.toEarth(+crs[0].start()))) {
+                  return eorzeaTime.toEarth(+crs[0].start());
                 } else {
-                  return eorzeaTime.toEarth(crs[0].end());
+                  return eorzeaTime.toEarth(+crs[0].end());
                 }
               }
             }
@@ -248,14 +242,14 @@ class ViewModel {
                 var crs = x.catchableRanges;
                 if (crs.length > i) {
                   return "in " + dateFns.distanceInWordsToNow(
-                    +eorzeaTime.toEarth(crs[i].start()), {includeSeconds: true}).replace("about ", "~");
+                    eorzeaTime.toEarth(+crs[i].start()), {includeSeconds: true}).replace("about ", "~");
                 }
                 return "unknown";
               },
               date: () => {
                 var crs = x.catchableRanges;
                 if (crs.length > i) {
-                  return eorzeaTime.toEarth(crs[i].start());
+                  return eorzeaTime.toEarth(+crs[i].start());
                 }
               }
             };

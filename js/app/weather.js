@@ -3,8 +3,9 @@ function weatherForArea(area, target) {
   return rate[0];
 }
 
-function startOfPeriod(m) {
-  return m.hour(parseInt(m.hour() / 8) * 8).startOf('hour');
+function startOfPeriod(d) {
+  return dateFns.utc.startOfHour(
+    dateFns.utc.setHours(d, parseInt(dateFns.utc.getHours(d) / 8) * 8));
 }
 
 class WeatherService {
@@ -21,24 +22,23 @@ class WeatherService {
     if (bell == 0 || bell == 8 || bell == 16) {
       console.info("Weather interval changed...");
       if (this.__weatherData.length > 0) {
-        var cutoffDate = startOfPeriod(eorzeaTime.getCurrentEorzeaDate()).subtract(2, 'days');
+        var cutoffDate =
+          dateFns.utc.subDays(startOfPeriod(
+            eorzeaTime.getCurrentEorzeaDate()), 2);
         if (_(this.__weatherData).first().date < cutoffDate) {
           this.__weatherData = _(this.__weatherData).drop();
         }
         console.log("Weather Cache:", this.__weatherData.length, "entries spanning",
-          moment.duration(eorzeaTime.toEarth(moment.utc(_(this.__weatherData).first().date).twix(
-            moment.utc(_(this.__weatherData).last().date).add(8, 'hours'))
-            .asDuration('milliseconds')).valueOf(), 'milliseconds')
-            .asDays().toFixed(2), "days");
+          (dateFns.differenceInMilliseconds(
+            eorzeaTime.toEarth(
+              dateFns.utc.addHours(_(this.__weatherData).last().date, 8)),
+            eorzeaTime.toEarth(_(this.__weatherData).first().date)) / 86400000).toFixed(2),
+          "days");
       }
     }
   }
 
   insertForcast(date, target) {
-    // Protect the table from me being stupid... Look, it happens to us all
-    if (moment.isMoment(date)) {
-      date = +date;
-    }
     // Make sure it's newer than the previous entry.
     // Technically, it should be newer by 8 hours...
     if (this.__weatherData.length > 0 && date <= _(this.__weatherData).last().date) {
@@ -50,7 +50,7 @@ class WeatherService {
 
   calculateForcastTarget(m) {
     // Based on Rougeadyn's SaintCoinach library.
-    var unixTime = m.unix();
+    var unixTime = parseInt(+m / 1000);
     // Get the Eorzea hour for weather start.
     var bell = unixTime / 175;
     // Magic needed for calculations:
@@ -72,9 +72,9 @@ class WeatherService {
     // the provided current weather set where the previous period matched the
     // provided previous weather set.
     if (previousWeatherSet.length > 0) {
-      date = startOfPeriod(moment(date).subtract(8, 'hours'));
+      date = startOfPeriod(dateFns.utc.subHours(date, 8));
     } else {
-      date = startOfPeriod(moment(date));
+      date = startOfPeriod(date);
     }
     // Yield a range covering the period for which this weather pattern occurs.
     var previousWeather = null;
@@ -89,7 +89,7 @@ class WeatherService {
       if (limit-- <= 0) return;
 
       // These must be computed, even if we continue without yielding.
-      lastDate = moment.utc(w.date);
+      lastDate = w.date;
       currentWeather = weatherForArea(area, w.target);
       // Has the previous weather condition been met?
       if (previousWeatherSet.length > 0 && !_(previousWeatherSet).contains(previousWeather)) {
@@ -98,21 +98,21 @@ class WeatherService {
       // Does the current weather condition work?
       if (currentWeatherSet.length == 0 || _(currentWeatherSet).contains(currentWeather)) {
         // Yield a date range for this weather period.
-        yield moment.duration(8, 'hours').afterMoment(moment.utc(w.date));
+        yield moment.duration(8, 'hours').afterMoment(moment.utc(lastDate));
       }
     }
     // That's it for the cached data, now you'll need to generate more...
     if (lastDate !== null) {
       // Resume, starting with the NEXT period!!!
-      date = lastDate.add(8, 'hours');
+      date = dateFns.utc.addHours(lastDate, 8);
     }
     // SAFEGUARD
     while (limit-- > 0) {
       // Move the *previous* current weather into previous weather.
       previousWeather = currentWeather;
-      lastDate = moment.utc(date);
+      lastDate = new Date(date);
       // Calculate the next weather target and insert into the table.
-      date.add(8, 'hours');
+      date = dateFns.addHours(date, 8);
       var target = this.calculateForcastTarget(eorzeaTime.toEarth(lastDate));
       this.insertForcast(lastDate, target);
       currentWeather = weatherForArea(area, target);
