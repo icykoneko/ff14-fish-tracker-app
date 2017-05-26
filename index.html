@@ -220,9 +220,10 @@
 
     <!-- Templates -->
     <script id="fish-table-template" type="text/html;x-dot-template">
-      <table id="fishes" class="ui selectable striped very basic very compact table">
+      <table id="fishes" class="ui selectable striped very basic very compact unstackable table">
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Availability</th>
             <th>Location</th>
@@ -247,6 +248,8 @@
             </div>
           </div>
           <img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}"/>
+        </td>
+        <td>
           <div class="ui middle aligned" style="display: inline-block;">
             {{=it.name}}<br/>
             <div class="ui tiny circular label">{{=it.patch}}</div>
