@@ -222,13 +222,11 @@
       <table id="fishes" class="ui selectable striped very basic very compact table">
         <thead>
           <tr>
-            <th></th>
-            <th></th>
             <th>Name</th>
-            <th style="min-width: 200px;">Availability</th>
+            <th>Availability</th>
             <th>Location</th>
             <th>Conditions</th>
-            <th style="min-width: 240px;">Bait</th>
+            <th>Bait</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -239,7 +237,7 @@
       <tr class="fish-entry {{=it.timerState()}} {{?it.caught}}fish-caught{{?}} {{?it.pinned}}fish-pinned{{?}}" data-id="{{=it.id}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
-          <div class="ui vertical mini very compact icon buttons">
+          <div class="ui middle aligned vertical mini very compact icon buttons">
             <div class="ui button fishCaught {{?it.caught}}green{{?}}">
               <i class="checkmark icon"></i>
             </div>
@@ -247,14 +245,11 @@
               <i class="pin icon"></i>
             </div>
           </div>
-        </td>
-        <!-- Fish icon, name, and patch info -->
-        <td class="collapsing">
           <img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}"/>
-        </td>
-        <td>
-          {{=it.name}}<br/>
-          <div class="ui tiny circular label">{{=it.patch}}</div>
+          <div class="ui middle aligned" style="display: inline-block;">
+            {{=it.name}}<br/>
+            <div class="ui tiny circular label">{{=it.patch}}</div>
+          </div>
         </td>
         <!-- Availability -->
         <td>
@@ -363,15 +358,6 @@
             }));
         });
 
-        $('#fishes').floatThead({
-          position: 'fixed',
-          floatContainerClass: 'floatThead-container-fishes',
-          zIndex: 500,
-          top: function () {
-            return this.top = $('#topmenu').outerHeight(true);
-          }
-        });
-
         // Register for changes.
         // Things we care about...
         //   - Changes in the catchable ranges for each fish.
@@ -433,7 +419,7 @@
                 }));
             });
             // $(".fish-entry[data-stale=true]", fishTableElement).remove();
-            $('#fishes').floatThead();
+            // $('#fishes').floatThead();
 
             var $markAsCaughtButtons = $('.fishCaught.button');
             var $markAsPinnedButtons = $('.fishPinned.button');
@@ -491,6 +477,19 @@
           console.log("Patches:", viewModel.filter.patch);
           filterPatchSubject.onNext(viewModel.filter.patch);
         });
+
+
+        // _.delay(() => {
+        //   $('#fishes').floatThead({
+        //     position: 'fixed',
+        //     floatContainerClass: 'floatThead-container-fishes',
+        //     zIndex: 500,
+        //     top: function () {
+        //       return this.top = $('#topmenu').outerHeight(true);
+        //     }
+        //   });
+        // }, 2000);
+
       });
     </script>
 
