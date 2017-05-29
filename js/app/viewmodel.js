@@ -94,13 +94,13 @@ sortByWindowPeriods = function() {
       return result;
     }
     // Fish which are ALWAYS up should come AFTER fish with limited uptime.
-    var limitedA = a.alwaysAvailable() ? 1 : -1;
-    var limitedB = b.alwaysAvailable() ? 1 : -1;
+    var limitedA = a.alwaysAvailable ? 1 : -1;
+    var limitedB = b.alwaysAvailable ? 1 : -1;
     result = compare(limitedA, limitedB);
     if (shouldLog(a, b))
       console.log("Comparing all-day availability:", result,
-        "\n", a.name, a.alwaysAvailable(),
-        "\n", b.name, b.alwaysAvailable());
+        "\n", a.name, a.alwaysAvailable,
+        "\n", b.name, b.alwaysAvailable);
     if (result != 0) {
       return result;
     }
@@ -167,27 +167,24 @@ class ViewModel {
     this.completionManager = new CompletionManager;
     this.theFish = Fishes;
     this.subscriptions = [];
+
+    this.fishEntryTemplate = () => "";
   }
 
-  updateAll() {
-    // IMPORTANT
-    //   Must dispose of any existing subscriptions first.
-    _(this.subscriptions).each((s) => s.dispose());
-
-    function getUpdatedWindowTimer(date) {
-      return moment(date).fromNow();
-    }
-
+  applyFiltersAndResort() {
     // Called when the view needs to be updated.
     var baseTime = eorzeaTime.getCurrentEorzeaDate();
-    // Start with ALL the fishies.
-    var fishes = [];
+
+    // Keep track of the original set of fish in the list.
+    var origFishIds = _(this.theFish).reduce(
+      (ids, fish) => ids.concat(fish.id), []);
 
     // Start by collecting the pinned fish, and removing them from the main list.
     // We don't want to filter these out for any reason.
-    var pinnedFish = _(Fishes).filter((v) => this.completionManager.isFishPinned(v._id));
+    var pinnedFish = _(Fishes).filter(
+      (v) => this.completionManager.isFishPinned(v._id));
     // Apply filters.
-    fishes = _(Fishes).chain()
+    var fishes = _(Fishes).chain()
       .reject((v) => this.completionManager.isFishPinned(v._id))
       .filter((v) => _(this.filter.patch).contains(v.patch))
       .filter((v) => {
@@ -200,10 +197,29 @@ class ViewModel {
         }
       })
       .value();
+
+
     // Now, we can add the pinned fish back into the list before sorting
     // the fish by rarity.
     fishes = pinnedFish.concat(fishes).sort(
       (a, b) => sortByWindowPeriods(a, b, baseTime, this.completionManager));
+
+    return {
+      fishes: fishes,
+    }
+  }
+
+  updateAll() {
+    // IMPORTANT
+    //   Must dispose of any existing subscriptions first.
+    //_(this.subscriptions).each((s) => s.dispose());
+
+    function getUpdatedWindowTimer(date) {
+      return moment(date).fromNow();
+    }
+
+    var result = this.applyFiltersAndResort();
+    var fishes = result.fishes;
 
     this.theFish = _(fishes).map((x) => {
       return _(x).extend({

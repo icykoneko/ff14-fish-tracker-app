@@ -34,6 +34,8 @@ class Fish {
       }),
       path: _(this.bestCatchPath).map((x) => DATA.ITEMS[x])
     };
+    this.alwaysAvailable =
+      this.weatherSet.length == 0 && this.startHour == 0 && this.endHour == 24;
 
     // Create a subject for catchableRanges that we can subscribe to.
     //this.catchableRangesObserver = new Rx.Observable.ofArrayChanges(this.catchableRanges);
@@ -61,22 +63,6 @@ class Fish {
         (uptime, range) => uptime += range.asDuration('milliseconds'), 0) / overallTime;
     }
     return 1;
-  }
-
-  alwaysAvailable() {
-    return this.weatherSet.length == 0 && this.startHour == 0 && this.endHour == 24;
-  }
-
-  bait() {
-    return {
-      hasPredators: _(this.predators).size() > 0,
-      predators: _(this.predators).map((v, k) => {
-        return { count: v,
-                 name: DATA.ITEMS[k].name,
-                 icon: DATA.ITEMS[k].icon };
-      }),
-      bestCatchPath: _(this.bestCatchPath).map((x) => DATA.ITEMS[x])
-    }
   }
 
   availableRangeDuring(r) {

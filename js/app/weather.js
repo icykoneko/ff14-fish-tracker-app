@@ -13,9 +13,10 @@ class WeatherService {
     // Cache weather information.
     this.__weatherData = [];
     // Every Eorzean day, prune out entries that are over 2 days old.
-    eorzeaTime.currentBellChanged.subscribe(
-      (bell) => this.onCurrentBellChanged(bell)
-    );
+    eorzeaTime.currentBellChanged
+      .filter((bell) => bell == 0 || bell == 8 || bell == 16)
+      .skip(1) /* skip the first since we really don't have any filtering to do yet */
+      .subscribe((bell) => this.onCurrentBellChanged(bell));
   }
 
   onCurrentBellChanged(bell) {

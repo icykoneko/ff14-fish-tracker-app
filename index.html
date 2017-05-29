@@ -236,14 +236,14 @@
     </script>
 
     <script id="fish-template" type="text/html;x-dot-template">
-      <tr class="fish-entry {{=it.timerState()}} {{?it.caught}}fish-caught{{?}} {{?it.pinned}}fish-pinned{{?}}" data-id="{{=it.id}}">
+      <tr class="fish-entry {{?it.isCatchable()}}fish-active{{?}} {{?it.caught || false}}fish-caught{{?}} {{?it.pinned || false}}fish-pinned{{?}}" data-id="{{=it.id}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
           <div class="ui middle aligned vertical mini very compact icon buttons">
-            <div class="ui button fishCaught {{?it.caught}}green{{?}}">
+            <div class="ui button fishCaught {{?it.caught || false}}green{{?}}">
               <i class="checkmark icon"></i>
             </div>
-            <div class="ui button fishPinned {{?it.pinned}}red{{?}}">
+            <div class="ui button fishPinned {{?it.pinned || false}}red{{?}}">
               <i class="pin icon"></i>
             </div>
           </div>
@@ -257,15 +257,21 @@
         </td>
         <!-- Availability -->
         <td>
-          {{?it.alwaysAvailable()}}
+          {{?it.alwaysAvailable}}
             Always
+          {{??it.availability === undefined}}
+            Unknown
           {{??}}
             <span class="fish-availability-current" data-val="{{=it.availability.current.date()}}" data-tooltip="{{var d = it.availability.current.date(); if (d) { out += moment(d).calendar(); } }}">
               {{=it.availability.current.duration()}}
             </span><br/>
             <span style="font-size: smaller">
-              <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
-              <b>Next:</b> <span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().duration()}}</span>
+              <span style="white-space: nowrap !important">
+                <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
+              </span>
+              <span style="white-space: nowrap !important">
+                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().duration()}}</span>
+              </span>
             </span>
           {{?}}
         </td>
@@ -337,7 +343,8 @@
         });
 
         var fishTableTemplate = doT.template($('#fish-table-template').text());
-        var fishEntryTemplate = doT.template($('#fish-template').text());
+        // var fishEntryTemplate = doT.template($('#fish-template').text());
+        viewModel.fishEntryTemplate = doT.template($('#fish-template').text());
 
         var fishChangedSubject = new Rx.Subject();
         var filterCompletionSubject = new Rx.BehaviorSubject(viewModel.filter.completion);
@@ -345,155 +352,199 @@
 
         $('#fish-table-container').append(fishTableTemplate());
         var fishTableElement = $('#fishes tbody');
+
+        function reconnectEvents() {
+          var $markAsCaughtButtons = $('.fishCaught.button', fishTableElement);
+          var $markAsPinnedButtons = $('.fishPinned.button', fishTableElement);
+
+          $markAsCaughtButtons.on('click', function() {
+            var f = Number( $(this).closest('.fish-entry').data('id') );
+            viewModel.completionManager.toggleCaughtState(f);
+          });
+          $markAsPinnedButtons.on('click', function() {
+            var f = Number( $(this).closest('.fish-entry').data('id') );
+            viewModel.completionManager.togglePinnedState(f);
+          });
+
+          $('.fish-entry.fish-pinned').filter(":last").find("td").css({
+            borderBottom: "2px solid red"
+          });
+          $('.fish-entry.fish-active').filter(":last").find("td").css({
+            borderBottom: "2px solid blue"
+          });
+        }
+
         // Initialize the table with all the fishies.
-        _(viewModel.updateAll()).each((fish) => {
+        _(Fishes).each((fish) => {
           // Create the initial entry.
-          fishTableElement.append(fishEntryTemplate(fish));
-          // Subscribe to the catchableRanges subject.
-          viewModel.subscriptions.push(
-            fish.catchableRangesObserver.debounce(500).subscribe((r) => {
-              //console.log('Detected change in catchableRanges for', fish.name, r);
-              // // Update the element for this fish please.
-              // $('.fish-entry[data-id=' + fish.id + ']')[0].outerHTML =
-              //   fishEntryTemplate(fish);
-              // Pass this to main page observable since we need to sort stuff
-              // and whatnot...
-              fishChangedSubject.onNext(fish.id);
-            }));
+          fishTableElement.append(viewModel.fishEntryTemplate(fish));
         });
 
-        // Register for changes.
-        // Things we care about...
-        //   - Changes in the catchable ranges for each fish.
-        //     - Technically, you only really care about the current bell...
-        //       but I'd like to find some way of binding to the fish's
-        //       data (if possible...)
-        //     - This is the most destructive type of change.
-        //   - Changes in filter settings.
-        //     - Should be less destructive, expect for the whole re-sorting bit...
-        //   - Changes in pinned settings.
-        //     - Would require a re-sort
-        //   - Changes to catchable status.
-        //     - Potentially requires visibility change.
 
-        var updatesNeededSource = Rx.Observable.merge(
-          fishChangedSubject.buffer(() => fishChangedSubject.debounce(500)),
-          filterCompletionSubject.tap((x) => console.log("completion-filter changed:", x)),
-          filterPatchSubject.tap((x) => console.log("patch-filter changed:", x)),
-          viewModel.completionManager.rx_completed,
-          viewModel.completionManager.rx_pinned
-        );
+        _.defer(function () {
+          console.log("Updating and sorting table now...");
+          initializeView();
+        });
 
-        updatesNeededSource.debounce(250).subscribe((x) => {
-        // fishChangedSubject
-        //   .buffer(() => { return fishChangedSubject.debounce(500); })
-        //   .subscribe((ids) => {
-        //     console.log('The following fish have been updated:', ids);
-            console.log("updates needed", x);
-            // // Get the existing entries, staining each as stale.
-            //var fishEntries = $(".fish-entry", fishTableElement).data("stale", true);
-            //var tbodyNode = fishTableElement[0];
-            $(".fish-entry").remove();
-            _(viewModel.updateAll()).each((fish) => {
-              // Generate a new HTML template for the fish...
-              // TODO: Come up with a less destructive means...
-              var fishHtml = fishEntryTemplate(fish);
-
-              // Grab the existing entry for this fish (if present)
-              // var fishElem = fishEntries.filter('*[data-id=' + fish.id + ']');
-              // if (fishElem.length > 0) {
-              //   // Move the existing child (essentially shuffles the node to
-              //   // the end, raising it back to the top as each entry is done)
-              //   fishElem[0].outerHTML = fishHtml;
-              //   tbodyNode.appendChild(fishElem[0]);
-              // } else {
-              //   fishTableElement.append(fishHtml);
-              // }
-              fishTableElement.append(fishHtml);
-              // Subscribe to the catchableRanges subject.
-              viewModel.subscriptions.push(
-                fish.catchableRangesObserver.skip(1).debounce(500).subscribe((r) => {
-                  //console.log('Detected change in catchableRanges for', fish.name, r);
-                  // // Update the element for this fish please.
-                  // $('.fish-entry[data-id=' + fish.id + ']')[0].outerHTML =
-                  //   fishEntryTemplate(fish);
-                  // Pass this to main page observable since we need to sort stuff
-                  // and whatnot...
-                  fishChangedSubject.onNext(fish.id);
-                }));
-            });
-            // $(".fish-entry[data-stale=true]", fishTableElement).remove();
-            // $('#fishes').floatThead();
-
-            var $markAsCaughtButtons = $('.fishCaught.button');
-            var $markAsPinnedButtons = $('.fishPinned.button');
-
-            $markAsCaughtButtons.on('click', function() {
-              var f = Number( $(this).closest('.fish-entry').data('id') );
-              viewModel.completionManager.toggleCaughtState(f);
-            });
-            $markAsPinnedButtons.on('click', function() {
-              var f = Number( $(this).closest('.fish-entry').data('id') );
-              viewModel.completionManager.togglePinnedState(f);
-            });
-
+        function initializeView() {
+          // Initialize the table with all the fishies.
+          _(viewModel.updateAll()).each((fish) => {
+            // Create the initial entry.
+            fishTableElement.append(viewModel.fishEntryTemplate(fish));
+            // Subscribe to the catchableRanges subject.
+            viewModel.subscriptions.push(
+              fish.catchableRangesObserver.debounce(500).subscribe((r) => {
+                //console.log('Detected change in catchableRanges for', fish.name, r);
+                // // Update the element for this fish please.
+                // $('.fish-entry[data-id=' + fish.id + ']')[0].outerHTML =
+                //   fishEntryTemplate(fish);
+                // Pass this to main page observable since we need to sort stuff
+                // and whatnot...
+                fishChangedSubject.onNext(fish.id);
+              }));
           });
 
-        Rx.Observable.interval(2500 /*ms*/).timestamp().subscribe((x) => {
-          // Every 5 seconds, update the availability times.
-          _($(".fish-entry")).each((e) => {
-            var currentAvail = $(".fish-availability-current", e);
-            var prefix = $(e).hasClass('fish-active') ? "closes " : "";
-            // currentAvail
-            //   .data("tooltip", moment(currentAvail.data("val")).local().calendar())
-            //   .text(prefix + moment(currentAvail.data("val")).fromNow());
-            // currentAvail
-            //   .text(prefix + formatCountdown(new Date(currentAvail.data("val"))));
-            currentAvail.text(prefix + "in " +
-              dateFns.distanceInWordsToNow(currentAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
-            var upcomingAvail = $(".fish-availability-upcoming", e);
-            // upcomingAvail
-            //   .data("tooltip", moment(upcomingAvail.data("val")).local().calendar())
-            //   .text(moment(upcomingAvail.data("val")).fromNow());
-            // upcomingAvail
-            //   .text(formatCountdown(new Date(upcomingAvail.data("val"))));
-            upcomingAvail.text("in " +
-              dateFns.distanceInWordsToNow(upcomingAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
+          // Connect event handlers.
+          reconnectEvents();
+
+          // Register for changes.
+          // Things we care about...
+          //   - Changes in the catchable ranges for each fish.
+          //     - Technically, you only really care about the current bell...
+          //       but I'd like to find some way of binding to the fish's
+          //       data (if possible...)
+          //     - This is the most destructive type of change.
+          //   - Changes in filter settings.
+          //     - Should be less destructive, expect for the whole re-sorting bit...
+          //   - Changes in pinned settings.
+          //     - Would require a re-sort
+          //   - Changes to catchable status.
+          //     - Potentially requires visibility change.
+
+          var updatesNeededSource = Rx.Observable.merge(
+            fishChangedSubject
+              .buffer(() => fishChangedSubject.debounce(500))
+              .map((e) => { return {type: "availabilityChanged", value: e}}),
+            filterCompletionSubject
+              .skip(1)
+              .debounce(500)
+              .map((e) => { return {type: "filter-completion", value: e}}),
+            filterPatchSubject
+              .skip(1)
+              .debounce(500)
+              .map((e) => { return {type: "filter-patch", value: e}}),
+            viewModel.completionManager.rx_completed
+              .skip(1)
+              .debounce(500)
+              .map((e) => { return {type: "completedChanged", value: e}}),
+            viewModel.completionManager.rx_pinned
+              .skip(1)
+              .debounce(500)
+              .map((e) => { return {type: "pinnedChanged", value: e}})
+          );
+
+          //updatesNeededSource/*.debounce(250)*/.subscribe((x) => {
+          updatesNeededSource
+            .buffer(() => updatesNeededSource.debounce(250))
+            .filter((x) => x.length > 0)
+            .subscribe((x) => {
+          // fishChangedSubject
+          //   .buffer(() => { return fishChangedSubject.debounce(500); })
+          //   .subscribe((ids) => {
+          //     console.log('The following fish have been updated:', ids);
+              console.log("updates needed\n", x);
+
+              // Has the availability changed at all?
+              if (_(x).any((x) => x.type === "availabilityChanged")) {
+                console.log("Availability has changed... Need to make lots of changes...");
+              } else {
+                // Potentially minor changes. Availability is still the same, but
+                // we might need to remove entries from the list, or at most,
+                // re-sort the list due to new entries becoming visible.
+              }
+
+
+              // // Get the existing entries, staining each as stale.
+              // var fishEntries = $(".fish-entry", fishTableElement).data("stale", true);
+              // var tbodyNode = fishTableElement[0];
+              $(".fish-entry").remove();
+              _(viewModel.updateAll()).each((fish) => {
+                // Generate a new HTML template for the fish...
+                // TODO: Come up with a less destructive means...
+                var fishHtml = viewModel.fishEntryTemplate(fish);
+
+                // // Grab the existing entry for this fish (if present)
+                // var fishElem = fishEntries.filter('*[data-id=' + fish.id + ']');
+                // if (fishElem.length > 0) {
+                //   // Move the existing child (essentially shuffles the node to
+                //   // the end, raising it back to the top as each entry is done)
+                //   fishElem[0].outerHTML = fishHtml;
+                //   tbodyNode.appendChild(fishElem[0]);
+                // } else {
+                //   fishTableElement.append(fishHtml);
+                // }
+                fishTableElement.append(fishHtml);
+              });
+              // $(".fish-entry[data-stale=true]", fishTableElement).remove();
+              // $('#fishes').floatThead();
+              reconnectEvents();
+            });
+
+          Rx.Observable.interval(2500 /*ms*/).timestamp().subscribe((x) => {
+            // Every 5 seconds, update the availability times.
+            _($(".fish-entry")).each((e) => {
+              var currentAvail = $(".fish-availability-current", e);
+              var prefix = $(e).hasClass('fish-active') ? "closes " : "";
+              // currentAvail
+              //   .data("tooltip", moment(currentAvail.data("val")).local().calendar())
+              //   .text(prefix + moment(currentAvail.data("val")).fromNow());
+              // currentAvail
+              //   .text(prefix + formatCountdown(new Date(currentAvail.data("val"))));
+              currentAvail.text(prefix + "in " +
+                dateFns.distanceInWordsToNow(currentAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
+              var upcomingAvail = $(".fish-availability-upcoming", e);
+              // upcomingAvail
+              //   .data("tooltip", moment(upcomingAvail.data("val")).local().calendar())
+              //   .text(moment(upcomingAvail.data("val")).fromNow());
+              // upcomingAvail
+              //   .text(formatCountdown(new Date(upcomingAvail.data("val"))));
+              upcomingAvail.text("in " +
+                dateFns.distanceInWordsToNow(upcomingAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
+            });
           });
-        });
 
-        var $filterCompletionButtons = $('#filterCompletion .button');
-        var $filterPatchButtons = $('#filterPatch .button');
+          var $filterCompletionButtons = $('#filterCompletion .button');
+          var $filterPatchButtons = $('#filterPatch .button');
 
-        $filterCompletionButtons.on('click', function() {
-          $(this).addClass('active').siblings().removeClass('active');
-          viewModel.filter.completion = $(this).data('filter');
-          filterCompletionSubject.onNext(viewModel.filter.completion);
-        });
+          $filterCompletionButtons.on('click', function() {
+            $(this).addClass('active').siblings().removeClass('active');
+            viewModel.filter.completion = $(this).data('filter');
+            filterCompletionSubject.onNext(viewModel.filter.completion);
+          });
 
-        $filterPatchButtons.on('click', function() {
-          var p = Number( $(this).toggleClass('active').data('filter') );
-          if ($(this).hasClass('active')) {
-            viewModel.filter.patch.push(p);
-          } else {
-            viewModel.filter.patch = _(viewModel.filter.patch).without(p);
-          }
-          console.log("Patches:", viewModel.filter.patch);
-          filterPatchSubject.onNext(viewModel.filter.patch);
-        });
+          $filterPatchButtons.on('click', function() {
+            var p = Number( $(this).toggleClass('active').data('filter') );
+            if ($(this).hasClass('active')) {
+              viewModel.filter.patch.push(p);
+            } else {
+              viewModel.filter.patch = _(viewModel.filter.patch).without(p);
+            }
+            console.log("Patches:", viewModel.filter.patch);
+            filterPatchSubject.onNext(viewModel.filter.patch);
+          });
 
 
-        // _.delay(() => {
-        //   $('#fishes').floatThead({
-        //     position: 'fixed',
-        //     floatContainerClass: 'floatThead-container-fishes',
-        //     zIndex: 500,
-        //     top: function () {
-        //       return this.top = $('#topmenu').outerHeight(true);
-        //     }
-        //   });
-        // }, 2000);
-
+          // _.delay(() => {
+          //   $('#fishes').floatThead({
+          //     position: 'fixed',
+          //     floatContainerClass: 'floatThead-container-fishes',
+          //     zIndex: 500,
+          //     top: function () {
+          //       return this.top = $('#topmenu').outerHeight(true);
+          //     }
+          //   });
+          // }, 2000);
+        }
       });
     </script>
 

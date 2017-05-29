@@ -3,8 +3,10 @@ class FishWatcher {
     // Total number of windows to keep track of.
     this.maxWindows = 10;
 
-    // Every new Eorzea bell, reconsider the fishes windows.
-    eorzeaTime.currentBellChanged.subscribe((bell) => this.updateFishes());
+    _.defer(() => {
+      // Every new Eorzea bell, reconsider the fishes windows.
+      eorzeaTime.currentBellChanged.subscribe((bell) => this.updateFishes());
+    });
   }
 
   updateFishes() {
@@ -25,9 +27,11 @@ class FishWatcher {
     // PHASE 1:
     //   Ensure each fish has at least 'n' windows defined.
     _(Fishes).chain()
-      .reject((fish) => fish.alwaysAvailable())
+      .reject((fish) => fish.alwaysAvailable)
       .filter((fish) => fish.catchableRanges.length < this.maxWindows)
       .each((fish) => this.updateRangesForFish(fish));
+
+    console.info("FishWatcher is finished...");
   }
 
   updateRangesForFish(fish) {
@@ -109,7 +113,7 @@ class FishWatcher {
         // Stop if the range has already been eliminated.
         if (nextRange === null) return null;
         var predatorFish = _(Fishes).findWhere({id: Number(predId)});
-        if (predatorFish.alwaysAvailable()) return nextRange;
+        if (predatorFish.alwaysAvailable) return nextRange;
         // Once again, we need to check if the weather right now works for
         // the predator fish.
         var iter = weatherService.findWeatherPattern(
