@@ -15,21 +15,24 @@ class FishWatcher {
     // CLEANUP PHASE:
     //   Remove expired windows first.
     var eDate = eorzeaTime.getCurrentEorzeaDate();
-    _(Fishes).each((fish) => {
+    for (let fish of Fishes) {
       if (fish.catchableRanges.length > 0 &&
           dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
         // Remove the first entry from the array.
         fish.catchableRanges.shift();
         fish.notifyCatchableRangesUpdated();
       }
-    });
+    }
 
     // PHASE 1:
     //   Ensure each fish has at least 'n' windows defined.
-    _(Fishes).chain()
+    var fishes = _(Fishes).chain()
       .reject((fish) => fish.alwaysAvailable)
       .filter((fish) => fish.catchableRanges.length < this.maxWindows)
-      .each((fish) => this.updateRangesForFish(fish));
+      .value();
+    for (let fish of fishes) {
+      this.updateRangesForFish(fish);
+    }
 
     console.info("FishWatcher is finished...");
   }

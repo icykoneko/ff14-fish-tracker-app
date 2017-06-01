@@ -46,7 +46,7 @@ class WeatherService {
       console.error("Attempted to insert record for earlier date.", date);
       return;
     }
-    this.__weatherData.push({date: date, target: target});
+    this.__weatherData.push({date: +date, target: target});
   }
 
   calculateForcastTarget(m) {
@@ -81,9 +81,8 @@ class WeatherService {
     var previousWeather = null;
     var currentWeather = null;
     var lastDate = null;
-    // NOTE: Underscore's closures are NOT interables that can yield.
-    var ww = _(this.__weatherData).filter((w) => w.date >= +date);
-    for (let w of ww) {
+    for (let w of this.__weatherData) {
+      if (w.date < +date) continue;
       // Move the *previous* current weather into previous weather.
       previousWeather = currentWeather;
       // SAFEGUARD

@@ -388,7 +388,8 @@
 
         function initializeView() {
           // Initialize the table with all the fishies.
-          _(viewModel.updateAll()).each((fish) => {
+          var fishes = viewModel.updateAll()
+          for (let fish of fishes) {
             // Create the initial entry.
             fishTableElement.append(viewModel.fishEntryTemplate(fish));
             // Subscribe to the catchableRanges subject.
@@ -402,7 +403,7 @@
                 // and whatnot...
                 fishChangedSubject.onNext(fish.id);
               }));
-          });
+          }
 
           // Connect event handlers.
           reconnectEvents();
@@ -435,23 +436,16 @@
               .map((e) => { return {type: "filter-patch", value: e}}),
             viewModel.completionManager.rx_completed
               .skip(1)
-              .debounce(500)
               .map((e) => { return {type: "completedChanged", value: e}}),
             viewModel.completionManager.rx_pinned
               .skip(1)
-              .debounce(500)
               .map((e) => { return {type: "pinnedChanged", value: e}})
           );
 
-          //updatesNeededSource/*.debounce(250)*/.subscribe((x) => {
           updatesNeededSource
             .buffer(() => updatesNeededSource.debounce(250))
             .filter((x) => x.length > 0)
             .subscribe((x) => {
-          // fishChangedSubject
-          //   .buffer(() => { return fishChangedSubject.debounce(500); })
-          //   .subscribe((ids) => {
-          //     console.log('The following fish have been updated:', ids);
               console.log("updates needed\n", x);
 
               // Has the availability changed at all?
@@ -468,7 +462,8 @@
               // var fishEntries = $(".fish-entry", fishTableElement).data("stale", true);
               // var tbodyNode = fishTableElement[0];
               $(".fish-entry").remove();
-              _(viewModel.updateAll()).each((fish) => {
+              var fishes = viewModel.updateAll();
+              for (let fish of fishes) {
                 // Generate a new HTML template for the fish...
                 // TODO: Come up with a less destructive means...
                 var fishHtml = viewModel.fishEntryTemplate(fish);
@@ -484,7 +479,7 @@
                 //   fishTableElement.append(fishHtml);
                 // }
                 fishTableElement.append(fishHtml);
-              });
+              }
               // $(".fish-entry[data-stale=true]", fishTableElement).remove();
               // $('#fishes').floatThead();
               reconnectEvents();
@@ -594,6 +589,12 @@
 
       <!-- Display the list of fish -->
       <div id="fish-table-container"></div>
+    </div>
+    <div class="ui container">
+      <p>
+        FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
+        FINAL FANTASY XIV © 2010 - 2017 SQUARE ENIX CO., LTD. All Rights Reserved.
+      </p>
     </div>
   </body>
 </html>
