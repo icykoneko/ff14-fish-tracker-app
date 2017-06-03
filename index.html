@@ -29,13 +29,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.0.3/jquery.floatThead.min.js"></script>
 
+    <link rel="stylesheet" href="public/images/sprite.css" />
+
     <style type="text/css">
       .main.container {
         padding-top: 3em;
       }
-      .weather-icon {
-        width: 20px;
-        height: 20px;
+      .sprite-icon {
+        display: inline-block;
+      }
+      .weather-icon.sprite-icon {
+        zoom: 0.675;
+      }
+      .bait-icon.sprite-icon {
+        zoom: 0.75;
       }
       img {
         vertical-align: middle;
@@ -247,7 +254,8 @@
               <i class="pin icon"></i>
             </div>
           </div>
-          <img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}"/>
+          <!--<img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}"/>-->
+          <div class="ui middle aligned sprite-icon sprite-icon-{{=it.icon}}"></div>
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
@@ -285,16 +293,20 @@
         <td>
           {{?it.conditions.previousWeatherSet.length > 0}}
             {{~it.conditions.previousWeatherSet :weather:windex}}
-              <img class="ui middle aligned image weather-icon"
-                   src="public/images/weather/{{=weather.icon}}"
-                   title="{{=weather.name}}"/>
+              <!-- <img class="ui middle aligned image weather-icon"
+                   src="public/images/weather/{{=weather.icon}}.png"
+                   title="{{=weather.name}}"/> -->
+              <div class="ui middle aligned sprite-icon sprite-icon-{{=weather.icon}} weather-icon"
+                   title="{{=weather.name}}"></div>
             {{~}}
             <i class="arrow right icon"></i>
           {{?}}
           {{~it.conditions.weatherSet :weather:idx}}
-            <img class="ui middle aligned image weather-icon"
-                 src="public/images/weather/{{=weather.icon}}"
-                 title="{{=weather.name}}"/>
+            <!-- <img class="ui middle aligned image weather-icon"
+                 src="public/images/weather/{{=weather.icon}}.png"
+                 title="{{=weather.name}}"/> -->
+            <div class="ui middle aligned sprite-icon sprite-icon-{{=weather.icon}} weather-icon"
+                 title="{{=weather.name}}"></div>
           {{~}}
           <br/><i class="wait icon"></i>&nbsp;{{=it.startHour + ' - ' + it.endHour}}
         </td>
@@ -304,18 +316,21 @@
             {{~it.bait.predators :predator:idx}}
               <div class="fish-predator">
                 <span style="font-size: +150%">{{=predator.count}}</span>&nbsp;
-                <img class="ui middle aligned image item-icon-40"
-                     src="public/images/fish_n_tackle/{{=predator.icon}}"
-                     title="{{=predator.name}}"/>
+                <!-- <img class="ui middle aligned image item-icon-40"
+                     src="public/images/fish_n_tackle/{{=predator.icon}}.png"
+                     title="{{=predator.name}}"/> -->
+                <div class="ui middle aligned bait-icon sprite-icon sprite-icon-{{=predator.icon}}" title="{{=predator.name}}"></div>
               </div>
             {{~}}
             <i class="chevron right icon"></i>
           {{?}}
           {{?it.fishEyes}}
-            <img class="ui middle aligned image" title="Fish Eyes" src="public/images/status/fisheyes.png"/>
+            <!-- <img class="ui middle aligned image" title="Fish Eyes" src="public/images/status/fisheyes.png"/> -->
+            <div class="ui middle aligned sprite-icon sprite-icon-fisheyes" title="Fish Eyes"></div>
           {{?}}
           {{?it.snagging}}
-            <img class="ui middle aligned image" title="Snagging" src="public/images/status/snagging.png"/>
+            <!-- <img class="ui middle aligned image" title="Snagging" src="public/images/status/snagging.png"/> -->
+            <div class="ui middle aligned sprite-icon sprite-icon-snagging" title="Snagging"></div>
           {{?}}
           {{~it.bait.path :item:idx}}
             {{?idx == 0}}
@@ -323,7 +338,8 @@
             {{??}}
               <i class="arrow right icon"></i>
             {{?}}
-            <img class="ui middle aligned image" title="{{=item.name}}" src="public/images/fish_n_tackle/{{=item.icon}}"/>
+            <!-- <img class="ui middle aligned image" title="{{=item.name}}" src="public/images/fish_n_tackle/{{=item.icon}}.png"/> -->
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-{{=item.icon}}" title="{{=item.name}}"></div>
             {{?idx == 0}}
               </a>
             {{?}}

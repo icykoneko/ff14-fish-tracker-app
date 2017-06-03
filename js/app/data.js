@@ -4505,1557 +4505,1557 @@ const DATA = {
       "7680": {
           "_id": 7680,
           "name": "Oschon's Print",
-          "icon": "029073.png"
+          "icon": "029073"
       },
       "7681": {
           "_id": 7681,
           "name": "Caterwauler",
-          "icon": "029326.png"
+          "icon": "029326"
       },
       "7682": {
           "_id": 7682,
           "name": "Crystal Perch",
-          "icon": "029327.png"
+          "icon": "029327"
       },
       "7683": {
           "_id": 7683,
           "name": "Moldva",
-          "icon": "029323.png"
+          "icon": "029323"
       },
       "7684": {
           "_id": 7684,
           "name": "Junkmonger",
-          "icon": "029070.png"
+          "icon": "029070"
       },
       "7685": {
           "_id": 7685,
           "name": "Goldenfin",
-          "icon": "029068.png"
+          "icon": "029068"
       },
       "7686": {
           "_id": 7686,
           "name": "Gigantshark",
-          "icon": "029065.png"
+          "icon": "029065"
       },
       "7687": {
           "_id": 7687,
           "name": "Armorer",
-          "icon": "029077.png"
+          "icon": "029077"
       },
       "7688": {
           "_id": 7688,
           "name": "Great Gudgeon",
-          "icon": "029325.png"
+          "icon": "029325"
       },
       "7689": {
           "_id": 7689,
           "name": "Dark Knight",
-          "icon": "029318.png"
+          "icon": "029318"
       },
       "7690": {
           "_id": 7690,
           "name": "Silver Sovereign",
-          "icon": "029078.png"
+          "icon": "029078"
       },
       "7691": {
           "_id": 7691,
           "name": "Sabertooth Cod",
-          "icon": "029066.png"
+          "icon": "029066"
       },
       "7692": {
           "_id": 7692,
           "name": "Dream Goby",
-          "icon": "029328.png"
+          "icon": "029328"
       },
       "7693": {
           "_id": 7693,
           "name": "Navigator's Brand",
-          "icon": "029071.png"
+          "icon": "029071"
       },
       "7694": {
           "_id": 7694,
           "name": "Dark Ambusher",
-          "icon": "029329.png"
+          "icon": "029329"
       },
       "7695": {
           "_id": 7695,
           "name": "Judgeray",
-          "icon": "029340.png"
+          "icon": "029340"
       },
       "7696": {
           "_id": 7696,
           "name": "Bloody Brewer",
-          "icon": "029321.png"
+          "icon": "029321"
       },
       "7697": {
           "_id": 7697,
           "name": "Faerie Queen",
-          "icon": "029330.png"
+          "icon": "029330"
       },
       "7698": {
           "_id": 7698,
           "name": "Slime King",
-          "icon": "029322.png"
+          "icon": "029322"
       },
       "7699": {
           "_id": 7699,
           "name": "Blue Widow",
-          "icon": "029331.png"
+          "icon": "029331"
       },
       "7700": {
           "_id": 7700,
           "name": "Ghost Carp",
-          "icon": "029332.png"
+          "icon": "029332"
       },
       "7701": {
           "_id": 7701,
           "name": "Carp Diem",
-          "icon": "029333.png"
+          "icon": "029333"
       },
       "7702": {
           "_id": 7702,
           "name": "Mud Pilgrim",
-          "icon": "029335.png"
+          "icon": "029335"
       },
       "7703": {
           "_id": 7703,
           "name": "Old Softie",
-          "icon": "029319.png"
+          "icon": "029319"
       },
       "7704": {
           "_id": 7704,
           "name": "Marrow Sucker",
-          "icon": "029334.png"
+          "icon": "029334"
       },
       "2585": {
           "_id": 2585,
           "name": "Lugworm",
-          "icon": "027004.png"
+          "icon": "027004"
       },
       "2586": {
           "_id": 2586,
           "name": "Moth Pupa",
-          "icon": "027003.png"
+          "icon": "027003"
       },
       "2587": {
           "_id": 2587,
           "name": "Pill Bug",
-          "icon": "027005.png"
+          "icon": "027005"
       },
       "2588": {
           "_id": 2588,
           "name": "Crayfish Ball",
-          "icon": "027008.png"
+          "icon": "027008"
       },
       "2589": {
           "_id": 2589,
           "name": "Goby Ball",
-          "icon": "027009.png"
+          "icon": "027009"
       },
       "2590": {
           "_id": 2590,
           "name": "Bloodworm",
-          "icon": "027006.png"
+          "icon": "027006"
       },
       "2591": {
           "_id": 2591,
           "name": "Rat Tail",
-          "icon": "027001.png"
+          "icon": "027001"
       },
       "2592": {
           "_id": 2592,
           "name": "Midge Basket",
-          "icon": "027002.png"
+          "icon": "027002"
       },
       "7713": {
           "_id": 7713,
           "name": "Stormdancer",
-          "icon": "029076.png"
+          "icon": "029076"
       },
       "2594": {
           "_id": 2594,
           "name": "Butterworm",
-          "icon": "027019.png"
+          "icon": "027019"
       },
       "2595": {
           "_id": 2595,
           "name": "Bass Ball",
-          "icon": "027010.png"
+          "icon": "027010"
       },
       "2596": {
           "_id": 2596,
           "name": "Spoon Worm",
-          "icon": "027015.png"
+          "icon": "027015"
       },
       "2597": {
           "_id": 2597,
           "name": "Syrphid Basket",
-          "icon": "027002.png"
+          "icon": "027002"
       },
       "2598": {
           "_id": 2598,
           "name": "Herring Ball",
-          "icon": "027007.png"
+          "icon": "027007"
       },
       "2599": {
           "_id": 2599,
           "name": "Honey Worm",
-          "icon": "027018.png"
+          "icon": "027018"
       },
       "2600": {
           "_id": 2600,
           "name": "Sand Leech",
-          "icon": "027014.png"
+          "icon": "027014"
       },
       "2601": {
           "_id": 2601,
           "name": "Stem Borer",
-          "icon": "027017.png"
+          "icon": "027017"
       },
       "12707": {
           "_id": 12707,
           "name": "Bladed Steel Jig",
-          "icon": "027070.png"
+          "icon": "027070"
       },
       "2603": {
           "_id": 2603,
           "name": "Glowworm",
-          "icon": "027021.png"
+          "icon": "027021"
       },
       "12805": {
           "_id": 12805,
           "name": "Rudderfish",
-          "icon": "029717.png"
+          "icon": "029717"
       },
       "2605": {
           "_id": 2605,
           "name": "Hoverworm",
-          "icon": "027022.png"
+          "icon": "027022"
       },
       "2606": {
           "_id": 2606,
           "name": "Northern Krill",
-          "icon": "027023.png"
+          "icon": "027023"
       },
       "2607": {
           "_id": 2607,
           "name": "Caddisfly Larva",
-          "icon": "027013.png"
+          "icon": "027013"
       },
       "8752": {
           "_id": 8752,
           "name": "Imperial Goldfish",
-          "icon": "029392.png"
+          "icon": "029392"
       },
       "4872": {
           "_id": 4872,
           "name": "Ocean Cloud",
-          "icon": "029005.png"
+          "icon": "029005"
       },
       "2610": {
           "_id": 2610,
           "name": "Chocobo Fly",
-          "icon": "027056.png"
+          "icon": "027056"
       },
       "2611": {
           "_id": 2611,
           "name": "Floating Minnow",
-          "icon": "027051.png"
+          "icon": "027051"
       },
       "8756": {
           "_id": 8756,
           "name": "Endoceras",
-          "icon": "029090.png"
+          "icon": "029090"
       },
       "2613": {
           "_id": 2613,
           "name": "Shrimp Cage Feeder",
-          "icon": "027053.png"
+          "icon": "027053"
       },
       "2614": {
           "_id": 2614,
           "name": "Crow Fly",
-          "icon": "027057.png"
+          "icon": "027057"
       },
       "8759": {
           "_id": 8759,
           "name": "Void Bass",
-          "icon": "029389.png"
+          "icon": "029389"
       },
       "2616": {
           "_id": 2616,
           "name": "Steel Jig",
-          "icon": "027067.png"
+          "icon": "027067"
       },
       "2617": {
           "_id": 2617,
           "name": "Sinking Minnow",
-          "icon": "027055.png"
+          "icon": "027055"
       },
       "2618": {
           "_id": 2618,
           "name": "Snurble Fly",
-          "icon": "027058.png"
+          "icon": "027058"
       },
       "2619": {
           "_id": 2619,
           "name": "Heavy Steel Jig",
-          "icon": "027065.png"
+          "icon": "027065"
       },
       "2620": {
           "_id": 2620,
           "name": "Spinner",
-          "icon": "027062.png"
+          "icon": "027062"
       },
       "4874": {
           "_id": 4874,
           "name": "Harbor Herring",
-          "icon": "029044.png"
+          "icon": "029044"
       },
       "8766": {
           "_id": 8766,
           "name": "Bat-o'-Nine-Tails",
-          "icon": "029380.png"
+          "icon": "029380"
       },
       "2623": {
           "_id": 2623,
           "name": "Wildfowl Fly",
-          "icon": "027059.png"
+          "icon": "027059"
       },
       "2624": {
           "_id": 2624,
           "name": "Topwater Frog",
-          "icon": "027054.png"
+          "icon": "027054"
       },
       "2625": {
           "_id": 2625,
           "name": "Rainbow Spoon Lure",
-          "icon": "027061.png"
+          "icon": "027061"
       },
       "2626": {
           "_id": 2626,
           "name": "Spinnerbait",
-          "icon": "027063.png"
+          "icon": "027063"
       },
       "8771": {
           "_id": 8771,
           "name": "Mahar",
-          "icon": "029660.png"
+          "icon": "029660"
       },
       "2628": {
           "_id": 2628,
           "name": "Yumizuno",
-          "icon": "027068.png"
+          "icon": "027068"
       },
       "8773": {
           "_id": 8773,
           "name": "Magicked Mushroom",
-          "icon": "029387.png"
+          "icon": "029387"
       },
       "8774": {
           "_id": 8774,
           "name": "Giant Takitaro",
-          "icon": "029382.png"
+          "icon": "029382"
       },
       "8775": {
           "_id": 8775,
           "name": "Namitaro",
-          "icon": "029384.png"
+          "icon": "029384"
       },
       "8776": {
           "_id": 8776,
           "name": "Blood Red Bonytongue",
-          "icon": "029379.png"
+          "icon": "029379"
       },
       "12812": {
           "_id": 12812,
           "name": "Blood Skipper",
-          "icon": "029295.png"
+          "icon": "029295"
       },
       "15439": {
           "_id": 15439,
           "name": "Magic Bucket",
-          "icon": "029431.png"
+          "icon": "029431"
       },
       "12804": {
           "_id": 12804,
           "name": "Illuminati Perch",
-          "icon": "029260.png"
+          "icon": "029260"
       },
       "12814": {
           "_id": 12814,
           "name": "Moogle Spirit",
-          "icon": "029702.png"
+          "icon": "029702"
       },
       "12815": {
           "_id": 12815,
           "name": "Oil Eel",
-          "icon": "029751.png"
+          "icon": "029751"
       },
       "7709": {
           "_id": 7709,
           "name": "High Perch",
-          "icon": "029338.png"
+          "icon": "029338"
       },
       "12816": {
           "_id": 12816,
           "name": "Jeweled Jellyfish",
-          "icon": "029755.png"
+          "icon": "029755"
       },
       "12780": {
           "_id": 12780,
           "name": "Sweetfish",
-          "icon": "029395.png"
+          "icon": "029395"
       },
       "17581": {
           "_id": 17581,
           "name": "Crystal Pigeon",
-          "icon": "029735.png"
+          "icon": "029735"
       },
       "12821": {
           "_id": 12821,
           "name": "Pteranodon",
-          "icon": "029707.png"
+          "icon": "029707"
       },
       "12825": {
           "_id": 12825,
           "name": "Stupendemys",
-          "icon": "029703.png"
+          "icon": "029703"
       },
       "4915": {
           "_id": 4915,
           "name": "Mahi-Mahi",
-          "icon": "029050.png"
+          "icon": "029050"
       },
       "7706": {
           "_id": 7706,
           "name": "Mud Golem",
-          "icon": "029337.png"
+          "icon": "029337"
       },
       "16752": {
           "_id": 16752,
           "name": "Aetherochemical Compound #666",
-          "icon": "029760.png"
+          "icon": "029760"
       },
       "5035": {
           "_id": 5035,
           "name": "Storm Rider",
-          "icon": "029606.png"
+          "icon": "029606"
       },
       "7707": {
           "_id": 7707,
           "name": "Octomammoth",
-          "icon": "029072.png"
+          "icon": "029072"
       },
       "8764": {
           "_id": 8764,
           "name": "Pirate's Bane",
-          "icon": "029092.png"
+          "icon": "029092"
       },
       "15629": {
           "_id": 15629,
           "name": "Scaleripper",
-          "icon": "029426.png"
+          "icon": "029426"
       },
       "12828": {
           "_id": 12828,
           "name": "Thunderbolt Eel",
-          "icon": "029205.png"
+          "icon": "029205"
       },
       "17578": {
           "_id": 17578,
           "name": "Captain Nemo",
-          "icon": "029816.png"
+          "icon": "029816"
       },
       "12743": {
           "_id": 12743,
           "name": "Kissing Fish",
-          "icon": "029410.png"
+          "icon": "029410"
       },
       "17580": {
           "_id": 17580,
           "name": "Ceti",
-          "icon": "029611.png"
+          "icon": "029611"
       },
       "4978": {
           "_id": 4978,
           "name": "Silverfish",
-          "icon": "029312.png"
+          "icon": "029312"
       },
       "17582": {
           "_id": 17582,
           "name": "Thunderscale",
-          "icon": "029437.png"
+          "icon": "029437"
       },
       "12829": {
           "_id": 12829,
           "name": "Catkiller",
-          "icon": "029414.png"
+          "icon": "029414"
       },
       "17584": {
           "_id": 17584,
           "name": "The Lord of Lords",
-          "icon": "029865.png"
+          "icon": "029865"
       },
       "17585": {
           "_id": 17585,
           "name": "The Speaker",
-          "icon": "029438.png"
+          "icon": "029438"
       },
       "17586": {
           "_id": 17586,
           "name": "Thousand Fin",
-          "icon": "029439.png"
+          "icon": "029439"
       },
       "17587": {
           "_id": 17587,
           "name": "Bloodchaser",
-          "icon": "029736.png"
+          "icon": "029736"
       },
       "17588": {
           "_id": 17588,
           "name": "Problematicus",
-          "icon": "029863.png"
+          "icon": "029863"
       },
       "7710": {
           "_id": 7710,
           "name": "Syldra",
-          "icon": "029074.png"
+          "icon": "029074"
       },
       "17590": {
           "_id": 17590,
           "name": "Armor Fish",
-          "icon": "029435.png"
+          "icon": "029435"
       },
       "17591": {
           "_id": 17591,
           "name": "Sea Butterfly",
-          "icon": "029662.png"
+          "icon": "029662"
       },
       "17592": {
           "_id": 17592,
           "name": "Charibenet",
-          "icon": "029734.png"
+          "icon": "029734"
       },
       "17593": {
           "_id": 17593,
           "name": "Raimdellopterus",
-          "icon": "029733.png"
+          "icon": "029733"
       },
       "7711": {
           "_id": 7711,
           "name": "Rivet Oyster",
-          "icon": "029067.png"
+          "icon": "029067"
       },
       "12827": {
           "_id": 12827,
           "name": "Barreleye",
-          "icon": "029754.png"
+          "icon": "029754"
       },
       "7712": {
           "_id": 7712,
           "name": "Jacques the Snipper",
-          "icon": "029075.png"
+          "icon": "029075"
       },
       "12810": {
           "_id": 12810,
           "name": "Scorpionfly",
-          "icon": "029721.png"
+          "icon": "029721"
       },
       "12832": {
           "_id": 12832,
           "name": "Lavalord",
-          "icon": "029859.png"
+          "icon": "029859"
       },
       "12833": {
           "_id": 12833,
           "name": "Tupuxuara",
-          "icon": "029709.png"
+          "icon": "029709"
       },
       "7714": {
           "_id": 7714,
           "name": "Glimmerscale",
-          "icon": "029339.png"
+          "icon": "029339"
       },
       "12749": {
           "_id": 12749,
           "name": "Vanuhead",
-          "icon": "029398.png"
+          "icon": "029398"
       },
       "12835": {
           "_id": 12835,
           "name": "Storm Chaser",
-          "icon": "029712.png"
+          "icon": "029712"
       },
       "12754": {
           "_id": 12754,
           "name": "Granite Crab",
-          "icon": "029854.png"
+          "icon": "029854"
       },
       "12836": {
           "_id": 12836,
           "name": "Berserker Betta",
-          "icon": "029238.png"
+          "icon": "029238"
       },
       "7902": {
           "_id": 7902,
           "name": "Cupfish",
-          "icon": "029373.png"
+          "icon": "029373"
       },
       "7903": {
           "_id": 7903,
           "name": "Meteor Survivor",
-          "icon": "029086.png"
+          "icon": "029086"
       },
       "7904": {
           "_id": 7904,
           "name": "Joan of Trout",
-          "icon": "029351.png"
+          "icon": "029351"
       },
       "7905": {
           "_id": 7905,
           "name": "Toramafish",
-          "icon": "029358.png"
+          "icon": "029358"
       },
       "7906": {
           "_id": 7906,
           "name": "Fingers",
-          "icon": "029082.png"
+          "icon": "029082"
       },
       "7907": {
           "_id": 7907,
           "name": "The Assassin",
-          "icon": "029347.png"
+          "icon": "029347"
       },
       "7908": {
           "_id": 7908,
           "name": "Vip Viper",
-          "icon": "029342.png"
+          "icon": "029342"
       },
       "7909": {
           "_id": 7909,
           "name": "The Greatest Bream in the World",
-          "icon": "029080.png"
+          "icon": "029080"
       },
       "7910": {
           "_id": 7910,
           "name": "Dirty Herry",
-          "icon": "029081.png"
+          "icon": "029081"
       },
       "7911": {
           "_id": 7911,
           "name": "Old Hollow Eyes",
-          "icon": "029363.png"
+          "icon": "029363"
       },
       "7912": {
           "_id": 7912,
           "name": "Sylphsbane",
-          "icon": "029360.png"
+          "icon": "029360"
       },
       "7913": {
           "_id": 7913,
           "name": "Floating Boulder",
-          "icon": "029352.png"
+          "icon": "029352"
       },
       "7914": {
           "_id": 7914,
           "name": "The Grinner",
-          "icon": "029343.png"
+          "icon": "029343"
       },
       "7915": {
           "_id": 7915,
           "name": "Shark Tuna",
-          "icon": "029083.png"
+          "icon": "029083"
       },
       "7916": {
           "_id": 7916,
           "name": "Worm of Nym",
-          "icon": "029355.png"
+          "icon": "029355"
       },
       "7917": {
           "_id": 7917,
           "name": "Twitchbeard",
-          "icon": "029374.png"
+          "icon": "029374"
       },
       "7918": {
           "_id": 7918,
           "name": "The Warden's Wand",
-          "icon": "029356.png"
+          "icon": "029356"
       },
       "7919": {
           "_id": 7919,
           "name": "Spearnose",
-          "icon": "029611.png"
+          "icon": "029611"
       },
       "7920": {
           "_id": 7920,
           "name": "Levinlight",
-          "icon": "029353.png"
+          "icon": "029353"
       },
       "7921": {
           "_id": 7921,
           "name": "The Sinker",
-          "icon": "029341.png"
+          "icon": "029341"
       },
       "7922": {
           "_id": 7922,
           "name": "The Gobfather",
-          "icon": "029357.png"
+          "icon": "029357"
       },
       "7923": {
           "_id": 7923,
           "name": "Sweetnewt",
-          "icon": "029375.png"
+          "icon": "029375"
       },
       "7924": {
           "_id": 7924,
           "name": "Bombardfish",
-          "icon": "029087.png"
+          "icon": "029087"
       },
       "7925": {
           "_id": 7925,
           "name": "The Salter",
-          "icon": "029365.png"
+          "icon": "029365"
       },
       "7926": {
           "_id": 7926,
           "name": "The Lone Ripper",
-          "icon": "029085.png"
+          "icon": "029085"
       },
       "7927": {
           "_id": 7927,
           "name": "King of the Spring",
-          "icon": "029362.png"
+          "icon": "029362"
       },
       "7928": {
           "_id": 7928,
           "name": "Discobolus",
-          "icon": "029349.png"
+          "icon": "029349"
       },
       "7929": {
           "_id": 7929,
           "name": "Iron Noose",
-          "icon": "029350.png"
+          "icon": "029350"
       },
       "7930": {
           "_id": 7930,
           "name": "Olgoi-Khorkhoi",
-          "icon": "029376.png"
+          "icon": "029376"
       },
       "7931": {
           "_id": 7931,
           "name": "Magic Carpet",
-          "icon": "029610.png"
+          "icon": "029610"
       },
       "7932": {
           "_id": 7932,
           "name": "Daniffen's Mark",
-          "icon": "029366.png"
+          "icon": "029366"
       },
       "7933": {
           "_id": 7933,
           "name": "Charon's Lantern",
-          "icon": "029372.png"
+          "icon": "029372"
       },
       "7934": {
           "_id": 7934,
           "name": "The Green Jester",
-          "icon": "029354.png"
+          "icon": "029354"
       },
       "7935": {
           "_id": 7935,
           "name": "Bloodbath",
-          "icon": "029344.png"
+          "icon": "029344"
       },
       "7936": {
           "_id": 7936,
           "name": "Son of Levin",
-          "icon": "029367.png"
+          "icon": "029367"
       },
       "7937": {
           "_id": 7937,
           "name": "Thundergut",
-          "icon": "029368.png"
+          "icon": "029368"
       },
       "7938": {
           "_id": 7938,
           "name": "The Drowned Sniper",
-          "icon": "029361.png"
+          "icon": "029361"
       },
       "7939": {
           "_id": 7939,
           "name": "The Terpsichorean",
-          "icon": "029364.png"
+          "icon": "029364"
       },
       "7940": {
           "_id": 7940,
           "name": "Mirrorscale",
-          "icon": "029371.png"
+          "icon": "029371"
       },
       "4869": {
           "_id": 4869,
           "name": "Merlthor Goby",
-          "icon": "029003.png"
+          "icon": "029003"
       },
       "7942": {
           "_id": 7942,
           "name": "The Thousand-year Itch",
-          "icon": "029369.png"
+          "icon": "029369"
       },
       "7943": {
           "_id": 7943,
           "name": "Hannibal",
-          "icon": "029345.png"
+          "icon": "029345"
       },
       "7944": {
           "_id": 7944,
           "name": "Dawn Maiden",
-          "icon": "029348.png"
+          "icon": "029348"
       },
       "7945": {
           "_id": 7945,
           "name": "Starbright",
-          "icon": "029359.png"
+          "icon": "029359"
       },
       "7946": {
           "_id": 7946,
           "name": "The Matriarch",
-          "icon": "029370.png"
+          "icon": "029370"
       },
       "15627": {
           "_id": 15627,
           "name": "The Impaler",
-          "icon": "029813.png"
+          "icon": "029813"
       },
       "7948": {
           "_id": 7948,
           "name": "The Captain's Chalice",
-          "icon": "029079.png"
+          "icon": "029079"
       },
       "7949": {
           "_id": 7949,
           "name": "Anomalocaris",
-          "icon": "029658.png"
+          "icon": "029658"
       },
       "7950": {
           "_id": 7950,
           "name": "Frilled Shark",
-          "icon": "029088.png"
+          "icon": "029088"
       },
       "15631": {
           "_id": 15631,
           "name": "Meteortoise",
-          "icon": "029861.png"
+          "icon": "029861"
       },
       "15632": {
           "_id": 15632,
           "name": "The Ewer King",
-          "icon": "029338.png"
+          "icon": "029338"
       },
       "15633": {
           "_id": 15633,
           "name": "Vidofnir",
-          "icon": "029428.png"
+          "icon": "029428"
       },
       "15634": {
           "_id": 15634,
           "name": "The Soul of the Martyr",
-          "icon": "029074.png"
+          "icon": "029074"
       },
       "15635": {
           "_id": 15635,
           "name": "Inkfish",
-          "icon": "029429.png"
+          "icon": "029429"
       },
       "15636": {
           "_id": 15636,
           "name": "The Second One",
-          "icon": "029065.png"
+          "icon": "029065"
       },
       "15637": {
           "_id": 15637,
           "name": "Augmented High Allagan Helmet",
-          "icon": "029086.png"
+          "icon": "029086"
       },
       "15638": {
           "_id": 15638,
           "name": "Aphotic Pirarucu",
-          "icon": "029430.png"
+          "icon": "029430"
       },
       "12761": {
           "_id": 12761,
           "name": "Dravanian Bass",
-          "icon": "029206.png"
+          "icon": "029206"
       },
       "4888": {
           "_id": 4888,
           "name": "Ogre Barracuda",
-          "icon": "029035.png"
+          "icon": "029035"
       },
       "12830": {
           "_id": 12830,
           "name": "Loosetongue",
-          "icon": "029243.png"
+          "icon": "029243"
       },
       "17579": {
           "_id": 17579,
           "name": "Paikiller",
-          "icon": "029436.png"
+          "icon": "029436"
       },
       "12796": {
           "_id": 12796,
           "name": "Albino Octopus",
-          "icon": "029705.png"
+          "icon": "029705"
       },
       "4898": {
           "_id": 4898,
           "name": "Fullmoon Sardine",
-          "icon": "029055.png"
+          "icon": "029055"
       },
       "8753": {
           "_id": 8753,
           "name": "The Old Man in the Sea",
-          "icon": "029095.png"
+          "icon": "029095"
       },
       "4904": {
           "_id": 4904,
           "name": "Wahoo",
-          "icon": "029025.png"
+          "icon": "029025"
       },
       "4905": {
           "_id": 4905,
           "name": "Raincaller",
-          "icon": "029057.png"
+          "icon": "029057"
       },
       "4906": {
           "_id": 4906,
           "name": "Nautilus",
-          "icon": "029006.png"
+          "icon": "029006"
       },
       "8754": {
           "_id": 8754,
           "name": "Nepto Dragon",
-          "icon": "029094.png"
+          "icon": "029094"
       },
       "4911": {
           "_id": 4911,
           "name": "Rock Lobster",
-          "icon": "029013.png"
+          "icon": "029013"
       },
       "4913": {
           "_id": 4913,
           "name": "Little Thalaos",
-          "icon": "029054.png"
+          "icon": "029054"
       },
       "8755": {
           "_id": 8755,
           "name": "Coelacanthus",
-          "icon": "029091.png"
+          "icon": "029091"
       },
       "4918": {
           "_id": 4918,
           "name": "Coelacanth",
-          "icon": "029041.png"
+          "icon": "029041"
       },
       "4919": {
           "_id": 4919,
           "name": "Giant Squid",
-          "icon": "029027.png"
+          "icon": "029027"
       },
       "12831": {
           "_id": 12831,
           "name": "Thaliak Caiman",
-          "icon": "029415.png"
+          "icon": "029415"
       },
       "8765": {
           "_id": 8765,
           "name": "Ndendecki",
-          "icon": "029391.png"
+          "icon": "029391"
       },
       "4924": {
           "_id": 4924,
           "name": "Titanic Sawfish",
-          "icon": "029020.png"
+          "icon": "029020"
       },
       "5002": {
           "_id": 5002,
           "name": "Assassin Betta",
-          "icon": "029238.png"
+          "icon": "029238"
       },
       "7708": {
           "_id": 7708,
           "name": "Matron Carp",
-          "icon": "029320.png"
+          "icon": "029320"
       },
       "4927": {
           "_id": 4927,
           "name": "Striped Goby",
-          "icon": "029230.png"
+          "icon": "029230"
       },
       "10123": {
           "_id": 10123,
           "name": "Gigant Clam",
-          "icon": "029047.png"
+          "icon": "029047"
       },
       "8758": {
           "_id": 8758,
           "name": "Ignus Horn",
-          "icon": "029390.png"
+          "icon": "029390"
       },
       "4937": {
           "_id": 4937,
           "name": "Abalathian Smelt",
-          "icon": "029310.png"
+          "icon": "029310"
       },
       "8757": {
           "_id": 8757,
           "name": "Seahag",
-          "icon": "029093.png"
+          "icon": "029093"
       },
       "4942": {
           "_id": 4942,
           "name": "Ala Mhigan Fighting Fish",
-          "icon": "029216.png"
+          "icon": "029216"
       },
       "8760": {
           "_id": 8760,
           "name": "Cornelia",
-          "icon": "029377.png"
+          "icon": "029377"
       },
       "4948": {
           "_id": 4948,
           "name": "Copperfish",
-          "icon": "029314.png"
+          "icon": "029314"
       },
       "15628": {
           "_id": 15628,
           "name": "La Reale",
-          "icon": "029814.png"
+          "icon": "029814"
       },
       "8761": {
           "_id": 8761,
           "name": "Ninja Betta",
-          "icon": "029378.png"
+          "icon": "029378"
       },
       "8762": {
           "_id": 8762,
           "name": "Canavan",
-          "icon": "029386.png"
+          "icon": "029386"
       },
       "17589": {
           "_id": 17589,
           "name": "Opabinia",
-          "icon": "029762.png"
+          "icon": "029762"
       },
       "8763": {
           "_id": 8763,
           "name": "Kuno the Killer",
-          "icon": "029381.png"
+          "icon": "029381"
       },
       "16742": {
           "_id": 16742,
           "name": "Dimorphodon",
-          "icon": "029730.png"
+          "icon": "029730"
       },
       "16743": {
           "_id": 16743,
           "name": "Basking Shark",
-          "icon": "029731.png"
+          "icon": "029731"
       },
       "16744": {
           "_id": 16744,
           "name": "Allagan Bladeshark",
-          "icon": "029759.png"
+          "icon": "029759"
       },
       "16745": {
           "_id": 16745,
           "name": "Hailfinder",
-          "icon": "029661.png"
+          "icon": "029661"
       },
       "16746": {
           "_id": 16746,
           "name": "Flarefish",
-          "icon": "029815.png"
+          "icon": "029815"
       },
       "16747": {
           "_id": 16747,
           "name": "Twin-tongued Carp",
-          "icon": "029432.png"
+          "icon": "029432"
       },
       "16748": {
           "_id": 16748,
           "name": "Madam Butterfly",
-          "icon": "029433.png"
+          "icon": "029433"
       },
       "16749": {
           "_id": 16749,
           "name": "Moggle Mogpom",
-          "icon": "029434.png"
+          "icon": "029434"
       },
       "16750": {
           "_id": 16750,
           "name": "Cirrostratus",
-          "icon": "029732.png"
+          "icon": "029732"
       },
       "16751": {
           "_id": 16751,
           "name": "Hraesvelgr's Tear",
-          "icon": "029862.png"
+          "icon": "029862"
       },
       "7947": {
           "_id": 7947,
           "name": "Shadowstreak",
-          "icon": "029346.png"
+          "icon": "029346"
       },
       "16753": {
           "_id": 16753,
           "name": "Hundred-eyed Axolotl",
-          "icon": "029761.png"
+          "icon": "029761"
       },
       "16754": {
           "_id": 16754,
           "name": "Bobgoblin Bass",
-          "icon": "029330.png"
+          "icon": "029330"
       },
       "17583": {
           "_id": 17583,
           "name": "Riddle",
-          "icon": "029864.png"
+          "icon": "029864"
       },
       "16756": {
           "_id": 16756,
           "name": "Merciless",
-          "icon": "029367.png"
+          "icon": "029367"
       },
       "8767": {
           "_id": 8767,
           "name": "Wootz Knifefish Zenith",
-          "icon": "029383.png"
+          "icon": "029383"
       },
       "4991": {
           "_id": 4991,
           "name": "Thunderbolt Sculpin",
-          "icon": "029303.png"
+          "icon": "029303"
       },
       "8768": {
           "_id": 8768,
           "name": "Helicoprion",
-          "icon": "029612.png"
+          "icon": "029612"
       },
       "14211": {
           "_id": 14211,
           "name": "Amber Salamander",
-          "icon": "029424.png"
+          "icon": "029424"
       },
       "14212": {
           "_id": 14212,
           "name": "Gnomefish",
-          "icon": "029421.png"
+          "icon": "029421"
       },
       "14213": {
           "_id": 14213,
           "name": "Fleece Stingray",
-          "icon": "029728.png"
+          "icon": "029728"
       },
       "8769": {
           "_id": 8769,
           "name": "Darkstar",
-          "icon": "029385.png"
+          "icon": "029385"
       },
       "14217": {
           "_id": 14217,
           "name": "Coerthan Oyster",
-          "icon": "029097.png"
+          "icon": "029097"
       },
       "14218": {
           "_id": 14218,
           "name": "Oliphant's Trunk",
-          "icon": "029613.png"
+          "icon": "029613"
       },
       "14219": {
           "_id": 14219,
           "name": "Mountain Kraken",
-          "icon": "029027.png"
+          "icon": "029027"
       },
       "14220": {
           "_id": 14220,
           "name": "Armored Catfish",
-          "icon": "029422.png"
+          "icon": "029422"
       },
       "8770": {
           "_id": 8770,
           "name": "Blue Corpse",
-          "icon": "029388.png"
+          "icon": "029388"
       },
       "5007": {
           "_id": 5007,
           "name": "Paglth'an Discus",
-          "icon": "029241.png"
+          "icon": "029241"
       },
       "5008": {
           "_id": 5008,
           "name": "Boxing Pleco",
-          "icon": "029237.png"
+          "icon": "029237"
       },
       "15626": {
           "_id": 15626,
           "name": "Fat Purse",
-          "icon": "029425.png"
+          "icon": "029425"
       },
       "5011": {
           "_id": 5011,
           "name": "Goldfish",
-          "icon": "029311.png"
+          "icon": "029311"
       },
       "7941": {
           "_id": 7941,
           "name": "Helmsman's Hand",
-          "icon": "029084.png"
+          "icon": "029084"
       },
       "12800": {
           "_id": 12800,
           "name": "Fossiltongue",
-          "icon": "029853.png"
+          "icon": "029853"
       },
       "5017": {
           "_id": 5017,
           "name": "Sundisc",
-          "icon": "029262.png"
+          "icon": "029262"
       },
       "5016": {
           "_id": 5016,
           "name": "Giant Donko",
-          "icon": "029222.png"
+          "icon": "029222"
       },
       "8772": {
           "_id": 8772,
           "name": "Shonisaurus",
-          "icon": "029659.png"
+          "icon": "029659"
       },
       "5021": {
           "_id": 5021,
           "name": "Cadaver Carp",
-          "icon": "029315.png"
+          "icon": "029315"
       },
       "5022": {
           "_id": 5022,
           "name": "Mushroom Crab",
-          "icon": "029293.png"
+          "icon": "029293"
       },
       "5023": {
           "_id": 5023,
           "name": "Judgment Staff",
-          "icon": "029302.png"
+          "icon": "029302"
       },
       "13728": {
           "_id": 13728,
           "name": "Coerthan Clione",
-          "icon": "029716.png"
+          "icon": "029716"
       },
       "13729": {
           "_id": 13729,
           "name": "Dravanian Smelt",
-          "icon": "029310.png"
+          "icon": "029310"
       },
       "13730": {
           "_id": 13730,
           "name": "Heavens Coral",
-          "icon": "029725.png"
+          "icon": "029725"
       },
       "13731": {
           "_id": 13731,
           "name": "Sunsail",
-          "icon": "029726.png"
+          "icon": "029726"
       },
       "13732": {
           "_id": 13732,
           "name": "Goblin Bass",
-          "icon": "029280.png"
+          "icon": "029280"
       },
       "12709": {
           "_id": 12709,
           "name": "Magma Worm",
-          "icon": "027026.png"
+          "icon": "027026"
       },
       "12710": {
           "_id": 12710,
           "name": "Fiend Worm",
-          "icon": "027027.png"
+          "icon": "027027"
       },
       "5031": {
           "_id": 5031,
           "name": "Jungle Catfish",
-          "icon": "029265.png"
+          "icon": "029265"
       },
       "5544": {
           "_id": 5544,
           "name": "Lamp Marimo",
-          "icon": "029316.png"
+          "icon": "029316"
       },
       "12713": {
           "_id": 12713,
           "name": "Icepick",
-          "icon": "029809.png"
+          "icon": "029809"
       },
       "12715": {
           "_id": 12715,
           "name": "Ice Faerie",
-          "icon": "029803.png"
+          "icon": "029803"
       },
       "12716": {
           "_id": 12716,
           "name": "Skyworm",
-          "icon": "029722.png"
+          "icon": "029722"
       },
       "5040": {
           "_id": 5040,
           "name": "Cloud Cutter",
-          "icon": "029655.png"
+          "icon": "029655"
       },
       "12721": {
           "_id": 12721,
           "name": "Whilom Catfish",
-          "icon": "029405.png"
+          "icon": "029405"
       },
       "12722": {
           "_id": 12722,
           "name": "Blueclaw Shrimp",
-          "icon": "029404.png"
+          "icon": "029404"
       },
       "12723": {
           "_id": 12723,
           "name": "Starflower",
-          "icon": "029715.png"
+          "icon": "029715"
       },
       "12724": {
           "_id": 12724,
           "name": "Glacier Core",
-          "icon": "029706.png"
+          "icon": "029706"
       },
       "12784": {
           "_id": 12784,
           "name": "Manasail",
-          "icon": "029704.png"
+          "icon": "029704"
       },
       "12726": {
           "_id": 12726,
           "name": "Sorcerer Fish",
-          "icon": "029807.png"
+          "icon": "029807"
       },
       "12727": {
           "_id": 12727,
           "name": "Hotrod",
-          "icon": "029810.png"
+          "icon": "029810"
       },
       "12730": {
           "_id": 12730,
           "name": "Bullfrog",
-          "icon": "029233.png"
+          "icon": "029233"
       },
       "13727": {
           "_id": 13727,
           "name": "Functional Proto-hropken",
-          "icon": "029758.png"
+          "icon": "029758"
       },
       "12733": {
           "_id": 12733,
           "name": "Rock Mussel",
-          "icon": "029413.png"
+          "icon": "029413"
       },
       "12704": {
           "_id": 12704,
           "name": "Stonefly Nymph",
-          "icon": "027028.png"
+          "icon": "027028"
       },
       "12739": {
           "_id": 12739,
           "name": "Bubble Eye",
-          "icon": "029408.png"
+          "icon": "029408"
       },
       "12740": {
           "_id": 12740,
           "name": "Grass Carp",
-          "icon": "029407.png"
+          "icon": "029407"
       },
       "12741": {
           "_id": 12741,
           "name": "Pipira Pira",
-          "icon": "029212.png"
+          "icon": "029212"
       },
       "12742": {
           "_id": 12742,
           "name": "Dravanian Squeaker",
-          "icon": "029397.png"
+          "icon": "029397"
       },
       "12705": {
           "_id": 12705,
           "name": "Purse Web Spider",
-          "icon": "022619.png"
+          "icon": "022619"
       },
       "7951": {
           "_id": 7951,
           "name": "Aetherlouse",
-          "icon": "029089.png"
+          "icon": "029089"
       },
       "12746": {
           "_id": 12746,
           "name": "Storm Core",
-          "icon": "029718.png"
+          "icon": "029718"
       },
       "12706": {
           "_id": 12706,
           "name": "Goblin Jig",
-          "icon": "027069.png"
+          "icon": "027069"
       },
       "12751": {
           "_id": 12751,
           "name": "Lungfish",
-          "icon": "029400.png"
+          "icon": "029400"
       },
       "12753": {
           "_id": 12753,
           "name": "Sky Faerie",
-          "icon": "029716.png"
+          "icon": "029716"
       },
       "12802": {
           "_id": 12802,
           "name": "Caiman",
-          "icon": "029393.png"
+          "icon": "029393"
       },
       "5027": {
           "_id": 5027,
           "name": "Heliobatis",
-          "icon": "029313.png"
+          "icon": "029313"
       },
       "12757": {
           "_id": 12757,
           "name": "Hedgemole Cricket",
-          "icon": "029801.png"
+          "icon": "029801"
       },
       "12708": {
           "_id": 12708,
           "name": "Red Balloon",
-          "icon": "027025.png"
+          "icon": "027025"
       },
       "12762": {
           "_id": 12762,
           "name": "Coerthan Puffer",
-          "icon": "029276.png"
+          "icon": "029276"
       },
       "12763": {
           "_id": 12763,
           "name": "Snowcaller",
-          "icon": "029057.png"
+          "icon": "029057"
       },
       "12765": {
           "_id": 12765,
           "name": "Mercy Staff",
-          "icon": "029302.png"
+          "icon": "029302"
       },
       "12766": {
           "_id": 12766,
           "name": "Rime Eater",
-          "icon": "029656.png"
+          "icon": "029656"
       },
       "12767": {
           "_id": 12767,
           "name": "Warmwater Bichir",
-          "icon": "029402.png"
+          "icon": "029402"
       },
       "12768": {
           "_id": 12768,
           "name": "Noontide Oscar",
-          "icon": "029403.png"
+          "icon": "029403"
       },
       "7705": {
           "_id": 7705,
           "name": "Chirurgeon",
-          "icon": "029336.png"
+          "icon": "029336"
       },
       "12774": {
           "_id": 12774,
           "name": "Tiny Axolotl",
-          "icon": "029396.png"
+          "icon": "029396"
       },
       "12776": {
           "_id": 12776,
           "name": "Platinum Fish",
-          "icon": "029312.png"
+          "icon": "029312"
       },
       "12777": {
           "_id": 12777,
           "name": "Aether Eye",
-          "icon": "029214.png"
+          "icon": "029214"
       },
       "15630": {
           "_id": 15630,
           "name": "The Dreamweaver",
-          "icon": "029427.png"
+          "icon": "029427"
       },
       "12711": {
           "_id": 12711,
           "name": "Brute Leech",
-          "icon": "022635.png"
+          "icon": "022635"
       },
       "12834": {
           "_id": 12834,
           "name": "Vampiric Tapestry",
-          "icon": "029701.png"
+          "icon": "029701"
       },
       "12837": {
           "_id": 12837,
           "name": "Capelin",
-          "icon": "029310.png"
+          "icon": "029310"
       },
       "12803": {
           "_id": 12803,
           "name": "Euphotic Pirarucu",
-          "icon": "029224.png"
+          "icon": "029224"
       },
       "12712": {
           "_id": 12712,
           "name": "Giant Crane Fly",
-          "icon": "027002.png"
+          "icon": "027002"
       },
       "12786": {
           "_id": 12786,
           "name": "Magma Louse",
-          "icon": "029856.png"
+          "icon": "029856"
       },
       "12789": {
           "_id": 12789,
           "name": "Brown Bolo",
-          "icon": "029232.png"
+          "icon": "029232"
       },
       "17577": {
           "_id": 17577,
           "name": "Bishopfish",
-          "icon": "029098.png"
+          "icon": "029098"
       },
       "12792": {
           "_id": 12792,
           "name": "Weston Bowfin",
-          "icon": "029302.png"
+          "icon": "029302"
       },
       "7679": {
           "_id": 7679,
           "name": "Beguiler Chub",
-          "icon": "029324.png"
+          "icon": "029324"
       },
       "4995": {
           "_id": 4995,
           "name": "Common Sculpin",
-          "icon": "029250.png"
+          "icon": "029250"
       },
       "7678": {
           "_id": 7678,
           "name": "Zalera",
-          "icon": "029069.png"
+          "icon": "029069"
       },
       "12799": {
           "_id": 12799,
           "name": "Warballoon",
-          "icon": "029657.png"
+          "icon": "029657"
       }
   },
   WEATHER_RATES: {
@@ -6578,71 +6578,71 @@ const DATA = {
   WEATHER_TYPES: {
       "1": {
           "name": "Clear Skies",
-          "icon": "060201.png"
+          "icon": "060201"
       },
       "2": {
           "name": "Fair Skies",
-          "icon": "060202.png"
+          "icon": "060202"
       },
       "3": {
           "name": "Clouds",
-          "icon": "060203.png"
+          "icon": "060203"
       },
       "4": {
           "name": "Fog",
-          "icon": "060204.png"
+          "icon": "060204"
       },
       "5": {
           "name": "Wind",
-          "icon": "060205.png"
+          "icon": "060205"
       },
       "6": {
           "name": "Gales",
-          "icon": "060206.png"
+          "icon": "060206"
       },
       "7": {
           "name": "Rain",
-          "icon": "060207.png"
+          "icon": "060207"
       },
       "8": {
           "name": "Showers",
-          "icon": "060208.png"
+          "icon": "060208"
       },
       "9": {
           "name": "Thunder",
-          "icon": "060209.png"
+          "icon": "060209"
       },
       "10": {
           "name": "Thunderstorms",
-          "icon": "060210.png"
+          "icon": "060210"
       },
       "11": {
           "name": "Dust Storms",
-          "icon": "060211.png"
+          "icon": "060211"
       },
       "14": {
           "name": "Heat Waves",
-          "icon": "060214.png"
+          "icon": "060214"
       },
       "15": {
           "name": "Snow",
-          "icon": "060215.png"
+          "icon": "060215"
       },
       "16": {
           "name": "Blizzards",
-          "icon": "060216.png"
+          "icon": "060216"
       },
       "17": {
           "name": "Gloom",
-          "icon": "060218.png"
+          "icon": "060218"
       },
       "50": {
           "name": "Umbral Static",
-          "icon": "060220.png"
+          "icon": "060220"
       },
       "49": {
           "name": "Umbral Wind",
-          "icon": "060219.png"
+          "icon": "060219"
       }
   },
 };
