@@ -393,11 +393,10 @@
         }
 
         // Initialize the table with all the fishies.
-        _(Fishes).each((fish) => {
+        for (let fish of Fishes) {
           // Create the initial entry.
           fishTableElement.append(viewModel.fishEntryTemplate(fish));
-        });
-
+        }
 
         _.defer(function () {
           console.log("Updating and sorting table now...");
@@ -469,6 +468,7 @@
               // Has the availability changed at all?
               if (_(x).any((x) => x.type === "availabilityChanged")) {
                 console.log("Availability has changed... Need to make lots of changes...");
+                $('#fish-table-container .ui.dimmer').addClass('active');
               } else {
                 // Potentially minor changes. Availability is still the same, but
                 // we might need to remove entries from the list, or at most,
@@ -501,6 +501,7 @@
               // $(".fish-entry[data-stale=true]", fishTableElement).remove();
               // $('#fishes').floatThead();
               reconnectEvents();
+              $('#fish-table-container .ui.dimmer').removeClass('active');
             });
 
           Rx.Observable.interval(2500 /*ms*/).timestamp().subscribe((x) => {
@@ -545,7 +546,6 @@
             console.log("Patches:", viewModel.filter.patch);
             filterPatchSubject.onNext(viewModel.filter.patch);
           });
-
 
           // _.delay(() => {
           //   $('#fishes').floatThead({
@@ -606,7 +606,11 @@
       </div>
 
       <!-- Display the list of fish -->
-      <div id="fish-table-container"></div>
+      <div id="fish-table-container">
+        <div class="ui active dimmer">
+          <div class="ui indeterminate text loader">Loading Fish Availability...</div>
+        </div>
+      </div>
     </div>
     <div class="ui container">
       <p>
