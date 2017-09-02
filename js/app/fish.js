@@ -5,15 +5,24 @@ class Fish {
     this.name = DATA.ITEMS[this.id].name;
     this.icon = DATA.ITEMS[this.id].icon;
     if (fishData.location !== null) {
-      var fishingSpot = DATA.FISHING_SPOTS[fishData.location];
+      var fishingSpot = null;
+      var spearfishing = false;
+      if (fishData.gig !== null && fishData.gig !== undefined) {
+        fishingSpot = DATA.SPEARFISHING_SPOTS[fishData.location];
+        spearfishing = true;
+      } else {
+        fishingSpot = DATA.FISHING_SPOTS[fishData.location];
+        spearfishing = false;
+      }
       this.location = {
         name: fishingSpot.name,
         zoneName: DATA.WEATHER_RATES[fishingSpot.territory_id].zone_name,
         id: fishingSpot._id,
         zoneId: fishingSpot.territory_id,
+        spearfishing: spearfishing,
       };
     } else {
-      this.location = {name: '', zoneName: '', id: 0, zoneId: 0};
+      this.location = {name: '', zoneName: '', id: 0, zoneId: 0, spearfishing: false};
     }
     this.catchableRanges = [];
     {

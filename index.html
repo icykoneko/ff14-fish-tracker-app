@@ -31,7 +31,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.0.3/jquery.floatThead.min.js"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css" />
+    <link rel="stylesheet" href="public/images/sprite.css?4.0_20170826" />
 
     <style type="text/css">
       .main.container {
@@ -217,7 +217,7 @@
     </style>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js"></script>
+    <script type="text/javascript" src="js/app/data.js?4.0_20170826"></script>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/app/time.js"></script>
@@ -256,8 +256,8 @@
               <i class="pin icon"></i>
             </div>
           </div>
-          <!--<img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}"/>-->
-          <div class="ui middle aligned sprite-icon sprite-icon-{{=it.icon}}"></div>
+          <!--<img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}.png"/>-->
+          <div class="ui middle aligned sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
@@ -287,7 +287,7 @@
         </td>
         <!-- Location -->
         <td>
-          <a href="http://garlandtools.org/db/#fishing/{{=it.location.id}}"
+          <a href="http://garlandtools.org/db/#{{?it.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.location.id}}"
              target="cp_gt">{{=it.location.name}}</a><br/>
           <span style="font-size: smaller">{{=it.location.zoneName}}</span>
         </td>
@@ -298,7 +298,7 @@
               <!-- <img class="ui middle aligned image weather-icon"
                    src="public/images/weather/{{=weather.icon}}.png"
                    title="{{=weather.name}}"/> -->
-              <div class="ui middle aligned sprite-icon sprite-icon-{{=weather.icon}} weather-icon"
+              <div class="ui middle aligned sprite-icon sprite-icon-weather-{{=weather.icon}} weather-icon"
                    title="{{=weather.name}}"></div>
             {{~}}
             <i class="arrow right icon"></i>
@@ -307,7 +307,7 @@
             <!-- <img class="ui middle aligned image weather-icon"
                  src="public/images/weather/{{=weather.icon}}.png"
                  title="{{=weather.name}}"/> -->
-            <div class="ui middle aligned sprite-icon sprite-icon-{{=weather.icon}} weather-icon"
+            <div class="ui middle aligned sprite-icon sprite-icon-weather-{{=weather.icon}} weather-icon"
                  title="{{=weather.name}}"></div>
           {{~}}
           <br/><i class="wait icon"></i>&nbsp;{{=it.startHour + ' - ' + it.endHour}}
@@ -321,18 +321,21 @@
                 <!-- <img class="ui middle aligned image item-icon-40"
                      src="public/images/fish_n_tackle/{{=predator.icon}}.png"
                      title="{{=predator.name}}"/> -->
-                <div class="ui middle aligned bait-icon sprite-icon sprite-icon-{{=predator.icon}}" title="{{=predator.name}}"></div>
+                <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=predator.icon}}" title="{{=predator.name}}"></div>
               </div>
             {{~}}
             <i class="chevron right icon"></i>
           {{?}}
           {{?it.fishEyes}}
             <!-- <img class="ui middle aligned image" title="Fish Eyes" src="public/images/status/fisheyes.png"/> -->
-            <div class="ui middle aligned sprite-icon sprite-icon-fisheyes" title="Fish Eyes"></div>
+            <div class="ui middle aligned sprite-icon sprite-icon-status-fisheyes" title="Fish Eyes"></div>
           {{?}}
           {{?it.snagging}}
             <!-- <img class="ui middle aligned image" title="Snagging" src="public/images/status/snagging.png"/> -->
-            <div class="ui middle aligned sprite-icon sprite-icon-snagging" title="Snagging"></div>
+            <div class="ui middle aligned sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
+          {{?}}
+          {{?it.gig}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.gig.toLowerCase()}}_gig" title="{{=it.gig}} Gig"></div>
           {{?}}
           {{~it.bait.path :item:idx}}
             {{?idx == 0}}
@@ -341,7 +344,7 @@
               <i class="arrow right icon"></i>
             {{?}}
             <!-- <img class="ui middle aligned image" title="{{=item.name}}" src="public/images/fish_n_tackle/{{=item.icon}}.png"/> -->
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-{{=item.icon}}" title="{{=item.name}}"></div>
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}"></div>
             {{?idx == 0}}
               </a>
             {{?}}
@@ -574,7 +577,7 @@
     <div class="ui main container">
       <h1>FFX|V Fish Tracker App</h1>
       <p>
-        This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.
+        This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may now <a href="#comments">leave comments</a> below!
       </p>
 
       <div id="filterCompletion">
@@ -603,6 +606,14 @@
           <div class="ui active button" data-filter="3.4">3.4</div>
           <div class="ui active button" data-filter="3.5">3.5</div>
         </div>
+        <div class="ui mini very compact buttons">
+          <div class="ui active button" data-filter="4">4.0</div>
+          <div class="ui active button disabled" data-filter="4.1">4.1</div>
+          <div class="ui active button disabled" data-filter="4.2">4.2</div>
+          <div class="ui active button disabled" data-filter="4.3">4.3</div>
+          <div class="ui active button disabled" data-filter="4.4">4.4</div>
+          <div class="ui active button disabled" data-filter="4.5">4.5</div>
+        </div>
       </div>
 
       <!-- Display the list of fish -->
@@ -611,6 +622,24 @@
           <div class="ui indeterminate text loader">Loading Fish Availability...</div>
         </div>
       </div>
+    </div>
+    <div class="ui container">
+      <a name="comments"></a>
+      <div id="disqus_thread"></div>
+      <script>
+        var disqus_config = function () {
+          this.page.url = "http://ff14fish.carbuncleplushy.com/";
+          this.page.identifier = "carby-ffxiv-fish-tracker";
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://carby-ffxiv-fish-tracker.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
     </div>
     <div class="ui container">
       <p>

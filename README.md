@@ -13,3 +13,8 @@ In order to cut down on GET requests, all of the images are bundled into a singl
 ```
 sprity create ./public/images/ ./public/images/**/*.png -c . -s sprite.css --prefix sprite-icon --margin 2 --orientation binary-tree
 ```
+
+Also, use the `generate_item_icon_map.py` helper script to generate a mapping of icons to include. This should probably get pushed into the main code?
+
+## Adding new fish data
+Run the local `importNewFishData_v2.py` script with `fishData-x.y.yaml` to add new fish data. This will produce `fish_data_updated.py`. After confirming the data is good, copy the file to `fish_data_current.py` run `dumpFishDataToYaml.py` to update `fishData.yaml`.  Copy `fish_data_updated.js` to `fish_data_current.js` as well. This is the data used for the web pages.
