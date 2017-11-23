@@ -1,0 +1,20 @@
+{
+  "name": "fish-tracker-app",
+  "private": true,
+  "description": "A webapp designed for tracking big fish and arranging them by which fish are less often available rather than just available right now.",
+  "version": "1.1.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icykoneko/ff14-fish-tracker-app.git"
+  },
+  "author": "Carbuncle Plushy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icykoneko/ff14-fish-tracker-app/issues"
+  },
+  "homepage": "https://github.com/icykoneko/ff14-fish-tracker-app#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
