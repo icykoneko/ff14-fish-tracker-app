@@ -31,7 +31,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.0.3/jquery.floatThead.min.js"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?4.0_20170826" />
+    <link rel="stylesheet" href="public/images/sprite.css?4.1_20171124" />
 
     <style type="text/css">
       .main.container {
@@ -217,7 +217,7 @@
     </style>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?4.0_20171122"></script>
+    <script type="text/javascript" src="js/app/data.js?4.1_20171124"></script>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/app/time.js"></script>
@@ -552,6 +552,14 @@
             console.log("Patches:", viewModel.filter.patch);
             filterPatchSubject.onNext(viewModel.filter.patch);
           });
+          $filterPatchButtons.on('dblclick', function() {
+            $(this).addClass('active').siblings().removeClass('active');
+            $(this).parent().siblings().children().removeClass('active');
+            var p = Number( $(this).data('filter') );
+            viewModel.filter.patch = [p];
+            console.log("Patches:", viewModel.filter.patch);
+            filterPatchSubject.onNext(viewModel.filter.patch);
+          });
 
           // _.delay(() => {
           //   $('#fishes').floatThead({
@@ -580,7 +588,10 @@
     <div class="ui main container">
       <h1>FFX|V Fish Tracker App</h1>
       <p>
-        This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may now <a href="#comments">leave comments</a> below!
+        This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a href="#comments">leave comments</a> below to leave kudos, report missing or incorrect data, or whatever. Good luck!
+      </p>
+      <p>
+        Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).
       </p>
 
       <div id="filterCompletion">
@@ -611,7 +622,7 @@
         </div>
         <div class="ui mini very compact buttons">
           <div class="ui active button" data-filter="4">4.0</div>
-          <div class="ui active button disabled" data-filter="4.1">4.1</div>
+          <div class="ui active button" data-filter="4.1">4.1</div>
           <div class="ui active button disabled" data-filter="4.2">4.2</div>
           <div class="ui active button disabled" data-filter="4.3">4.3</div>
           <div class="ui active button disabled" data-filter="4.4">4.4</div>
