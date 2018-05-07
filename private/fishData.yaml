@@ -1,0 +1,4973 @@
+- name: Fullmoon Sardine
+  location: Costa del Sol
+  startHour: 18
+  endHour: 6
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Spoon Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Wahoo
+  location: Cape Westwind
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Raincaller
+  location: Jadeite Flood
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Snow
+  predators: {}
+  bestCatchPath:
+  - Stem Borer
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Nautilus
+  location: Isles of Umbra Southshore
+  startHour: 18
+  endHour: 6
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Steel Jig
+  - Fullmoon Sardine
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Rock Lobster
+  location: Crescent Cove
+  startHour: 17
+  endHour: 21
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Northern Krill
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Little Thalaos
+  location: Rhotano Sea (Privateer Sterncastle)
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Northern Krill
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Mahi-Mahi
+  location: Oschon's Torch
+  startHour: 10
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Yumizuno
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Coelacanth
+  location: Isles of Umbra Southshore
+  startHour: 18
+  endHour: 5
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Steel Jig
+  - Fullmoon Sardine
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Titanic Sawfish
+  location: Cape Westwind
+  startHour: 9
+  endHour: 15
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  - Wahoo
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Thunderbolt Sculpin
+  location: Raincatcher Gully
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Spinner
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Paglth'an Discus
+  location: Zahar'ak
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Heat Waves
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Glowworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Boxing Pleco
+  location: Lake Tahtotl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Glowworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Giant Donko
+  location: The Long Climb
+  startHour: 4
+  endHour: 12
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  - Clear Skies
+  - Fair Skies
+  - Rain
+  predators: {}
+  bestCatchPath:
+  - Spinnerbait
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Sundisc
+  location: The Burning Wall
+  startHour: 10
+  endHour: 15
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Caddisfly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Cadaver Carp
+  location: The Tangle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Gloom
+  predators: {}
+  bestCatchPath:
+  - Rainbow Spoon Lure
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Mushroom Crab
+  location: Sylphlands
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Spinner
+  - Common Sculpin
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Judgment Staff
+  location: Rootslake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  - Thunderstorms
+  predators: {}
+  bestCatchPath:
+  - Caddisfly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Heliobatis
+  location: North Silvertear
+  startHour: 17
+  endHour: 9
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Caddisfly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Jungle Catfish
+  location: Red Mantis Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  - Goldfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Lamp Marimo
+  location: The Weeping Saint
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Chocobo Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Zalera
+  location: Zephyr Drift
+  startHour: 9
+  endHour: 14
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Rat Tail
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Beguiler Chub
+  location: Rogue River
+  startHour: 9
+  endHour: 14
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Moth Pupa
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Oschon's Print
+  location: Moraby Bay
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Goby Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Caterwauler
+  location: The Mourning Widow
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Moth Pupa
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Crystal Perch
+  location: Woad Whisper Canyon
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Butterworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Moldva
+  location: Springripple Brook
+  startHour: 18
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Midge Basket
+  - Ala Mhigan Fighting Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Junkmonger
+  location: Skull Valley
+  startHour: 16
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  - Wahoo
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Goldenfin
+  location: Limsa Lominsa Upper Decks
+  startHour: 9
+  endHour: 14
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Pill Bug
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Gigantshark
+  location: Summerford
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Armorer
+  location: Swiftperch
+  startHour: 19
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Northern Krill
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Great Gudgeon
+  location: West Agelyss River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Crayfish Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Dark Knight
+  location: The Unholy Heir
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  - Dust Storms
+  predators: {}
+  bestCatchPath:
+  - Crow Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Silver Sovereign
+  location: Oschon's Torch
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Yumizuno
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Sabertooth Cod
+  location: Candlekeep Quay
+  startHour: 16
+  endHour: 22
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Goby Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Dream Goby
+  location: Upper Soot Creek
+  startHour: 17
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Crayfish Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Navigator's Brand
+  location: The Brewer's Beacon
+  startHour: 9
+  endHour: 14
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Yumizuno
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Dark Ambusher
+  location: Sweetbloom Pier
+  startHour: 21
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Moth Pupa
+  - Striped Goby
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Judgeray
+  location: Fallgourd Float
+  startHour: 17
+  endHour: 21
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Wildfowl Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Bloody Brewer
+  location: Lower Black Tea Brook
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Crayfish Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Faerie Queen
+  location: Empty Heart
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Spinnerbait
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Slime King
+  location: Lower Soot Creek
+  startHour: 19
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Crayfish Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Blue Widow
+  location: Murmur Rills
+  startHour: 9
+  endHour: 14
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Floating Minnow
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Ghost Carp
+  location: The Mirror
+  startHour: 21
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  predators: {}
+  bestCatchPath:
+  - Butterworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Carp Diem
+  location: Upper Black Tea Brook
+  startHour: 9
+  endHour: 14
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Crow Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Mud Pilgrim
+  location: South Drybone
+  startHour: 17
+  endHour: 8
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Midge Basket
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Old Softie
+  location: The Clutch
+  startHour: 17
+  endHour: 21
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Bloodworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Marrow Sucker
+  location: North Drybone
+  startHour: 20
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Syrphid Basket
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Chirurgeon
+  location: The Vein
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Moth Pupa
+  - Striped Goby
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Mud Golem
+  location: The Footfalls
+  startHour: 21
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Butterworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Octomammoth
+  location: Limsa Lominsa Lower Decks
+  startHour: 9
+  endHour: 17
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Pill Bug
+  - Harbor Herring
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Matron Carp
+  location: Whispering Gorge
+  startHour: 15
+  endHour: 21
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Bloodworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: High Perch
+  location: Nym River
+  startHour: 5
+  endHour: 8
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Sinking Minnow
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Syldra
+  location: Cedarwood
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  predators: {}
+  bestCatchPath:
+  - Spoon Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Rivet Oyster
+  location: Vesper Bay
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Heavy Steel Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Jacques the Snipper
+  location: Moraby Drydocks
+  startHour: 21
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Goby Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Stormdancer
+  location: Jadeite Flood
+  startHour: 17
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Snow
+  predators: {}
+  bestCatchPath:
+  - Stem Borer
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Glimmerscale
+  location: Nophica's Wells
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Butterworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.2
+- name: Cupfish
+  location: Blind Iron Mines
+  startHour: 17
+  endHour: 19
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Syrphid Basket
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Meteor Survivor
+  location: The Salt Strand
+  startHour: 3
+  endHour: 5
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Rat Tail
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Joan of Trout
+  location: Fool Falls
+  startHour: 4
+  endHour: 6
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Crow Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Toramafish
+  location: Oakwood
+  startHour: 17
+  endHour: 20
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Spinner
+  - Common Sculpin
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Fingers
+  location: Crescent Cove
+  startHour: 17
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Northern Krill
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Assassin
+  location: Sanctum of the Twelve
+  startHour: 21
+  endHour: 23
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Butterworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Vip Viper
+  location: Upper Hathoeva River
+  startHour: 18
+  endHour: 19
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Butterworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Greatest Bream in the World
+  location: South Bloodshore
+  startHour: 20
+  endHour: 23
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Shrimp Cage Feeder
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Dirty Herry
+  location: The Silver Bazaar
+  startHour: 20
+  endHour: 22
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Northern Krill
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Old Hollow Eyes
+  location: Burnt Lizard Creek
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Midge Basket
+  - Copperfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Sylphsbane
+  location: Verdant Drop
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  predators: {}
+  bestCatchPath:
+  - Butterworm
+  - Copperfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Floating Boulder
+  location: Lower Hathoeva River
+  startHour: 0
+  endHour: 8
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Bass Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Grinner
+  location: East Hathoeva River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Syrphid Basket
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Shark Tuna
+  location: Costa del Sol
+  startHour: 19
+  endHour: 21
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Spoon Worm
+  - Fullmoon Sardine
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Worm of Nym
+  location: Bronze Lake Shallows
+  startHour: 19
+  endHour: 22
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Butterworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Twitchbeard
+  location: Mist
+  startHour: 4
+  endHour: 6
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Spoon Worm
+  - Fullmoon Sardine
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Warden's Wand
+  location: Yugr'am River
+  startHour: 17
+  endHour: 20
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Spearnose
+  location: The Goblet
+  startHour: 21
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Caddisfly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Levinlight
+  location: Everschade
+  startHour: 18
+  endHour: 23
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Syrphid Basket
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Sinker
+  location: Middle Hathoeva River
+  startHour: 21
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Sinking Minnow
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Gobfather
+  location: Goblinblood
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  - Thunderstorms
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Sweetnewt
+  location: The Lavender Beds
+  startHour: 23
+  endHour: 5
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Midge Basket
+  - Ala Mhigan Fighting Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Bombardfish
+  location: North Bloodshore
+  startHour: 9
+  endHour: 15
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Herring Ball
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Salter
+  location: Hidden Falls
+  startHour: 17
+  endHour: 20
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Lone Ripper
+  location: Halfstone
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Gales
+  predators: {}
+  bestCatchPath:
+  - Heavy Steel Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: King of the Spring
+  location: Northwest Bronze Lake
+  startHour: 16
+  endHour: 19
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Spinnerbait
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Discobolus
+  location: Zahar'ak
+  startHour: 12
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet:
+  - Heat Waves
+  predators: {}
+  bestCatchPath:
+  - Glowworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Iron Noose
+  location: Forgotten Springs
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Spinner
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Olgoi-Khorkhoi
+  location: Sagolii Dunes
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Heat Waves
+  predators: {}
+  bestCatchPath:
+  - Sand Leech
+  - Storm Rider
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Magic Carpet
+  location: Sagolii Desert
+  startHour: 9
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Heat Waves
+  predators: {}
+  bestCatchPath:
+  - Sand Leech
+  - Storm Rider
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Daniffen's Mark
+  location: Coerthas River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Wildfowl Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Charon's Lantern
+  location: Daniffen Pass
+  startHour: 0
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet:
+  - Blizzards
+  - Snow
+  predators: {}
+  bestCatchPath:
+  - Glowworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Green Jester
+  location: Hopeseed Pond
+  startHour: 18
+  endHour: 21
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Bloodbath
+  location: Haukke Manor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Son of Levin
+  location: Rootslake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunderstorms
+  predators: {}
+  bestCatchPath:
+  - Caddisfly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Thundergut
+  location: The Long Climb
+  startHour: 19
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  predators: {}
+  bestCatchPath:
+  - Stem Borer
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Drowned Sniper
+  location: East Agelyss River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Snurble Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Terpsichorean
+  location: Raincatcher Gully
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Mirrorscale
+  location: The Juggernaut
+  startHour: 9
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Midge Basket
+  - Copperfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Helmsman's Hand
+  location: Isles of Umbra Northshore
+  startHour: 9
+  endHour: 15
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Pill Bug
+  - Ocean Cloud
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Thousand-year Itch
+  location: The Burning Wall
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Stem Borer
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Hannibal
+  location: Bluefog
+  startHour: 22
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Spinnerbait
+  - Common Sculpin
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Dawn Maiden
+  location: Dragonhead Latrines
+  startHour: 5
+  endHour: 7
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Wildfowl Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Starbright
+  location: The Nail
+  startHour: 21
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Syrphid Basket
+  - Abalathian Smelt
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Matriarch
+  location: Exploratory Ice Hole
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Snow
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Abalathian Smelt
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Shadowstreak
+  location: Proud Creek
+  startHour: 4
+  endHour: 10
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Topwater Frog
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: The Captain's Chalice
+  location: Sapsa Spawning Grounds
+  startHour: 23
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Steel Jig
+  - Fullmoon Sardine
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Anomalocaris
+  location: Sea of Clouds
+  startHour: 10
+  endHour: 15
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Hoverworm
+  - Cloud Cutter
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Frilled Shark
+  location: The Ship Graveyard
+  startHour: 17
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  - Wahoo
+  - Giant Squid
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Aetherlouse
+  location: North Silvertear
+  startHour: 3
+  endHour: 13
+  previousWeatherSet: []
+  weatherSet:
+  - Gloom
+  predators: {}
+  bestCatchPath:
+  - Glowworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.3
+- name: Imperial Goldfish
+  location: Red Mantis Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Jungle Catfish: 3
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: The Old Man in the Sea
+  location: Rhotano Sea (Privateer Forecastle)
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Rain
+  - Showers
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Pill Bug
+  - Harbor Herring
+  - Ogre Barracuda
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Nepto Dragon
+  location: Rhotano Sea (Privateer Sterncastle)
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Showers
+  predators:
+    Little Thalaos: 3
+  bestCatchPath:
+  - Northern Krill
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Coelacanthus
+  location: Isles of Umbra Southshore
+  startHour: 22
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Spoon Worm
+  - Fullmoon Sardine
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Endoceras
+  location: Isles of Umbra Southshore
+  startHour: 20
+  endHour: 5
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Fog
+  - Clouds
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Spoon Worm
+  - Fullmoon Sardine
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Seahag
+  location: Reaver Hide
+  startHour: 19
+  endHour: 2
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  - Wahoo
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Ignus Horn
+  location: The Deep Tangle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Gloom
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Glowworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Void Bass
+  location: Rathefrost
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Gloom
+  predators: {}
+  bestCatchPath:
+  - Glowworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Cornelia
+  location: Lake Tahtotl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Boxing Pleco: 5
+  bestCatchPath:
+  - Rainbow Spoon Lure
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Ninja Betta
+  location: The Tangle
+  startHour: 18
+  endHour: 9
+  previousWeatherSet: []
+  weatherSet:
+  - Gloom
+  predators: {}
+  bestCatchPath:
+  - Midge Basket
+  - Ala Mhigan Fighting Fish
+  - Assassin Betta
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Canavan
+  location: The North Shards
+  startHour: 8
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet:
+  - Gloom
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  - Goldfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Kuno the Killer
+  location: The North Shards
+  startHour: 8
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Canavan: 1
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  - Assassin Betta
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Pirate's Bane
+  location: Cape Westwind
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Wahoo: 6
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  - Wahoo
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Ndendecki
+  location: Moondrip
+  startHour: 18
+  endHour: 5
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  - Assassin Betta
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Bat-o'-Nine-Tails
+  location: Parata's Peace
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Rain
+  weatherSet:
+  - Fog
+  - Clouds
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Wootz Knifefish Zenith
+  location: Ceruleum Field
+  startHour: 1
+  endHour: 4
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Helicoprion
+  location: Sagolii Desert
+  startHour: 8
+  endHour: 20
+  previousWeatherSet:
+  - Fog
+  - Clouds
+  weatherSet:
+  - Heat Waves
+  predators: {}
+  bestCatchPath:
+  - Sand Leech
+  - Storm Rider
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Darkstar
+  location: The Weeping Saint
+  startHour: 19
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet:
+  - Blizzards
+  - Snow
+  predators:
+    Lamp Marimo: 5
+  bestCatchPath:
+  - Honey Worm
+  - Abalathian Smelt
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Blue Corpse
+  location: Snowcloak
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Blizzards
+  - Snow
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Caddisfly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Mahar
+  location: Witchdrop
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Hoverworm
+  - Cloud Cutter
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Shonisaurus
+  location: Witchdrop
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Hoverworm
+  - Cloud Cutter
+  - Mahar
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Magicked Mushroom
+  location: Sylphlands
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Rain
+  - Thunder
+  weatherSet:
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Spinner
+  - Common Sculpin
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Giant Takitaro
+  location: Urth's Gift
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  - Thunderstorms
+  predators: {}
+  bestCatchPath:
+  - Glowworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Namitaro
+  location: Urth's Gift
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  - Fair Skies
+  - Thunderstorms
+  predators:
+    Giant Takitaro: 1
+  bestCatchPath:
+  - Topwater Frog
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Blood Red Bonytongue
+  location: Singing Shards
+  startHour: 4
+  endHour: 12
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.4
+- name: Gigant Clam
+  location: South Bloodshore
+  startHour: 23
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Heavy Steel Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2.5
+- name: Icepick
+  location: Unfrozen Pond
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Goblin Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Ice Faerie
+  location:
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Purse Web Spider
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.0
+- name: Whilom Catfish
+  location: The Hundred Throes
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Goblin Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Starflower
+  location: Mok Oogl Island
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Glacier Core
+  location: Greytail Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Blizzards
+  - Snow
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Sorcerer Fish
+  location: Unfrozen Pond
+  startHour: 8
+  endHour: 20
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Hotrod
+  location: Clearpool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Snow
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Rock Mussel
+  location: Whilom River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  hookset:
+  snagging: true
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Bubble Eye
+  location: Voor Sian Siran
+  startHour: 10
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Grass Carp
+  location: The Hundred Throes
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Dust Storms
+  - Clouds
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Bladed Steel Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Pipira Pira
+  location: The Hundred Throes
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Dust Storms
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Goblin Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Dravanian Squeaker
+  location: Weston Waters
+  startHour: 16
+  endHour: 19
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Kissing Fish
+  location: Eil Tohm
+  startHour: 9
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Storm Core
+  location: The Blue Window
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Fog
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Vanuhead
+  location: The Eddies
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Bladed Steel Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Lungfish
+  location: The Pappus Tree
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Sky Faerie
+  location:
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.0
+- name: Hedgemole Cricket
+  location:
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.0
+- name: Dravanian Bass
+  location: Whilom River
+  startHour: 0
+  endHour: 6
+  previousWeatherSet: []
+  weatherSet:
+  - Dust Storms
+  - Clouds
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  - Blueclaw Shrimp
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Coerthan Puffer
+  location: Riversmeet
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Snow
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Purse Web Spider
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Snowcaller
+  location: West Banepool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Snow
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Mercy Staff
+  location: West Banepool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Snow
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Rime Eater
+  location: Greytail Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Snow
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  - Glacier Core
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Warmwater Bichir
+  location: The Smoldering Wastes
+  startHour: 21
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Purse Web Spider
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Noontide Oscar
+  location: Eil Tohm
+  startHour: 6
+  endHour: 12
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Tiny Axolotl
+  location: The Pappus Tree
+  startHour: 21
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Manasail
+  location: Tharl Oom Khash
+  startHour: 10
+  endHour: 14
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  - Sky Faerie
+  - Rudderfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Magma Louse
+  location: Anyx Old
+  startHour: 18
+  endHour: 5
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Magma Worm
+  - Granite Crab
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: 1
+  patch: 3
+- name: Brown Bolo
+  location: Tharl Oom Khash
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Weston Bowfin
+  location: Weston Waters
+  startHour: 8
+  endHour: 12
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Goblin Jig
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Albino Octopus
+  location: Unfrozen Pond
+  startHour: 8
+  endHour: 17
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Warballoon
+  location: Greytail Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  - Skyworm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: 1
+  patch: 3
+- name: Fossiltongue
+  location: Halo
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Magma Worm
+  - Granite Crab
+  hookset:
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.0
+- name: Caiman
+  location: The Iron Feast
+  startHour: 18
+  endHour: 21
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Bladed Steel Jig
+  - Blueclaw Shrimp
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Euphotic Pirarucu
+  location: Delta Quadrant
+  startHour: 18
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Illuminati Perch
+  location: Thaliak River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  - Hedgemole Cricket
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Rudderfish
+  location:
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.0
+- name: Scorpionfly
+  location: Mok Oogl Island
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.0
+- name: Blood Skipper
+  location: Alpha Quadrant
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Moogle Spirit
+  location: Mok Oogl Island
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Oil Eel
+  location: The Flagship
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  - Platinum Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Jeweled Jellyfish
+  location: The Flagship
+  startHour: 20
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  - Fair Skies
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  - Platinum Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Pteranodon
+  location: Sohm Al Summit
+  startHour: 9
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Stupendemys
+  location: The Habisphere
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  - Rudderfish
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3
+- name: Barreleye
+  location: The Flagship
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  - Platinum Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: 1
+  patch: 3
+- name: Thunderbolt Eel
+  location: The Iron Feast
+  startHour: 22
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  - Blueclaw Shrimp
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Catkiller
+  location: The Eddies
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Loosetongue
+  location: Upper Thaliak River
+  startHour: 7
+  endHour: 20
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 3
+- name: Thaliak Caiman
+  location: Middle Thaliak River
+  startHour: 15
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Bladed Steel Jig
+  - Bullfrog
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Lavalord
+  location: Halo
+  startHour: 10
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Magma Worm
+  - Granite Crab
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: 1
+  patch: 3
+- name: Tupuxuara
+  location: The Habisphere
+  startHour: 15
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Vampiric Tapestry
+  location: Mok Oogl Island
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Storm Chaser
+  location: Tharl Oom Khash
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3
+- name: Berserker Betta
+  location: Middle Thaliak River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3
+- name: Capelin
+  location: Clearpool
+  startHour: 0
+  endHour: 6
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: 1
+  patch: 3
+- name: Functional Proto-hropken
+  location: The Flagship
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  - Platinum Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: 1
+  patch: 3.1
+- name: Coerthan Clione
+  location: Unfrozen Pond
+  startHour: 0
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet:
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3.1
+- name: Dravanian Smelt
+  location: The Hundred Throes
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.1
+- name: Heavens Coral
+  location: Mok Oogl Island
+  startHour: 0
+  endHour: 5
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3.1
+- name: Sunsail
+  location: Landlord Colony
+  startHour: 15
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3.1
+- name: Goblin Bass
+  location: Middle Thaliak River
+  startHour: 0
+  endHour: 5
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: 1
+  patch: 3.1
+- name: Amber Salamander
+  location: The Iron Feast
+  startHour: 6
+  endHour: 12
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 3.2
+- name: Gnomefish
+  location: Quickspill Delta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  - Rain
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3.2
+- name: Fleece Stingray
+  location: Cloudtop
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3.2
+- name: Coerthan Oyster
+  location: West Banepool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset: Precision
+  snagging: true
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3.2
+- name: Oliphant's Trunk
+  location: Hyperstellar Downconverter
+  startHour: 18
+  endHour: 23
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3.2
+- name: Mountain Kraken
+  location: South Banepool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Snow
+  - Blizzards
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 3.2
+- name: Armored Catfish
+  location: Upper Thaliak River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: 1
+  fishEyes: false
+  patch: 3.2
+- name: Magic Bucket
+  location: South Banepool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging: true
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: Fat Purse
+  location: Riversmeet
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: The Impaler
+  location: Dragonspit
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset: Precision
+  snagging: true
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: La Reale
+  location: Ashpool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: Scaleripper
+  location: The Hundred Throes
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: The Dreamweaver
+  location: The Smoldering Wastes
+  startHour: 22
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet:
+  - Dust Storms
+  - Fog
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: Meteortoise
+  location: Mourn
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Magma Worm
+  - Granite Crab
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: The Ewer King
+  location: Thaliak River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Goblin Jig
+  - Sweetfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: Vidofnir
+  location: Eil Tohm
+  startHour: 8
+  endHour: 10
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: The Soul of the Martyr
+  location: Landlord Colony
+  startHour: 4
+  endHour: 6
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: Inkfish
+  location: Voor Sian Siran
+  startHour: 14
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.3
+- name: The Second One
+  location: The Blue Window
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: Augmented High Allagan Helmet
+  location: Alpha Quadrant
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  - Platinum Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: Aphotic Pirarucu
+  location: Delta Quadrant
+  startHour: 22
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Purse Web Spider
+  - Aether Eye
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.3
+- name: Dimorphodon
+  location: Sohm Al Summit
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clear Skies
+  weatherSet:
+  - Gales
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  - Rudderfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.4
+- name: Basking Shark
+  location: Mok Oogl Island
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Fog
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  - Sky Faerie
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Allagan Bladeshark
+  location: The Flagship
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  - Platinum Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Hailfinder
+  location: Greytail Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Snow
+  weatherSet:
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Red Balloon
+  - Glacier Core
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Flarefish
+  location: Unfrozen Pond
+  startHour: 10
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Purse Web Spider
+  - Ice Faerie
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Twin-tongued Carp
+  location: Whilom River
+  startHour: 12
+  endHour: 16
+  previousWeatherSet:
+  - Clouds
+  - Dust Storms
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Madam Butterfly
+  location: Quickspill Delta
+  startHour: 21
+  endHour: 2
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Purse Web Spider
+  - Hedgemole Cricket
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Moggle Mogpom
+  location: Greensward
+  startHour: 10
+  endHour: 13
+  previousWeatherSet:
+  - Gales
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Cirrostratus
+  location: Cloudtop
+  startHour: 10
+  endHour: 13
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Hraesvelgr's Tear
+  location: West Mourn
+  startHour: 2
+  endHour: 6
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Magma Worm
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.4
+- name: 'Aetherochemical Compound #666'
+  location: Aetherochemical Spill
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  - Platinum Fish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.4
+- name: Hundred-eyed Axolotl
+  location: The Pappus Tree
+  startHour: 6
+  endHour: 10
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Purse Web Spider
+  - Aether Eye
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Bobgoblin Bass
+  location: Middle Thaliak River
+  startHour: 2
+  endHour: 6
+  previousWeatherSet:
+  - Rain
+  weatherSet:
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Goblin Jig
+  - Sweetfish
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.4
+- name: Merciless
+  location: West Banepool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Snow
+  - Blizzards
+  weatherSet:
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Caddisfly Larva
+  - Ice Faerie
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.4
+- name: Bishopfish
+  location: Clearpool
+  startHour: 10
+  endHour: 14
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.5
+- name: Captain Nemo
+  location: South Banepool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Snow
+  weatherSet:
+  - Blizzards
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset: Powerful
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Paikiller
+  location: The Eddies
+  startHour: 8
+  endHour: 12
+  previousWeatherSet:
+  - Fog
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Bladed Steel Jig
+  - Bullfrog
+  hookset: Powerful
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Ceti
+  location: Hyperstellar Downconverter
+  startHour: 18
+  endHour: 22
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Fiend Worm
+  hookset:
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.5
+- name: Crystal Pigeon
+  location: The Habisphere
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Fair Skies
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  - Rudderfish
+  hookset:
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.5
+- name: Thunderscale
+  location: The Iron Feast
+  startHour: 6
+  endHour: 8
+  previousWeatherSet:
+  - Dust Storms
+  - Clouds
+  - Fog
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  - Blueclaw Shrimp
+  hookset: Powerful
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Riddle
+  location: Anyx Old
+  startHour: 8
+  endHour: 16
+  previousWeatherSet:
+  - Clear Skies
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Magma Worm
+  - Granite Crab
+  hookset: Powerful
+  snagging: false
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 3.5
+- name: The Lord of Lords
+  location: Halo
+  startHour: 8
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Magma Worm
+  - Granite Crab
+  hookset:
+  snagging: false
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 3.5
+- name: The Speaker
+  location: Upper Thaliak River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clouds
+  - Fog
+  weatherSet:
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Stonefly Nymph
+  - Hedgemole Cricket
+  hookset: Powerful
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Thousand Fin
+  location: Weston Waters
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Gales
+  predators: {}
+  bestCatchPath:
+  - Brute Leech
+  hookset:
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.5
+- name: Bloodchaser
+  location: Tharl Oom Khash
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clear Skies
+  weatherSet:
+  - Gales
+  predators: {}
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 3.5
+- name: Problematicus
+  location: Halo
+  startHour: 10
+  endHour: 15
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators:
+    Fossiltongue: 3
+  bestCatchPath:
+  - Magma Worm
+  - Granite Crab
+  hookset: Powerful
+  snagging: false
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 3.5
+- name: Opabinia
+  location: The Flagship
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  predators:
+    Functional Proto-hropken: 3
+  bestCatchPath:
+  - Fiend Worm
+  - Platinum Fish
+  hookset: Precision
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Armor Fish
+  location: Upper Thaliak River
+  startHour: 1
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators:
+    Hedgemole Cricket: 6
+  bestCatchPath:
+  - Stonefly Nymph
+  - Hedgemole Cricket
+  hookset: Precision
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Sea Butterfly
+  location: Mok Oogl Island
+  startHour: 5
+  endHour: 7
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators:
+    Scorpionfly: 3
+    Sky Faerie: 3
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Charibenet
+  location: Clearpool
+  startHour: 0
+  endHour: 3
+  previousWeatherSet: []
+  weatherSet:
+  - Blizzards
+  predators:
+    Ice Faerie: 5
+  bestCatchPath:
+  - Purse Web Spider
+  - Ice Faerie
+  hookset: Precision
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Raimdellopterus
+  location: Tharl Oom Khash
+  startHour: 6
+  endHour: 8
+  previousWeatherSet: []
+  weatherSet:
+  - Gales
+  predators:
+    Rudderfish: 5
+  bestCatchPath:
+  - Giant Crane Fly
+  - Rudderfish
+  hookset: Powerful
+  snagging: false
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.5
+- name: Dafangshi
+  location: 481
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Ichthyosaur: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Small
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Liopleurodon
+  location: Hells' Lid
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Thunder
+  predators: {}
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.0
+- name: Yanxian Barramundi
+  location: The One River (East)
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Nightcrawler
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Seraphim
+  location: The One River (West)
+  startHour: 16
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Suspending Minnow
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Sweatfish
+  location: Azim Khaat
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Larva
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.0
+- name: Doman Grass Carp
+  location: Mercantile Docks
+  startHour: 20
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Midge Larva
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Hak Bitterling
+  location: Hak Khaal
+  startHour: 0
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  predators: {}
+  bestCatchPath:
+  - Stonefly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 4.0
+- name: Tawny Wench Shark
+  location: The Isle of Bekko
+  startHour: 10
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: true
+  patch: 4.0
+- name: Killifish
+  location: The Silver Canal
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Midge Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Sculptor
+  location: Loch Seld
+  startHour: 12
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet:
+  - Thunderstorms
+  predators: {}
+  bestCatchPath:
+  - Silkworm
+  - Rock Saltfish
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 4.0
+- name: Steelshark
+  location: Heather Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Suspending Minnow
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Harutsuge
+  location: Shoal Rock
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Blue Bobbit
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.0
+- name: Silken Koi
+  location: Plum Spring
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  predators: {}
+  bestCatchPath:
+  - Stonefly Larva
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 4.0
+- name: Hanatatsu
+  location: Kugane Piers
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.0
+- name: Miounnefish
+  location: Upper Mirage Creek
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Salmon Roe
+  - Gyr Abanian Trout
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Deemster
+  location: The Ephor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Stonefly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Bull's Bite
+  location: The Bull's Bath
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  - Wind
+  - Clouds
+  - Dust Storms
+  predators: {}
+  bestCatchPath:
+  - Midge Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Falling Star
+  location: The Comet's Tail
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Salmon Roe
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Nirvana Crab
+  location: The Comet's Tail
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Salmon Roe
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Swordfish
+  location: Onokoro
+  startHour: 8
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 4.0
+- name: Daio Squid
+  location: The Isle of Zekki
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Koromo Octopus
+  location: The Isle of Zekki
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Raitonfish
+  location: Doma Castle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Suspending Minnow
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Longhair Catfish
+  location: The One River (East)
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Suspending Minnow
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Pandamoth
+  location: Plum Spring
+  startHour: 10
+  endHour: 18
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Midge Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Steppe Skipper
+  location: Nem Khaal
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Midge Larva
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Eastern Pike
+  location: The Arms of Meed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  predators: {}
+  bestCatchPath:
+  - Suspending Minnow
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Wraithfish
+  location: Dimwold
+  startHour: 0
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet:
+  - Fog
+  predators: {}
+  bestCatchPath:
+  - Stonefly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 4.0
+- name: Little Perykos
+  location: North Isle of Endless Summer
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet:
+  - Rain
+  - Showers
+  predators: {}
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  - Wahoo
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Mitsukuri Shark
+  location: 480
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Bashful Batfish: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Large
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Bashful Batfish
+  location: The Kobayashi Maru
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Small
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Cherubfish
+  location: 481
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Ichthyosaur: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Normal
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Glaring Perch
+  location: Azim Khaat Eastern Lakebed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Large
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Thousandfang
+  location: 480
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Bashful Batfish: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Large
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Ichthyosaur
+  location: The Sunken Junk
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Large
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Fangshi
+  location: 481
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Ichthyosaur: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Normal
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Eternal Eye
+  location: 482
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Glaring Perch: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Small
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Soul of the Stallion
+  location: 482
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Glaring Perch: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Small
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Mercenary Crab
+  location: Loch Seld Central Lakebed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Normal
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Silken Sunfish
+  location: 483
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Mercenary Crab: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Large
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Mosasaur
+  location: 483
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Mercenary Crab: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Large
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Castaway Chocobo Chick
+  location: North Isle of Endless Summer
+  startHour: 9
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  - Wahoo
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
+- name: Gyr Abanian Chub
+  location: Timmon Beck
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Salmon Roe
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.1
+- name: Coral Horse
+  location: The Ruby Price
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Live Shrimp
+  hookset:
+  snagging: true
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.1
+- name: Maiden's Heart
+  location: The Heron's Nest
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Nightcrawler
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.1
+- name: Velodyna Salmon
+  location: The Velodyna River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Nightcrawler
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.1
+- name: Purple Buckler
+  location: Heather Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Midge Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.1
+- name: Cardinalfish
+  location: The Comet's Tail
+  startHour: 19
+  endHour: 23
+  previousWeatherSet: []
+  weatherSet:
+  - Clouds
+  predators: {}
+  bestCatchPath:
+  - Suspending Minnow
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.1
+- name: Rockfish
+  location: The Arms of Meed
+  startHour: 12
+  endHour: 16
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Suspending Minnow
+  hookset:
+  snagging: true
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.1
+- name: Ukiki
+  location: Hells' Lid
+  startHour: 8
+  endHour: 12
+  previousWeatherSet: []
+  weatherSet:
+  - Wind
+  predators: {}
+  bestCatchPath:
+  - Blue Bobbit
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.1
+- name: Violet Prismfish
+  location: Prism Lake
+  startHour: 0
+  endHour: 4
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Stonefly Larva
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.1
+- name: Guppy
+  location: Azim Khaat
+  startHour: 16
+  endHour: 20
+  previousWeatherSet: []
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  predators: {}
+  bestCatchPath:
+  - Stonefly Larva
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.1
+- name: Ichimonji
+  location: The Kobayashi Maru
+  startHour: 2
+  endHour: 12
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Large
+  folklore: false
+  fishEyes: false
+  patch: 4.1
+- name: Snailfish
+  location: 530
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators:
+    Ichimonji: 10
+  bestCatchPath: []
+  hookset:
+  snagging:
+  gig: Normal
+  folklore: false
+  fishEyes: false
+  patch: 4.1
