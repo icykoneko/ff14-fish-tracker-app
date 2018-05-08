@@ -4119,6 +4119,9 @@
   folklore: false
   fishEyes: false
   patch: 3.5
+#
+# STORMBLOOD - Patch 4.0
+#
 - name: Dafangshi
   location: 481
   startHour: 0
@@ -4788,6 +4791,9 @@
   folklore: false
   fishEyes: false
   patch: 4.0
+#
+# Patch 4.1
+#
 - name: Gyr Abanian Chub
   location: Timmon Beck
   startHour: 0
@@ -4971,3 +4977,170 @@
   folklore: false
   fishEyes: false
   patch: 4.1
+#
+# Patch 4.2
+#
+- name: Elder Gourami
+  location: Tao Khaal
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clouds
+  - Fog
+  # - Wind (maybe)
+  bestCatchPath:
+  - Nightcrawler
+  - Zagas Khaal
+  predators:
+  hookset: Powerful
+  snagging: false
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Red Prismfish
+  location: Prism Lake
+  startHour: 4
+  endHour: 8
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Ribbon Eel
+  location: Kugane Piers
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Bonsai Fish
+  location: The Silver Canal
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Nightcrawler
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Saltmill
+  location: Loch Seld
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clouds
+  - Fog
+  bestCatchPath:
+  - Live Shrimp
+  - Rock Saltfish
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Usuginu Octopus
+  location: The Isle of Bekko
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Redtail
+  location: The Outer Fist
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clouds
+  - Fog
+  bestCatchPath:
+  - Salmon Roe
+  - Balloon Frog
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Alligator Snapping Turtle
+  location: The Bull's Bath
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Triplespine
+  location: Isari
+  startHour: 5
+  endHour: 7
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Blue Bobbit
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2
+- name: Mirage Mahi
+  location: Mirage Creek
+  startHour: 4
+  endHour: 8
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.2

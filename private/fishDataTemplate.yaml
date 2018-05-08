@@ -1,0 +1,14 @@
+- name:
+  location:
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch:
