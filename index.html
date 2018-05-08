@@ -543,7 +543,8 @@
           });
 
           var $filterCompletionButtons = $('#filterCompletion .button');
-          var $filterPatchButtons = $('#filterPatch .button');
+          var $filterPatchButtons = $('#filterPatch .button:not(.patch-set)');
+          var $filterPatchSetButtons = $('#filterPatch .button.patch-set');
 
           $filterCompletionButtons.on('click', function() {
             $(this).addClass('active').siblings().removeClass('active');
@@ -566,6 +567,24 @@
             $(this).parent().siblings().children().removeClass('active');
             var p = Number( $(this).data('filter') );
             viewModel.filter.patch = [p];
+            console.log("Patches:", viewModel.filter.patch);
+            filterPatchSubject.onNext(viewModel.filter.patch);
+          });
+
+          $filterPatchSetButtons.on('click', function() {
+            $(this).toggleClass('active');
+            if ($(this).hasClass('active')) {
+              // Activate the rest of the buttons as well.
+              $(this).siblings(":not(.disabled)").addClass("active").each(function() {
+                viewModel.filter.patch.push(Number( $(this).data('filter') ));
+              })
+            } else {
+              // Deactivate the rest of the buttons as well.
+              $(this).siblings(":not(.disabled)").removeClass("active").each(function() {
+                viewModel.filter.patch =
+                  _(viewModel.filter.patch).without(Number( $(this).data('filter') ));
+              })
+            }
             console.log("Patches:", viewModel.filter.patch);
             filterPatchSubject.onNext(viewModel.filter.patch);
           });
@@ -600,42 +619,53 @@
         This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a href="#comments">leave comments</a> below to leave kudos, report missing or incorrect data, or whatever. Good luck!
       </p>
       <p>
-        Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).
+        Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).  You can also single-click the expansion button to toggle an entire expansion from being displayed.
       </p>
 
-      <div id="filterCompletion">
-        <span class="ui">Completion:</span>
-        <div class="ui mini very compact buttons" style="margin-top: 4px;">
-          <button class="ui active button" data-filter="all">All</button>
-          <button class="ui button" data-filter="caught">Caught</button>
-          <button class="ui button" data-filter="uncaught">Uncaught</button>
+      <div class="ui vertically padded grid">
+        <div class="row" id="filterCompletion" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
+          <div class="column">Completion:</div>
+          <div class="fifteen wide column">
+            <div class="ui mini very compact buttons">
+              <button class="ui active button" data-filter="all">All</button>
+              <button class="ui button" data-filter="caught">Caught</button>
+              <button class="ui button" data-filter="uncaught">Uncaught</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div id="filterPatch">
-        <span class="ui">Patch:</span>
-        <div class="ui mini very compact buttons" style="margin-top: 4px;">
-          <div class="ui active button" data-filter="2">2.0</div>
-          <div class="ui active button" data-filter="2.1">2.1</div>
-          <div class="ui active button" data-filter="2.2">2.2</div>
-          <div class="ui active button" data-filter="2.3">2.3</div>
-          <div class="ui active button" data-filter="2.4">2.4</div>
-          <div class="ui active button" data-filter="2.5">2.5</div>
-        </div>
-        <div class="ui mini very compact buttons">
-          <div class="ui active button" data-filter="3">3.0</div>
-          <div class="ui active button" data-filter="3.1">3.1</div>
-          <div class="ui active button" data-filter="3.2">3.2</div>
-          <div class="ui active button" data-filter="3.3">3.3</div>
-          <div class="ui active button" data-filter="3.4">3.4</div>
-          <div class="ui active button" data-filter="3.5">3.5</div>
-        </div>
-        <div class="ui mini very compact buttons">
-          <div class="ui active button" data-filter="4">4.0</div>
-          <div class="ui active button" data-filter="4.1">4.1</div>
-          <div class="ui active button" data-filter="4.2">4.2</div>
-          <div class="ui active button disabled" data-filter="4.3">4.3</div>
-          <div class="ui active button disabled" data-filter="4.4">4.4</div>
-          <div class="ui active button disabled" data-filter="4.5">4.5</div>
+        <div class="row" id="filterPatch" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
+          <div class="column">Patch:</div>
+          <div class="fifteen wide column">
+            <div class="ui vertically padded stacked grid">
+              <div class="ui mini very compact buttons">
+                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="2">ARR (2.x)</div>
+                <div class="ui active button" data-filter="2">2.0</div>
+                <div class="ui active button" data-filter="2.1">2.1</div>
+                <div class="ui active button" data-filter="2.2">2.2</div>
+                <div class="ui active button" data-filter="2.3">2.3</div>
+                <div class="ui active button" data-filter="2.4">2.4</div>
+                <div class="ui active button" data-filter="2.5">2.5</div>
+              </div>
+              <div class="ui mini very compact buttons">
+                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="3">Heavensward (3.x)</div>
+                <div class="ui active button" data-filter="3">3.0</div>
+                <div class="ui active button" data-filter="3.1">3.1</div>
+                <div class="ui active button" data-filter="3.2">3.2</div>
+                <div class="ui active button" data-filter="3.3">3.3</div>
+                <div class="ui active button" data-filter="3.4">3.4</div>
+                <div class="ui active button" data-filter="3.5">3.5</div>
+              </div>
+              <div class="ui mini very compact buttons">
+                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="4">Stormblood (4.x)</div>
+                <div class="ui active button" data-filter="4">4.0</div>
+                <div class="ui active button" data-filter="4.1">4.1</div>
+                <div class="ui active button" data-filter="4.2">4.2</div>
+                <div class="ui active button disabled" data-filter="4.3">4.3</div>
+                <div class="ui active button disabled" data-filter="4.4">4.4</div>
+                <div class="ui active button disabled" data-filter="4.5">4.5</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
