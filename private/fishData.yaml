@@ -3131,6 +3131,21 @@
   folklore: 1
   fishEyes: 1
   patch: 3
+- name: Granite Crab
+  location:
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Magma Worm
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 3.0
 - name: Functional Proto-hropken
   location: The Flagship
   startHour: 0
