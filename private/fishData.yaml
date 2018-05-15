@@ -3413,14 +3413,17 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet: []
+  weatherSet:
+  - Dust Storms
+  - Fog
+  - Clouds
   predators: {}
   bestCatchPath:
   - Brute Leech
   hookset:
   snagging:
   gig:
-  folklore: false
+  folklore: true
   fishEyes: false
   patch: 3.3
 - name: The Dreamweaver
@@ -4020,6 +4023,7 @@
   - Fair Skies
   predators:
     Fossiltongue: 3
+    Granite Crab: 5
   bestCatchPath:
   - Magma Worm
   - Granite Crab
@@ -4119,9 +4123,7 @@
   folklore: false
   fishEyes: false
   patch: 3.5
-#
 # STORMBLOOD - Patch 4.0
-#
 - name: Dafangshi
   location: 481
   startHour: 0
@@ -4333,8 +4335,6 @@
   endHour: 24
   previousWeatherSet: []
   weatherSet:
-  - Fair Skies
-  - Clear Skies
   predators: {}
   bestCatchPath:
   - Live Shrimp
@@ -4791,9 +4791,7 @@
   folklore: false
   fishEyes: false
   patch: 4.0
-#
 # Patch 4.1
-#
 - name: Gyr Abanian Chub
   location: Timmon Beck
   startHour: 0
@@ -4977,9 +4975,7 @@
   folklore: false
   fishEyes: false
   patch: 4.1
-#
 # Patch 4.2
-#
 - name: Elder Gourami
   location: Tao Khaal
   startHour: 0
