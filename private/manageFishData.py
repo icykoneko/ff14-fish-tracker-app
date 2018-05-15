@@ -207,14 +207,20 @@ def rebuild_fish_data(args):
         raise KeyError("Missing item names: %s" % ', '.join(diffs))
 
     # Make sure any predators have data defined for them too!
-    diffs = set(filter(None,
+    predators = set(filter(None,
                        reduce(add,
                               [list((fish.get('predators', {}) or {}).keys())
-                               for fish in fishes]))) - \
-        set([fish['name'] for fish in fishes]) - \
-        set(map(itemgetter('name'), fish_and_tackle_data.values()))
+                               for fish in fishes])))
+    diffs = predators - \
+            set([fish['name'] for fish in fishes]) - \
+            set(map(itemgetter('name'), fish_and_tackle_data.values()))
     if len(diffs) != 0:
         raise KeyError("Missing predators: %s" % ', '.join(diffs))
+
+    diffs = predators - \
+            set([fish['name'] for fish in fishes])
+    if len(diffs) != 0:
+        raise KeyError("Missing predator definitions: %s" % ', '.join(diffs))
 
     fish_data = OrderedDict(map(convert_fish_to_json, fishes))
 
