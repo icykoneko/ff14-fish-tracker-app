@@ -5155,3 +5155,257 @@
   folklore: true
   fishEyes: false
   patch: 4.2
+# Patch 4.3
+- name: White Goldfish
+  location: Prism Lake
+  startHour: 4
+  endHour: 8
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  - Red Prismfish
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: Firelight Goldfish
+  location: Prism Lake
+  startHour: 4
+  endHour: 8
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  - Red Prismfish
+  predators:
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: Hookstealer
+  location: Upper Mirage Creek
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet: # Favors Fair Skies
+  bestCatchPath:
+  - Midge Larva
+  - Gyr Abanian Trout
+  predators:
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: Sapphire Fan
+  location: Dimwold
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Thunder
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: The Archbishop
+  location: The Comet's Tail
+  startHour: 12
+  endHour: 16
+  previousWeatherSet:
+  weatherSet: # Favors Fair Skies
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: Bondsplitter
+  location: Grymm & Enid
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Dust Storms
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: The Undecided
+  location: The Slow Wash
+  startHour: 8
+  endHour: 12
+  previousWeatherSet:
+  weatherSet: # Favors Fair Skies
+  bestCatchPath:
+  - Midge Larva
+  - Gyr Abanian Trout
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: Diamond-eye
+  location: Loch Seld
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Silkworm
+  - Rock Saltfish
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 4.3
+- name: Rising Dragon
+  location: Kugane Piers
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: The Gambler
+  location: Shirogane
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Blue Bobbit
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: The Winter Queen
+  location: Shoal Rock
+  startHour: 16
+  endHour: 20
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Blue Bobbit
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.3
+- name: Rakshasa
+  location: The Isle of Zekki
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Thunder
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.3
+- name: Bokuden
+  location: Doma Castle
+  startHour: 12
+  endHour: 14
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: Hagoromo Koi
+  location: Plum Spring
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: true
+  patch: 4.3
+- name: The Word of God
+  location: Tao Khaal
+  startHour: 20
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
+- name: Yat Khan
+  location: Lower Yat Khaal
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Wind
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.3
