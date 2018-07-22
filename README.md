@@ -22,7 +22,7 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
   * `git diff -U20 my-current`
   * If necessary, update the `saintcoinach-py` project to reflect any recent changes and comment to the local repo there. (Yes, that's right, I ported SaintCoinach to Python!)
   * Switch to the *my-current* branch, and merge the latest changes from *master*: `git pull master` or use the GitDesktop app to make life easier...
-* Rebuild the fish data JS file: `py ./private/manageFishData.py rebuild -o ./js/app/data.js --with-icons`
+* Rebuild the fish data JS file: `py ./private/manageFishData.py rebuild -i ./private/fishData.yaml -o ./js/app/data.js --with-icons`
   * If changes to the SaintCoinach library break the script, fix it, then commit the changes as a separate commit.
   * **NOTE:** Pay attention to the log messages. If the script extracted any new textures, you'll need to update the sprite image.
 * Update the *cache buster* in `index.html` for `js/app/data.js`. Use the format: `?${ver}_YYYYMMDD`.
