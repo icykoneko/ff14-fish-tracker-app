@@ -16,7 +16,7 @@ Add new entries to the `private/fishData.yaml` file, then run `private/manageFis
 ## Step-by-step Instructions for Updating Data
 Sometimes you forget how to do this after several months... Clearly the TODO list isn't getting done...
 
-1. Collect information from http://en.ff14angler.com/fish/ regarding new fishies. Include only those fish with special catch conditions (such as weather or time of day), and all *big fish*. Update the `private/fishData.yaml` with the new additions (or changes).
+* Collect information from http://en.ff14angler.com/fish/ regarding new fishies. Include only those fish with special catch conditions (such as weather or time of day), and all *big fish*. Update the `private/fishData.yaml` with the new additions (or changes).
   * Use the `private/fishDataTemplate.yaml` as a template for adding new records. For new patches, include a comment before the start of the patch additions (for readability-sake, I dunno...).
 * Update clone of `SaintCoinach` master branch, then compare with the *my-current* branch for changes.
   * `git diff -U20 my-current`
@@ -27,11 +27,11 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
   * **NOTE:** Pay attention to the log messages. If the script extracted any new textures, you'll need to update the sprite image.
 * Update the *cache buster* in `index.html` for `js/app/data.js`. Use the format: `?${ver}_YYYYMMDD`.
 * If adding fish for a new patch;
-  1. Update the `viewModel.filter` definition in `index.html` by adding the patch version. (You'll also need to update the entry in `js/app/viewmodel.js`)
+  * Update the `viewModel.filter` definition in `index.html` by adding the patch version. (You'll also need to update the entry in `js/app/viewmodel.js`)
   * Remove the `disabled` class from the new patch version.
     * **NOTE:** If it's a new expansion, well... make sure it looks nice, and set the patch buttons to `disabled` at first.
 * If new textures were extracted (i.e. new fish images, or new bait images);
-  1. Update the *cache buster* in `index.html` for `public/images/sprite.css`. Use the format `?${ver}_YYYYMMDD`.
+  * Update the *cache buster* in `index.html` for `public/images/sprite.css`. Use the format `?${ver}_YYYYMMDD`.
   * Rebuild the sprite image using: `sprity create ./public/images/ ./private/images/**/*.png -c . -s sprite.css --prefix sprite-icon --margin 2 --orientation binary-tree`
     * **NOTE:** This command **must** be run via CMD, not bash. For some reason, bash will cause the entries in the CSS to be different...
   * Edit the `public/images/sprite.css` file and add a *cache buster* to the main image. Use the format: `?YYYYMMDD`.
