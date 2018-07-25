@@ -280,7 +280,7 @@
                 <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
               </span>
               <span style="white-space: nowrap !important">
-                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().duration()}}</span>
+                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-prevclose="{{=it.availability.upcoming().prevdate()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().downtime()}}</span>
               </span>
             </span>
           {{?}}
@@ -419,6 +419,7 @@
         });
 
         function initializeView() {
+          $('.ui.radio.checkbox').checkbox();
           // Initialize the table with all the fishies.
           var fishes = viewModel.updateAll()
           for (let fish of fishes) {
@@ -537,14 +538,24 @@
               //   .text(moment(upcomingAvail.data("val")).fromNow());
               // upcomingAvail
               //   .text(formatCountdown(new Date(upcomingAvail.data("val"))));
-              upcomingAvail.text("in " +
-                dateFns.distanceInWordsToNow(upcomingAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
+              // upcomingAvail.text("in " +
+              //   dateFns.distanceInWordsToNow(upcomingAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
+              if (viewModel.showUpcomingWindowFromNow) {
+                upcomingAvail.text(viewModel.formatDurationUntilNextWindowFromNow(
+                  upcomingAvail.data("val")));
+              } else {
+                // Technically, you shouldn't have to do this, since the value
+                // can't change.
+                upcomingAvail.text(viewModel.formatDurationUntilNextWindow(
+                  upcomingAvail.data("prevclose"), upcomingAvail.data("val")));
+              }
             });
           });
 
           var $filterCompletionButtons = $('#filterCompletion .button');
           var $filterPatchButtons = $('#filterPatch .button:not(.patch-set)');
           var $filterPatchSetButtons = $('#filterPatch .button.patch-set');
+          var $upcomingWindowFormatOptions = $('#upcomingWindowFormat .radio.checkbox');
 
           $filterCompletionButtons.on('click', function() {
             $(this).addClass('active').siblings().removeClass('active');
@@ -589,6 +600,13 @@
             filterPatchSubject.onNext(viewModel.filter.patch);
           });
 
+          $upcomingWindowFormatOptions.checkbox({
+            onChecked: function() {
+              console.log("Changed upcoming window format option to: ", $(this).val())
+              viewModel.showUpcomingWindowFromNow = $(this).val() == 'fromNow';
+            }
+          });
+
           // _.delay(() => {
           //   $('#fishes').floatThead({
           //     position: 'fixed',
@@ -623,13 +641,30 @@
       </p>
 
       <div class="ui vertically padded grid">
-        <div class="row" id="filterCompletion" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
+        <div class="row" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
           <div class="column">Completion:</div>
-          <div class="fifteen wide column">
-            <div class="ui mini very compact buttons">
+          <div class="three wide column">
+            <div class="ui mini very compact buttons" id="filterCompletion">
               <button class="ui active button" data-filter="all">All</button>
               <button class="ui button" data-filter="caught">Caught</button>
               <button class="ui button" data-filter="uncaught">Uncaught</button>
+            </div>
+          </div>
+          <div class="twelve wide column">
+            <div class="inline fields" id="upcomingWindowFormat">
+              <div style="float: left;">Upcoming window format:</div>
+              <div class="field" style="float: left; margin-left: 1rem;">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="upcomingWindowFormat" class="hidden" value="fromNow"/>
+                  <label>From Now</label>
+                </div>
+              </div>
+              <div class="field" style="float: left; margin-left: 1rem;">
+                <div class="ui radio checked checkbox">
+                  <input type="radio" name="upcomingWindowFormat" checked="checked" class="hidden" value="fromPrevClose"/>
+                  <label>From Previous Close</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>

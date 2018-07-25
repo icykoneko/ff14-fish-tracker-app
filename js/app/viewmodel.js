@@ -167,6 +167,7 @@ class ViewModel {
     };
     this.completionManager = new CompletionManager;
     this.theFish = Fishes;
+    this.showUpcomingWindowFromNow = false;
     this.subscriptions = [];
 
     this.fishEntryTemplate = () => "";
@@ -254,12 +255,15 @@ class ViewModel {
             }
           },
           upcoming: (i=1) => {
+            if (i < 1) {
+              console.error("Upcoming interval must be greater than 1");
+            }
             return {
               duration: () => {
                 var crs = x.catchableRanges;
                 if (crs.length > i) {
-                  return "in " + dateFns.distanceInWordsToNow(
-                    eorzeaTime.toEarth(+crs[i].start()), {includeSeconds: true}).replace("about ", "~");
+                  return this.formatDurationUntilNextWindowFromNow(
+                    eorzeaTime.toEarth(+crs[i].start()));
                 }
                 return "unknown";
               },
@@ -267,6 +271,23 @@ class ViewModel {
                 var crs = x.catchableRanges;
                 if (crs.length > i) {
                   return eorzeaTime.toEarth(+crs[i].start());
+                }
+              },
+              downtime: () => {
+                // Calculates the downtime between the upcoming window and the
+                // previous window.
+                var crs = x.catchableRanges;
+                if (crs.length > i) {
+                  return this.formatDurationUntilNextWindow(
+                    eorzeaTime.toEarth(+crs[i-1].end()),
+                    eorzeaTime.toEarth(+crs[i].start()));
+                }
+                return "unknown";
+              },
+              prevdate: () => {
+                var crs = x.catchableRanges;
+                if (crs.length > i) {
+                  return eorzeaTime.toEarth(+crs[i-1].end());
                 }
               }
             };
@@ -276,6 +297,16 @@ class ViewModel {
     });
 
     return this.theFish;
+  }
+
+  formatDurationUntilNextWindowFromNow(upcomingStart) {
+    return "in " + dateFns.distanceInWordsToNow(
+      upcomingStart, {includeSeconds: true}).replace("about ", "~");
+  }
+
+  formatDurationUntilNextWindow(prevEnd, upcomingStart) {
+    return dateFns.distanceInWords(
+      prevEnd, upcomingStart, {includeSeconds: true}).replace("about ", "~") + " later";
   }
 }
 
