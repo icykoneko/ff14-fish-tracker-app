@@ -44,6 +44,28 @@ class CompletionManager {
     localStorage.pinned = JSON.stringify(this.pinned);
     this.rx_pinned.onNext(this.pinned);
   }
+
+  importCaughtState() {
+    var completion = window.prompt("Enter Fishing Checklist Code:");
+    if (completion === null || completion === "") { return; }
+    var newCompletion;
+    try {
+      newCompletion = JSON.parse(completion);
+      newCompletion = _(newCompletion).reduce((o, v) => o.concat(Number(v)), [])
+    } catch(e) {
+      window.alert("Error: Malformed fishing checklist.");
+      return;
+    }
+    if (!Array.isArray(newCompletion)) {
+      window.alert("Error: Invalid fishing checklist.");
+      return;
+    }
+    if (newCompletion.length > 0) {
+      this.completed = newCompletion;
+      localStorage.completed = JSON.stringify(this.completed);
+      this.rx_completed.onNext(this.completed);
+    }
+  }
 }
 
 sortByWindowPeriods = function() {
