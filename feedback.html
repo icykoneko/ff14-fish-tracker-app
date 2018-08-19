@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A big fish tracker for FF14 that uses rarity to sort" />
+    <meta name="author" content="Carbuncle Plushy (Balmung)" />
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <title>FFX|V Fish Tracker App - Feedback</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <!-- Semantic UI Overrides -->
+    <style type="text/css">
+      .main.container {
+        padding-top: 3em;
+      }
+
+      /* Large Monitor */
+      @media only screen and (min-width: 1200px) and (max-width: 1499px) {
+        .ui.container {
+          width: 1127px;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+
+        .ui.grid.container {
+          width: calc( 1127px  +  2rem ) !important;
+        }
+
+        .ui.relaxed.grid.container {
+          width: calc( 1127px  +  3rem ) !important;
+        }
+
+        .ui.very.relaxed.grid.container {
+          width: calc( 1127px  +  5rem ) !important;
+        }
+      }
+      /* Even larger Monitor */
+      @media only screen and (min-width: 1500px) {
+        .ui.container {
+          width: 1427px;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+
+        .ui.grid.container {
+          width: calc( 1427px  +  2rem ) !important;
+        }
+
+        .ui.relaxed.grid.container {
+          width: calc( 1427px  +  3rem ) !important;
+        }
+
+        .ui.very.relaxed.grid.container {
+          width: calc( 1427px  +  5rem ) !important;
+        }
+      }
+
+      /* Overrides for Semantic UI 2.2.10 - Icon */
+      i.icon {
+        margin: inherit !important;
+      }
+
+      /* Overrides for Semantic UI 2.2.10 - Button */
+      .ui[class*="very compact"].buttons .button,
+      .ui[class*="very compact"].button {
+        padding: 0.58928571em 0.58928571em 0.58928571em;
+      }
+
+      .ui[class*="very compact"].table th {
+        padding: 0.2em 0.3em;
+      }
+
+      .ui[class*="very compact"].table td {
+        padding: 0.2em 0.3em;
+      }
+
+      [data-tooltip]:before {
+        z-index: 1102;
+      }
+      [data-tooltip]:after {
+        z-index: 1101;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="topmenu" class="ui text top fixed menu" style="background-color: white;">
+      <div class="ui container">
+        <div class="header item"><a href="/">FFX|V Fish Tracker App</a></div>
+      </div>
+    </div>
+    <div class="ui main container">
+      <h1>FFX|V Fish Tracker App</h1>
+      <p>Please leave comments, kudos, questions, corrections, etc. below:</p>
+      <div id="disqus_thread"></div>
+      <script>
+        var disqus_config = function () {
+          this.page.url = "http://ff14fish.carbuncleplushy.com/";
+          this.page.identifier = "carby-ffxiv-fish-tracker";
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://carby-ffxiv-fish-tracker.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+    <div class="ui container">
+      <p>
+        FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
+        FINAL FANTASY XIV © 2010 - 2018 SQUARE ENIX CO., LTD. All Rights Reserved.
+      </p>
+    </div>
+  </body>
