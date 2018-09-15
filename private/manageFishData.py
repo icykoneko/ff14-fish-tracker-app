@@ -245,21 +245,21 @@ def rebuild_fish_data(args):
         # Check that the private/images/* folders contain all of the icons used.
         for item in filter(lambda x: x.key in fish_and_tackle_data.keys(),
                            XIV.get_sheet('Item')):
-            if not os.path.exists(os.path.join('.', 'images', 'fish_n_tackle',
+            if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle',
                                                '%06u.png' % item.get_raw('Icon'))):
                 logging.info('Extracting %s' % item['Icon'])
                 icon = item.as_image('Icon')
                 icon.get_image().save(
-                    os.path.join('.', 'images', 'fish_n_tackle',
+                    os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle',
                                  '%06u.png' % item.get_raw('Icon')))
         for weather in filter(lambda x: x.key in WEATHER_TYPES.keys(),
                               XIV.get_sheet('Weather')):
-            if not os.path.exists(os.path.join('.', 'images', 'weather',
+            if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather',
                                                '%06u.png' % weather.get_raw('Icon'))):
                 logging.info('Extracting %s' % weather['Icon'])
                 icon = weather.as_image('Icon')
                 icon.get_image().save(
-                    os.path.join('.', 'images', 'weather',
+                    os.path.join(_SCRIPT_PATH, 'images', 'weather',
                                  '%06u.png' % weather.get_raw('Icon')))
 
 
@@ -269,10 +269,12 @@ if __name__ == '__main__':
 
     parser_rebuild = subparsers.add_parser('rebuild',
                                            help='Rebuilds JS data from YAML')
-    parser_rebuild.add_argument('-i', '--in', type=str, default='fishData.yaml',
+    parser_rebuild.add_argument('-i', '--in', type=str,
+                                default=os.path.join(_SCRIPT_PATH, 'fishData.yaml'),
                                 dest='yaml_file',
                                 help='Path to current fish data YAML file')
-    parser_rebuild.add_argument('-o', '--out', type=str, default='data.js',
+    parser_rebuild.add_argument('-o', '--out', type=str,
+                                default=os.path.join(_SCRIPT_PATH, 'data.js'),
                                 dest='js_file',
                                 help='Where to store Java Script data (data.js)')
     parser_rebuild.add_argument('--with-icons', action='store_true', default=False,
