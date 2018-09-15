@@ -197,7 +197,7 @@
 - name: Giant Donko
   location: The Long Climb
   startHour: 4
-  endHour: 12
+  endHour: 9
   previousWeatherSet: []
   weatherSet:
   - Fog
