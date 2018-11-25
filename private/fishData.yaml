@@ -5409,3 +5409,269 @@
   folklore: true
   fishEyes: false
   patch: 4.3
+# Patch 4.4
+- name: Indigo Prismfish
+  location: Prism Lake
+  startHour: 0
+  endHour: 4
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  - Violet Prismfish
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Green Prismfish
+  location: Prism Lake
+  startHour: 0
+  endHour: 16
+  previousWeatherSet:
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Watcher Catfish
+  location: Rhalgr's Reach
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Thunder
+  bestCatchPath:
+  - Midge Larva
+  - Gyr Abanian Trout
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Bloodtail Zombie
+  location: The Outer Fist
+  startHour: 8
+  endHour: 12
+  previousWeatherSet:
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Salmon Roe
+  - Balloon Frog
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Hardhead Trout
+  location: Timmon Beck
+  startHour: 16
+  endHour: 20
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Downstream Loach
+  location: The Velodyna River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Corpse Chub
+  location: Mirage Creek
+  startHour: 20
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: The Last Tear
+  location: Heather Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Fog
+  weatherSet:
+  - Fair Skies
+  bestCatchPath:
+  - Salmon Roe
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Hemon
+  location: The Bull's Bath
+  startHour: 16
+  endHour: 20
+  previousWeatherSet:
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Moksha
+  location: The Ephor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Princess Killifish
+  location: The Silver Canal
+  startHour: 4
+  endHour: 6
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Nightcrawler
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Ku'er
+  location: The Ruby Price
+  startHour: 0
+  endHour: 8
+  previousWeatherSet:
+  - Thunder
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Blue Bobbit
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Argonautica
+  location: Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Wind
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Hagoromo Bijin
+  location: The One River (West)
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Duskfish
+  location: Azim Khaat
+  startHour: 8
+  endHour: 16
+  previousWeatherSet:
+  - Rain
+  - Gales
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Nightcrawler
+  - Zagas Khaal
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
+- name: Blade Skipper
+  location: Upper Yat Khaal
+  startHour: 4
+  endHour: 8
+  previousWeatherSet:
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.4
