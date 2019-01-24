@@ -2273,7 +2273,10 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet: []
+  weatherSet:
+  - Clouds
+  - Fog
+  - Dust Storms
   predators: {}
   bestCatchPath:
   - Goblin Jig
@@ -3206,7 +3209,7 @@
   bestCatchPath:
   - Giant Crane Fly
   hookset:
-  snagging:
+  snagging: true
   gig:
   folklore: 1
   fishEyes: false
@@ -3214,7 +3217,7 @@
 - name: Sunsail
   location: Landlord Colony
   startHour: 15
-  endHour: 16
+  endHour: 17
   previousWeatherSet: []
   weatherSet:
   - Fair Skies
@@ -4457,13 +4460,12 @@
   - Wind
   predators: {}
   bestCatchPath:
-  - Live Shrimp
-  - Ruby Shrimp
-  hookset:
+  - Blue Bobbit
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
-  fishEyes: true
+  fishEyes: true  # 4min timer
   patch: 4.0
 - name: Daio Squid
   location: The Isle of Zekki
