@@ -2778,7 +2778,7 @@
   fishEyes: true
   patch: 3.0
 - name: Caiman
-  location: The Iron Feast
+  location: Voor Sian Siran
   startHour: 18
   endHour: 21
   previousWeatherSet: []
@@ -2786,8 +2786,8 @@
   predators: {}
   bestCatchPath:
   - Bladed Steel Jig
-  - Blueclaw Shrimp
-  hookset:
+  - Bullfrog
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -4142,21 +4142,6 @@
   fishEyes: false
   patch: 3.5
 # STORMBLOOD - Patch 4.0
-- name: Dafangshi
-  location: 481
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: []
-  weatherSet: []
-  predators:
-    Ichthyosaur: 10
-  bestCatchPath: []
-  hookset:
-  snagging:
-  gig: Small
-  folklore: false
-  fishEyes: false
-  patch: 4.0
 - name: Liopleurodon
   location: Hells' Lid
   startHour: 0
@@ -4905,14 +4890,18 @@
   startHour: 12
   endHour: 16
   previousWeatherSet: []
-  weatherSet: []
+  weatherSet:
+  - Clouds
+  - Fog
+  - Wind
+  - Dust Storms
   predators: {}
   bestCatchPath:
   - Suspending Minnow
   hookset:
-  snagging: true
+  snagging: false
   gig:
-  folklore: false
+  folklore: true
   fishEyes: false
   patch: 4.1
 - name: Ukiki
@@ -5584,7 +5573,7 @@
   bestCatchPath:
   - Nightcrawler
   predators:
-  hookset:
+  hookset: Precision
   snagging:
   gig:
   folklore: true
