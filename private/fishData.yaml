@@ -4141,6 +4141,23 @@
   folklore: false
   fishEyes: false
   patch: 3.5
+- name: Lava Snail
+  location: Halo
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  bestCatchPath:
+  - Magma Worm
+  predators:
+  hookset:
+  snagging: true
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 3.2
 # STORMBLOOD - Patch 4.0
 - name: Liopleurodon
   location: Hells' Lid
@@ -5126,7 +5143,7 @@
   - Blue Bobbit
   predators:
   hookset:
-  snagging:
+  snagging: true
   gig:
   folklore: true
   fishEyes: false
