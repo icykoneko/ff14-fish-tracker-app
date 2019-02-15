@@ -5666,3 +5666,224 @@
   folklore: true
   fishEyes: false
   patch: 4.4
+# Patch 4.5
+- name: Lily of the Veil
+  location: The Arms of Meed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Clear Skies
+  weatherSet:
+  - Fair Skies
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: The Vegetarian
+  location: Hells' Lid
+  startHour: 20
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Thunder
+  bestCatchPath:
+  - Live Shrimp
+  - Ruby Shrimp
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Seven Stars
+  location: The Isle of Bekko
+  startHour: 10
+  endHour: 18
+  previousWeatherSet:
+  - Thunder
+  weatherSet:
+  - Fair Skies
+  bestCatchPath:
+  - Blue Bobbit
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Pinhead
+  location: Isari
+  startHour: 16
+  endHour: 24
+  previousWeatherSet:
+  # May not have previous weather set
+  - Fair Skies
+  - Clear Skies
+  weatherSet:
+  - Thunder
+  bestCatchPath:
+  - Live Shrimp
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Pomegranate Trout
+  location: The Heron's Nest
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Rain
+  bestCatchPath:
+  - Nightcrawler
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Glarramundi
+  location: The Heron's Way
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  - Fair Skies
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Hermit's End
+  location: Namai
+  startHour: 20
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Suiten Ippeki
+  location: Mercantile Docks
+  startHour: 16
+  endHour: 24
+  previousWeatherSet:
+  - Fair Skies
+  weatherSet:
+  - Showers
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Axelrod
+  location: The One River (East)
+  startHour: 0
+  endHour: 8
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Fair Skies
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: The Unraveled Bow
+  location: Prism Canyon
+  startHour: 12
+  endHour: 16
+  previousWeatherSet:
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Nhaama's Treasure
+  location: Dotharl Khaa
+  startHour: 4
+  endHour: 8
+  previousWeatherSet:
+  - Rain
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Garden Skipper
+  location: Nem Khaal
+  startHour: 8
+  endHour: 12
+  previousWeatherSet:
+  - Fair Skies
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Midge Larva
+  predators:
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Banderole
+  location: Hak Khaal
+  startHour: 0
+  endHour: 8
+  previousWeatherSet:
+  - Fair Skies
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Nightcrawler
+  - Zagas Khaal
+  predators:
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5

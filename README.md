@@ -5,10 +5,15 @@ A webapp designed for tracking big fish and arranging them by which fish are les
 In order to cut down on GET requests, all of the images are bundled into a single sprite image.
 
 ```
-sprity create ./public/images/ ./private/images/**/*.png -c . -s sprite.css --prefix sprite-icon --margin 2 --orientation binary-tree
+sprity create ./public/images/ ./private/images/**/*.png -c . -s sprite.css --prefix sprite-icon --margin 2 --orientation binary-tree --engine jimp
 ```
 
 After updating the sprites, make sure to update the _cache buster_ value in `index.html` so visitors get the latest version.
+
+You need to install sprity-cli globally to get access to the CLI `sprity`.
+```
+npm i sprity-cli sprity-jimp -g
+```
 
 ## Adding new fish data
 Add new entries to the `private/fishData.yaml` file, then run `private/manageFishData.py rebuild --with-icons`. This will produce a new `data.js` file to replace the existing one in `js/app/data.js`. Any new fish icons will be extracted and added to the private images folder. Remember to rebuild the sprites and update the _cache buster_ value in `index.html` so visitors get the latest version.
@@ -32,7 +37,7 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
     * **NOTE:** If it's a new expansion, well... make sure it looks nice, and set the patch buttons to `disabled` at first.
 * If new textures were extracted (i.e. new fish images, or new bait images);
   * Update the *cache buster* in `index.html` for `public/images/sprite.css`. Use the format `?${ver}_YYYYMMDD`.
-  * Rebuild the sprite image using: `sprity create ./public/images/ ./private/images/**/*.png -c . -s sprite.css --prefix sprite-icon --margin 2 --orientation binary-tree`
+  * Rebuild the sprite image using: `sprity create ./public/images/ ./private/images/**/*.png -c . -s sprite.css --prefix sprite-icon --margin 2 --orientation binary-tree --engine jimp`
     * **NOTE:** This command **must** be run via CMD, not bash. For some reason, bash will cause the entries in the CSS to be different...
   * Edit the `public/images/sprite.css` file and add a *cache buster* to the main image. Use the format: `?YYYYMMDD`.
   * Compress the `public/images/sprite.png` file using https://tinypng.com/. This should reduce its size by ~67% and that reduces bandwidth, and costs.
