@@ -143,6 +143,14 @@
       .ui.striped.table tbody tr.fish-entry:nth-child(2n) {
         background-color: hsla(0, 0%, 100%, 0.8) !important;
       }
+
+      .ui.striped.table > tr.section-divider:hover:not(.fish-entry),
+      .ui.striped.table tbody tr.section-divider:hover:not(.fish-entry),
+      .ui.striped.table > tr.section-divider:not(.fish-entry),
+      .ui.striped.table tbody tr.section-divider:not(.fish-entry) {
+        background-color: hsl(0, 0%, 80%) !important;
+      }
+
     </style>
 
     <!-- Semantic UI Overrides -->
@@ -224,7 +232,7 @@
     <script type="text/javascript" src="js/app/fish.js"></script>
     <script type="text/javascript" src="js/app/weather.js"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js"></script>
-    <script type="text/javascript" src="js/app/viewmodel.js?20190214"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20190215"></script>
 
 
     <!-- Templates -->
@@ -245,7 +253,7 @@
     </script>
 
     <script id="fish-template" type="text/html;x-dot-template">
-      <tr class="fish-entry {{?it.isCatchable()}}fish-active{{?}} {{?it.caught || false}}fish-caught{{?}} {{?it.pinned || false}}fish-pinned{{?}}" data-id="{{=it.id}}">
+      <tr class="fish-entry {{?it.isCatchable()}}fish-active{{?}} {{?it.caught || false}}fish-caught{{?}} {{?it.pinned || false}}fish-pinned{{?}} {{=it.nextAvailBin()}}" data-id="{{=it.id}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
           <div class="ui middle aligned vertical mini very compact icon buttons">
@@ -356,6 +364,11 @@
       </tr>
     </script>
 
+    <script id="table-section-divider-template" type="text/html;x-dot-template">
+      <tr class="section-divider">
+        <td colspan="6">{{=it.text}}</td>
+      </tr>
+    </script>
 
     <script type="text/javascript">
       $(() => {
@@ -369,6 +382,7 @@
         var fishTableTemplate = doT.template($('#fish-table-template').text());
         // var fishEntryTemplate = doT.template($('#fish-template').text());
         viewModel.fishEntryTemplate = doT.template($('#fish-template').text());
+        var tableSectionDividerTemplate = doT.template($('#table-section-divider-template').text());
 
         // Initialize the view model's initial filter.
         // Do this here to prevent caching issues...
@@ -383,6 +397,7 @@
         var fishChangedSubject = new Rx.Subject();
         var filterCompletionSubject = new Rx.BehaviorSubject(viewModel.filter.completion);
         var filterPatchSubject = new Rx.BehaviorSubject(viewModel.filter.patch);
+        var sortingTypeSubject = new Rx.Subject();
 
         $('#fish-table-container').append(fishTableTemplate());
         var fishTableElement = $('#fishes tbody');
@@ -403,16 +418,33 @@
           $('.fish-entry.fish-pinned').filter(":last").find("td").css({
             borderBottom: "2px solid red"
           });
-          $('.fish-entry.fish-active').filter(":last").find("td").css({
-            borderBottom: "2px solid blue"
-          });
+
+          var $lastActiveFish = $('.fish-entry.fish-active').filter(":last");
+          $lastActiveFish.find("td").css({borderBottom: "2px solid blue"});
+
+          if (viewModel.sortingType == 'overallRarity') {
+            var $lastFishBin15 = $('.fish-entry.fish-bin-15').filter(":last");
+            if ($lastFishBin15.length != 0) {
+              $lastActiveFish.after(tableSectionDividerTemplate({
+                text: "Fish up in the next 15 minutes..."
+              }));
+              $lastFishBin15.find("td").css({borderBottom: "2px solid black"});
+              $lastFishBin15.after(tableSectionDividerTemplate({
+                text: "Fish up more than 15 minutes from now... <b>(Sorted by rarity)</b>"
+              }));
+            } else {
+              $lastActiveFish.after(tableSectionDividerTemplate({
+                text: "Fish up more than 15 minutes from now... <b>(Sorted by rarity)</b>"
+              }));
+            }
+          }
         }
 
-        // Initialize the table with all the fishies.
-        for (let fish of Fishes) {
-          // Create the initial entry.
-          fishTableElement.append(viewModel.fishEntryTemplate(fish));
-        }
+        // // Initialize the table with all the fishies.
+        // for (let fish of Fishes) {
+        //   // Create the initial entry.
+        //   fishTableElement.append(viewModel.fishEntryTemplate(fish));
+        // }
 
         _.defer(function () {
           console.log("Updating and sorting table now...");
@@ -473,7 +505,10 @@
               .map((e) => { return {type: "completedChanged", value: e}}),
             viewModel.completionManager.rx_pinned
               .skip(1)
-              .map((e) => { return {type: "pinnedChanged", value: e}})
+              .map((e) => { return {type: "pinnedChanged", value: e}}),
+            sortingTypeSubject
+              .debounce(500)
+              .map((e) => { return {type: "sortingChanged", value: e}})
           );
 
           updatesNeededSource
@@ -497,6 +532,7 @@
               // var fishEntries = $(".fish-entry", fishTableElement).data("stale", true);
               // var tbodyNode = fishTableElement[0];
               $(".fish-entry").remove();
+              $(".section-divider").remove();
               var fishes = viewModel.updateAll();
               for (let fish of fishes) {
                 // Generate a new HTML template for the fish...
@@ -558,6 +594,7 @@
           var $filterPatchSetButtons = $('#filterPatch .button.patch-set');
           var $upcomingWindowFormatOptions = $('#upcomingWindowFormat .radio.checkbox');
           var $checklistButtons = $('#checklist .button');
+          var $sortingButtons = $('#sortingType .radio.checkbox');
 
           $filterCompletionButtons.on('click', function() {
             $(this).addClass('active').siblings().removeClass('active');
@@ -609,6 +646,14 @@
             }
           });
 
+          $sortingButtons.checkbox({
+            onChecked: function() {
+              console.log("Changed sorting option to: ", $(this).val())
+              viewModel.sortingType = $(this).val();
+              sortingTypeSubject.onNext($(this).val());
+            }
+          });
+
           $checklistButtons.on('click', function() {
             if ($(this).data('action') == 'export') {
               // Pop up dialog box with completion value for user to save.
@@ -651,11 +696,14 @@
       <p>
         Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).  You can also single-click the expansion button to toggle an entire expansion from being displayed.
       </p>
+      <p>
+        Having trouble picking out those super rare fish from the vast list of upcoming fish windows? Now you can sort by <b>Overall Rarity</b>.  As always, the rarest fish currently available will be shown first, followed by the sorted list of fish coming up in the next 15 minutes. But after that, the remaining fish will be sorted by rarity first, making those super rare fish jump to the top (even if they are days away.) I hope this helps you plan out catching the super rare ones.  Good luck!
+      </p>
 
       <div class="ui vertically padded grid">
         <div class="row" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
           <div class="column">Completion:</div>
-          <div class="three wide column">
+          <div class="four wide column">
             <div class="ui mini very compact buttons" id="filterCompletion">
               <button class="ui active button" data-filter="all">All</button>
               <button class="ui button" data-filter="caught">Caught</button>
@@ -666,7 +714,7 @@
               <button class="ui icon button" data-action="export" data-tooltip="Export Fish Checklist"><i class="download icon"></i></button>
             </div>
           </div>
-          <div class="nine wide column">
+          <div class="eight wide column">
             <div class="inline fields" id="upcomingWindowFormat">
               <div style="float: left;">Upcoming window format:</div>
               <div class="field" style="float: left; margin-left: 1rem;">
@@ -714,6 +762,25 @@
                 <div class="ui active button" data-filter="4.3">4.3</div>
                 <div class="ui active button" data-filter="4.4">4.4</div>
                 <div class="ui active button" data-filter="4.5">4.5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="sorting" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
+          <div class="column">Sorting:</div>
+          <div class="six wide column" id="sortingType">
+            <div class="inline fields">
+              <div class="field" style="float: left; margin-right: 1rem;">
+                <div class="ui radio checked checkbox">
+                  <input type="radio" name="sortingType" checked="checked" class="hidden" value="windowPeriods"/>
+                  <label>Window Periods</label>
+                </div>
+              </div>
+              <div class="field" style="float: left;">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
+                  <label>Overall Rarity</label>
+                </div>
               </div>
             </div>
           </div>
