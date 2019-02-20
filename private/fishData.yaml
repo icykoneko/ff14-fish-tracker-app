@@ -5768,7 +5768,7 @@
   snagging:
   gig:
   folklore: true
-  fishEyes: false
+  fishEyes: true
   patch: 4.5
 - name: Glarramundi
   location: The Heron's Way
