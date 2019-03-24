@@ -25,7 +25,7 @@ def nth(iterable, n, default=None):
 
 def load_dats():
     # Add the Saint Coinach python API to the path.
-    sys.path += [os.path.join(_SCRIPT_PATH, '..', '..', 'saintcoinach-py')]
+    sys.path += [os.path.join(_SCRIPT_PATH, 'saintcoinach-py')]
 
     # TODO: Really should have the ability to import the saintcoinach module
     #       which would give you XIV (XivCollection).
@@ -38,7 +38,7 @@ def load_dats():
     packs = pack.PackCollection(r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack")
     coll = XivCollection(packs)
     coll.active_language = Language.english
-    with open(os.path.join(_SCRIPT_PATH, '..', '..', 'Saintcoinach', 'Saintcoinach', 'ex.json'),
+    with open(os.path.join(_SCRIPT_PATH, 'Saintcoinach', 'Saintcoinach', 'ex.json'),
               'r',
               encoding='utf-8') as f:
         coll.definition = RelationDefinition.from_json_fp(f)
