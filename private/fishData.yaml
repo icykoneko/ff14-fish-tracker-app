@@ -5439,6 +5439,8 @@
   startHour: 0
   endHour: 16
   previousWeatherSet:
+  - Fair Skies
+  - Clear Skies
   weatherSet:
   - Fair Skies
   - Clear Skies
@@ -5900,6 +5902,99 @@
   - Zagas Khaal
   predators:
   hookset: Powerful
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+# Patch 4.56
+- name: Xenacanthus
+  location: Timmon Beck
+  startHour: 16
+  endHour: 20
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  - Hardhead Trout
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Drepanaspis
+  location: Grymm & Enid
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Suspending Minnow
+  predators:
+    Bondsplitter: 2
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Stethacanthus
+  location: Loch Seld
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath: # TODO: Unknown
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: The Ruby Dragon
+  location: The Ruby Price
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath: # TODO: Unknown
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: Warden of the Seven Hues
+  location: Prism Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Stonefly Larva
+  predators:
+    Firelight Goldfish: 3
+    Indigo Prismfish: 3
+    Green Prismfish: 5
+  hookset:
+  snagging:
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 4.5
+- name: The Unconditional
+  location: Dotharl Khaa
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath: # TODO: Unknown
+  predators:
+  hookset:
   snagging:
   gig:
   folklore: true
