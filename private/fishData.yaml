@@ -3256,7 +3256,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Stonefly Nymph
+  - Brute Leech
   hookset:
   snagging:
   gig:
@@ -3522,10 +3522,10 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  hookset: Precision
   snagging:
   gig:
-  folklore: false
+  folklore: true
   fishEyes: false
   patch: 3.3
 - name: Inkfish
