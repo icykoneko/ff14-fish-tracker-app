@@ -657,8 +657,13 @@
           $checklistButtons.on('click', function() {
             if ($(this).data('action') == 'export') {
               // Pop up dialog box with completion value for user to save.
-              var completion = JSON.stringify(viewModel.completionManager.completed);
-              window.prompt('Fishing Checklist Code:', completion);
+              var result = {}
+              var completed = viewModel.completionManager.completed;
+              var pinned = viewModel.completionManager.pinned;
+              result["pinned"] = pinned;
+              result["completed"] = completed;
+              result = JSON.stringify(result)
+              window.prompt('Fishing Checklist Code:', result);
             } else if ($(this).data('action') == 'import') {
               viewModel.completionManager.importCaughtState();
             }
