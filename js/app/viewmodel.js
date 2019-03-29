@@ -66,7 +66,7 @@ class CompletionManager {
     }
     if (newCompletion["pinned"].length > 0) {
       this.pinned = _(newCompletion["pinned"]).reduce((o, v) => o.concat(Number(v)), []);
-      if(this.validateArray(this.pinned)){
+      if (this.validateArray(this.pinned)) {
         localStorage.pinned = JSON.stringify(this.pinned);
         this.rx_pinned.onNext(this.pinned);
       }else{
