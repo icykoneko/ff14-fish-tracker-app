@@ -45,25 +45,42 @@ class CompletionManager {
     this.rx_pinned.onNext(this.pinned);
   }
 
+  validateArray(newCompletion) {
+    if (!Array.isArray(newCompletion)) {
+      window.alert("Error: Invalid fishing checklist.");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   importCaughtState() {
     var completion = window.prompt("Enter Fishing Checklist Code:");
     if (completion === null || completion === "") { return; }
     var newCompletion;
     try {
       newCompletion = JSON.parse(completion);
-      newCompletion = _(newCompletion).reduce((o, v) => o.concat(Number(v)), [])
     } catch(e) {
       window.alert("Error: Malformed fishing checklist.");
       return;
     }
-    if (!Array.isArray(newCompletion)) {
-      window.alert("Error: Invalid fishing checklist.");
-      return;
+    if (newCompletion["pinned"].length > 0) {
+      this.pinned = _(newCompletion["pinned"]).reduce((o, v) => o.concat(Number(v)), []);
+      if (this.validateArray(this.pinned)) {
+        localStorage.pinned = JSON.stringify(this.pinned);
+        this.rx_pinned.onNext(this.pinned);
+      } else {
+        return;
+      }
     }
-    if (newCompletion.length > 0) {
-      this.completed = newCompletion;
-      localStorage.completed = JSON.stringify(this.completed);
-      this.rx_completed.onNext(this.completed);
+    if (newCompletion["completed"].length > 0) {
+      this.completed = _(newCompletion["completed"]).reduce((o, v) => o.concat(Number(v)), []);
+      if (this.validateArray(this.completed)) {
+        localStorage.completed = JSON.stringify(this.completed);
+        this.rx_completed.onNext(this.completed);
+      } else {
+        return;
+      }
     }
   }
 }
