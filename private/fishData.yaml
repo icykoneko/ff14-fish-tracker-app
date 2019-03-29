@@ -5862,6 +5862,7 @@
   previousWeatherSet:
   - Rain
   weatherSet:
+  - Fair Skies
   - Clear Skies
   bestCatchPath:
   - Suspending Minnow
@@ -5946,8 +5947,11 @@
   endHour: 24
   previousWeatherSet:
   weatherSet:
-  bestCatchPath: # TODO: Unknown
+  bestCatchPath:
+  - Silkworm
+  - Rock Saltfish
   predators:
+    Sculptor: 2
   hookset:
   snagging:
   gig:
