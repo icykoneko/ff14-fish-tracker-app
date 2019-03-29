@@ -45,7 +45,7 @@ class CompletionManager {
     this.rx_pinned.onNext(this.pinned);
   }
 
-  validateArray(newCompletion){
+  validateArray(newCompletion) {
     if (!Array.isArray(newCompletion)) {
       window.alert("Error: Invalid fishing checklist.");
       return false;
@@ -69,16 +69,16 @@ class CompletionManager {
       if (this.validateArray(this.pinned)) {
         localStorage.pinned = JSON.stringify(this.pinned);
         this.rx_pinned.onNext(this.pinned);
-      }else{
+      } else {
         return;
       }
     }
     if (newCompletion["completed"].length > 0) {
       this.completed = _(newCompletion["completed"]).reduce((o, v) => o.concat(Number(v)), []);
-      if(this.validateArray(this.completed)){
+      if (this.validateArray(this.completed)) {
         localStorage.completed = JSON.stringify(this.completed);
         this.rx_completed.onNext(this.completed);
-      }else{
+      } else {
         return;
       }
     }
