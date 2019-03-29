@@ -49,7 +49,7 @@ class CompletionManager {
     if (!Array.isArray(newCompletion)) {
       window.alert("Error: Invalid fishing checklist.");
       return false;
-    }else{
+    } else {
       return true;
     }
   }
