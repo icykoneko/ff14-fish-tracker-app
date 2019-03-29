@@ -110,13 +110,14 @@ class FishWatcher {
 
     // If this fish has predators, we have to consider their windows too...
     // Basically, to ensure we get the same number of windows for every fish,
-    // we'll intersect this range with its predators' ranges.
+    // we'll intersect this range with the UNION of its predators' ranges.
     if (_(fish.predators).size() > 0) {
+      var overallPredRange = null;
+      var predatorsAlwaysAvailable = true;
       _(fish.predators).chain().keys().each((predId) => {
-        // Stop if the range has already been eliminated.
-        if (nextRange === null) return null;
         var predatorFish = _(Fishes).findWhere({id: Number(predId)});
         if (predatorFish.alwaysAvailable) return nextRange;
+        predatorsAlwaysAvailable = false;
         // Once again, we need to check if the weather right now works for
         // the predator fish.
         var iter = weatherService.findWeatherPattern(
@@ -126,19 +127,34 @@ class FishWatcher {
           predatorFish.weatherSet,
           1);
         var _iterItem = iter.next();
-        if (_iterItem.done) { return nextRange = null; }
+        if (_iterItem.done) { return /*nextRange = null*/; }
         var predWindow = _iterItem.value;
         var predRange = predatorFish.availableRangeDuring(predWindow);
-        if (!predWindow.overlaps(predRange)) { return nextRange = null; }
+        if (!predWindow.overlaps(predRange)) { return /*nextRange = null*/; }
         if (dateFns.isSameOrBefore(+predRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
-          return nextRange = null;
+          return /*nextRange = null*/;
         }
-        // Reduce the next range by intersecting with predator's range.
-        return nextRange = nextRange.intersection(predRange);
+        if (overallPredRange === null) {
+          overallPredRange = predRange;
+        } else {
+          // COMBINE this predators range with the others.
+          // This is necessary for fish with multiple predators which have
+          // non-overlapping availability...
+          overallPredRange = overallPredRange.union(predRange);
+        }
+        return nextRange;
       });
+      // Reduce the next range by intersecting with OVERALL predator's range.
+      if (predatorsAlwaysAvailable) {
+        // Do nothing; keep nextRange intact
+      } else if (overallPredRange === null) {
+        nextRange = null;
+      } else {
+        nextRange = nextRange.intersection(overallPredRange);
+      }
     }
     if (nextRange === null) {
-      // One of its predators isn't available right now... Too bad
+      // None of its predators are available right now... Too bad...
       return false;
     }
 

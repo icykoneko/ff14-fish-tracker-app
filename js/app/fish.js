@@ -1,9 +1,14 @@
+function shouldLogForFish(fish) {
+  return false;
+}
+
 class Fish {
   constructor(fishData) {
     _(this).extend(fishData);
     this.id = fishData._id;
     this.name = DATA.ITEMS[this.id].name;
     this.icon = DATA.ITEMS[this.id].icon;
+    this.logging = shouldLogForFish(this);
     if (fishData.location !== null) {
       var fishingSpot = null;
       var spearfishing = false;
@@ -47,7 +52,6 @@ class Fish {
       this.weatherSet.length == 0 && this.startHour == 0 && this.endHour == 24;
 
     // Create a subject for catchableRanges that we can subscribe to.
-    //this.catchableRangesObserver = new Rx.Observable.ofArrayChanges(this.catchableRanges);
     this.catchableRangesObserver = new Rx.BehaviorSubject([]);
   }
 
@@ -143,7 +147,20 @@ class Fish {
   }
 }
 
+function fishPredatorPass(fish, idx, fishes) {
+  if (fish.alwaysAvailable && fish.bait.hasPredators) {
+    // Make sure its predators are ALSO always available...
+    fish.alwaysAvailable = _(fish.predators).chain()
+      .map((v, predId) => {
+        return _(fishes).findWhere({_id: Number(predId)}).alwaysAvailable;
+      })
+      .all()
+      .value();
+  }
+}
+
 let Fishes = _(DATA.FISH).chain()
   .values()
   .map((fishData) => new Fish(fishData))
+  .each(fishPredatorPass)
   .value();
