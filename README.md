@@ -54,7 +54,6 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
   * Add filter settings to import/export blob.
 * Provide option for displaying actual time instead of relative time by default.
 * Optimize the code for refreshing fish data on screen. The for-each loop eats up a lot of time and probably doesn't need to be recomputed.
-* Add pinned fish to import/export data blob.
 * Add GUI that resembles the in-game fishing log, allowing users an easier method of checking off the fish they've caught.
 * Add area filtering?
 * Improve the display when a fish is up all day (it currently shows "0-24", it ought to read "All Day").
