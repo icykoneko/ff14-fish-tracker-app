@@ -74,6 +74,8 @@ class WeatherService {
     // provided previous weather set.
     if (previousWeatherSet.length > 0) {
       date = startOfPeriod(dateFns.utc.subHours(date, 8));
+      // We need to add one extra to the "limit" as a result...
+      limit++;
     } else {
       date = startOfPeriod(date);
     }
