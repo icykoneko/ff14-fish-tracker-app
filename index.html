@@ -46,7 +46,7 @@
       .bait-icon.sprite-icon {
         zoom: 0.75;
       }
-      tr.fish-intuition-row .sprite-icon,
+      tr.fish-intuition-row .fish-icon.sprite-icon,
       tr.fish-intuition-row .weather-icon.sprite-icon,
       tr.fish-intuition-row .bait-icon.sprite-icon {
         zoom: 0.675;
@@ -276,7 +276,7 @@
             </div>
           </div>
           <!--<img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}.png"/>-->
-          <div class="ui middle aligned sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
@@ -339,24 +339,15 @@
         <!-- Requirements and Bait -->
         <td>
           {{?it.bait.hasPredators}}
-            {{~it.bait.predators :predator:idx}}
-              <div class="fish-predator">
-                <span style="font-size: +150%">{{=predator.count}}</span>&nbsp;
-                <!-- <img class="ui middle aligned image item-icon-40"
-                     src="public/images/fish_n_tackle/{{=predator.icon}}.png"
-                     title="{{=predator.name}}"/> -->
-                <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=predator.icon}}" title="{{=predator.name}}"></div>
-              </div>
-            {{~}}
-            <i class="chevron right icon"></i>
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
           {{?}}
           {{?it.fishEyes}}
             <!-- <img class="ui middle aligned image" title="Fish Eyes" src="public/images/status/fisheyes.png"/> -->
-            <div class="ui middle aligned sprite-icon sprite-icon-status-fish_eyes" title="Fish Eyes"></div>
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes" title="Fish Eyes"></div>
           {{?}}
           {{?it.snagging}}
             <!-- <img class="ui middle aligned image" title="Snagging" src="public/images/status/snagging.png"/> -->
-            <div class="ui middle aligned sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
           {{?it.gig}}
             <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.gig.toLowerCase()}}_gig" title="{{=it.gig}} Gig"></div>
@@ -384,7 +375,7 @@
       <tr class="fish-intuition-row fish-entry {{?it.isCatchable()}}fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor}}">
         <td class="collapsing right aligned">
           <div class="intuition-count">{{=it.intuitionCount}}</div>
-          <div class="ui middle aligned sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">{{=it.name}}</div>
@@ -418,10 +409,10 @@
         <!-- Bait -->
         <td>
           {{?it.fishEyes}}
-            <div class="ui middle aligned sprite-icon sprite-icon-status-fish_eyes" title="Fish Eyes"></div>
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes" title="Fish Eyes"></div>
           {{?}}
           {{?it.snagging}}
-            <div class="ui middle aligned sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
           {{?it.gig}}
             <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.gig.toLowerCase()}}_gig" title="{{=it.gig}} Gig"></div>
