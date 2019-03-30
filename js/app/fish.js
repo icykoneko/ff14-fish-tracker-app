@@ -4,6 +4,11 @@ function shouldLogForFish(fish) {
 
 class Fish {
   constructor(fishData) {
+    // Copy constructor version.
+    if (fishData instanceof Fish) {
+      _(this).clone(fishData);
+      return;
+    }
     _(this).extend(fishData);
     this.id = fishData._id;
     this.name = DATA.ITEMS[this.id].name;
@@ -42,7 +47,8 @@ class Fish {
     this.bait = {
       hasPredators: _(this.predators).size() > 0,
       predators: _(this.predators).map((v, k) => {
-        return { count: v,
+        return { id: Number(k),
+                 count: v,
                  name: DATA.ITEMS[k].name,
                  icon: DATA.ITEMS[k].icon };
       }),
@@ -50,6 +56,7 @@ class Fish {
     };
     this.alwaysAvailable =
       this.weatherSet.length == 0 && this.startHour == 0 && this.endHour == 24;
+    this.intuitionFish = [];
 
     // Create a subject for catchableRanges that we can subscribe to.
     this.catchableRangesObserver = new Rx.BehaviorSubject([]);
@@ -147,20 +154,25 @@ class Fish {
   }
 }
 
-function fishPredatorPass(fish, idx, fishes) {
-  if (fish.alwaysAvailable && fish.bait.hasPredators) {
-    // Make sure its predators are ALSO always available...
-    fish.alwaysAvailable = _(fish.predators).chain()
-      .map((v, predId) => {
-        return _(fishes).findWhere({_id: Number(predId)}).alwaysAvailable;
-      })
-      .all()
-      .value();
+function muxinIntuitionReqs(fish, idx, fishes) {
+  if (fish.bait.hasPredators) {
+    // Attach the generated intuition requirement fish to this so it's easier to
+    // look up on updates.
+    fish.intuitionFish = _(fish.bait.predators).map((predFish) => {
+      return {count: predFish.count,
+              data: _(fishes).findWhere({id: predFish.id}) };
+    });
+    if (fish.alwaysAvailable) {
+      // Make sure its intuition requirements are ALSO always available...
+      fish.alwaysAvailable = _(fish.intuitionFish).all((iFish) => {
+        return iFish.data.alwaysAvailable;
+      });
+    }
   }
 }
 
 let Fishes = _(DATA.FISH).chain()
   .values()
   .map((fishData) => new Fish(fishData))
-  .each(fishPredatorPass)
+  .each(muxinIntuitionReqs)
   .value();

@@ -308,6 +308,7 @@ class ViewModel {
     this.sortingType = "windowPeriods";
 
     this.fishEntryTemplate = () => "";
+    this.fishIntuitionEntryTemplate = () => "";
   }
 
   applyFiltersAndResort() {
