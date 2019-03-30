@@ -4435,18 +4435,33 @@
   folklore: false
   fishEyes: false
   patch: 4.0
+- name: Capsized Squeaker
+  location: The Comet's Tail
+  startHour: 16
+  endHour: 19
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Salmon Roe
+  predators:
+  hookset:
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 4.0
 - name: Nirvana Crab
   location: The Comet's Tail
   startHour: 0
   endHour: 24
-  previousWeatherSet: []
+  previousWeatherSet:
   weatherSet:
   - Clouds
   - Fog
-  predators: {}
+  predators:
   bestCatchPath:
   - Salmon Roe
-  hookset:
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
