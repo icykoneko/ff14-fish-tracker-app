@@ -56,4 +56,3 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
 * Optimize the code for refreshing fish data on screen. The for-each loop eats up a lot of time and probably doesn't need to be recomputed.
 * Add GUI that resembles the in-game fishing log, allowing users an easier method of checking off the fish they've caught.
 * Add area filtering?
-* Display predator fish information in the same row as the particular fish.
