@@ -487,19 +487,20 @@
             viewModel.completionManager.togglePinnedState(f);
           });
 
-          // TODO: I'm pretty sure the changes for intuition UI will break
-          // this trick (and the ones below). Ideally, we need to wrap each
-          // entry in <tbody>. Since that will take a bit of refactoring of
-          // style rules, I'm gonna just hope for the best ;_;
-          $('.fish-entry.fish-pinned').filter(":last").find("td").css({
+          // Ideally, we need to wrap each entry in <tbody>, but this method
+          // appears to work for the purpose of injecting the borders.
+          // Maybe you should have... um, used the viewmodel to stain the
+          // entry so you could just find by that?  Whatever, this whole part
+          // is mostly a hack LOL XD
+          $('.fish-entry.fish-pinned').filter(":last").nextAll(".fish-entry:not(.fish-intuition-row)").first().prev("tr").find("td").css({
             borderBottom: "2px solid red"
           });
 
-          var $lastActiveFish = $('.fish-entry.fish-active').filter(":last");
+          var $lastActiveFish = $('.fish-entry.fish-active').filter(":last").nextAll(".fish-entry:not(.fish-intuition-row)").first().prev("tr");
           $lastActiveFish.find("td").css({borderBottom: "2px solid blue"});
 
           if (viewModel.sortingType == 'overallRarity') {
-            var $lastFishBin15 = $('.fish-entry.fish-bin-15').filter(":last");
+            var $lastFishBin15 = $('.fish-entry.fish-bin-15').filter(":last").nextAll(".fish-entry:not(.fish-intuition-row)").first().prev("tr");
             if ($lastFishBin15.length != 0) {
               $lastActiveFish.after(tableSectionDividerTemplate({
                 text: "Fish up in the next 15 minutes..."
