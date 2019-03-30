@@ -318,7 +318,12 @@
             <div class="ui middle aligned sprite-icon sprite-icon-weather-{{=weather.icon}} weather-icon"
                  title="{{=weather.name}}"></div>
           {{~}}
-          <br/><i class="wait icon"></i>&nbsp;{{=it.startHour + ' - ' + it.endHour}}
+          <br/><i class="wait icon"></i>&nbsp;
+          {{? it.startHour === 0 && it.endHour === 24}}
+            All Day
+          {{??}}
+            {{=it.startHour + ' - ' + it.endHour}}
+          {{?}}
         </td>
         <!-- Bait / Predators -->
         <td>
