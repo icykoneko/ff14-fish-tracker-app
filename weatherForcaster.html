@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="An advanced weather forcaster for fishing research." />
+    <meta name="author" content="Carbuncle Plushy (Balmung)" />
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <title>FFX|V Weather Forcaster</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" />
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"></script>
+    <script src="js/lib/dateFns.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
+
+    <link rel="stylesheet" href="public/images/sprite.css?4.56_20190327" />
+
+    <!-- Semantic UI Overrides -->
+    <style type="text/css">
+
+      /* Large Monitor */
+      @media only screen and (min-width: 1200px) and (max-width: 1499px) {
+        .ui.container {
+          width: 1127px;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+
+        .ui.grid.container {
+          width: calc( 1127px  +  2rem ) !important;
+        }
+
+        .ui.relaxed.grid.container {
+          width: calc( 1127px  +  3rem ) !important;
+        }
+
+        .ui.very.relaxed.grid.container {
+          width: calc( 1127px  +  5rem ) !important;
+        }
+      }
+      /* Even larger Monitor */
+      @media only screen and (min-width: 1500px) {
+        .ui.container {
+          width: 1427px;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+
+        .ui.grid.container {
+          width: calc( 1427px  +  2rem ) !important;
+        }
+
+        .ui.relaxed.grid.container {
+          width: calc( 1427px  +  3rem ) !important;
+        }
+
+        .ui.very.relaxed.grid.container {
+          width: calc( 1427px  +  5rem ) !important;
+        }
+      }
+
+      /* Overrides for Semantic UI 2.2.10 - Icon */
+      /* i.icon {
+        margin: inherit !important;
+      } */
+
+      /* Overrides for Semantic UI 2.2.10 - Button */
+      .ui[class*="very compact"].buttons .button,
+      .ui[class*="very compact"].button {
+        padding: 0.58928571em 0.58928571em 0.58928571em;
+      }
+
+      .ui[class*="very compact"].table th {
+        padding: 0.2em 0.3em;
+      }
+
+      .ui[class*="very compact"].table td {
+        padding: 0.2em 0.3em;
+      }
+
+      [data-tooltip]:before {
+        z-index: 1102;
+      }
+      [data-tooltip]:after {
+        z-index: 1101;
+      }
+    </style>
+    <!-- Include the data -->
+    <script type="text/javascript" src="js/app/data.js"></script>
+    <script type="text/javascript" src="js/app/time.js"></script>
+    <script type="text/javascript" src="js/app/weather.js"></script>
+
+    <script id="weatherTable-template" type="text/html;x-dot-template">
+      <thead>
+        <tr>
+          <th></th>
+          {{~it :weather:idx}}
+            <th class="weather-to-colheader" data-id="{{=weather.id}}">
+              <div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-{{=weather.icon}}" title="{{=weather.name}}"></div>
+            </th>
+          {{~}}
+        </tr>
+      </thead>
+      <tbody>
+        {{~it :weather:idx}}
+          <tr>
+            <td class="weather-from-rowheader" data-id="{{=weather.id}}">
+              <div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-{{=weather.icon}}" title="{{=weather.name}}"></div>
+            </td>
+            {{~it :weatherB:idxB}}
+              <td class="center aligned">
+                <div class="ui icon tiny circular button weather-lookup-button" data-from="{{=weather.id}}" data-to="{{=weatherB.id}}">
+                  <i class="list ul icon"></i>
+                </div>
+              </td>
+            {{~}}
+          </tr>
+        {{~}}
+        <tr>
+          <td class="weather-from-rowheader" data-id="0"></td>
+          {{~it :weatherB:idxB}}
+            <td class="center aligned">
+              <div class="ui icon tiny circular button weather-lookup-button" data-from="0" data-to="{{=weatherB.id}}">
+                <i class="list ul icon"></i>
+              </div>
+            </td>
+          {{~}}
+        </tr>
+      </tbody>
+    </script>
+    <script id="weatherWindows-template" type="text/html;x-dot-template">
+      {{~it :w:idx}}
+        <div class="item">
+          <div class="header">{{=dateFns.format(eorzeaTime.toEarth(+w.start()), "dddd, MMMM Do YYYY, h:mm:ss a")}}</div>
+          {{=moment.utc(w.start()).format("HH:mm")}} - {{=moment.utc(w.end()).format("HH:mm")}}
+        </div>
+      {{~}}
+    </script>
+
+    <script type="text/javascript">
+      $(() => {
+        // Main header needs to display the current time.
+        Rx.Observable.interval(1000 /*ms*/).timestamp().subscribe((x) => {
+          // Update the main header's earth and eorzea times.
+          $("#earthClock").text(dateFns.format(x.timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
+          $("#eorzeaClock").text(moment.utc(eorzeaTime.toEorzea(x.timestamp)).format("HH:mm"));
+        });
+
+        $nextWindows = $("#nextWindows");
+        $nextWindowsLabel = $("#nextWindowsLabel");
+        var weatherWindowsTemplate = doT.template($('#weatherWindows-template').text());
+
+        $weatherTable = $('#weatherTable');
+        var weatherTableTemplate = doT.template($('#weatherTable-template').text());
+
+        // Populate the region selector...
+        let REGIONS = _(DATA.WEATHER_RATES).chain()
+          .map((v,k) => _({id: Number(k)}).extend(_(v).pick('region_name', 'zone_name')))
+          .groupBy('region_name')
+          .value();
+        $territory = $('#territory');
+
+        // Initialize zone selector.
+        for (let region in REGIONS) {
+          $('.menu', $territory).append("<div class='header'>" + region + "</div>");
+          for (let zone of REGIONS[region]) {
+            $('.menu', $territory).append("<div class='item' data-value='" + zone.id + "'>" + zone.zone_name + "</div>");
+          }
+        }
+        $territory.dropdown({
+          onChange: function(value, text, $selectedItem) {
+            console.log("Displaying weather for zone", value, ": ", text);
+            var possible_weathers = _(DATA.WEATHER_RATES[Number(value)].weather_rates).chain()
+              .map((v) => v[0])
+              .sort()
+              .uniq()
+              .map((v) => _({id:v}).extend(DATA.WEATHER_TYPES[v]))
+              .value();
+            $weatherTable.empty();
+            $weatherTable.append(weatherTableTemplate(possible_weathers));
+
+            var territory_id = value;
+            var territory_name = text;
+
+            $('.weather-lookup-button').parents('td').hover(function(event) {
+              $this = $('.weather-lookup-button', this)
+              // console.log("Hovering over:", $this.attr('data-from'), $this.attr('data-to'));
+              if (event.type == 'mouseenter') {
+                $('.weather-from-rowheader[data-id='+$this.attr('data-from')+']').css({backgroundColor: 'rgba(0,0,0,0.20)'});
+                $('.weather-to-colheader[data-id='+$this.attr('data-to')+']').css({backgroundColor: 'rgba(0,0,0,0.20)'});
+              } else {
+                $('.weather-from-rowheader[data-id='+$this.attr('data-from')+']').css({backgroundColor: ''});
+                $('.weather-to-colheader[data-id='+$this.attr('data-to')+']').css({backgroundColor: ''});
+              }
+            });
+            $('.weather-lookup-button').click(function() {
+              $this = $(this);
+              prevWeatherSet = Number($this.attr('data-from'));
+              currentWeatherSet = [Number($this.attr('data-to'))];
+              if (prevWeatherSet != 0) {
+                prevWeatherSet = [prevWeatherSet];
+              } else {
+                prevWeatherSet = [];
+              }
+              // Compute the next 10 instances of this weather transition.
+              var iter = weatherService.findWeatherPattern(
+                +eorzeaTime.getCurrentEorzeaDate(),
+                territory_id,
+                prevWeatherSet,
+                currentWeatherSet);
+              var windows = [];
+              while (windows.length < 10) {
+                var _iterItem = iter.next();
+                if (_iterItem.done) {
+                  console.warn("Stopped iterating early!");
+                  break;
+                }
+                windows.push(_iterItem.value);
+              }
+              $nextWindows.empty();
+              var labelText = "Next Windows for <u>";
+              if (prevWeatherSet.length != 0) {
+                labelText += DATA.WEATHER_TYPES[prevWeatherSet[0]].name;
+                labelText += "</u> to <u>";
+              }
+              labelText += DATA.WEATHER_TYPES[currentWeatherSet[0]].name;
+              labelText += "</u> in <u>";
+              labelText += territory_name;
+              labelText += "</u>";
+              $nextWindowsLabel.html(labelText);
+              $nextWindows.append(weatherWindowsTemplate(windows));
+            });
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="topmenu" class="ui text top fixed menu" style="background-color: white;">
+      <div class="ui container">
+        <div class="header item">FFX|V Weather Forcaster</div>
+        <div class="right item">
+          <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
+        </div>
+      </div>
+    </div>
+    <div class="ui main container">
+      <h1>FFX|V Weather Forcaster</h1>
+      <div class="ui basic segment">
+        <form class="ui form">
+          <div class="field">
+            <label>Zone</label>
+            <div class="ui fluid search selection dropdown" id="territory">
+              <input type="hidden" name="territory">
+              <i class="dropdown icon"></i>
+              <div class="default text">Select Zone</div>
+              <div class="menu"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- <div class="ui grid">
+        <div class="nine wide column"> -->
+      <div style="display: flex;">
+        <div style="width: fit-contents !important; padding: 0.5em;">
+          <div class="ui segment">
+            <div class="ui top attached label">Weather&nbsp;Transitions</div>
+            <table id="weatherTable" class="ui very compact collapsing celled definition table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th><div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-060201" title="Clear Skies"></div></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-060201" title="Clear Skies"></div></td>
+                  <td class="center aligned"><div class="ui icon tiny circular button"><i class="list ul icon"></i></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- <div class="seven wide column"> -->
+        <div style="flex-grow: 10; padding: 0.5em;">
+          <div class="ui segment">
+            <div class="ui top attached label" id="nextWindowsLabel">Next Windows for Weather</div>
+            <div class="ui fluid container">
+              <div class="ui relaxed divided list" id="nextWindows"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
