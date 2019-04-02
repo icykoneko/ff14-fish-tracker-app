@@ -5586,12 +5586,16 @@
   startHour: 0
   endHour: 24
   previousWeatherSet:
+  - Clouds
+  - Wind
+  - Fog
+  - Dust Storms
   weatherSet:
   - Clear Skies
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
