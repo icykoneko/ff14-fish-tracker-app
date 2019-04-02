@@ -27,6 +27,300 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?4.56_20190327" />
 
+    <!-- Spinner Control (http://jsfiddle.net/cqkr7z1h/4/) -->
+    <!--
+      <div class="ui form segment">
+          <div class="field">
+              <label for="number">Number</label>
+              <div class="ui spinner input">
+                  <input type="text" id="number" name="number" placeholder="Number" value="2" />
+                  <div class="ui vertical buttons">
+                      <button type="button" class="ui spinner up icon button">
+                        <i class="chevron up icon"></i>
+                      </button>
+                      <button type="button" class="ui spinner down icon button">
+                        <i class="chevron down icon"></i>
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    -->
+    <script type="text/javascript">
+      /*
+
+      Fuel UX Spinner
+      https://github.com/ExactTarget/fuelux *
+      Copyright (c) 2012 ExactTarget
+      Licensed under the MIT license. */
+      ! function ($) {
+
+          "use strict"; // jshint ;_;
+          var old = $.fn.spinner;
+
+          // SPINNER CONSTRUCTOR AND PROTOTYPE
+
+          var Spinner = function (element, options) {
+              this.$element = $(element);
+              this.options = $.extend({}, $.fn.spinner.defaults, options);
+              this.$input = this.$element.find('input');
+              this.$element.on('keyup', this.$input, $.proxy(this.change, this));
+              this.$element.on('keydown', this.$input, $.proxy(this.keydown, this));
+
+              if (this.options.hold) {
+                  this.$element.on('mousedown', '.spinner.up', $.proxy(function () {
+                      this.startSpin(true);
+                  }, this));
+                  this.$element.on('mouseup', '.spinner.up, .spinner.down', $.proxy(this.stopSpin, this));
+                  this.$element.on('mouseout', '.spinner.up, .spinner.down', $.proxy(this.stopSpin, this));
+                  this.$element.on('mousedown', '.spinner.down', $.proxy(function () {
+                      this.startSpin(false);
+                  }, this));
+              } else {
+                  this.$element.on('click', '.spinner.up', $.proxy(function () {
+                      this.step(true);
+                  }, this));
+                  this.$element.on('click', '.spinner.down', $.proxy(function () {
+                      this.step(false);
+                  }, this));
+              }
+
+              // this.$element.find('.spinner.up, .spinner.down').attr('tabIndex', -1);
+
+              this.switches = {
+                  count: 1,
+                  enabled: true
+              };
+
+              if (this.options.speed === 'medium') {
+                  this.switches.speed = 300;
+              } else if (this.options.speed === 'fast') {
+                  this.switches.speed = 100;
+              } else {
+                  this.switches.speed = 500;
+              }
+
+              this.lastValue = null;
+
+              this.render();
+
+              if (this.options.disabled) {
+                  this.disable();
+              }
+          };
+
+          Spinner.prototype = {
+              constructor: Spinner,
+
+              render: function () {
+                  var inputValue = this.$input.val();
+
+                  if (inputValue) {
+                      this.value(inputValue);
+                  } else {
+                      this.$input.val(this.options.value);
+                  }
+
+                  this.$input.attr('maxlength', (this.options.max + '').split('').length);
+              },
+
+              change: function () {
+                  var newVal = this.$input.val();
+
+                  if (newVal / 1) {
+                      this.options.value = newVal / 1;
+                  } else {
+                      newVal = newVal.replace(/[^0-9]/g, '') || '';
+                      this.$input.val(newVal);
+                      this.options.value = newVal / 1;
+                  }
+
+                  this.triggerChangedEvent();
+              },
+
+              stopSpin: function () {
+                  if (this.switches.timeout !== undefined) {
+                      clearTimeout(this.switches.timeout);
+                      this.switches.count = 1;
+                      this.triggerChangedEvent();
+                  }
+              },
+
+              triggerChangedEvent: function () {
+                  var currentValue = this.value();
+                  if (currentValue === this.lastValue) return;
+
+                  this.lastValue = currentValue;
+
+                  // Primary changed event
+                  this.$element.trigger('changed', currentValue);
+
+                  // Undocumented, kept for backward compatibility
+                  this.$element.trigger('change');
+              },
+
+              startSpin: function (type) {
+
+                  if (!this.options.disabled) {
+                      var divisor = this.switches.count;
+
+                      if (divisor === 1) {
+                          this.step(type);
+                          divisor = 1;
+                      } else if (divisor < 3) {
+                          divisor = 1.5;
+                      } else if (divisor < 8) {
+                          divisor = 2.5;
+                      } else {
+                          divisor = 4;
+                      }
+
+                      this.switches.timeout = setTimeout($.proxy(function () {
+                          this.iterator(type);
+                      }, this), this.switches.speed / divisor);
+                      this.switches.count++;
+                  }
+              },
+
+              iterator: function (type) {
+                  this.step(type);
+                  this.startSpin(type);
+              },
+
+              step: function (dir) {
+                  var curValue = this.options.value;
+                  var limValue = dir ? this.options.max : this.options.min;
+                  var digits, multiple;
+
+                  if ((dir ? curValue < limValue : curValue > limValue)) {
+                      var newVal = curValue + (dir ? 1 : -1) * this.options.step;
+
+                      if (this.options.step % 1 !== 0) {
+                          digits = (this.options.step + '').split('.')[1].length;
+                          multiple = Math.pow(10, digits);
+                          newVal = Math.round(newVal * multiple) / multiple;
+                      }
+
+                      if (dir ? newVal > limValue : newVal < limValue) {
+                          this.value(limValue);
+                      } else {
+                          this.value(newVal);
+                      }
+                  } else if (this.options.cycle) {
+                      var cycleVal = dir ? this.options.min : this.options.max;
+                      this.value(cycleVal);
+                  }
+              },
+
+              value: function (value) {
+                  if (!isNaN(parseFloat(value)) && isFinite(value)) {
+                      value = parseFloat(value);
+                      this.options.value = value;
+                      this.$input.val(value);
+                      return this;
+                  } else {
+                      return this.options.value;
+                  }
+              },
+
+              disable: function () {
+                  this.options.disabled = true;
+                  this.$input.attr('disabled', '');
+                  this.$element.find('button').addClass('disabled');
+              },
+
+              enable: function () {
+                  this.options.disabled = false;
+                  this.$input.removeAttr("disabled");
+                  this.$element.find('button').removeClass('disabled');
+              },
+
+              keydown: function (event) {
+                  var keyCode = event.keyCode;
+
+                  if (keyCode === 38) {
+                      this.step(true);
+                  } else if (keyCode === 40) {
+                      this.step(false);
+                  }
+              }
+          };
+
+
+          // SPINNER PLUGIN DEFINITION
+
+          $.fn.spinner = function (option) {
+              var args = Array.prototype.slice.call(arguments, 1);
+              var methodReturn;
+
+              var $set = this.each(function () {
+                  var $this = $(this);
+                  var data = $this.data('spinner');
+                  var options = typeof option === 'object' && option;
+
+                  if (!data) $this.data('spinner', (data = new Spinner(this, options)));
+                  if (typeof option === 'string') methodReturn = data[option].apply(data, args);
+              });
+
+              return (methodReturn === undefined) ? $set : methodReturn;
+          };
+
+          $.fn.spinner.defaults = {
+              value: 1,
+              min: 1,
+              max: 999,
+              step: 1,
+              hold: true,
+              speed: 'medium',
+              disabled: false
+          };
+
+          $.fn.spinner.Constructor = Spinner;
+
+          $.fn.spinner.noConflict = function () {
+              $.fn.spinner = old;
+              return this;
+          };
+
+
+          // SPINNER DATA-API
+
+          $(function () {
+              $('body').on('mousedown.spinner.data-api', '.spinner.button', function () {
+                  var $this = $(this);
+                  if ($this.data('spinner')) return;
+                  $this.spinner($this.data());
+              });
+          });
+      }(window.jQuery);
+    </script>
+    <style type="text/css">
+      .ui.spinner.input input {
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important;
+      }
+      .ui.spinner.input .button.disabled {
+          cursor: not-allowed;
+      }
+      .ui.spinner.input .buttons .button {
+          /* background-color: #fff;
+          border: 1px solid rgba(34, 36, 38, 0.15); */
+          border-left: none;
+          padding: .2em .3em .2em;
+          /* height: 21px; */
+      }
+      .ui.spinner.input .spinner.up.button {
+          border-bottom: none;
+          border-top-left-radius: 0;
+      }
+      .ui.spinner.input .spinner.down.button {
+          border-bottom-left-radius: 0;
+      }
+      .ui.spinner.input .button .icon {
+        margin: 0;
+      }
+    </style>
+
     <!-- Semantic UI Overrides -->
     <style type="text/css">
 
@@ -165,13 +459,15 @@
         $weatherTable = $('#weatherTable');
         var weatherTableTemplate = doT.template($('#weatherTable-template').text());
 
+        var territory_id = null;
+        var territory_name = null;
+
         // Populate the region selector...
         let REGIONS = _(DATA.WEATHER_RATES).chain()
           .map((v,k) => _({id: Number(k)}).extend(_(v).pick('region_name', 'zone_name')))
           .groupBy('region_name')
           .value();
         $territory = $('#territory');
-
         // Initialize zone selector.
         for (let region in REGIONS) {
           $('.menu', $territory).append("<div class='header'>" + region + "</div>");
@@ -179,6 +475,69 @@
             $('.menu', $territory).append("<div class='item' data-value='" + zone.id + "'>" + zone.zone_name + "</div>");
           }
         }
+
+        $maxWindows = $('#maxWindows').spinner({min: 5, max: 20});
+        $clusterWindows = $('#clusterWindows').first().checkbox();
+        $('#downloadCSV').click(function() {
+          var file;
+          var data = ["fromWeather, toWeather, earthTime, eorzeaTimeStart, eorzeaTimeEnd\n"];
+          var properties = {type: 'text/csv'};
+
+          var numWindows = $maxWindows.spinner('value')
+          var clustered = $clusterWindows.checkbox('is checked');
+
+          var possible_weathers = _(DATA.WEATHER_RATES[Number(territory_id)].weather_rates).chain()
+            .map((v) => v[0])
+            .sort()
+            .uniq()
+            .map((v) => Object({id:v, name:DATA.WEATHER_TYPES[v].name}))
+            .value();
+
+          var currentTime = +eorzeaTime.getCurrentEorzeaDate();
+
+          _(possible_weathers).each((toWeather) => {
+            _(possible_weathers.concat([null])).each((fromWeather) => {
+              var iter = null;
+              if (fromWeather === null) {
+                console.log("Getting windows for " + toWeather.name);
+                var iter = weatherService.findWeatherPattern(currentTime, territory_id, [], [toWeather.id]);
+              } else {
+                console.log("Getting windows for " + fromWeather.name + " to " + toWeather.name);
+                var iter = weatherService.findWeatherPattern(currentTime, territory_id, [fromWeather.id], [toWeather.id]);
+              }
+              var rows = [];
+              while (rows.length < numWindows) {
+                var _iterItem = iter.next();
+                if (_iterItem.done) {
+                  console.warn("Stopped iterating early!");
+                  break;
+                }
+                var w = _iterItem.value;
+                rows.push("\"" + (fromWeather === null ? "" : fromWeather.name) + "\",\"" + toWeather.name + "\"," +
+                  new Date(eorzeaTime.toEarth(+w.start())).toISOString() + "," +
+                  moment.utc(w.start()).format("HH:mm") + "," +
+                  moment.utc(w.end()).format("HH:mm") + "\n");
+              }
+              data = data.concat(rows);
+            });
+          });
+          try {
+            file = new File(data, 'weatherForcast.csv', properties);
+          } catch (e) {
+            console.info("Falling back to Blob constructor...");
+            file = new Blob(data, properties);
+          }
+          var url = URL.createObjectURL(file);
+
+          var downloadElement = document.createElement('a');
+          downloadElement.setAttribute('href', url);
+          downloadElement.setAttribute('download', 'weatherForcast.csv');
+          downloadElement.style.display = 'none';
+          document.body.appendChild(downloadElement);
+          downloadElement.click();
+          document.body.removeChild(downloadElement);
+        });
+
         $territory.dropdown({
           onChange: function(value, text, $selectedItem) {
             console.log("Displaying weather for zone", value, ": ", text);
@@ -188,14 +547,19 @@
               .uniq()
               .map((v) => _({id:v}).extend(DATA.WEATHER_TYPES[v]))
               .value();
+
+            $weatherTable.siblings(".placeholder").remove();
+
             $weatherTable.empty();
             $weatherTable.append(weatherTableTemplate(possible_weathers));
 
-            var territory_id = value;
-            var territory_name = text;
+            territory_id = value;
+            territory_name = text;
+
+            $('#downloadCSV').removeClass('disabled');
 
             $('.weather-lookup-button').parents('td').hover(function(event) {
-              $this = $('.weather-lookup-button', this)
+              var $this = $('.weather-lookup-button', this)
               // console.log("Hovering over:", $this.attr('data-from'), $this.attr('data-to'));
               if (event.type == 'mouseenter') {
                 $('.weather-from-rowheader[data-id='+$this.attr('data-from')+']').css({backgroundColor: 'rgba(0,0,0,0.20)'});
@@ -206,14 +570,16 @@
               }
             });
             $('.weather-lookup-button').click(function() {
-              $this = $(this);
-              prevWeatherSet = Number($this.attr('data-from'));
-              currentWeatherSet = [Number($this.attr('data-to'))];
+              var $this = $(this);
+              var prevWeatherSet = Number($this.attr('data-from'));
+              var currentWeatherSet = [Number($this.attr('data-to'))];
               if (prevWeatherSet != 0) {
                 prevWeatherSet = [prevWeatherSet];
               } else {
                 prevWeatherSet = [];
               }
+              var numWindows = $maxWindows.spinner('value')
+  
               // Compute the next 10 instances of this weather transition.
               var iter = weatherService.findWeatherPattern(
                 +eorzeaTime.getCurrentEorzeaDate(),
@@ -221,7 +587,7 @@
                 prevWeatherSet,
                 currentWeatherSet);
               var windows = [];
-              while (windows.length < 10) {
+              while (windows.length < numWindows) {
                 var _iterItem = iter.next();
                 if (_iterItem.done) {
                   console.warn("Stopped iterating early!");
@@ -258,18 +624,46 @@
     </div>
     <div class="ui main container">
       <h1>FFX|V Weather Forcaster</h1>
-      <div class="ui basic segment">
-        <form class="ui form">
-          <div class="field">
-            <label>Zone</label>
-            <div class="ui fluid search selection dropdown" id="territory">
-              <input type="hidden" name="territory">
-              <i class="dropdown icon"></i>
-              <div class="default text">Select Zone</div>
-              <div class="menu"></div>
+      <div class="ui basic form segment">
+          <div class="fields">
+            <div class="seven wide field" style="flex-grow: 7;">
+              <label>Zone</label>
+              <div class="ui fluid search selection dropdown" id="territory">
+                <input type="hidden" name="territory" />
+                <i class="dropdown icon"></i>
+                <div class="default text">Select Zone</div>
+                <div class="menu"></div>
+              </div>
+            </div>
+            <div class="two wide field" style="flex-shrink: 2;">
+              <label>Max&nbsp;Windows</label>
+              <div class="ui spinner input" id="maxWindows">
+                <input type="text" value="10" name="maxWindows" autocomplete="off" />
+                <div class="ui vertical icon buttons">
+                  <div class="ui spinner up icon button">
+                    <i class="chevron up icon"></i>
+                  </div>
+                  <div class="ui spinner down icon button">
+                    <i class="chevron down icon"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="three wide field" style="flex-shrink: 3;">
+              <label>&nbsp;</label>
+              <div class="ui checkbox disabled" id="clusterWindows">
+                <input type="checkbox" name="clusterWindows" />
+                <label>Cluster&nbsp;Windows</label>
+              </div>
+            </div>
+            <div class="four wide field" style="flex: 1 1 0;">
+              <label>&nbsp;</label>
+              <div class="ui labeled icon button disabled" id="downloadCSV">
+                <i class="download icon"></i>
+                Download&nbsp;<abbr title="Comma Seprated Values format">CSV</abbr>
+              </div>
             </div>
           </div>
-        </form>
       </div>
       <!-- <div class="ui grid">
         <div class="nine wide column"> -->
@@ -277,19 +671,8 @@
         <div style="width: fit-contents !important; padding: 0.5em;">
           <div class="ui segment">
             <div class="ui top attached label">Weather&nbsp;Transitions</div>
+            <div class="ui placeholder header">Please select a zone first.</div>
             <table id="weatherTable" class="ui very compact collapsing celled definition table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th><div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-060201" title="Clear Skies"></div></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-060201" title="Clear Skies"></div></td>
-                  <td class="center aligned"><div class="ui icon tiny circular button"><i class="list ul icon"></i></div></td>
-                </tr>
-              </tbody>
             </table>
           </div>
         </div>
