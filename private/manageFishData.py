@@ -6,7 +6,7 @@ import json
 from operator import itemgetter, add
 from collections import OrderedDict, namedtuple
 from functools import reduce
-from itertools import islice
+from itertools import islice, repeat
 import logging
 
 logging.basicConfig(level=logging.INFO,
@@ -38,6 +38,12 @@ def load_dats():
     from ex.relational.definition import RelationDefinition
     import text
 
+    global LANGUAGES
+    LANGUAGES = [Language.english,
+                 Language.japanese,
+                 Language.german,
+                 Language.french]
+
     packs = pack.PackCollection(r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack")
     coll = XivCollection(packs)
     coll.active_language = Language.english
@@ -46,19 +52,37 @@ def load_dats():
               encoding='utf-8') as f:
         coll.definition = RelationDefinition.from_json_fp(f)
 
+    _string_decoder = text.XivStringDecoder.default()
+
     # Override the tag decoder for emphasis so it doesn't produce tags in string...
     def omit_tag_decoder(i, t, l):
         text.XivStringDecoder.get_integer(i)
         return text.nodes.StaticString('')
 
-    text.XivStringDecoder.default().set_decoder(
-        text.TagType.Emphasis.value, omit_tag_decoder)
+    _string_decoder.set_decoder(text.TagType.Emphasis.value, omit_tag_decoder)
+    _string_decoder.set_decoder(
+        text.TagType.SoftHyphen.value,
+        lambda i,t,l: text.nodes.StaticString(_string_decoder.dash))
 
     return coll
 
 XIV = load_dats()
 fish_and_tackle_data = {}
 
+def _make_localized_field(fld_name, row, col_name):
+    from ex import IMultiRow
+    from xiv import IXivRow
+
+    if isinstance(row, IXivRow):
+        row = row.source_row
+    if not isinstance(row, IMultiRow):
+        raise TypeError('Expected row to be a IMultiRow')
+
+    return map(lambda lang: (fld_name + lang.get_suffix(), row[(col_name, lang)]), LANGUAGES)
+
+def _make_static_localized_field(fld_name, value):
+    return zip([fld_name + lang.get_suffix() for lang in LANGUAGES],
+                     repeat(value, len(LANGUAGES)))
 
 def _is_town_or_field_territory(name):
     return len(name) == 4 and name[2] in ('f', 't', 'h') and str(name[3]).isdigit()
@@ -67,41 +91,53 @@ TERRITORIES = list(filter(lambda data: data.get_raw('Map') != 0 and
                                        _is_town_or_field_territory(data['Name']),
                           XIV.get_sheet('TerritoryType')))
 
+REGIONS = dict([
+    (territory.region_place_name.key,
+     dict(_make_localized_field('name', territory.region_place_name, 'Name')))
+    for territory in TERRITORIES])
+
+ZONES = dict([
+    (territory.place_name.key,
+     dict(_make_localized_field('name', territory.place_name, 'Name')))
+    for territory in TERRITORIES])
 
 def _collect_weather_rates(rate):
     return [(r[1].key, r[0]) for r in rate.weather_rates if r[1].key != 0]
 
-# Determine "useful" weather types.
 WEATHER_RATES = dict([
     (territory.key,
-     OrderedDict({'map_id': territory.map.key,
-                  'zone_id': territory.place_name.key,
-                  'zone_name': str(territory.place_name.name),
-                  'region_id': territory.region_place_name.key,
-                  'region_name': str(territory.region_place_name.name),
-                  'weather_rates': _collect_weather_rates(territory.weather_rate)}))
+     dict({'map_id': territory.map.key,
+           'zone_id': territory.place_name.key,
+           'region_id': territory.region_place_name.key,
+           'weather_rates': _collect_weather_rates(territory.weather_rate)}))
     for territory in TERRITORIES])
 
 WEATHER_TYPES = dict([
     (weather.key,
-     OrderedDict({'name': str(weather.name),
-                  'icon': '%06u' % weather.get_raw('Icon')}))
+     dict([*_make_localized_field('name', weather, 'Name'),
+           ('icon', '%06u' % weather.get_raw('Icon'))]))
     for weather in
     set(reduce(add, [t.weather_rate.possible_weathers for t in TERRITORIES], []))
     if weather.key != 0])
 
 FISHING_NODES = dict([
     (spot.key,
-     OrderedDict({'_id': spot.key,
-                  'name': str(spot.as_string('PlaceName')),
-                  'territory_id': spot.get_raw('TerritoryType')}))
+     dict([('_id', spot.key),
+           *_make_localized_field('name', spot['PlaceName'], 'Name'),
+           ('territory_id', spot.get_raw('TerritoryType'))]))
     for spot in XIV.get_sheet('FishingSpot')])
+
+def _decode_spearfishing_node_name(x):
+    if x.get_raw('PlaceName') != 0:
+        return _make_localized_field('name', x['PlaceName'], 'Name')
+    else:
+        return _make_static_localized_field('name', 'Node')
 
 SPEARFISHING_NODES = dict([
     (x['GatheringPointBase'].key,
-     OrderedDict({'_id': x['GatheringPointBase'].key,
-                  'name': str(x.as_string('PlaceName')) if x.get_raw('PlaceName') != 0 else 'Node',
-                  'territory_id': x.get_raw('TerritoryType')}))
+     dict([('_id', x['GatheringPointBase'].key),
+           *_decode_spearfishing_node_name(x),
+           ('territory_id', x.get_raw('TerritoryType'))]))
     for x in XIV.get_sheet('GatheringPoint')
     if x['GatheringPointBase']['GatheringType'].key == 4])
 
@@ -111,12 +147,16 @@ FISHING_NODES = OrderedDict(sorted(FISHING_NODES.items(), key=lambda t: t[0]))
 SPEARFISHING_NODES = OrderedDict(sorted(SPEARFISHING_NODES.items(), key=lambda t: t[0]))
 WEATHER_RATES = OrderedDict(sorted(WEATHER_RATES.items(), key=lambda t: t[0]))
 WEATHER_TYPES = OrderedDict(sorted(WEATHER_TYPES.items(), key=lambda t: t[0]))
+REGIONS = OrderedDict(sorted(REGIONS.items(), key=lambda t: t[0]))
+ZONES = OrderedDict(sorted(ZONES.items(), key=lambda t: t[0]))
 
 KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
 
 
+# The following lookup functions /always/ use the English name.
+
 def lookup_fish_by_name(name):
-    result = nth(filter(lambda item: item[1]['name'] == name,
+    result = nth(filter(lambda item: item[1]['name_en'] == name,
                         fish_and_tackle_data.items()), 0)
     if result is None:
         raise ValueError(name)
@@ -124,7 +164,7 @@ def lookup_fish_by_name(name):
 
 
 def lookup_weather_by_name(name):
-    result = nth(filter(lambda item: item[1]['name'] == name,
+    result = nth(filter(lambda item: item[1]['name_en'] == name,
                         WEATHER_TYPES.items()), 0)
     if result is None:
         raise ValueError(name)
@@ -134,7 +174,7 @@ def lookup_weather_by_name(name):
 def lookup_fishing_spot_by_name(name):
     if name is None:
         return KeyValuePair(None, None)
-    result = nth(filter(lambda item: item[1]['name'] == name,
+    result = nth(filter(lambda item: item[1]['name_en'] == name,
                         FISHING_NODES.items()), 0)
     if result is None:
         raise ValueError(name)
@@ -146,7 +186,7 @@ def lookup_spearfishing_spot_by_name(name):
         return KeyValuePair()
     if isinstance(name, int):
         return KeyValuePair(name, None)
-    result = nth(filter(lambda item: item[1]['name'] == name,
+    result = nth(filter(lambda item: item[1]['name_en'] == name,
                         SPEARFISHING_NODES.items()), 0)
     if result is None:
         raise ValueError(name)
@@ -164,8 +204,7 @@ def convert_fish_to_json(item):
     catch_path = [lookup_fish_by_name(x).key for x in item['bestCatchPath'] or []]
     predators = {}
     if item.get('predators') is not None:
-        predators = OrderedDict([(lookup_fish_by_name(x[0]).key, x[1])
-                                 for x in item['predators'].items()])
+        predators = dict([(lookup_fish_by_name(x[0]).key, x[1]) for x in item['predators'].items()])
 
     return (key,
             OrderedDict({'_id': key,
@@ -199,13 +238,14 @@ def rebuild_fish_data(args):
     for item in XIV.get_sheet('Item'):
         if item['Name'] not in fish_and_tackle_names:
             continue
-        fish_and_tackle_data[item.key] = {'_id': item.key,
-                                          'name': item['Name'],
-                                          'icon': '%06u' % item.get_raw('Icon')}
+        fish_and_tackle_data[item.key] = dict([
+            ('_id', item.key),
+            *_make_localized_field('name', item, 'Name'),
+            ('icon', '%06u' % item.get_raw('Icon'))])
 
     # Verify nothing's missing.
     diffs = set(fish_and_tackle_names) - \
-            set(map(itemgetter('name'), fish_and_tackle_data.values()))
+            set(map(itemgetter('name_en'), fish_and_tackle_data.values()))
     if len(diffs) != 0:
         raise KeyError("Missing item names: %s" % ', '.join(diffs))
 
@@ -216,7 +256,7 @@ def rebuild_fish_data(args):
                                for fish in fishes])))
     diffs = predators - \
             set([fish['name'] for fish in fishes]) - \
-            set(map(itemgetter('name'), fish_and_tackle_data.values()))
+            set(map(itemgetter('name_en'), fish_and_tackle_data.values()))
     if len(diffs) != 0:
         raise KeyError("Missing predators: %s" % ', '.join(diffs))
 
@@ -241,7 +281,9 @@ def rebuild_fish_data(args):
         f.write("  SPEARFISHING_SPOTS: %s,\n" % dump_foldable(SPEARFISHING_NODES))
         f.write("  ITEMS: %s,\n" % dump_foldable(fish_and_tackle_data))
         f.write("  WEATHER_RATES: %s,\n" % dump_foldable(WEATHER_RATES))
-        f.write("  WEATHER_TYPES: %s\n" % dump_foldable(WEATHER_TYPES))
+        f.write("  WEATHER_TYPES: %s,\n" % dump_foldable(WEATHER_TYPES))
+        f.write("  REGIONS: %s,\n" % dump_foldable(REGIONS))
+        f.write("  ZONES: %s\n" % dump_foldable(ZONES))
         f.write("}\n")
 
     if args.with_icons:
