@@ -6010,11 +6010,14 @@
   patch: 4.5
 - name: The Unconditional
   location: Dotharl Khaa
-  startHour: 0
-  endHour: 24
+  startHour: 5
+  endHour: 7
   previousWeatherSet:
+  - Rain
   weatherSet:
-  bestCatchPath: # TODO: Unknown
+  - Clear Skies
+  bestCatchPath:
+  - Stonefly Larva
   predators:
   hookset:
   snagging:
