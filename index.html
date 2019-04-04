@@ -235,6 +235,9 @@
       }
     </style>
 
+    <!-- Localization Support script -->
+    <script type="text/javascript" src="js/app/localization.js"></script>
+
     <!-- Include the data -->
     <script type="text/javascript" src="js/app/data.js?4.56_201904031619"></script>
 
@@ -275,7 +278,6 @@
               <i class="pin icon"></i>
             </div>
           </div>
-          <!--<img style="width: 40px; height: 40px;" class="ui middle aligned image" src="public/images/fish_n_tackle/{{=it.icon}}.png"/>-->
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
         </td>
         <td>
@@ -314,20 +316,14 @@
         <td>
           {{?it.conditions.previousWeatherSet.length > 0}}
             {{~it.conditions.previousWeatherSet :weather:windex}}
-              <!-- <img class="ui middle aligned image weather-icon"
-                   src="public/images/weather/{{=weather.icon}}.png"
-                   title="{{=weather.name}}"/> -->
-              <div class="ui middle aligned sprite-icon sprite-icon-weather-{{=weather.icon}} weather-icon"
-                   title="{{=weather.name}}"></div>
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                   title="{{=__p(weather,'name')}}"></div>
             {{~}}
             <i class="arrow right icon"></i>
           {{?}}
           {{~it.conditions.weatherSet :weather:idx}}
-            <!-- <img class="ui middle aligned image weather-icon"
-                 src="public/images/weather/{{=weather.icon}}.png"
-                 title="{{=weather.name}}"/> -->
-            <div class="ui middle aligned sprite-icon sprite-icon-weather-{{=weather.icon}} weather-icon"
-                 title="{{=weather.name}}"></div>
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                 title="{{=__p(weather,'name')}}"></div>
           {{~}}
           <br/><i class="wait icon"></i>&nbsp;
           {{? it.startHour === 0 && it.endHour === 24}}
@@ -342,11 +338,9 @@
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
           {{?}}
           {{?it.fishEyes}}
-            <!-- <img class="ui middle aligned image" title="Fish Eyes" src="public/images/status/fisheyes.png"/> -->
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes" title="Fish Eyes"></div>
           {{?}}
           {{?it.snagging}}
-            <!-- <img class="ui middle aligned image" title="Snagging" src="public/images/status/snagging.png"/> -->
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
           {{?it.gig}}
@@ -358,8 +352,7 @@
             {{??}}
               <i class="arrow right icon"></i>
             {{?}}
-            <!-- <img class="ui middle aligned image" title="{{=item.name}}" src="public/images/fish_n_tackle/{{=item.icon}}.png"/> -->
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}"></div>
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}"></div>
             {{?idx == 0}}
               </a>
             {{?}}
@@ -423,7 +416,7 @@
             {{??}}
               <i class="arrow right icon"></i>
             {{?}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}"></div>
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}"></div>
             {{?idx == 0}}
               </a>
             {{?}}

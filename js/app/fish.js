@@ -11,7 +11,7 @@ class Fish {
     }
     _(this).extend(fishData);
     this.id = fishData._id;
-    this.name = DATA.ITEMS[this.id].name;
+    this.name = __p(DATA.ITEMS[this.id], "name");
     this.icon = DATA.ITEMS[this.id].icon;
     this.logging = shouldLogForFish(this);
     if (fishData.location !== null) {
@@ -25,10 +25,10 @@ class Fish {
         spearfishing = false;
       }
       this.location = {
-        name: fishingSpot.name,
-        zoneName: DATA.WEATHER_RATES[fishingSpot.territory_id].zone_name,
         id: fishingSpot._id,
-        zoneId: fishingSpot.territory_id,
+        name: __p(fishingSpot, "name"),
+        zoneId: fishingSpot.territory_id, /* This is not a typo! */
+        zoneName: __p(DATA.ZONES[DATA.WEATHER_RATES[fishingSpot.territory_id].zone_id], "name"),
         spearfishing: spearfishing,
       };
     } else {
@@ -49,7 +49,7 @@ class Fish {
       predators: _(this.predators).map((v, k) => {
         return { id: Number(k),
                  count: v,
-                 name: DATA.ITEMS[k].name,
+                 name: __p(DATA.ITEMS[k], "name"),
                  icon: DATA.ITEMS[k].icon };
       }),
       path: _(this.bestCatchPath).map((x) => DATA.ITEMS[x])
