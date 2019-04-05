@@ -4255,19 +4255,18 @@
 - name: Tawny Wench Shark
   location: The Isle of Bekko
   startHour: 10
-  endHour: 16
+  endHour: 19
   previousWeatherSet: []
   weatherSet:
   - Clear Skies
   predators: {}
   bestCatchPath:
-  - Live Shrimp
-  - Ruby Shrimp
+  - Blue Bobbit
   hookset:
   snagging:
   gig:
   folklore: false
-  fishEyes: true
+  fishEyes: true  # 4
   patch: 4.0
 - name: Killifish
   location: The Silver Canal
@@ -5979,10 +5978,14 @@
 - name: The Ruby Dragon
   location: The Ruby Price
   startHour: 0
-  endHour: 24
+  endHour: 8
   previousWeatherSet:
+  - Thunder
   weatherSet:
-  bestCatchPath: # TODO: Unknown
+  - Clouds
+  bestCatchPath:
+  - Blue Bobbit
+  - Ku'er
   predators:
   hookset:
   snagging:
