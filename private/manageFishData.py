@@ -13,8 +13,8 @@ from functools import reduce
 from itertools import islice
 import logging
 
-logging.basicConfig(level=logging.INFO,
-                    stream=sys.stderr)
+logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+packs = None
 
 try:
     _SCRIPT_PATH = os.path.abspath(__path__)
@@ -41,6 +41,7 @@ def load_dats():
     from xiv.xivcollection import XivCollection
     from ex.relational.definition import RelationDefinition
     import text
+    global packs
 
     packs = pack.PackCollection(r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack")
     coll = XivCollection(packs)
@@ -108,6 +109,24 @@ SPEARFISHING_NODES = dict([
                   'territory_id': x.get_raw('TerritoryType')}))
     for x in XIV.get_sheet('GatheringPoint')
     if x['GatheringPointBase']['GatheringType'].key == 4])
+
+ICON_MAP = {
+    '': [
+        (9, 'DEFAULT.png'),
+    ],
+    'action': [
+        (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
+        (1116, 'precision_hookset.png'),  # Action[Name="Precision Hookset"]
+        (60671, 'small_gig.png'),
+        (60672, 'normal_gig.png'),
+        (60673, 'large_gig.png'),
+    ],
+    'status': [
+        (11101, 'intuition.png'),  # Status[Name="Fisher's Intuition"]
+        (11102, 'snagging.png'),  # Status[Name="Snagging"]
+        (11103, 'fish_eyes.png'),  # Status[Name="Fish Eyes"]
+    ]
+}
 
 # Store the dictionaries sorted by key
 # This makes the generated JS a bit more consistent.
@@ -249,7 +268,6 @@ def rebuild_fish_data(args):
         f.write("}\n")
 
     if args.with_icons:
-
         # Create image/fish_n_tackle dir if not exists
         if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle')):
           os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle'))
@@ -275,6 +293,17 @@ def rebuild_fish_data(args):
                 icon.get_image().save(
                     os.path.join(_SCRIPT_PATH, 'images', 'weather',
                                  '%06u.png' % weather.get_raw('Icon')))
+        # Create image/{action|status} dir if not exists
+        from imaging import IconHelper
+        global packs
+        for subdir in ICON_MAP:
+          if not os.path.isdir(os.path.join(_SCRIPT_PATH, 'images', subdir)):
+              os.makedirs(os.path.join(_SCRIPT_PATH, 'images', subdir))
+          for n, filename in ICON_MAP[subdir]:
+              if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', subdir, filename)):
+                  icon = IconHelper.get_icon(packs, n)
+                  logging.info('Extracting %s -> %s' % (icon, filename))
+                  icon.get_image().save(os.path.join(_SCRIPT_PATH, 'images', subdir, filename))
 
 
 if __name__ == '__main__':
