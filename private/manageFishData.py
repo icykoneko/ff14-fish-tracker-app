@@ -89,11 +89,9 @@ def initialize_data(args):
 
   XIV = load_dats(args)
 
-  TERRITORIES = list(
-                  filter(
-                    lambda data: data.get_raw('Map') != 0 and _is_town_or_field_territory(data['Name']), XIV.get_sheet('TerritoryType')
-                    )
-                  )
+  TERRITORIES = list(filter(lambda data: data.get_raw('Map') != 0 and
+                                        _is_town_or_field_territory(data['Name']),
+                            XIV.get_sheet('TerritoryType')))
 
   # Determine "useful" weather types.
   WEATHER_RATES = dict([
@@ -288,7 +286,7 @@ def rebuild_fish_data(args):
     if args.with_icons:
         # Create image/fish_n_tackle dir if not exists
         if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle')):
-          os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle'))
+            os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle'))
         # Check that the private/images/* folders contain all of the icons used.
         for item in filter(lambda x: x.key in fish_and_tackle_data.keys(),
                            XIV.get_sheet('Item')):
@@ -301,7 +299,7 @@ def rebuild_fish_data(args):
                                  '%06u.png' % item.get_raw('Icon')))
         # Create image/fish_n_tackle dir if not exists
         if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather')):
-          os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'weather'))
+              os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'weather'))
         for weather in filter(lambda x: x.key in WEATHER_TYPES.keys(),
                               XIV.get_sheet('Weather')):
             if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather',
@@ -341,7 +339,7 @@ if __name__ == '__main__':
     parser_rebuild.add_argument('--game_path', '-gpath', type=str,
                                 default=r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack",
                                 dest='game_path',
-                                help='Where to store Java Script data (data.js)')
+                                help='Path to FF14 sqpack directory')
     parser_rebuild.add_argument('--with-icons', action='store_true', default=False,
                                 help='Extract missing icons')
     parser_rebuild.set_defaults(func=rebuild_fish_data)
