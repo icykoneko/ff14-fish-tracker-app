@@ -2,6 +2,10 @@ import argparse
 import sys
 import os
 import yaml
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
 import json
 from operator import itemgetter, add
 from collections import OrderedDict, namedtuple
@@ -187,7 +191,7 @@ def convert_fish_to_json(item):
 def rebuild_fish_data(args):
     global fish_and_tackle_data
     # Parse the fish data in the YAML file.
-    fishes = yaml.load(open(args.yaml_file, 'r'))
+    fishes = yaml.load(open(args.yaml_file, 'r'), Loader=Loader)
     # Collect all of the fish/tackle names.
     fish_and_tackle_names = list(set(filter(None, reduce(
         add, [[fish['name']] +
