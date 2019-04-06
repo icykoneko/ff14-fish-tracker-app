@@ -249,6 +249,10 @@ def rebuild_fish_data(args):
         f.write("}\n")
 
     if args.with_icons:
+
+        # Create image/fish_n_tackle dir if not exists
+        if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle')):
+          os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle'))
         # Check that the private/images/* folders contain all of the icons used.
         for item in filter(lambda x: x.key in fish_and_tackle_data.keys(),
                            XIV.get_sheet('Item')):
@@ -259,6 +263,9 @@ def rebuild_fish_data(args):
                 icon.get_image().save(
                     os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle',
                                  '%06u.png' % item.get_raw('Icon')))
+        # Create image/fish_n_tackle dir if not exists
+        if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather')):
+          os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'weather'))
         for weather in filter(lambda x: x.key in WEATHER_TYPES.keys(),
                               XIV.get_sheet('Weather')):
             if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather',
