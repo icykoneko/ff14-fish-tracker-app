@@ -2,6 +2,10 @@ import argparse
 import sys
 import os
 import yaml
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
 import json
 from operator import itemgetter, add
 from collections import OrderedDict, namedtuple
@@ -9,9 +13,16 @@ from functools import reduce
 from itertools import islice
 import logging
 
-logging.basicConfig(level=logging.INFO,
-                    stream=sys.stderr)
-
+logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+packs = None
+fish_and_tackle_data = {}
+XIV = None
+KeyValuePair = None
+FISHING_NODES = None
+SPEARFISHING_NODES = None
+WEATHER_RATES = None
+WEATHER_TYPES = None
+ICON_MAP = None
 try:
     _SCRIPT_PATH = os.path.abspath(__path__)
 except:
@@ -26,7 +37,7 @@ def nth(iterable, n, default=None):
     return next(islice(iterable, n, None), default)
 
 
-def load_dats():
+def load_dats(args):
     # Add the Saint Coinach python API to the path.
     sys.path += [os.path.join(_HELPER_LIBS_PATH, 'saintcoinach-py')]
 
@@ -37,8 +48,10 @@ def load_dats():
     from xiv.xivcollection import XivCollection
     from ex.relational.definition import RelationDefinition
     import text
+    global packs
 
-    packs = pack.PackCollection(r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack")
+    #packs = pack.PackCollection(r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack")
+    packs = pack.PackCollection(args.game_path)
     coll = XivCollection(packs)
     coll.active_language = Language.english
     with open(os.path.join(_HELPER_LIBS_PATH, 'Saintcoinach', 'Saintcoinach', 'ex.json'),
@@ -56,64 +69,90 @@ def load_dats():
 
     return coll
 
-XIV = load_dats()
-fish_and_tackle_data = {}
-
 
 def _is_town_or_field_territory(name):
     return len(name) == 4 and name[2] in ('f', 't', 'h') and str(name[3]).isdigit()
-
-TERRITORIES = list(filter(lambda data: data.get_raw('Map') != 0 and
-                                       _is_town_or_field_territory(data['Name']),
-                          XIV.get_sheet('TerritoryType')))
 
 
 def _collect_weather_rates(rate):
     return [(r[1].key, r[0]) for r in rate.weather_rates if r[1].key != 0]
 
-# Determine "useful" weather types.
-WEATHER_RATES = dict([
-    (territory.key,
-     OrderedDict({'map_id': territory.map.key,
-                  'zone_id': territory.place_name.key,
-                  'zone_name': str(territory.place_name.name),
-                  'region_id': territory.region_place_name.key,
-                  'region_name': str(territory.region_place_name.name),
-                  'weather_rates': _collect_weather_rates(territory.weather_rate)}))
-    for territory in TERRITORIES])
 
-WEATHER_TYPES = dict([
-    (weather.key,
-     OrderedDict({'name': str(weather.name),
-                  'icon': '%06u' % weather.get_raw('Icon')}))
-    for weather in
-    set(reduce(add, [t.weather_rate.possible_weathers for t in TERRITORIES], []))
-    if weather.key != 0])
+def initialize_data(args):
+  global XIV
+  global KeyValuePair
+  global FISHING_NODES
+  global SPEARFISHING_NODES
+  global WEATHER_RATES
+  global WEATHER_TYPES
+  global ICON_MAP
 
-FISHING_NODES = dict([
-    (spot.key,
-     OrderedDict({'_id': spot.key,
-                  'name': str(spot.as_string('PlaceName')),
-                  'territory_id': spot.get_raw('TerritoryType')}))
-    for spot in XIV.get_sheet('FishingSpot')])
+  XIV = load_dats(args)
 
-SPEARFISHING_NODES = dict([
-    (x['GatheringPointBase'].key,
-     OrderedDict({'_id': x['GatheringPointBase'].key,
-                  'name': str(x.as_string('PlaceName')) if x.get_raw('PlaceName') != 0 else 'Node',
-                  'territory_id': x.get_raw('TerritoryType')}))
-    for x in XIV.get_sheet('GatheringPoint')
-    if x['GatheringPointBase']['GatheringType'].key == 4])
+  TERRITORIES = list(filter(lambda data: data.get_raw('Map') != 0 and
+                                        _is_town_or_field_territory(data['Name']),
+                            XIV.get_sheet('TerritoryType')))
 
-# Store the dictionaries sorted by key
-# This makes the generated JS a bit more consistent.
-FISHING_NODES = OrderedDict(sorted(FISHING_NODES.items(), key=lambda t: t[0]))
-SPEARFISHING_NODES = OrderedDict(sorted(SPEARFISHING_NODES.items(), key=lambda t: t[0]))
-WEATHER_RATES = OrderedDict(sorted(WEATHER_RATES.items(), key=lambda t: t[0]))
-WEATHER_TYPES = OrderedDict(sorted(WEATHER_TYPES.items(), key=lambda t: t[0]))
-
-KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
-
+  # Determine "useful" weather types.
+  WEATHER_RATES = dict([
+      (territory.key,
+       OrderedDict({'map_id': territory.map.key,
+                    'zone_id': territory.place_name.key,
+                    'zone_name': str(territory.place_name.name),
+                    'region_id': territory.region_place_name.key,
+                    'region_name': str(territory.region_place_name.name),
+                    'weather_rates': _collect_weather_rates(territory.weather_rate)}))
+      for territory in TERRITORIES])
+  
+  WEATHER_TYPES = dict([
+      (weather.key,
+       OrderedDict({'name': str(weather.name),
+                    'icon': '%06u' % weather.get_raw('Icon')}))
+      for weather in
+      set(reduce(add, [t.weather_rate.possible_weathers for t in TERRITORIES], []))
+      if weather.key != 0])
+  
+  FISHING_NODES = dict([
+      (spot.key,
+       OrderedDict({'_id': spot.key,
+                    'name': str(spot.as_string('PlaceName')),
+                    'territory_id': spot.get_raw('TerritoryType')}))
+      for spot in XIV.get_sheet('FishingSpot')])
+  
+  SPEARFISHING_NODES = dict([
+      (x['GatheringPointBase'].key,
+       OrderedDict({'_id': x['GatheringPointBase'].key,
+                    'name': str(x.as_string('PlaceName')) if x.get_raw('PlaceName') != 0 else 'Node',
+                    'territory_id': x.get_raw('TerritoryType')}))
+      for x in XIV.get_sheet('GatheringPoint')
+      if x['GatheringPointBase']['GatheringType'].key == 4])
+  
+  ICON_MAP = {
+      '': [
+          (9, 'DEFAULT.png'),
+      ],
+      'action': [
+          (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
+          (1116, 'precision_hookset.png'),  # Action[Name="Precision Hookset"]
+          (60671, 'small_gig.png'),
+          (60672, 'normal_gig.png'),
+          (60673, 'large_gig.png'),
+      ],
+      'status': [
+          (11101, 'intuition.png'),  # Status[Name="Fisher's Intuition"]
+          (11102, 'snagging.png'),  # Status[Name="Snagging"]
+          (11103, 'fish_eyes.png'),  # Status[Name="Fish Eyes"]
+      ]
+  }
+  
+  # Store the dictionaries sorted by key
+  # This makes the generated JS a bit more consistent.
+  WEATHER_RATES = OrderedDict(sorted(WEATHER_RATES.items(), key=lambda t: t[0]))
+  WEATHER_TYPES = OrderedDict(sorted(WEATHER_TYPES.items(), key=lambda t: t[0]))
+  FISHING_NODES = OrderedDict(sorted(FISHING_NODES.items(), key=lambda t: t[0]))
+  SPEARFISHING_NODES = OrderedDict(sorted(SPEARFISHING_NODES.items(), key=lambda t: t[0]))
+  
+  KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
 
 def lookup_fish_by_name(name):
     result = nth(filter(lambda item: item[1]['name'] == name,
@@ -187,7 +226,7 @@ def convert_fish_to_json(item):
 def rebuild_fish_data(args):
     global fish_and_tackle_data
     # Parse the fish data in the YAML file.
-    fishes = yaml.load(open(args.yaml_file, 'r'))
+    fishes = yaml.load(open(args.yaml_file, 'r'), Loader=Loader)
     # Collect all of the fish/tackle names.
     fish_and_tackle_names = list(set(filter(None, reduce(
         add, [[fish['name']] +
@@ -245,6 +284,9 @@ def rebuild_fish_data(args):
         f.write("}\n")
 
     if args.with_icons:
+        # Create image/fish_n_tackle dir if not exists
+        if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle')):
+            os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle'))
         # Check that the private/images/* folders contain all of the icons used.
         for item in filter(lambda x: x.key in fish_and_tackle_data.keys(),
                            XIV.get_sheet('Item')):
@@ -255,6 +297,9 @@ def rebuild_fish_data(args):
                 icon.get_image().save(
                     os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle',
                                  '%06u.png' % item.get_raw('Icon')))
+        # Create image/fish_n_tackle dir if not exists
+        if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather')):
+              os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'weather'))
         for weather in filter(lambda x: x.key in WEATHER_TYPES.keys(),
                               XIV.get_sheet('Weather')):
             if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather',
@@ -264,6 +309,17 @@ def rebuild_fish_data(args):
                 icon.get_image().save(
                     os.path.join(_SCRIPT_PATH, 'images', 'weather',
                                  '%06u.png' % weather.get_raw('Icon')))
+        # Create image/{action|status} dir if not exists
+        from imaging import IconHelper
+        global packs
+        for subdir in ICON_MAP:
+          if not os.path.isdir(os.path.join(_SCRIPT_PATH, 'images', subdir)):
+              os.makedirs(os.path.join(_SCRIPT_PATH, 'images', subdir))
+          for n, filename in ICON_MAP[subdir]:
+              if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', subdir, filename)):
+                  icon = IconHelper.get_icon(packs, n)
+                  logging.info('Extracting %s -> %s' % (icon, filename))
+                  icon.get_image().save(os.path.join(_SCRIPT_PATH, 'images', subdir, filename))
 
 
 if __name__ == '__main__':
@@ -280,9 +336,14 @@ if __name__ == '__main__':
                                 default=os.path.join(_SCRIPT_PATH, 'data.js'),
                                 dest='js_file',
                                 help='Where to store Java Script data (data.js)')
+    parser_rebuild.add_argument('--game_path', '-gpath', type=str,
+                                default=r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack",
+                                dest='game_path',
+                                help='Path to FF14 sqpack directory')
     parser_rebuild.add_argument('--with-icons', action='store_true', default=False,
                                 help='Extract missing icons')
     parser_rebuild.set_defaults(func=rebuild_fish_data)
 
     args = parser.parse_args()
+    initialize_data(args)
     args.func(args)
