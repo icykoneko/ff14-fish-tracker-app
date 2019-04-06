@@ -56,9 +56,9 @@ def load_dats(args):
     global LANGUAGES
 
     LANGUAGES = [Language.english,
-             Language.japanese,
-             Language.german,
-             Language.french]
+                 Language.japanese,
+                 Language.german,
+                 Language.french]
 
     #packs = pack.PackCollection(r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack")
     packs = pack.PackCollection(args.game_path)
@@ -106,6 +106,12 @@ def _make_static_localized_field(fld_name, value):
     return zip([fld_name + lang.get_suffix() for lang in LANGUAGES],
                      repeat(value, len(LANGUAGES)))
 
+def _decode_spearfishing_node_name(x):
+    if x.get_raw('PlaceName') != 0:
+        return _make_localized_field('name', x['PlaceName'], 'Name')
+    else:
+        return _make_static_localized_field('name', 'Node')
+
 def initialize_data(args):
   global XIV
   global KeyValuePair
@@ -119,11 +125,9 @@ def initialize_data(args):
 
   XIV = load_dats(args)
 
-  TERRITORIES = list(
-                  filter(
-                    lambda data: data.get_raw('Map') != 0 and _is_town_or_field_territory(data['Name']), XIV.get_sheet('TerritoryType')
-                    )
-                  )
+  TERRITORIES = list(filter(lambda data: data.get_raw('Map') != 0 and
+                                         _is_town_or_field_territory(data['Name']),
+                            XIV.get_sheet('TerritoryType')))
 
   # Determine "useful" weather types.
   WEATHER_RATES = dict([
@@ -195,13 +199,6 @@ def initialize_data(args):
   ZONES = OrderedDict(sorted(ZONES.items(), key=lambda t: t[0]))
   
   KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
-
-
-def _decode_spearfishing_node_name(x):
-    if x.get_raw('PlaceName') != 0:
-        return _make_localized_field('name', x['PlaceName'], 'Name')
-    else:
-        return _make_static_localized_field('name', 'Node')
 
 
 def lookup_fish_by_name(name):
@@ -391,7 +388,7 @@ if __name__ == '__main__':
     parser_rebuild.add_argument('--game_path', '-gpath', type=str,
                                 default=r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack",
                                 dest='game_path',
-                                help='Where to store Java Script data (data.js)')
+                                help='Path to FF14 sqpack directory')
     parser_rebuild.add_argument('--with-icons', action='store_true', default=False,
                                 help='Extract missing icons')
     parser_rebuild.set_defaults(func=rebuild_fish_data)
