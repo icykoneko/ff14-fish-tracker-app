@@ -11,6 +11,14 @@ If using Windows, you have a couple options for handling symlinks:
 2. Enable the permissions for creating symlinks in Git for Windows; see https://github.com/git-for-windows/git/wiki/Symbolic-Links.
     * **NOTE:** You need to start Git Bash in admin mode for it to create symlinks. If you forgot to do that during cloning, you'll need to follow the instructions in part 1 instead.
 
+Alternatively, this workflow also works, and doesn't require any aliases. You do need to enable permissions, and will need to use admin mode for some parts:
+```
+git clone --recurse-submodules git@github.com:icykoneko/ff14-fish-tracker-app.git
+git submodule foreach --recursive git config core.symlinks true
+# As admin:
+git submodule update --force --recursive
+```
+
 ## Building sprites
 In order to cut down on GET requests, all of the images are bundled into a single sprite image.
 
