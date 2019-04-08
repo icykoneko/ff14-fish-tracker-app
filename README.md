@@ -6,8 +6,10 @@ This repo makes use of submodules and symlinks. When cloning, please include the
 
 If using Windows, you have a couple options for handling symlinks:
 
-1. Follow the instructions in https://stackoverflow.com/questions/5917249/git-symlinks-in-windows, creating the command aliases. Then, after cloning, you should be able to just run `git submodules foreach --recursive git checkout-symlinks` to fix the links.
+1. Follow the instructions in https://stackoverflow.com/questions/5917249/git-symlinks-in-windows, creating the command aliases. Then, after cloning, you should be able to just run `git submodules foreach --recursive git rm-symlinks` to convert them into hardlinks.
+    * **NOTE:** You will need to run `git submodules foreach --recursive git checkout-symlinks` to restore the git symlinks.
 2. Enable the permissions for creating symlinks in Git for Windows; see https://github.com/git-for-windows/git/wiki/Symbolic-Links.
+    * You need to start Git Bash in admin mode for it to create symlinks. If you forgot to do that during cloning, running `git submodules foreach --recursive git checkout-symlinks` from an elevated shell will also work.
 
 ## Building sprites
 In order to cut down on GET requests, all of the images are bundled into a single sprite image.
