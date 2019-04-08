@@ -37,6 +37,15 @@ def nth(iterable, n, default=None):
     return next(islice(iterable, n, None), default)
 
 
+def first(iterable, pred, default=None):
+    """Returns the first item for which pred(item) is true.
+
+    If no true value is found, returns *default*
+
+    """
+    return next(filter(pred, iterable), default)
+
+
 def load_dats(args):
     # Add the Saint Coinach python API to the path.
     sys.path += [os.path.join(_HELPER_LIBS_PATH, 'saintcoinach-py')]
@@ -103,7 +112,7 @@ def initialize_data(args):
                     'region_name': str(territory.region_place_name.name),
                     'weather_rates': _collect_weather_rates(territory.weather_rate)}))
       for territory in TERRITORIES])
-  
+
   WEATHER_TYPES = dict([
       (weather.key,
        OrderedDict({'name': str(weather.name),
@@ -111,14 +120,14 @@ def initialize_data(args):
       for weather in
       set(reduce(add, [t.weather_rate.possible_weathers for t in TERRITORIES], []))
       if weather.key != 0])
-  
+
   FISHING_NODES = dict([
       (spot.key,
        OrderedDict({'_id': spot.key,
                     'name': str(spot.as_string('PlaceName')),
                     'territory_id': spot.get_raw('TerritoryType')}))
       for spot in XIV.get_sheet('FishingSpot')])
-  
+
   SPEARFISHING_NODES = dict([
       (x['GatheringPointBase'].key,
        OrderedDict({'_id': x['GatheringPointBase'].key,
@@ -126,7 +135,7 @@ def initialize_data(args):
                     'territory_id': x.get_raw('TerritoryType')}))
       for x in XIV.get_sheet('GatheringPoint')
       if x['GatheringPointBase']['GatheringType'].key == 4])
-  
+
   ICON_MAP = {
       '': [
           (9, 'DEFAULT.png'),
@@ -144,14 +153,14 @@ def initialize_data(args):
           (11103, 'fish_eyes.png'),  # Status[Name="Fish Eyes"]
       ]
   }
-  
+
   # Store the dictionaries sorted by key
   # This makes the generated JS a bit more consistent.
   WEATHER_RATES = OrderedDict(sorted(WEATHER_RATES.items(), key=lambda t: t[0]))
   WEATHER_TYPES = OrderedDict(sorted(WEATHER_TYPES.items(), key=lambda t: t[0]))
   FISHING_NODES = OrderedDict(sorted(FISHING_NODES.items(), key=lambda t: t[0]))
   SPEARFISHING_NODES = OrderedDict(sorted(SPEARFISHING_NODES.items(), key=lambda t: t[0]))
-  
+
   KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
 
 def lookup_fish_by_name(name):
@@ -322,6 +331,30 @@ def rebuild_fish_data(args):
                   icon.get_image().save(os.path.join(_SCRIPT_PATH, 'images', subdir, filename))
 
 
+def check_data_integrity(args):
+    has_errors = False
+    # Parse the fish data in the YAML file.
+    fishes = yaml.load(open(args.yaml_file, 'r'), Loader=Loader)
+
+    # For each fish, verify time and weather restrictions have been recorded.
+    for fish in fishes:
+        fish_params = first(XIV.get_sheet('FishParameter'),
+                            lambda x: x['Item'] is not None and x['Item']['Name'] == fish['name'])
+        if fish_params is None:
+            continue
+        if fish_params['TimeRestricted'] and fish['startHour'] == 0 and fish['endHour'] == 24:
+            has_errors = True
+            logging.error('%s should be time restricted' % fish['name'])
+        if fish_params['WeatherRestricted'] and len(fish['previousWeatherSet'] or []) == 0 and len(fish['weatherSet'] or []) == 0:
+            has_errors = True
+            logging.error('%s should be weather restricted' % fish['name'])
+
+    if has_errors:
+        logging.error('Data integrity check failed...')
+
+    return not has_errors
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Fish Data Management Script')
     subparsers = parser.add_subparsers()
@@ -343,6 +376,18 @@ if __name__ == '__main__':
     parser_rebuild.add_argument('--with-icons', action='store_true', default=False,
                                 help='Extract missing icons')
     parser_rebuild.set_defaults(func=rebuild_fish_data)
+
+    parser_integrity = subparsers.add_parser('integrity',
+                                             help='Checks data integrity')
+    parser_integrity.add_argument('-i', '--in', type=str,
+                                  default=os.path.join(_SCRIPT_PATH, 'fishData.yaml'),
+                                  dest='yaml_file',
+                                  help='Path to current fish data YAML file')
+    parser_integrity.add_argument('--game_path', '-gpath', type=str,
+                                  default=r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack",
+                                  dest='game_path',
+                                  help='Path to FF14 sqpack directory')
+    parser_integrity.set_defaults(func=check_data_integrity)
 
     args = parser.parse_args()
     initialize_data(args)
