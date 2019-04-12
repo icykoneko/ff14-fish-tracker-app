@@ -126,6 +126,7 @@ def initialize_data(args):
   ICON_MAP = {
       '': [
           (9, 'DEFAULT.png'),
+          (60166, 'aquarium.png'),
       ],
       'action': [
           (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
@@ -202,6 +203,14 @@ def convert_fish_to_json(item):
         predators = OrderedDict([(lookup_fish_by_name(x[0]).key, x[1])
                                  for x in item['predators'].items()])
 
+    # Aquarium information:
+    # - Just pull this from the DATs. Sometimes they add support for old fish.
+    aquarium_entry = first(XIV.game_data.get_sheet('AquariumFish'),
+                           lambda r: r.get_raw('Item') == key)
+    if aquarium_entry is not None:
+        aquarium_entry = dict({'water': str(aquarium_entry['AquariumWater']),
+                               'size': int(aquarium_entry['Size'])})
+
     return (key,
             OrderedDict({'_id': key,
                          'previousWeatherSet': previous_weather_set,
@@ -216,7 +225,8 @@ def convert_fish_to_json(item):
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
-                         'gig': item.get('gig', None)}))
+                         'gig': item.get('gig', None),
+                         'aquarium': aquarium_entry}))
 
 
 def rebuild_fish_data(args):

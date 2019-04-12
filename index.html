@@ -233,10 +233,25 @@
       [data-tooltip]:after {
         z-index: 1101;
       }
+
+      [data-position="right center"][data-tooltip][data-variation="mini"]:before {
+        margin-top: calc(-0.07142857rem * .75);
+        margin-left: calc(0.14285714rem * .75);
+      }
+      [data-tooltip][data-variation="mini"]:before {
+        width: calc(0.71428571em * .75);
+        height: calc(0.71428571em * .75);
+      }
+      [data-tooltip][data-variation="mini"]:after {
+        font-size: .78571429rem;
+        line-height: calc(1.4285em * .75);
+        padding: calc(0.833em * .75) calc(1em * .75);
+      }
+
     </style>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?4.56_201904051747"></script>
+    <script type="text/javascript" src="js/app/data.js?4.56_201904111047"></script>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/app/time.js"></script>
@@ -282,6 +297,10 @@
           <div class="ui middle aligned" style="display: inline-block;">
             {{=it.name}}<br/>
             <div class="ui tiny circular label">{{=it.patch}}</div>
+            {{?it.aquarium !== null}}
+              <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
+                   data-tooltip="Tier {{=it.aquarium.size}} {{=it.aquarium.water}}" data-position="right center" data-variation="mini"></div>
+            {{?}}
           </div>
         </td>
         <!-- Availability -->
@@ -515,6 +534,12 @@
               }));
             }
           }
+
+          // $('.sprite-icon-aquarium').popup({
+          //   position: 'right center',
+          //   inline: true,
+          //   delay: {show: 0, hide: 0}
+          // });
         }
 
         _.defer(function () {
