@@ -3964,7 +3964,11 @@
   location: Halo
   startHour: 8
   endHour: 16
-  previousWeatherSet: []
+  previousWeatherSet:
+  # This weather transition may be the only way for the proper fish eyes buff.
+  - Fog
+  - Dust Storms
+  - Clouds
   weatherSet:
   - Clear Skies
   - Fair Skies
@@ -3976,7 +3980,7 @@
   snagging: false
   gig:
   folklore: true
-  fishEyes: true
+  fishEyes: true # 5min (immediately into 4)
   patch: 3.5
 - name: The Speaker
   location: Upper Thaliak River
