@@ -12,6 +12,12 @@ class WeatherService {
   constructor() {
     // Cache weather information.
     this.__weatherData = [];
+    // In order to optimize the iterator function, initialize the cached data
+    // with the previous weather period first.
+    var date = startOfPeriod(
+      dateFns.utc.subHours(eorzeaTime.getCurrentEorzeaDate(), 8));
+    var target = this.calculateForecastTarget(eorzeaTime.toEarth(date));
+    this.insertForecast(date, target);
     // Every Eorzean day, prune out entries that are over 2 days old.
     eorzeaTime.currentBellChanged
       .filter((bell) => bell == 0 || bell == 8 || bell == 16)
@@ -39,17 +45,18 @@ class WeatherService {
     }
   }
 
-  insertForcast(date, target) {
+  insertForecast(date, target) {
     // Make sure it's newer than the previous entry.
     // Technically, it should be newer by 8 hours...
     if (this.__weatherData.length > 0 && date <= _(this.__weatherData).last().date) {
+      // See, previous Carby told me I'm not allowed to record the past.
       console.error("Attempted to insert record for earlier date.", date);
       return;
     }
     this.__weatherData.push({date: +date, target: target});
   }
 
-  calculateForcastTarget(m) {
+  calculateForecastTarget(m) {
     // Based on Rougeadyn's SaintCoinach library.
     var unixTime = parseInt(+m / 1000);
     // Get the Eorzea hour for weather start.
@@ -115,8 +122,8 @@ class WeatherService {
       lastDate = new Date(date);
       // Calculate the next weather target and insert into the table.
       date = dateFns.addHours(date, 8);
-      var target = this.calculateForcastTarget(eorzeaTime.toEarth(lastDate));
-      this.insertForcast(lastDate, target);
+      var target = this.calculateForecastTarget(eorzeaTime.toEarth(lastDate));
+      this.insertForecast(lastDate, target);
       currentWeather = weatherForArea(area, target);
       // Has the previous weather condition been met?
       if (previousWeatherSet.length > 0 && !_(previousWeatherSet).contains(previousWeather)) {
