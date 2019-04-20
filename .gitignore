@@ -1,6 +1,16 @@
-node_modules/
-.deploy/
+# IDE artifacts
 .idea/
+
+# Python artifacts
+__pycache__
+*.pyc
+pyvirt/
+
+# NPM
+node_modules/
+
+# Other stuff
+.deploy/
 public/
 uploaded/
 *.log

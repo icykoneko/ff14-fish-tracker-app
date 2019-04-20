@@ -14,15 +14,14 @@ from itertools import islice, repeat
 import logging
 
 logging.basicConfig(level=logging.INFO, stream=sys.stderr)
-packs = None
 fish_and_tackle_data = {}
 XIV = None
 KeyValuePair = None
-FISHING_NODES = {}
-SPEARFISHING_NODES = {}
-WEATHER_RATES = {}
-WEATHER_TYPES = {}
-ICON_MAP = {}
+FISHING_NODES = None
+SPEARFISHING_NODES = None
+WEATHER_RATES = None
+WEATHER_TYPES = None
+ICON_MAP = None
 REGIONS = {}
 ZONES = {}
 LANGUAGES = []
@@ -41,18 +40,23 @@ def nth(iterable, n, default=None):
     return next(islice(iterable, n, None), default)
 
 
+def first(iterable, pred, default=None):
+    """Returns the first item for which pred(item) is true.
+
+    If no true value is found, returns *default*
+
+    """
+    return next(filter(pred, iterable), default)
+
+
 def load_dats(args):
     # Add the Saint Coinach python API to the path.
     sys.path += [os.path.join(_HELPER_LIBS_PATH, 'saintcoinach-py')]
 
-    # TODO: Really should have the ability to import the saintcoinach module
-    #       which would give you XIV (XivCollection).
-    import pack
-    from ex.language import Language
-    from xiv.xivcollection import XivCollection
-    from ex.relational.definition import RelationDefinition
-    import text
-    global packs
+    from pysaintcoinach import ARealmReversed
+    import pysaintcoinach.text as text
+    from pysaintcoinach.ex.language import Language
+
     global LANGUAGES
 
     LANGUAGES = [Language.english,
@@ -60,17 +64,10 @@ def load_dats(args):
                  Language.german,
                  Language.french]
 
-    #packs = pack.PackCollection(r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack")
-    packs = pack.PackCollection(args.game_path)
-    coll = XivCollection(packs)
-    coll.active_language = Language.english
-    with open(os.path.join(_HELPER_LIBS_PATH, 'Saintcoinach', 'Saintcoinach', 'ex.json'),
-              'r',
-              encoding='utf-8') as f:
-        coll.definition = RelationDefinition.from_json_fp(f)
-
     _string_decoder = text.XivStringDecoder.default()
 
+    # Load up the game data
+    xiv = ARealmReversed(args.game_path, Language.english)
     # Override the tag decoder for emphasis so it doesn't produce tags in string...
     def omit_tag_decoder(i, t, l):
         text.XivStringDecoder.get_integer(i)
@@ -81,7 +78,7 @@ def load_dats(args):
         text.TagType.SoftHyphen.value,
         lambda i,t,l: text.nodes.StaticString(_string_decoder.dash))
 
-    return coll
+    return xiv
 
 
 def _is_town_or_field_territory(name):
@@ -91,9 +88,10 @@ def _is_town_or_field_territory(name):
 def _collect_weather_rates(rate):
     return [(r[1].key, r[0]) for r in rate.weather_rates if r[1].key != 0]
 
+
 def _make_localized_field(fld_name, row, col_name):
-    from ex import IMultiRow
-    from xiv import IXivRow
+    from pysaintcoinach.ex import IMultiRow
+    from pysaintcoinach.xiv import IXivRow
 
     if isinstance(row, IXivRow):
         row = row.source_row
@@ -102,15 +100,18 @@ def _make_localized_field(fld_name, row, col_name):
 
     return map(lambda lang: (fld_name + lang.get_suffix(), row[(col_name, lang)]), LANGUAGES)
 
+
 def _make_static_localized_field(fld_name, value):
     return zip([fld_name + lang.get_suffix() for lang in LANGUAGES],
                      repeat(value, len(LANGUAGES)))
+
 
 def _decode_spearfishing_node_name(x):
     if x.get_raw('PlaceName') != 0:
         return _make_localized_field('name', x['PlaceName'], 'Name')
     else:
         return _make_static_localized_field('name', 'Node')
+
 
 def initialize_data(args):
   global XIV
@@ -126,8 +127,8 @@ def initialize_data(args):
   XIV = load_dats(args)
 
   TERRITORIES = list(filter(lambda data: data.get_raw('Map') != 0 and
-                                         _is_town_or_field_territory(data['Name']),
-                            XIV.get_sheet('TerritoryType')))
+                                        _is_town_or_field_territory(data['Name']),
+                            XIV.game_data.get_sheet('TerritoryType')))
 
   # Determine "useful" weather types.
   WEATHER_RATES = dict([
@@ -151,14 +152,14 @@ def initialize_data(args):
       dict([('_id', spot.key),
             *_make_localized_field('name', spot['PlaceName'], 'Name'),
             ('territory_id', spot.get_raw('TerritoryType'))]))
-      for spot in XIV.get_sheet('FishingSpot')])
+      for spot in XIV.game_data.get_sheet('FishingSpot')])
   
   SPEARFISHING_NODES = dict([
       (x['GatheringPointBase'].key,
       dict([('_id', x['GatheringPointBase'].key),
             *_decode_spearfishing_node_name(x),
             ('territory_id', x.get_raw('TerritoryType'))]))
-      for x in XIV.get_sheet('GatheringPoint')
+      for x in XIV.game_data.get_sheet('GatheringPoint')
       if x['GatheringPointBase']['GatheringType'].key == 4])
   
   REGIONS = dict([
@@ -174,6 +175,7 @@ def initialize_data(args):
   ICON_MAP = {
       '': [
           (9, 'DEFAULT.png'),
+          (60166, 'aquarium.png'),
       ],
       'action': [
           (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
@@ -252,6 +254,14 @@ def convert_fish_to_json(item):
     if item.get('predators') is not None:
         predators = dict([(lookup_fish_by_name(x[0]).key, x[1]) for x in item['predators'].items()])
 
+    # Aquarium information:
+    # - Just pull this from the DATs. Sometimes they add support for old fish.
+    aquarium_entry = first(XIV.game_data.get_sheet('AquariumFish'),
+                           lambda r: r.get_raw('Item') == key)
+    if aquarium_entry is not None:
+        aquarium_entry = dict({'water': str(aquarium_entry['AquariumWater']),
+                               'size': int(aquarium_entry['Size'])})
+
     return (key,
             OrderedDict({'_id': key,
                          'previousWeatherSet': previous_weather_set,
@@ -266,7 +276,8 @@ def convert_fish_to_json(item):
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
-                         'gig': item.get('gig', None)}))
+                         'gig': item.get('gig', None),
+                         'aquarium': aquarium_entry}))
 
 
 def rebuild_fish_data(args):
@@ -281,7 +292,7 @@ def rebuild_fish_data(args):
               for fish in fishes], []))))
     # Match these with Item records.
     fish_and_tackle_data = OrderedDict()
-    for item in XIV.get_sheet('Item'):
+    for item in XIV.game_data.get_sheet('Item'):
         if item['Name'] not in fish_and_tackle_names:
             continue
         fish_and_tackle_data[item.key] = dict([
@@ -335,10 +346,10 @@ def rebuild_fish_data(args):
     if args.with_icons:
         # Create image/fish_n_tackle dir if not exists
         if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle')):
-          os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle'))
+            os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle'))
         # Check that the private/images/* folders contain all of the icons used.
         for item in filter(lambda x: x.key in fish_and_tackle_data.keys(),
-                           XIV.get_sheet('Item')):
+                           XIV.game_data.get_sheet('Item')):
             if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle',
                                                '%06u.png' % item.get_raw('Icon'))):
                 logging.info('Extracting %s' % item['Icon'])
@@ -348,9 +359,9 @@ def rebuild_fish_data(args):
                                  '%06u.png' % item.get_raw('Icon')))
         # Create image/fish_n_tackle dir if not exists
         if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather')):
-          os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'weather'))
+            os.makedirs(os.path.join(_SCRIPT_PATH, 'images', 'weather'))
         for weather in filter(lambda x: x.key in WEATHER_TYPES.keys(),
-                              XIV.get_sheet('Weather')):
+                              XIV.game_data.get_sheet('Weather')):
             if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'weather',
                                                '%06u.png' % weather.get_raw('Icon'))):
                 logging.info('Extracting %s' % weather['Icon'])
@@ -359,16 +370,39 @@ def rebuild_fish_data(args):
                     os.path.join(_SCRIPT_PATH, 'images', 'weather',
                                  '%06u.png' % weather.get_raw('Icon')))
         # Create image/{action|status} dir if not exists
-        from imaging import IconHelper
-        global packs
+        from pysaintcoinach.imaging import IconHelper
         for subdir in ICON_MAP:
-          if not os.path.isdir(os.path.join(_SCRIPT_PATH, 'images', subdir)):
-              os.makedirs(os.path.join(_SCRIPT_PATH, 'images', subdir))
-          for n, filename in ICON_MAP[subdir]:
-              if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', subdir, filename)):
-                  icon = IconHelper.get_icon(packs, n)
-                  logging.info('Extracting %s -> %s' % (icon, filename))
-                  icon.get_image().save(os.path.join(_SCRIPT_PATH, 'images', subdir, filename))
+            if not os.path.isdir(os.path.join(_SCRIPT_PATH, 'images', subdir)):
+                os.makedirs(os.path.join(_SCRIPT_PATH, 'images', subdir))
+            for n, filename in ICON_MAP[subdir]:
+                if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', subdir, filename)):
+                    icon = IconHelper.get_icon(XIV.packs, n)
+                    logging.info('Extracting %s -> %s' % (icon, filename))
+                    icon.get_image().save(os.path.join(_SCRIPT_PATH, 'images', subdir, filename))
+
+
+def check_data_integrity(args):
+    has_errors = False
+    # Parse the fish data in the YAML file.
+    fishes = yaml.load(open(args.yaml_file, 'r'), Loader=Loader)
+
+    # For each fish, verify time and weather restrictions have been recorded.
+    for fish in fishes:
+        fish_params = first(XIV.game_data.get_sheet('FishParameter'),
+                            lambda x: x['Item'] is not None and x['Item']['Name'] == fish['name'])
+        if fish_params is None:
+            continue
+        if fish_params['TimeRestricted'] and fish['startHour'] == 0 and fish['endHour'] == 24:
+            has_errors = True
+            logging.error('%s should be time restricted' % fish['name'])
+        if fish_params['WeatherRestricted'] and len(fish['previousWeatherSet'] or []) == 0 and len(fish['weatherSet'] or []) == 0:
+            has_errors = True
+            logging.error('%s should be weather restricted' % fish['name'])
+
+    if has_errors:
+        logging.error('Data integrity check failed...')
+
+    return not has_errors
 
 
 if __name__ == '__main__':
@@ -386,12 +420,24 @@ if __name__ == '__main__':
                                 dest='js_file',
                                 help='Where to store Java Script data (data.js)')
     parser_rebuild.add_argument('--game_path', '-gpath', type=str,
-                                default=r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn\game\sqpack",
+                                default=r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn",
                                 dest='game_path',
-                                help='Path to FF14 sqpack directory')
+                                help='Path to FF14 installation')
     parser_rebuild.add_argument('--with-icons', action='store_true', default=False,
                                 help='Extract missing icons')
     parser_rebuild.set_defaults(func=rebuild_fish_data)
+
+    parser_integrity = subparsers.add_parser('integrity',
+                                             help='Checks data integrity')
+    parser_integrity.add_argument('-i', '--in', type=str,
+                                  default=os.path.join(_SCRIPT_PATH, 'fishData.yaml'),
+                                  dest='yaml_file',
+                                  help='Path to current fish data YAML file')
+    parser_integrity.add_argument('--game_path', '-gpath', type=str,
+                                  default=r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn",
+                                  dest='game_path',
+                                  help='Path to FF14 installation')
+    parser_integrity.set_defaults(func=check_data_integrity)
 
     args = parser.parse_args()
     initialize_data(args)

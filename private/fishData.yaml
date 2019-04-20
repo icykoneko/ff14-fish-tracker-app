@@ -3793,7 +3793,7 @@
   bestCatchPath:
   - Purse Web Spider
   - Aether Eye
-  hookset:
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -3964,7 +3964,11 @@
   location: Halo
   startHour: 8
   endHour: 16
-  previousWeatherSet: []
+  previousWeatherSet:
+  # This weather transition may be the only way for the proper fish eyes buff.
+  - Fog
+  - Dust Storms
+  - Clouds
   weatherSet:
   - Clear Skies
   - Fair Skies
@@ -3976,7 +3980,7 @@
   snagging: false
   gig:
   folklore: true
-  fishEyes: true
+  fishEyes: true # 5min (immediately into 4)
   patch: 3.5
 - name: The Speaker
   location: Upper Thaliak River
@@ -4255,19 +4259,18 @@
 - name: Tawny Wench Shark
   location: The Isle of Bekko
   startHour: 10
-  endHour: 16
+  endHour: 19
   previousWeatherSet: []
   weatherSet:
   - Clear Skies
   predators: {}
   bestCatchPath:
-  - Live Shrimp
-  - Ruby Shrimp
+  - Blue Bobbit
   hookset:
   snagging:
   gig:
   folklore: false
-  fishEyes: true
+  fishEyes: true  # 4
   patch: 4.0
 - name: Killifish
   location: The Silver Canal
@@ -5979,10 +5982,14 @@
 - name: The Ruby Dragon
   location: The Ruby Price
   startHour: 0
-  endHour: 24
+  endHour: 8
   previousWeatherSet:
+  - Thunder
   weatherSet:
-  bestCatchPath: # TODO: Unknown
+  - Clouds
+  bestCatchPath:
+  - Blue Bobbit
+  - Ku'er
   predators:
   hookset:
   snagging:
