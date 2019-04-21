@@ -374,6 +374,9 @@ class ViewModel {
     var fishes = result.fishes;
 
     this.theFish = _(fishes).map((x) => {
+      // Make sure localization is up-to-date.
+      x.applyLocalization();
+      // Add in view-specific fields.
       return _(x).extend({
         caught: this.completionManager.isFishCaught(x.id),
         pinned: this.completionManager.isFishPinned(x.id),

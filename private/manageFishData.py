@@ -114,93 +114,95 @@ def _decode_spearfishing_node_name(x):
 
 
 def initialize_data(args):
-  global XIV
-  global KeyValuePair
-  global FISHING_NODES
-  global SPEARFISHING_NODES
-  global WEATHER_RATES
-  global WEATHER_TYPES
-  global ICON_MAP
-  global REGIONS
-  global ZONES
+    global XIV
+    global KeyValuePair
+    global FISHING_NODES
+    global SPEARFISHING_NODES
+    global WEATHER_RATES
+    global WEATHER_TYPES
+    global ICON_MAP
+    global REGIONS
+    global ZONES
 
-  XIV = load_dats(args)
+    XIV = load_dats(args)
 
-  TERRITORIES = list(filter(lambda data: data.get_raw('Map') != 0 and
-                                        _is_town_or_field_territory(data['Name']),
-                            XIV.game_data.get_sheet('TerritoryType')))
+    TERRITORIES = list(filter(lambda data: data.get_raw('Map') != 0 and
+                                           _is_town_or_field_territory(data['Name']),
+                              XIV.game_data.get_sheet('TerritoryType')))
 
-  # Determine "useful" weather types.
-  WEATHER_RATES = dict([
-      (territory.key,
-        dict({'map_id': territory.map.key,
-              'zone_id': territory.place_name.key,
-              'region_id': territory.region_place_name.key,
-              'weather_rates': _collect_weather_rates(territory.weather_rate)}))
-      for territory in TERRITORIES])
-  
-  WEATHER_TYPES = dict([
-      (weather.key,
-      dict([*_make_localized_field('name', weather, 'Name'),
-            ('icon', '%06u' % weather.get_raw('Icon'))]))
-      for weather in
-      set(reduce(add, [t.weather_rate.possible_weathers for t in TERRITORIES], []))
-      if weather.key != 0])
-  
-  FISHING_NODES = dict([
-      (spot.key,
-      dict([('_id', spot.key),
-            *_make_localized_field('name', spot['PlaceName'], 'Name'),
-            ('territory_id', spot.get_raw('TerritoryType'))]))
-      for spot in XIV.game_data.get_sheet('FishingSpot')])
-  
-  SPEARFISHING_NODES = dict([
-      (x['GatheringPointBase'].key,
-      dict([('_id', x['GatheringPointBase'].key),
-            *_decode_spearfishing_node_name(x),
-            ('territory_id', x.get_raw('TerritoryType'))]))
-      for x in XIV.game_data.get_sheet('GatheringPoint')
-      if x['GatheringPointBase']['GatheringType'].key == 4])
-  
-  REGIONS = dict([
-      (territory.region_place_name.key,
-       dict(_make_localized_field('name', territory.region_place_name, 'Name')))
-      for territory in TERRITORIES])
-  
-  ZONES = dict([
-      (territory.place_name.key,
-       dict(_make_localized_field('name', territory.place_name, 'Name')))
-      for territory in TERRITORIES])
+    # Determine "useful" weather types.
+    WEATHER_RATES = dict([
+        (territory.key,
+         dict({'map_id': territory.map.key,
+               'zone_id': territory.place_name.key,
+               'region_id': territory.region_place_name.key,
+               'weather_rates': _collect_weather_rates(territory.weather_rate)}))
+        for territory in TERRITORIES])
+    
+    WEATHER_TYPES = dict([
+        (weather.key,
+         dict([*_make_localized_field('name', weather, 'Name'),
+               ('icon', '%06u' % weather.get_raw('Icon'))]))
+        for weather in
+        set(reduce(add, [t.weather_rate.possible_weathers for t in TERRITORIES], []))
+        if weather.key != 0])
+    
+    FISHING_NODES = dict([
+        (spot.key,
+         dict([('_id', spot.key),
+               *_make_localized_field('name', spot['PlaceName'], 'Name'),
+               ('territory_id', spot.get_raw('TerritoryType')),
+               ('placename_id', spot.key)]))
+        for spot in XIV.game_data.get_sheet('FishingSpot')])
+    
+    SPEARFISHING_NODES = dict([
+        (x['GatheringPointBase'].key,
+         dict([('_id', x['GatheringPointBase'].key),
+               *_decode_spearfishing_node_name(x),
+               ('territory_id', x.get_raw('TerritoryType')),
+               ('placename_id', x.key)]))
+        for x in XIV.game_data.get_sheet('GatheringPoint')
+        if x['GatheringPointBase']['GatheringType'].key == 4])
+    
+    REGIONS = dict([
+        (territory.region_place_name.key,
+         dict(_make_localized_field('name', territory.region_place_name, 'Name')))
+        for territory in TERRITORIES])
+    
+    ZONES = dict([
+        (territory.place_name.key,
+         dict(_make_localized_field('name', territory.place_name, 'Name')))
+        for territory in TERRITORIES])
 
-  ICON_MAP = {
-      '': [
-          (9, 'DEFAULT.png'),
-          (60166, 'aquarium.png'),
-      ],
-      'action': [
-          (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
-          (1116, 'precision_hookset.png'),  # Action[Name="Precision Hookset"]
-          (60671, 'small_gig.png'),
-          (60672, 'normal_gig.png'),
-          (60673, 'large_gig.png'),
-      ],
-      'status': [
-          (11101, 'intuition.png'),  # Status[Name="Fisher's Intuition"]
-          (11102, 'snagging.png'),  # Status[Name="Snagging"]
-          (11103, 'fish_eyes.png'),  # Status[Name="Fish Eyes"]
-      ]
-  }
-  
-  # Store the dictionaries sorted by key
-  # This makes the generated JS a bit more consistent.
-  WEATHER_RATES = OrderedDict(sorted(WEATHER_RATES.items(), key=lambda t: t[0]))
-  WEATHER_TYPES = OrderedDict(sorted(WEATHER_TYPES.items(), key=lambda t: t[0]))
-  FISHING_NODES = OrderedDict(sorted(FISHING_NODES.items(), key=lambda t: t[0]))
-  SPEARFISHING_NODES = OrderedDict(sorted(SPEARFISHING_NODES.items(), key=lambda t: t[0]))
-  REGIONS = OrderedDict(sorted(REGIONS.items(), key=lambda t: t[0]))
-  ZONES = OrderedDict(sorted(ZONES.items(), key=lambda t: t[0]))
-  
-  KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
+    ICON_MAP = {
+        '': [
+            (9, 'DEFAULT.png'),
+            (60166, 'aquarium.png'),
+        ],
+        'action': [
+            (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
+            (1116, 'precision_hookset.png'),  # Action[Name="Precision Hookset"]
+            (60671, 'small_gig.png'),
+            (60672, 'normal_gig.png'),
+            (60673, 'large_gig.png'),
+        ],
+        'status': [
+            (11101, 'intuition.png'),  # Status[Name="Fisher's Intuition"]
+            (11102, 'snagging.png'),  # Status[Name="Snagging"]
+            (11103, 'fish_eyes.png'),  # Status[Name="Fish Eyes"]
+        ]
+    }
+    
+    # Store the dictionaries sorted by key
+    # This makes the generated JS a bit more consistent.
+    WEATHER_RATES = OrderedDict(sorted(WEATHER_RATES.items(), key=lambda t: t[0]))
+    WEATHER_TYPES = OrderedDict(sorted(WEATHER_TYPES.items(), key=lambda t: t[0]))
+    FISHING_NODES = OrderedDict(sorted(FISHING_NODES.items(), key=lambda t: t[0]))
+    SPEARFISHING_NODES = OrderedDict(sorted(SPEARFISHING_NODES.items(), key=lambda t: t[0]))
+    REGIONS = OrderedDict(sorted(REGIONS.items(), key=lambda t: t[0]))
+    ZONES = OrderedDict(sorted(ZONES.items(), key=lambda t: t[0]))
+    
+    KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
 
 
 def lookup_fish_by_name(name):

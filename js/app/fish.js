@@ -66,6 +66,26 @@ class Fish {
     this.catchableRangesObserver.onNext(this.catchableRanges);
   }
 
+  applyLocalization() {
+    // This function allows for runtime language swapping.
+    // Really, stuff like this belongs in the viewmodel, but there's a lot of
+    // code in here that doesn't make sense lol. One day...
+    this.name = __p(DATA.ITEMS[this.id], "name");
+    if (this.location.id != 0) {
+      if (this.location.spearfishing) {
+        this.location.name = __p(DATA.SPEARFISHING_SPOTS[this.location.id], "name");
+      } else {
+        this.location.name = __p(DATA.FISHING_SPOTS[this.location.id], "name");
+      }
+      this.location.zoneName = __p(DATA.ZONES[DATA.WEATHER_RATES[this.location.zoneId].zone_id], "name");
+    }
+    if (this.bait.hasPredators) {
+      _(this.bait.predators).each((p) => {
+        p.name = __p(DATA.ITEMS[p.id], "name");
+      });
+    }
+  }
+
   isCatchable() {
     var crs = this.catchableRanges;
     if (crs.length > 0) {

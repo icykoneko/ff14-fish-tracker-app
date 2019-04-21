@@ -15,6 +15,14 @@ class LocalizationHelper {
         this.language_suffix = "_" + lang;
       }
     }
+    // Otherwise, check saved preferences from last visit.
+    else if (window.localStorage.getItem('lang')) {
+      var lang = window.localStorage.getItem('lang');
+      if (_(this.LANGUAGES).chain().values().contains("_" + lang).value()) {
+        this.language_suffix = "_" + lang;
+      }
+    }
+    this.languageChanged = new Rx.BehaviorSubject(this.language_suffix);
   }
 
   getLocalizedProperty(obj, name) {
@@ -34,6 +42,20 @@ class LocalizationHelper {
       .object()
       .extend(_(tmp[1].object()))
       .value();
+  }
+
+  setLanguage(lang) {
+    if (_(this.LANGUAGES).chain().values().contains("_" + lang).value()) {
+      this.language_suffix = "_" + lang;
+      window.localStorage.setItem('lang', lang);
+      this.languageChanged.onNext(this.language_suffix);
+    } else {
+      console.error("Invalid language choice:", lang);
+    }
+  }
+
+  getLanguage() {
+    return this.language_suffix.slice(1);
   }
 }
 

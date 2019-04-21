@@ -248,6 +248,13 @@
         padding: calc(0.833em * .75) calc(1em * .75);
       }
 
+      .ui.labeled.icon.buttons > .button .icon i.flag:before,
+      .ui.labeled.icon.button .icon i.flag:before {
+        margin-top: 35%;
+        margin-left: 25%;
+      }
+
+
     </style>
 
     <!-- Localization Support script -->
@@ -618,7 +625,10 @@
               .map((e) => { return {type: "pinnedChanged", value: e}}),
             sortingTypeSubject
               .debounce(500)
-              .map((e) => { return {type: "sortingChanged", value: e}})
+              .map((e) => { return {type: "sortingChanged", value: e}}),
+            localizationHelper.languageChanged
+              .skip(1)
+              .map((e) => { return {type: "languageChanged", value: e}})
           );
 
           updatesNeededSource
@@ -628,7 +638,7 @@
               console.log("updates needed\n", x);
 
               // Has the availability changed at all?
-              if (_(x).any((x) => x.type === "availabilityChanged")) {
+              if (_(x).any((x) => x.type === "availabilityChanged" || x.type === "languageChanged")) {
                 console.log("Availability has changed... Need to make lots of changes...");
                 $('#fish-table-container .ui.dimmer').addClass('active');
               } else {
@@ -704,6 +714,9 @@
           var $upcomingWindowFormatOptions = $('#upcomingWindowFormat .radio.checkbox');
           var $checklistButtons = $('#checklist .button');
           var $sortingButtons = $('#sortingType .radio.checkbox');
+          var $languageButtons = $('#languageChoice .button');
+
+          $($languageButtons).filter('[data-lang="' + localizationHelper.getLanguage() + '"]').addClass('active');
 
           $filterCompletionButtons.on('click', function() {
             $(this).addClass('active').siblings().removeClass('active');
@@ -778,6 +791,12 @@
             }
           });
 
+          $languageButtons.on('click', function() {
+            var lang = $(this).addClass('active').data('lang');
+            $(this).siblings().removeClass('active');
+            localizationHelper.setLanguage(lang);
+          });
+
           // _.delay(() => {
           //   $('#fishes').floatThead({
           //     position: 'fixed',
@@ -815,6 +834,9 @@
       </p>
       <p>
         Another tool you may find useful for researching is the <a href="weatherForecaster.html">Weather Forecaster</a> app. It can display all the possible weather transitions for a zone, as well as when each transition will occur. Some are much more rare than others.
+      </p>
+      <p>
+        Partial localization support is here! Select the language to change the in-game names and locations to your client's language. I'm very sorry the UI does not automatically translate well, please forgive me.
       </p>
 
       <div class="ui vertically padded grid">
@@ -898,6 +920,29 @@
                   <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
                   <label>Overall Rarity</label>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" id="language" style="padding-top: 0x.25rem; padding-bottom: 0.25rem;">
+          <div class="column">Language:</div>
+          <div class="fifteen wide column">
+            <div class="ui mini compact buttons" id="languageChoice">
+              <div class="ui labeled icon button" data-lang="en">
+                <div class="icon"><i class="us flag"></i></div>
+                English
+              </div>
+              <div class="ui labeled icon button" data-lang="ja">
+                <div class="icon"><i class="jp flag"></i></div>
+                日本語
+              </div>
+              <div class="ui labeled icon button" data-lang="de">
+                <div class="icon"><i class="de flag"></i></div>
+                Deutsch
+              </div>
+              <div class="ui labeled icon button" data-lang="fr">
+                <div class="icon"><i class="fr flag"></i></div>
+                Français
               </div>
             </div>
           </div>
