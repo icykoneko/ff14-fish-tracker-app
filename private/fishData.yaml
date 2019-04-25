@@ -4129,7 +4129,7 @@
   patch: 3.5
 - name: Raimdellopterus
   location: Tharl Oom Khash
-  startHour: 6
+  startHour: 5
   endHour: 8
   previousWeatherSet: []
   weatherSet:
