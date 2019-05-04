@@ -5952,6 +5952,7 @@
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Dust Storms
   bestCatchPath:
   - Suspending Minnow
   predators:
@@ -5964,8 +5965,8 @@
   patch: 4.5
 - name: Stethacanthus
   location: Loch Seld
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 18
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
