@@ -2,7 +2,8 @@ const LANGUAGES = {
   English: "_en",
   Japanese: "_ja",
   German: "_de",
-  French: "_fr"
+  French: "_fr",
+  Korean: "_ko"
 };
 
 class LocalizationHelper {

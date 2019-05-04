@@ -57,12 +57,18 @@ def load_dats(args):
     import pysaintcoinach.text as text
     from pysaintcoinach.ex.language import Language
 
+    # Add ExtractedSheet plugin to library.
+    import extracted_sheet_plugin
+
+    extracted_sheet_plugin.initialize()
+
     global LANGUAGES
 
     LANGUAGES = [Language.english,
                  Language.japanese,
                  Language.german,
-                 Language.french]
+                 Language.french,
+                 Language.korean]
 
     _string_decoder = text.XivStringDecoder.default()
 
@@ -93,17 +99,33 @@ def _make_localized_field(fld_name, row, col_name):
     from pysaintcoinach.ex import IMultiRow
     from pysaintcoinach.xiv import IXivRow
 
+    global LANGUAGES
+
     if isinstance(row, IXivRow):
         row = row.source_row
     if not isinstance(row, IMultiRow):
         raise TypeError('Expected row to be a IMultiRow')
 
-    return map(lambda lang: (fld_name + lang.get_suffix(), row[(col_name, lang)]), LANGUAGES)
+    def try_get_value(row, col_name, lang):
+        try:
+            return row[(col_name, lang)]
+        except KeyError:
+            value = row[col_name]
+            logging.warning("Missing %s data for %s[%u][%s], using \"%s\" instead.",
+                            lang.name,
+                            row.sheet.name,
+                            row.key,
+                            col_name,
+                            value)
+            # Use the default language name instead...
+            return value
+
+    return map(lambda lang: (fld_name + lang.get_suffix(), try_get_value(row, col_name, lang)), LANGUAGES)
 
 
 def _make_static_localized_field(fld_name, value):
     return zip([fld_name + lang.get_suffix() for lang in LANGUAGES],
-                     repeat(value, len(LANGUAGES)))
+               repeat(value, len(LANGUAGES)))
 
 
 def _decode_spearfishing_node_name(x):
