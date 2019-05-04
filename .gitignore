@@ -1,5 +1,6 @@
 # IDE artifacts
 .idea/
+.vscode/
 
 # Python artifacts
 __pycache__
