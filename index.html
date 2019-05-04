@@ -47,9 +47,11 @@
         zoom: 0.75;
       }
       tr.fish-intuition-row .fish-icon.sprite-icon,
-      tr.fish-intuition-row .weather-icon.sprite-icon,
       tr.fish-intuition-row .bait-icon.sprite-icon {
         zoom: 0.675;
+      }
+      tr.fish-intuition-row .weather-icon.sprite-icon {
+        zoom: 0.5;
       }
       img {
         vertical-align: middle;
@@ -261,7 +263,7 @@
     <script type="text/javascript" src="js/app/localization.js?20190504"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?4.56_201905041434"></script>
+    <script type="text/javascript" src="js/app/data.js?4.56_201905041510"></script>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/app/time.js"></script>
@@ -411,7 +413,7 @@
             </span>
           {{?}}
         </td>
-        <td colspan="2">
+        <td>
           {{?!it.alwaysAvailable && it.availability !== undefined}}
             <span style="font-size: smaller">
               <span style="white-space: nowrap !important">
@@ -423,8 +425,25 @@
             </span>
           {{?}}
         </td>
-
-        <!-- Location and Conditions are omitted so this row stays compact. -->
+        <td>
+          {{?it.conditions.previousWeatherSet.length > 0}}
+            {{~it.conditions.previousWeatherSet :weather:windex}}
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                   title="{{=__p(weather,'name')}}"></div>
+            {{~}}
+            <i class="arrow right icon"></i>
+          {{?}}
+          {{~it.conditions.weatherSet :weather:idx}}
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                 title="{{=__p(weather,'name')}}"></div>
+          {{~}}
+          <i class="wait icon"></i>&nbsp;
+          {{? it.startHour === 0 && it.endHour === 24}}
+            All Day
+          {{??}}
+            {{=it.startHour + ' - ' + it.endHour}}
+          {{?}}
+        </td>
         <!-- Bait -->
         <td>
           {{?it.fishEyes}}
