@@ -390,11 +390,27 @@
       [data-tooltip]:after {
         z-index: 1101;
       }
+
+      .ui.labeled.icon.buttons > .button .icon i.flag:before,
+      .ui.labeled.icon.button .icon i.flag:before {
+        margin-top: 35%;
+        margin-left: 25%;
+      }
+
     </style>
+    <!-- Localization Support script -->
+    <script type="text/javascript" src="js/app/localization.js"></script>
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js"></script>
+    <script type="text/javascript" src="js/app/data.js?4.56_201904242304"></script>
     <script type="text/javascript" src="js/app/time.js"></script>
     <script type="text/javascript" src="js/app/weather.js"></script>
+
+    <style type="text/css">
+      span.window-qualifier-text {
+        font-size: 125%;
+        font-style: italic;
+      }
+    </style>
 
     <script id="weatherTable-template" type="text/html;x-dot-template">
       <thead>
@@ -402,7 +418,7 @@
           <th></th>
           {{~it :weather:idx}}
             <th class="weather-to-colheader" data-id="{{=weather.id}}">
-              <div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-{{=weather.icon}}" title="{{=weather.name}}"></div>
+              <div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-{{=weather.icon}}" title="{{=__p(weather,'name')}}"></div>
             </th>
           {{~}}
         </tr>
@@ -411,7 +427,7 @@
         {{~it :weather:idx}}
           <tr>
             <td class="weather-from-rowheader" data-id="{{=weather.id}}">
-              <div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-{{=weather.icon}}" title="{{=weather.name}}"></div>
+              <div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-{{=weather.icon}}" title="{{=__p(weather,'name')}}"></div>
             </td>
             {{~it :weatherB:idxB}}
               <td class="center aligned">
@@ -452,6 +468,7 @@
           $("#eorzeaClock").text(moment.utc(eorzeaTime.toEorzea(x.timestamp)).format("HH:mm"));
         });
 
+        var $languageButtons = $('#languageChoice .button');
         $nextWindows = $("#nextWindows");
         $nextWindowsLabel = $("#nextWindowsLabel");
         var weatherWindowsTemplate = doT.template($('#weatherWindows-template').text());
@@ -459,22 +476,42 @@
         $weatherTable = $('#weatherTable');
         var weatherTableTemplate = doT.template($('#weatherTable-template').text());
 
+        $($languageButtons).filter('[data-lang="' + localizationHelper.getLanguage() + '"]').addClass('active');
+
         var territory_id = null;
         var territory_name = null;
 
         // Populate the region selector...
-        let REGIONS = _(DATA.WEATHER_RATES).chain()
-          .map((v,k) => _({id: Number(k)}).extend(_(v).pick('region_name', 'zone_name')))
-          .groupBy('region_name')
+        var REGION_GROUPS = _(DATA.WEATHER_RATES).chain()
+          .map((v,k) => _({id: Number(k)}).extend(_(v).pick('region_id', 'zone_id')))
+          .groupBy('region_id')
           .value();
         $territory = $('#territory');
         // Initialize zone selector.
-        for (let region in REGIONS) {
-          $('.menu', $territory).append("<div class='header'>" + region + "</div>");
-          for (let zone of REGIONS[region]) {
-            $('.menu', $territory).append("<div class='item' data-value='" + zone.id + "'>" + zone.zone_name + "</div>");
-          }
-        }
+        _(REGION_GROUPS).each((zones, region_id) => {
+          $('.menu', $territory).append("<div class='header'><span class='localized-region' data-id='" + region_id + "'>" + __p(DATA.REGIONS[Number(region_id)], 'name') + "</span></div>");
+          _(zones).each((zone) => {
+            $('.menu', $territory).append("<div class='item' data-value='" + zone.id + "'><span class='localized-zone' data-id='" + zone.zone_id + "'>" + __p(DATA.ZONES[Number(zone.zone_id)], 'name') + "</span></div>");
+          });
+        });
+
+        $languageButtons.on('click', function() {
+          var lang = $(this).addClass('active').data('lang');
+          $(this).siblings().removeClass('active');
+          localizationHelper.setLanguage(lang);
+        });
+
+        localizationHelper.languageChanged.skip(1).subscribe((x) => {
+          // Update the zone selector.
+          $('.menu .localized-region', $territory).each((i, el) => {
+            $el = $(el)
+            $el.text(__p(DATA.REGIONS[Number($el.data('id'))], 'name'));
+          });
+          $('.menu .localized-zone', $territory).each((i, el) => {
+            $el = $(el)
+            $el.text(__p(DATA.ZONES[Number($el.data('id'))], 'name'));
+          });
+        });
 
         $maxWindows = $('#maxWindows').spinner({min: 5, max: 20});
         $clusterWindows = $('#clusterWindows').first().checkbox();
@@ -490,7 +527,7 @@
             .map((v) => v[0])
             .sort()
             .uniq()
-            .map((v) => Object({id:v, name:DATA.WEATHER_TYPES[v].name}))
+            .map((v) => Object({id:v, name:__p(DATA.WEATHER_TYPES[v],'name')}))
             .value();
 
           var currentTime = +eorzeaTime.getCurrentEorzeaDate();
@@ -596,15 +633,15 @@
                 windows.push(_iterItem.value);
               }
               $nextWindows.empty();
-              var labelText = "Next Windows for <u>";
+              var labelText = "Next Windows for <span class='window-qualifier-text'>";
               if (prevWeatherSet.length != 0) {
-                labelText += DATA.WEATHER_TYPES[prevWeatherSet[0]].name;
-                labelText += "</u> to <u>";
+                labelText += __p(DATA.WEATHER_TYPES[prevWeatherSet[0]],'name');
+                labelText += "</span> to <span class='window-qualifier-text'>";
               }
-              labelText += DATA.WEATHER_TYPES[currentWeatherSet[0]].name;
-              labelText += "</u> in <u>";
+              labelText += __p(DATA.WEATHER_TYPES[currentWeatherSet[0]],'name');
+              labelText += "</span> in <span class='window-qualifier-text'>";
               labelText += territory_name;
-              labelText += "</u>";
+              labelText += "</span>";
               $nextWindowsLabel.html(labelText);
               $nextWindows.append(weatherWindowsTemplate(windows));
             });
@@ -661,6 +698,29 @@
               <div class="ui labeled icon button disabled" id="downloadCSV">
                 <i class="download icon"></i>
                 Download&nbsp;<abbr title="Comma Seprated Values format">CSV</abbr>
+              </div>
+            </div>
+          </div>
+          <div class="fields">
+            <div class="sixteen wide field" id="language">
+              <label>Language</label>
+              <div class="ui mini compact buttons" id="languageChoice">
+                <div class="ui labeled icon button" data-lang="en">
+                  <div class="icon"><i class="us flag"></i></div>
+                  English
+                </div>
+                <div class="ui labeled icon button" data-lang="ja">
+                  <div class="icon"><i class="jp flag"></i></div>
+                  日本語
+                </div>
+                <div class="ui labeled icon button" data-lang="de">
+                  <div class="icon"><i class="de flag"></i></div>
+                  Deutsch
+                </div>
+                <div class="ui labeled icon button" data-lang="fr">
+                  <div class="icon"><i class="fr flag"></i></div>
+                  Français
+                </div>
               </div>
             </div>
           </div>
