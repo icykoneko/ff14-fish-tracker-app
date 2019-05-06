@@ -127,13 +127,26 @@ class FishWatcher {
           predatorFish.weatherSet,
           1);
         var _iterItem = iter.next();
-        if (_iterItem.done) { return /*nextRange = null*/; }
+        if (_iterItem.done) {
+          // Wait wait wait, try one more thing.
+          // Let's say you catch the fish during the intuition buff period!
+          iter = weatherService.findWeatherPattern(
+            +nextRange.start().subtract(1, 'hour'), // FIXME: Completely arbitrary "intuition window" selected here...
+            predatorFish.location.zoneId,
+            predatorFish.previousWeatherSet,
+            predatorFish.weatherSet,
+            1);
+          _iterItem = iter.next();
+          if (_iterItem.done) { return; }
+        }
         var predWindow = _iterItem.value;
         var predRange = predatorFish.availableRangeDuring(predWindow);
         if (!predWindow.overlaps(predRange)) { return /*nextRange = null*/; }
         if (dateFns.isSameOrBefore(+predRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
           return /*nextRange = null*/;
         }
+        // Because of the "intuition window" being added, we need to re-constrain the predRange.
+        predRange = predRange.intersection(predWindow);
         if (overallPredRange === null) {
           overallPredRange = predRange;
         } else {
@@ -150,6 +163,8 @@ class FishWatcher {
       } else if (overallPredRange === null) {
         nextRange = null;
       } else {
+        // Increase the pred range by intuition buff time first.
+        overallPredRange = overallPredRange.start().twix(overallPredRange.end().add(1, 'hour'))
         nextRange = nextRange.intersection(overallPredRange);
       }
     }
