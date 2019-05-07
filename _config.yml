@@ -1,0 +1,21 @@
+# Jekyll Configuration
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - pyvirt/
+  - private/
+  - index.js
+  - LICENSE
+  - package-lock.json
+  - package.json
+  - README.md
+defaults:
+  - scope:
+      path: public/images/sprite.png
+    values:
+      image: true

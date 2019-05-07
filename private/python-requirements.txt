@@ -1,3 +1,0 @@
-construct~=2.9.45
-Pillow~=5.3.0
-PyYAML~=5.1
