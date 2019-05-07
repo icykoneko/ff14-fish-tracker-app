@@ -10,6 +10,9 @@ pyvirt/
 # NPM
 node_modules/
 
+# Github Pages deployment folder
+dist/
+
 # Other stuff
 .deploy/
 public/
