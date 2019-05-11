@@ -2361,6 +2361,7 @@
   predators: {}
   bestCatchPath:
   - Stonefly Nymph
+  # ALTBAIT: Goblin Jig
   hookset:
   snagging: true
   gig:
@@ -3007,9 +3008,10 @@
   patch: 3
 - name: Loosetongue
   location: Upper Thaliak River
-  startHour: 7
+  startHour: 13
   endHour: 20
   previousWeatherSet: []
+  # Favors Clear Skies or Fair Skies.
   weatherSet: []
   predators: {}
   bestCatchPath:
@@ -3038,7 +3040,8 @@
   patch: 3
 - name: Lavalord
   location: Halo
-  startHour: 10
+  # NOTE: Availability may have changed.
+  startHour: 9
   endHour: 16
   previousWeatherSet: []
   weatherSet:
@@ -3051,8 +3054,8 @@
   hookset:
   snagging:
   gig:
-  folklore: 1
-  fishEyes: 1
+  folklore: true
+  fishEyes: true # 240s
   patch: 3
 - name: Tupuxuara
   location: The Habisphere
@@ -4911,10 +4914,11 @@
   previousWeatherSet: []
   weatherSet:
   - Clouds
+  - Fog
   predators: {}
   bestCatchPath:
   - Suspending Minnow
-  hookset:
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
