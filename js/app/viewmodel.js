@@ -457,6 +457,28 @@ class ViewModel {
               }
             };
           }
+        },
+        fishEyesDuration: () => {
+          if (x.fishEyes === false) {
+            console.error("This fish does not require Fish Eyes");
+            return "";
+          }
+          else if (x.fishEyes === true) {
+            console.warn("This fish does not have a known Fish Eyes buff duration");
+            return "";
+          }
+          // If the buff is more than 60s, display in fractional minutes.
+          if (x.fishEyes > 60) {
+            var mins = Math.floor(x.fishEyes / 60);
+            var secs = x.fishEyes % 60;
+            var result = "" + mins + "m";
+            if (secs != 0) {
+              result += " " + secs + "s";
+            }
+            return result;
+          } else {
+            return "" + x.fishEyes + "s";
+          }
         }
       });
     });

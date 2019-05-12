@@ -70,6 +70,57 @@
         float: left;
       }
 
+      /*
+       * These rules match the Fish Eyes status requirement when a duration is present.
+       * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(
+       */
+      tr.fish-entry .sprite-icon-status-fish_eyes.has-duration {
+        margin-top: -6px;
+        /* Sometimes, we need some extra room... */
+        margin-left: 6px;
+        margin-right: 6px;
+      }
+      tr.fish-entry .sprite-icon-status-fish_eyes.has-duration > span {
+        display: inline-block;
+        position: relative;
+        top: 26px;
+        width: 40px; /* 28 + 12 (to allow for longer text) */
+        white-space: nowrap;
+        text-align: center;
+        font-size: 12px;
+        margin-left: -6px;
+        margin-right: -6px;
+      }
+      tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration {
+        margin-left: 24px;
+        margin-top: auto;
+        margin-right: auto;
+        /* Use flexbox to control vertical alignment */
+        display: -webkit-inline-box;
+        display: -webkit-inline-flex;
+        display: -moz-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+        -webkit-flex-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        -ms-flex-direction: row;
+        flex-direction: row;
+      }
+      tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > span {
+        position: unset;
+        left: auto;
+        top: auto;
+        width: 24px;
+        text-align: right;
+        white-space: normal;
+        line-height: 14px;
+        margin-left: -24px;
+        margin-right: auto;
+      }
+
       /* Style for active fish (unless caught or pinned) */
       .ui.striped.table > tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned),
       .ui.striped.table tbody tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
@@ -263,14 +314,14 @@
     <script type="text/javascript" src="js/app/localization.js?20190504"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?4.56_201905110932"></script>
+    <script type="text/javascript" src="js/app/data.js?4.56_201905121934"></script>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/app/time.js"></script>
     <script type="text/javascript" src="js/app/fish.js?20190421"></script>
     <script type="text/javascript" src="js/app/weather.js?20190415"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20190328"></script>
-    <script type="text/javascript" src="js/app/viewmodel.js?20190421"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20190512"></script>
 
 
     <!-- Templates -->
@@ -365,8 +416,12 @@
           {{?it.bait.hasPredators}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
           {{?}}
-          {{?it.fishEyes}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes" title="Fish Eyes"></div>
+          {{?it.fishEyes !== false}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes {{?it.fishEyes !== true}}has-duration{{?}}" title="Fish Eyes">
+              {{?it.fishEyes !== true}}
+                <span>{{=it.fishEyesDuration()}}</span>
+              {{?}}
+            </div>
           {{?}}
           {{?it.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
@@ -446,8 +501,12 @@
         </td>
         <!-- Bait -->
         <td>
-          {{?it.fishEyes}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes" title="Fish Eyes"></div>
+          {{?it.fishEyes !== false}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes {{?it.fishEyes !== true}}has-duration{{?}}" title="Fish Eyes">
+              {{?it.fishEyes !== true}}
+                <span>{{=it.fishEyesDuration()}}</span>
+              {{?}}
+            </div>
           {{?}}
           {{?it.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
