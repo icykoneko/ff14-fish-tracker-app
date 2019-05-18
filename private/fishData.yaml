@@ -6042,7 +6042,7 @@
   patch: 4.5
 - name: The Ruby Dragon
   location: The Ruby Price
-  startHour: 0
+  startHour: 4
   endHour: 8
   previousWeatherSet:
   - Thunder
