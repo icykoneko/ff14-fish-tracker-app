@@ -107,6 +107,11 @@ class FishWatcher {
       //console.error("Range has already expired:", nextRange.simpleFormat());
       return false;
     }
+    // BUGFIX: the `availableRangeDuring` function always returns the FULL RANGE of the
+    // fish, without clipping to the window if the range is "already in progress".
+    // As a result, if a fish is up for multiple 8-hour windows, `nextRange` will keep
+    // getting set to the same value. To solve this, we'll intersect nextRange with window.
+    nextRange = nextRange.intersection(window);
 
     // If this fish has predators, we have to consider their windows too...
     // Basically, to ensure we get the same number of windows for every fish,
