@@ -1,4 +1,6 @@
-images/
+images/*
+!images/collectable.png
+!images/folklore.png
 compression/
 *.sh
 *.log

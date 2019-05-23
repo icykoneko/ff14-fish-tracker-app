@@ -1,6 +1,10 @@
 function weatherForArea(area, target) {
-  var rate = _(DATA.WEATHER_RATES[area].weather_rates).find((r) => { return target < r[1]; });
-  return rate[0];
+  try {
+    var rate = _(DATA.WEATHER_RATES[area].weather_rates).find((r) => { return target < r[1]; });
+    return rate[0];
+  } catch (e){
+    return 0;
+  }
 }
 
 function startOfPeriod(d) {

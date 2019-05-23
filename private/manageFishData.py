@@ -12,6 +12,7 @@ from collections import OrderedDict, namedtuple
 from functools import reduce
 from itertools import islice, repeat
 import logging
+import subprocess
 
 logging.basicConfig(level=logging.INFO, stream=sys.stderr)
 fish_and_tackle_data = {}
@@ -200,6 +201,8 @@ def initialize_data(args):
         '': [
             (9, 'DEFAULT.png'),
             (60166, 'aquarium.png'),
+            (999998, 'collectable.png'),
+            (999999, 'folklore.png'),
         ],
         'action': [
             (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
@@ -244,6 +247,9 @@ def lookup_weather_by_name(name):
 
 
 def lookup_fishing_spot_by_name(name):
+    #if more than 1 instance is available in raw data, take the first one
+    if isinstance(name, list):
+        name = name[0]
     if name is None:
         return KeyValuePair(None, None)
     result = nth(filter(lambda item: item[1]['name_en'] == name,
@@ -254,6 +260,9 @@ def lookup_fishing_spot_by_name(name):
 
 
 def lookup_spearfishing_spot_by_name(name):
+    #if more than 1 instance is available in raw data, take the first one
+    if isinstance(name, list):
+        name = name[0]
     if name is None:
         return KeyValuePair()
     if isinstance(name, int):
@@ -297,6 +306,7 @@ def convert_fish_to_json(item):
                          'predators': predators,
                          'patch': item.get('patch'),
                          'folklore': item.get('folklore', False),
+                         'collectable': item.get('folklore', False),
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
@@ -429,6 +439,10 @@ def check_data_integrity(args):
     return not has_errors
 
 
+def createSprites():
+    subprocess.check_call("%s/createSprites.bat" % os.getcwd())
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Fish Data Management Script')
     subparsers = parser.add_subparsers()
@@ -466,3 +480,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     initialize_data(args)
     args.func(args)
+    createSprites()
