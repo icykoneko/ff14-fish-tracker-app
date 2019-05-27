@@ -321,7 +321,7 @@
     <script type="text/javascript" src="js/app/fish.js?20190517"></script>
     <script type="text/javascript" src="js/app/weather.js?20190517"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?201905172105"></script>
-    <script type="text/javascript" src="js/app/viewmodel.js?20190517"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20190527"></script>
 
 
     <!-- Templates -->
@@ -540,6 +540,9 @@
 
     <script type="text/javascript">
       $(() => {
+        // When displaying a date that's more than a week away, include the time as well.
+        moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
+
         // Main header needs to display the current time.
         Rx.Observable.interval(1000 /*ms*/).timestamp().subscribe((x) => {
           // Update the main header's earth and eorzea times.
@@ -759,21 +762,9 @@
             _($(".fish-entry")).each((e) => {
               var currentAvail = $(".fish-availability-current", e);
               var prefix = $(e).hasClass('fish-active') ? "closes " : "";
-              // currentAvail
-              //   .data("tooltip", moment(currentAvail.data("val")).local().calendar())
-              //   .text(prefix + moment(currentAvail.data("val")).fromNow());
-              // currentAvail
-              //   .text(prefix + formatCountdown(new Date(currentAvail.data("val"))));
               currentAvail.text(prefix + "in " +
-                dateFns.distanceInWordsToNow(currentAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
+                dateFns.distanceInWordsStrict(x.timestamp, currentAvail.data("val")));
               var upcomingAvail = $(".fish-availability-upcoming", e);
-              // upcomingAvail
-              //   .data("tooltip", moment(upcomingAvail.data("val")).local().calendar())
-              //   .text(moment(upcomingAvail.data("val")).fromNow());
-              // upcomingAvail
-              //   .text(formatCountdown(new Date(upcomingAvail.data("val"))));
-              // upcomingAvail.text("in " +
-              //   dateFns.distanceInWordsToNow(upcomingAvail.data("val"), {includeSeconds: true}).replace("about ", "~"));
               if (viewModel.showUpcomingWindowFromNow) {
                 upcomingAvail.text(viewModel.formatDurationUntilNextWindowFromNow(
                   upcomingAvail.data("val")));
