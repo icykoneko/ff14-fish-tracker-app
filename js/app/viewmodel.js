@@ -399,11 +399,9 @@ class ViewModel {
               var crs = x.catchableRanges;
               if (crs.length > 0) {
                 if (dateFns.isFuture(eorzeaTime.toEarth(+crs[0].start()))) {
-                  return "in " + dateFns.distanceInWordsToNow(
-                    eorzeaTime.toEarth(+crs[0].start()), {includeSeconds: true}).replace("about ", "~");
+                  return "in " + dateFns.distanceInWordsStrict(Date.now(), eorzeaTime.toEarth(+crs[0].start()));
                 } else {
-                  return "closes in " + dateFns.distanceInWordsToNow(
-                    eorzeaTime.toEarth(+crs[0].end()), {includeSeconds: true}).replace("about ", "~");
+                  return "closes in " + dateFns.distanceInWordsStrict(Date.now(), eorzeaTime.toEarth(+crs[0].end()));
                 }
               }
               return "unknown";
@@ -487,13 +485,11 @@ class ViewModel {
   }
 
   formatDurationUntilNextWindowFromNow(upcomingStart) {
-    return "in " + dateFns.distanceInWordsToNow(
-      upcomingStart, {includeSeconds: true}).replace("about ", "~");
+    return "in " + dateFns.distanceInWordsStrict(Date.now(), upcomingStart);
   }
 
   formatDurationUntilNextWindow(prevEnd, upcomingStart) {
-    return dateFns.distanceInWords(
-      prevEnd, upcomingStart, {includeSeconds: true}).replace("about ", "~") + " later";
+    return dateFns.distanceInWordsStrict(prevEnd, upcomingStart) + " later";
   }
 }
 
