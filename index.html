@@ -557,6 +557,31 @@
 
     <script type="text/javascript">
       $(() => {
+        // Display appropriate messages depending on if the site was loaded via http or https.
+        var $https_message = $("#https_message");
+        var $transition_message = $("#transition_message");
+
+        if (document.location.protocol == "http:") {
+          // Display the secure mode announcement.
+          $https_message.removeClass("hidden");
+        } else {
+          // Check if the user got here via the non-secure version (by clicking the link).
+          if ((document.referrer == "http://" + document.location.host + "/") &&
+              !localStorage.completed)
+          {
+            // There's nothing in the local storage, and they came from the unsecure version.
+            // Let's display a helpful message so they can complete the import process.
+            $transition_message.removeClass("hidden");
+            $transition_message.find(".close").on('click', function() {
+              $(this).closest('.message').transition('fade');
+            });
+          }
+        }
+      });
+    </script>
+    
+    <script type="text/javascript">
+      $(() => {
         // When displaying a date that's more than a week away, include the time as well.
         moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
 
@@ -912,13 +937,34 @@
       <p>
         This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a target="#top" href="feedback.html">leave comments, kudos, report missing or incorrect data</a>, or whatever. Good luck!
       </p>
-      <div class="ui icon info message">
+      <!-- HTTP => HTTPS Transition Helper Messages -->
+      <div class="ui hidden icon info message" id="https_message">
         <i class="exclamation circle icon"></i>
         <div class="content">
           <div class="header">
-            Upcoming Changes!
+            HTTPS Version Now Available
           </div>
-          <p>This site will transition to https in June 2019. As a result, your checklist and saved preferences will be lost as they are stored locally in your browser. Please regularly save your settings using the <i class="download icon"></i> button below. Once the cut-over is complete, you can re-import your settings! Thank you.</p>
+          <p>This site is now available under HTTPS. Please follow these steps to transition to the secure version:</p>
+          <ol>
+            <li>Export your current checklist by clicking the <i class="download icon"></i> export button below.</li>
+            <li>Copy the text to the clipboard.</li>
+            <li>Load the <a href="https://ff14fish.carbuncleplushy.com" style="text-decoration-line: underline;">secure version (https://ff14fish.carbuncleplushy.com)</a> of this site.</li>
+            <li>After loading the secure version, restore your settings by clicking the <i class="upload icon"></i> import button below.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="ui hidden icon info message" id="transition_message">
+        <i class="close icon"></i>
+        <i class="exclamation circle icon"></i>
+        <div class="content">
+          <div class="header">
+            Welcome to the HTTPS Version
+          </div>
+          <p>
+            Welcome back to the secure version of this site.
+            You should have copied your previous settings to the clipboard.
+            Now, click the <i class="upload icon"></i> import button to restore your settings.
+          </p>
         </div>
       </div>
       <p>
