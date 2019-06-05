@@ -46,6 +46,9 @@
       .bait-icon.sprite-icon {
         zoom: 0.75;
       }
+      .sprite-icon-item-folklore_book {
+        zoom: 0.75;
+      }
       tr.fish-intuition-row .fish-icon.sprite-icon,
       tr.fish-intuition-row .bait-icon.sprite-icon {
         zoom: 0.675;
@@ -307,7 +310,6 @@
         margin-left: 25%;
       }
 
-
     </style>
 
     <!-- Localization Support script -->
@@ -427,7 +429,7 @@
           <!-- check if fish is folklore -->
           {{?it.folklore === true}}
             <div class="ui middle aligned sprite-icon sprite-icon-item-folklore_book"
-                 data-tooltip="Folklore {{=it.location.zoneName}}" data-position="right center" data-variation="mini"></div>
+                 data-tooltip="tome of ichthyological folklore - {{=it.location.zoneName}}" data-position="right center" data-variation="mini"></div>
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.bait.hasPredators}}
