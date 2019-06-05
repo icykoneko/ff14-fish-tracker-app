@@ -202,8 +202,8 @@ def initialize_data(args):
             (9, 'DEFAULT.png'),
             (60166, 'aquarium.png'),
         ],
-        'item': [
-            (26164, 'folklore_book.png')
+        'mapmarker': [
+            (60556, 'folklore.png')
         ],
         'action': [
             (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
@@ -306,8 +306,8 @@ def convert_fish_to_json(item):
                          'bestCatchPath': catch_path,
                          'predators': predators,
                          'patch': item.get('patch'),
-                         'folklore': item.get('folklore', False),
-                         'collectable': item.get('folklore', False),
+                         'folklore': item.get('folklore_book', False),
+                         'collectable': item.get('collectable', False),
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
