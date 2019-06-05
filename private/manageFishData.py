@@ -202,6 +202,9 @@ def initialize_data(args):
             (9, 'DEFAULT.png'),
             (60166, 'aquarium.png'),
         ],
+        'item': [
+            (26164, 'folklore_book.png')
+        ],
         'action': [
             (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
             (1116, 'precision_hookset.png'),  # Action[Name="Precision Hookset"]

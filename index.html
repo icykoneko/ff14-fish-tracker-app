@@ -424,6 +424,11 @@
         </td>
         <!-- Requirements and Bait -->
         <td>
+          <!-- check if fish is folklore -->
+          {{?it.folklore === true}}
+            <div class="ui middle aligned sprite-icon sprite-icon-item-folklore_book"
+                 data-tooltip="Folklore {{=it.location.zoneName}}" data-position="right center" data-variation="mini"></div>
+          {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.bait.hasPredators}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
