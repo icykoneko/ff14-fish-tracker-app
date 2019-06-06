@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -109,6 +109,11 @@
        * These rules match the Fish Eyes status requirement when a duration is present.
        * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(
        */
+
+      body.dark .ui.table thead th {
+           background-color: black !important;
+           color: white !important;
+      }
       tr.fish-entry .sprite-icon-status-fish_eyes.has-duration {
         margin-top: -6px;
         /* Sometimes, we need some extra room... */
