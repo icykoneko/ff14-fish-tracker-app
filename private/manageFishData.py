@@ -26,6 +26,8 @@ ICON_MAP = None
 REGIONS = {}
 ZONES = {}
 LANGUAGES = []
+GATHERING_SUB_CATEGORIES = None
+FISHPARAMETER = None
 
 try:
     _SCRIPT_PATH = os.path.abspath(__path__)
@@ -146,6 +148,8 @@ def initialize_data(args):
     global ICON_MAP
     global REGIONS
     global ZONES
+    global GATHERING_SUB_CATEGORIES
+    global FISHPARAMETER
 
     XIV = load_dats(args)
 
@@ -161,7 +165,17 @@ def initialize_data(args):
                'region_id': territory.region_place_name.key,
                'weather_rates': _collect_weather_rates(territory.weather_rate)}))
         for territory in TERRITORIES])
-    
+
+    GATHERING_SUB_CATEGORIES = dict([
+        (gsc.key, 
+         gsc)
+        for gsc in XIV.game_data.get_sheet('GatheringSubCategory')])
+
+    FISHPARAMETER = dict([
+        (fp.get_raw("Item"), 
+         str(GATHERING_SUB_CATEGORIES.get(fp.get_raw("GatheringSubCategory"),None)))
+        for fp in XIV.game_data.get_sheet('FishParameter') if fp.get_raw("GatheringSubCategory")])
+
     WEATHER_TYPES = dict([
         (weather.key,
          dict([*_make_localized_field('name', weather, 'Name'),
@@ -306,7 +320,7 @@ def convert_fish_to_json(item):
                          'bestCatchPath': catch_path,
                          'predators': predators,
                          'patch': item.get('patch'),
-                         'folklore': item.get('folklore_book', False),
+                         'folklore': FISHPARAMETER.get(key,False),
                          'collectable': item.get('collectable', False),
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
