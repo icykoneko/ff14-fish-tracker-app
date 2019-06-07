@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -58,6 +58,41 @@
       }
       .floatThead-container-fishes {
         background-color: white;
+      } 
+    body.dark{
+        background-color:  rgb(40,40,40);
+    color: white;
+    } 
+    body.dark .ui.menu {
+      background-color:  rgb(40,40,40)  !important;
+    color: white !important;
+    }
+    body.dark .ui.menu .item{		
+      color: white !important;
+    }
+    body.dark .ui.checkbox label{
+      color:white;
+    }
+      
+      .theme-button {
+        margin-left : 10px;
+        width: 24px;
+        height: 24px;
+        /* min-width: 50px; */
+        /* min-height: 50px; */
+        border-radius: 21px;
+        background-color:  rgb(40,40,40);
+        border: 0px;
+      }
+      
+      body.dark .theme-button {
+        width: 24px;
+        height: 24px;
+        /* min-width: 50px; */
+        /* min-height: 50px; */
+        border-radius: 21px;
+        background-color: white;
+        border: 1px;
       }
 
       .intuition-count {
@@ -74,6 +109,11 @@
        * These rules match the Fish Eyes status requirement when a duration is present.
        * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(
        */
+
+      body.dark .ui.table thead th {
+           background-color:  rgb(40,40,40) !important;
+           color: white !important;
+      }
       tr.fish-entry .sprite-icon-status-fish_eyes.has-duration {
         margin-top: -6px;
         /* Sometimes, we need some extra room... */
@@ -809,6 +849,7 @@
           var $checklistButtons = $('#checklist .button');
           var $sortingButtons = $('#sortingType .radio.checkbox');
           var $languageButtons = $('#languageChoice .button');
+          var $themeButton = $('#theme-button');
 
           $($languageButtons).filter('[data-lang="' + localizationHelper.getLanguage() + '"]').addClass('active');
 
@@ -890,6 +931,18 @@
             $(this).siblings().removeClass('active');
             localizationHelper.setLanguage(lang);
           });
+          
+          $themeButton.on('click', function(){
+            var theme = localStorage.getItem("theme");
+            theme  = theme ? '' : 'dark';
+            localStorage.setItem("theme",theme);
+            $("body").toggleClass('dark');
+          });
+
+          var theme = localStorage.getItem("theme");
+          if (theme){
+            $("body").addClass(theme);
+          }
 
           // _.delay(() => {
           //   $('#fishes').floatThead({
@@ -912,6 +965,7 @@
         <div class="header item">FFX|V Fish Tracker App</div>
         <div class="right item">
           <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
+          <button id="theme-button" class="theme-button"></button>
         </div>
       </div>
     </div>
