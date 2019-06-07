@@ -60,6 +60,40 @@
         background-color: white;
       }
 
+      /* Dark Mode styles */
+      body.dark {
+        background-color: rgb(40,40,40);
+        color: white;
+      }
+      body.dark .ui.menu {
+        background-color: rgb(40,40,40) !important;
+        color: white !important;
+      }
+      body.dark .ui.menu .item {
+        color: white !important;
+      }
+      body.dark .ui.checkbox label {
+        color: white;
+      }
+      body.dark .ui.table thead th {
+        background-color: rgb(40,40,40) !important;
+        color: white !important;
+      }
+
+      /* Site theme button style */
+      .theme-button {
+        margin-left: 10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 21px;
+        background-color: rgb(40,40,40);
+        border: 0px;
+      }
+      body.dark .theme-button {
+        background-color: white;
+        border: 1px;
+      }
+
       .intuition-count {
         vertical-align: middle;
         display: inline-grid;
@@ -825,6 +859,7 @@
           var $checklistButtons = $('#checklist .button');
           var $sortingButtons = $('#sortingType .radio.checkbox');
           var $languageButtons = $('#languageChoice .button');
+          var $themeButton = $('#theme-button');
 
           $($languageButtons).filter('[data-lang="' + localizationHelper.getLanguage() + '"]').addClass('active');
 
@@ -907,6 +942,18 @@
             localizationHelper.setLanguage(lang);
           });
 
+          $themeButton.on('click', function() {
+            var theme = localStorage.getItem("theme");
+            theme = theme ? '' : 'dark';
+            localStorage.setItem("theme", theme);
+            $("body").toggleClass('dark');
+          });
+
+          var theme = localStorage.getItem("theme");
+          if (theme === 'dark') {
+            $("body").addClass(theme);
+          }
+
           // _.delay(() => {
           //   $('#fishes').floatThead({
           //     position: 'fixed',
@@ -928,6 +975,7 @@
         <div class="header item">FFX|V Fish Tracker App</div>
         <div class="right item">
           <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
+          <button id="theme-button" class="theme-button"></button>
         </div>
       </div>
     </div>
