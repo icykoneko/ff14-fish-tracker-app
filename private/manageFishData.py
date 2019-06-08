@@ -12,7 +12,6 @@ from collections import OrderedDict, namedtuple
 from functools import reduce
 from itertools import islice, repeat
 import logging
-import subprocess
 
 logging.basicConfig(level=logging.INFO, stream=sys.stderr)
 fish_and_tackle_data = {}
@@ -454,10 +453,6 @@ def check_data_integrity(args):
     return not has_errors
 
 
-def createSprites():
-    subprocess.check_call("%s/createSprites.bat" % os.getcwd())
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Fish Data Management Script')
     subparsers = parser.add_subparsers()
@@ -495,4 +490,3 @@ if __name__ == '__main__':
     args = parser.parse_args()
     initialize_data(args)
     args.func(args)
-    createSprites()
