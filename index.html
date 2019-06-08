@@ -397,12 +397,10 @@
               <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
                    data-tooltip="Tier {{=it.aquarium.size}} {{=it.aquarium.water}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            <!-- check if fish is folklore -->
             {{?it.folklore !== false}}
               <div class="ui middle aligned sprite-icon sprite-icon-mapmarker-folklore"
                    data-tooltip="{{=it.folklore}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            <!-- check if fish is collectable -->
             {{?it.collectable === true}}
               <div class="ui middle aligned sprite-icon sprite-icon-collectable"
                    data-tooltip="Collectable" data-position="right center" data-variation="mini"></div>
@@ -469,15 +467,12 @@
               {{?}}
             </div>
           {{?}}
-          <!-- Put snagging if fish has snagging != null -->
           {{?it.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
-          <!-- Put gig if fish has gig != null -->
           {{?it.gig}}
             <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.gig.toLowerCase()}}_gig" title="{{=it.gig}} Gig"></div>
           {{?}}
-          <!-- Put bait for fish -->
           {{~it.bait.path :item:idx}}
             {{?idx == 0}}
               <a href="http://www.garlandtools.org/db/#item/{{=item._id}}" target="cp_gt">
@@ -489,7 +484,6 @@
               </a>
             {{?}}
           {{~}}
-          <!-- Put hookset if fish has hookset != null -->
           {{?it.hookset}}
             <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.hookset.toLowerCase()}}_hookset" title="{{=it.hookset}} Hookset"></div>
           {{?}}
