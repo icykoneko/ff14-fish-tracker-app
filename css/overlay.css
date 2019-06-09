@@ -1,0 +1,250 @@
+.theme-button {
+  margin-left : 10px;
+  width: 24px;
+  height: 24px;
+  /* min-width: 50px; */
+  /* min-height: 50px; */
+  border-radius: 21px;
+  background-color: black;
+  border: 0px;
+}
+
+.main.container {
+  padding-top: 3em;
+}
+.sprite-icon {
+  display: inline-block;
+}
+.weather-icon.sprite-icon {
+  zoom: 0.675;
+}
+.bait-icon.sprite-icon {
+  zoom: 0.75;
+}
+tr.fish-intuition-row .fish-icon.sprite-icon,
+tr.fish-intuition-row .bait-icon.sprite-icon {
+  zoom: 0.675;
+}
+tr.fish-intuition-row .weather-icon.sprite-icon {
+  zoom: 0.5;
+}
+img {
+  vertical-align: middle;
+}
+.floatThead-container-fishes {
+  background-color: white;
+}
+
+.intuition-count {
+  vertical-align: middle;
+  display: inline-grid;
+  font-size: larger;
+}
+
+.fish-predator {
+  float: left;
+}
+
+/*
+ * These rules match the Fish Eyes status requirement when a duration is present.
+ * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(
+ */
+tr.fish-entry .sprite-icon-status-fish_eyes.has-duration {
+  margin-top: -6px;
+  /* Sometimes, we need some extra room... */
+  margin-left: 6px;
+  margin-right: 6px;
+}
+tr.fish-entry .sprite-icon-status-fish_eyes.has-duration > span {
+  display: inline-block;
+  position: relative;
+  top: 26px;
+  width: 40px; /* 28 + 12 (to allow for longer text) */
+  white-space: nowrap;
+  text-align: center;
+  font-size: 12px;
+  margin-left: -6px;
+  margin-right: -6px;
+}
+tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration {
+  margin-left: 24px;
+  margin-top: auto;
+  margin-right: auto;
+  /* Use flexbox to control vertical alignment */
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > span {
+  position: unset;
+  left: auto;
+  top: auto;
+  width: 24px;
+  text-align: right;
+  white-space: normal;
+  line-height: 14px;
+  margin-left: -24px;
+  margin-right: auto;
+}
+
+/* Style for active fish (unless caught or pinned) */
+.ui.striped.table > tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned),
+.ui.striped.table tbody tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
+  background-color: hsla(180, 60%, 89%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned),
+.ui.striped.table tbody tr.fish-entry.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
+  background-color: hsla(180, 100%, 89%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active:not(.fish-caught):not(.fish-pinned),
+.ui.striped.table tbody tr.fish-entry.fish-active:not(.fish-caught):not(.fish-pinned) {
+  background-color: hsla(180, 60%, 94%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned),
+.ui.striped.table tbody tr.fish-entry.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
+  background-color: hsla(180, 100%, 94%, 0.8) !important;
+}
+
+.ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover,
+.ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover {
+  background-color: hsla(150, 60%, 75%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover:nth-child(2n),
+.ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover:nth-child(2n) {
+  background-color: hsla(150, 100%, 75%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active.fish-caught,
+.ui.striped.table tbody tr.fish-entry.fish-active.fish-caught {
+  background-color: hsla(150, 60%, 80%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active.fish-caught:nth-child(2n),
+.ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:nth-child(2n) {
+  background-color: hsla(150, 100%, 80%, 0.8) !important;
+}
+
+.ui.striped.table > tr.fish-entry.fish-caught:hover,
+.ui.striped.table tbody tr.fish-entry.fish-caught:hover {
+  background-color: hsla(120, 60%, 75%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-caught:hover:nth-child(2n),
+.ui.striped.table tbody tr.fish-entry.fish-caught:hover:nth-child(2n) {
+  background-color: hsla(120, 100%, 75%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-caught,
+.ui.striped.table tbody tr.fish-entry.fish-caught {
+  background-color: hsla(120, 60%, 80%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-caught:nth-child(2n),
+.ui.striped.table tbody tr.fish-entry.fish-caught:nth-child(2n) {
+  background-color: hsla(120, 100%, 80%, 0.8) !important;
+}
+
+/* Pinned Fish (styled only when active) */
+.ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover,
+.ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover {
+  background-color: hsla(350, 60%, 83%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover:nth-child(2n),
+.ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover:nth-child(2n) {
+  background-color: hsla(350, 100%, 83%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active.fish-pinned,
+.ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned {
+  background-color: hsla(350, 60%, 88%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry.fish-active.fish-pinned:nth-child(2n),
+.ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:nth-child(2n) {
+  background-color: hsla(350, 100%, 88%, 0.8) !important;
+}
+
+.ui.striped.table > tr.fish-entry:hover,
+.ui.striped.table tbody tr.fish-entry:hover {
+  background-color: hsla(50, 65%, 90%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry:hover:nth-child(2n),
+.ui.striped.table tbody tr.fish-entry:hover:nth-child(2n) {
+  background-color: hsla(50, 65%, 95%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry,
+.ui.striped.table tbody tr.fish-entry {
+  background-color: hsla(0, 0%, 95%, 0.8) !important;
+}
+.ui.striped.table > tr.fish-entry:nth-child(2n),
+.ui.striped.table tbody tr.fish-entry:nth-child(2n) {
+  background-color: hsla(0, 0%, 100%, 0.8) !important;
+}
+
+.ui.striped.table > tr.section-divider:hover:not(.fish-entry),
+.ui.striped.table tbody tr.section-divider:hover:not(.fish-entry),
+.ui.striped.table > tr.section-divider:not(.fish-entry),
+.ui.striped.table tbody tr.section-divider:not(.fish-entry) {
+  background-color: hsl(0, 0%, 80%) !important;
+}
+
+
+
+
+/*Simple css to style it like a toggle switch*/
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 28px;
+  position: relative;
+  width: 54px;
+}
+
+.theme-switch input {
+  display:none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 20px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 20px;
+}
+
+input:checked + .slider:before {
+  background-color: rgb(0, 0, 0);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
