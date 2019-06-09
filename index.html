@@ -341,7 +341,6 @@
         margin-left: 25%;
       }
 
-
     </style>
 
     <!-- Localization Support script -->
@@ -393,9 +392,18 @@
           <div class="ui middle aligned" style="display: inline-block;">
             {{=it.name}}<br/>
             <div class="ui tiny circular label">{{=it.patch}}</div>
+            <!-- check if fish can be put into the aquarium -->
             {{?it.aquarium !== null}}
               <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
                    data-tooltip="Tier {{=it.aquarium.size}} {{=it.aquarium.water}}" data-position="right center" data-variation="mini"></div>
+            {{?}}
+            {{?it.folklore !== null}}
+              <div class="ui middle aligned sprite-icon sprite-icon-mapmarker-folklore"
+                   data-tooltip="{{=__p(DATA.FOLKLORE[it.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
+            {{?}}
+            {{?it.collectable === true}}
+              <div class="ui middle aligned sprite-icon sprite-icon-collectable"
+                   data-tooltip="Collectable" data-position="right center" data-variation="mini"></div>
             {{?}}
           </div>
         </td>
@@ -447,9 +455,11 @@
         </td>
         <!-- Requirements and Bait -->
         <td>
+          <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.bait.hasPredators}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
           {{?}}
+          <!-- Put fishEyes if fishEyes is not false and if true enter fishEyesDuration()  -->
           {{?it.fishEyes !== false}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes {{?it.fishEyes !== true}}has-duration{{?}}" title="Fish Eyes">
               {{?it.fishEyes !== true}}

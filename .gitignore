@@ -18,3 +18,6 @@ dist/
 public/
 uploaded/
 *.log
+
+build.bat
+createSprites.bat

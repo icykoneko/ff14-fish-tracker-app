@@ -24,13 +24,17 @@ class Fish {
         fishingSpot = DATA.FISHING_SPOTS[fishData.location];
         spearfishing = false;
       }
-      this.location = {
-        id: fishingSpot._id,
-        name: __p(fishingSpot, "name"),
-        zoneId: fishingSpot.territory_id, /* This is not a typo! */
-        zoneName: __p(DATA.ZONES[DATA.WEATHER_RATES[fishingSpot.territory_id].zone_id], "name"),
-        spearfishing: spearfishing,
-      };
+      if (fishingSpot.territory_id !== 0){
+        this.location = {
+          id: fishingSpot._id,
+          name: __p(fishingSpot, "name"),
+          zoneId: fishingSpot.territory_id, /* This is not a typo! */
+          zoneName: __p(DATA.ZONES[DATA.WEATHER_RATES[fishingSpot.territory_id].zone_id], "name"),
+          spearfishing: spearfishing,
+        };
+      } else {
+        this.location = {name: '', zoneName: '', id: 0, zoneId: 0, spearfishing: false};
+      }
     } else {
       this.location = {name: '', zoneName: '', id: 0, zoneId: 0, spearfishing: false};
     }

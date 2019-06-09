@@ -25,6 +25,7 @@ ICON_MAP = None
 REGIONS = {}
 ZONES = {}
 LANGUAGES = []
+GATHERING_SUB_CATEGORIES = None
 
 try:
     _SCRIPT_PATH = os.path.abspath(__path__)
@@ -145,6 +146,7 @@ def initialize_data(args):
     global ICON_MAP
     global REGIONS
     global ZONES
+    global GATHERING_SUB_CATEGORIES
 
     XIV = load_dats(args)
 
@@ -160,7 +162,13 @@ def initialize_data(args):
                'region_id': territory.region_place_name.key,
                'weather_rates': _collect_weather_rates(territory.weather_rate)}))
         for territory in TERRITORIES])
-    
+
+    GATHERING_SUB_CATEGORIES = dict([
+        (x.key,
+         dict([*_make_localized_field('book', x, 'FolkloreBook'),
+               *_make_localized_field('name', x['Item'], 'Name')]))
+        for x in XIV.game_data.get_sheet('GatheringSubCategory')])
+
     WEATHER_TYPES = dict([
         (weather.key,
          dict([*_make_localized_field('name', weather, 'Name'),
@@ -201,6 +209,9 @@ def initialize_data(args):
             (9, 'DEFAULT.png'),
             (60166, 'aquarium.png'),
         ],
+        'mapmarker': [
+            (60556, 'folklore.png')
+        ],
         'action': [
             (1115, 'powerful_hookset.png'),  # Action[Name="Powerful Hookset"]
             (1116, 'precision_hookset.png'),  # Action[Name="Precision Hookset"]
@@ -223,6 +234,7 @@ def initialize_data(args):
     SPEARFISHING_NODES = OrderedDict(sorted(SPEARFISHING_NODES.items(), key=lambda t: t[0]))
     REGIONS = OrderedDict(sorted(REGIONS.items(), key=lambda t: t[0]))
     ZONES = OrderedDict(sorted(ZONES.items(), key=lambda t: t[0]))
+    GATHERING_SUB_CATEGORIES = OrderedDict(sorted(GATHERING_SUB_CATEGORIES.items(), key=lambda t: t[0]))
     
     KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
 
@@ -244,6 +256,9 @@ def lookup_weather_by_name(name):
 
 
 def lookup_fishing_spot_by_name(name):
+    #if more than 1 instance is available in raw data, take the first one
+    if isinstance(name, list):
+        name = name[0]
     if name is None:
         return KeyValuePair(None, None)
     result = nth(filter(lambda item: item[1]['name_en'] == name,
@@ -254,6 +269,9 @@ def lookup_fishing_spot_by_name(name):
 
 
 def lookup_spearfishing_spot_by_name(name):
+    #if more than 1 instance is available in raw data, take the first one
+    if isinstance(name, list):
+        name = name[0]
     if name is None:
         return KeyValuePair()
     if isinstance(name, int):
@@ -286,6 +304,19 @@ def convert_fish_to_json(item):
         aquarium_entry = dict({'water': str(aquarium_entry['AquariumWater']),
                                'size': int(aquarium_entry['Size'])})
 
+    # Check if the fish requires Folklore (use the DATs, ignore old data from YAML file)
+    # Technically, every fish /should/ have an entry in this table... but we'll be safe.
+    folklore = None
+    fish_parameter = first(XIV.game_data.get_sheet('FishParameter'),
+                           lambda r: r.get_raw('Item') == key)
+    if fish_parameter is not None:
+        folklore = fish_parameter['GatheringSubCategory']
+        if folklore is not None:
+            # Convert to raw key to allow for localization (and less duplication)
+            folklore = folklore.key
+    else:
+        logging.warning('%s does not have an entry in FishParameter?!', item['name'])
+
     return (key,
             OrderedDict({'_id': key,
                          'previousWeatherSet': previous_weather_set,
@@ -296,7 +327,8 @@ def convert_fish_to_json(item):
                          'bestCatchPath': catch_path,
                          'predators': predators,
                          'patch': item.get('patch'),
-                         'folklore': item.get('folklore', False),
+                         'folklore': folklore,
+                         'collectable': item.get('collectable', False),
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
@@ -364,7 +396,8 @@ def rebuild_fish_data(args):
         f.write("  WEATHER_RATES: %s,\n" % dump_foldable(WEATHER_RATES))
         f.write("  WEATHER_TYPES: %s,\n" % dump_foldable(WEATHER_TYPES))
         f.write("  REGIONS: %s,\n" % dump_foldable(REGIONS))
-        f.write("  ZONES: %s\n" % dump_foldable(ZONES))
+        f.write("  ZONES: %s,\n" % dump_foldable(ZONES))
+        f.write("  FOLKLORE: %s\n" % dump_foldable(GATHERING_SUB_CATEGORIES))
         f.write("}\n")
 
     if args.with_icons:
