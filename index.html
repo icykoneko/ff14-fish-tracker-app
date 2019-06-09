@@ -397,9 +397,9 @@
               <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
                    data-tooltip="Tier {{=it.aquarium.size}} {{=it.aquarium.water}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            {{?it.folklore !== false}}
+            {{?it.folklore !== null}}
               <div class="ui middle aligned sprite-icon sprite-icon-mapmarker-folklore"
-                   data-tooltip="{{=it.folklore}}" data-position="right center" data-variation="mini"></div>
+                   data-tooltip="{{=__p(DATA.FOLKLORE[it.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
             {{?}}
             {{?it.collectable === true}}
               <div class="ui middle aligned sprite-icon sprite-icon-collectable"
