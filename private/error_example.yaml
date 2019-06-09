@@ -1,0 +1,22 @@
+- _id: 445
+  bestCatchPath:
+  - Giant Crane Fly
+  collectable: false
+  endHour: 0
+  ff14angler_id: 445
+  fishEyes: false
+  folklore: false
+  game_id: 13734
+  gig: null
+  hookset: null
+  ilvl: 180
+  location:
+  - Swirling Cloudtop
+  - Calm Cloudtop
+  name: Eurhinosaur
+  patch: 3.1
+  predators: {}
+  previousWeatherSet: []
+  snagging: null
+  startHour: 2
+  weatherSet: []
