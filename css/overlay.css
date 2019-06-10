@@ -1,36 +1,32 @@
-.theme-button {
-  margin-left : 10px;
-  width: 24px;
-  height: 24px;
-  /* min-width: 50px; */
-  /* min-height: 50px; */
-  border-radius: 21px;
-  background-color: black;
-  border: 0px;
-}
-
 .main.container {
   padding-top: 3em;
 }
+
 .sprite-icon {
   display: inline-block;
 }
+
 .weather-icon.sprite-icon {
   zoom: 0.675;
 }
+
 .bait-icon.sprite-icon {
   zoom: 0.75;
 }
+
 tr.fish-intuition-row .fish-icon.sprite-icon,
 tr.fish-intuition-row .bait-icon.sprite-icon {
   zoom: 0.675;
 }
+
 tr.fish-intuition-row .weather-icon.sprite-icon {
   zoom: 0.5;
 }
+
 img {
   vertical-align: middle;
 }
+
 .floatThead-container-fishes {
   background-color: white;
 }
@@ -55,6 +51,7 @@ tr.fish-entry .sprite-icon-status-fish_eyes.has-duration {
   margin-left: 6px;
   margin-right: 6px;
 }
+
 tr.fish-entry .sprite-icon-status-fish_eyes.has-duration > span {
   display: inline-block;
   position: relative;
@@ -66,6 +63,7 @@ tr.fish-entry .sprite-icon-status-fish_eyes.has-duration > span {
   margin-left: -6px;
   margin-right: -6px;
 }
+
 tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration {
   margin-left: 24px;
   margin-top: auto;
@@ -84,6 +82,7 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration {
   -ms-flex-direction: row;
   flex-direction: row;
 }
+
 tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > span {
   position: unset;
   left: auto;
@@ -190,61 +189,6 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
   background-color: hsl(0, 0%, 80%) !important;
 }
 
-
-
-
-/*Simple css to style it like a toggle switch*/
-.theme-switch-wrapper {
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-}
-
-.theme-switch {
-  display: inline-block;
-  height: 28px;
-  position: relative;
-  width: 54px;
-}
-
-.theme-switch input {
-  display:none;
-}
-
-.slider {
-  background-color: #ccc;
-  bottom: 0;
-  cursor: pointer;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: .4s;
-}
-
-.slider:before {
-  background-color: #fff;
-  bottom: 4px;
-  content: "";
-  height: 20px;
-  left: 4px;
-  position: absolute;
-  transition: .4s;
-  width: 20px;
-}
-
-input:checked + .slider:before {
-  background-color: rgb(0, 0, 0);
-}
-
-input:checked + .slider:before {
-  transform: translateX(26px);
-}
-
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
+#theme-toogle{
+  padding-left: 5px;
 }

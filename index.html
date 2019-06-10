@@ -639,6 +639,7 @@
           var theme = localStorage.getItem("theme");
           if (theme === 'dark') {
             $("body").addClass(theme);
+            $("#theme-button").prop('checked', true);
           }
 
           // _.delay(() => {
@@ -662,11 +663,9 @@
         <div class="header item">FFX|V Fish Tracker App</div>
         <div class="right item">
           <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
-          <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="theme-button">
-              <input type="checkbox" id="theme-button" />
-              <div class="slider round"></div>
-            </label>
+          <div id="theme-toogle" class="ui toggle checkbox">
+            <input type="checkbox" name="theme-button" id="theme-button">
+            <label></label>
           </div>
         </div>
       </div>

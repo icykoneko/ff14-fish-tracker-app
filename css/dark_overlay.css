@@ -32,11 +32,6 @@ body.dark table a{
   color: hsla(246, 100%, 26%, 1);
 }
 
-body.dark .theme-button {
-  background-color: white;
-}
-
-
 /* Style for active fish (unless caught or pinned) */
 body.dark .ui.striped.table > tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
