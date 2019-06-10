@@ -20,8 +20,13 @@ body.dark .ui.table thead th{
   color: white !important;        
 }
 
+body.dark .ui.selectable.table tbody tr:hover, 
+body.dark .ui.table tbody tr td.selectable:hover{
+  color: white !important; 
+}
+
 body.dark .ui.table{
-  color: rgb(180, 180, 180) !important;        
+  color: white !important;        
 }
 
 body.dark .ui.checkbox label{
