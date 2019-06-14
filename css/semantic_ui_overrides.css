@@ -84,3 +84,21 @@ i.icon {
   margin-top: 35%;
   margin-left: 25%;
 }
+
+
+/*
+ * Prevent transitions for select components.
+ * This leads to performance hits when a lot of data is displayed.
+ */
+
+.ui.checkbox label,
+.ui.checkbox + label {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
+.ui.table th,
+.ui.table td {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
