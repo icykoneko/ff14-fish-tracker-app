@@ -151,5 +151,5 @@ body.dark .ui.striped.table > tr.section-divider:hover:not(.fish-entry),
 body.dark .ui.striped.table tbody tr.section-divider:hover:not(.fish-entry),
 body.dark .ui.striped.table > tr.section-divider:not(.fish-entry),
 body.dark .ui.striped.table tbody tr.section-divider:not(.fish-entry) {
-  background-color: hsl(0, 0%, 80%) !important;
+  background-color: hsl(0, 0%, 20%) !important;
 }
