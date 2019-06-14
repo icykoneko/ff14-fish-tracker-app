@@ -1,152 +1,129 @@
-.floatThead-container-fishes {
-  background-color: white;
-}
-
-body.dark{
+body.dark {
   background-color: hsla(0, 0%, 15%, 1);
   color: hsl(0, 0%, 90%);
 }
 
 body.dark .ui.menu {
-  background-color: black  !important;
+  background-color: black !important;
   color: hsl(0, 0%, 90%) !important;
 }
 
-body.dark .ui.menu .item{    
+body.dark .ui.menu .item {
   color: hsl(0, 0%, 90%) !important;
 }
 
 body.dark .ui.table thead th {
-  color: hsl(0, 0%, 90%) !important;        
+  color: hsl(0, 0%, 90%) !important;
 }
 
-body.dark .ui.selectable.table tbody tr:hover, 
-body.dark .ui.table tbody tr td.selectable:hover{
-  color: hsla(0, 0%, 90%, 0.87) !important; 
-}
-
-body.dark .ui.table{
+body.dark .ui.selectable.table tbody tr:hover,
+body.dark .ui.table tbody tr td.selectable:hover {
   color: hsla(0, 0%, 90%, 0.87) !important;
 }
 
-body.dark .ui.checkbox label{
-  color:white;
+body.dark .ui.table {
+  color: hsla(0, 0%, 90%, 0.87) !important;
 }
 
-body.dark table a{
+body.dark .ui.checkbox label {
+  color: white;
+}
+
+body.dark table a {
   color: hsl(210, 53%, 75%);
 }
 
-/* Style for active fish (unless caught or pinned) */
+/* Active, non-caught, non-pinned fish */
 body.dark .ui.striped.table > tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
   background-color: hsla(180, 75%, 25%, 0.8) !important;
 }
-/**/
 body.dark .ui.striped.table > tr.fish-entry.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active:hover:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
   background-color: hsla(180, 75%, 35%, 0.8) !important;
 }
-/**/
 body.dark .ui.striped.table > tr.fish-entry.fish-active:not(.fish-caught):not(.fish-pinned),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active:not(.fish-caught):not(.fish-pinned) {
   background-color: hsla(180, 50%, 25%, 0.8) !important;
 }
-/**/
 body.dark .ui.striped.table > tr.fish-entry.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active:nth-child(2n):not(.fish-caught):not(.fish-pinned) {
   background-color: hsla(180, 50%, 35%, 0.8) !important;
 }
 
-
-/**/
+/* Active, already caught fish */
 body.dark .ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover,
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover {
   background-color: hsla(150, 75%, 25%, 0.8) !important;
 }
-/**/
 body.dark .ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover:nth-child(2n),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover:nth-child(2n) {
   background-color: hsla(150, 75%, 35%, 0.8) !important;
 }
-/**/
 body.dark .ui.striped.table > tr.fish-entry.fish-active.fish-caught,
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught {
   background-color: hsla(150, 50%, 25%, 0.8) !important;
 }
-/**/
 body.dark .ui.striped.table > tr.fish-entry.fish-active.fish-caught:nth-child(2n),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:nth-child(2n) {
   background-color: hsla(150, 50%, 35%, 0.8) !important;
 }
 
-
-/* fish not pinned, caught, not active, hovered, odd*/
+/* Non-active, caught fish */
 body.dark .ui.striped.table > tr.fish-entry.fish-caught:hover,
 body.dark .ui.striped.table tbody tr.fish-entry.fish-caught:hover {
   background-color: hsla(120, 75%, 25%, 0.8) !important;
 }
-/* fish not pinned, caught, not active, hovered, even*/
 body.dark .ui.striped.table > tr.fish-entry.fish-caught:hover:nth-child(2n),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-caught:hover:nth-child(2n) {
   background-color: hsla(120, 75%, 35%, 0.8) !important;
 }
-/* fish not pinned, caught, not active, not hovered, odd*/
 body.dark .ui.striped.table > tr.fish-entry.fish-caught,
 body.dark .ui.striped.table tbody tr.fish-entry.fish-caught {
   background-color: hsla(120, 50%, 25%, 0.8) !important;
 }
-/* fish not pinned, caught, not active, not hovered, even*/
 body.dark .ui.striped.table > tr.fish-entry.fish-caught:nth-child(2n),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-caught:nth-child(2n) {
-  background-color: hsla(120, 50%, 35%, 0.8)!important;
+  background-color: hsla(120, 50%, 35%, 0.8) !important;
 }
 
-
-/* fish pinned, not caught, active, not hovered, odd*/
+/* Active, pinned fish */
 body.dark .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover,
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover {
   background-color: hsla(350, 75%, 25%, 0.8) !important;
 }
-/* fish pinned, not caught, active, hovered, even*/
 body.dark .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover:nth-child(2n),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover:nth-child(2n) {
   background-color: hsla(350, 75%, 35%, 0.8) !important;
 }
-/* fish pinned, not caught, active, not hovered, odd*/
 body.dark .ui.striped.table > tr.fish-entry.fish-active.fish-pinned,
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned {
   background-color: hsla(350, 50%, 25%, 0.8) !important;
 }
-/* fish pinned, not caught, active, not hovered, even*/
 body.dark .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:nth-child(2n),
 body.dark .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:nth-child(2n) {
   background-color: hsla(350, 50%, 35%, 0.8) !important;
 }
 
-
-/* fish not pinned, not caught, not active, hovered, odd*/
+/* Generic fish entry */
 body.dark .ui.striped.table > tr.fish-entry:hover,
 body.dark .ui.striped.table tbody tr.fish-entry:hover {
   background-color: hsla(50, 25%, 25%, 0.8) !important;
 }
-/* fish not pinned, not caught, not active, hovered, even*/
 body.dark .ui.striped.table > tr.fish-entry:hover:nth-child(2n),
 body.dark .ui.striped.table tbody tr.fish-entry:hover:nth-child(2n) {
   background-color: hsla(50, 25%, 35%, 0.8) !important;
 }
-/* fish not pinned, not caught, not active, not hovered, odd*/
 body.dark .ui.striped.table > tr.fish-entry,
 body.dark .ui.striped.table tbody tr.fish-entry {
   background-color: hsla(0, 0%, 25%, 0.8) !important;
 }
-/* fish not pinned, not caught, not active, not hovered, even*/
 body.dark .ui.striped.table > tr.fish-entry:nth-child(2n),
 body.dark .ui.striped.table tbody tr.fish-entry:nth-child(2n) {
   background-color: hsla(0, 0%, 35%, 0.8) !important;
 }
 
-
+/* Section Divider */
 body.dark .ui.striped.table > tr.section-divider:hover:not(.fish-entry),
 body.dark .ui.striped.table tbody tr.section-divider:hover:not(.fish-entry),
 body.dark .ui.striped.table > tr.section-divider:not(.fish-entry),

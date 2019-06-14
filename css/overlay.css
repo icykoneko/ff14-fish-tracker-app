@@ -41,6 +41,10 @@ img {
   float: left;
 }
 
+#theme-toogle {
+  padding-left: 5px;
+}
+
 /*
  * These rules match the Fish Eyes status requirement when a duration is present.
  * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(
@@ -95,7 +99,7 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
   margin-right: auto;
 }
 
-/* Style for active fish (unless caught or pinned) */
+/* Active, non-caught, non-pinned fish */
 .ui.striped.table > tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned),
 .ui.striped.table tbody tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
   background-color: hsla(180, 60%, 89%, 0.8) !important;
@@ -113,6 +117,7 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
   background-color: hsla(180, 100%, 94%, 0.8) !important;
 }
 
+/* Active, already caught fish */
 .ui.striped.table > tr.fish-entry.fish-active.fish-caught:hover,
 .ui.striped.table tbody tr.fish-entry.fish-active.fish-caught:hover {
   background-color: hsla(150, 60%, 75%, 0.8) !important;
@@ -130,6 +135,7 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
   background-color: hsla(150, 100%, 80%, 0.8) !important;
 }
 
+/* Non-active, caught fish */
 .ui.striped.table > tr.fish-entry.fish-caught:hover,
 .ui.striped.table tbody tr.fish-entry.fish-caught:hover {
   background-color: hsla(120, 60%, 75%, 0.8) !important;
@@ -147,7 +153,7 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
   background-color: hsla(120, 100%, 80%, 0.8) !important;
 }
 
-/* Pinned Fish (styled only when active) */
+/* Active, pinned fish */
 .ui.striped.table > tr.fish-entry.fish-active.fish-pinned:hover,
 .ui.striped.table tbody tr.fish-entry.fish-active.fish-pinned:hover {
   background-color: hsla(350, 60%, 83%, 0.8) !important;
@@ -165,6 +171,7 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
   background-color: hsla(350, 100%, 88%, 0.8) !important;
 }
 
+/* Generic fish entry */
 .ui.striped.table > tr.fish-entry:hover,
 .ui.striped.table tbody tr.fish-entry:hover {
   background-color: hsla(50, 65%, 90%, 0.8) !important;
@@ -182,13 +189,10 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
   background-color: hsla(0, 0%, 100%, 0.8) !important;
 }
 
+/* Section Divider */
 .ui.striped.table > tr.section-divider:hover:not(.fish-entry),
 .ui.striped.table tbody tr.section-divider:hover:not(.fish-entry),
 .ui.striped.table > tr.section-divider:not(.fish-entry),
 .ui.striped.table tbody tr.section-divider:not(.fish-entry) {
   background-color: hsl(0, 0%, 80%) !important;
-}
-
-#theme-toogle{
-  padding-left: 5px;
 }
