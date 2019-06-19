@@ -109,17 +109,22 @@ def _make_localized_field(fld_name, row, col_name):
 
     def try_get_value(row, col_name, lang):
         try:
-            return row[(col_name, lang)]
+            value = row[(col_name, lang)]
+            if value != '':
+                return value
+            # Fall through if value is blank!
         except KeyError:
-            value = row[col_name]
-            logging.warning("Missing %s data for %s[%u][%s], using \"%s\" instead.",
-                            lang.name,
-                            row.sheet.name,
-                            row.key,
-                            col_name,
-                            value)
-            # Use the default language name instead...
-            return value
+            pass
+
+        # Use the default language name instead...
+        value = row[col_name]
+        logging.warning("Missing %s data for %s[%u][%s], using \"%s\" instead.",
+                        lang.name,
+                        row.sheet.name,
+                        row.key,
+                        col_name,
+                        value)
+        return value
 
     return map(lambda lang: (fld_name + lang.get_suffix(), try_get_value(row, col_name, lang)), LANGUAGES)
 
