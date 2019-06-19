@@ -85,7 +85,7 @@ class ExportedHeader(object):
     def collection(self) -> RelationalExCollection: return self.__collection
 
     @property
-    def file(self): raise NotImplemented
+    def file(self): raise NotImplementedError
 
     @property
     def name(self) -> str: return self.__name
@@ -113,7 +113,7 @@ class ExportedHeader(object):
         return self.collection.definition.get_sheet(self.name)
 
     @property
-    def data_file_ranges(self): raise NotImplemented
+    def data_file_ranges(self): raise NotImplementedError
 
     @property
     def available_languages(self) -> IterableT[Language]: return [self.__language]
@@ -122,7 +122,7 @@ class ExportedHeader(object):
     def available_languages_count(self) -> int: return 1
 
     @property
-    def fixed_size_data_length(self): raise NotImplemented
+    def fixed_size_data_length(self): raise NotImplementedError
 
     def __init__(self, collection: RelationalExCollection, name: str,
                  language: Language, indices, col_names, col_types):
@@ -161,7 +161,7 @@ class ExportedDataRow(IDataRow):
     def key(self): return self.__key
 
     @property
-    def offset(self): raise NotImplemented
+    def offset(self): raise NotImplementedError
 
     def __init__(self, sheet: 'ExportedDataSheet', key: int, values: list):
         self.__sheet = sheet
@@ -246,7 +246,7 @@ class ExportedDataSheet(IDataSheet[T]):
         self.__build()
 
     def get_buffer(self):
-        raise NotImplemented
+        raise NotImplementedError
 
     def __build(self):
         # An exported data sheet starts with column indices, names, then types.
@@ -264,7 +264,7 @@ class ExportedDataSheet(IDataSheet[T]):
             # Generate a sheet row.
             self.__rows[int(row_data[0])] = ExportedDataRow(self, int(row_data[0]), row_data[1:])
 
-        logging.info("Built %s using exported data", self.name)
+        logging.debug("Built %s using exported data", self.name)
 
     def __getitem__(self, item: Union[int, Tuple[int, int]]) -> Union[T, IRow, object]:
         def get_row(key):
@@ -281,11 +281,11 @@ class ExportedDataSheet(IDataSheet[T]):
         return len(self.__rows)
 
     def __iter__(self):
-        return self.__rows.values()
+        return iter(self.__rows.values())
 
 
 def _create_localised_sheet_wrapper(self, language):
-    logging.info('Creating localised, %s sheet for: %s', language.name, self.header.name)
+    logging.debug('Creating localised, %s sheet for: %s', language.name, self.header.name)
     if language == Language.korean:
         import urllib.request
         import io
