@@ -454,6 +454,27 @@ class ViewModel {
                 }
               }
             };
+          },
+          upcomingWindows: () => {
+            var crs = x.catchableRanges;
+            if (crs.length > 0) {
+              return _(crs).map((cr, idx) => {
+                var start = eorzeaTime.toEarth(+cr.start());
+                var end = eorzeaTime.toEarth(+cr.end());
+                var downtime = "";
+                if (idx + 1 < crs.length) {
+                  downtime = dateFns.distanceInWordsStrict(end, eorzeaTime.toEarth(+crs[idx+1].start()));
+                }
+                return {
+                  start: start,
+                  end: end,
+                  duration: dateFns.distanceInWordsStrict(start, end),
+                  downtime: downtime
+                };
+              });
+            } else {
+              return [];
+            }
           }
         },
         fishEyesDuration: () => {

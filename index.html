@@ -43,7 +43,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?4.56_20190609" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20190614" />
-    <link rel="stylesheet" href="css/overlay.css?20190614" />
+    <link rel="stylesheet" href="css/overlay.css?20190621" />
     <link rel="stylesheet" href="css/dark_overlay.css?20190614" />
 
     <!-- Localization Support script -->
@@ -57,7 +57,7 @@
     <script type="text/javascript" src="js/app/fish.js?20190609"></script>
     <script type="text/javascript" src="js/app/weather.js?20190609"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?201905172105"></script>
-    <script type="text/javascript" src="js/app/viewmodel.js?20190527"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20190621"></script>
 
 
     <!-- Templates -->
@@ -121,6 +121,7 @@
               {{=it.availability.current.duration()}}
             </span><br/>
             <span style="font-size: smaller">
+              <i class="upcoming-windows-button calendar icon"></i>
               <span style="white-space: nowrap !important">
                 <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
               </span>
@@ -285,6 +286,33 @@
       </tr>
     </script>
 
+    <script id="upcoming-windows-template" type="text/html;x-dot-template">
+      <div class="ui popup" style="">
+        <div class="upcoming-windows-popup">
+          <div>
+            <b>Next Start</b>
+          </div>
+          <div>
+            <b>Duration</b>
+          </div>
+          <div>
+            <b>Downtime</b>
+          </div>
+          {{~it.availability.upcomingWindows() :nextWindow:idx}}
+            <div style="white-space: nowrap;">
+              <b>{{=moment(nextWindow.start).calendar()}}</b>
+            </div>
+            <div style="white-space: nowrap;">
+              {{=nextWindow.duration}}
+            </div>
+            <div style="white-space: nowrap;">
+              {{=nextWindow.downtime}}
+            </div>
+          {{~}}
+        </div>
+      </div>
+    </script>
+
     <script type="text/javascript">
       $(() => {
         // Display appropriate messages depending on if the site was loaded via http or https.
@@ -327,6 +355,7 @@
         viewModel.fishEntryTemplate = doT.template($('#fish-template').text());
         viewModel.fishIntuitionEntryTemplate = doT.template($('#fish-intuition-template').text());
         var tableSectionDividerTemplate = doT.template($('#table-section-divider-template').text());
+        var upcomingWindowsTemplate = doT.template($('#upcoming-windows-template').text());
 
         // Initialize the view model's initial filter.
         // Do this here to prevent caching issues...
@@ -388,6 +417,9 @@
             }
           }
 
+          // Invert any tooltips
+          $('*[data-tooltip]').attr('data-inverted', '');
+
           // $('.sprite-icon-aquarium').popup({
           //   position: 'right center',
           //   inline: true,
@@ -402,7 +434,7 @@
 
         function addFishEntryToTable(fish) {
           // Add a row for the fish.
-          fishTableElement.append(viewModel.fishEntryTemplate(fish));
+          var fishEntry = fishTableElement.append(viewModel.fishEntryTemplate(fish)).children().last();
           // If it requires intuition, add rows for each required fish.
           for (let intuitionFish of fish.intuitionFish) {
             var intuitionFishView = null;
@@ -418,6 +450,20 @@
               console.error(intuitionFishView);
               throw e;
             }
+          }
+          fishEntry.find('.upcoming-windows-button').parent().after(upcomingWindowsTemplate(fish));
+          fishEntry.find('.upcoming-windows-button').popup({
+            addTouchEvents: false,
+            hoverable: true,
+            inline: true,
+            position: 'right center',
+            target: fishEntry.find('.upcoming-windows-button').parent(),
+            on: 'click',
+            maxSearchDepth: 3,
+            observeChanges: false
+          });
+          if (localStorage.getItem("theme") === 'dark') {
+            fishEntry.find('.upcoming-windows-popup').parent().addClass('inverted');
           }
         }
 
@@ -504,6 +550,7 @@
               // // Get the existing entries, staining each as stale.
               // var fishEntries = $(".fish-entry", fishTableElement).data("stale", true);
               // var tbodyNode = fishTableElement[0];
+              $('.upcoming-windows-button').popup("destroy");
               $(".fish-entry").remove();
               $(".section-divider").remove();
               var fishes = viewModel.updateAll();
@@ -531,7 +578,7 @@
 
           Rx.Observable.interval(2500 /*ms*/).timestamp().subscribe((x) => {
             // Every 5 seconds, update the availability times.
-            _($(".fish-entry")).each((e) => {
+            $(".fish-entry").each((index, e) => {
               var currentAvail = $(".fish-availability-current", e);
               var prefix = $(e).hasClass('fish-active') ? "closes " : "";
               currentAvail.text(prefix + "in " +
@@ -644,12 +691,20 @@
             theme = theme ? '' : 'dark';
             localStorage.setItem("theme", theme);
             $("body").toggleClass('dark');
+            if (theme === 'dark') {
+              $('.upcoming-windows-popup').parent().addClass('inverted');
+              $('*[data-tooltip]').attr('data-inverted', '');
+            } else {
+              $('.upcoming-windows-popup').parent().removeClass('inverted');
+              $('*[data-tooltip]').removeAttr('data-inverted');
+            }
           });
 
           var theme = localStorage.getItem("theme");
           if (theme === 'dark') {
             $("body").addClass(theme);
             $("#theme-button").prop('checked', true);
+            $('*[data-tooltip]').attr('data-inverted', '');
           }
 
           // _.delay(() => {
@@ -715,6 +770,7 @@
           </p>
         </div>
       </div>
+      <h2>Tips and Tricks:</h2>
       <p>
         Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).  You can also single-click the expansion button to toggle an entire expansion from being displayed.
       </p>
@@ -727,7 +783,11 @@
       <p>
         Partial localization support is here! Select the language to change the in-game names and locations to your client's language. I'm very sorry the UI does not automatically translate well, please forgive me.
       </p>
+      <p>
+        You can display the next 10 upcoming windows by clicking on the <i class="calendar icon"></i> in front of the uptime text. You might be sad afterward though, looking at you Bobgoblin Bass...
+      </p>
 
+      <h2>Settings:</h2>
       <div class="ui vertically padded grid">
         <div class="row" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
           <div class="column">Completion:</div>
