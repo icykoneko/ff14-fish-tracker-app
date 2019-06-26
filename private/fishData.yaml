@@ -47,9 +47,9 @@
   fishEyes: false
   patch: 2
 - name: Nautilus
-  location: Isles of Umbra Southshore
-  startHour: 18
-  endHour: 6
+  location: Sapsa Spawning Grounds
+  startHour: 0
+  endHour: 24
   previousWeatherSet: []
   weatherSet: []
   predators: {}
@@ -2138,8 +2138,11 @@
   location: Witchdrop
   startHour: 0
   endHour: 24
-  previousWeatherSet: []
-  weatherSet: []
+  previousWeatherSet:     # NOTE: Weather restrictions are copied from Mahar. Ignore integrity check.
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Blizzards
   predators: {}
   bestCatchPath:
   - Hoverworm
@@ -2237,7 +2240,7 @@
   bestCatchPath:
   - Heavy Steel Jig
   hookset:
-  snagging:
+  snagging: false       # Ignore integrity check. Fish from ARR do not require Snagging.
   gig:
   folklore: false
   fishEyes: false
@@ -2640,13 +2643,14 @@
   patch: 3
 - name: Noontide Oscar
   location: Eil Tohm
-  startHour: 6
-  endHour: 12
+  startHour: 0              # NOTE: The time restrictions on this fish were relaxed at some point.
+  endHour: 24
   previousWeatherSet: []
   weatherSet: []
   predators: {}
   bestCatchPath:
   - Brute Leech
+  # Alternatively, you can use Purse Web Spider (non-scrip bait)
   hookset:
   snagging:
   gig:
@@ -3233,7 +3237,7 @@
   bestCatchPath:
   - Giant Crane Fly
   hookset:
-  snagging: true
+  snagging: false
   gig:
   folklore: true
   fishEyes: false
@@ -4913,7 +4917,7 @@
   bestCatchPath:
   - Live Shrimp
   hookset:
-  snagging: true
+  snagging: false
   gig:
   folklore: false
   fishEyes: false
@@ -5221,7 +5225,7 @@
   - Blue Bobbit
   predators:
   hookset:
-  snagging: true
+  snagging: false
   gig:
   folklore: true
   fishEyes: false

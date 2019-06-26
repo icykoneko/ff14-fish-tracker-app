@@ -454,12 +454,51 @@ def check_data_integrity(args):
                             lambda x: x['Item'] is not None and x['Item']['Name'] == fish['name'])
         if fish_params is None:
             continue
-        if fish_params['TimeRestricted'] and fish['startHour'] == 0 and fish['endHour'] == 24:
+
+        # VERY IMPORTANT NOTE:
+        #   The game data very often does not restrict the weather or time for
+        #   mooched fish. That is, if a particular fish can only be caught by
+        #   mooching a fish with time/weather restrictions, it itself won't
+        #   appear to be restricted (according to the DATs).
+        #   For the sake of use experience, restrictions have often been copied
+        #   over to the target fish. This should be revisted once the UI allows
+        #   better display of mootch fish (similar to intuition fish).
+
+        # Check if time restricted.
+        if fish_params.time_restricted and \
+                fish['startHour'] == 0 and fish['endHour'] == 24:
             has_errors = True
-            logging.error('%s should be time restricted' % fish['name'])
-        if fish_params['WeatherRestricted'] and len(fish['previousWeatherSet'] or []) == 0 and len(fish['weatherSet'] or []) == 0:
+            logging.error('%s should be time restricted', fish['name'])
+        elif not fish_params.time_restricted and \
+                not (fish['startHour'] == 0 and fish['endHour'] == 24):
             has_errors = True
-            logging.error('%s should be weather restricted' % fish['name'])
+            logging.error('%s should not be time restricted', fish['name'])
+
+        # Check if weather restricted.
+        if fish_params.weather_restricted and \
+                len(fish['previousWeatherSet'] or []) == 0 and \
+                len(fish['weatherSet'] or []) == 0:
+            has_errors = True
+            logging.error('%s should be weather restricted', fish['name'])
+        elif not fish_params.weather_restricted and \
+                len(fish['previousWeatherSet'] or []) != 0 and \
+                len(fish['weatherSet'] or []) != 0:
+            has_errors = True
+            logging.error('%s should not be weather restricted', fish['name'])
+
+        # Check if fish eyes or snagging should be set.
+        # This is not 100% accurate yet. According to crowd-sourced data, even when
+        # this check says Snagging isn't required, the majority of comments say it
+        # is needed. It doesn't help that it also seems to apply to Fish Eyes.
+        fish_eyes_needed = fish.get('fishEyes') or False
+        snagging_needed = fish.get('snagging') or False
+        if not fish_params['IsHidden'] and fish_params[4]:
+            if fish_eyes_needed is False and snagging_needed is False:
+                has_errors = True
+                logging.error('%s should require Fish Eyes or Snagging', fish['name'])
+        elif snagging_needed is not False:
+            has_errors = True
+            logging.error('%s should not require Snagging', fish['name'])
 
     if has_errors:
         logging.error('Data integrity check failed...')
