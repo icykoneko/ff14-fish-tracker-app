@@ -1,3 +1,7 @@
+---
+layout: none
+title: Home
+---
 <!DOCTYPE html>
 <html>
   <head>
@@ -59,7 +63,7 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?201905172105"></script>
     <script type="text/javascript" src="js/app/viewmodel.js?20190627"></script>
 
-
+    {% raw %}
     <!-- Templates -->
     <script id="fish-table-template" type="text/html;x-dot-template">
       <table id="fishes" class="ui selectable striped very basic very compact unstackable table">
@@ -342,6 +346,7 @@
         </div>
       </div>
     </script>
+    {% endraw %}
 
     <script type="text/javascript">
       $(() => {
@@ -803,6 +808,17 @@
           </p>
         </div>
       </div>
+
+      <!-- ANNOUNCEMENT MESSAGES -->
+      <div class="announcements">
+        {% for post in site.posts %}
+          <div class="ui message announcement">
+            <div class="header">{{ post.title }}</div>
+            {{ post.content }}
+          </div>
+        {% endfor %}
+      </div>
+
       <h2>Tips and Tricks:</h2>
       <p>
         Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).  You can also single-click the expansion button to toggle an entire expansion from being displayed.
