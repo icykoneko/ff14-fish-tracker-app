@@ -41,7 +41,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.0.3/jquery.floatThead.min.js"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?4.56_20190609" />
+    <link rel="stylesheet" href="public/images/sprite.css?5.0_201906280009" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20190614" />
     <link rel="stylesheet" href="css/overlay.css?20190621" />
     <link rel="stylesheet" href="css/dark_overlay.css?20190614" />
@@ -50,14 +50,14 @@
     <script type="text/javascript" src="js/app/localization.js?20190517"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?4.56_201906261816"></script>
+    <script type="text/javascript" src="js/app/data.js?5.0_201906280009"></script>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/app/time.js"></script>
-    <script type="text/javascript" src="js/app/fish.js?20190609"></script>
+    <script type="text/javascript" src="js/app/fish.js?20190627"></script>
     <script type="text/javascript" src="js/app/weather.js?20190609"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?201905172105"></script>
-    <script type="text/javascript" src="js/app/viewmodel.js?20190621"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20190627"></script>
 
 
     <!-- Templates -->
@@ -112,7 +112,9 @@
         </td>
         <!-- Availability -->
         <td>
-          {{?it.alwaysAvailable}}
+          {{?it.dataMissing !== false}}
+            <i class="question circle outline icon"></i> Unknown
+          {{??it.alwaysAvailable}}
             Always
           {{??it.availability === undefined}}
             Unknown
@@ -139,26 +141,39 @@
         </td>
         <!-- Conditions -->
         <td>
-          {{?it.conditions.previousWeatherSet.length > 0}}
-            {{~it.conditions.previousWeatherSet :weather:windex}}
-              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                   title="{{=__p(weather,'name')}}"></div>
-            {{~}}
-            <i class="arrow right icon"></i>
-          {{?}}
-          {{~it.conditions.weatherSet :weather:idx}}
-            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                 title="{{=__p(weather,'name')}}"></div>
-          {{~}}
-          <br/><i class="wait icon"></i>&nbsp;
-          {{? it.startHour === 0 && it.endHour === 24}}
-            All Day
+          {{?it.dataMissing !== false}}
+            {{?it.dataMissing.weatherRestricted}}
+              <i class="cloud icon"></i> Weather Restricted
+            {{?}}
+            <br/>
+            {{?it.dataMissing.timeRestricted}}
+              <i class="clock icon"></i> Time Restricted
+            {{?}}
           {{??}}
-            {{=it.startHour + ' - ' + it.endHour}}
+            {{?it.conditions.previousWeatherSet.length > 0}}
+              {{~it.conditions.previousWeatherSet :weather:windex}}
+                <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                    title="{{=__p(weather,'name')}}"></div>
+              {{~}}
+              <i class="arrow right icon"></i>
+            {{?}}
+            {{~it.conditions.weatherSet :weather:idx}}
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                  title="{{=__p(weather,'name')}}"></div>
+            {{~}}
+            <br/><i class="wait icon"></i>&nbsp;
+            {{? it.startHour === 0 && it.endHour === 24}}
+              All Day
+            {{??}}
+              {{=it.startHour + ' - ' + it.endHour}}
+            {{?}}
           {{?}}
         </td>
         <!-- Requirements and Bait -->
         <td>
+          {{?it.bait.path.length == 0}}
+            <i class="question circle outline icon"></i> Unknown
+          {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.bait.hasPredators}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
@@ -206,7 +221,9 @@
         </td>
         <!-- Availability -->
         <td>
-          {{?it.alwaysAvailable}}
+          {{?it.dataMissing !== false}}
+            <i class="question circle outline icon"></i> Unknown
+          {{??it.alwaysAvailable}}
             Always
           {{??it.availability === undefined}}
             Unknown
@@ -229,26 +246,39 @@
           {{?}}
         </td>
         <td>
-          {{?it.conditions.previousWeatherSet.length > 0}}
-            {{~it.conditions.previousWeatherSet :weather:windex}}
-              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                   title="{{=__p(weather,'name')}}"></div>
-            {{~}}
-            <i class="arrow right icon"></i>
-          {{?}}
-          {{~it.conditions.weatherSet :weather:idx}}
-            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                 title="{{=__p(weather,'name')}}"></div>
-          {{~}}
-          <i class="wait icon"></i>&nbsp;
-          {{? it.startHour === 0 && it.endHour === 24}}
-            All Day
+          {{?it.dataMissing !== false}}
+            {{?it.dataMissing.weatherRestricted}}
+              <i class="cloud icon"></i> Weather Restricted
+            {{?}}
+            <br/>
+            {{?it.dataMissing.timeRestricted}}
+              <i class="clock icon"></i> Time Restricted
+            {{?}}
           {{??}}
-            {{=it.startHour + ' - ' + it.endHour}}
+            {{?it.conditions.previousWeatherSet.length > 0}}
+              {{~it.conditions.previousWeatherSet :weather:windex}}
+                <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                    title="{{=__p(weather,'name')}}"></div>
+              {{~}}
+              <i class="arrow right icon"></i>
+            {{?}}
+            {{~it.conditions.weatherSet :weather:idx}}
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                  title="{{=__p(weather,'name')}}"></div>
+            {{~}}
+            <i class="wait icon"></i>&nbsp;
+            {{? it.startHour === 0 && it.endHour === 24}}
+              All Day
+            {{??}}
+              {{=it.startHour + ' - ' + it.endHour}}
+            {{?}}
           {{?}}
         </td>
         <!-- Bait -->
         <td>
+          {{?it.bait.path.length == 0}}
+            <i class="question circle outline icon"></i> Unknown
+          {{?}}
           {{?it.fishEyes !== false}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes {{?it.fishEyes !== true}}has-duration{{?}}" title="Fish Eyes">
               {{?it.fishEyes !== true}}
@@ -363,7 +393,8 @@
           completion: 'all',
           patch: [2, 2.1, 2.2, 2.3, 2.4, 2.5,
                   3, 3.1, 3.2, 3.3, 3.4, 3.5,
-                  4, 4.1, 4.2, 4.3, 4.4, 4.5],
+                  4, 4.1, 4.2, 4.3, 4.4, 4.5,
+                  5],
         };
         viewModel.showUpcomingWindowFromNow = false;
 
@@ -428,7 +459,6 @@
         }
 
         _.defer(function () {
-          console.log("Updating and sorting table now...");
           initializeView();
         });
 
@@ -470,6 +500,7 @@
         function initializeView() {
           $('.ui.radio.checkbox').checkbox();
           // Initialize the table with all the fishies.
+          console.log("Updating and sorting table now...");
           var fishes = viewModel.updateAll()
           for (let fish of fishes) {
             // Create the initial entry.
@@ -691,6 +722,7 @@
             theme = theme ? '' : 'dark';
             localStorage.setItem("theme", theme);
             $("body").toggleClass('dark');
+            $('.ui.message.announcement').toggleClass('inverted');
             if (theme === 'dark') {
               $('.upcoming-windows-popup').parent().addClass('inverted');
               $('*[data-tooltip]').attr('data-inverted', '');
@@ -703,6 +735,7 @@
           var theme = localStorage.getItem("theme");
           if (theme === 'dark') {
             $("body").addClass(theme);
+            $('.ui.message.announcement').addClass('inverted');
             $("#theme-button").prop('checked', true);
             $('*[data-tooltip]').attr('data-inverted', '');
           }
@@ -741,7 +774,7 @@
         This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a target="#top" href="feedback.html">leave comments, kudos, report missing or incorrect data</a>, or whatever. Good luck!
       </p>
       <!-- HTTP => HTTPS Transition Helper Messages -->
-      <div class="ui hidden icon info message" id="https_message">
+      <div class="ui hidden icon info message announcement" id="https_message">
         <i class="exclamation circle icon"></i>
         <div class="content">
           <div class="header">
@@ -756,7 +789,7 @@
           </ol>
         </div>
       </div>
-      <div class="ui hidden icon info message" id="transition_message">
+      <div class="ui hidden icon info message announcement" id="transition_message">
         <i class="close icon"></i>
         <i class="exclamation circle icon"></i>
         <div class="content">
@@ -850,6 +883,15 @@
                 <div class="ui active button" data-filter="4.3">4.3</div>
                 <div class="ui active button" data-filter="4.4">4.4</div>
                 <div class="ui active button" data-filter="4.5">4.5</div>
+              </div>
+              <div class="ui mini very compact buttons">
+                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="5">Shadowbringers (5.x)</div>
+                <div class="ui active button" data-filter="5">5.0</div>
+                <div class="ui disabled active button" data-filter="5.1">5.1</div>
+                <div class="ui disabled active button" data-filter="5.2">5.2</div>
+                <div class="ui disabled active button" data-filter="5.3">5.3</div>
+                <div class="ui disabled active button" data-filter="5.4">5.4</div>
+                <div class="ui disabled active button" data-filter="5.5">5.5</div>
               </div>
             </div>
           </div>
