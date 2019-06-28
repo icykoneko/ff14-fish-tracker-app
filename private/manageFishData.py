@@ -6,6 +6,10 @@ try:
     from yaml import CLoader as Loader
 except ImportError:
     from yaml import Loader
+try:
+    from yaml import CDumper as Dumper
+except ImportError:
+    from yaml import Dumper
 import json
 from operator import itemgetter, add
 from collections import OrderedDict, namedtuple
@@ -515,6 +519,66 @@ def check_data_integrity(args):
     return not has_errors
 
 
+def add_new_fish_data(args):
+    global XIV
+
+    # Parse the fish data in the YAML file.
+    fishes = yaml.load(open(args.existing_data, 'r'), Loader=Loader)
+    known_fishes = [fish['name'] for fish in fishes]
+
+    # Add ignored fish as well please.
+    if args.ignored_fish is not None:
+        with open(args.ignored_fish, 'r') as f:
+            known_fishes += [fish.strip() for fish in f]
+
+    known_fishes = set(known_fishes)
+
+    # Iterate all of the FishingSpot entries next, skipping any fish we already know about.
+    new_fishes = {}
+    for fishing_spot in XIV.game_data.get_sheet('FishingSpot'):
+        if fishing_spot.place_name.key == 0:
+            continue
+        for fish in fishing_spot.items:
+            if str(fish.name) in known_fishes:
+                continue
+
+            if fish.key not in new_fishes:
+
+                new_fishes[fish.key] = {
+                    'name': str(fish.name),
+                    'location': str(fishing_spot.place_name),
+                    'startHour': 0,
+                    'endHour': 24,
+                    'previousWeatherSet': None,
+                    'weatherSet': None,
+                    'bestCatchPath': None,
+                    'predators': None,
+                    'hookset': None,
+                    'snagging': None,
+                    'gig': None,
+                    'fishEyes': False,
+                    'patch': float(args.patch),
+                    'dataMissing': True
+                }
+
+    # TODO: Include spearfishing as well.
+    #  This requires additional porting in the pysaintcoinach library to be efficient.
+
+    # Dump the new fish data to a YAML file.
+
+    with open(args.new_data, 'w') as f:
+        # Make things prettier...
+        def represent_none(self, _):
+            return self.represent_scalar('tag:yaml.org,2002:null', '')
+
+        yaml.add_representer(type(None), represent_none)
+        yaml.dump(list(new_fishes.values()), f, Dumper=yaml.CSafeDumper, default_flow_style=False, sort_keys=False)
+        # f.write('---\n')
+        # f.writelines(['%s\n' % str(fish['name']) for fish in list(new_fishes.values())])
+
+    return True
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Fish Data Management Script')
     subparsers = parser.add_subparsers()
@@ -548,6 +612,27 @@ if __name__ == '__main__':
                                   dest='game_path',
                                   help='Path to FF14 installation')
     parser_integrity.set_defaults(func=check_data_integrity)
+
+    parser_addnew = subparsers.add_parser('addnew',
+                                          help='Adds newly discovered fish to the YAML file')
+    parser_addnew.add_argument('-i', '--in', type=str,
+                               default=os.path.join(_SCRIPT_PATH, 'fishData.yaml'),
+                               dest='existing_data',
+                               help='Path to current fish data YAML file')
+    parser_addnew.add_argument('-o', '--out', type=str,
+                               default=os.path.join(_SCRIPT_PATH, 'fishDataAdditions.yaml'),
+                               dest='new_data',
+                               help='Where to store newly added fish (YAML)')
+    parser_addnew.add_argument('--game_path', '-gpath', type=str,
+                               default=r"C:\Program Files (x86)\SquareEnix\FINAL FANTASY XIV - A Realm Reborn",
+                               dest='game_path',
+                               help='Path to FF14 installation')
+    parser_addnew.add_argument('-p', '--patch', type=str,
+                               help='Patch number to associate with these new fish')
+    parser_addnew.add_argument('-x', '--ignore',
+                               dest='ignored_fish',
+                               help='List of fish to always ignore (one per line)')
+    parser_addnew.set_defaults(func=add_new_fish_data)
 
     args = parser.parse_args()
     initialize_data(args)
