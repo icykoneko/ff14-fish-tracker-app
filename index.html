@@ -175,7 +175,7 @@ title: Home
         </td>
         <!-- Requirements and Bait -->
         <td>
-          {{?it.bait.path.length == 0}}
+          {{?it.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
@@ -280,7 +280,7 @@ title: Home
         </td>
         <!-- Bait -->
         <td>
-          {{?it.bait.path.length == 0}}
+          {{?it.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
           {{?}}
           {{?it.fishEyes !== false}}
