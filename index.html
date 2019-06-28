@@ -721,6 +721,7 @@
             theme = theme ? '' : 'dark';
             localStorage.setItem("theme", theme);
             $("body").toggleClass('dark');
+            $('.ui.message.announcement').toggleClass('inverted');
             if (theme === 'dark') {
               $('.upcoming-windows-popup').parent().addClass('inverted');
               $('*[data-tooltip]').attr('data-inverted', '');
@@ -733,6 +734,7 @@
           var theme = localStorage.getItem("theme");
           if (theme === 'dark') {
             $("body").addClass(theme);
+            $('.ui.message.announcement').addClass('inverted');
             $("#theme-button").prop('checked', true);
             $('*[data-tooltip]').attr('data-inverted', '');
           }
@@ -771,7 +773,7 @@
         This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a target="#top" href="feedback.html">leave comments, kudos, report missing or incorrect data</a>, or whatever. Good luck!
       </p>
       <!-- HTTP => HTTPS Transition Helper Messages -->
-      <div class="ui hidden icon info message" id="https_message">
+      <div class="ui hidden icon info message announcement" id="https_message">
         <i class="exclamation circle icon"></i>
         <div class="content">
           <div class="header">
@@ -786,7 +788,7 @@
           </ol>
         </div>
       </div>
-      <div class="ui hidden icon info message" id="transition_message">
+      <div class="ui hidden icon info message announcement" id="transition_message">
         <i class="close icon"></i>
         <i class="exclamation circle icon"></i>
         <div class="content">
