@@ -333,7 +333,7 @@ def convert_fish_to_json(item):
                          'predators': predators,
                          'patch': item.get('patch'),
                          'folklore': folklore,
-                         'collectable': item.get('collectable', False),
+                         'collectible': item.get('collectible', False),
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
