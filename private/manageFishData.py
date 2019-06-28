@@ -312,6 +312,7 @@ def convert_fish_to_json(item):
     # Check if the fish requires Folklore (use the DATs, ignore old data from YAML file)
     # Technically, every fish /should/ have an entry in this table... but we'll be safe.
     folklore = None
+    data_missing = None
     fish_parameter = first(XIV.game_data.get_sheet('FishParameter'),
                            lambda r: r.get_raw('Item') == key)
     if fish_parameter is not None:
@@ -319,6 +320,13 @@ def convert_fish_to_json(item):
         if folklore is not None:
             # Convert to raw key to allow for localization (and less duplication)
             folklore = folklore.key
+        # If the entry is marked as "dataMissing", then populate the time and weather
+        # restriction values. Also, display a warning in the logs so we know we need
+        # to resolve the missing information in the future.
+        if item.get('dataMissing', False):
+            data_missing = {'weatherRestricted': fish_parameter.weather_restricted,
+                            'timeRestricted': fish_parameter.time_restricted}
+            logging.warning('%s still needs conditions verified', item['name'])
     else:
         logging.warning('%s does not have an entry in FishParameter?!', item['name'])
 
@@ -338,7 +346,8 @@ def convert_fish_to_json(item):
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
                          'gig': item.get('gig', None),
-                         'aquarium': aquarium_entry}))
+                         'aquarium': aquarium_entry,
+                         'dataMissing': data_missing}))
 
 
 def rebuild_fish_data(args):

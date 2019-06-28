@@ -62,6 +62,11 @@ class Fish {
       this.weatherSet.length == 0 && this.startHour == 0 && this.endHour == 24;
     this.intuitionFish = [];
 
+    // Allow for unknown data.
+    if (this.dataMissing === undefined || this.dataMissing === null) {
+      this.dataMissing = false;
+    }
+
     // Create a subject for catchableRanges that we can subscribe to.
     this.catchableRangesObserver = new Rx.BehaviorSubject([]);
   }
