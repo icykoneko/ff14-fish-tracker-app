@@ -273,7 +273,12 @@ def lookup_fishing_spot_by_name(name):
     result = nth(filter(lambda item: item[1]['name_en'] == name,
                         FISHING_NODES.items()), 0)
     if result is None:
-        raise ValueError(name)
+        # HOLD ON, Clorifex says SE f's this up a lot... and can sometimes turn
+        # the first letter of place names to lowercase... Seriously SE?
+        result = nth(filter(lambda item: item[1]['name_en'].lower() == name.lower(),
+                            FISHING_NODES.items()), 0)
+        if result is None:
+            raise ValueError(name)
     return KeyValuePair(*result)
 
 
