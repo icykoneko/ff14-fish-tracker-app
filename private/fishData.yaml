@@ -6107,13 +6107,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tag: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Laxan Carp
   location: The Trivium
   startHour: 0
@@ -6121,13 +6122,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Asteroidea
   location: The Trivium
   startHour: 0
@@ -6177,13 +6179,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Wandering Catfish
   location: The Quadrivium
   startHour: 0
@@ -6205,13 +6208,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Skeletonfish
   location: Crystarium Personal Suites
   startHour: 0
@@ -6219,13 +6223,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Eighteyes Eel
   location: The Rift of Sighs
   startHour: 0
@@ -7264,18 +7269,19 @@
   dataMissing: true
 - name: Diamond Pipira
   location: The Red Chalice
-  startHour: 0
-  endHour: 24
+  startHour: 18
+  endHour: 19
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
-  hookset:
+  hookset: Powerful
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Rak'tika Trout
   location: The Rotzatl
   startHour: 0
@@ -7335,17 +7341,19 @@
 - name: Darkdweller
   location: Woven Oath
   startHour: 0
-  endHour: 24
+  endHour: 8
   previousWeatherSet:
   weatherSet:
+  - Fog
   bestCatchPath:
+  - Baitbugs
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
-  fishEyes: false
+  fishEyes: true
   patch: 5.0
-  dataMissing: true
 - name: Stormfish
   location: The Flounders' Floor
   startHour: 0
