@@ -339,6 +339,8 @@ def convert_fish_to_json(item):
     else:
         logging.warning('%s does not have an entry in FishParameter?!', item['name'])
 
+    is_collectable = XIV.game_data.get_sheet('Item')[key].as_boolean('IsCollectable')
+
     return (key,
             OrderedDict({'_id': key,
                          'previousWeatherSet': previous_weather_set,
@@ -350,7 +352,7 @@ def convert_fish_to_json(item):
                          'predators': predators,
                          'patch': item.get('patch'),
                          'folklore': folklore,
-                         'collectible': item.get('collectible', False),
+                         'collectable': is_collectable,
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
@@ -459,6 +461,19 @@ def rebuild_fish_data(args):
                     icon = IconHelper.get_icon(XIV.packs, n)
                     logging.info('Extracting %s -> %s' % (icon, filename))
                     icon.get_image().save(os.path.join(_SCRIPT_PATH, 'images', subdir, filename))
+
+        # Import the icons for collectable and folklore
+        fishing_note_book = None
+        if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'collectable.png')):
+            if fishing_note_book is None:
+                fishing_note_book = XIV.packs.get_file('ui/uld/FishingNoteBook.tex').get_image()
+            logging.info('Extracting collectable.png')
+            fishing_note_book.crop((104, 28, 124, 48)).save(os.path.join(_SCRIPT_PATH, 'images', 'collectable.png'))
+        if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'folklore.png')):
+            if fishing_note_book is None:
+                fishing_note_book = XIV.packs.get_file('ui/uld/FishingNoteBook.tex').get_image()
+            logging.info('Extracting folklore.png')
+            fishing_note_book.crop((124, 28, 144, 48)).save(os.path.join(_SCRIPT_PATH, 'images', 'folklore.png'))
 
 
 def check_data_integrity(args):
