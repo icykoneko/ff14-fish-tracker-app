@@ -6137,13 +6137,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
-  snagging:
+  tug: light
+  snagging: true
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Lover's Flower
   location: The Trivium
   startHour: 0
@@ -6151,13 +6152,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Jacketed Snail
   location: The Trivium
   startHour: 0
@@ -6194,13 +6196,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Crystarium Tetra
   location: Crystarium Personal Suites
   startHour: 0
@@ -6238,13 +6241,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Hard Candy
   location: The Rift of Sighs
   startHour: 0
@@ -6252,13 +6256,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Abyssal Snail
   location: The Rift of Sighs
   startHour: 0
@@ -6266,13 +6271,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Water Ball
   location: The Rift of Sighs
   startHour: 0
@@ -6280,13 +6286,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Albino Caiman
   location: The Rift of Sighs
   startHour: 0
@@ -6294,13 +6301,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Misty Killifish
   location: The Rusted Reservoir
   startHour: 0
@@ -6308,13 +6316,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Platinum Guppy
   location: The Rusted Reservoir
   startHour: 0
@@ -6336,13 +6345,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Rabbit Skipper
   location: The Source
   startHour: 0
@@ -6350,13 +6360,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Xanthic Bass
   location: The Source
   startHour: 0
@@ -6364,13 +6375,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Albino Rock Crab
   location: The Source
   startHour: 0
@@ -6378,13 +6390,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Snakeskin Discus
   location: Sullen
   startHour: 0
@@ -6392,13 +6405,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Albino Garfish
   location: The Isle of Ken
   startHour: 0
@@ -6406,13 +6420,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
-  hookset:
+  hookset: Powerful
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Vicejaw
   location: The Isle of Ken
   startHour: 0
@@ -6420,13 +6435,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
-  hookset:
+  hookset: Powerful
+  tug: heavy
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Skulleater
   location: Upper Watts River
   startHour: 0
@@ -6434,13 +6450,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Toffee Snail
   location: Upper Watts River
   startHour: 0
@@ -6448,13 +6465,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Watts Trout
   location: Upper Watts River
   startHour: 0
@@ -6462,13 +6480,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Hucho Taimen
   location: Upper Watts River
   startHour: 0
@@ -6476,13 +6495,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Winged Hatchetfish
   location: Upper Watts River
   startHour: 0
@@ -6490,13 +6510,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Noble's Fan
   location: White Oil Falls
   startHour: 0
@@ -6504,13 +6525,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Zebra Catfish
   location: Lower Watts River
   startHour: 0
@@ -6518,13 +6540,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Sepia Sole
   location: Sharptongue Drip
   startHour: 0
@@ -6532,13 +6555,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: South Kholusian Cod
   location: The Western Kholusian Coast
   startHour: 0
@@ -6546,13 +6570,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Kholusian Flounder
   location: The Western Kholusian Coast
   startHour: 0
@@ -6560,13 +6585,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Shellfracture Kelp
   location: The Western Kholusian Coast
   startHour: 0
@@ -6574,13 +6600,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Creamy Oyster
   location: The Western Kholusian Coast
   startHour: 0
@@ -6588,13 +6615,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
-  snagging:
+  tug: light
+  snagging: true
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Rose Shrimp
   location: The Western Kholusian Coast
   startHour: 0
@@ -6602,13 +6630,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Razorfish
   location: The Western Kholusian Coast
   startHour: 0
@@ -6616,13 +6645,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Blood Cloud
   location: Seagazer Shoals
   startHour: 0
@@ -6630,13 +6660,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Shapeshifter
   location: Seagazer Shoals
   startHour: 0
@@ -6644,13 +6675,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Minstrelfish
   location: Seagazer Shoals
   startHour: 0
@@ -6658,13 +6690,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Spearhead Squid
   location: The Eastern Kholusian Coast
   startHour: 0
@@ -6672,13 +6705,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Kholusian Wrasse
   location: The Eastern Kholusian Coast
   startHour: 0
@@ -6686,13 +6720,15 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
+  - Spearhead Squid
   predators:
-  hookset:
+  hookset: Powerful
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Weedy Seadragon
   location: The Eastern Kholusian Coast
   startHour: 0
@@ -6700,13 +6736,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Henodus
   location: The Eastern Kholusian Coast
   startHour: 0
@@ -6728,13 +6765,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Gravel Mussel
   location: The Derelicts
   startHour: 0
@@ -6742,13 +6780,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Bonefish
   location: The Derelicts
   startHour: 0
@@ -6756,13 +6795,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Crimson Sea Spider
   location: The Derelicts
   startHour: 0
@@ -6770,13 +6810,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Eulmore Butterfly
   location: The Derelicts
   startHour: 0
@@ -6784,13 +6825,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Red Hammerhead
   location: The Derelicts
   startHour: 0
@@ -6798,13 +6840,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Shadow Crab
   location: The River of Sand
   startHour: 0
@@ -6812,13 +6855,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Desert Dustfish
   location: The River of Sand
   startHour: 0
@@ -6826,13 +6870,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Sand Egg
   location: The River of Sand
   startHour: 0
@@ -6840,13 +6885,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Hornhelm
   location: The River of Sand
   startHour: 0
@@ -6854,13 +6900,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Web-footed Sand Gecko
   location: The River of Sand
   startHour: 0
@@ -6868,13 +6915,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
   predators:
-  hookset:
+  hookset: Powerful
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Garik Crab
   location: The Hills of Amber
   startHour: 0
@@ -6882,13 +6930,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Nabaath Manta
   location: The Hills of Amber
   startHour: 0
@@ -6896,13 +6945,15 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
+  - Web-footed Sand Gecko
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Amber Monkfish
   location: The Hills of Amber
   startHour: 0
@@ -6910,27 +6961,31 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Thorned Lizard
   location: The Hills of Amber
-  startHour: 0
-  endHour: 24
+  startHour: 14
+  endHour: 15
   previousWeatherSet:
   weatherSet:
+  - Heat Waves
   bestCatchPath:
+  - Desert Dessert Frog
+  - Web-footed Sand Gecko
   predators:
-  hookset:
+  hookset: Powerful
+  tug: heavy
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Amber Lamprey
   location: The Nabaath Severance
   startHour: 0
@@ -6938,13 +6993,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Desert Dessert Frog
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Desert Saw
   location: The Nabaath Severance
   startHour: 0
@@ -6952,13 +7008,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Jerked Ovim
   predators:
   hookset:
+  tug: heavy
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Grey Skipper
   location: Handmirror Lake
   startHour: 0
@@ -6966,13 +7023,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Pixie Fish
   location: Handmirror Lake
   startHour: 0
@@ -6980,13 +7038,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Lemonfish
   location: Handmirror Lake
   startHour: 0
@@ -6994,13 +7053,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Wimple Carp
   location: Handmirror Lake
   startHour: 0
@@ -7008,13 +7068,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Cerulean Loach
   location: Longmirror Lake
   startHour: 0
@@ -7022,13 +7083,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Official Ball
   location: Longmirror Lake
   startHour: 0
@@ -7036,13 +7098,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Rebel
   location: Longmirror Lake
   startHour: 0
@@ -7050,13 +7113,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Wild Red Betta
   location: Longmirror Lake
   startHour: 0
@@ -7064,13 +7128,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Blood-eyed Frog
   location: The Haughty One
   startHour: 0
@@ -7078,13 +7143,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Spotted Ctenopoma
   location: The Haughty One
   startHour: 0
@@ -7092,13 +7158,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Spotted Blue-eye
   location: The Jealous One
   startHour: 0
@@ -7106,27 +7173,30 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Toadhead
   location: Father Collard's Failings
   startHour: 0
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Clear Skies
   bestCatchPath:
+  - Baitbugs
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
-  fishEyes: false
+  fishEyes: true
   patch: 5.0
-  dataMissing: true
 - name: Brightmirror Clam
   location: The Spoiled One
   startHour: 0
@@ -7134,13 +7204,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Cherry Herring
   location: The Spoiled One
   startHour: 0
@@ -7148,13 +7219,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Golden Lobster
   location: Saint Fathric's Temple
   startHour: 0
@@ -7162,13 +7234,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Clawbow
   location: Lake Tusi Mek'ta
   startHour: 0
@@ -7176,13 +7249,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Yellow Pipira
   location: Lake Tusi Mek'ta
   startHour: 0
@@ -7190,13 +7264,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Robber Crab
   location: Lake Tusi Mek'ta
   startHour: 0
@@ -7204,13 +7279,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Clown Tetra
   location: Lake Tusi Mek'ta
   startHour: 0
@@ -7218,13 +7294,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Eryops
   location: Lake Tusi Mek'ta
   startHour: 0
@@ -7232,13 +7309,15 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
+  - Clown Tetra
   predators:
-  hookset:
+  hookset: Powerful
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Oathfish
   location: The Red Chalice
   startHour: 0
@@ -7246,13 +7325,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Marble Nymph
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Darkroot
   location: The Red Chalice
   startHour: 0
@@ -7260,13 +7340,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Diamond Pipira
   location: The Red Chalice
   startHour: 18
@@ -7289,13 +7370,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Night's Bass
   location: The Rotzatl
   startHour: 0
@@ -7303,13 +7385,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Black Tri-star
   location: The Rotzatl
   startHour: 0
@@ -7317,13 +7400,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Silver Kitten
   location: South Mjrl's Regret
   startHour: 0
@@ -7331,13 +7415,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Robber Ball
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Darkdweller
   location: Woven Oath
   startHour: 0
@@ -7361,13 +7446,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Deep Purple Coral
   location: The Flounders' Floor
   startHour: 0
@@ -7417,13 +7503,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Stippled Eel
   location: Where the Dry Return
   startHour: 0
@@ -7472,14 +7559,16 @@
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Short Bill Minnow
   predators:
-  hookset:
+  hookset: Powerful
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Seatrap
   location: Northwest Caliban Gorge
   startHour: 0
@@ -7487,13 +7576,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Ancient Shrimp
   location: West Caliban Gap
   startHour: 0
@@ -7501,13 +7591,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Yeti Crab
   location: West Caliban Gap
   startHour: 0
@@ -7557,13 +7648,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Maneater Clam
   location: Purpure
   startHour: 0
@@ -7585,13 +7677,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Stargazer
   location: Purpure
   startHour: 0
@@ -7599,13 +7692,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Sweetflesh Oyster
   location: The Norvrandt Slope
   startHour: 0
