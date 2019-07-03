@@ -6972,7 +6972,7 @@
 - name: Thorned Lizard
   location: The Hills of Amber
   startHour: 14
-  endHour: 15
+  endHour: 18
   previousWeatherSet:
   weatherSet:
   - Heat Waves
