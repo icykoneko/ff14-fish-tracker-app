@@ -6971,11 +6971,12 @@
   patch: 5.0
 - name: Thorned Lizard
   location: The Hills of Amber
-  startHour: 11
+  startHour: 10
   endHour: 18
   previousWeatherSet:
   weatherSet:
   - Heat Waves
+  - Clear Skies
   bestCatchPath:
   - Desert Dessert Frog
   - Web-footed Sand Gecko
