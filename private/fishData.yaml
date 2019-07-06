@@ -6167,13 +6167,13 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Fruit Worm
   predators:
   hookset:
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Sinspitter
   location: The Quadrivium
   startHour: 0
@@ -6330,14 +6330,16 @@
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Clear Skies
   bestCatchPath:
+  - Baitbugs
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Clean Saucer
   location: The Source
   startHour: 0
@@ -6619,7 +6621,7 @@
   predators:
   hookset:
   tug: light
-  snagging: true
+  snagging: false
   gig:
   fishEyes: false
   patch: 5.0
@@ -6746,18 +6748,21 @@
   patch: 5.0
 - name: Henodus
   location: The Eastern Kholusian Coast
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 23
   previousWeatherSet:
   weatherSet:
+  - Clouds
   bestCatchPath:
+  - Moyebi Shrimp
+  - Spearhead Squid
   predators:
-  hookset:
+  hookset: Powerful
+  tug: heavy
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Milky Coral
   location: The Derelicts
   startHour: 0
@@ -7447,7 +7452,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Moyebi Shrimp
   predators:
   hookset:
   tug: medium
@@ -7462,13 +7467,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
-  snagging:
+  tug: light
+  snagging: true
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Caliban
   location: The Flounders' Floor
   startHour: 0
@@ -7476,13 +7482,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Moyebi Shrimp
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Bubble Angler
   location: The Flounders' Floor
   startHour: 0
@@ -7490,13 +7497,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Ondo Harpoon
   location: The Flounders' Floor
   startHour: 0
@@ -7519,13 +7527,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Ondobane
   location: Where the Dry Return
   startHour: 0
@@ -7533,13 +7542,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Sycorax
   location: Northwest Caliban Gorge
   startHour: 0
@@ -7547,13 +7557,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Hoodwinker
   location: Northwest Caliban Gorge
   startHour: 0
@@ -7607,27 +7618,32 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
+  - Ancient Shrimp
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Aapoak
   location: West Caliban Gap
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 16
   previousWeatherSet:
   weatherSet:
+  - Clear Skies
   bestCatchPath:
+  - Short Bill Minnow
+  - Ancient Shrimp
   predators:
-  hookset:
+  hookset: Powerful
+  tug: heavy
   snagging:
   gig:
-  fishEyes: false
+  fishEyes: true
   patch: 5.0
-  dataMissing: true
 - name: Cyan Sea Devil
   location: East Caliban Gap
   startHour: 0
@@ -7635,13 +7651,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
+  tug: medium
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Pancake Octopus
   location: East Caliban Gap
   startHour: 0
@@ -7664,13 +7681,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
-  snagging:
+  tug: light
+  snagging: true
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Azure Sea Spider
   location: Purpure
   startHour: 0
@@ -7708,13 +7726,14 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
-  snagging:
+  tug: light
+  snagging: true
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Rainbow Shrimp
   location: The Norvrandt Slope
   startHour: 0
@@ -7736,10 +7755,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
