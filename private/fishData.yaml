@@ -6752,6 +6752,7 @@
   endHour: 23
   previousWeatherSet:
   weatherSet:
+  - Fog
   - Clouds
   bestCatchPath:
   - Moyebi Shrimp
