@@ -6749,7 +6749,7 @@
 - name: Henodus
   location: The Eastern Kholusian Coast
   startHour: 12
-  endHour: 23
+  endHour: 24
   previousWeatherSet:
   weatherSet:
   - Fog
