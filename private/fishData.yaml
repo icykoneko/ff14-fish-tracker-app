@@ -7357,8 +7357,8 @@
   patch: 5.0
 - name: Diamond Pipira
   location: The Red Chalice
-  startHour: 18
-  endHour: 19
+  startHour: 14
+  endHour: 20
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
@@ -7742,13 +7742,13 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Short Bill Minnow
   predators:
   hookset:
   snagging:
   gig:
   fishEyes: false
   patch: 5.0
-  dataMissing: true
 - name: Predator
   location: The Norvrandt Slope
   startHour: 0
