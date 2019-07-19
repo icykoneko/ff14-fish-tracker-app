@@ -7358,7 +7358,7 @@
   patch: 5.0
 - name: Diamond Pipira
   location: The Red Chalice
-  startHour: 14
+  startHour: 12
   endHour: 20
   previousWeatherSet:
   weatherSet:
