@@ -57,8 +57,8 @@
     <script type="text/javascript" src="js/app/fish.js?20190627"></script>
     <script type="text/javascript" src="js/app/weather.js?20190609"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?201905172105"></script>
-    <script type="text/javascript" src="js/app/viewmodel.js?20190627"></script>
-
+    <script type="text/javascript" src="js/app/viewmodel.js?20190812"></script>
+    <script type="text/javascript" src="js/app/layout.js?20190812"></script>
 
     <!-- Templates -->
     <script id="fish-table-template" type="text/html;x-dot-template">
@@ -78,7 +78,7 @@
     </script>
 
     <script id="fish-template" type="text/html;x-dot-template">
-      <tr class="fish-entry {{?it.isCatchable()}}fish-active{{?}} {{?it.caught || false}}fish-caught{{?}} {{?it.pinned || false}}fish-pinned{{?}} {{=it.nextAvailBin()}}" data-id="{{=it.id}}">
+      <tr class="fish-entry {{?it.isCatchable()}}fish-active{{?}} {{?it.caught || false}}fish-caught{{?}} {{?it.pinned || false}}fish-pinned{{?}} {{=it.nextAvailBin()}}" data-id="{{=it.id}}" data-sortIdx="{{=it.sortIdx}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
           <div class="ui middle aligned vertical mini very compact icon buttons">
@@ -465,6 +465,7 @@
         function addFishEntryToTable(fish) {
           // Add a row for the fish.
           var fishEntry = fishTableElement.append(viewModel.fishEntryTemplate(fish)).children().last();
+          fishEntry.data('view', fish);
           // If it requires intuition, add rows for each required fish.
           for (let intuitionFish of fish.intuitionFish) {
             var intuitionFishView = null;

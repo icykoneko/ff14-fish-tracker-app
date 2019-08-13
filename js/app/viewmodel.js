@@ -293,6 +293,388 @@ sorters = function() {
   };
 }();
 
+///////////////////////////////////////////////////////////////////////////////
+// View Model (v2)
+// ============================================================================
+// View model will encapsulate all of the display logic and timer subscriptions.
+// Individual displayed fish entries will be HTML elements using data to link
+// back to the back-end data model. On initialization, the view model will still
+// need to wrap the data model to support all of its fields.
+
+class SiteSettings {
+  constructor() {
+    // Filter Settings
+    this.filters = {
+      // Completion filtering:
+      // * all: Display all fish, regardless of caught status.
+      // * caught: Display only caught fish.
+      // * uncaught: Display only uncaught fish.
+      completion: 'all',
+      // Patch filtering:
+      // * Display fish from the specified patches.
+      patch: [2, 2.1, 2.2, 2.3, 2.4, 2.5,
+              3, 3.1, 3.2, 3.3, 3.4, 3.5,
+              4, 4.1, 4.2, 4.3, 4.4, 4.5,
+              5],
+    };
+
+    // Upcoming Window Format:
+    // * fromPrevClose: Display the time until next window starting from the
+    //                  current window's end.
+    // * fromNow: Display the time until next window starting from now.
+    //            NOTE: This requires more updating...
+    this.upcomingWindowFormat = 'fromPrevClose';
+
+    // Sorting Type:
+    // * overallRarity: Sorts fish based on rarity when next window is at least 15
+    //                  minutes from now. Fish are displayed in bins of active,
+    //                  up within 15 minutes, and up later.
+    // * windowPeriods: Sorts all fish by rarity (fish with the shortest windows
+    //                  first). All fish which are not currently active are sorted
+    //                  based on the next time they are up, THEN by rarity.
+    this.sortingType = 'overallRarity';
+
+    // Site Theme:
+    // * dark: Dark mode...
+    // * light: Light mode...
+    this.theme = 'dark';
+
+    // Recorded information:
+    // * completed: An array of fish ids which have been caught.
+    // * pinned: An array of fish ids which should be pinned.
+    this.completed = [];
+    this.pinned = [];
+  }
+}
+
+class FishEntry {
+  constructor(fishId) {
+    // TODO:
+    this.active = false;
+    this.id = fishId;
+    
+    // This is the DOM element associated with this Fish.
+    this.element = null;
+  }
+}
+
+class ViewModel2 {
+  constructor() {
+    // The site settings.
+    this.settings = new SiteSettings();
+
+    // Initialize everything!
+    // NOTE: The fish data itself is already initialized as `Fishes`.
+    // Fish entries contains those entries we want to display.
+    this.fishEntries = {}
+
+    // The actual sorter function.
+    this.sorterFunc = null;
+
+    // When displaying a date that's more than a week away, include the time as well.
+    moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
+
+    // Initialize the layout components.
+    this.layout = new FishTableLayout();
+
+    // Finally, initialize the display.
+    this.initializeDisplay();
+
+  }
+
+  initializeDisplay() {
+    // The main HTML is actually inlined, for the most part.
+
+    // Load the site settings.
+    var settings = this.loadSettings();
+
+    // The fish!
+    // This is the view model's pointer to the master list of fish.
+    this.fishMap = _.reduce(Fishes, (memo, fish) => {
+      memo[fish.id] = fish;
+      return memo;
+    }, {});
+
+    // Create the table to hold all the displayed fish data.
+    var $fishTable = $(this.layout.templates.fishTable());
+    // And initialize it...
+    this.layout.initializeLayout($fishTable);
+
+    // Subjects.
+    // These are used for RxJS to allow subscription events to changes.
+    this.filterCompletionSubject = new Rx.BehaviorSubject(settings.filters.completion);
+    this.filterPatchSubject = new Rx.BehaviorSubject(settings.filters.patch);
+    this.sortingTypeSubject = new Rx.BehaviorSubject(settings.sortingType);
+
+    // Update the table!
+    this.updateDisplay(null);
+
+    // Set event handlers.
+    $('#filterCompletion .button').on('click', this.filterCompletionClicked);
+    $('#filterPatch .button:not(.patch-set)').on({
+      click: this.filterPatchClicked,
+      dblclick: this.filterPatchDblClicked
+    });
+    $('#filterPatch .button.patch-set').on('click', this.filterPatchSetClicked);
+
+    // Special event handlers.
+    // These are mainly supporting the SemanticUI widgets.
+    $('#sortingType .radio.checkbox').checkbox({
+      onChecked: this.sortingTypeChecked
+    });
+  }
+
+  updateDisplay(reason) {
+    // This functionality used to be applyFiltersAndResort. Instead of causing
+    // and outside event, we're going to ask the layout class to do the hard
+    // work.
+
+    // This function is intended to be called whenever major parts of the fish
+    // data have changed. That includes filtering, sorting, and availability
+    // changes.
+
+    // TODO: Include a `reason` argument to determine just how much needs to be
+    // updated (if we can be efficient).
+
+    // We need a base time!
+    var baseTime = eorzeaTime.getCurrentEorzeaDate();
+
+    // Mark all existing entries as stale (or not active).
+    // Anything that's not active, won't be displayed, and at the end of this
+    // function, will be removed from the list, making future updates faster.
+    _(this.fishEntries).each((entry) => entry.active = false);
+
+    // Start by collecting the pinned fish, and removing them from the main list.
+    // We don't want to filter these out for any reason.
+    // TODO: If the pinned fish haven't changed, we probably don't need to do
+    // anything...
+    var pinnedFish = _(Fishes).filter(this.isFishPinned);
+
+    // Next, we'll apply the current filters to the entire list.
+    // TODO: If the filter settings haven't changed, there's no reason to do
+    // this!
+    var visibleFish = _(Fishes).chain()
+      .reject(this.isFishPinned) // don't operate on pinned fish
+      .reject(this.isFishFiltered) // remove fish which are filtered out
+      .value();
+    
+    // All of these fish should have active entries.
+    _(visibleFish).each((fish) => this.activateEntry(fish, baseTime));
+
+    // Remove any entries which are still inactive.
+    for (var k in this.fishEntries) {
+      var entry = this.fishEntries[k];
+      if (!entry.active) {
+        // No one likes stale, rotten fish.  They stink, so remove them.
+        this.layout.remove(entry.element);
+        delete this.fishEntries[k];
+      }
+    }
+
+    // Finally, we can apply sorting to the list of active fish.
+    // NOTE: Sorting used to be handled here... but there's a lot of layout
+    // information that goes into sorting.
+    this.layout.sort(this.sorterFunc);
+  }
+
+  isFishPinned(fish) {
+    return _(this.settings.pinned).contains(fish.id);
+  }
+
+  isFishCaught(fish) {
+    return _(this.settings.completed).contains(fish.id);
+  }
+
+  isFishFiltered(fish) {
+    // Filter by patch.
+    if (!_(this.settings.filters.patch).contains(fish.patch))
+      return false;
+
+    // Filter by completion state.
+    if (this.settings.filters.completion == 'uncaught') {
+      if (this.isFishCaught(fish))
+        return false;
+    } else if (this.settings.filters.completion == 'caught') {
+      if (!this.isFishCaught(fish))
+        return false;
+    }
+
+    // No other reason to filter.
+    return true;
+  }
+
+  activateEntry(fish, baseTime) {
+    // Check if there's already an entry for this fish.
+    if (this.fishEntries[fish.id]) {
+      // There is, so just mark it as active and return.
+      this.fishEntries[fish.id].active = true;
+      return;
+    }
+
+    // Otherwise, we have to create a new entry for this fish.
+    var entry = this.createEntry(fish, baseTime);
+    // Have the layout build a new row for this entry.
+    var $entry = this.layout.templates.fishEntry(entry);
+    // Associate the DOM element with the back-end data.
+    $entry.data('view', entry);
+    entry.element = $entry;
+
+    // Add the new entry to the set of tracked fish entries.
+    this.fishEntries[fish.id] = entry;
+
+    // Append the entry to the layout itself.
+    this.layout.append($entry);
+  }
+
+  createEntry(fish, baseTime) {
+    var entry = new FishEntry(fish.id);
+    // TODO: Does the entry need to be wired up to anything?
+
+    return entry;
+  }
+
+  filterCompletionClicked(e) {
+    e.stopPropagation();
+    var $this = $(this);
+
+    // Set the active filter.
+    $this.addClass('active').siblings().removeClass('active');
+    TheViewModel.settings.filters.completion = $this.data('filter');
+
+    // Notify anyone interested in this change.
+    TheViewModel.filterCompletionSubject.onNext(TheViewModel.settings.filters.completion);
+    return false;
+  }
+
+  filterPatchClicked(e) {
+    e.stopPropagation();
+    var $this = $(this);
+
+    // Update the UI and get the patch number together.
+    var patch = Number($this.toggleClass('active').data('filter'));
+    if ($this.hasClass('active')) {
+      TheViewModel.settings.filters.patch.push(patch);
+    } else {
+      TheViewModel.settings.filters.patch =
+        _(TheViewModel.settings.filters.patch).without(patch);
+    }
+
+    // Notify others about the change.
+    TheViewModel.filterPatchSubject.onNext(TheViewModel.settings.filters.patch);
+    return false;
+  }
+
+  filterPatchDblClicked(e) {
+    e.stopPropagation();
+    var $this = $(this);
+
+    // Update the UI making only the selected patch visible.
+    $this.addClass('active').siblings().removeClass('active');
+    $this.parent().siblings().children().removeClass('active');
+    var patch = Number($this.data('filter'));
+
+    // Just this patch is included now.
+    TheViewModel.settings.filters.patch = [patch];
+    // Notify others about this change.
+    TheViewModel.filterPatchSubject.onNext(TheViewModel.settings.filters.patch);
+    return false;
+  }
+
+  filterPatchSetClicked(e) {
+    e.stopPropagation();
+    var $this = $(this);
+
+    // Toggle full patch activation in the UI.
+    $this.toggleClass('active');
+    if ($this.hasClass('active')) {
+      // Activate the rest of the buttons as well, and add to the filter settings.
+      _($this.siblings(":not(.disabled)").addClass('active')).each(function() {
+        TheViewModel.settings.filters.patch.push(Number($(this).data('filter')));
+      });
+    } else {
+      // Deactivate the rest of the button as well, and remove from the filter settings.
+      $this.siblings(":not(.disabled)").removeClass('active').each(function() {
+        TheViewModel.settings.filters.patch =
+          _(TheViewModel.settings.filters.patch).without(Number($(this).data('filter')));
+      });
+    }
+
+    // Notify others about this change.
+    TheViewModel.filterPatchSubject.onNext(TheViewModel.settings.filters.patch);
+    return false;
+  }
+
+  sortingTypeChecked(e) {
+    if (e) e.stopPropagation();
+    var $this = $(this);
+    TheViewModel.settings.sortingType = $this.val();
+    TheViewModel.sortingTypeSubject.onNext(TheViewModel.settings.sortingType);
+  }
+
+  loadSettings() {
+    var settings = this.settings;
+
+    // Try loading the user's settings from localStorage.
+    try {
+      if (localStorage.getItem('fishTrackerSettings')) {
+        settings = JSON.parse(localStorage.fishTrackerSettings);
+      } else {
+        // COMPATIBILITY SUPPORT:
+        // * The old view model stores settings in individual keys. Check for them
+        //   first, and upgrade to the new model.
+        if (localStorage.completed) {
+          settings.completed = JSON.parse(localStorage.completed);
+        }
+        if (localStorage.pinned) {
+          settings.pinned = JSON.parse(localStorage.pinned);
+        }
+      }
+    } catch (ex) {
+      // Ignore this. This may happen if localStorage is disabled or private browsing.
+      console.warn("Unable to access localStorage. Settings not restored.");
+    }
+
+    if (settings.filters) {
+      if (settings.filters.completion) {
+        $('#filterCompletion .button[data-filter="' + settings.filters.completion + '"]')
+        .addClass('active').siblings().removeClass('active');
+      }
+      if (settings.filters.patch) {
+        // TODO: Consider restoring this filter. The catch is... what about when a new
+        // patch is released. No one would have it in their settings, and thus, would
+        // never see it by default :(
+      }
+    }
+
+    // Set the sorter function.
+    if (settings.sortingType == 'overallRarity') {
+      this.sorterFunc = sorters.sortByOverallRarity;
+    } else if (settings.sortingType == 'windowPeriods') {
+      this.sorterFunc = sorters.sortByWindowPeriods;
+    } else {
+      console.error("Invalid sortingType: ", settings.sortingType);
+    }
+
+    // Save the settings to the model.
+    this.settings = settings;
+    return settings;
+  }
+
+  saveSettings() {
+    // Save the site settings to localStorage.
+    try {
+      localStorage.fishTrackerSettings = JSON.stringify(this.settings);
+    } catch (ex) {
+      console.warn("Unable to save settings to local storage.");
+    }
+  }
+}
+
+let TheViewModel = new ViewModel2;
+
+
+
+
 class ViewModel {
   constructor() {
     this.filter = {
@@ -374,11 +756,12 @@ class ViewModel {
     var result = this.applyFiltersAndResort();
     var fishes = result.fishes;
 
-    this.theFish = _(fishes).map((x) => {
+    this.theFish = _(fishes).map((x, idx) => {
       // Make sure localization is up-to-date.
       x.applyLocalization();
       // Add in view-specific fields.
       return _(x).extend({
+        sortIdx: idx,
         caught: this.completionManager.isFishCaught(x.id),
         pinned: this.completionManager.isFishPinned(x.id),
         timerState: () => { return x.isCatchable() ? 'fish-active' : '' },
