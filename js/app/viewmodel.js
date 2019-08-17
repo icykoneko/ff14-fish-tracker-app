@@ -444,22 +444,15 @@ class ViewModel2 {
     // function, will be removed from the list, making future updates faster.
     _(this.fishEntries).each((entry) => entry.active = false);
 
-    // Start by collecting the pinned fish, and removing them from the main list.
-    // We don't want to filter these out for any reason.
-    // TODO: If the pinned fish haven't changed, we probably don't need to do
-    // anything...
-    var pinnedFish = _(Fishes).filter(this.isFishPinned);
-
-    // Next, we'll apply the current filters to the entire list.
+    // Next, we'll apply the current filters to the entire list, and only
+    // (re-)activate the fish that remain.
+    // NOTE: We don't actually need to keep a copy of this list, thus the
+    // chaining.
     // TODO: If the filter settings haven't changed, there's no reason to do
     // this!
-    var visibleFish = _(Fishes).chain()
-      .reject(this.isFishPinned) // don't operate on pinned fish
-      .reject(this.isFishFiltered) // remove fish which are filtered out
-      .value();
-    
-    // All of these fish should have active entries.
-    _(visibleFish).each((fish) => this.activateEntry(fish, baseTime));
+    _(Fishes).chain()
+      .reject(fish => this.isFishFiltered(fish))
+      .each(fish => this.activateEntry(fish, baseTime));
 
     // Remove any entries which are still inactive.
     for (var k in this.fishEntries) {
@@ -486,21 +479,25 @@ class ViewModel2 {
   }
 
   isFishFiltered(fish) {
+    // Pinned fish are NEVER filtered out!
+    if (this.isFishPinned(fish))
+      return false;
+
     // Filter by patch.
     if (!_(this.settings.filters.patch).contains(fish.patch))
-      return false;
+      return true;
 
     // Filter by completion state.
     if (this.settings.filters.completion == 'uncaught') {
       if (this.isFishCaught(fish))
-        return false;
+        return true;
     } else if (this.settings.filters.completion == 'caught') {
       if (!this.isFishCaught(fish))
-        return false;
+        return true;
     }
 
     // No other reason to filter.
-    return true;
+    return false;
   }
 
   activateEntry(fish, baseTime) {
