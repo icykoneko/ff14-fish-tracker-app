@@ -11,10 +11,12 @@ class FishWatcher {
 
   updateFishes() {
     console.info("FishWatcher is considering updating fishies >< c> |o.o)>");
+    console.time('updateFishes');
 
     // CLEANUP PHASE:
     //   Remove expired windows first.
     var eDate = eorzeaTime.getCurrentEorzeaDate();
+    console.time('cleanupFish');
     for (let fish of Fishes) {
       if (fish.catchableRanges.length > 0 &&
           dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
@@ -22,19 +24,24 @@ class FishWatcher {
         fish.catchableRanges.shift();
         fish.notifyCatchableRangesUpdated();
       }
+      console.timeLog('cleanupFish', fish.name);
     }
+    console.timeEnd('cleanupFish');
 
     // PHASE 1:
     //   Ensure each fish has at least 'n' windows defined.
+    console.time('updateRanges');
     var fishes = _(Fishes).chain()
       .reject((fish) => fish.alwaysAvailable)
       .filter((fish) => fish.catchableRanges.length < this.maxWindows)
       .value();
     for (let fish of fishes) {
       this.updateRangesForFish(fish);
+      console.timeLog('updateRanges', fish.name);
     }
+    console.timeEnd('updateRanges');
 
-    console.info("FishWatcher is finished...");
+    console.timeEnd('updateFishes');
   }
 
   updateRangesForFish(fish) {
@@ -74,6 +81,7 @@ class FishWatcher {
       lastRangeSpansPeriods =
         this.__checkToAddCatchableRange(fish, _iterItem.value);
     }
+    weatherService.finishedWithIter();
 
     // Make sure the LAST window is complete!
     while (lastRangeSpansPeriods) {
@@ -91,6 +99,7 @@ class FishWatcher {
       lastRangeSpansPeriods =
         this.__checkToAddCatchableRange(fish, _iterItem.value);
     }
+    weatherService.finishedWithIter();
   }
 
   __checkToAddCatchableRange(fish, window) {
@@ -133,6 +142,7 @@ class FishWatcher {
           1);
         var _iterItem = iter.next();
         if (_iterItem.done) {
+          weatherService.finishedWithIter();
           // Wait wait wait, try one more thing.
           // Let's say you catch the fish during the intuition buff period!
           iter = weatherService.findWeatherPattern(
@@ -142,7 +152,7 @@ class FishWatcher {
             predatorFish.weatherSet,
             1);
           _iterItem = iter.next();
-          if (_iterItem.done) { return; }
+          if (_iterItem.done) { weatherService.finishedWithIter(); return; }
         }
         var predWindow = _iterItem.value;
         var predRange = predatorFish.availableRangeDuring(predWindow);

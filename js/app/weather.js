@@ -27,6 +27,16 @@ class WeatherService {
       .filter((bell) => bell == 0 || bell == 8 || bell == 16)
       .skip(1) /* skip the first since we really don't have any filtering to do yet */
       .subscribe((bell) => this.onCurrentBellChanged(bell));
+    
+    this.computingWeather = false;
+  }
+
+  finishedWithIter() {
+    // This is basically for testing purposes. It will end our computingWeather timer.
+    if (this.computingWeather) {
+      console.timeEnd('computingWeather');
+      this.computingWeather = false;
+    }
   }
 
   onCurrentBellChanged(bell) {
@@ -39,7 +49,7 @@ class WeatherService {
         if (_(this.__weatherData).first().date < cutoffDate) {
           this.__weatherData = _(this.__weatherData).drop();
         }
-        console.log("Weather Cache:", this.__weatherData.length, "entries spanning",
+        console.debug("Weather Cache:", this.__weatherData.length, "entries spanning",
           (dateFns.differenceInMilliseconds(
             eorzeaTime.toEarth(
               dateFns.utc.addHours(_(this.__weatherData).last().date, 8)),
@@ -119,6 +129,9 @@ class WeatherService {
       // Resume, starting with the NEXT period!!!
       date = dateFns.utc.addHours(lastDate, 8);
     }
+    
+    this.computingWeather = true;
+    console.time('computingWeather');
     // SAFEGUARD
     while (limit-- > 0) {
       // Move the *previous* current weather into previous weather.
