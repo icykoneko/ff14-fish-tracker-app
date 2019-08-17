@@ -438,6 +438,9 @@ let ViewModel = new class {
     // TODO: Include a `reason` argument to determine just how much needs to be
     // updated (if we can be efficient).
 
+    console.time('updateDisplay');
+    console.log("Updating display...", reason);
+
     // We need a base time!
     var baseTime = eorzeaTime.getCurrentEorzeaDate();
 
@@ -470,6 +473,8 @@ let ViewModel = new class {
     // NOTE: Sorting used to be handled here... but there's a lot of layout
     // information that goes into sorting.
     this.layout.sort(this.sorterFunc, baseTime);
+
+    console.time('updateDisplay');
   }
 
   isFishPinned(fish) {
