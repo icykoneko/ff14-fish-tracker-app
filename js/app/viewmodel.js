@@ -469,7 +469,7 @@ let ViewModel = new class {
     // Finally, we can apply sorting to the list of active fish.
     // NOTE: Sorting used to be handled here... but there's a lot of layout
     // information that goes into sorting.
-    this.layout.sort(this.sorterFunc);
+    this.layout.sort(this.sorterFunc, baseTime);
   }
 
   isFishPinned(fish) {

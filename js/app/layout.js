@@ -28,11 +28,11 @@ class FishTableLayout {
     $(fishEntry).remove();
   }
 
-  sort(cmpFunc) {
+  sort(cmpFunc, baseTime) {
     // Get the displayed fish entries.
     var $entries = $('.fish-entry not(.fish-intuition-row)', this.fishTable);
     // Sort the entries.
-    $entries.sort(cmpFunc);
+    $entries.sort(e => cmpFunc(e, baseTime));
     // That just sorted the array, it didn't affect the table itself.
     // For that, we're literally going to append each entry back into the
     // table in order.  This works because a DOM element may only have one
