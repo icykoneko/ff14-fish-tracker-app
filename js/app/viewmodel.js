@@ -358,7 +358,7 @@ class FishEntry {
   }
 }
 
-class ViewModel2 {
+let ViewModel = new class {
   constructor() {
     // The site settings.
     this.settings = new SiteSettings();
@@ -369,17 +369,19 @@ class ViewModel2 {
     this.fishEntries = {}
 
     // The actual sorter function.
+    // This will get initialized later from the settings.
     this.sorterFunc = null;
-
-    // When displaying a date that's more than a week away, include the time as well.
-    moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
 
     // Initialize the layout components.
     this.layout = new FishTableLayout();
+  }
+
+  initialize() {
+    // When displaying a date that's more than a week away, include the time as well.
+    moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
 
     // Finally, initialize the display.
     this.initializeDisplay();
-
   }
 
   initializeDisplay() {
@@ -536,10 +538,10 @@ class ViewModel2 {
 
     // Set the active filter.
     $this.addClass('active').siblings().removeClass('active');
-    TheViewModel.settings.filters.completion = $this.data('filter');
+    ViewModel.settings.filters.completion = $this.data('filter');
 
     // Notify anyone interested in this change.
-    TheViewModel.filterCompletionSubject.onNext(TheViewModel.settings.filters.completion);
+    ViewModel.filterCompletionSubject.onNext(ViewModel.settings.filters.completion);
     return false;
   }
 
@@ -550,14 +552,14 @@ class ViewModel2 {
     // Update the UI and get the patch number together.
     var patch = Number($this.toggleClass('active').data('filter'));
     if ($this.hasClass('active')) {
-      TheViewModel.settings.filters.patch.push(patch);
+      ViewModel.settings.filters.patch.push(patch);
     } else {
-      TheViewModel.settings.filters.patch =
-        _(TheViewModel.settings.filters.patch).without(patch);
+      ViewModel.settings.filters.patch =
+        _(ViewModel.settings.filters.patch).without(patch);
     }
 
     // Notify others about the change.
-    TheViewModel.filterPatchSubject.onNext(TheViewModel.settings.filters.patch);
+    ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
     return false;
   }
 
@@ -571,9 +573,9 @@ class ViewModel2 {
     var patch = Number($this.data('filter'));
 
     // Just this patch is included now.
-    TheViewModel.settings.filters.patch = [patch];
+    ViewModel.settings.filters.patch = [patch];
     // Notify others about this change.
-    TheViewModel.filterPatchSubject.onNext(TheViewModel.settings.filters.patch);
+    ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
     return false;
   }
 
@@ -586,26 +588,26 @@ class ViewModel2 {
     if ($this.hasClass('active')) {
       // Activate the rest of the buttons as well, and add to the filter settings.
       _($this.siblings(":not(.disabled)").addClass('active')).each(function() {
-        TheViewModel.settings.filters.patch.push(Number($(this).data('filter')));
+        ViewModel.settings.filters.patch.push(Number($(this).data('filter')));
       });
     } else {
       // Deactivate the rest of the button as well, and remove from the filter settings.
       $this.siblings(":not(.disabled)").removeClass('active').each(function() {
-        TheViewModel.settings.filters.patch =
-          _(TheViewModel.settings.filters.patch).without(Number($(this).data('filter')));
+        ViewModel.settings.filters.patch =
+          _(ViewModel.settings.filters.patch).without(Number($(this).data('filter')));
       });
     }
 
     // Notify others about this change.
-    TheViewModel.filterPatchSubject.onNext(TheViewModel.settings.filters.patch);
+    ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
     return false;
   }
 
   sortingTypeChecked(e) {
     if (e) e.stopPropagation();
     var $this = $(this);
-    TheViewModel.settings.sortingType = $this.val();
-    TheViewModel.sortingTypeSubject.onNext(TheViewModel.settings.sortingType);
+    ViewModel.settings.sortingType = $this.val();
+    ViewModel.sortingTypeSubject.onNext(ViewModel.settings.sortingType);
   }
 
   loadSettings() {
@@ -665,14 +667,9 @@ class ViewModel2 {
       console.warn("Unable to save settings to local storage.");
     }
   }
-}
+};
 
-let TheViewModel = new ViewModel2;
-
-
-
-
-class ViewModel {
+class OldViewModel {
   constructor() {
     this.filter = {
       completion: 'all',
@@ -895,4 +892,4 @@ class ViewModel {
   }
 }
 
-let viewModel = new ViewModel;
+//let viewModel = new OldViewModel;

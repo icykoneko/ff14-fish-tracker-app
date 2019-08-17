@@ -52,15 +52,31 @@
     <!-- Include the data -->
     <script type="text/javascript" src="js/app/data.js?5.0_201907182000"></script>
 
-    <!-- Scripts -->
+    <!--
+      - Scripts
+      - * NOTE: The order is somewhat important. Care must be taken to avoid
+      -   circular dependencies.  Where it cannot be avoided, defer references
+      -   to other classes until an initialization method can be called safely.
+      -->
     <script type="text/javascript" src="js/app/time.js"></script>
     <script type="text/javascript" src="js/app/fish.js?20190627"></script>
     <script type="text/javascript" src="js/app/weather.js?20190609"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?201905172105"></script>
-    <script type="text/javascript" src="js/app/viewmodel.js?20190812"></script>
-    <script type="text/javascript" src="js/app/layout.js?20190812"></script>
 
-    <!-- Templates -->
+    <!--
+      - SUPER IMPORTANT!!!!!!
+      - The remaining scripts are for view and layout logic. Due to document load
+      - order, THEY MUST COME AFTER THE TEMPLATES ARE DEFINED!!!
+      - Loading these scripts before will prevent templates from loading
+      - correctly!
+    -->
+
+    <!--
+      - Site Templates
+      - All of the HTML widgets are built using doT and SemanticUI. In order to
+      - prevent excessive load requests, the templates are stored in individual
+      - <script> elements. This is where the bulk of the HTML lives.
+      -->
     <script id="fish-table-template" type="text/html;x-dot-template">
       <table id="fishes" class="ui selectable striped very basic very compact unstackable table">
         <thead>
@@ -343,6 +359,11 @@
       </div>
     </script>
 
+    <!-- At last, we can load the layout and view model code. -->
+    <script type="text/javascript" src="js/app/layout.js?20190812"></script>
+    <!-- NOTE: The ViewModel should be the last script loaded. -->
+    <script type="text/javascript" src="js/app/viewmodel.js?20190812"></script>
+
     <script type="text/javascript">
       $(() => {
         // Display appropriate messages depending on if the site was loaded via http or https.
@@ -367,9 +388,23 @@
         }
       });
     </script>
+
+    <script type="text/javascript">
+    $(() => {
+      // Document is ready, initialize the view model now.
+      ViewModel.initialize();
+      // There shouldn't be anything more to do.  Any logic controling the
+      // display belongs in the ViewModel or Layout classes.
+      // DO NOT ADD CODE AFTER THIS POINT!!!
+    });
+    </script>
     
     <script type="text/javascript">
+
       $(() => {
+        // DON'T RUN THIS CODE ANYMORE!!!
+        return;
+
         // When displaying a date that's more than a week away, include the time as well.
         moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
 
