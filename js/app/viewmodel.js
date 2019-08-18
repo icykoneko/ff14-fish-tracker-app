@@ -587,17 +587,14 @@ let ViewModel = new class {
         .buffer(() => this.fishChangedSubject.debounce(100))
         .map(e => { return {fishAvailability: e} }),
       this.filterCompletionSubject
-        .distinctUntilChanged()
         .skip(1)
         .debounce(100)
         .map(e => { return {filterCompletion: e} }),
       this.filterPatchSubject
-        .distinctUntilChanged()
         .skip(1)
         .debounce(100)
         .map(e => { return {filterPatch: e} }),
       this.sortingTypeSubject
-        .distinctUntilChanged()
         .skip(1)
         .debounce(100)
         .map(e => { return {sortingType: e} })
@@ -850,7 +847,7 @@ let ViewModel = new class {
     $this.toggleClass('active');
     if ($this.hasClass('active')) {
       // Activate the rest of the buttons as well, and add to the filter settings.
-      _($this.siblings(":not(.disabled)").addClass('active')).each(function() {
+      $this.siblings(":not(.disabled)").addClass('active').each(function() {
         ViewModel.settings.filters.patch.push(Number($(this).data('filter')));
       });
     } else {
@@ -919,6 +916,7 @@ let ViewModel = new class {
         // TODO: Consider restoring this filter. The catch is... what about when a new
         // patch is released. No one would have it in their settings, and thus, would
         // never see it by default :(
+        settings.filters.patch = this.settings.filters.patch;
       }
     }
 
