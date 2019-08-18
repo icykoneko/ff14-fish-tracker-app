@@ -522,6 +522,9 @@ let ViewModel = new class {
     // And initialize it...
     this.layout.initializeLayout($fishTable);
 
+    // Initialize checkbox controls.
+    $('.ui.radio.checkbox').checkbox();
+
     // Subjects.
     // These are used for RxJS to allow subscription events to changes.
     this.fishChangedSubject = new Rx.Subject();
@@ -541,9 +544,6 @@ let ViewModel = new class {
 
     // At this point, we need to remove the dimmer...
     $('#fish-table-container .ui.dimmer').removeClass('active');
-
-    // Initialize checkbox controls.
-    $('.ui.radio.checkbox').checkbox();
 
     // Set event handlers.
     $('#filterCompletion .button').on('click', this.filterCompletionClicked);
@@ -928,6 +928,7 @@ let ViewModel = new class {
     } else {
       console.error("Invalid sortingType: ", settings.sortingType);
     }
+    $('#sortingType input[value="' + settings.sortingType + '"]').parent().checkbox('check');
 
     // Save the settings to the model.
     this.settings = settings;
