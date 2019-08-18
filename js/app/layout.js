@@ -20,7 +20,7 @@ class FishTableLayout {
 
   append($fishEntry) {
     // Appends a new fish entry to the layout.
-    this.fishTable.append($fishEntry);
+    this.fishTable[0].appendChild($fishEntry[0]);
   }
 
   remove(fishEntry) {
@@ -70,6 +70,8 @@ class FishTableLayout {
   }
 
   sort(cmpFunc, baseTime) {
+    console.time('Sorting');
+
     // Get the displayed fish entries.
     var $entries = $('.fish-entry:not(.fish-intuition-row)', this.fishTable);
 
@@ -87,7 +89,9 @@ class FishTableLayout {
     // Another key thing to note, we haven't made any modifications to the
     // actual element itself.
     for (var i = 0; i < $entries.length; i++) {
-      this.fishTable.append($entries[i]);
+      this.fishTable[0].appendChild($entries[i]);
     }
+
+    console.timeEnd('Sorting');
   }
 }

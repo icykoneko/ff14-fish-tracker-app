@@ -69,9 +69,13 @@ class Fish {
 
     // Create a subject for catchableRanges that we can subscribe to.
     this.catchableRangesObserver = new Rx.Subject([]);
+
+    this.__uptime = null;
+    this.__uptimeDirty = true;
   }
 
   notifyCatchableRangesUpdated() {
+    this.__uptimeDirty = true;
     this.catchableRangesObserver.onNext(this.catchableRanges);
   }
 
@@ -104,14 +108,19 @@ class Fish {
   }
 
   uptime() {
-    var crs = this.catchableRanges;
-    if (crs.length > 0) {
-      // Compute the overall time this fish is up for.
-      var overallTime = +_(crs).last().end() - +_(crs).first().start();
-      return _(crs).reduce(
-        (uptime, range) => uptime += range.asDuration('milliseconds'), 0) / overallTime;
+    if (this.__uptimeDirty) {
+      let crs = this.catchableRanges;
+      if (crs.length > 0) {
+        // Compute the overall time this fish is up for.
+        let overallTime = +_(crs).last().end() - +_(crs).first().start();
+        this.__uptime = _(crs).reduce(
+          (uptime, range) => uptime += range.asDuration('milliseconds'), 0) / overallTime;
+      } else {
+        this.__uptime = 1;
+      }
+      this.__uptimeDirty = false;
     }
-    return 1;
+    return this.__uptime;
   }
 
   availableRangeDuring(r) {
