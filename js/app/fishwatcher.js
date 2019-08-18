@@ -3,10 +3,10 @@ class FishWatcher {
     // Total number of windows to keep track of.
     this.maxWindows = 10;
 
-    _.defer(() => {
-      // Every new Eorzea bell, reconsider the fishes windows.
-      eorzeaTime.currentBellChanged.subscribe((bell) => this.updateFishes());
-    });
+    // IMPORTANT!!!
+    // The new view model does not regenerate templates every time. This means
+    // we MUST NOT RACE the view model! We'll still schedule the updateFishes
+    // function for every new bell, but let the view model do it please...
   }
 
   updateFishes() {
@@ -24,20 +24,21 @@ class FishWatcher {
         fish.catchableRanges.shift();
         fish.notifyCatchableRangesUpdated();
       }
-      console.timeLog('cleanupFish', fish.name);
     }
     console.timeEnd('cleanupFish');
 
     // PHASE 1:
     //   Ensure each fish has at least 'n' windows defined.
     console.time('updateRanges');
-    var fishes = _(Fishes).chain()
-      .reject((fish) => fish.alwaysAvailable)
-      .filter((fish) => fish.catchableRanges.length < this.maxWindows)
-      .value();
-    for (let fish of fishes) {
+    for (let fish of Fishes) {
+      if (fish.alwaysAvailable) {
+        continue;
+      }
+      if (fish.catchableRanges.length >= this.maxWindows) {
+        continue;
+      }
+      // Okay, update it please.
       this.updateRangesForFish(fish);
-      console.timeLog('updateRanges', fish.name);
     }
     console.timeEnd('updateRanges');
 

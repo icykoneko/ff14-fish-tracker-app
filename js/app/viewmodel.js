@@ -135,11 +135,11 @@ sorters = function() {
       +dateFns.addMinutes(eorzeaTime.toEarth(baseTime), 15);
   }
 
-  function sortByOverallRarity(a, b, baseTime, completionManager) {
+  function sortByOverallRarity(a, b, baseTime) {
     var result = 0;
     // PINNED FISH ALWAYS COME FIRST!!!
-    var pinnedA = completionManager.isFishPinned(a.id) ? -1 : 1;
-    var pinnedB = completionManager.isFishPinned(b.id) ? -1 : 1;
+    var pinnedA = ViewModel.isFishPinned(a.id) ? -1 : 1;
+    var pinnedB = ViewModel.isFishPinned(b.id) ? -1 : 1;
     result = compare(pinnedA, pinnedB);
     if (result != 0) {
       return result;
@@ -217,11 +217,11 @@ sorters = function() {
     return result;
   }
 
-  function sortByWindowPeriods(a, b, baseTime, completionManager) {
+  function sortByWindowPeriods(a, b, baseTime) {
     var result = 0;
     // PINNED FISH ALWAYS COME FIRST!!!
-    var pinnedA = completionManager.isFishPinned(a.id) ? -1 : 1;
-    var pinnedB = completionManager.isFishPinned(b.id) ? -1 : 1;
+    var pinnedA = ViewModel.isFishPinned(a.id) ? -1 : 1;
+    var pinnedB = ViewModel.isFishPinned(b.id) ? -1 : 1;
     result = compare(pinnedA, pinnedB);
     if (result != 0) {
       return result;
@@ -348,13 +348,131 @@ class SiteSettings {
 }
 
 class FishEntry {
-  constructor(fishId) {
+  constructor(fish) {
     // TODO:
     this.active = false;
-    this.id = fishId;
+    this.id = fish.id;
     
     // This is the DOM element associated with this Fish.
     this.element = null;
+
+    // Subscription while active.
+    this.subscription = null;
+
+    // HOLD A REFERENCE TO THE FISH DATA!!!
+    // What's the alternative? Copying every field into this object?
+    // Just make sure you don't leak references...
+    this.data = fish;
+
+    // Set up the remaining data structure...
+    this.isUpSoon = '';
+    this.availability = {
+      current: {
+        duration: null,
+        date: null
+      },
+      upcoming: {
+        duration: null,
+        date: null,
+        downtime: null,
+        prevdate: null
+      },
+      upcomingWindows: [],
+    };
+    this.uptime = 1.0;
+    this.isCatchable = false;
+    
+    // Fish Eyes...
+    if (fish.fishEyes === false) {
+      this.fishEyesDuration = '';
+    }
+    else if (fish.fishEyes === true) {
+      // Unknown duration, return empty string.
+      this.fishEyesDuration = '';
+    }
+    else if (fish.fishEyes > 60) {
+      // If the buff is more than 60s, display in fractional minutes.
+      let mins = Math.floor(fish.fishEyes / 60);
+      let secs = fish.fishEyes % 60;
+      let result = "" + mins + "m";
+      if (secs != 0) {
+        result += " " + secs + "s";
+      }
+      this.fishEyesDuration = result;
+    }
+    else {
+      this.fishEyesDuration = '' + fish.fishEyes + 's';
+    }
+  }
+
+  update(earthTime, full = false) {
+    // This function should be called whenever the underlying fish data has changed.
+    // Make sure you do this BEFORE updating the display...
+    let fish = this.data;
+    let crs = fish.catchableRanges;
+
+    // TODO: Even this is pretty heavy-handed. We should really only update
+    // the fields which have changed... [NEEDS-OPTIMIZATION]
+
+    this.isCatchable = fish.isCatchable();
+    this.isCaught = ViewModel.isFishCaught(this.id);
+    this.isPinned = ViewModel.isFishPinned(this.id);
+    
+    // The rest requires catchable ranges.
+    if (crs.length > 0) {
+      // Cache the dates, they are used A LOT.
+      let currStart = eorzeaTime.toEarth(+crs[0].start());
+      let currEnd = eorzeaTime.toEarth(+crs[0].end());
+      // NOTE: If it has once entry, it'll have 2...
+      if (crs.length < 2) {
+        console.error("Expected at least 2 catchable ranges for " + fish.name);
+        return;
+      }
+      let nextStart = eorzeaTime.toEarth(+crs[1].start());
+
+      if (dateFns.isAfter(currStart, earthTime)) {
+        // The fish is not currently available.
+        this.isUpSoon = dateFns.differenceInMinutes(currStart, earthTime) < 15;
+        this.availability.current.duration =
+          "in " + dateFns.distanceInWordsStrict(earthTime, currStart);
+        this.availability.current.date = currStart;
+      } else {
+        // The fish is currently available!
+        this.isUpSoon = false; // It's already up! XD
+        this.availability.current.duration =
+          "closes in " + dateFns.distanceInWordsStrict(earthTime, currEnd);
+        this.availability.current.date = currEnd;
+      }
+      this.availability.upcoming.duration = "in " + dateFns.distanceInWordsStrict(earthTime, nextStart);
+
+      this.availability.upcoming.date = nextStart;
+      this.availability.upcoming.prevdate = currEnd;
+
+      // Compute the overall time this fish is up for.
+      let overallTime = +_(crs).last().end() - +_(crs).first().start();
+      this.uptime = _(crs).reduce(
+        (uptime, range) => uptime += range.asDuration('milliseconds'), 0) / overallTime;
+
+      // Don't rebuild static information if we don't need to.
+      if (full) {
+        this.availability.upcoming.downtime = dateFns.distanceInWordsStrict(currEnd, nextStart) + " later";
+
+        this.availability.upcomingWindows = _(crs).map((cr, idx) => {
+          let start = eorzeaTime.toEarth(+cr.start());
+          let end = eorzeaTime.toEarth(+cr.end());
+          let downtime = "";
+          if (idx + 1 < crs.length) {
+            downtime = dateFns.distanceInWordsStrict(end, eorzeaTime.toEarth(+crs[idx+1].start()));
+          }
+          return {
+            start: start,
+            end: end,
+            duration: dateFns.distanceInWordsStrict(start, end),
+            downtime: downtime
+          };
+        });
+      }
+    }
   }
 }
 
@@ -386,6 +504,7 @@ let ViewModel = new class {
 
   initializeDisplay() {
     // The main HTML is actually inlined, for the most part.
+    console.time("Initialization");
 
     // Load the site settings.
     var settings = this.loadSettings();
@@ -399,17 +518,32 @@ let ViewModel = new class {
 
     // Create the table to hold all the displayed fish data.
     var $fishTable = $(this.layout.templates.fishTable());
+    $('#fish-table-container').append($fishTable);
     // And initialize it...
     this.layout.initializeLayout($fishTable);
 
     // Subjects.
     // These are used for RxJS to allow subscription events to changes.
+    this.fishChangedSubject = new Rx.Subject();
     this.filterCompletionSubject = new Rx.BehaviorSubject(settings.filters.completion);
     this.filterPatchSubject = new Rx.BehaviorSubject(settings.filters.patch);
     this.sortingTypeSubject = new Rx.BehaviorSubject(settings.sortingType);
 
+    // IMPORTANT NOTE:
+    // The system still relies on FishWatcher keeping every fish up-to-date.
+    // Unfortunately, that includes filtered fish too...
+    // But that's not the point.  FishWatcher is the source of availability
+    // data, and when the app is just starting up, we need to NOT RACE it.
+    fishWatcher.updateFishes();
+
     // Update the table!
     this.updateDisplay(null);
+
+    // At this point, we need to remove the dimmer...
+    $('#fish-table-container .ui.dimmer').removeClass('active');
+
+    // Initialize checkbox controls.
+    $('.ui.radio.checkbox').checkbox();
 
     // Set event handlers.
     $('#filterCompletion .button').on('click', this.filterCompletionClicked);
@@ -424,6 +558,68 @@ let ViewModel = new class {
     $('#sortingType .radio.checkbox').checkbox({
       onChecked: this.sortingTypeChecked
     });
+
+    // Register for changes.
+    // Things we care about...
+    //   - Changes in the catchable ranges for each fish.
+    //     - Technically, you only really care about the current bell...
+    //       but I'd like to find some way of binding to the fish's
+    //       data (if possible...)
+    //     - This is the most destructive type of change.
+    //   - Changes in filter settings.
+    //     - Should be less destructive, expect for the whole re-sorting bit...
+    //   - Changes in pinned settings.
+    //     - Should only require a minor re-sorting...
+    //   - Changes to catchable status.
+    //     - Potentially requires visibility change.
+    //   - Changes to the sorting algorithm.
+    //     - Requires whole resorting of list.
+    // Merge all of these subjects together, annotating the reason, then buffer
+    // the event so that the `updateDisplay` is not being called more than it
+    // needs to be.
+    // NOTE: There's still the 1s interval event timer running. It needs to be
+    // deduped somehow so it's not interfering every bell (or half-bell)...
+    // Technically, we can just add it to this massive subscription, and use
+    // the `reason` to tell it apart... It's just, the buffering doesn't make
+    // sense for it.
+    var updateDisplaySources$ = Rx.Observable.merge(
+      this.fishChangedSubject
+        .buffer(() => this.fishChangedSubject.debounce(100))
+        .map(e => { return {fishAvailability: e} }),
+      this.filterCompletionSubject
+        .skip(1)
+        .debounce(500)
+        .map(e => { return {filterCompletion: e} }),
+      this.filterPatchSubject
+        .skip(1)
+        .debounce(500)
+        .map(e => { return {filterPatch: e} }),
+      this.sortingTypeSubject
+        .skip(1)
+        .debounce(500)
+        .map(e => { return {sortingType: e} })
+    );
+
+    // Merge with 1s interval timer.
+    Rx.Observable.merge(
+      Rx.Observable.interval(1000).timestamp()
+        .map(e => { return {countdown: e.timestamp} }),
+      updateDisplaySources$
+        .buffer(() => updateDisplaySources$.debounce(100))
+        .map(e => {
+          // Combine these into a single object.
+          return e.reduce((acc, curr) => {
+            return Object.assign(acc, curr);
+          }, {});
+        })
+    ).subscribe(e => this.updateDisplay(e));
+
+    // Ok, now it's safe to have FishWatcher start listening for the next bell.
+    eorzeaTime.currentBellChanged
+      .skip(1)
+      .subscribe((bell) => fishWatcher.updateFishes());
+
+    console.timeEnd("Initialization");
   }
 
   updateDisplay(reason) {
@@ -435,14 +631,39 @@ let ViewModel = new class {
     // data have changed. That includes filtering, sorting, and availability
     // changes.
 
-    // TODO: Include a `reason` argument to determine just how much needs to be
-    // updated (if we can be efficient).
+    let updateUpcomingTime = this.settings.upcomingWindowFormat == 'fromNow';
 
+    // The `countdown` reason is ALWAYS sent alone (due to how merge works).
+    if (reason !== null &&
+        'countdown' in reason)
+    {
+      //console.time('updateDisplay[countdown]');
+      // We only need to update the already displayed fish. No destructive
+      // changes need to be made this time.
+      // The update function needs an EARTH timestamp, which we get from the
+      // countdown event itself.
+      let timestamp = reason.countdown;
+
+      // Update the main header's earth and eorzea times.
+      $('#earthClock').text(dateFns.format(timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
+      $('#eorzeaClock').text(moment.utc(eorzeaTime.toEorzea(timestamp)).format("HH:mm"));
+
+      _(this.fishEntries).each(entry => {
+        // Update the data for this entry first.
+        entry.update(timestamp);
+        // Then have the layout make necessary updates.
+        this.layout.update(entry, timestamp, updateUpcomingTime);
+      });
+      //console.timeEnd('updateDisplay[countdown]');
+      return;
+    }
+
+    console.info("Updating display...", reason);
     console.time('updateDisplay');
-    console.log("Updating display...", reason);
 
     // We need a base time!
-    var baseTime = eorzeaTime.getCurrentEorzeaDate();
+    let earthTime = Date.now();
+    let baseTime = eorzeaTime.toEorzea(earthTime);
 
     // Mark all existing entries as stale (or not active).
     // Anything that's not active, won't be displayed, and at the end of this
@@ -457,16 +678,28 @@ let ViewModel = new class {
     // this!
     _(Fishes).chain()
       .reject(fish => this.isFishFiltered(fish))
-      .each(fish => this.activateEntry(fish, baseTime));
+      .each(fish => this.activateEntry(fish, earthTime));
 
     // Remove any entries which are still inactive.
     for (var k in this.fishEntries) {
       var entry = this.fishEntries[k];
       if (!entry.active) {
         // No one likes stale, rotten fish.  They stink, so remove them.
-        this.layout.remove(entry.element);
-        delete this.fishEntries[k];
+        this.removeEntry(entry);
       }
+    }
+
+    // Of the remaining entries, update any which were marked as availability changed.
+    if (reason !== null && 'fishAvailability' in reason) {
+      let fishNeedingUpdates = new Set(reason.fishAvailability);
+      _(this.fishEntries).chain()
+        .filter(entry => fishNeedingUpdates.has(entry.id))
+        .each(entry => {
+          // Update the data for this entry first.
+          entry.update(earthTime);
+          // Then have the layout do extra work to update the display.
+          this.layout.update(entry, earthTime, updateUpcomingTime)
+        });
     }
 
     // Finally, we can apply sorting to the list of active fish.
@@ -474,20 +707,20 @@ let ViewModel = new class {
     // information that goes into sorting.
     this.layout.sort(this.sorterFunc, baseTime);
 
-    console.time('updateDisplay');
+    console.timeEnd('updateDisplay');
   }
 
-  isFishPinned(fish) {
-    return _(this.settings.pinned).contains(fish.id);
+  isFishPinned(fishId) {
+    return _(this.settings.pinned).contains(fishId);
   }
 
-  isFishCaught(fish) {
-    return _(this.settings.completed).contains(fish.id);
+  isFishCaught(fishId) {
+    return _(this.settings.completed).contains(fishId);
   }
 
   isFishFiltered(fish) {
     // Pinned fish are NEVER filtered out!
-    if (this.isFishPinned(fish))
+    if (this.isFishPinned(fish.id))
       return false;
 
     // Filter by patch.
@@ -496,10 +729,10 @@ let ViewModel = new class {
 
     // Filter by completion state.
     if (this.settings.filters.completion == 'uncaught') {
-      if (this.isFishCaught(fish))
+      if (this.isFishCaught(fish.id))
         return true;
     } else if (this.settings.filters.completion == 'caught') {
-      if (!this.isFishCaught(fish))
+      if (!this.isFishCaught(fish.id))
         return true;
     }
 
@@ -507,7 +740,7 @@ let ViewModel = new class {
     return false;
   }
 
-  activateEntry(fish, baseTime) {
+  activateEntry(fish, earthTime) {
     // Check if there's already an entry for this fish.
     if (this.fishEntries[fish.id]) {
       // There is, so just mark it as active and return.
@@ -516,9 +749,10 @@ let ViewModel = new class {
     }
 
     // Otherwise, we have to create a new entry for this fish.
-    var entry = this.createEntry(fish, baseTime);
+    var entry = this.createEntry(fish, earthTime);
     // Have the layout build a new row for this entry.
-    var $entry = this.layout.templates.fishEntry(entry);
+    var $entry = $(this.layout.templates.fishEntry(entry));
+
     // Associate the DOM element with the back-end data.
     $entry.data('view', entry);
     entry.element = $entry;
@@ -528,13 +762,30 @@ let ViewModel = new class {
 
     // Append the entry to the layout itself.
     this.layout.append($entry);
+
+    // Don't forget to activate the new entry!!!
+    entry.active = true;
   }
 
-  createEntry(fish, baseTime) {
-    var entry = new FishEntry(fish.id);
-    // TODO: Does the entry need to be wired up to anything?
+  createEntry(fish, earthTime) {
+    var entry = new FishEntry(fish);
+
+    // Update the display fields for this entry.
+    entry.update(earthTime, true);
+
+    // Connect the catchableRangesObserver to our fishChanged subject.
+    entry.subscription = fish.catchableRangesObserver.debounce(100).subscribe((r) => {
+      // Pass this event to the view model's fish changed subject.
+      this.fishChangedSubject.onNext(fish.id);
+    });
 
     return entry;
+  }
+
+  removeEntry(entry, k) {
+    this.layout.remove(entry.element);
+    entry.subscription.dispose();
+    delete this.fishEntries[k];
   }
 
   filterCompletionClicked(e) {
@@ -547,6 +798,7 @@ let ViewModel = new class {
 
     // Notify anyone interested in this change.
     ViewModel.filterCompletionSubject.onNext(ViewModel.settings.filters.completion);
+    ViewModel.saveSettings();
     return false;
   }
 
@@ -565,6 +817,7 @@ let ViewModel = new class {
 
     // Notify others about the change.
     ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
+    ViewModel.saveSettings();
     return false;
   }
 
@@ -581,6 +834,7 @@ let ViewModel = new class {
     ViewModel.settings.filters.patch = [patch];
     // Notify others about this change.
     ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
+    ViewModel.saveSettings();
     return false;
   }
 
@@ -605,14 +859,27 @@ let ViewModel = new class {
 
     // Notify others about this change.
     ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
+    ViewModel.saveSettings();
     return false;
   }
 
   sortingTypeChecked(e) {
     if (e) e.stopPropagation();
-    var $this = $(this);
-    ViewModel.settings.sortingType = $this.val();
-    ViewModel.sortingTypeSubject.onNext(ViewModel.settings.sortingType);
+    let $this = $(this);
+    let sortingType = $this.val();
+
+    if (sortingType == 'overallRarity') {
+      ViewModel.sorterFunc = sorters.sortByOverallRarity;
+    } else if (sortingType == 'windowPeriods') {
+      ViewModel.sorterFunc = sorters.sortByWindowPeriods;
+    } else {
+      console.error("Invalid sortingType: ", settings.sortingType);
+      return;
+    }
+
+    ViewModel.settings.sortingType = sortingType;
+    ViewModel.sortingTypeSubject.onNext(sortingType);
+    ViewModel.saveSettings();
   }
 
   loadSettings() {
@@ -626,6 +893,7 @@ let ViewModel = new class {
         // COMPATIBILITY SUPPORT:
         // * The old view model stores settings in individual keys. Check for them
         //   first, and upgrade to the new model.
+        console.warn("Trying to restore settings from legacy version...");
         if (localStorage.completed) {
           settings.completed = JSON.parse(localStorage.completed);
         }

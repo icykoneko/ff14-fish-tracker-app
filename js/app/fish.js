@@ -68,7 +68,7 @@ class Fish {
     }
 
     // Create a subject for catchableRanges that we can subscribe to.
-    this.catchableRangesObserver = new Rx.BehaviorSubject([]);
+    this.catchableRangesObserver = new Rx.Subject([]);
   }
 
   notifyCatchableRangesUpdated() {

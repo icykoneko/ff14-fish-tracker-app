@@ -94,33 +94,33 @@
     </script>
 
     <script id="fish-template" type="text/html;x-dot-template">
-      <tr class="fish-entry {{?it.isCatchable()}}fish-active{{?}} {{?it.caught || false}}fish-caught{{?}} {{?it.pinned || false}}fish-pinned{{?}} {{=it.nextAvailBin()}}" data-id="{{=it.id}}" data-sortIdx="{{=it.sortIdx}}">
+      <tr class="fish-entry{{?it.isCatchable}} fish-active{{?}}{{?it.isCaught || false}} fish-caught{{?}}{{?it.isPinned || false}} fish-pinned{{?}}{{?it.isUpSoon}} fish-bin-15{{?}}" data-id="{{=it.id}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
           <div class="ui middle aligned vertical mini very compact icon buttons">
-            <div class="ui button fishCaught {{?it.caught || false}}green{{?}}">
+            <div class="ui button fishCaught {{?it.isCaught || false}}green{{?}}">
               <i class="checkmark icon"></i>
             </div>
-            <div class="ui button fishPinned {{?it.pinned || false}}red{{?}}">
+            <div class="ui button fishPinned {{?it.isPinned || false}}red{{?}}">
               <i class="pin icon"></i>
             </div>
           </div>
-          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
-            {{=it.name}}<br/>
-            <div class="ui tiny circular label">{{=it.patch}}</div>
+            {{=it.data.name}}<br/>
+            <div class="ui tiny circular label">{{=it.data.patch}}</div>
             <!-- check if fish can be put into the aquarium -->
-            {{?it.aquarium !== null}}
+            {{?it.data.aquarium !== null}}
               <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
-                   data-tooltip="Tier {{=it.aquarium.size}} {{=it.aquarium.water}}" data-position="right center" data-variation="mini"></div>
+                   data-tooltip="Tier {{=it.data.aquarium.size}} {{=it.data.aquarium.water}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            {{?it.folklore !== null}}
+            {{?it.data.folklore !== null}}
               <div class="ui middle aligned sprite-icon sprite-icon-folklore"
-                   data-tooltip="{{=__p(DATA.FOLKLORE[it.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
+                   data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            {{?it.collectable === true}}
+            {{?it.data.collectable === true}}
               <div class="ui middle aligned sprite-icon sprite-icon-collectable"
                    data-tooltip="Collectable" data-position="right center" data-variation="mini"></div>
             {{?}}
@@ -128,87 +128,85 @@
         </td>
         <!-- Availability -->
         <td>
-          {{?it.dataMissing !== false}}
+          {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
-          {{??it.alwaysAvailable}}
+          {{??it.data.alwaysAvailable}}
             Always
-          {{??it.availability === undefined}}
-            Unknown
           {{??}}
-            <span class="fish-availability-current" data-val="{{=it.availability.current.date()}}" data-tooltip="{{var d = it.availability.current.date(); if (d) { out += moment(d).calendar(); } }}">
-              {{=it.availability.current.duration()}}
+            <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += moment(d).calendar(); } }}">
+              {{=it.availability.current.duration}}
             </span><br/>
             <span style="font-size: smaller">
               <i class="upcoming-windows-button calendar icon"></i>
               <span style="white-space: nowrap !important">
-                <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
+                <b>Uptime:</b>&nbsp;{{=(it.uptime * 100.0).toFixed(1)}}%
               </span>
               <span style="white-space: nowrap !important">
-                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-prevclose="{{=it.availability.upcoming().prevdate()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().downtime()}}</span>
+                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming.downtime}}</span>
               </span>
             </span>
           {{?}}
         </td>
         <!-- Location -->
         <td>
-          <a href="http://garlandtools.org/db/#{{?it.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.location.id}}"
-             target="cp_gt">{{=it.location.name}}</a><br/>
-          <span style="font-size: smaller">{{=it.location.zoneName}}</span>
+          <a href="http://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}"
+             target="cp_gt">{{=it.data.location.name}}</a><br/>
+          <span style="font-size: smaller">{{=it.data.location.zoneName}}</span>
         </td>
         <!-- Conditions -->
         <td>
-          {{?it.dataMissing !== false}}
-            {{?it.dataMissing.weatherRestricted}}
+          {{?it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.weatherRestricted}}
               <i class="cloud icon"></i> Weather Restricted
             {{?}}
             <br/>
-            {{?it.dataMissing.timeRestricted}}
+            {{?it.data.dataMissing.timeRestricted}}
               <i class="clock icon"></i> Time Restricted
             {{?}}
           {{??}}
-            {{?it.conditions.previousWeatherSet.length > 0}}
-              {{~it.conditions.previousWeatherSet :weather:windex}}
+            {{?it.data.conditions.previousWeatherSet.length > 0}}
+              {{~it.data.conditions.previousWeatherSet :weather:windex}}
                 <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
                     title="{{=__p(weather,'name')}}"></div>
               {{~}}
               <i class="arrow right icon"></i>
             {{?}}
-            {{~it.conditions.weatherSet :weather:idx}}
+            {{~it.data.conditions.weatherSet :weather:idx}}
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
                   title="{{=__p(weather,'name')}}"></div>
             {{~}}
             <br/><i class="wait icon"></i>&nbsp;
-            {{? it.startHour === 0 && it.endHour === 24}}
+            {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              {{=it.startHour + ' - ' + it.endHour}}
+              {{=it.data.startHour + ' - ' + it.data.endHour}}
             {{?}}
           {{?}}
         </td>
         <!-- Requirements and Bait -->
         <td>
-          {{?it.dataMissing !== false}}
+          {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
-          {{?it.bait.hasPredators}}
+          {{?it.data.bait.hasPredators}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
           {{?}}
           <!-- Put fishEyes if fishEyes is not false and if true enter fishEyesDuration()  -->
-          {{?it.fishEyes !== false}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes {{?it.fishEyes !== true}}has-duration{{?}}" title="Fish Eyes">
-              {{?it.fishEyes !== true}}
-                <span>{{=it.fishEyesDuration()}}</span>
+          {{?it.data.fishEyes !== false}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes{{?it.data.fishEyes !== true}} has-duration{{?}}" title="Fish Eyes">
+              {{?it.data.fishEyes !== true}}
+                <span>{{=it.fishEyesDuration}}</span>
               {{?}}
             </div>
           {{?}}
-          {{?it.snagging}}
+          {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
-          {{?it.gig}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.gig.toLowerCase()}}_gig" title="{{=it.gig}} Gig"></div>
+          {{?it.data.gig}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
           {{?}}
-          {{~it.bait.path :item:idx}}
+          {{~it.data.bait.path :item:idx}}
             {{?idx == 0}}
               <a href="http://www.garlandtools.org/db/#item/{{=item._id}}" target="cp_gt">
             {{??}}
@@ -219,96 +217,94 @@
               </a>
             {{?}}
           {{~}}
-          {{?it.hookset}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.hookset.toLowerCase()}}_hookset" title="{{=it.hookset}} Hookset"></div>
+          {{?it.data.hookset}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
           {{?}}
         </td>
       </tr>
     </script>
 
     <script id="fish-intuition-template" type="text/html;x-dot-template">
-      <tr class="fish-intuition-row fish-entry {{?it.isCatchable()}}fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor}}">
+      <tr class="fish-intuition-row fish-entry{{?it.isCatchable}} fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor}}">
         <td class="collapsing right aligned">
-          <div class="intuition-count">{{=it.intuitionCount}}</div>
-          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
+          <div class="intuition-count">{{=it.data.intuitionCount}}</div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
-          <div class="ui middle aligned" style="display: inline-block;">{{=it.name}}</div>
+          <div class="ui middle aligned" style="display: inline-block;">{{=it.data.name}}</div>
         </td>
         <!-- Availability -->
         <td>
-          {{?it.dataMissing !== false}}
+          {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
-          {{??it.alwaysAvailable}}
+          {{??it.data.alwaysAvailable}}
             Always
-          {{??it.availability === undefined}}
-            Unknown
           {{??}}
-            <span class="fish-availability-current" data-val="{{=it.availability.current.date()}}" data-tooltip="{{var d = it.availability.current.date(); if (d) { out += moment(d).calendar(); } }}">
-              {{=it.availability.current.duration()}}
+            <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += moment(d).calendar(); } }}">
+              {{=it.availability.current.duration}}
             </span>
           {{?}}
         </td>
         <td>
-          {{?!it.alwaysAvailable && it.availability !== undefined}}
+          {{?!it.data.alwaysAvailable}}
             <span style="font-size: smaller">
               <span style="white-space: nowrap !important">
-                <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
+                <b>Uptime:</b>&nbsp;{{=(it.uptime * 100.0).toFixed(1)}}%
               </span>
               <span style="white-space: nowrap !important">
-                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-prevclose="{{=it.availability.upcoming().prevdate()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().downtime()}}</span>
+                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming.downtime}}</span>
               </span>
             </span>
           {{?}}
         </td>
         <td>
-          {{?it.dataMissing !== false}}
-            {{?it.dataMissing.weatherRestricted}}
+          {{?it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.weatherRestricted}}
               <i class="cloud icon"></i> Weather Restricted
             {{?}}
             <br/>
-            {{?it.dataMissing.timeRestricted}}
+            {{?it.data.dataMissing.timeRestricted}}
               <i class="clock icon"></i> Time Restricted
             {{?}}
           {{??}}
-            {{?it.conditions.previousWeatherSet.length > 0}}
-              {{~it.conditions.previousWeatherSet :weather:windex}}
+            {{?it.data.conditions.previousWeatherSet.length > 0}}
+              {{~it.data.conditions.previousWeatherSet :weather:windex}}
                 <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
                     title="{{=__p(weather,'name')}}"></div>
               {{~}}
               <i class="arrow right icon"></i>
             {{?}}
-            {{~it.conditions.weatherSet :weather:idx}}
+            {{~it.data.conditions.weatherSet :weather:idx}}
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
                   title="{{=__p(weather,'name')}}"></div>
             {{~}}
             <i class="wait icon"></i>&nbsp;
-            {{? it.startHour === 0 && it.endHour === 24}}
+            {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              {{=it.startHour + ' - ' + it.endHour}}
+              {{=it.data.startHour + ' - ' + it.data.endHour}}
             {{?}}
           {{?}}
         </td>
         <!-- Bait -->
         <td>
-          {{?it.dataMissing !== false}}
+          {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
           {{?}}
-          {{?it.fishEyes !== false}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes {{?it.fishEyes !== true}}has-duration{{?}}" title="Fish Eyes">
-              {{?it.fishEyes !== true}}
-                <span>{{=it.fishEyesDuration()}}</span>
+          {{?it.data.fishEyes !== false}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes{{?it.data.fishEyes !== true}} has-duration{{?}}" title="Fish Eyes">
+              {{?it.data.fishEyes !== true}}
+                <span>{{=it.fishEyesDuration}}</span>
               {{?}}
             </div>
           {{?}}
-          {{?it.snagging}}
+          {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
-          {{?it.gig}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.gig.toLowerCase()}}_gig" title="{{=it.gig}} Gig"></div>
+          {{?it.data.gig}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
           {{?}}
-          {{~it.bait.path :item:idx}}
+          {{~it.data.bait.path :item:idx}}
             {{?idx == 0}}
               <a href="http://www.garlandtools.org/db/#item/{{=item._id}}" target="cp_gt">
             {{??}}
@@ -319,8 +315,8 @@
               </a>
             {{?}}
           {{~}}
-          {{?it.hookset}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.hookset.toLowerCase()}}_hookset" title="{{=it.hookset}} Hookset"></div>
+          {{?it.data.hookset}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
           {{?}}
         </td>
       </tr>
@@ -344,7 +340,7 @@
           <div>
             <b>Downtime</b>
           </div>
-          {{~it.availability.upcomingWindows() :nextWindow:idx}}
+          {{~it.availability.upcomingWindows :nextWindow:idx}}
             <div style="white-space: nowrap;">
               <b>{{=moment(nextWindow.start).calendar()}}</b>
             </div>
