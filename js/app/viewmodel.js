@@ -587,16 +587,19 @@ let ViewModel = new class {
         .buffer(() => this.fishChangedSubject.debounce(100))
         .map(e => { return {fishAvailability: e} }),
       this.filterCompletionSubject
+        .distinctUntilChanged()
         .skip(1)
-        .debounce(500)
+        .debounce(100)
         .map(e => { return {filterCompletion: e} }),
       this.filterPatchSubject
+        .distinctUntilChanged()
         .skip(1)
-        .debounce(500)
+        .debounce(100)
         .map(e => { return {filterPatch: e} }),
       this.sortingTypeSubject
+        .distinctUntilChanged()
         .skip(1)
-        .debounce(500)
+        .debounce(100)
         .map(e => { return {sortingType: e} })
     );
 
@@ -606,6 +609,7 @@ let ViewModel = new class {
         .map(e => { return {countdown: e.timestamp} }),
       updateDisplaySources$
         .buffer(() => updateDisplaySources$.debounce(100))
+        .filter(x => x.length > 0)
         .map(e => {
           // Combine these into a single object.
           return e.reduce((acc, curr) => {
