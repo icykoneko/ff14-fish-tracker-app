@@ -681,11 +681,11 @@ let ViewModel = new class {
       .each(fish => this.activateEntry(fish, earthTime));
 
     // Remove any entries which are still inactive.
-    for (var k in this.fishEntries) {
+    for (let k in this.fishEntries) {
       var entry = this.fishEntries[k];
       if (!entry.active) {
         // No one likes stale, rotten fish.  They stink, so remove them.
-        this.removeEntry(entry);
+        this.removeEntry(entry, k);
       }
     }
 
