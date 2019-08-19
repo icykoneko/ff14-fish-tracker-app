@@ -123,8 +123,58 @@ class FishTableLayout {
     // parent at any time.
     // Another key thing to note, we haven't made any modifications to the
     // actual element itself.
+    let lastFishPinned = false;
+    let lastFishActive = false;
+    let lastFishUpSoon = false;
+    let careAboutUpSoon = ViewModel.settings.sortingType == 'overallRarity';
+
+    if (!careAboutUpSoon) {
+      lastFishUpSoon = null;
+    }
+
     for (var i = 0; i < $entries.length; i++) {
-      this.fishTable[0].appendChild($entries[i]);
+      let entryElem = $entries[i];
+
+      // Remove any old classes.
+      $(entryElem)
+        .removeClass('entry-after-last-pinned-entry')
+        .removeClass('entry-after-last-active-entry')
+        .removeClass('entry-after-last-upsoon-entry');
+
+      // This is super odd, but while we're doing this, we need to mark certain
+      // rows to have alternate border style.
+      // TODO: This really needs to be managed with CSS, but because the fish
+      // aren't <tbody>'s it kinda messes things up...
+      if (lastFishPinned !== null) {
+        if ($(entryElem).data('view').isPinned) {
+          lastFishPinned = true;
+        } else if (lastFishPinned === true) {
+          // But this fish is not pinned, so that's the last pinned fish.
+          $(entryElem).addClass('entry-after-last-pinned-entry');
+          // Stop tracking this.
+          lastFishPinned = null;
+        }
+      }
+      else if (lastFishActive !== null) {
+        if ($(entryElem).data('view').isCatchable) {
+          lastFishActive = true;
+        } else if (lastFishActive === true) {
+          $(entryElem).addClass('entry-after-last-active-entry');
+          // Stop tracking this.
+          lastFishActive = null;
+        }
+      }
+      else if (lastFishUpSoon !== null) {
+        if ($(entryElem).data('view').isUpSoon) {
+          lastFishUpSoon = true;
+        } else if (lastFishUpSoon === true) {
+          $(entryElem).addClass('entry-after-last-upsoon-entry');
+          // Stop tracking this.
+          lastFishUpSoon = null;
+        }
+      }
+
+      this.fishTable[0].appendChild(entryElem);
     }
 
     console.timeEnd('Sorting');
