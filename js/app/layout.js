@@ -28,7 +28,25 @@ class FishTableLayout {
     $(fishEntry).remove();
   }
 
-  update(fishEntry, baseTime, updateUpcomingTime = false) {
+  updateCaughtState(fishEntry) {
+    let $fishEntry = $(fishEntry.element);
+
+    $fishEntry.toggleClass('fish-caught', fishEntry.isCaught);
+    $('.fishCaught.button', $fishEntry).toggleClass('green', fishEntry.isCaught);
+  }
+
+  updatePinnedState(fishEntry) {
+    // TODO: [OPTIMIZATION-POINT]
+    // - Consider handling the moving of the element to the top of the list,
+    //   and even resorting /only the pinned fish/.
+    let $fishEntry = $(fishEntry.element);
+
+    $fishEntry.toggleClass('fish-pinned', fishEntry.isPinned);
+    $('.fishPinned.button', $fishEntry).toggleClass('red', fishEntry.isPinned);
+  }
+
+  update(fishEntry, baseTime) {
+    let updateUpcomingTime = ViewModel.settings.upcomingWindowFormat == 'fromNow';
     // Update the countdown information for this fish.
     let $fishEntry = $(fishEntry.element);
     let $currentAvail = $('.fish-availability-current', $fishEntry);
@@ -57,7 +75,7 @@ class FishTableLayout {
     // date in the data `val`.
     $currentAvail.text(
       ($fishEntry.hasClass('fish-active') ? 'closes ' : '') + 'in ' +
-      dateFns.distanceInWordsStrict(baseTime, $currentAvail.data('val'))
+      dateFns.distanceInWordsStrict(baseTime, fishEntry.availability.current.date)
     );
 
     // Is this fish going to be up soon...
@@ -77,7 +95,7 @@ class FishTableLayout {
     // skip this.
     if (updateUpcomingTime) {
       $upcomingAvail.text(
-        'in ' + dateFns.distanceInWordsStrict(baseTime, $upcomingAvail.data('val'))
+        'in ' + dateFns.distanceInWordsStrict(baseTime, fishEntry.availability.upcoming.date)
       );
     }
 

@@ -406,7 +406,7 @@ let ViewModel = new class {
     console.timeEnd("Initialization");
   }
 
-  updateDisplay(reason) {
+  updateDisplay(reason = null) {
     // This functionality used to be applyFiltersAndResort. Instead of causing
     // and outside event, we're going to ask the layout class to do the hard
     // work.
@@ -414,8 +414,6 @@ let ViewModel = new class {
     // This function is intended to be called whenever major parts of the fish
     // data have changed. That includes filtering, sorting, and availability
     // changes.
-
-    let updateUpcomingTime = this.settings.upcomingWindowFormat == 'fromNow';
 
     let fishWithUpdatedState = [];
 
@@ -438,7 +436,7 @@ let ViewModel = new class {
         // Update the data for this entry first.
         entry.update(timestamp);
         // Then have the layout make necessary updates.
-        if (this.layout.update(entry, timestamp, updateUpcomingTime)) {
+        if (this.layout.update(entry, timestamp)) {
           // Queue this fish entry for resorting as well!
           // We're basically doing FishWatcher's job for it now...
           // TODO: [NEEDS-REFACTOR]
@@ -572,7 +570,9 @@ let ViewModel = new class {
       this.fishChangedSubject.onNext(fish.id);
     });
 
-    // TODO: Connect the new entry's events.
+    // Connect the new entry's events.
+    $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
+    $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
 
     return entry;
   }
@@ -581,6 +581,46 @@ let ViewModel = new class {
     this.layout.remove(entry.element);
     entry.subscription.dispose();
     delete this.fishEntries[k];
+  }
+
+  onFishEntryCaughtClicked(e) {
+    e.stopPropagation();
+    let $this = $(this);
+
+    let entry = $this.closest('.fish-entry').data('view');
+    if (entry.isCaught) {
+      ViewModel.settings.completed = _(ViewModel.settings.completed).without(entry.id);
+    } else {
+      ViewModel.settings.completed.push(entry.id);
+    }
+    entry.isCaught = !entry.isCaught;
+    ViewModel.saveSettings();
+
+    // TODO: Determine if this fish should still be displayed efficiently.
+    ViewModel.layout.updateCaughtState(entry);
+    ViewModel.updateDisplay();
+
+    return false;
+  }
+
+  onFishEntryPinnedClicked(e) {
+    e.stopPropagation();
+    let $this = $(this);
+
+    let entry = $this.closest('.fish-entry').data('view');
+    if (entry.isPinned) {
+      ViewModel.settings.pinned = _(ViewModel.settings.pinned).without(entry.id);
+    } else {
+      ViewModel.settings.pinned.push(entry.id);
+    }
+    entry.isPinned = !entry.isPinned;
+    ViewModel.saveSettings();
+
+    // TODO: Determine if this fish should still be displayed efficiently.
+    ViewModel.layout.updatePinnedState(entry);
+    ViewModel.updateDisplay();
+
+    return false;
   }
 
   filterCompletionClicked(e) {
