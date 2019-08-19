@@ -13,12 +13,22 @@ class FishWatcher {
     console.info("FishWatcher is considering updating fishies >< c> |o.o)>");
     console.time('updateFishes');
 
+    // OPTIMIZATION POINT
+    // - FishWatcher normally just works on EVERY possible fish.
+    //   Instead, we'll ask the ViewModel for only the active fish entries. Each
+    //   entry contains a reference to the Fish object we need.
+    // - Due to this optimization, some fish may go out of scope and miss
+    //   getting windows assigned to them.
+
+    let trackedFish = _(ViewModel.fishEntries).map(entry => entry.data);
+
     // CLEANUP PHASE:
     //   Remove expired windows first.
     var eDate = eorzeaTime.getCurrentEorzeaDate();
     console.time('cleanupFish');
-    for (let fish of Fishes) {
-      if (fish.catchableRanges.length > 0 &&
+    for (let fish of trackedFish) {
+      // SAFEGUARD: Consume /all/ expired entries.
+      while (fish.catchableRanges.length > 0 &&
           dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
         // Remove the first entry from the array.
         fish.catchableRanges.shift();
@@ -30,19 +40,39 @@ class FishWatcher {
     // PHASE 1:
     //   Ensure each fish has at least 'n' windows defined.
     console.time('updateRanges');
-    for (let fish of Fishes) {
-      if (fish.alwaysAvailable) {
-        continue;
-      }
-      if (fish.catchableRanges.length >= this.maxWindows) {
-        continue;
-      }
+    for (let fish of trackedFish) {
+      if (fish.alwaysAvailable) { continue; }
+      if (fish.catchableRanges.length >= this.maxWindows) { continue; }
       // Okay, update it please.
       this.updateRangesForFish(fish);
     }
     console.timeEnd('updateRanges');
 
     console.timeEnd('updateFishes');
+  }
+
+  reinitRangesForFish(fish) {
+    // Support function to create, or reintegrate a fish into tracking.
+
+    // CLEANUP PHASE:
+    //   Remove expired windows first.
+    var eDate = eorzeaTime.getCurrentEorzeaDate();
+    while (fish.catchableRanges.length > 0 &&
+        dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
+      // Remove the first entry from the array.
+      fish.catchableRanges.shift();
+      fish.notifyCatchableRangesUpdated();
+    }
+
+    // PHASE 1:
+    //   Ensure each fish has at least 'n' windows defined.
+    do {
+      if (fish.alwaysAvailable) { break; }
+      if (fish.catchableRanges.length >= this.maxWindows) { break; }
+      // Okay, update it please.
+      this.updateRangesForFish(fish);
+    } while (0);
+
   }
 
   updateRangesForFish(fish) {
@@ -96,11 +126,11 @@ class FishWatcher {
         fish.weatherSet,
         1);
       var _iterItem = iter.next();
+      weatherService.finishedWithIter();
       if (_iterItem.done) { break; }
       lastRangeSpansPeriods =
         this.__checkToAddCatchableRange(fish, _iterItem.value);
     }
-    weatherService.finishedWithIter();
   }
 
   __checkToAddCatchableRange(fish, window) {
@@ -142,8 +172,8 @@ class FishWatcher {
           predatorFish.weatherSet,
           1);
         var _iterItem = iter.next();
+        weatherService.finishedWithIter();
         if (_iterItem.done) {
-          weatherService.finishedWithIter();
           // Wait wait wait, try one more thing.
           // Let's say you catch the fish during the intuition buff period!
           iter = weatherService.findWeatherPattern(
@@ -153,7 +183,8 @@ class FishWatcher {
             predatorFish.weatherSet,
             1);
           _iterItem = iter.next();
-          if (_iterItem.done) { weatherService.finishedWithIter(); return; }
+          weatherService.finishedWithIter();
+          if (_iterItem.done) { return; }
         }
         var predWindow = _iterItem.value;
         var predRange = predatorFish.availableRangeDuring(predWindow);

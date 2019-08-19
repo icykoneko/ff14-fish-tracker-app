@@ -325,7 +325,7 @@ let ViewModel = new class {
     // Unfortunately, that includes filtered fish too...
     // But that's not the point.  FishWatcher is the source of availability
     // data, and when the app is just starting up, we need to NOT RACE it.
-    fishWatcher.updateFishes();
+    //fishWatcher.updateFishes();
 
     // Update the table!
     this.updateDisplay(null);
@@ -349,11 +349,6 @@ let ViewModel = new class {
 
     // Register for changes.
     // Things we care about...
-    //   - Changes in the catchable ranges for each fish.
-    //     - Technically, you only really care about the current bell...
-    //       but I'd like to find some way of binding to the fish's
-    //       data (if possible...)
-    //     - This is the most destructive type of change.
     //   - Changes in filter settings.
     //     - Should be less destructive, expect for the whole re-sorting bit...
     //   - Changes in pinned settings.
@@ -376,15 +371,15 @@ let ViewModel = new class {
         .map(e => { return {fishAvailability: e} }),
       this.filterCompletionSubject
         .skip(1)
-        .debounce(100)
+        .debounce(250)
         .map(e => { return {filterCompletion: e} }),
       this.filterPatchSubject
         .skip(1)
-        .debounce(100)
+        .debounce(250)
         .map(e => { return {filterPatch: e} }),
       this.sortingTypeSubject
         .skip(1)
-        .debounce(100)
+        .debounce(250)
         .map(e => { return {sortingType: e} })
     );
 
@@ -422,11 +417,13 @@ let ViewModel = new class {
 
     let updateUpcomingTime = this.settings.upcomingWindowFormat == 'fromNow';
 
+    let fishWithUpdatedState = [];
+
     // The `countdown` reason is ALWAYS sent alone (due to how merge works).
     if (reason !== null &&
         'countdown' in reason)
     {
-      //console.time('updateDisplay[countdown]');
+      console.time('updateDisplay[countdown]');
       // We only need to update the already displayed fish. No destructive
       // changes need to be made this time.
       // The update function needs an EARTH timestamp, which we get from the
@@ -441,9 +438,19 @@ let ViewModel = new class {
         // Update the data for this entry first.
         entry.update(timestamp);
         // Then have the layout make necessary updates.
-        this.layout.update(entry, timestamp, updateUpcomingTime);
+        if (this.layout.update(entry, timestamp, updateUpcomingTime)) {
+          // Queue this fish entry for resorting as well!
+          // We're basically doing FishWatcher's job for it now...
+          // TODO: [NEEDS-REFACTOR]
+          fishWithUpdatedState.push(entry.id);
+        }
       });
-      //console.timeEnd('updateDisplay[countdown]');
+
+      if (fishWithUpdatedState.length > 0) {
+        // Looks like we need to resort the display.
+        this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(timestamp));
+      }
+      console.timeEnd('updateDisplay[countdown]');
       return;
     }
 
@@ -452,7 +459,6 @@ let ViewModel = new class {
 
     // We need a base time!
     let earthTime = Date.now();
-    let baseTime = eorzeaTime.toEorzea(earthTime);
 
     // Mark all existing entries as stale (or not active).
     // Anything that's not active, won't be displayed, and at the end of this
@@ -478,23 +484,17 @@ let ViewModel = new class {
       }
     }
 
-    // Of the remaining entries, update any which were marked as availability changed.
-    if (reason !== null && 'fishAvailability' in reason) {
-      let fishNeedingUpdates = new Set(reason.fishAvailability);
-      _(this.fishEntries).chain()
-        .filter(entry => fishNeedingUpdates.has(entry.id))
-        .each(entry => {
-          // Update the data for this entry first.
-          entry.update(earthTime);
-          // Then have the layout do extra work to update the display.
-          this.layout.update(entry, earthTime, updateUpcomingTime)
-        });
+    // Was this change caused by filter change?
+    if (reason !== null && ('filterCompletion' in reason || 'filterPatch' in reason))
+    {
+      // Let FishWatcher know!
+      fishWatcher.updateFishes();
     }
 
     // Finally, we can apply sorting to the list of active fish.
     // NOTE: Sorting used to be handled here... but there's a lot of layout
     // information that goes into sorting.
-    this.layout.sort(this.sorterFunc, baseTime);
+    this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(earthTime));
 
     console.timeEnd('updateDisplay');
   }
@@ -538,15 +538,26 @@ let ViewModel = new class {
     }
 
     // Otherwise, we have to create a new entry for this fish.
-    var entry = this.createEntry(fish, earthTime);
-    // Have the layout build a new row for this entry.
-    var $entry = $(this.layout.templates.fishEntry(entry));
+    this.createEntry(fish, earthTime);
+  }
 
+  createEntry(fish, earthTime) {
+    let entry = new FishEntry(fish);
+
+    // Request FishWatcher update our information, please?
+    // This /should/ take care of fish which were pulled out of tracking, then
+    // added back in later.
+    fishWatcher.reinitRangesForFish(fish);
+    // Update the display fields for this entry.
+    entry.update(earthTime, true);
+    // Have the layout build a new row for this entry.
+    let $entry = $(this.layout.templates.fishEntry(entry));
     // Associate the DOM element with the back-end data.
     $entry.data('view', entry);
     entry.element = $entry;
 
     // Add the new entry to the set of tracked fish entries.
+    // This way, whenever display changes, we'll get checked as well.
     this.fishEntries[fish.id] = entry;
 
     // Append the entry to the layout itself.
@@ -554,19 +565,14 @@ let ViewModel = new class {
 
     // Don't forget to activate the new entry!!!
     entry.active = true;
-  }
-
-  createEntry(fish, earthTime) {
-    var entry = new FishEntry(fish);
-
-    // Update the display fields for this entry.
-    entry.update(earthTime, true);
 
     // Connect the catchableRangesObserver to our fishChanged subject.
     entry.subscription = fish.catchableRangesObserver.debounce(100).subscribe((r) => {
       // Pass this event to the view model's fish changed subject.
       this.fishChangedSubject.onNext(fish.id);
     });
+
+    // TODO: Connect the new entry's events.
 
     return entry;
   }

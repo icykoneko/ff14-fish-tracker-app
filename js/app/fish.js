@@ -75,7 +75,6 @@ class Fish {
   }
 
   notifyCatchableRangesUpdated() {
-    this.__uptimeDirty = true;
     this.catchableRangesObserver.onNext(this.catchableRanges);
   }
 
@@ -158,6 +157,9 @@ class Fish {
   }
 
   addCatchableRange(nextRange) {
+    // Invalidate previously cached uptime value.
+    this.__uptimeDirty = true;
+
     // Add or merge next range with existing catchable ranges.
     if (_(this.catchableRanges).isEmpty()) {
       // The first entry is special. We can simply push it into the array.
@@ -213,4 +215,5 @@ let Fishes = _(DATA.FISH).chain()
   .values()
   .map((fishData) => new Fish(fishData))
   .each(muxinIntuitionReqs)
+  //.first(100)
   .value();

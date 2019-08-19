@@ -34,14 +34,23 @@ class FishTableLayout {
     let $currentAvail = $('.fish-availability-current', $fishEntry);
     let $upcomingAvail = $('.fish-availability-upcoming', $fishEntry);
 
+    let hasFishAvailabilityChanged = false;
+
     // First, check if the fish's availability changed.
     if (fishEntry.isCatchable != $fishEntry.hasClass('fish-active')) {
       $fishEntry.toggleClass('fish-active');
+      console.info(`${fishEntry.id} "${fishEntry.data.name}" has changed availability.`);
       updateUpcomingTime = true; // because status changed
+      hasFishAvailabilityChanged = true;
       // HACK: Fish whose availability state changes will always have catchableRanges.
       // That's why we don't bother checking it.
-      $currentAvail.data('val', fishEntry.availability.current.date);
-      $upcomingAvail.data('val', fishEntry.availability.upcoming.date);
+      $currentAvail
+        .data('val', fishEntry.availability.current.date)
+        .data('tooltip', moment(fishEntry.availability.current.date).calendar());
+      $upcomingAvail
+        .data('val', fishEntry.availability.upcoming.date)
+        .data('prevclose', fishEntry.availability.upcoming.prevdate)
+        .data('tooltip', moment(fishEntry.availability.upcoming.date).calendar());
     }
 
     // Set the "current availability" time. Remember, we've cached the other
@@ -53,10 +62,14 @@ class FishTableLayout {
 
     // Is this fish going to be up soon...
     // TODO: [NEEDS-OPTIMIZATION]
-    if (!$fishEntry.hasClass('fish-active') && fishEntry.isUpSoon) {
-      $fishEntry.addClass('fish-bin-15');
-    } else {
-      $fishEntry.removeClass('fish-bin-15');
+    if (!$fishEntry.hasClass('fish-active') &&
+        (fishEntry.isUpSoon != $fishEntry.hasClass('fish-bin-15')))
+    {
+      $fishEntry.toggleClass('fish-bin-15');
+      if (fishEntry.isUpSoon) {
+        console.info(`${fishEntry.id} "${fishEntry.data.name}" will be up soon.`);
+        hasFishAvailabilityChanged = true;
+      }
     }
 
     // Updating the "upcoming availability" time depends on the view model
@@ -67,6 +80,10 @@ class FishTableLayout {
         'in ' + dateFns.distanceInWordsStrict(baseTime, $upcomingAvail.data('val'))
       );
     }
+
+    // Let the caller know this fish changed availability or bins.
+    // They need to queue a resort.
+    return hasFishAvailabilityChanged;
   }
 
   sort(cmpFunc, baseTime) {
