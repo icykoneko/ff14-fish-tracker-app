@@ -63,12 +63,12 @@ class FishTableLayout {
       // HACK: Fish whose availability state changes will always have catchableRanges.
       // That's why we don't bother checking it.
       $currentAvail
-        .data('val', fishEntry.availability.current.date)
-        .data('tooltip', moment(fishEntry.availability.current.date).calendar());
+        .attr('data-val', fishEntry.availability.current.date)
+        .attr('data-tooltip', moment(fishEntry.availability.current.date).calendar());
       $upcomingAvail
-        .data('val', fishEntry.availability.upcoming.date)
-        .data('prevclose', fishEntry.availability.upcoming.prevdate)
-        .data('tooltip', moment(fishEntry.availability.upcoming.date).calendar());
+        .attr('data-val', fishEntry.availability.upcoming.date)
+        .attr('data-prevclose', fishEntry.availability.upcoming.prevdate)
+        .attr('data-tooltip', moment(fishEntry.availability.upcoming.date).calendar());
     }
 
     // Set the "current availability" time. Remember, we've cached the other
