@@ -148,6 +148,11 @@ class FishEntry {
     // This is the DOM element associated with this Fish.
     this.element = null;
 
+    // TODO: Improve this
+    // For fish with intuition requirements, include their elements here as
+    // well.
+    this.intuitionElements = [];
+
     // Subscription while active.
     this.subscription = null;
 
@@ -261,6 +266,18 @@ class FishEntry {
         });
       }
     }
+  }
+}
+
+class IntuitionFishEntry extends FishEntry {
+  // TODO: If we are independently tracking this fish, have IntuitionFishEntry
+  // just point at the main FishEntry for that fish.
+
+  constructor(fish, intuitionForFish, count) {
+    super(fish);
+
+    this.intuitionCount = count;
+    this.intuitionFor = intuitionForFish;
   }
 }
 
@@ -421,7 +438,7 @@ let ViewModel = new class {
     if (reason !== null &&
         'countdown' in reason)
     {
-      console.time('updateDisplay[countdown]');
+      // console.time('updateDisplay[countdown]');
       // We only need to update the already displayed fish. No destructive
       // changes need to be made this time.
       // The update function needs an EARTH timestamp, which we get from the
@@ -448,12 +465,12 @@ let ViewModel = new class {
         // Looks like we need to resort the display.
         this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(timestamp));
       }
-      console.timeEnd('updateDisplay[countdown]');
+      // console.timeEnd('updateDisplay[countdown]');
       return;
     }
 
-    console.info("Updating display...", reason);
-    console.time('updateDisplay');
+    // console.info("Updating display...", reason);
+    // console.time('updateDisplay');
 
     // We need a base time!
     let earthTime = Date.now();
@@ -494,7 +511,7 @@ let ViewModel = new class {
     // information that goes into sorting.
     this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(earthTime));
 
-    console.timeEnd('updateDisplay');
+    // console.timeEnd('updateDisplay');
   }
 
   isFishPinned(fishId) {
@@ -542,6 +559,9 @@ let ViewModel = new class {
   createEntry(fish, earthTime) {
     let entry = new FishEntry(fish);
 
+    // Don't forget to activate the new entry!!!
+    entry.active = true;
+
     // Request FishWatcher update our information, please?
     // This /should/ take care of fish which were pulled out of tracking, then
     // added back in later.
@@ -552,17 +572,35 @@ let ViewModel = new class {
     let $entry = $(this.layout.templates.fishEntry(entry));
     // Associate the DOM element with the back-end data.
     $entry.data('view', entry);
-    entry.element = $entry;
+    entry.element = $entry[0];
 
     // Add the new entry to the set of tracked fish entries.
     // This way, whenever display changes, we'll get checked as well.
     this.fishEntries[fish.id] = entry;
 
-    // Append the entry to the layout itself.
-    this.layout.append($entry);
+    // Check if this fish has intuition requirements.
+    for (let intuitionFish of fish.intuitionFish) {
+      let intuitionFishEntry = new IntuitionFishEntry(
+        intuitionFish.data, fish, intuitionFish.count);
+      intuitionFishEntry.active = true;
+      // Initially, FishWatcher only determined if this fish /would/ be up.
+      // It doesn't necessarily compute the ranges.
+      fishWatcher.reinitRangesForFish(intuitionFish.data);
+      // Update the entry's display fields.
+      intuitionFishEntry.update(earthTime, true);
+      // Have the layout build a new row for this intuition entry.
+      let $subEntry =
+        $(this.layout.templates.intuitionFishEntry(intuitionFishEntry));
+      // Connect DOM and object together.
+      $subEntry.data('view', intuitionFishEntry);
+      intuitionFishEntry.element = $subEntry[0];
 
-    // Don't forget to activate the new entry!!!
-    entry.active = true;
+      // Unlike normal entries, this only gets added to the parent fish.
+      entry.intuitionElements.push($subEntry[0]);
+    }
+
+    // Append the entry to the layout.
+    this.layout.append(entry);
 
     // Connect the catchableRangesObserver to our fishChanged subject.
     entry.subscription = fish.catchableRangesObserver.debounce(100).subscribe((r) => {
@@ -578,8 +616,12 @@ let ViewModel = new class {
   }
 
   removeEntry(entry, k) {
-    this.layout.remove(entry.element);
     entry.subscription.dispose();
+    this.layout.remove(entry);
+    // Remove intuition entries as well.
+    for (let subElement of entry.intuitionElements) {
+      delete $(subElement).data('view');
+    }
     delete this.fishEntries[k];
   }
 

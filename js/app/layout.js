@@ -18,14 +18,22 @@ class FishTableLayout {
     this.fishTable = $('tbody', $fishTable);
   }
 
-  append($fishEntry) {
+  append(fishEntry) {
     // Appends a new fish entry to the layout.
-    this.fishTable[0].appendChild($fishEntry[0]);
+    this.fishTable[0].appendChild(fishEntry.element);
+    // Include any intuition elements as well.
+    for (let subEntryElem of fishEntry.intuitionElements) {
+      this.fishTable[0].appendChild(subEntryElem);
+    }
   }
 
   remove(fishEntry) {
     // Removes a new fish entry from the layout.
-    $(fishEntry).remove();
+    fishEntry.element.remove();
+    // Also remove any intuition elements.
+    for (let subEntryElem of fishEntry.intuitionElements) {
+      subEntryElem.remove();
+    }
   }
 
   updateCaughtState(fishEntry) {
@@ -99,6 +107,11 @@ class FishTableLayout {
       );
     }
 
+    // Update any intuition fish rows as well!
+    for (let subEntryElem of fishEntry.intuitionElements) {
+      this.update($(subEntryElem).data('view'), baseTime);
+    }
+
     // Let the caller know this fish changed availability or bins.
     // They need to queue a resort.
     return hasFishAvailabilityChanged;
@@ -132,49 +145,51 @@ class FishTableLayout {
       lastFishUpSoon = null;
     }
 
+    // Remove any old classes.
+    $entries
+      .removeClass('entry-after-last-pinned-entry')
+      .removeClass('entry-after-last-active-entry')
+      .removeClass('entry-after-last-upsoon-entry');
+
     for (var i = 0; i < $entries.length; i++) {
       let entryElem = $entries[i];
-
-      // Remove any old classes.
-      $(entryElem)
-        .removeClass('entry-after-last-pinned-entry')
-        .removeClass('entry-after-last-active-entry')
-        .removeClass('entry-after-last-upsoon-entry');
+      let $entryElem = $(entryElem);
+      let entry = $entryElem.data('view');
 
       // This is super odd, but while we're doing this, we need to mark certain
       // rows to have alternate border style.
       // TODO: This really needs to be managed with CSS, but because the fish
       // aren't <tbody>'s it kinda messes things up...
       if (lastFishPinned !== null) {
-        if ($(entryElem).data('view').isPinned) {
+        if (entry.isPinned) {
           lastFishPinned = true;
         } else if (lastFishPinned === true) {
           // But this fish is not pinned, so that's the last pinned fish.
-          $(entryElem).addClass('entry-after-last-pinned-entry');
+          $entryElem.addClass('entry-after-last-pinned-entry');
           // Stop tracking this.
           lastFishPinned = null;
         }
       }
       else if (lastFishActive !== null) {
-        if ($(entryElem).data('view').isCatchable) {
+        if (entry.isCatchable) {
           lastFishActive = true;
         } else if (lastFishActive === true) {
-          $(entryElem).addClass('entry-after-last-active-entry');
+          $entryElem.addClass('entry-after-last-active-entry');
           // Stop tracking this.
           lastFishActive = null;
         }
       }
       else if (lastFishUpSoon !== null) {
-        if ($(entryElem).data('view').isUpSoon) {
+        if (entry.isUpSoon) {
           lastFishUpSoon = true;
         } else if (lastFishUpSoon === true) {
-          $(entryElem).addClass('entry-after-last-upsoon-entry');
+          $entryElem.addClass('entry-after-last-upsoon-entry');
           // Stop tracking this.
           lastFishUpSoon = null;
         }
       }
 
-      this.fishTable[0].appendChild(entryElem);
+      this.append(entry);
     }
 
     console.timeEnd('Sorting');

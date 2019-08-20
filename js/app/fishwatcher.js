@@ -20,7 +20,12 @@ class FishWatcher {
     // - Due to this optimization, some fish may go out of scope and miss
     //   getting windows assigned to them.
 
-    let trackedFish = _(ViewModel.fishEntries).map(entry => entry.data);
+    let trackedFish = _(ViewModel.fishEntries).reduce((acc, curr) => {
+      acc.push(curr.data);
+      _(curr.data.intuitionFish).each(e => acc.push(e.data));
+      return acc;
+    }, []);
+
 
     // CLEANUP PHASE:
     //   Remove expired windows first.
