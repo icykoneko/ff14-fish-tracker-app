@@ -149,9 +149,9 @@ class FishEntry {
     this.element = null;
 
     // TODO: Improve this
-    // For fish with intuition requirements, include their elements here as
+    // For fish with intuition requirements, include their entries here as
     // well.
-    this.intuitionElements = [];
+    this.intuitionEntries = [];
 
     // Subscription while active.
     this.subscription = null;
@@ -265,6 +265,10 @@ class FishEntry {
           };
         });
       }
+    }
+
+    for (let subEntry of this.intuitionEntries) {
+      subEntry.update(earthTime, full);
     }
   }
 }
@@ -473,7 +477,31 @@ let ViewModel = new class {
     // console.time('updateDisplay');
 
     // We need a base time!
-    let earthTime = Date.now();
+    let timestamp = Date.now();
+
+    if (reason !== null && 'fishAvailability' in reason)
+    {
+      // _(reason.fishAvailability).each(fishId => {
+      //   // NOTE: Only top-level fish send this message, so you don't need to check intuition
+      //   // fish.
+      //   this.fishEntries[fishId].update(timestamp);
+      //   this.layout.update(this.fishEntries[fishId], timestamp);
+      // });
+
+      // FishWatcher doesn't send a message when a fish window opens...
+      // But it's important to know that one closed, since this results in new
+      // availability values getting computed...
+      // Either way... we'll update ALL THE FISH ENTRIES to prevent a
+      // double-resort.
+      _(this.fishEntries).each(entry => {
+        // Update the data for this entry first.
+        entry.update(timestamp);
+        // Then have the layout make necessary updates.
+        this.layout.update(entry, timestamp);
+      });
+      this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(timestamp));
+      return;
+    }
 
     // Mark all existing entries as stale (or not active).
     // Anything that's not active, won't be displayed, and at the end of this
@@ -488,7 +516,7 @@ let ViewModel = new class {
     // this!
     _(Fishes).chain()
       .reject(fish => this.isFishFiltered(fish))
-      .each(fish => this.activateEntry(fish, earthTime));
+      .each(fish => this.activateEntry(fish, timestamp));
 
     // Remove any entries which are still inactive.
     for (let k in this.fishEntries) {
@@ -509,7 +537,7 @@ let ViewModel = new class {
     // Finally, we can apply sorting to the list of active fish.
     // NOTE: Sorting used to be handled here... but there's a lot of layout
     // information that goes into sorting.
-    this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(earthTime));
+    this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(timestamp));
 
     // console.timeEnd('updateDisplay');
   }
@@ -596,7 +624,7 @@ let ViewModel = new class {
       intuitionFishEntry.element = $subEntry[0];
 
       // Unlike normal entries, this only gets added to the parent fish.
-      entry.intuitionElements.push($subEntry[0]);
+      entry.intuitionEntries.push(intuitionFishEntry);
     }
 
     // Append the entry to the layout.
@@ -619,8 +647,8 @@ let ViewModel = new class {
     entry.subscription.dispose();
     this.layout.remove(entry);
     // Remove intuition entries as well.
-    for (let subElement of entry.intuitionElements) {
-      delete $(subElement).data('view');
+    for (let subEntry in entry.intuitionEntries) {
+      delete entry.intuitionEntries[subEntry];
     }
     delete this.fishEntries[k];
   }

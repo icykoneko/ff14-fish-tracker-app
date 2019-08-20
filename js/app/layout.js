@@ -22,8 +22,8 @@ class FishTableLayout {
     // Appends a new fish entry to the layout.
     this.fishTable[0].appendChild(fishEntry.element);
     // Include any intuition elements as well.
-    for (let subEntryElem of fishEntry.intuitionElements) {
-      this.fishTable[0].appendChild(subEntryElem);
+    for (let subEntry of fishEntry.intuitionEntries) {
+      this.fishTable[0].appendChild(subEntry.element);
     }
   }
 
@@ -31,8 +31,8 @@ class FishTableLayout {
     // Removes a new fish entry from the layout.
     fishEntry.element.remove();
     // Also remove any intuition elements.
-    for (let subEntryElem of fishEntry.intuitionElements) {
-      subEntryElem.remove();
+    for (let subEntry of fishEntry.intuitionEntries) {
+      subEntry.element.remove();
     }
   }
 
@@ -88,7 +88,8 @@ class FishTableLayout {
 
     // Is this fish going to be up soon...
     // TODO: [NEEDS-OPTIMIZATION]
-    if (!$fishEntry.hasClass('fish-active') &&
+    if (!$fishEntry.hasClass('fish-intuition-row') &&
+        !$fishEntry.hasClass('fish-active') &&
         (fishEntry.isUpSoon != $fishEntry.hasClass('fish-bin-15')))
     {
       $fishEntry.toggleClass('fish-bin-15');
@@ -108,8 +109,8 @@ class FishTableLayout {
     }
 
     // Update any intuition fish rows as well!
-    for (let subEntryElem of fishEntry.intuitionElements) {
-      this.update($(subEntryElem).data('view'), baseTime);
+    for (let subEntry of fishEntry.intuitionEntries) {
+      this.update(subEntry, baseTime);
     }
 
     // Let the caller know this fish changed availability or bins.

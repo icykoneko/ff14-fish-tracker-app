@@ -226,7 +226,7 @@
     </script>
 
     <script id="fish-intuition-template" type="text/html;x-dot-template">
-      <tr class="fish-intuition-row fish-entry{{?it.isCatchable}} fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor}}">
+      <tr class="fish-intuition-row fish-entry{{?it.isCatchable}} fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor.id}}">
         <td class="collapsing right aligned">
           <div class="intuition-count">{{=it.intuitionCount}}</div>
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
