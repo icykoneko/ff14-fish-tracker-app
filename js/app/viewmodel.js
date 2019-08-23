@@ -363,6 +363,7 @@ let ViewModel = new class {
       dblclick: this.filterPatchDblClicked
     });
     $('#filterPatch .button.patch-set').on('click', this.filterPatchSetClicked);
+    $('#theme-button').on('click', this.themeButtonClicked);
 
     // Special event handlers.
     // These are mainly supporting the SemanticUI widgets.
@@ -654,10 +655,12 @@ let ViewModel = new class {
       maxSearchDepth: 3,
       observeChanges: false
     });
+    entry.upcomingWindowsPopupElement = $('.ui.popup.upcoming-windows', $entry)[0];
+
     if (this.settings.theme === 'dark') {
       $('.ui.popup.upcoming-windows', $entry).addClass('inverted');
+      $('*[data-tooltip]', $entry).attr('data-inverted', '');
     }
-    entry.upcomingWindowsPopupElement = $('.ui.popup.upcoming-windows', $entry)[0];
 
     return entry;
   }
@@ -806,6 +809,32 @@ let ViewModel = new class {
     ViewModel.saveSettings();
   }
 
+  themeButtonClicked(e) {
+    if (e) e.stopPropagation();
+    let $this = $(this);
+    let theme = $this.prop('checked') ? 'dark' : 'light';
+
+    // Apply the theme.
+    ViewModel.applyTheme(theme);
+    // And save it to settings.
+    ViewModel.settings.theme = theme;
+    ViewModel.saveSettings();
+  }
+
+  applyTheme(theme) {
+    if (theme === 'dark') {
+      $('body').addClass('dark');
+      $('.ui.message.announcement').addClass('inverted');
+      $('.ui.popup.upcoming-windows').addClass('inverted');
+      $('*[data-tooltip]').attr('data-inverted', '');
+    } else {
+      $('body').removeClass('dark');
+      $('.ui.message.announcement').removeClass('inverted');
+      $('.ui.popup.upcoming-windows').removeClass('inverted');
+      $('*[data-tooltip]').removeAttr('data-inverted');
+    }
+  }
+
   loadSettings() {
     var settings = this.settings;
 
@@ -823,6 +852,9 @@ let ViewModel = new class {
         }
         if (localStorage.pinned) {
           settings.pinned = JSON.parse(localStorage.pinned);
+        }
+        if (localStorage.theme) {
+          settings.theme = localStorage.theme;
         }
       }
     } catch (ex) {
@@ -852,6 +884,10 @@ let ViewModel = new class {
       console.error("Invalid sortingType: ", settings.sortingType);
     }
     $('#sortingType input[value="' + settings.sortingType + '"]').parent().checkbox('check');
+
+    // Set the theme.
+    $('#theme-button').prop('checked', settings.theme === 'dark');
+    this.applyTheme(settings.theme);
 
     // Save the settings to the model.
     this.settings = settings;
