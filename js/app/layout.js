@@ -77,6 +77,13 @@ class FishTableLayout {
         .attr('data-val', fishEntry.availability.upcoming.date)
         .attr('data-prevclose', fishEntry.availability.upcoming.prevdate)
         .attr('data-tooltip', moment(fishEntry.availability.upcoming.date).calendar());
+      
+      // If this fish has upcoming windows data, update it now.
+      if (fishEntry.upcomingWindowsPopupElement !== null) {
+        $('.upcoming-windows-button', $fishEntry).popup('hide');
+        $(fishEntry.upcomingWindowsPopupElement).children().first().replaceWith(
+          this.templates.upcomingWindows(fishEntry));
+      }
     }
 
     // Set the "current availability" time. Remember, we've cached the other

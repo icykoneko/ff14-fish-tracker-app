@@ -147,6 +147,8 @@ class FishEntry {
     
     // This is the DOM element associated with this Fish.
     this.element = null;
+    
+    this.upcomingWindowsPopupElement = null;
 
     // TODO: Improve this
     // For fish with intuition requirements, include their entries here as
@@ -495,7 +497,7 @@ let ViewModel = new class {
       // double-resort.
       _(this.fishEntries).each(entry => {
         // Update the data for this entry first.
-        entry.update(timestamp);
+        entry.update(timestamp, true);
         // Then have the layout make necessary updates.
         this.layout.update(entry, timestamp);
       });
@@ -639,6 +641,23 @@ let ViewModel = new class {
     // Connect the new entry's events.
     $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
     $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
+    
+    $('.ui.popup.upcoming-windows', $entry).append(
+      this.layout.templates.upcomingWindows(entry));
+    $('.upcoming-windows-button', $entry).popup({
+      addTouchEvents: false,
+      hoverable: true,
+      popup: '.ui.popup.upcoming-windows',
+      position: 'right center',
+      target: $('.upcoming-windows-button', $entry).parent(),
+      on: 'click',
+      maxSearchDepth: 3,
+      observeChanges: false
+    });
+    if (this.settings.theme === 'dark') {
+      $('.ui.popup.upcoming-windows', $entry).addClass('inverted');
+    }
+    entry.upcomingWindowsPopupElement = $('.ui.popup.upcoming-windows', $entry)[0];
 
     return entry;
   }

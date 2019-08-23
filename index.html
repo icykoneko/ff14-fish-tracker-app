@@ -146,6 +146,7 @@
                 <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming.downtime}}</span>
               </span>
             </span>
+            <div class="ui popup upcoming-windows"></div>
           {{?}}
         </td>
         <!-- Location -->
@@ -330,29 +331,27 @@
     </script>
 
     <script id="upcoming-windows-template" type="text/html;x-dot-template">
-      <div class="ui popup" style="">
-        <div class="upcoming-windows-popup">
-          <div>
-            <b>Next Start</b>
-          </div>
-          <div>
-            <b>Duration</b>
-          </div>
-          <div>
-            <b>Downtime</b>
-          </div>
-          {{~it.availability.upcomingWindows :nextWindow:idx}}
-            <div style="white-space: nowrap;">
-              <b>{{=moment(nextWindow.start).calendar()}}</b>
-            </div>
-            <div style="white-space: nowrap;">
-              {{=nextWindow.duration}}
-            </div>
-            <div style="white-space: nowrap;">
-              {{=nextWindow.downtime}}
-            </div>
-          {{~}}
+      <div class="upcoming-windows-popup">
+        <div>
+          <b>Next Start</b>
         </div>
+        <div>
+          <b>Duration</b>
+        </div>
+        <div>
+          <b>Downtime</b>
+        </div>
+        {{~it.availability.upcomingWindows :nextWindow:idx}}
+          <div style="white-space: nowrap;">
+            <b>{{=moment(nextWindow.start).calendar()}}</b>
+          </div>
+          <div style="white-space: nowrap;">
+            {{=nextWindow.duration}}
+          </div>
+          <div style="white-space: nowrap;">
+            {{=nextWindow.downtime}}
+          </div>
+        {{~}}
       </div>
     </script>
 
