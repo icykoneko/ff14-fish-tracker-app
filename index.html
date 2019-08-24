@@ -110,7 +110,7 @@
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
-            {{=it.data.name}}<br/>
+            <span class="fish-name">{{=it.data.name}}</span><br/>
             <div class="ui tiny circular label">{{=it.data.patch}}</div>
             <!-- check if fish can be put into the aquarium -->
             {{?it.data.aquarium !== null}}
@@ -152,8 +152,8 @@
         <!-- Location -->
         <td>
           <a href="http://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}"
-             target="cp_gt">{{=it.data.location.name}}</a><br/>
-          <span style="font-size: smaller">{{=it.data.location.zoneName}}</span>
+             target="cp_gt" class="location-name">{{=it.data.location.name}}</a><br/>
+          <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
         </td>
         <!-- Conditions -->
         <td>
@@ -169,13 +169,15 @@
             {{?it.data.conditions.previousWeatherSet.length > 0}}
               {{~it.data.conditions.previousWeatherSet :weather:windex}}
                 <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                    title="{{=__p(weather,'name')}}"></div>
+                    title="{{=__p(weather,'name')}}"
+                    data-prevWeatherIdx="{{=windex}}"></div>
               {{~}}
               <i class="arrow right icon"></i>
             {{?}}
-            {{~it.data.conditions.weatherSet :weather:idx}}
+            {{~it.data.conditions.weatherSet :weather:windex}}
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                  title="{{=__p(weather,'name')}}"></div>
+                  title="{{=__p(weather,'name')}}"
+                  data-currWeatherIdx="{{=windex}}"></div>
             {{~}}
             <br/><i class="wait icon"></i>&nbsp;
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
@@ -214,7 +216,7 @@
             {{??}}
               <i class="arrow right icon"></i>
             {{?}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}"></div>
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}" data-baitIdx="{{=idx}}"></div>
             {{?idx == 0}}
               </a>
             {{?}}
@@ -233,7 +235,7 @@
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
-          <div class="ui middle aligned" style="display: inline-block;">{{=it.data.name}}</div>
+          <div class="ui middle aligned fish-name" style="display: inline-block;">{{=it.data.name}}</div>
         </td>
         <!-- Availability -->
         <td>
@@ -272,13 +274,15 @@
             {{?it.data.conditions.previousWeatherSet.length > 0}}
               {{~it.data.conditions.previousWeatherSet :weather:windex}}
                 <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                    title="{{=__p(weather,'name')}}"></div>
+                    title="{{=__p(weather,'name')}}"
+                    data-prevWeatherIdx="{{=windex}}"></div>
               {{~}}
               <i class="arrow right icon"></i>
             {{?}}
-            {{~it.data.conditions.weatherSet :weather:idx}}
+            {{~it.data.conditions.weatherSet :weather:windex}}
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                  title="{{=__p(weather,'name')}}"></div>
+                  title="{{=__p(weather,'name')}}"
+                  data-currWeatherIdx="{{=windex}}"></div>
             {{~}}
             <i class="wait icon"></i>&nbsp;
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
@@ -312,7 +316,7 @@
             {{??}}
               <i class="arrow right icon"></i>
             {{?}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}"></div>
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}" data-baitIdx="{{=idx}}"></div>
             {{?idx == 0}}
               </a>
             {{?}}

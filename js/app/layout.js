@@ -53,6 +53,59 @@ class FishTableLayout {
     $('.fishPinned.button', $fishEntry).toggleClass('red', fishEntry.isPinned);
   }
 
+  updateLanguage(fishEntry) {
+    // The Fish object actually stores language-specific values in certain
+    // fields... To make our life easier, and to prevent any unforseen issues,
+    // we'll run the applyLocalization function first, then update the DOM
+    // elements that coorespond with the affected text.
+    // SPOILER: THERE'S A LOT! Maybe it would be better to simply reapply the
+    // template... but that has consequences of its own...
+
+    // AFFECTED FIELDS:
+    // it.data.name
+    // it.data.location.name
+    // it.data.location.zoneName
+    // it.data.bait.predators[...].name
+
+    fishEntry.data.applyLocalization();
+
+    let $fishEntry = $(fishEntry.element);
+
+    $('.fish-name', $fishEntry).text(fishEntry.data.name);
+    if (fishEntry.data.folklore !== null) {
+      $('.sprite-icon-folklore', $fishEntry).attr(
+        'data-tooltip', __p(DATA.FOLKLORE[fishEntry.data.folklore], 'name'));
+    }
+    $('.location-name', $fishEntry).text(fishEntry.data.location.name);
+    $('.zone-name', $fishEntry).text(fishEntry.data.location.zoneName);
+    $('.weather-icon', $fishEntry).each((nodeIdx, elem) => {
+      let $elem = $(elem);
+      let idx = $elem.attr('data-prevWeatherIdx');
+      if (idx !== undefined) {
+        $elem.attr('title',
+          __p(fishEntry.data.conditions.previousWeatherSet[idx], 'name'));
+      } else {
+        idx = $elem.attr('data-currWeatherIdx');
+        if (idx !== undefined) {
+          $elem.attr('title',
+            __p(fishEntry.data.conditions.weatherSet[idx], 'name'));
+        }
+      }
+    });
+    $('.bait-icon', $fishEntry).each((nodeIdx, elem) => {
+      let $elem = $(elem);
+      let idx = $elem.attr('data-baitIdx');
+      if (idx !== undefined) {
+        $elem.attr('title', __p(fishEntry.data.bait.path[idx], 'name'));
+      }
+    });
+
+    // Update the intuition entries as well...
+    for (let subEntry of fishEntry.intuitionEntries) {
+      this.updateLanguage(subEntry);
+    }
+  }
+
   update(fishEntry, baseTime) {
     let updateUpcomingTime = ViewModel.settings.upcomingWindowFormat == 'fromNow';
     // Update the countdown information for this fish.

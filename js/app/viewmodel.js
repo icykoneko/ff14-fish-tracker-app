@@ -163,6 +163,11 @@ class FishEntry {
     // Just make sure you don't leak references...
     this.data = fish;
 
+    // The Fish object actually stores language-specific values in certain
+    // fields... This really only helps when the fish is displayed initially
+    // though...
+    this.data.applyLocalization();
+
     // Set up the remaining data structure...
     this.isUpSoon = '';
     this.availability = {
@@ -308,6 +313,7 @@ let ViewModel = new class {
   initialize() {
     // When displaying a date that's more than a week away, include the time as well.
     moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
+    doT.templateSettings.strip = false;
 
     // Finally, initialize the display.
     this.initializeDisplay();
@@ -335,6 +341,12 @@ let ViewModel = new class {
 
     // Initialize checkbox controls.
     $('.ui.radio.checkbox').checkbox();
+
+    // The language buttons aren't managed by ViewModel's settings, so we need
+    // to set the active button here...
+    $('#languageChoice .button')
+      .filter('[data-lang="' + localizationHelper.getLanguage() + '"]')
+      .addClass('active');
 
     // Subjects.
     // These are used for RxJS to allow subscription events to changes.
@@ -364,6 +376,7 @@ let ViewModel = new class {
     });
     $('#filterPatch .button.patch-set').on('click', this.filterPatchSetClicked);
     $('#theme-button').on('click', this.themeButtonClicked);
+    $('#languageChoice .button').on('click', this.languageChoiceClicked);
 
     // Special event handlers.
     // These are mainly supporting the SemanticUI widgets.
@@ -404,7 +417,10 @@ let ViewModel = new class {
       this.sortingTypeSubject
         .skip(1)
         .debounce(250)
-        .map(e => { return {sortingType: e} })
+        .map(e => { return {sortingType: e} }),
+      localizationHelper.languageChanged
+        .skip(1)
+        .map(e => { return {language: e} })
     );
 
     // Merge with 1s interval timer.
@@ -502,31 +518,34 @@ let ViewModel = new class {
         // Then have the layout make necessary updates.
         this.layout.update(entry, timestamp);
       });
-      this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(timestamp));
-      return;
+      // Fall-through just in case filters were changed at the same time...
     }
 
-    // Mark all existing entries as stale (or not active).
-    // Anything that's not active, won't be displayed, and at the end of this
-    // function, will be removed from the list, making future updates faster.
-    _(this.fishEntries).each((entry) => entry.active = false);
+    if ((reason === null) ||
+        (reason !== null && ('filterCompletion' in reason || 'filterPatch' in reason)))
+    {
+      // Mark all existing entries as stale (or not active).
+      // Anything that's not active, won't be displayed, and at the end of this
+      // function, will be removed from the list, making future updates faster.
+      _(this.fishEntries).each((entry) => entry.active = false);
 
-    // Next, we'll apply the current filters to the entire list, and only
-    // (re-)activate the fish that remain.
-    // NOTE: We don't actually need to keep a copy of this list, thus the
-    // chaining.
-    // TODO: If the filter settings haven't changed, there's no reason to do
-    // this!
-    _(Fishes).chain()
-      .reject(fish => this.isFishFiltered(fish))
-      .each(fish => this.activateEntry(fish, timestamp));
+      // Next, we'll apply the current filters to the entire list, and only
+      // (re-)activate the fish that remain.
+      // NOTE: We don't actually need to keep a copy of this list, thus the
+      // chaining.
+      // TODO: If the filter settings haven't changed, there's no reason to do
+      // this!
+      _(Fishes).chain()
+        .reject(fish => this.isFishFiltered(fish))
+        .each(fish => this.activateEntry(fish, timestamp));
 
-    // Remove any entries which are still inactive.
-    for (let k in this.fishEntries) {
-      var entry = this.fishEntries[k];
-      if (!entry.active) {
-        // No one likes stale, rotten fish.  They stink, so remove them.
-        this.removeEntry(entry, k);
+      // Remove any entries which are still inactive.
+      for (let k in this.fishEntries) {
+        var entry = this.fishEntries[k];
+        if (!entry.active) {
+          // No one likes stale, rotten fish.  They stink, so remove them.
+          this.removeEntry(entry, k);
+        }
       }
     }
 
@@ -537,10 +556,23 @@ let ViewModel = new class {
       fishWatcher.updateFishes();
     }
 
-    // Finally, we can apply sorting to the list of active fish.
-    // NOTE: Sorting used to be handled here... but there's a lot of layout
-    // information that goes into sorting.
-    this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(timestamp));
+    if ((reason === null) ||
+        (reason !== null && ('filterCompletion' in reason ||
+                             'filterPatch' in reason ||
+                             'fishAvailability' in reason)))
+    {
+      // Finally, we can apply sorting to the list of active fish.
+      // NOTE: Sorting used to be handled here... but there's a lot of layout
+      // information that goes into sorting.
+      this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(timestamp));
+    }
+
+    // This function is also used whenever the language is updated.
+    // Now that everything's been resorted, ask the layout to update any fields
+    // which are language-dependent.
+    if (reason !== null && 'language' in reason) {
+      _(this.fishEntries).each(entry => this.layout.updateLanguage(entry));
+    }
 
     // console.timeEnd('updateDisplay');
   }
@@ -819,6 +851,22 @@ let ViewModel = new class {
     // And save it to settings.
     ViewModel.settings.theme = theme;
     ViewModel.saveSettings();
+  }
+
+  languageChoiceClicked(e) {
+    if (e) e.stopPropagation();
+    let $this = $(this);
+    
+    let lang = $this.data('lang');
+    // Update the `active` status for the language buttons.
+    $this.addClass('active').siblings().removeClass('active');
+    // Tell localization helper to update the language setting.
+    // TODO: This is the only setting that's NOT managed directly by the
+    //       ViewModel. That needs to be fixed so everything's in one
+    //       central location :/
+    localizationHelper.setLanguage(lang);
+    // We really should still defer updating the display so the click
+    // event can actually finish within reasonable time.
   }
 
   applyTheme(theme) {
