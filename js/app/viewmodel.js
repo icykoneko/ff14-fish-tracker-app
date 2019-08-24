@@ -1001,6 +1001,7 @@ let ViewModel = new class {
     // Update the fish entries.
     // TODO: [NEEDS-OPTIMIZATION]
     _(this.fishEntries).each(entry => {
+      entry.update();
       this.layout.updatePinnedState(entry);
       this.layout.updateCaughtState(entry);
     });
