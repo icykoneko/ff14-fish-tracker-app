@@ -10,7 +10,8 @@ class EorzeaTime {
       .timestamp()
       .map((v) => dateFns.utc.getHours(this.toEorzea(v.timestamp)))
       .distinctUntilChanged()
-      .tap((v) => console.log("Current bell is now:", v));
+      .tap((v) => console.log("Current bell is now:", v))
+      .share();
   }
 
   getCurrentEorzeaDate() {

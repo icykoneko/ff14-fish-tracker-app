@@ -3,38 +3,81 @@ class FishWatcher {
     // Total number of windows to keep track of.
     this.maxWindows = 10;
 
-    _.defer(() => {
-      // Every new Eorzea bell, reconsider the fishes windows.
-      eorzeaTime.currentBellChanged.subscribe((bell) => this.updateFishes());
-    });
+    // IMPORTANT!!!
+    // The new view model does not regenerate templates every time. This means
+    // we MUST NOT RACE the view model! We'll still schedule the updateFishes
+    // function for every new bell, but let the view model do it please...
   }
 
   updateFishes() {
     console.info("FishWatcher is considering updating fishies >< c> |o.o)>");
+    console.time('updateFishes');
+
+    // OPTIMIZATION POINT
+    // - FishWatcher normally just works on EVERY possible fish.
+    //   Instead, we'll ask the ViewModel for only the active fish entries. Each
+    //   entry contains a reference to the Fish object we need.
+    // - Due to this optimization, some fish may go out of scope and miss
+    //   getting windows assigned to them.
+
+    let trackedFish = _(ViewModel.fishEntries).reduce((acc, curr) => {
+      acc.push(curr.data);
+      _(curr.data.intuitionFish).each(e => acc.push(e.data));
+      return acc;
+    }, []);
+
 
     // CLEANUP PHASE:
     //   Remove expired windows first.
     var eDate = eorzeaTime.getCurrentEorzeaDate();
-    for (let fish of Fishes) {
-      if (fish.catchableRanges.length > 0 &&
+    console.time('cleanupFish');
+    for (let fish of trackedFish) {
+      // SAFEGUARD: Consume /all/ expired entries.
+      while (fish.catchableRanges.length > 0 &&
           dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
         // Remove the first entry from the array.
         fish.catchableRanges.shift();
         fish.notifyCatchableRangesUpdated();
       }
     }
+    console.timeEnd('cleanupFish');
 
     // PHASE 1:
     //   Ensure each fish has at least 'n' windows defined.
-    var fishes = _(Fishes).chain()
-      .reject((fish) => fish.alwaysAvailable)
-      .filter((fish) => fish.catchableRanges.length < this.maxWindows)
-      .value();
-    for (let fish of fishes) {
+    console.time('updateRanges');
+    for (let fish of trackedFish) {
+      if (fish.alwaysAvailable) { continue; }
+      if (fish.catchableRanges.length >= this.maxWindows) { continue; }
+      // Okay, update it please.
       this.updateRangesForFish(fish);
     }
+    console.timeEnd('updateRanges');
 
-    console.info("FishWatcher is finished...");
+    console.timeEnd('updateFishes');
+  }
+
+  reinitRangesForFish(fish) {
+    // Support function to create, or reintegrate a fish into tracking.
+
+    // CLEANUP PHASE:
+    //   Remove expired windows first.
+    var eDate = eorzeaTime.getCurrentEorzeaDate();
+    while (fish.catchableRanges.length > 0 &&
+        dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
+      // Remove the first entry from the array.
+      fish.catchableRanges.shift();
+      fish.notifyCatchableRangesUpdated();
+    }
+
+    // PHASE 1:
+    //   Ensure each fish has at least 'n' windows defined.
+    do {
+      if (fish.alwaysAvailable) { break; }
+      if (fish.catchableRanges.length >= this.maxWindows) { break; }
+      // Okay, update it please.
+      this.updateRangesForFish(fish);
+    } while (0);
+
   }
 
   updateRangesForFish(fish) {
@@ -74,6 +117,7 @@ class FishWatcher {
       lastRangeSpansPeriods =
         this.__checkToAddCatchableRange(fish, _iterItem.value);
     }
+    weatherService.finishedWithIter();
 
     // Make sure the LAST window is complete!
     while (lastRangeSpansPeriods) {
@@ -87,6 +131,7 @@ class FishWatcher {
         fish.weatherSet,
         1);
       var _iterItem = iter.next();
+      weatherService.finishedWithIter();
       if (_iterItem.done) { break; }
       lastRangeSpansPeriods =
         this.__checkToAddCatchableRange(fish, _iterItem.value);
@@ -132,6 +177,7 @@ class FishWatcher {
           predatorFish.weatherSet,
           1);
         var _iterItem = iter.next();
+        weatherService.finishedWithIter();
         if (_iterItem.done) {
           // Wait wait wait, try one more thing.
           // Let's say you catch the fish during the intuition buff period!
@@ -142,6 +188,7 @@ class FishWatcher {
             predatorFish.weatherSet,
             1);
           _iterItem = iter.next();
+          weatherService.finishedWithIter();
           if (_iterItem.done) { return; }
         }
         var predWindow = _iterItem.value;
