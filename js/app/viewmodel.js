@@ -113,8 +113,6 @@ class SiteSettings {
     // Upcoming Window Format:
     // * fromPrevClose: Display the time until next window starting from the
     //                  current window's end.
-    // * fromNow: Display the time until next window starting from now.
-    //            NOTE: This requires more updating...
     this.upcomingWindowFormat = 'fromPrevClose';
 
     // Sorting Type:
@@ -377,6 +375,7 @@ let ViewModel = new class {
     $('#filterPatch .button.patch-set').on('click', this.filterPatchSetClicked);
     $('#theme-button').on('click', this.themeButtonClicked);
     $('#languageChoice .button').on('click', this.languageChoiceClicked);
+    $('#checklist .button').on('click', this.onChecklistButtonClicked);
 
     // Special event handlers.
     // These are mainly supporting the SemanticUI widgets.
@@ -953,6 +952,71 @@ let ViewModel = new class {
     } catch (ex) {
       console.warn("Unable to save settings to local storage.");
     }
+  }
+
+  exportChecklist() {
+    // NOTE: THIS IS NOT THE SAME AS EXPORTING THE ENTIRE SITE'S SETTINGS
+
+    // Pop up dialog box with completion value for user to save.
+    let result = {
+      completed: this.settings.completed,
+      pinned: this.settings.pinned
+    };
+
+    // TODO: The window.prompt might not be able to fit everything now...
+    window.prompt('Fishing Checklist Code:', JSON.stringify(result));
+  }
+
+  importChecklist() {
+    // NOTE: THIS IS NOT THE SAME AS IMPORTING THE ENTIRE SITE'S SETTINGS
+    let completion = window.prompt("Enter Fishing Checklist Code:");
+    if (completion === null || completion === "") { return; }
+    try {
+      completion = JSON.parse(completion);
+    } catch {
+      window.alert("Error: Malformed fishing checklist.");
+      return;
+    }
+    if ('pinned' in completion && completion["pinned"].length > 0) {
+      try {
+        // Update the settings
+        this.settings.pinned =
+          _(completion["pinned"]).reduce((o, v) => o.concat(Number(v)), []);
+      } catch {
+        window.alert("Error: Malformed fishing checklist.")
+        return;
+      }
+    }
+    if ('completed' in completion && completion["completed"].length > 0) {
+      try {
+        // Update the settings
+        this.settings.completed =
+          _(completion["completed"]).reduce((o, v) => o.concat(Number(v)), []);
+      } catch {
+        window.alert("Error: Malformed fishing checklist.")
+        return;
+      }
+    }
+    this.saveSettings();
+    // Update the fish entries.
+    // TODO: [NEEDS-OPTIMIZATION]
+    _(this.fishEntries).each(entry => {
+      this.layout.updatePinnedState(entry);
+      this.layout.updateCaughtState(entry);
+    });
+    this.updateDisplay();
+  }
+
+  onChecklistButtonClicked(e) {
+    if (e) e.stopPropagation();
+    let $this = $(this);
+
+    if ($this.data('action') === 'export') {
+      ViewModel.exportChecklist();
+    } else {
+      ViewModel.importChecklist();
+    }
+    return false;
   }
 };
 
