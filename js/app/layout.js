@@ -107,7 +107,6 @@ class FishTableLayout {
   }
 
   update(fishEntry, baseTime) {
-    let updateUpcomingTime = ViewModel.settings.upcomingWindowFormat == 'fromNow';
     // Update the countdown information for this fish.
     let $fishEntry = $(fishEntry.element);
     let $currentAvail = $('.fish-availability-current', $fishEntry);
@@ -118,8 +117,7 @@ class FishTableLayout {
     // First, check if the fish's availability changed.
     if (fishEntry.isCatchable != $fishEntry.hasClass('fish-active')) {
       $fishEntry.toggleClass('fish-active');
-      console.info(`${fishEntry.id} "${fishEntry.data.name}" has changed availability.`);
-      updateUpcomingTime = true; // because status changed
+      console.debug(`${fishEntry.id} "${fishEntry.data.name}" has changed availability.`);
       hasFishAvailabilityChanged = true;
       // HACK: Fish whose availability state changes will always have catchableRanges.
       // That's why we don't bother checking it.
@@ -129,7 +127,8 @@ class FishTableLayout {
       $upcomingAvail
         .attr('data-val', fishEntry.availability.upcoming.date)
         .attr('data-prevclose', fishEntry.availability.upcoming.prevdate)
-        .attr('data-tooltip', moment(fishEntry.availability.upcoming.date).calendar());
+        .attr('data-tooltip', moment(fishEntry.availability.upcoming.date).calendar())
+        .text(fishEntry.availability.upcoming.downtime);
       
       // If this fish has upcoming windows data, update it now.
       if (fishEntry.upcomingWindowsPopupElement !== null) {
@@ -137,6 +136,10 @@ class FishTableLayout {
         $(fishEntry.upcomingWindowsPopupElement).children().first().replaceWith(
           this.templates.upcomingWindows(fishEntry));
       }
+
+      // Update the 'uptime'.  Usually, this doesn't really change though.
+      $('.fish-availability-uptime', $fishEntry)
+        .text((fishEntry.uptime * 100.0).toFixed(1));
     }
 
     // Set the "current availability" time. Remember, we've cached the other
@@ -154,18 +157,9 @@ class FishTableLayout {
     {
       $fishEntry.toggleClass('fish-bin-15');
       if (fishEntry.isUpSoon) {
-        console.info(`${fishEntry.id} "${fishEntry.data.name}" will be up soon.`);
+        console.debug(`${fishEntry.id} "${fishEntry.data.name}" will be up soon.`);
         hasFishAvailabilityChanged = true;
       }
-    }
-
-    // Updating the "upcoming availability" time depends on the view model
-    // settings. If set to "From Now", we need to update; otherwise, we can
-    // skip this.
-    if (updateUpcomingTime) {
-      $upcomingAvail.text(
-        'in ' + dateFns.distanceInWordsStrict(baseTime, fishEntry.availability.upcoming.date)
-      );
     }
 
     // Update any intuition fish rows as well!

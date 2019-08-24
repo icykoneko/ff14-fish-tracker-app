@@ -140,7 +140,7 @@
             <span style="font-size: smaller">
               <i class="upcoming-windows-button calendar icon"></i>
               <span style="white-space: nowrap !important">
-                <b>Uptime:</b>&nbsp;{{=(it.uptime * 100.0).toFixed(1)}}%
+                <b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%
               </span>
               <span style="white-space: nowrap !important">
                 <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming.downtime}}</span>
@@ -253,7 +253,7 @@
           {{?!it.data.alwaysAvailable}}
             <span style="font-size: smaller">
               <span style="white-space: nowrap !important">
-                <b>Uptime:</b>&nbsp;{{=(it.uptime * 100.0).toFixed(1)}}%
+                <b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%
               </span>
               <span style="white-space: nowrap !important">
                 <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming.downtime}}</span>
