@@ -60,11 +60,8 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
 ## TODOs
 * Automation of sprite generation
 * Better automation of fish data updating...
-* Save the filter settings in local storage.
-  * When user revisits the site, it should only compute availability for the fish being displayed.
-  * Add filter settings to import/export blob.
+* Add filter settings to import/export blob.
 * Provide option for displaying actual time instead of relative time by default.
-* Optimize the code for refreshing fish data on screen. The for-each loop eats up a lot of time and probably doesn't need to be recomputed.
 * Add GUI that resembles the in-game fishing log, allowing users an easier method of checking off the fish they've caught.
 * Add area filtering?
 
