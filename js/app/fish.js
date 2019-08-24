@@ -68,14 +68,14 @@ class Fish {
     }
 
     // Create a subject for catchableRanges that we can subscribe to.
-    this.catchableRangesObserver = new Rx.Subject([]);
+    this.catchableRangesObserver = new rxjs.Subject([]);
 
     this.__uptime = null;
     this.__uptimeDirty = true;
   }
 
   notifyCatchableRangesUpdated() {
-    this.catchableRangesObserver.onNext(this.catchableRanges);
+    this.catchableRangesObserver.next(this.catchableRanges);
   }
 
   applyLocalization() {

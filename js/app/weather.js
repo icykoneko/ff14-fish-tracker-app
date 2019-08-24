@@ -14,6 +14,8 @@ function startOfPeriod(d) {
 
 class WeatherService {
   constructor() {
+    const { filter, skip } = rxjs.operators;
+
     // Cache weather information.
     this.__weatherData = [];
     // In order to optimize the iterator function, initialize the cached data
@@ -23,10 +25,10 @@ class WeatherService {
     var target = this.calculateForecastTarget(eorzeaTime.toEarth(date));
     this.insertForecast(date, target);
     // Every Eorzean day, prune out entries that are over 2 days old.
-    eorzeaTime.currentBellChanged
-      .filter((bell) => bell == 0 || bell == 8 || bell == 16)
-      .skip(1) /* skip the first since we really don't have any filtering to do yet */
-      .subscribe((bell) => this.onCurrentBellChanged(bell));
+    eorzeaTime.currentBellChanged.pipe(
+      filter(bell => bell == 0 || bell == 8 || bell == 16),
+      skip(1) /* skip the first since we really don't have any filtering to do yet */
+    ).subscribe(bell => this.onCurrentBellChanged(bell));
     
     this.computingWeather = false;
   }
