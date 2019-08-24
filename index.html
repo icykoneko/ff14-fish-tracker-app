@@ -26,7 +26,7 @@
     <!-- <script data-main="js/app" src="https://cdn.jsdelivr.net/requirejs/2.1.22/require.js"></script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
@@ -42,25 +42,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.0.3/jquery.floatThead.min.js"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?5.0_201907021302" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20190614" />
-    <link rel="stylesheet" href="css/overlay.css?20190621" />
-    <link rel="stylesheet" href="css/dark_overlay.css?20190614" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20190823" />
+    <link rel="stylesheet" href="css/overlay.css?20190823" />
+    <link rel="stylesheet" href="css/dark_overlay.css?20190823" />
 
     <!-- Localization Support script -->
-    <script type="text/javascript" src="js/app/localization.js?20190517"></script>
+    <script type="text/javascript" src="js/app/localization.js?20190823"></script>
 
     <!-- Include the data -->
     <script type="text/javascript" src="js/app/data.js?5.0_201907182000"></script>
 
-    <!-- Scripts -->
-    <script type="text/javascript" src="js/app/time.js"></script>
-    <script type="text/javascript" src="js/app/fish.js?20190627"></script>
-    <script type="text/javascript" src="js/app/weather.js?20190609"></script>
-    <script type="text/javascript" src="js/app/fishwatcher.js?201905172105"></script>
-    <script type="text/javascript" src="js/app/viewmodel.js?20190627"></script>
+    <!--
+      - Scripts
+      - * NOTE: The order is somewhat important. Care must be taken to avoid
+      -   circular dependencies.  Where it cannot be avoided, defer references
+      -   to other classes until an initialization method can be called safely.
+      -->
+    <script type="text/javascript" src="js/app/time.js?20190823"></script>
+    <script type="text/javascript" src="js/app/fish.js?20190823"></script>
+    <script type="text/javascript" src="js/app/weather.js?20190823"></script>
+    <script type="text/javascript" src="js/app/fishwatcher.js?20190823"></script>
+    <script type="text/javascript" src="js/app/sorters.js?20190823"></script>
 
+    <!--
+      - SUPER IMPORTANT!!!!!!
+      - The remaining scripts are for view and layout logic. Due to document load
+      - order, THEY MUST COME AFTER THE TEMPLATES ARE DEFINED!!!
+      - Loading these scripts before will prevent templates from loading
+      - correctly!
+    -->
 
-    <!-- Templates -->
+    <!--
+      - Site Templates
+      - All of the HTML widgets are built using doT and SemanticUI. In order to
+      - prevent excessive load requests, the templates are stored in individual
+      - <script> elements. This is where the bulk of the HTML lives.
+      -->
     <script id="fish-table-template" type="text/html;x-dot-template">
       <table id="fishes" class="ui selectable striped very basic very compact unstackable table">
         <thead>
@@ -78,33 +95,33 @@
     </script>
 
     <script id="fish-template" type="text/html;x-dot-template">
-      <tr class="fish-entry {{?it.isCatchable()}}fish-active{{?}} {{?it.caught || false}}fish-caught{{?}} {{?it.pinned || false}}fish-pinned{{?}} {{=it.nextAvailBin()}}" data-id="{{=it.id}}">
+      <tr class="fish-entry{{?it.isCatchable}} fish-active{{?}}{{?it.isCaught || false}} fish-caught{{?}}{{?it.isPinned || false}} fish-pinned{{?}}{{?it.isUpSoon}} fish-bin-15{{?}}" data-id="{{=it.id}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
           <div class="ui middle aligned vertical mini very compact icon buttons">
-            <div class="ui button fishCaught {{?it.caught || false}}green{{?}}">
+            <div class="ui button fishCaught {{?it.isCaught || false}}green{{?}}">
               <i class="checkmark icon"></i>
             </div>
-            <div class="ui button fishPinned {{?it.pinned || false}}red{{?}}">
+            <div class="ui button fishPinned {{?it.isPinned || false}}red{{?}}">
               <i class="pin icon"></i>
             </div>
           </div>
-          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
-            {{=it.name}}<br/>
-            <div class="ui tiny circular label">{{=it.patch}}</div>
+            <span class="fish-name">{{=it.data.name}}</span><br/>
+            <div class="ui tiny circular label">{{=it.data.patch}}</div>
             <!-- check if fish can be put into the aquarium -->
-            {{?it.aquarium !== null}}
+            {{?it.data.aquarium !== null}}
               <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
-                   data-tooltip="Tier {{=it.aquarium.size}} {{=it.aquarium.water}}" data-position="right center" data-variation="mini"></div>
+                   data-tooltip="Tier {{=it.data.aquarium.size}} {{=it.data.aquarium.water}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            {{?it.folklore !== null}}
+            {{?it.data.folklore !== null}}
               <div class="ui middle aligned sprite-icon sprite-icon-folklore"
-                   data-tooltip="{{=__p(DATA.FOLKLORE[it.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
+                   data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            {{?it.collectable === true}}
+            {{?it.data.collectable === true}}
               <div class="ui middle aligned sprite-icon sprite-icon-collectable"
                    data-tooltip="Collectable" data-position="right center" data-variation="mini"></div>
             {{?}}
@@ -112,199 +129,200 @@
         </td>
         <!-- Availability -->
         <td>
-          {{?it.dataMissing !== false}}
+          {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
-          {{??it.alwaysAvailable}}
+          {{??it.data.alwaysAvailable}}
             Always
-          {{??it.availability === undefined}}
-            Unknown
           {{??}}
-            <span class="fish-availability-current" data-val="{{=it.availability.current.date()}}" data-tooltip="{{var d = it.availability.current.date(); if (d) { out += moment(d).calendar(); } }}">
-              {{=it.availability.current.duration()}}
+            <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += moment(d).calendar(); } }}">
+              {{=it.availability.current.duration}}
             </span><br/>
             <span style="font-size: smaller">
               <i class="upcoming-windows-button calendar icon"></i>
               <span style="white-space: nowrap !important">
-                <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
+                <b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%
               </span>
               <span style="white-space: nowrap !important">
-                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-prevclose="{{=it.availability.upcoming().prevdate()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().downtime()}}</span>
+                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming.downtime}}</span>
               </span>
             </span>
+            <div class="ui popup upcoming-windows"></div>
           {{?}}
         </td>
         <!-- Location -->
         <td>
-          <a href="http://garlandtools.org/db/#{{?it.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.location.id}}"
-             target="cp_gt">{{=it.location.name}}</a><br/>
-          <span style="font-size: smaller">{{=it.location.zoneName}}</span>
+          <a href="http://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}"
+             target="cp_gt" class="location-name">{{=it.data.location.name}}</a><br/>
+          <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
         </td>
         <!-- Conditions -->
         <td>
-          {{?it.dataMissing !== false}}
-            {{?it.dataMissing.weatherRestricted}}
+          {{?it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.weatherRestricted}}
               <i class="cloud icon"></i> Weather Restricted
             {{?}}
             <br/>
-            {{?it.dataMissing.timeRestricted}}
+            {{?it.data.dataMissing.timeRestricted}}
               <i class="clock icon"></i> Time Restricted
             {{?}}
           {{??}}
-            {{?it.conditions.previousWeatherSet.length > 0}}
-              {{~it.conditions.previousWeatherSet :weather:windex}}
+            {{?it.data.conditions.previousWeatherSet.length > 0}}
+              {{~it.data.conditions.previousWeatherSet :weather:windex}}
                 <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                    title="{{=__p(weather,'name')}}"></div>
+                    title="{{=__p(weather,'name')}}"
+                    data-prevWeatherIdx="{{=windex}}"></div>
               {{~}}
               <i class="arrow right icon"></i>
             {{?}}
-            {{~it.conditions.weatherSet :weather:idx}}
+            {{~it.data.conditions.weatherSet :weather:windex}}
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                  title="{{=__p(weather,'name')}}"></div>
+                  title="{{=__p(weather,'name')}}"
+                  data-currWeatherIdx="{{=windex}}"></div>
             {{~}}
             <br/><i class="wait icon"></i>&nbsp;
-            {{? it.startHour === 0 && it.endHour === 24}}
+            {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              {{=it.startHour + ' - ' + it.endHour}}
+              {{=it.data.startHour + ' - ' + it.data.endHour}}
             {{?}}
           {{?}}
         </td>
         <!-- Requirements and Bait -->
         <td>
-          {{?it.dataMissing !== false}}
+          {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
-          {{?it.bait.hasPredators}}
+          {{?it.data.bait.hasPredators}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
           {{?}}
           <!-- Put fishEyes if fishEyes is not false and if true enter fishEyesDuration()  -->
-          {{?it.fishEyes !== false}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes {{?it.fishEyes !== true}}has-duration{{?}}" title="Fish Eyes">
-              {{?it.fishEyes !== true}}
-                <span>{{=it.fishEyesDuration()}}</span>
+          {{?it.data.fishEyes !== false}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes{{?it.data.fishEyes !== true}} has-duration{{?}}" title="Fish Eyes">
+              {{?it.data.fishEyes !== true}}
+                <span>{{=it.fishEyesDuration}}</span>
               {{?}}
             </div>
           {{?}}
-          {{?it.snagging}}
+          {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
-          {{?it.gig}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.gig.toLowerCase()}}_gig" title="{{=it.gig}} Gig"></div>
+          {{?it.data.gig}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
           {{?}}
-          {{~it.bait.path :item:idx}}
+          {{~it.data.bait.path :item:idx}}
             {{?idx == 0}}
               <a href="http://www.garlandtools.org/db/#item/{{=item._id}}" target="cp_gt">
             {{??}}
               <i class="arrow right icon"></i>
             {{?}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}"></div>
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}" data-baitIdx="{{=idx}}"></div>
             {{?idx == 0}}
               </a>
             {{?}}
           {{~}}
-          {{?it.hookset}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.hookset.toLowerCase()}}_hookset" title="{{=it.hookset}} Hookset"></div>
+          {{?it.data.hookset}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
           {{?}}
         </td>
       </tr>
     </script>
 
     <script id="fish-intuition-template" type="text/html;x-dot-template">
-      <tr class="fish-intuition-row fish-entry {{?it.isCatchable()}}fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor}}">
+      <tr class="fish-intuition-row fish-entry{{?it.isCatchable}} fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor.id}}">
         <td class="collapsing right aligned">
           <div class="intuition-count">{{=it.intuitionCount}}</div>
-          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
-          <div class="ui middle aligned" style="display: inline-block;">{{=it.name}}</div>
+          <div class="ui middle aligned fish-name" style="display: inline-block;">{{=it.data.name}}</div>
         </td>
         <!-- Availability -->
         <td>
-          {{?it.dataMissing !== false}}
+          {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
-          {{??it.alwaysAvailable}}
+          {{??it.data.alwaysAvailable}}
             Always
-          {{??it.availability === undefined}}
-            Unknown
           {{??}}
-            <span class="fish-availability-current" data-val="{{=it.availability.current.date()}}" data-tooltip="{{var d = it.availability.current.date(); if (d) { out += moment(d).calendar(); } }}">
-              {{=it.availability.current.duration()}}
+            <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += moment(d).calendar(); } }}">
+              {{=it.availability.current.duration}}
             </span>
           {{?}}
         </td>
         <td>
-          {{?!it.alwaysAvailable && it.availability !== undefined}}
+          {{?!it.data.alwaysAvailable}}
             <span style="font-size: smaller">
               <span style="white-space: nowrap !important">
-                <b>Uptime:</b>&nbsp;{{=(it.uptime() * 100.0).toFixed(1)}}%
+                <b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%
               </span>
               <span style="white-space: nowrap !important">
-                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming().date()}}" data-prevclose="{{=it.availability.upcoming().prevdate()}}" data-tooltip="{{var d = it.availability.upcoming().date(); if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming().downtime()}}</span>
+                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += moment(d).calendar(); } }}">{{=it.availability.upcoming.downtime}}</span>
               </span>
             </span>
           {{?}}
         </td>
         <td>
-          {{?it.dataMissing !== false}}
-            {{?it.dataMissing.weatherRestricted}}
+          {{?it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.weatherRestricted}}
               <i class="cloud icon"></i> Weather Restricted
             {{?}}
             <br/>
-            {{?it.dataMissing.timeRestricted}}
+            {{?it.data.dataMissing.timeRestricted}}
               <i class="clock icon"></i> Time Restricted
             {{?}}
           {{??}}
-            {{?it.conditions.previousWeatherSet.length > 0}}
-              {{~it.conditions.previousWeatherSet :weather:windex}}
+            {{?it.data.conditions.previousWeatherSet.length > 0}}
+              {{~it.data.conditions.previousWeatherSet :weather:windex}}
                 <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                    title="{{=__p(weather,'name')}}"></div>
+                    title="{{=__p(weather,'name')}}"
+                    data-prevWeatherIdx="{{=windex}}"></div>
               {{~}}
               <i class="arrow right icon"></i>
             {{?}}
-            {{~it.conditions.weatherSet :weather:idx}}
+            {{~it.data.conditions.weatherSet :weather:windex}}
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                  title="{{=__p(weather,'name')}}"></div>
+                  title="{{=__p(weather,'name')}}"
+                  data-currWeatherIdx="{{=windex}}"></div>
             {{~}}
             <i class="wait icon"></i>&nbsp;
-            {{? it.startHour === 0 && it.endHour === 24}}
+            {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              {{=it.startHour + ' - ' + it.endHour}}
+              {{=it.data.startHour + ' - ' + it.data.endHour}}
             {{?}}
           {{?}}
         </td>
         <!-- Bait -->
         <td>
-          {{?it.dataMissing !== false}}
+          {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon"></i> Unknown
           {{?}}
-          {{?it.fishEyes !== false}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes {{?it.fishEyes !== true}}has-duration{{?}}" title="Fish Eyes">
-              {{?it.fishEyes !== true}}
-                <span>{{=it.fishEyesDuration()}}</span>
+          {{?it.data.fishEyes !== false}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes{{?it.data.fishEyes !== true}} has-duration{{?}}" title="Fish Eyes">
+              {{?it.data.fishEyes !== true}}
+                <span>{{=it.fishEyesDuration}}</span>
               {{?}}
             </div>
           {{?}}
-          {{?it.snagging}}
+          {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
-          {{?it.gig}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.gig.toLowerCase()}}_gig" title="{{=it.gig}} Gig"></div>
+          {{?it.data.gig}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
           {{?}}
-          {{~it.bait.path :item:idx}}
+          {{~it.data.bait.path :item:idx}}
             {{?idx == 0}}
               <a href="http://www.garlandtools.org/db/#item/{{=item._id}}" target="cp_gt">
             {{??}}
               <i class="arrow right icon"></i>
             {{?}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}"></div>
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=__p(item,'name')}}" data-baitIdx="{{=idx}}"></div>
             {{?idx == 0}}
               </a>
             {{?}}
           {{~}}
-          {{?it.hookset}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.hookset.toLowerCase()}}_hookset" title="{{=it.hookset}} Hookset"></div>
+          {{?it.data.hookset}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
           {{?}}
         </td>
       </tr>
@@ -317,31 +335,34 @@
     </script>
 
     <script id="upcoming-windows-template" type="text/html;x-dot-template">
-      <div class="ui popup" style="">
-        <div class="upcoming-windows-popup">
-          <div>
-            <b>Next Start</b>
-          </div>
-          <div>
-            <b>Duration</b>
-          </div>
-          <div>
-            <b>Downtime</b>
-          </div>
-          {{~it.availability.upcomingWindows() :nextWindow:idx}}
-            <div style="white-space: nowrap;">
-              <b>{{=moment(nextWindow.start).calendar()}}</b>
-            </div>
-            <div style="white-space: nowrap;">
-              {{=nextWindow.duration}}
-            </div>
-            <div style="white-space: nowrap;">
-              {{=nextWindow.downtime}}
-            </div>
-          {{~}}
+      <div class="upcoming-windows-popup">
+        <div>
+          <b>Next Start</b>
         </div>
+        <div>
+          <b>Duration</b>
+        </div>
+        <div>
+          <b>Downtime</b>
+        </div>
+        {{~it.availability.upcomingWindows :nextWindow:idx}}
+          <div style="white-space: nowrap;">
+            <b>{{=moment(nextWindow.start).calendar()}}</b>
+          </div>
+          <div style="white-space: nowrap;">
+            {{=nextWindow.duration}}
+          </div>
+          <div style="white-space: nowrap;">
+            {{=nextWindow.downtime}}
+          </div>
+        {{~}}
       </div>
     </script>
+
+    <!-- At last, we can load the layout and view model code. -->
+    <script type="text/javascript" src="js/app/layout.js?20190823"></script>
+    <!-- NOTE: The ViewModel should be the last script loaded. -->
+    <script type="text/javascript" src="js/app/viewmodel.js?20190823"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -367,393 +388,16 @@
         }
       });
     </script>
-    
+
     <script type="text/javascript">
-      $(() => {
-        // When displaying a date that's more than a week away, include the time as well.
-        moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
-
-        // Main header needs to display the current time.
-        Rx.Observable.interval(1000 /*ms*/).timestamp().subscribe((x) => {
-          // Update the main header's earth and eorzea times.
-          $("#earthClock").text(dateFns.format(x.timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
-          $("#eorzeaClock").text(moment.utc(eorzeaTime.toEorzea(x.timestamp)).format("HH:mm"));
-        });
-
-        var fishTableTemplate = doT.template($('#fish-table-template').text());
-        // var fishEntryTemplate = doT.template($('#fish-template').text());
-        viewModel.fishEntryTemplate = doT.template($('#fish-template').text());
-        viewModel.fishIntuitionEntryTemplate = doT.template($('#fish-intuition-template').text());
-        var tableSectionDividerTemplate = doT.template($('#table-section-divider-template').text());
-        var upcomingWindowsTemplate = doT.template($('#upcoming-windows-template').text());
-
-        // Initialize the view model's initial filter.
-        // Do this here to prevent caching issues...
-        viewModel.filter = {
-          completion: 'all',
-          patch: [2, 2.1, 2.2, 2.3, 2.4, 2.5,
-                  3, 3.1, 3.2, 3.3, 3.4, 3.5,
-                  4, 4.1, 4.2, 4.3, 4.4, 4.5,
-                  5],
-        };
-        viewModel.showUpcomingWindowFromNow = false;
-
-        var fishChangedSubject = new Rx.Subject();
-        var filterCompletionSubject = new Rx.BehaviorSubject(viewModel.filter.completion);
-        var filterPatchSubject = new Rx.BehaviorSubject(viewModel.filter.patch);
-        var sortingTypeSubject = new Rx.Subject();
-
-        $('#fish-table-container').append(fishTableTemplate());
-        var fishTableElement = $('#fishes tbody');
-
-        function reconnectEvents() {
-          var $markAsCaughtButtons = $('.fishCaught.button', fishTableElement);
-          var $markAsPinnedButtons = $('.fishPinned.button', fishTableElement);
-
-          $markAsCaughtButtons.on('click', function() {
-            var f = Number( $(this).closest('.fish-entry').data('id') );
-            viewModel.completionManager.toggleCaughtState(f);
-          });
-          $markAsPinnedButtons.on('click', function() {
-            var f = Number( $(this).closest('.fish-entry').data('id') );
-            viewModel.completionManager.togglePinnedState(f);
-          });
-
-          // Ideally, we need to wrap each entry in <tbody>, but this method
-          // appears to work for the purpose of injecting the borders.
-          // Maybe you should have... um, used the viewmodel to stain the
-          // entry so you could just find by that?  Whatever, this whole part
-          // is mostly a hack LOL XD
-          $('.fish-entry.fish-pinned').filter(":last").nextAll(".fish-entry:not(.fish-intuition-row)").first().prev("tr").find("td").css({
-            borderBottom: "2px solid red"
-          });
-
-          var $lastActiveFish = $('.fish-entry.fish-active').filter(":last").nextAll(".fish-entry:not(.fish-intuition-row)").first().prev("tr");
-          $lastActiveFish.find("td").css({borderBottom: "2px solid blue"});
-
-          if (viewModel.sortingType == 'overallRarity') {
-            var $lastFishBin15 = $('.fish-entry.fish-bin-15').filter(":last").nextAll(".fish-entry:not(.fish-intuition-row)").first().prev("tr");
-            if ($lastFishBin15.length != 0) {
-              $lastActiveFish.after(tableSectionDividerTemplate({
-                text: "Fish up in the next 15 minutes..."
-              }));
-              $lastFishBin15.find("td").css({borderBottom: "2px solid black"});
-              $lastFishBin15.after(tableSectionDividerTemplate({
-                text: "Fish up more than 15 minutes from now... <b>(Sorted by rarity)</b>"
-              }));
-            } else {
-              $lastActiveFish.after(tableSectionDividerTemplate({
-                text: "Fish up more than 15 minutes from now... <b>(Sorted by rarity)</b>"
-              }));
-            }
-          }
-
-          // Invert any tooltips
-          $('*[data-tooltip]').attr('data-inverted', '');
-
-          // $('.sprite-icon-aquarium').popup({
-          //   position: 'right center',
-          //   inline: true,
-          //   delay: {show: 0, hide: 0}
-          // });
-        }
-
-        _.defer(function () {
-          initializeView();
-        });
-
-        function addFishEntryToTable(fish) {
-          // Add a row for the fish.
-          var fishEntry = fishTableElement.append(viewModel.fishEntryTemplate(fish)).children().last();
-          // If it requires intuition, add rows for each required fish.
-          for (let intuitionFish of fish.intuitionFish) {
-            var intuitionFishView = null;
-            try {
-              intuitionFishView = new Fish(intuitionFish.data);
-              _(intuitionFishView).extend(intuitionFish.data, {
-                intuitionCount: intuitionFish.count,
-                intuitionFor: fish.id
-              });
-              fishTableElement.append(
-                viewModel.fishIntuitionEntryTemplate(intuitionFishView));
-            } catch (e) {
-              console.error(intuitionFishView);
-              throw e;
-            }
-          }
-          fishEntry.find('.upcoming-windows-button').parent().after(upcomingWindowsTemplate(fish));
-          fishEntry.find('.upcoming-windows-button').popup({
-            addTouchEvents: false,
-            hoverable: true,
-            inline: true,
-            position: 'right center',
-            target: fishEntry.find('.upcoming-windows-button').parent(),
-            on: 'click',
-            maxSearchDepth: 3,
-            observeChanges: false
-          });
-          if (localStorage.getItem("theme") === 'dark') {
-            fishEntry.find('.upcoming-windows-popup').parent().addClass('inverted');
-          }
-        }
-
-        function initializeView() {
-          $('.ui.radio.checkbox').checkbox();
-          // Initialize the table with all the fishies.
-          console.log("Updating and sorting table now...");
-          var fishes = viewModel.updateAll()
-          for (let fish of fishes) {
-            // Create the initial entry.
-            addFishEntryToTable(fish);
-            // Subscribe to the catchableRanges subject.
-            viewModel.subscriptions.push(
-              fish.catchableRangesObserver.debounce(500).subscribe((r) => {
-                //console.log('Detected change in catchableRanges for', fish.name, r);
-                // // Update the element for this fish please.
-                // $('.fish-entry[data-id=' + fish.id + ']')[0].outerHTML =
-                //   fishEntryTemplate(fish);
-                // Pass this to main page observable since we need to sort stuff
-                // and whatnot...
-                fishChangedSubject.onNext(fish.id);
-              }));
-          }
-
-          // Connect event handlers.
-          reconnectEvents();
-
-          // Register for changes.
-          // Things we care about...
-          //   - Changes in the catchable ranges for each fish.
-          //     - Technically, you only really care about the current bell...
-          //       but I'd like to find some way of binding to the fish's
-          //       data (if possible...)
-          //     - This is the most destructive type of change.
-          //   - Changes in filter settings.
-          //     - Should be less destructive, expect for the whole re-sorting bit...
-          //   - Changes in pinned settings.
-          //     - Would require a re-sort
-          //   - Changes to catchable status.
-          //     - Potentially requires visibility change.
-
-          var updatesNeededSource = Rx.Observable.merge(
-            fishChangedSubject
-              .buffer(() => fishChangedSubject.debounce(500))
-              .map((e) => { return {type: "availabilityChanged", value: e}}),
-            filterCompletionSubject
-              .skip(1)
-              .debounce(500)
-              .map((e) => { return {type: "filter-completion", value: e}}),
-            filterPatchSubject
-              .skip(1)
-              .debounce(500)
-              .map((e) => { return {type: "filter-patch", value: e}}),
-            viewModel.completionManager.rx_completed
-              .skip(1)
-              .map((e) => { return {type: "completedChanged", value: e}}),
-            viewModel.completionManager.rx_pinned
-              .skip(1)
-              .map((e) => { return {type: "pinnedChanged", value: e}}),
-            sortingTypeSubject
-              .debounce(500)
-              .map((e) => { return {type: "sortingChanged", value: e}}),
-            localizationHelper.languageChanged
-              .skip(1)
-              .map((e) => { return {type: "languageChanged", value: e}})
-          );
-
-          updatesNeededSource
-            .buffer(() => updatesNeededSource.debounce(250))
-            .filter((x) => x.length > 0)
-            .subscribe((x) => {
-              console.log("updates needed\n", x);
-
-              // Has the availability changed at all?
-              if (_(x).any((x) => x.type === "availabilityChanged" || x.type === "languageChanged")) {
-                console.log("Availability has changed... Need to make lots of changes...");
-                $('#fish-table-container .ui.dimmer').addClass('active');
-              } else {
-                // Potentially minor changes. Availability is still the same, but
-                // we might need to remove entries from the list, or at most,
-                // re-sort the list due to new entries becoming visible.
-              }
-
-
-              // // Get the existing entries, staining each as stale.
-              // var fishEntries = $(".fish-entry", fishTableElement).data("stale", true);
-              // var tbodyNode = fishTableElement[0];
-              $('.upcoming-windows-button').popup("destroy");
-              $(".fish-entry").remove();
-              $(".section-divider").remove();
-              var fishes = viewModel.updateAll();
-              for (let fish of fishes) {
-                // Generate a new HTML template for the fish...
-                // // Grab the existing entry for this fish (if present)
-                // var fishElem = fishEntries.filter('*[data-id=' + fish.id + ']');
-                // if (fishElem.length > 0) {
-                //   // Move the existing child (essentially shuffles the node to
-                //   // the end, raising it back to the top as each entry is done)
-                //   fishElem[0].outerHTML = fishHtml;
-                //   tbodyNode.appendChild(fishElem[0]);
-                // } else {
-                //   fishTableElement.append(fishHtml);
-                // }
-
-                // TODO: Come up with a less destructive means...
-                addFishEntryToTable(fish);
-              }
-              // $(".fish-entry[data-stale=true]", fishTableElement).remove();
-              // $('#fishes').floatThead();
-              reconnectEvents();
-              $('#fish-table-container .ui.dimmer').removeClass('active');
-            });
-
-          Rx.Observable.interval(2500 /*ms*/).timestamp().subscribe((x) => {
-            // Every 5 seconds, update the availability times.
-            $(".fish-entry").each((index, e) => {
-              var currentAvail = $(".fish-availability-current", e);
-              var prefix = $(e).hasClass('fish-active') ? "closes " : "";
-              currentAvail.text(prefix + "in " +
-                dateFns.distanceInWordsStrict(x.timestamp, currentAvail.data("val")));
-              var upcomingAvail = $(".fish-availability-upcoming", e);
-              if (viewModel.showUpcomingWindowFromNow) {
-                upcomingAvail.text(viewModel.formatDurationUntilNextWindowFromNow(
-                  upcomingAvail.data("val")));
-              } else {
-                // Technically, you shouldn't have to do this, since the value
-                // can't change.
-                upcomingAvail.text(viewModel.formatDurationUntilNextWindow(
-                  upcomingAvail.data("prevclose"), upcomingAvail.data("val")));
-              }
-            });
-          });
-
-          var $filterCompletionButtons = $('#filterCompletion .button');
-          var $filterPatchButtons = $('#filterPatch .button:not(.patch-set)');
-          var $filterPatchSetButtons = $('#filterPatch .button.patch-set');
-          var $upcomingWindowFormatOptions = $('#upcomingWindowFormat .radio.checkbox');
-          var $checklistButtons = $('#checklist .button');
-          var $sortingButtons = $('#sortingType .radio.checkbox');
-          var $languageButtons = $('#languageChoice .button');
-          var $themeButton = $('#theme-button');
-
-          $($languageButtons).filter('[data-lang="' + localizationHelper.getLanguage() + '"]').addClass('active');
-
-          $filterCompletionButtons.on('click', function() {
-            $(this).addClass('active').siblings().removeClass('active');
-            viewModel.filter.completion = $(this).data('filter');
-            filterCompletionSubject.onNext(viewModel.filter.completion);
-          });
-
-          $filterPatchButtons.on('click', function() {
-            var p = Number( $(this).toggleClass('active').data('filter') );
-            if ($(this).hasClass('active')) {
-              viewModel.filter.patch.push(p);
-            } else {
-              viewModel.filter.patch = _(viewModel.filter.patch).without(p);
-            }
-            console.log("Patches:", viewModel.filter.patch);
-            filterPatchSubject.onNext(viewModel.filter.patch);
-          });
-          $filterPatchButtons.on('dblclick', function() {
-            $(this).addClass('active').siblings().removeClass('active');
-            $(this).parent().siblings().children().removeClass('active');
-            var p = Number( $(this).data('filter') );
-            viewModel.filter.patch = [p];
-            console.log("Patches:", viewModel.filter.patch);
-            filterPatchSubject.onNext(viewModel.filter.patch);
-          });
-
-          $filterPatchSetButtons.on('click', function() {
-            $(this).toggleClass('active');
-            if ($(this).hasClass('active')) {
-              // Activate the rest of the buttons as well.
-              $(this).siblings(":not(.disabled)").addClass("active").each(function() {
-                viewModel.filter.patch.push(Number( $(this).data('filter') ));
-              })
-            } else {
-              // Deactivate the rest of the buttons as well.
-              $(this).siblings(":not(.disabled)").removeClass("active").each(function() {
-                viewModel.filter.patch =
-                  _(viewModel.filter.patch).without(Number( $(this).data('filter') ));
-              })
-            }
-            console.log("Patches:", viewModel.filter.patch);
-            filterPatchSubject.onNext(viewModel.filter.patch);
-          });
-
-          $upcomingWindowFormatOptions.checkbox({
-            onChecked: function() {
-              console.log("Changed upcoming window format option to: ", $(this).val())
-              viewModel.showUpcomingWindowFromNow = $(this).val() == 'fromNow';
-            }
-          });
-
-          $sortingButtons.checkbox({
-            onChecked: function() {
-              console.log("Changed sorting option to: ", $(this).val())
-              viewModel.sortingType = $(this).val();
-              sortingTypeSubject.onNext($(this).val());
-            }
-          });
-
-          $checklistButtons.on('click', function() {
-            if ($(this).data('action') == 'export') {
-              // Pop up dialog box with completion value for user to save.
-              var result = {}
-              var completed = viewModel.completionManager.completed;
-              var pinned = viewModel.completionManager.pinned;
-              result["pinned"] = pinned;
-              result["completed"] = completed;
-              result = JSON.stringify(result)
-              window.prompt('Fishing Checklist Code:', result);
-            } else if ($(this).data('action') == 'import') {
-              viewModel.completionManager.importCaughtState();
-            }
-          });
-
-          $languageButtons.on('click', function() {
-            var lang = $(this).addClass('active').data('lang');
-            $(this).siblings().removeClass('active');
-            localizationHelper.setLanguage(lang);
-          });
-
-          $themeButton.on('click', function() {
-            var theme = localStorage.getItem("theme");
-            theme = theme ? '' : 'dark';
-            localStorage.setItem("theme", theme);
-            $("body").toggleClass('dark');
-            $('.ui.message.announcement').toggleClass('inverted');
-            if (theme === 'dark') {
-              $('.upcoming-windows-popup').parent().addClass('inverted');
-              $('*[data-tooltip]').attr('data-inverted', '');
-            } else {
-              $('.upcoming-windows-popup').parent().removeClass('inverted');
-              $('*[data-tooltip]').removeAttr('data-inverted');
-            }
-          });
-
-          var theme = localStorage.getItem("theme");
-          if (theme === 'dark') {
-            $("body").addClass(theme);
-            $('.ui.message.announcement').addClass('inverted');
-            $("#theme-button").prop('checked', true);
-            $('*[data-tooltip]').attr('data-inverted', '');
-          }
-
-          // _.delay(() => {
-          //   $('#fishes').floatThead({
-          //     position: 'fixed',
-          //     floatContainerClass: 'floatThead-container-fishes',
-          //     zIndex: 500,
-          //     top: function () {
-          //       return this.top = $('#topmenu').outerHeight(true);
-          //     }
-          //   });
-          // }, 2000);
-        }
-      });
+    $(() => {
+      // Document is ready, initialize the view model now.
+      ViewModel.initialize();
+      // There shouldn't be anything more to do.  Any logic controling the
+      // display belongs in the ViewModel or Layout classes.
+      // DO NOT ADD CODE AFTER THIS POINT!!!
+    });
     </script>
-
   </head>
   <body>
     <div id="topmenu" class="ui text top fixed menu" style="background-color: white;">
@@ -824,32 +468,15 @@
       <div class="ui vertically padded grid">
         <div class="row" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
           <div class="column">Completion:</div>
-          <div class="four wide column">
+          <div class="fifteen wide column">
             <div class="ui mini very compact buttons" id="filterCompletion">
               <button class="ui active button" data-filter="all">All</button>
               <button class="ui button" data-filter="caught">Caught</button>
               <button class="ui button" data-filter="uncaught">Uncaught</button>
             </div>
-            <div class="ui small very compact buttons" id="checklist">
-              <button class="ui icon button" data-action="import" data-tooltip="Import Fish Checklist"><i class="upload icon"></i></button>
-              <button class="ui icon button" data-action="export" data-tooltip="Export Fish Checklist"><i class="download icon"></i></button>
-            </div>
-          </div>
-          <div class="eight wide column">
-            <div class="inline fields" id="upcomingWindowFormat">
-              <div style="float: left;">Upcoming window format:</div>
-              <div class="field" style="float: left; margin-left: 1rem;">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="upcomingWindowFormat" class="hidden" value="fromNow"/>
-                  <label>From Now</label>
-                </div>
-              </div>
-              <div class="field" style="float: left; margin-left: 1rem;">
-                <div class="ui radio checked checkbox">
-                  <input type="radio" name="upcomingWindowFormat" checked="checked" class="hidden" value="fromPrevClose"/>
-                  <label>From Previous Close</label>
-                </div>
-              </div>
+            <div class="ui very compact buttons" id="checklist">
+              <div class="ui icon button" data-action="import" data-tooltip="Import Fish Checklist"><i class="upload icon"></i></div>
+              <div class="ui icon button" data-action="export" data-tooltip="Export Fish Checklist"><i class="download icon"></i></div>
             </div>
           </div>
         </div>
