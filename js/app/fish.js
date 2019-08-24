@@ -215,5 +215,4 @@ let Fishes = _(DATA.FISH).chain()
   .values()
   .map((fishData) => new Fish(fishData))
   .each(muxinIntuitionReqs)
-  //.first(100)
   .value();
