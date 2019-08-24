@@ -259,12 +259,16 @@ let ViewModel = new class {
       .filter('[data-lang="' + localizationHelper.getLanguage() + '"]')
       .addClass('active');
 
+
+    const { Subject, BehaviorSubject, merge, interval } = rxjs;
+    const { buffer, debounceTime, map, filter, skip, timestamp } = rxjs.operators;
+
     // Subjects.
     // These are used for RxJS to allow subscription events to changes.
-    this.fishChangedSubject = new Rx.Subject();
-    this.filterCompletionSubject = new Rx.BehaviorSubject(settings.filters.completion);
-    this.filterPatchSubject = new Rx.BehaviorSubject(settings.filters.patch);
-    this.sortingTypeSubject = new Rx.BehaviorSubject(settings.sortingType);
+    this.fishChangedSubject = new Subject();
+    this.filterCompletionSubject = new BehaviorSubject(settings.filters.completion);
+    this.filterPatchSubject = new BehaviorSubject(settings.filters.patch);
+    this.sortingTypeSubject = new BehaviorSubject(settings.sortingType);
 
     // Update the table!
     this.updateDisplay(null);
@@ -307,46 +311,59 @@ let ViewModel = new class {
     // Technically, we can just add it to this massive subscription, and use
     // the `reason` to tell it apart... It's just, the buffering doesn't make
     // sense for it.
-    var updateDisplaySources$ = Rx.Observable.merge(
-      this.fishChangedSubject
-        .buffer(() => this.fishChangedSubject.debounce(100))
-        .map(e => { return {fishAvailability: e} }),
-      this.filterCompletionSubject
-        .skip(1)
-        .debounce(250)
-        .map(e => { return {filterCompletion: e} }),
-      this.filterPatchSubject
-        .skip(1)
-        .debounce(250)
-        .map(e => { return {filterPatch: e} }),
-      this.sortingTypeSubject
-        .skip(1)
-        .debounce(250)
-        .map(e => { return {sortingType: e} }),
-      localizationHelper.languageChanged
-        .skip(1)
-        .map(e => { return {language: e} })
-    );
 
-    // Merge with 1s interval timer.
-    Rx.Observable.merge(
-      Rx.Observable.interval(1000).timestamp()
-        .map(e => { return {countdown: e.timestamp} }),
-      updateDisplaySources$
-        .buffer(() => updateDisplaySources$.debounce(100))
-        .filter(x => x.length > 0)
-        .map(e => {
+    const bufferedFishAvailability$ = this.fishChangedSubject.pipe(
+      buffer(this.fishChangedSubject.pipe(debounceTime(100))),
+      map(e => { return {fishAvailability: e} })
+    );
+    const filterCompletion$ = this.filterCompletionSubject.pipe(
+      skip(1),
+      debounceTime(250),
+      map(e => { return {filterCompletion: e} })
+    );
+    const filterPatch$ = this.filterPatchSubject.pipe(
+      skip(1),
+      debounceTime(250),
+      map(e => { return {filterPatch: e} })
+    );
+    const sortingType$ = this.sortingTypeSubject.pipe(
+      skip(1),
+      debounceTime(250),
+      map(e => { return {sortingType: e} })
+    )
+    const language$ = localizationHelper.languageChanged.pipe(
+      skip(1),
+      map(e => { return {language: e} })
+    )
+
+    const updateDisplaySources$ = merge(
+      bufferedFishAvailability$,
+      filterCompletion$,
+      filterPatch$,
+      sortingType$,
+      language$);
+
+    merge(
+      interval(1000).pipe(
+        timestamp(),
+        map(e => { return {countdown: e.timestamp} })
+      ),
+      updateDisplaySources$.pipe(
+        buffer(updateDisplaySources$.pipe(debounceTime(100))),
+        filter(x => x.length > 0),
+        map(e => {
           // Combine these into a single object.
           return e.reduce((acc, curr) => {
             return Object.assign(acc, curr);
           }, {});
         })
+      )
     ).subscribe(e => this.updateDisplay(e));
 
     // Ok, now it's safe to have FishWatcher start listening for the next bell.
-    eorzeaTime.currentBellChanged
-      .skip(1)
-      .subscribe((bell) => fishWatcher.updateFishes());
+    eorzeaTime.currentBellChanged.pipe(
+      skip(1)
+    ).subscribe(bell => fishWatcher.updateFishes());
 
     console.timeEnd("Initialization");
   }
@@ -569,9 +586,11 @@ let ViewModel = new class {
     this.layout.append(entry);
 
     // Connect the catchableRangesObserver to our fishChanged subject.
-    entry.subscription = fish.catchableRangesObserver.debounce(100).subscribe((r) => {
+    entry.subscription = fish.catchableRangesObserver.pipe(
+      rxjs.operators.debounceTime(100)
+    ).subscribe(r => {
       // Pass this event to the view model's fish changed subject.
-      this.fishChangedSubject.onNext(fish.id);
+      this.fishChangedSubject.next(fish.id);
     });
 
     // Connect the new entry's events.
@@ -601,7 +620,7 @@ let ViewModel = new class {
   }
 
   removeEntry(entry, k) {
-    entry.subscription.dispose();
+    entry.subscription.unsubscribe();
     this.layout.remove(entry);
     // Remove intuition entries as well.
     for (let subEntry in entry.intuitionEntries) {
@@ -659,7 +678,7 @@ let ViewModel = new class {
     ViewModel.settings.filters.completion = $this.data('filter');
 
     // Notify anyone interested in this change.
-    ViewModel.filterCompletionSubject.onNext(ViewModel.settings.filters.completion);
+    ViewModel.filterCompletionSubject.next(ViewModel.settings.filters.completion);
     ViewModel.saveSettings();
     return false;
   }
@@ -678,7 +697,7 @@ let ViewModel = new class {
     }
 
     // Notify others about the change.
-    ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
+    ViewModel.filterPatchSubject.next(ViewModel.settings.filters.patch);
     ViewModel.saveSettings();
     return false;
   }
@@ -695,7 +714,7 @@ let ViewModel = new class {
     // Just this patch is included now.
     ViewModel.settings.filters.patch = [patch];
     // Notify others about this change.
-    ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
+    ViewModel.filterPatchSubject.next(ViewModel.settings.filters.patch);
     ViewModel.saveSettings();
     return false;
   }
@@ -720,7 +739,7 @@ let ViewModel = new class {
     }
 
     // Notify others about this change.
-    ViewModel.filterPatchSubject.onNext(ViewModel.settings.filters.patch);
+    ViewModel.filterPatchSubject.next(ViewModel.settings.filters.patch);
     ViewModel.saveSettings();
     return false;
   }
@@ -740,7 +759,7 @@ let ViewModel = new class {
     }
 
     ViewModel.settings.sortingType = sortingType;
-    ViewModel.sortingTypeSubject.onNext(sortingType);
+    ViewModel.sortingTypeSubject.next(sortingType);
     ViewModel.saveSettings();
   }
 

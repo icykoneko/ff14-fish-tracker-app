@@ -5,13 +5,16 @@ const MS_IN_A_DAY = 24 * MS_IN_AN_HOUR;
 
 class EorzeaTime {
   constructor() {
-    this.currentBellChanged = Rx.Observable
-      .interval(0.75 * EARTH_TO_EORZEA /* ms */)
-      .timestamp()
-      .map((v) => dateFns.utc.getHours(this.toEorzea(v.timestamp)))
-      .distinctUntilChanged()
-      .tap((v) => console.log("Current bell is now:", v))
-      .share();
+    const { interval } = rxjs;
+    const { timestamp, map, distinctUntilChanged, tap, share } = rxjs.operators;
+
+    this.currentBellChanged = interval(0.75 * EARTH_TO_EORZEA /* ms */).pipe(
+      timestamp(),
+      map(v => dateFns.utc.getHours(this.toEorzea(v.timestamp))),
+      distinctUntilChanged(),
+      tap(v => console.log("Current bell is now:", v)),
+      share()
+    );
   }
 
   getCurrentEorzeaDate() {

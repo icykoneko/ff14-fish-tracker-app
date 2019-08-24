@@ -26,7 +26,7 @@ class LocalizationHelper {
         this.language_suffix = "_" + lang;
       }
     }
-    this.languageChanged = new Rx.BehaviorSubject(this.language_suffix);
+    this.languageChanged = new rxjs.BehaviorSubject(this.language_suffix);
   }
 
   getLocalizedProperty(obj, name) {
@@ -52,7 +52,7 @@ class LocalizationHelper {
     if (_(LANGUAGES).chain().values().contains("_" + lang).value()) {
       this.language_suffix = "_" + lang;
       window.localStorage.setItem('lang', lang);
-      this.languageChanged.onNext(this.language_suffix);
+      this.languageChanged.next(this.language_suffix);
     } else {
       console.error("Invalid language choice:", lang);
     }
