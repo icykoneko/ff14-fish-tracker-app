@@ -658,6 +658,10 @@ let ViewModel = new class {
       $subEntry.data('view', intuitionFishEntry);
       intuitionFishEntry.element = $subEntry[0];
 
+      if (this.settings.theme === 'dark') {
+        $('*[data-tooltip]', $subEntry).attr('data-inverted', '');
+      }
+
       // Unlike normal entries, this only gets added to the parent fish.
       entry.intuitionEntries.push(intuitionFishEntry);
     }
