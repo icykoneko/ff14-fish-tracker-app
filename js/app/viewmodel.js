@@ -457,7 +457,8 @@ let ViewModel = new class {
     if ((reason === null) ||
         (reason !== null && ('filterCompletion' in reason ||
                              'filterPatch' in reason ||
-                             'fishAvailability' in reason)))
+                             'fishAvailability' in reason ||
+                             'sortingType' in reason)))
     {
       // Finally, we can apply sorting to the list of active fish.
       // NOTE: Sorting used to be handled here... but there's a lot of layout
