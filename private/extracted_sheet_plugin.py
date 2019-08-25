@@ -1,4 +1,4 @@
-from typing import TypeVar, Type, Union, Tuple, Callable, List, Iterable as IterableT
+from typing import TypeVar, Type, Union, Tuple, Callable, Iterable as IterableT, Iterable
 from functools import update_wrapper
 import io
 import csv
@@ -206,6 +206,10 @@ class ExportedDataRow(IDataRow):
             if col is None:
                 raise KeyError
             return col.read_raw(self.__values[col.index])
+
+    def column_values(self) -> Iterable[object]:
+        for column in self.sheet.header.columns:
+            yield column.read(self.__values[column.index])
 
 
 T = TypeVar('T', bound=IDataRow)
