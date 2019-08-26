@@ -87,7 +87,7 @@ def load_dats(args):
     _string_decoder.set_decoder(text.TagType.Emphasis.value, omit_tag_decoder)
     _string_decoder.set_decoder(
         text.TagType.SoftHyphen.value,
-        lambda i,t,l: text.nodes.StaticString(_string_decoder.dash))
+        lambda i,t,l: text.nodes.StaticString("\x26shy;"))
 
     return xiv
 
