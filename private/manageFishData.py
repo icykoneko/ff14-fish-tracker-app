@@ -19,7 +19,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO, stream=sys.stderr)
 fish_and_tackle_data = {}
-XIV = None
+XIV = None  # type: 'pysaintcoinach.ARealmReversed'
 KeyValuePair = None
 FISHING_NODES = None
 SPEARFISHING_NODES = None
@@ -434,7 +434,7 @@ def rebuild_fish_data(args):
                            XIV.game_data.get_sheet('Item')):
             if not os.path.exists(os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle',
                                                '%06u.png' % item.get_raw('Icon'))):
-                logging.info('Extracting %s' % item['Icon'])
+                logging.info('Extracting %s  (%s)' % (item['Icon'], str(item['Name'])))
                 icon = item.as_image('Icon')
                 icon.get_image().save(
                     os.path.join(_SCRIPT_PATH, 'images', 'fish_n_tackle',
@@ -540,7 +540,7 @@ def check_data_integrity(args):
 
 
 def add_new_fish_data(args):
-    global XIV
+    global XIV  # type: 'pysaintcoinach.ARealmReversed'
 
     # Parse the fish data in the YAML file.
     fishes = yaml.load(open(args.existing_data, 'r'), Loader=Loader)
@@ -555,7 +555,9 @@ def add_new_fish_data(args):
 
     # Iterate all of the FishingSpot entries next, skipping any fish we already know about.
     new_fishes = {}
-    for fishing_spot in XIV.game_data.get_sheet('FishingSpot'):
+
+    from pysaintcoinach.xiv.fishing_spot import FishingSpot
+    for fishing_spot in XIV.game_data.get_sheet(FishingSpot):
         if fishing_spot.place_name.key == 0:
             continue
         for fish in fishing_spot.items:
@@ -581,10 +583,38 @@ def add_new_fish_data(args):
                     'dataMissing': True
                 }
 
-    # TODO: Include spearfishing as well.
-    #  This requires additional porting in the pysaintcoinach library to be efficient.
+    # Include spearfishing as well.
+    from pysaintcoinach.xiv.gathering_point import GatheringPoint
+    for gathering_point in XIV.game_data.get_sheet(GatheringPoint):
+        # We only care about spearfishing gathering points.
+        if gathering_point.base.type.key != 4:
+            continue
+        for item in gathering_point.base.items:
+            if str(item.name) in known_fishes:
+                continue
 
-    # Dump the new fish data to a YAML file.
+            if item.key not in new_fishes:
+                # Get the BASE gathering point only!
+                is_hidden = gathering_point[2] == 6  # super-sketch, but this is the field
+
+                new_fishes[item.key] = {
+                    'name': str(item.name),
+                    'location': gathering_point.base.key if is_hidden else str(gathering_point.place_name.name),
+                    'startHour': 0,
+                    'endHour': 24,
+                    'previousWeatherSet': None,
+                    'weatherSet': None,
+                    'bestCatchPath': None,
+                    'predators': None,
+                    'hookset': None,
+                    'snagging': None,
+                    'gig': 'UNKNOWN',
+                    'fishEyes': False,
+                    'patch': float(args.patch),
+                    'dataMissing': True
+                }
+
+        # Dump the new fish data to a YAML file.
 
     with open(args.new_data, 'w') as f:
         # Make things prettier...
@@ -593,8 +623,8 @@ def add_new_fish_data(args):
 
         yaml.add_representer(type(None), represent_none)
         yaml.dump(list(new_fishes.values()), f, Dumper=yaml.CSafeDumper, default_flow_style=False, sort_keys=False)
-        # f.write('---\n')
-        # f.writelines(['%s\n' % str(fish['name']) for fish in list(new_fishes.values())])
+        f.write('---\n')
+        f.writelines(['%s\n' % str(fish['name']) for fish in list(new_fishes.values())])
 
     return True
 
