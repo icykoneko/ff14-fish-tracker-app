@@ -1,6 +1,6 @@
 
 .sprite-icon {
-  background-image: url('sprite.png?5.0_201907021302');
+  background-image: url('sprite.png?5.0_20190825_2144');
 }
 
 .sprite-icon-DEFAULT {
@@ -9,17 +9,17 @@
   height: 44px;
 }
 .sprite-icon-aquarium {
-  background-position: -360px -1232px;
+  background-position: -1276px -1176px;
   width: 24px;
   height: 24px;
 }
 .sprite-icon-collectable {
-  background-position: -336px -1232px;
+  background-position: -1276px -1152px;
   width: 24px;
   height: 24px;
 }
 .sprite-icon-folklore {
-  background-position: -1232px -1208px;
+  background-position: -1276px -1128px;
   width: 24px;
   height: 24px;
 }
@@ -59,122 +59,122 @@
   height: 44px;
 }
 .sprite-icon-mapmarker-folklore {
-  background-position: -216px -1232px;
+  background-position: -1276px -984px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-status-fish_eyes {
-  background-position: -280px -1232px;
+  background-position: -1276px -1056px;
   width: 28px;
   height: 36px;
 }
 .sprite-icon-status-intuition {
-  background-position: -252px -1232px;
+  background-position: -1276px -1020px;
   width: 28px;
   height: 36px;
 }
 .sprite-icon-status-snagging {
-  background-position: -308px -1232px;
+  background-position: -1276px -1092px;
   width: 28px;
   height: 36px;
 }
 .sprite-icon-weather-060201 {
-  background-position: -180px -1232px;
+  background-position: -1276px -948px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060202 {
-  background-position: -144px -1232px;
+  background-position: -1276px -912px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060203 {
-  background-position: -108px -1232px;
+  background-position: -1276px -876px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060204 {
-  background-position: -72px -1232px;
+  background-position: -1276px -840px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060205 {
-  background-position: -36px -1232px;
+  background-position: -1276px -804px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060206 {
-  background-position: -0px -1232px;
+  background-position: -1276px -768px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060207 {
-  background-position: -1232px -704px;
+  background-position: -1276px -264px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060208 {
-  background-position: -1232px -1136px;
+  background-position: -1276px -696px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060209 {
-  background-position: -1232px -1100px;
+  background-position: -1276px -660px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060210 {
-  background-position: -1232px -1064px;
+  background-position: -1276px -624px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060211 {
-  background-position: -1232px -1028px;
+  background-position: -1276px -588px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060212 {
-  background-position: -1232px -992px;
+  background-position: -1276px -552px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060213 {
-  background-position: -1232px -956px;
+  background-position: -1276px -516px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060214 {
-  background-position: -1232px -920px;
+  background-position: -1276px -480px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060215 {
-  background-position: -1232px -884px;
+  background-position: -1276px -444px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060216 {
-  background-position: -1232px -848px;
+  background-position: -1276px -408px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060217 {
-  background-position: -1232px -812px;
+  background-position: -1276px -372px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060218 {
-  background-position: -1232px -776px;
+  background-position: -1276px -336px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060219 {
-  background-position: -1232px -740px;
+  background-position: -1276px -300px;
   width: 36px;
   height: 36px;
 }
 .sprite-icon-weather-060220 {
-  background-position: -1232px -1172px;
+  background-position: -1276px -732px;
   width: 36px;
   height: 36px;
 }
@@ -2069,7 +2069,7 @@
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029321 {
-  background-position: -0px -0px;
+  background-position: -880px -572px;
   width: 44px;
   height: 44px;
 }
@@ -2189,7 +2189,7 @@
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029345 {
-  background-position: -748px -880px;
+  background-position: -0px -0px;
   width: 44px;
   height: 44px;
 }
@@ -3448,693 +3448,928 @@
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029601 {
+.sprite-icon-fish_n_tackle-029597 {
   background-position: -1144px -572px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029602 {
+.sprite-icon-fish_n_tackle-029598 {
   background-position: -1144px -616px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029603 {
+.sprite-icon-fish_n_tackle-029599 {
   background-position: -1144px -660px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029604 {
+.sprite-icon-fish_n_tackle-029601 {
   background-position: -1144px -704px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029605 {
+.sprite-icon-fish_n_tackle-029602 {
   background-position: -1144px -748px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029606 {
+.sprite-icon-fish_n_tackle-029603 {
   background-position: -1144px -792px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029607 {
+.sprite-icon-fish_n_tackle-029604 {
   background-position: -1144px -836px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029608 {
+.sprite-icon-fish_n_tackle-029605 {
   background-position: -1144px -880px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029609 {
+.sprite-icon-fish_n_tackle-029606 {
   background-position: -1144px -924px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029610 {
+.sprite-icon-fish_n_tackle-029607 {
   background-position: -1144px -968px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029611 {
+.sprite-icon-fish_n_tackle-029608 {
   background-position: -1144px -1012px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029612 {
+.sprite-icon-fish_n_tackle-029609 {
   background-position: -1144px -1056px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029613 {
+.sprite-icon-fish_n_tackle-029610 {
   background-position: -1144px -1100px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029614 {
+.sprite-icon-fish_n_tackle-029611 {
   background-position: -0px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029615 {
+.sprite-icon-fish_n_tackle-029612 {
   background-position: -44px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029616 {
+.sprite-icon-fish_n_tackle-029613 {
   background-position: -88px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029617 {
+.sprite-icon-fish_n_tackle-029614 {
   background-position: -132px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029618 {
+.sprite-icon-fish_n_tackle-029615 {
   background-position: -176px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029619 {
+.sprite-icon-fish_n_tackle-029616 {
   background-position: -220px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029651 {
+.sprite-icon-fish_n_tackle-029617 {
   background-position: -264px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029652 {
+.sprite-icon-fish_n_tackle-029618 {
   background-position: -308px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029653 {
+.sprite-icon-fish_n_tackle-029619 {
   background-position: -352px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029654 {
+.sprite-icon-fish_n_tackle-029651 {
   background-position: -396px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029655 {
+.sprite-icon-fish_n_tackle-029652 {
   background-position: -440px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029656 {
+.sprite-icon-fish_n_tackle-029653 {
   background-position: -484px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029657 {
+.sprite-icon-fish_n_tackle-029654 {
   background-position: -528px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029658 {
+.sprite-icon-fish_n_tackle-029655 {
   background-position: -572px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029659 {
+.sprite-icon-fish_n_tackle-029656 {
   background-position: -616px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029660 {
+.sprite-icon-fish_n_tackle-029657 {
   background-position: -660px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029661 {
+.sprite-icon-fish_n_tackle-029658 {
   background-position: -704px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029662 {
+.sprite-icon-fish_n_tackle-029659 {
   background-position: -748px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029701 {
+.sprite-icon-fish_n_tackle-029660 {
   background-position: -792px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029702 {
+.sprite-icon-fish_n_tackle-029661 {
   background-position: -836px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029703 {
+.sprite-icon-fish_n_tackle-029662 {
   background-position: -880px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029704 {
+.sprite-icon-fish_n_tackle-029701 {
   background-position: -924px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029705 {
+.sprite-icon-fish_n_tackle-029702 {
   background-position: -968px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029706 {
+.sprite-icon-fish_n_tackle-029703 {
   background-position: -1012px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029707 {
+.sprite-icon-fish_n_tackle-029704 {
   background-position: -1056px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029708 {
+.sprite-icon-fish_n_tackle-029705 {
   background-position: -1100px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029709 {
+.sprite-icon-fish_n_tackle-029706 {
   background-position: -1144px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029710 {
+.sprite-icon-fish_n_tackle-029707 {
   background-position: -1188px -0px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029711 {
+.sprite-icon-fish_n_tackle-029708 {
   background-position: -1188px -44px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029712 {
+.sprite-icon-fish_n_tackle-029709 {
   background-position: -1188px -88px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029713 {
+.sprite-icon-fish_n_tackle-029710 {
   background-position: -1188px -132px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029714 {
+.sprite-icon-fish_n_tackle-029711 {
   background-position: -1188px -176px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029715 {
+.sprite-icon-fish_n_tackle-029712 {
   background-position: -1188px -220px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029716 {
+.sprite-icon-fish_n_tackle-029713 {
   background-position: -1188px -264px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029717 {
+.sprite-icon-fish_n_tackle-029714 {
   background-position: -1188px -308px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029718 {
+.sprite-icon-fish_n_tackle-029715 {
   background-position: -1188px -352px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029719 {
+.sprite-icon-fish_n_tackle-029716 {
   background-position: -1188px -396px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029720 {
+.sprite-icon-fish_n_tackle-029717 {
   background-position: -1188px -440px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029721 {
+.sprite-icon-fish_n_tackle-029718 {
   background-position: -1188px -484px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029722 {
+.sprite-icon-fish_n_tackle-029719 {
   background-position: -1188px -528px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029723 {
+.sprite-icon-fish_n_tackle-029720 {
   background-position: -1188px -572px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029724 {
+.sprite-icon-fish_n_tackle-029721 {
   background-position: -1188px -616px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029725 {
+.sprite-icon-fish_n_tackle-029722 {
   background-position: -1188px -660px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029726 {
+.sprite-icon-fish_n_tackle-029723 {
   background-position: -1188px -704px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029727 {
+.sprite-icon-fish_n_tackle-029724 {
   background-position: -1188px -748px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029728 {
+.sprite-icon-fish_n_tackle-029725 {
   background-position: -1188px -792px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029729 {
+.sprite-icon-fish_n_tackle-029726 {
   background-position: -1188px -836px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029730 {
+.sprite-icon-fish_n_tackle-029727 {
   background-position: -1188px -880px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029731 {
+.sprite-icon-fish_n_tackle-029728 {
   background-position: -1188px -924px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029732 {
+.sprite-icon-fish_n_tackle-029729 {
   background-position: -1188px -968px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029733 {
+.sprite-icon-fish_n_tackle-029730 {
   background-position: -1188px -1012px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029734 {
+.sprite-icon-fish_n_tackle-029731 {
   background-position: -1188px -1056px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029735 {
+.sprite-icon-fish_n_tackle-029732 {
   background-position: -1188px -1100px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029736 {
+.sprite-icon-fish_n_tackle-029733 {
   background-position: -1188px -1144px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029751 {
+.sprite-icon-fish_n_tackle-029734 {
   background-position: -0px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029752 {
+.sprite-icon-fish_n_tackle-029735 {
   background-position: -44px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029753 {
+.sprite-icon-fish_n_tackle-029736 {
   background-position: -88px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029754 {
+.sprite-icon-fish_n_tackle-029751 {
   background-position: -132px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029755 {
+.sprite-icon-fish_n_tackle-029752 {
   background-position: -176px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029756 {
+.sprite-icon-fish_n_tackle-029753 {
   background-position: -220px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029757 {
+.sprite-icon-fish_n_tackle-029754 {
   background-position: -264px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029758 {
+.sprite-icon-fish_n_tackle-029755 {
   background-position: -308px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029759 {
+.sprite-icon-fish_n_tackle-029756 {
   background-position: -352px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029760 {
+.sprite-icon-fish_n_tackle-029757 {
   background-position: -396px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029761 {
+.sprite-icon-fish_n_tackle-029758 {
   background-position: -440px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029762 {
+.sprite-icon-fish_n_tackle-029759 {
   background-position: -484px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029801 {
+.sprite-icon-fish_n_tackle-029760 {
   background-position: -528px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029802 {
+.sprite-icon-fish_n_tackle-029761 {
   background-position: -572px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029803 {
+.sprite-icon-fish_n_tackle-029762 {
   background-position: -616px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029804 {
+.sprite-icon-fish_n_tackle-029801 {
   background-position: -660px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029805 {
+.sprite-icon-fish_n_tackle-029802 {
   background-position: -704px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029806 {
+.sprite-icon-fish_n_tackle-029803 {
   background-position: -748px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029807 {
+.sprite-icon-fish_n_tackle-029804 {
   background-position: -792px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029808 {
+.sprite-icon-fish_n_tackle-029805 {
   background-position: -836px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029809 {
+.sprite-icon-fish_n_tackle-029806 {
   background-position: -880px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029810 {
+.sprite-icon-fish_n_tackle-029807 {
   background-position: -924px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029811 {
+.sprite-icon-fish_n_tackle-029808 {
   background-position: -968px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029812 {
+.sprite-icon-fish_n_tackle-029809 {
   background-position: -1012px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029813 {
+.sprite-icon-fish_n_tackle-029810 {
   background-position: -1056px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029814 {
+.sprite-icon-fish_n_tackle-029811 {
   background-position: -1100px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029815 {
+.sprite-icon-fish_n_tackle-029812 {
   background-position: -1144px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029816 {
+.sprite-icon-fish_n_tackle-029813 {
   background-position: -1188px -1188px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029851 {
+.sprite-icon-fish_n_tackle-029814 {
   background-position: -1232px -0px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029852 {
+.sprite-icon-fish_n_tackle-029815 {
   background-position: -1232px -44px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029853 {
+.sprite-icon-fish_n_tackle-029816 {
   background-position: -1232px -88px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029854 {
+.sprite-icon-fish_n_tackle-029851 {
   background-position: -1232px -132px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029855 {
+.sprite-icon-fish_n_tackle-029852 {
   background-position: -1232px -176px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029856 {
+.sprite-icon-fish_n_tackle-029853 {
   background-position: -1232px -220px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029857 {
+.sprite-icon-fish_n_tackle-029854 {
   background-position: -1232px -264px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029858 {
+.sprite-icon-fish_n_tackle-029855 {
   background-position: -1232px -308px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029859 {
+.sprite-icon-fish_n_tackle-029856 {
   background-position: -1232px -352px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029860 {
+.sprite-icon-fish_n_tackle-029857 {
   background-position: -1232px -396px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029861 {
+.sprite-icon-fish_n_tackle-029858 {
   background-position: -1232px -440px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029862 {
+.sprite-icon-fish_n_tackle-029859 {
   background-position: -1232px -484px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029863 {
+.sprite-icon-fish_n_tackle-029860 {
   background-position: -1232px -528px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029864 {
+.sprite-icon-fish_n_tackle-029861 {
   background-position: -1232px -572px;
   width: 44px;
   height: 44px;
 }
-.sprite-icon-fish_n_tackle-029865 {
+.sprite-icon-fish_n_tackle-029862 {
   background-position: -1232px -616px;
   width: 44px;
   height: 44px;
 }
+.sprite-icon-fish_n_tackle-029863 {
+  background-position: -1232px -660px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029864 {
+  background-position: -1232px -704px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029865 {
+  background-position: -1232px -748px;
+  width: 44px;
+  height: 44px;
+}
 .sprite-icon-fish_n_tackle-029901 {
-  background-position: -880px -572px;
+  background-position: -1232px -792px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029902 {
-  background-position: -176px -220px;
+  background-position: -1232px -836px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029903 {
-  background-position: -132px -220px;
+  background-position: -1232px -880px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029904 {
-  background-position: -88px -220px;
+  background-position: -1232px -924px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029905 {
-  background-position: -44px -220px;
+  background-position: -1232px -968px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029906 {
-  background-position: -0px -220px;
+  background-position: -1232px -1012px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029907 {
-  background-position: -220px -176px;
+  background-position: -1232px -1056px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029908 {
-  background-position: -220px -132px;
+  background-position: -1232px -1100px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029909 {
-  background-position: -220px -88px;
+  background-position: -1232px -1144px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029910 {
-  background-position: -220px -44px;
+  background-position: -1232px -1188px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029911 {
-  background-position: -220px -0px;
+  background-position: -0px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029912 {
-  background-position: -176px -176px;
+  background-position: -44px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029913 {
-  background-position: -132px -176px;
+  background-position: -88px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029914 {
-  background-position: -88px -176px;
+  background-position: -132px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029915 {
-  background-position: -44px -176px;
+  background-position: -176px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029916 {
-  background-position: -0px -176px;
+  background-position: -220px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029917 {
-  background-position: -176px -132px;
+  background-position: -264px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029918 {
-  background-position: -176px -88px;
+  background-position: -308px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029919 {
-  background-position: -176px -44px;
+  background-position: -352px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029920 {
-  background-position: -176px -0px;
+  background-position: -396px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029921 {
-  background-position: -132px -132px;
+  background-position: -440px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029922 {
-  background-position: -88px -132px;
+  background-position: -484px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029923 {
-  background-position: -44px -132px;
+  background-position: -528px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029924 {
-  background-position: -0px -132px;
+  background-position: -572px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029925 {
-  background-position: -132px -88px;
+  background-position: -616px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029926 {
-  background-position: -44px -44px;
+  background-position: -660px -1232px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029927 {
-  background-position: -0px -44px;
+  background-position: -704px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029950 {
+  background-position: -748px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029951 {
+  background-position: -792px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029952 {
+  background-position: -836px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029953 {
+  background-position: -880px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029954 {
+  background-position: -924px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029955 {
+  background-position: -968px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029956 {
+  background-position: -1012px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029957 {
+  background-position: -1056px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029958 {
+  background-position: -1100px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029959 {
+  background-position: -1144px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029960 {
+  background-position: -1188px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029961 {
+  background-position: -1232px -1232px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029962 {
+  background-position: -1276px -0px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029963 {
+  background-position: -1276px -44px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029964 {
+  background-position: -1276px -88px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029965 {
+  background-position: -1276px -132px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029966 {
+  background-position: -1276px -176px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029967 {
+  background-position: -748px -880px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029968 {
+  background-position: -176px -220px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029969 {
+  background-position: -132px -220px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029970 {
+  background-position: -88px -220px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029971 {
+  background-position: -44px -220px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029972 {
+  background-position: -0px -220px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029973 {
+  background-position: -220px -176px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029974 {
+  background-position: -220px -132px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029975 {
+  background-position: -220px -88px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029976 {
+  background-position: -220px -44px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029977 {
+  background-position: -220px -0px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029978 {
+  background-position: -176px -176px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029979 {
+  background-position: -132px -176px;
   width: 44px;
   height: 44px;
 }
 .sprite-icon-fish_n_tackle-029980 {
-  background-position: -1232px -660px;
+  background-position: -88px -176px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029981 {
+  background-position: -44px -176px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029982 {
+  background-position: -0px -176px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029983 {
+  background-position: -176px -132px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029984 {
+  background-position: -176px -88px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029985 {
+  background-position: -176px -44px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029986 {
+  background-position: -176px -0px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029987 {
+  background-position: -132px -132px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029988 {
+  background-position: -88px -132px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029989 {
+  background-position: -44px -132px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029990 {
+  background-position: -0px -132px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029991 {
+  background-position: -132px -88px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029992 {
+  background-position: -44px -44px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029993 {
+  background-position: -0px -44px;
+  width: 44px;
+  height: 44px;
+}
+.sprite-icon-fish_n_tackle-029994 {
+  background-position: -1276px -220px;
   width: 44px;
   height: 44px;
 }
