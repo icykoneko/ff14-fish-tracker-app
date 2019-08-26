@@ -7764,3 +7764,867 @@
   gig:
   fishEyes: false
   patch: 5.0
+- name: Lilac Goby
+  location: Northeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Purple Ghost
+  location: Northeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Gazing Glass
+  location: Northeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Elven Spear
+  location: Northeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Lakelouse
+  location: Northeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Source Octopus
+  location: Northeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Grey Carp
+  location: The Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Shade Gudgeon
+  location: The Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Lakethistle
+  location: The Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Platinum Bream
+  location: The Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Finned Eggplant
+  location: The Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Wardenfish
+  location: The Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Skykisser
+  location: Southeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Viola Clam
+  location: Southeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Lakeland Cod
+  location: Southeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Geayi
+  location: Southeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Noblefish
+  location: Southeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Misteye
+  location: Southeast Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Jenanna's Tear
+  location: North Lyhe Ghiah
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Shade Axolotl
+  location: North Lyhe Ghiah
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Daisy Turban
+  location: North Lyhe Ghiah
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Little Flirt
+  location: North Lyhe Ghiah
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Peallaidh
+  location: North Lyhe Ghiah
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Voeburt Bichir
+  location: North Lyhe Ghiah
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Gilded Batfish
+  location: Deepwood Swim
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Mirrorfish
+  location: Deepwood Swim
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Glass Eel
+  location: Deepwood Swim
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Poecilia
+  location: Deepwood Swim
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Petalfish
+  location: Deepwood Swim
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Voeburt Salamander
+  location: Deepwood Swim
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Bedskipper
+  location: Central Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Dandyfish
+  location: Central Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Mock Pixie
+  location: Central Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Hunter's Arrow
+  location: Central Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Fuathgobbler
+  location: Central Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Sauldia Ruby
+  location: Central Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Paradise Crab
+  location: Thysm Lran
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Saint Fathric's Ire
+  location: Thysm Lran
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Queensgown
+  location: Thysm Lran
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Flowering Kelpie
+  location: Thysm Lran
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Ghoulfish
+  location: Thysm Lran
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Measan Deala
+  location: Thysm Lran
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Big-eye
+  location: South Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Dohn Horn
+  location: South Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Aquabloom
+  location: South Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Jester Fish
+  location: South Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Blue Lightning
+  location: South Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Maidenhair
+  location: South Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Ankle Snipper
+  location: North Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Treescale
+  location: North Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Ronkan Pleco
+  location: North Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Gourmand Crab
+  location: North Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Gatorl's Bead
+  location: North Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Diamondtongue
+  location: North Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Everdark Bass
+  location: The Covered Halls of Dwatl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Hermit's Hood
+  location: The Covered Halls of Dwatl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Megapiranha
+  location: The Covered Halls of Dwatl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Hermit Crab
+  location: The Covered Halls of Dwatl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Lozatl Pirarucu
+  location: The Covered Halls of Dwatl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Anpa's Handmaid
+  location: The Covered Halls of Dwatl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Little Bismarck
+  location: 645
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+    Noblefish: 10
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Bothriolepis
+  location: 645
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+    Noblefish: 10
+  hookset:
+  snagging:
+  gig: Large
+  fishEyes: false
+  patch: 5.0
+- name: Elder Pixie
+  location: 646
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+    Sauldia Ruby: 10
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Blue Mountain Bubble
+  location: 646
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+    Sauldia Ruby: 10
+  hookset:
+  snagging:
+  gig: Normal
+  fishEyes: false
+  patch: 5.0
+- name: Rak'tika Goby
+  location: 647
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+    Treescale: 10
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
+- name: Viis Ear
+  location: 647
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+    Treescale: 10
+  hookset:
+  snagging:
+  gig: Small
+  fishEyes: false
+  patch: 5.0
