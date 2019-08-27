@@ -96,7 +96,8 @@ class FishTableLayout {
       let $elem = $(elem);
       let idx = $elem.attr('data-baitIdx');
       if (idx !== undefined) {
-        $elem.attr('title', __p(fishEntry.data.bait.path[idx], 'name'));
+        // NOTE: BaitEntry automatically returns the correct language name.
+        $elem.attr('title', fishEntry.bait[idx].name);
       }
     });
 
