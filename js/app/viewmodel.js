@@ -892,7 +892,7 @@ let ViewModel = new class {
     if (completion === null || completion === "") { return; }
     try {
       completion = JSON.parse(completion);
-    } catch {
+    } catch (ex) {
       window.alert("Error: Malformed fishing checklist.");
       return;
     }
@@ -901,7 +901,7 @@ let ViewModel = new class {
         // Update the settings
         this.settings.pinned =
           _(completion["pinned"]).reduce((o, v) => o.concat(Number(v)), []);
-      } catch {
+      } catch (ex) {
         window.alert("Error: Malformed fishing checklist.")
         return;
       }
@@ -911,7 +911,7 @@ let ViewModel = new class {
         // Update the settings
         this.settings.completed =
           _(completion["completed"]).reduce((o, v) => o.concat(Number(v)), []);
-      } catch {
+      } catch (ex) {
         window.alert("Error: Malformed fishing checklist.")
         return;
       }
