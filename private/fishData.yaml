@@ -1,3 +1,4 @@
+# Patch 2.0
 - name: Fullmoon Sardine
   location: Costa del Sol
   startHour: 18
@@ -7,7 +8,24 @@
   predators: {}
   bestCatchPath:
   - Spoon Worm
-  hookset:
+  tug: Light
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 2
+- name: Abalathian Smelt
+  location:
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  predators:
+  bestCatchPath:
+  - Brute Leech  # Better to leave empty if possible, best caught with honey worms in HW holes
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -23,7 +41,8 @@
   bestCatchPath:
   - Lugworm
   - Merlthor Goby
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -40,7 +59,8 @@
   predators: {}
   bestCatchPath:
   - Stem Borer
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -56,7 +76,8 @@
   bestCatchPath:
   - Steel Jig
   - Fullmoon Sardine
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -71,7 +92,8 @@
   predators: {}
   bestCatchPath:
   - Northern Krill
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -88,7 +110,8 @@
   predators: {}
   bestCatchPath:
   - Northern Krill
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -103,7 +126,8 @@
   predators: {}
   bestCatchPath:
   - Yumizuno
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -119,7 +143,8 @@
   bestCatchPath:
   - Steel Jig
   - Fullmoon Sardine
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -138,7 +163,8 @@
   - Lugworm
   - Merlthor Goby
   - Wahoo
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -155,7 +181,8 @@
   predators: {}
   bestCatchPath:
   - Spinner
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -173,7 +200,8 @@
   predators: {}
   bestCatchPath:
   - Glowworm
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -188,7 +216,8 @@
   predators: {}
   bestCatchPath:
   - Glowworm
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -208,7 +237,8 @@
   predators: {}
   bestCatchPath:
   - Spinnerbait
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -225,7 +255,8 @@
   predators: {}
   bestCatchPath:
   - Caddisfly Larva
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -241,6 +272,7 @@
   predators: {}
   bestCatchPath:
   - Rainbow Spoon Lure
+  tug: Medium
   hookset:
   snagging:
   gig:
@@ -259,7 +291,8 @@
   bestCatchPath:
   - Spinner
   - Common Sculpin
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -276,7 +309,8 @@
   predators: {}
   bestCatchPath:
   - Caddisfly Larva
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -291,7 +325,8 @@
   predators: {}
   bestCatchPath:
   - Caddisfly Larva
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -308,7 +343,8 @@
   - Honey Worm
   - Silverfish
   - Goldfish
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -323,12 +359,14 @@
   predators: {}
   bestCatchPath:
   - Chocobo Fly
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
   fishEyes: false
   patch: 2
+<<<<<<< HEAD
 # Patch 2.0: Additional Fish
 - name: Merlthor Goby
   bestCatchPath:
@@ -410,6 +448,8 @@
   - Silverfish
   hookset:
   patch: 2
+=======
+>>>>>>> hooksets
 # Patch 2.2
 - name: Zalera
   location: Zephyr Drift
@@ -420,7 +460,8 @@
   predators: {}
   bestCatchPath:
   - Rat Tail
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -435,7 +476,8 @@
   predators: {}
   bestCatchPath:
   - Moth Pupa
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -450,7 +492,8 @@
   predators: {}
   bestCatchPath:
   - Goby Ball
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -465,7 +508,8 @@
   predators: {}
   bestCatchPath:
   - Moth Pupa
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -482,7 +526,8 @@
   predators: {}
   bestCatchPath:
   - Butterworm
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -498,7 +543,8 @@
   bestCatchPath:
   - Midge Basket
   - Ala Mhigan Fighting Fish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -515,7 +561,8 @@
   - Lugworm
   - Merlthor Goby
   - Wahoo
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -530,7 +577,8 @@
   predators: {}
   bestCatchPath:
   - Pill Bug
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -548,7 +596,8 @@
   bestCatchPath:
   - Lugworm
   - Merlthor Goby
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -566,7 +615,8 @@
   predators: {}
   bestCatchPath:
   - Northern Krill
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -581,7 +631,8 @@
   predators: {}
   bestCatchPath:
   - Crayfish Ball
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -599,7 +650,8 @@
   predators: {}
   bestCatchPath:
   - Crow Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -614,7 +666,8 @@
   predators: {}
   bestCatchPath:
   - Yumizuno
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -629,7 +682,8 @@
   predators: {}
   bestCatchPath:
   - Goby Ball
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -647,7 +701,8 @@
   predators: {}
   bestCatchPath:
   - Crayfish Ball
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -664,7 +719,8 @@
   predators: {}
   bestCatchPath:
   - Yumizuno
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -680,7 +736,8 @@
   bestCatchPath:
   - Moth Pupa
   - Striped Goby
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -695,7 +752,8 @@
   predators: {}
   bestCatchPath:
   - Wildfowl Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -710,7 +768,8 @@
   predators: {}
   bestCatchPath:
   - Crayfish Ball
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -728,7 +787,8 @@
   predators: {}
   bestCatchPath:
   - Spinnerbait
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -743,7 +803,8 @@
   predators: {}
   bestCatchPath:
   - Crayfish Ball
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -761,7 +822,8 @@
   predators: {}
   bestCatchPath:
   - Floating Minnow
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -777,7 +839,8 @@
   predators: {}
   bestCatchPath:
   - Butterworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -794,7 +857,8 @@
   predators: {}
   bestCatchPath:
   - Crow Fly
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -811,7 +875,8 @@
   predators: {}
   bestCatchPath:
   - Midge Basket
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -829,7 +894,8 @@
   predators: {}
   bestCatchPath:
   - Bloodworm
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -846,7 +912,8 @@
   predators: {}
   bestCatchPath:
   - Syrphid Basket
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -862,7 +929,8 @@
   bestCatchPath:
   - Moth Pupa
   - Striped Goby
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -880,7 +948,8 @@
   predators: {}
   bestCatchPath:
   - Butterworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -896,7 +965,8 @@
   bestCatchPath:
   - Pill Bug
   - Harbor Herring
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -911,7 +981,8 @@
   predators: {}
   bestCatchPath:
   - Bloodworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -926,7 +997,8 @@
   predators: {}
   bestCatchPath:
   - Sinking Minnow
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -942,7 +1014,8 @@
   predators: {}
   bestCatchPath:
   - Spoon Worm
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -957,7 +1030,8 @@
   predators: {}
   bestCatchPath:
   - Heavy Steel Jig
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -972,7 +1046,8 @@
   predators: {}
   bestCatchPath:
   - Goby Ball
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -989,7 +1064,8 @@
   predators: {}
   bestCatchPath:
   - Stem Borer
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1006,7 +1082,8 @@
   predators: {}
   bestCatchPath:
   - Butterworm
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -1022,7 +1099,8 @@
   predators: {}
   bestCatchPath:
   - Syrphid Basket
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -1039,7 +1117,8 @@
   predators: {}
   bestCatchPath:
   - Rat Tail
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1054,7 +1133,8 @@
   predators: {}
   bestCatchPath:
   - Crow Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1072,7 +1152,8 @@
   bestCatchPath:
   - Spinner
   - Common Sculpin
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1087,7 +1168,8 @@
   predators: {}
   bestCatchPath:
   - Northern Krill
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1102,7 +1184,8 @@
   predators: {}
   bestCatchPath:
   - Butterworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1117,7 +1200,8 @@
   predators: {}
   bestCatchPath:
   - Butterworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1132,7 +1216,8 @@
   predators: {}
   bestCatchPath:
   - Shrimp Cage Feeder
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1147,7 +1232,8 @@
   predators: {}
   bestCatchPath:
   - Northern Krill
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1164,7 +1250,8 @@
   bestCatchPath:
   - Midge Basket
   - Copperfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1181,7 +1268,8 @@
   bestCatchPath:
   - Butterworm
   - Copperfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1198,7 +1286,8 @@
   predators: {}
   bestCatchPath:
   - Bass Ball
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1213,7 +1302,8 @@
   predators: {}
   bestCatchPath:
   - Syrphid Basket
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1231,7 +1321,8 @@
   bestCatchPath:
   - Spoon Worm
   - Fullmoon Sardine
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1246,7 +1337,8 @@
   predators: {}
   bestCatchPath:
   - Butterworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1264,7 +1356,8 @@
   bestCatchPath:
   - Spoon Worm
   - Fullmoon Sardine
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1280,7 +1373,8 @@
   predators: {}
   bestCatchPath:
   - Honey Worm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1297,7 +1391,8 @@
   predators: {}
   bestCatchPath:
   - Caddisfly Larva
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -1312,7 +1407,8 @@
   predators: {}
   bestCatchPath:
   - Syrphid Basket
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -1329,7 +1425,8 @@
   predators: {}
   bestCatchPath:
   - Sinking Minnow
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1347,7 +1444,8 @@
   bestCatchPath:
   - Honey Worm
   - Silverfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1364,7 +1462,8 @@
   bestCatchPath:
   - Midge Basket
   - Ala Mhigan Fighting Fish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1380,7 +1479,8 @@
   predators: {}
   bestCatchPath:
   - Herring Ball
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1397,7 +1497,8 @@
   predators: {}
   bestCatchPath:
   - Honey Worm
-  hookset:
+  tug: Medium
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -1413,7 +1514,8 @@
   predators: {}
   bestCatchPath:
   - Heavy Steel Jig
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1428,7 +1530,8 @@
   predators: {}
   bestCatchPath:
   - Spinnerbait
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1444,7 +1547,8 @@
   predators: {}
   bestCatchPath:
   - Glowworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1460,7 +1564,8 @@
   predators: {}
   bestCatchPath:
   - Spinner
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1477,7 +1582,8 @@
   bestCatchPath:
   - Sand Leech
   - Storm Rider
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1494,7 +1600,8 @@
   bestCatchPath:
   - Sand Leech
   - Storm Rider
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1510,7 +1617,8 @@
   predators: {}
   bestCatchPath:
   - Wildfowl Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1527,7 +1635,8 @@
   predators: {}
   bestCatchPath:
   - Glowworm
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -1542,7 +1651,8 @@
   predators: {}
   bestCatchPath:
   - Honey Worm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1559,7 +1669,8 @@
   bestCatchPath:
   - Honey Worm
   - Silverfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1575,7 +1686,8 @@
   predators: {}
   bestCatchPath:
   - Caddisfly Larva
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1591,7 +1703,8 @@
   predators: {}
   bestCatchPath:
   - Stem Borer
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1608,7 +1721,8 @@
   predators: {}
   bestCatchPath:
   - Snurble Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1624,7 +1738,8 @@
   predators: {}
   bestCatchPath:
   - Honey Worm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1642,7 +1757,8 @@
   bestCatchPath:
   - Midge Basket
   - Copperfish
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -1661,7 +1777,8 @@
   bestCatchPath:
   - Pill Bug
   - Ocean Cloud
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1677,7 +1794,8 @@
   predators: {}
   bestCatchPath:
   - Stem Borer
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1694,7 +1812,8 @@
   bestCatchPath:
   - Spinnerbait
   - Common Sculpin
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1711,7 +1830,8 @@
   predators: {}
   bestCatchPath:
   - Wildfowl Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1729,7 +1849,8 @@
   bestCatchPath:
   - Syrphid Basket
   - Abalathian Smelt
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1747,7 +1868,8 @@
   bestCatchPath:
   - Honey Worm
   - Abalathian Smelt
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -1763,7 +1885,8 @@
   predators: {}
   bestCatchPath:
   - Topwater Frog
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1779,7 +1902,8 @@
   bestCatchPath:
   - Steel Jig
   - Fullmoon Sardine
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1797,7 +1921,8 @@
   bestCatchPath:
   - Hoverworm
   - Cloud Cutter
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1818,7 +1943,8 @@
   - Merlthor Goby
   - Wahoo
   - Giant Squid
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1834,7 +1960,8 @@
   predators: {}
   bestCatchPath:
   - Glowworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1852,7 +1979,8 @@
   bestCatchPath:
   - Honey Worm
   - Silverfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1872,7 +2000,8 @@
   - Pill Bug
   - Harbor Herring
   - Ogre Barracuda
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1890,7 +2019,8 @@
     Little Thalaos: 3
   bestCatchPath:
   - Northern Krill
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1909,7 +2039,8 @@
   bestCatchPath:
   - Spoon Worm
   - Fullmoon Sardine
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1930,7 +2061,8 @@
   bestCatchPath:
   - Spoon Worm
   - Fullmoon Sardine
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1951,7 +2083,8 @@
   - Lugworm
   - Merlthor Goby
   - Wahoo
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -1969,7 +2102,8 @@
   predators: {}
   bestCatchPath:
   - Glowworm
-  hookset:
+  tug: Legendary
+  hookset: Precision  # conflicting info on this one + has a fixed getaway rate
   snagging:
   gig:
   folklore: false
@@ -1987,7 +2121,8 @@
   predators: {}
   bestCatchPath:
   - Glowworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2003,7 +2138,8 @@
     Boxing Pleco: 5
   bestCatchPath:
   - Rainbow Spoon Lure
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2021,7 +2157,8 @@
   - Midge Basket
   - Ala Mhigan Fighting Fish
   - Assassin Betta
-  hookset:
+  tug: Legendary
+  hookset: Powerful  # conflicting info here, fairly sure it's powerful though
   snagging:
   gig:
   folklore: false
@@ -2039,7 +2176,8 @@
   - Honey Worm
   - Silverfish
   - Goldfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2057,7 +2195,8 @@
   - Honey Worm
   - Silverfish
   - Assassin Betta
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2075,7 +2214,8 @@
   - Lugworm
   - Merlthor Goby
   - Wahoo
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2093,7 +2233,8 @@
   - Honey Worm
   - Silverfish
   - Assassin Betta
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2114,7 +2255,8 @@
   bestCatchPath:
   - Honey Worm
   - Silverfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2133,7 +2275,8 @@
   bestCatchPath:
   - Honey Worm
   - Silverfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2152,7 +2295,8 @@
   bestCatchPath:
   - Sand Leech
   - Storm Rider
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2171,7 +2315,8 @@
   bestCatchPath:
   - Honey Worm
   - Abalathian Smelt
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2190,7 +2335,8 @@
   predators: {}
   bestCatchPath:
   - Caddisfly Larva
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2209,7 +2355,8 @@
   bestCatchPath:
   - Hoverworm
   - Cloud Cutter
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2229,7 +2376,8 @@
   - Hoverworm
   - Cloud Cutter
   - Mahar
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2249,7 +2397,8 @@
   bestCatchPath:
   - Spinner
   - Common Sculpin
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2266,7 +2415,8 @@
   predators: {}
   bestCatchPath:
   - Glowworm
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2285,7 +2435,8 @@
     Giant Takitaro: 1
   bestCatchPath:
   - Topwater Frog
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2304,12 +2455,17 @@
   bestCatchPath:
   - Honey Worm
   - Silverfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
   fishEyes: false
+<<<<<<< HEAD
   patch: 2.4
+=======
+  patch: 2.4\
+>>>>>>> hooksets
 # Patch 2.5
 - name: Gigant Clam
   location: South Bloodshore
@@ -2320,8 +2476,14 @@
   predators: {}
   bestCatchPath:
   - Heavy Steel Jig
+<<<<<<< HEAD
   hookset:
   snagging: false       # Ignore integrity check. Fish from ARR do not require Snagging.
+=======
+  tug: Legendary
+  hookset: Powerful
+  snagging:
+>>>>>>> hooksets
   gig:
   folklore: false
   fishEyes: false
@@ -2336,7 +2498,8 @@
   predators: {}
   bestCatchPath:
   - Goblin Jig
-  hookset:
+  tug: Light  # Checked manually, Angler lists medium in the pie charts
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2351,7 +2514,8 @@
   predators: {}
   bestCatchPath:
   - Purse Web Spider
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2368,8 +2532,9 @@
   - Dust Storms
   predators: {}
   bestCatchPath:
-  - Goblin Jig
-  hookset:
+  - Bladed Steel Jig
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2386,7 +2551,8 @@
   predators: {}
   bestCatchPath:
   - Red Balloon
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2403,7 +2569,8 @@
   predators: {}
   bestCatchPath:
   - Red Balloon
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2417,8 +2584,10 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Stonefly Nymph
-  hookset:
+  - Honey Worm
+  - Abalathian Smelt
+  tug: Medium
+  hookset: Powerful  # checked manually
   snagging:
   gig:
   folklore: false
@@ -2435,23 +2604,30 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
   fishEyes: false
   patch: 3
 - name: Rock Mussel
-  location: Whilom River
+  location: The Smoldering Wastes
   startHour: 0
   endHour: 24
   previousWeatherSet: []
   weatherSet: []
   predators: {}
   bestCatchPath:
+<<<<<<< HEAD
   - Stonefly Nymph
   # ALTBAIT: Goblin Jig
   hookset:
+=======
+  - Goblin Jig
+  tug: Light
+  hookset: Precision
+>>>>>>> hooksets
   snagging: true
   gig:
   folklore: false
@@ -2465,8 +2641,9 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Stonefly Nymph
-  hookset:
+  - Brute Leech
+  tug: Medium
+  hookset: Powerful  # tested
   snagging:
   gig:
   folklore: false
@@ -2484,7 +2661,8 @@
   predators: {}
   bestCatchPath:
   - Bladed Steel Jig
-  hookset:
+  tug: Medium  # tested, ~25s to bite
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2502,7 +2680,8 @@
   predators: {}
   bestCatchPath:
   - Goblin Jig
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2517,7 +2696,8 @@
   predators: {}
   bestCatchPath:
   - Stonefly Nymph
-  hookset:
+  tug: Light
+  hookset: Precision  # tested
   snagging:
   gig:
   folklore: false
@@ -2532,7 +2712,8 @@
   predators: {}
   bestCatchPath:
   - Stonefly Nymph
-  hookset:
+  tug: Light
+  hookset: Precision  # tested
   snagging:
   gig:
   folklore: false
@@ -2550,7 +2731,8 @@
   predators: {}
   bestCatchPath:
   - Red Balloon
-  hookset:
+  tug: Light
+  hookset: Precision  # tested
   snagging:
   gig:
   folklore: false
@@ -2567,7 +2749,8 @@
   predators: {}
   bestCatchPath:
   - Bladed Steel Jig
-  hookset:
+  tug: Medium
+  hookset: Powerful  # tested
   snagging:
   gig:
   folklore: false
@@ -2583,7 +2766,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2598,7 +2782,8 @@
   predators: {}
   bestCatchPath:
   - Red Balloon
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2613,7 +2798,8 @@
   predators: {}
   bestCatchPath:
   - Stonefly Nymph
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2649,7 +2835,8 @@
   predators: {}
   bestCatchPath:
   - Purse Web Spider
-  hookset:
+  tug: Light
+  hookset: Precision  # tested
   snagging:
   gig:
   folklore: false
@@ -2666,7 +2853,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Medium
+  hookset: Powerful  # tested
   snagging:
   gig:
   folklore: false
@@ -2683,7 +2871,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Medium
+  hookset: Powerful  # tested
   snagging:
   gig:
   folklore: false
@@ -2701,7 +2890,8 @@
   bestCatchPath:
   - Red Balloon
   - Glacier Core
-  hookset:
+  tug: Light
+  hookset: Precision  # tested
   snagging:
   gig:
   folklore: false
@@ -2716,7 +2906,8 @@
   predators: {}
   bestCatchPath:
   - Purse Web Spider
-  hookset:
+  tug: Medium  # not 100% but nearly sure
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2731,8 +2922,13 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
+<<<<<<< HEAD
   # Alternatively, you can use Purse Web Spider (non-scrip bait)
   hookset:
+=======
+  tug: Medium
+  hookset: Powerful  # tested
+>>>>>>> hooksets
   snagging:
   gig:
   folklore: false
@@ -2747,7 +2943,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2766,7 +2963,8 @@
   - Red Balloon
   - Sky Faerie
   - Rudderfish
-  hookset:
+  tug: Medium
+  hookset: Powerful # tested
   snagging:
   gig:
   folklore: false
@@ -2782,11 +2980,16 @@
   bestCatchPath:
   - Magma Worm
   - Granite Crab
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
+<<<<<<< HEAD
   fishEyes: 300
+=======
+  fishEyes: true
+>>>>>>> hooksets
   patch: 3
 - name: Brown Bolo
   location: Tharl Oom Khash
@@ -2798,7 +3001,8 @@
   predators: {}
   bestCatchPath:
   - Red Balloon
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2813,7 +3017,8 @@
   predators: {}
   bestCatchPath:
   - Goblin Jig
-  hookset:
+  tug: Medium
+  hookset: Powerful  # manually tested
   snagging:
   gig:
   folklore: false
@@ -2828,7 +3033,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Medium
+  hookset: Powerful  # tested, that's one smol octopus
   snagging:
   gig:
   folklore: false
@@ -2846,11 +3052,16 @@
   bestCatchPath:
   - Giant Crane Fly
   - Skyworm
-  hookset:
+  tug: Light
+  hookset: Precision  # tested
   snagging:
   gig:
   folklore: false
+<<<<<<< HEAD
   fishEyes: 120
+=======
+  fishEyes: true
+>>>>>>> hooksets
   patch: 3
 - name: Fossiltongue
   location: Halo
@@ -2862,7 +3073,8 @@
   bestCatchPath:
   - Magma Worm
   - Granite Crab
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging: false
   gig:
   folklore: false
@@ -2871,13 +3083,14 @@
 - name: Caiman
   location: Voor Sian Siran
   startHour: 18
-  endHour: 21
-  previousWeatherSet: []
-  weatherSet: []
-  predators: {}
+  endHour: 21  # seemingly 20:30
+  previousWeatherSet:
+  weatherSet:
+  predators:
   bestCatchPath:
   - Bladed Steel Jig
   - Bullfrog
+  tug: Legendary  # but quick medium reel-in animation!
   hookset: Powerful
   snagging:
   gig:
@@ -2894,7 +3107,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2910,7 +3124,8 @@
   bestCatchPath:
   - Stonefly Nymph
   - Hedgemole Cricket
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2925,6 +3140,7 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
+  tug: Medium
   hookset: Powerful
   snagging:
   gig:
@@ -2940,7 +3156,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -2956,7 +3173,8 @@
   predators: {}
   bestCatchPath:
   - Fiend Worm
-  hookset:
+  tug: Medium  # 15-20s bite
+  hookset: Powerful  # tested
   snagging:
   gig:
   folklore: false
@@ -2973,7 +3191,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -2990,7 +3209,8 @@
   bestCatchPath:
   - Fiend Worm
   - Platinum Fish
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3009,11 +3229,29 @@
   bestCatchPath:
   - Fiend Worm
   - Platinum Fish
-  hookset:
+  tug: Light  # tested; long wait
+  hookset: Precision  # tested
   snagging:
   gig:
   folklore: false
   fishEyes: false
+  patch: 3
+- name: Black Magefish  # was missing for whatever reason
+  location: West Mourn
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  predators:
+  bestCatchPath:
+  - Magma Worm
+  - Granite Crab
+  tug: Medium
+  hookset: Powerful
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: true  # 120
   patch: 3
 - name: Pteranodon
   location: Sohm Al Summit
@@ -3024,7 +3262,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3040,7 +3279,8 @@
   bestCatchPath:
   - Giant Crane Fly
   - Rudderfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -3073,11 +3313,16 @@
   bestCatchPath:
   - Fiend Worm
   - Platinum Fish
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
+<<<<<<< HEAD
   fishEyes: 150
+=======
+  fishEyes: true
+>>>>>>> hooksets
   patch: 3
 - name: Thunderbolt Eel
   location: The Iron Feast
@@ -3089,7 +3334,8 @@
   bestCatchPath:
   - Stonefly Nymph
   - Blueclaw Shrimp
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3106,7 +3352,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3122,7 +3369,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -3138,7 +3386,8 @@
   bestCatchPath:
   - Bladed Steel Jig
   - Bullfrog
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3156,11 +3405,16 @@
   bestCatchPath:
   - Magma Worm
   - Granite Crab
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
+<<<<<<< HEAD
   fishEyes: 240
+=======
+  fishEyes: true
+>>>>>>> hooksets
   patch: 3
 - name: Tupuxuara
   location: The Habisphere
@@ -3171,7 +3425,8 @@
   predators: {}
   bestCatchPath:
   - Red Balloon
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3189,7 +3444,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3204,7 +3460,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3221,7 +3478,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -3236,11 +3494,16 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: true
+<<<<<<< HEAD
   fishEyes: 150
+=======
+  fishEyes: true
+>>>>>>> hooksets
   patch: 3
 - name: Granite Crab
   location:
@@ -3251,12 +3514,14 @@
   bestCatchPath:
   - Magma Worm
   predators:
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
   fishEyes: false
   patch: 3.0
+<<<<<<< HEAD
 # Patch 3.0: Extra Information
 - name: Blueclaw Shrimp
   bestCatchPath:
@@ -3288,6 +3553,8 @@
   - Purse Web Spider
   hookset:
   patch: 3.0
+=======
+>>>>>>> hooksets
 # Patch 3.1
 - name: Functional Proto-hropken
   location: The Flagship
@@ -3298,13 +3565,17 @@
   - Thunder
   predators: {}
   bestCatchPath:
-  - Fiend Worm
-  - Platinum Fish
-  hookset:
+  - Fiend Worm  # Omitting Platinum Fish for purposes of proccing Opa int using DH
+  tug: Medium
+  hookset: Powerful  # Double... :p
   snagging:
   gig:
   folklore: true
+<<<<<<< HEAD
   fishEyes: 120
+=======
+  fishEyes: true
+>>>>>>> hooksets
   patch: 3.1
 - name: Coerthan Clione
   location: Unfrozen Pond
@@ -3316,7 +3587,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: true
@@ -3331,7 +3603,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -3348,8 +3621,14 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
+<<<<<<< HEAD
   hookset:
   snagging: false
+=======
+  tug: Light
+  hookset: Precision  # unsure
+  snagging: true
+>>>>>>> hooksets
   gig:
   folklore: true
   fishEyes: false
@@ -3365,7 +3644,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: # Medium from comments
+  hookset: # Precision from the sole comment mentioning it, needs testing!!! Tried for a few windows and was unable to catch - Lodinn
   snagging:
   gig:
   folklore: true
@@ -3382,11 +3662,16 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
+<<<<<<< HEAD
   fishEyes: 150
+=======
+  fishEyes: true
+>>>>>>> hooksets
   patch: 3.1
 # Patch 3.2
 - name: Amber Salamander
@@ -3398,7 +3683,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -3416,8 +3702,9 @@
   - Showers
   predators: {}
   bestCatchPath:
-  - Brute Leech
-  hookset:
+  - Purse Web Spider
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: true
@@ -3434,7 +3721,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -3464,7 +3752,26 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
+  tug: Light
   hookset: Precision
+  snagging: true
+  gig:
+  folklore: true
+  fishEyes: false
+  patch: 3.2
+- name: Lava Snail
+  location: Halo
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  bestCatchPath:
+  - Magma Worm
+  predators:
+  tug: Light
+  hookset: Precision  # not 100% sure
   snagging: true
   gig:
   folklore: true
@@ -3480,7 +3787,8 @@
   predators: {}
   bestCatchPath:
   - Fiend Worm
-  hookset:
+  tug: Light  # Looong wait
+  hookset: Precision  # manually tested
   snagging:
   gig:
   folklore: true
@@ -3499,7 +3807,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -3516,7 +3825,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -3532,7 +3842,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful  # Technically... But don't be retarded
   snagging: true
   gig:
   folklore: false
@@ -3547,7 +3858,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -3562,6 +3874,7 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
+  tug: Legendary
   hookset: Precision
   snagging: true
   gig:
@@ -3577,7 +3890,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3595,7 +3909,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -3613,7 +3928,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3631,7 +3947,8 @@
   bestCatchPath:
   - Magma Worm
   - Granite Crab
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3647,7 +3964,8 @@
   bestCatchPath:
   - Goblin Jig
   - Sweetfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3662,6 +3980,7 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -3679,6 +3998,7 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
+  tug: Legendary
   hookset: Precision
   snagging:
   gig:
@@ -3696,7 +4016,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3712,7 +4033,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3728,7 +4050,8 @@
   bestCatchPath:
   - Fiend Worm
   - Platinum Fish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3745,7 +4068,8 @@
   bestCatchPath:
   - Purse Web Spider
   - Aether Eye
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3764,7 +4088,8 @@
   bestCatchPath:
   - Giant Crane Fly
   - Rudderfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3782,7 +4107,8 @@
   bestCatchPath:
   - Red Balloon
   - Sky Faerie
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3800,7 +4126,8 @@
   bestCatchPath:
   - Fiend Worm
   - Platinum Fish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3818,7 +4145,8 @@
   bestCatchPath:
   - Red Balloon
   - Glacier Core
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -3835,7 +4163,8 @@
   bestCatchPath:
   - Purse Web Spider
   - Ice Faerie
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3853,7 +4182,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3870,7 +4200,8 @@
   bestCatchPath:
   - Purse Web Spider
   - Hedgemole Cricket
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3887,7 +4218,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -3904,7 +4236,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3919,7 +4252,8 @@
   predators: {}
   bestCatchPath:
   - Magma Worm
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -3935,7 +4269,8 @@
   bestCatchPath:
   - Fiend Worm
   - Platinum Fish
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -3951,6 +4286,10 @@
   bestCatchPath:
   - Purse Web Spider
   - Aether Eye
+<<<<<<< HEAD
+=======
+  tug: Legendary
+>>>>>>> hooksets
   hookset: Precision
   snagging:
   gig:
@@ -3967,9 +4306,12 @@
   - Showers
   predators: {}
   bestCatchPath:
-  - Goblin Jig
+  - Brute Leech
   - Sweetfish
-  hookset:
+  # - Sweetfish
+  # - Sweetfish
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -3988,7 +4330,8 @@
   bestCatchPath:
   - Caddisfly Larva
   - Ice Faerie
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -4005,7 +4348,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging: false
   gig:
   folklore: false
@@ -4022,6 +4366,7 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
+  tug: Legendary
   hookset: Powerful
   snagging: false
   gig:
@@ -4040,6 +4385,7 @@
   bestCatchPath:
   - Bladed Steel Jig
   - Bullfrog
+  tug: Legendary
   hookset: Powerful
   snagging: false
   gig:
@@ -4057,7 +4403,8 @@
   predators: {}
   bestCatchPath:
   - Fiend Worm
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging: false
   gig:
   folklore: false
@@ -4075,7 +4422,8 @@
   bestCatchPath:
   - Giant Crane Fly
   - Rudderfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging: false
   gig:
   folklore: false
@@ -4095,6 +4443,7 @@
   bestCatchPath:
   - Stonefly Nymph
   - Blueclaw Shrimp
+  tug: Legendary
   hookset: Powerful
   snagging: false
   gig:
@@ -4113,6 +4462,7 @@
   bestCatchPath:
   - Magma Worm
   - Granite Crab
+  tug: Legendary
   hookset: Powerful
   snagging: false
   gig:
@@ -4135,7 +4485,8 @@
   bestCatchPath:
   - Magma Worm
   - Granite Crab
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging: false
   gig:
   folklore: true
@@ -4154,6 +4505,7 @@
   bestCatchPath:
   - Stonefly Nymph
   - Hedgemole Cricket
+  tug: Legendary
   hookset: Powerful
   snagging: false
   gig:
@@ -4171,7 +4523,8 @@
   predators: {}
   bestCatchPath:
   - Brute Leech
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging: false
   gig:
   folklore: false
@@ -4188,7 +4541,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Legendary
+  hookset: Powerful  # It was quite a painful experience though...
   snagging: false
   gig:
   folklore: false
@@ -4208,6 +4562,7 @@
   bestCatchPath:
   - Magma Worm
   - Granite Crab
+  tug: Legendary
   hookset: Powerful
   snagging: false
   gig:
@@ -4226,6 +4581,7 @@
   bestCatchPath:
   - Fiend Worm
   - Platinum Fish
+  tug: Legendary
   hookset: Precision
   snagging: false
   gig:
@@ -4242,8 +4598,9 @@
   predators:
     Hedgemole Cricket: 6
   bestCatchPath:
-  - Stonefly Nymph
+  - Purse Web Spider  # Slightly better than nymph
   - Hedgemole Cricket
+  tug: Legendary
   hookset: Precision
   snagging: false
   gig:
@@ -4262,7 +4619,8 @@
     Sky Faerie: 3
   bestCatchPath:
   - Giant Crane Fly
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging: false
   gig:
   folklore: false
@@ -4280,6 +4638,7 @@
   bestCatchPath:
   - Purse Web Spider
   - Ice Faerie
+  tug: Legendary
   hookset: Precision
   snagging: false
   gig:
@@ -4298,29 +4657,13 @@
   bestCatchPath:
   - Giant Crane Fly
   - Rudderfish
+  tug: Legendary
   hookset: Powerful
   snagging: false
   gig:
   folklore: false
   fishEyes: false
   patch: 3.5
-- name: Lava Snail
-  location: Halo
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  - Clear Skies
-  - Fair Skies
-  bestCatchPath:
-  - Magma Worm
-  predators:
-  hookset:
-  snagging: true
-  gig:
-  folklore: true
-  fishEyes: false
-  patch: 3.2
 # STORMBLOOD - Patch 4.0
 - name: Liopleurodon
   location: Hells' Lid
@@ -4333,6 +4676,7 @@
   bestCatchPath:
   - Live Shrimp
   - Ruby Shrimp
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -4348,6 +4692,7 @@
   predators: {}
   bestCatchPath:
   - Nightcrawler
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -4363,7 +4708,8 @@
   predators: {}
   bestCatchPath:
   - Suspending Minnow
-  hookset:
+  tug: Medium  # ~25s
+  hookset: Powerful  # tested - looked suspicious (the fish is tiny),
   snagging:
   gig:
   folklore: false
@@ -4394,6 +4740,7 @@
   predators: {}
   bestCatchPath:
   - Stonefly Larva
+  tug: Light
   hookset: Precision
   snagging:
   gig:
@@ -4409,6 +4756,7 @@
   predators: {}
   bestCatchPath:
   - Midge Larva
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -4425,7 +4773,8 @@
   predators: {}
   bestCatchPath:
   - Stonefly Larva
-  hookset:
+  tug: # Medium from angler comments, looks bit fishy and needs more info!!! (tested Seraphim which has similar circumstances)
+  hookset: # Powerful from angler comments
   snagging:
   gig:
   folklore: true
@@ -4440,8 +4789,15 @@
   - Clear Skies
   predators: {}
   bestCatchPath:
+<<<<<<< HEAD
   - Blue Bobbit
   hookset:
+=======
+  - Live Shrimp
+  - Ruby Shrimp
+  tug: Medium
+  hookset: Powerful
+>>>>>>> hooksets
   snagging:
   gig:
   folklore: false
@@ -4457,7 +4813,8 @@
   predators: {}
   bestCatchPath:
   - Midge Larva
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -4474,7 +4831,8 @@
   bestCatchPath:
   - Silkworm
   - Rock Saltfish
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -4489,7 +4847,8 @@
   - Clear Skies
   predators: {}
   bestCatchPath:
-  - Suspending Minnow
+  - Stonefly Larva
+  tug: Light
   hookset:
   snagging:
   gig:
@@ -4505,6 +4864,7 @@
   predators: {}
   bestCatchPath:
   - Blue Bobbit
+  tug: Light
   hookset: Precision
   snagging:
   gig:
@@ -4521,6 +4881,7 @@
   predators: {}
   bestCatchPath:
   - Stonefly Larva
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -4537,14 +4898,15 @@
   bestCatchPath:
   - Live Shrimp
   - Ruby Shrimp
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
   fishEyes: false
   patch: 4.0
 - name: Miounnefish
-  location: Upper Mirage Creek
+  location: Timmon Beck
   startHour: 0
   endHour: 24
   previousWeatherSet: []
@@ -4553,9 +4915,10 @@
   - Fog
   predators: {}
   bestCatchPath:
-  - Salmon Roe
-  - Gyr Abanian Trout
-  hookset:
+  - Nightcrawler
+  - Balloon Frog  # changed from Rhalgr Salmon Roe path & tested, works like a charm
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -4571,7 +4934,8 @@
   predators: {}
   bestCatchPath:
   - Stonefly Larva
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -4590,7 +4954,8 @@
   predators: {}
   bestCatchPath:
   - Midge Larva
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -4607,7 +4972,8 @@
   predators: {}
   bestCatchPath:
   - Salmon Roe
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -4622,7 +4988,8 @@
   bestCatchPath:
   - Salmon Roe
   predators:
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -4639,6 +5006,7 @@
   predators:
   bestCatchPath:
   - Salmon Roe
+  tug: Medium
   hookset: Powerful
   snagging:
   gig:
@@ -4656,6 +5024,7 @@
   predators: {}
   bestCatchPath:
   - Blue Bobbit
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -4672,6 +5041,7 @@
   bestCatchPath:
   - Live Shrimp
   - Ruby Shrimp
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -4688,6 +5058,7 @@
   bestCatchPath:
   - Live Shrimp
   - Ruby Shrimp
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -4705,6 +5076,7 @@
   predators: {}
   bestCatchPath:
   - Suspending Minnow
+  tug: Medium
   hookset: Powerful
   snagging:
   gig:
@@ -4722,6 +5094,7 @@
   predators: {}
   bestCatchPath:
   - Suspending Minnow
+  tug: Medium
   hookset: Powerful
   snagging:
   gig:
@@ -4737,7 +5110,8 @@
   predators: {}
   bestCatchPath:
   - Midge Larva
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -4752,6 +5126,7 @@
   predators: {}
   bestCatchPath:
   - Midge Larva
+  tug: Light
   hookset: Precision
   snagging:
   gig:
@@ -4769,7 +5144,8 @@
   predators: {}
   bestCatchPath:
   - Suspending Minnow
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -4785,7 +5161,8 @@
   predators: {}
   bestCatchPath:
   - Stonefly Larva
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -4804,7 +5181,8 @@
   - Lugworm
   - Merlthor Goby
   - Wahoo
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -4817,7 +5195,7 @@
   previousWeatherSet: []
   weatherSet: []
   predators:
-    Bashful Batfish: 10
+    Bashful Batfish: 7  # tested
   bestCatchPath: []
   hookset:
   snagging:
@@ -4846,7 +5224,7 @@
   previousWeatherSet: []
   weatherSet: []
   predators:
-    Ichthyosaur: 10
+    Ichthyosaur: 7
   bestCatchPath: []
   hookset:
   snagging:
@@ -4875,7 +5253,7 @@
   previousWeatherSet: []
   weatherSet: []
   predators:
-    Bashful Batfish: 10
+    Bashful Batfish: 7
   bestCatchPath: []
   hookset:
   snagging:
@@ -4904,7 +5282,7 @@
   previousWeatherSet: []
   weatherSet: []
   predators:
-    Ichthyosaur: 10
+    Ichthyosaur: 7
   bestCatchPath: []
   hookset:
   snagging:
@@ -4919,7 +5297,7 @@
   previousWeatherSet: []
   weatherSet: []
   predators:
-    Glaring Perch: 10
+    Glaring Perch: 7
   bestCatchPath: []
   hookset:
   snagging:
@@ -4934,7 +5312,7 @@
   previousWeatherSet: []
   weatherSet: []
   predators:
-    Glaring Perch: 10
+    Glaring Perch: 7
   bestCatchPath: []
   hookset:
   snagging:
@@ -4963,7 +5341,7 @@
   previousWeatherSet: []
   weatherSet: []
   predators:
-    Mercenary Crab: 10
+    Mercenary Crab: 7
   bestCatchPath: []
   hookset:
   snagging:
@@ -4978,7 +5356,7 @@
   previousWeatherSet: []
   weatherSet: []
   predators:
-    Mercenary Crab: 10
+    Mercenary Crab: 7
   bestCatchPath: []
   hookset:
   snagging:
@@ -4997,7 +5375,8 @@
   - Lugworm
   - Merlthor Goby
   - Wahoo
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -5039,7 +5418,8 @@
   predators: {}
   bestCatchPath:
   - Salmon Roe
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -5054,8 +5434,14 @@
   predators: {}
   bestCatchPath:
   - Live Shrimp
+<<<<<<< HEAD
   hookset:
   snagging: false
+=======
+  tug: Light
+  hookset: Precision
+  snagging:  # was set but not needed
+>>>>>>> hooksets
   gig:
   folklore: false
   fishEyes: false
@@ -5069,7 +5455,8 @@
   predators: {}
   bestCatchPath:
   - Nightcrawler
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: false
@@ -5084,7 +5471,8 @@
   predators: {}
   bestCatchPath:
   - Nightcrawler
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -5099,7 +5487,8 @@
   predators: {}
   bestCatchPath:
   - Midge Larva
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
@@ -5116,6 +5505,10 @@
   predators: {}
   bestCatchPath:
   - Suspending Minnow
+<<<<<<< HEAD
+=======
+  tug: Medium
+>>>>>>> hooksets
   hookset: Powerful
   snagging:
   gig:
@@ -5135,7 +5528,8 @@
   predators: {}
   bestCatchPath:
   - Suspending Minnow
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging: false
   gig:
   folklore: true
@@ -5151,7 +5545,8 @@
   predators: {}
   bestCatchPath:
   - Blue Bobbit
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5166,7 +5561,8 @@
   predators: {}
   bestCatchPath:
   - Stonefly Larva
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5183,6 +5579,7 @@
   predators: {}
   bestCatchPath:
   - Stonefly Larva
+  tug: Light
   hookset: Precision
   snagging:
   gig:
@@ -5232,6 +5629,7 @@
   - Nightcrawler
   - Zagas Khaal
   predators:
+  tug: Medium
   hookset: Powerful
   snagging: false
   gig:
@@ -5247,7 +5645,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5263,7 +5662,8 @@
   - Live Shrimp
   - Ruby Shrimp
   predators:
-  hookset:
+  tug: Light
+  hookset: Precision  # not 100% sure
   snagging:
   gig:
   folklore: true
@@ -5278,7 +5678,8 @@
   bestCatchPath:
   - Nightcrawler
   predators:
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: true
@@ -5296,7 +5697,8 @@
   - Silkworm
   - Rock Saltfish
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5312,6 +5714,7 @@
   - Live Shrimp
   - Ruby Shrimp
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5330,6 +5733,7 @@
   - Salmon Roe
   - Balloon Frog
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5347,7 +5751,8 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5362,8 +5767,14 @@
   bestCatchPath:
   - Blue Bobbit
   predators:
+<<<<<<< HEAD
   hookset:
   snagging: false
+=======
+  tug: Light
+  hookset: Precision
+  snagging:  # Was set to true before but apparently catchable without
+>>>>>>> hooksets
   gig:
   folklore: true
   fishEyes: false
@@ -5377,7 +5788,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5394,6 +5806,7 @@
   - Stonefly Larva
   - Red Prismfish
   predators:
+  tug: Medium
   hookset: Powerful
   snagging:
   gig:
@@ -5410,6 +5823,7 @@
   - Stonefly Larva
   - Red Prismfish
   predators:
+  tug: Light
   hookset: Precision
   snagging:
   gig:
@@ -5426,6 +5840,7 @@
   - Midge Larva
   - Gyr Abanian Trout
   predators:
+  tug: Legendary
   hookset: Precision
   snagging:
   gig:
@@ -5442,6 +5857,7 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
+  tug: Legendary
   hookset: Precision
   snagging:
   gig:
@@ -5457,7 +5873,8 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5473,7 +5890,8 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5489,7 +5907,8 @@
   - Midge Larva
   - Gyr Abanian Trout
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5506,7 +5925,8 @@
   - Silkworm
   - Rock Saltfish
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5522,6 +5942,7 @@
   - Live Shrimp
   - Ruby Shrimp
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5537,7 +5958,8 @@
   bestCatchPath:
   - Blue Bobbit
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5552,6 +5974,7 @@
   bestCatchPath:
   - Blue Bobbit
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5569,6 +5992,7 @@
   - Live Shrimp
   - Ruby Shrimp
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5584,7 +6008,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: true
@@ -5600,7 +6025,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5615,6 +6041,7 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
+  tug: Legendary
   hookset: Precision
   snagging:
   gig:
@@ -5631,6 +6058,7 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
+  tug: Legendary
   hookset: Precision
   snagging:
   gig:
@@ -5648,7 +6076,8 @@
   - Stonefly Larva
   - Violet Prismfish
   predators:
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: true
@@ -5666,7 +6095,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Light
+  hookset: Precision
   snagging:
   gig:
   folklore: true
@@ -5683,6 +6113,7 @@
   - Midge Larva
   - Gyr Abanian Trout
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5700,6 +6131,7 @@
   - Salmon Roe
   - Balloon Frog
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5715,7 +6147,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5731,7 +6164,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5747,7 +6181,8 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5764,7 +6199,8 @@
   bestCatchPath:
   - Salmon Roe
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5780,7 +6216,8 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5800,6 +6237,10 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
+<<<<<<< HEAD
+=======
+  tug: Legendary
+>>>>>>> hooksets
   hookset: Powerful
   snagging:
   gig:
@@ -5815,6 +6256,7 @@
   bestCatchPath:
   - Nightcrawler
   predators:
+  tug: Legendary
   hookset: Precision
   snagging:
   gig:
@@ -5832,7 +6274,8 @@
   bestCatchPath:
   - Blue Bobbit
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5849,6 +6292,7 @@
   - Live Shrimp
   - Ruby Shrimp
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5867,7 +6311,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5886,6 +6331,7 @@
   - Nightcrawler
   - Zagas Khaal
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5902,7 +6348,8 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5920,7 +6367,8 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: true
@@ -5937,6 +6385,7 @@
   - Live Shrimp
   - Ruby Shrimp
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5954,6 +6403,7 @@
   bestCatchPath:
   - Blue Bobbit
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5973,6 +6423,7 @@
   bestCatchPath:
   - Live Shrimp
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -5989,6 +6440,7 @@
   bestCatchPath:
   - Nightcrawler
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -6006,6 +6458,7 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -6022,6 +6475,7 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -6039,6 +6493,7 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -6056,6 +6511,7 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -6072,6 +6528,7 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -6090,7 +6547,8 @@
   bestCatchPath:
   - Suspending Minnow
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -6107,6 +6565,7 @@
   bestCatchPath:
   - Midge Larva
   predators:
+  tug: Legendary
   hookset: Precision
   snagging:
   gig:
@@ -6125,6 +6584,7 @@
   - Nightcrawler
   - Zagas Khaal
   predators:
+  tug: Legendary
   hookset: Powerful
   snagging:
   gig:
@@ -6142,7 +6602,8 @@
   - Stonefly Larva
   - Hardhead Trout
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -6152,14 +6613,15 @@
   location: Grymm & Enid
   startHour: 0
   endHour: 24
-  previousWeatherSet:
+  previousWeatherSet:  # very likely shares it with splitter
   weatherSet:
   - Dust Storms
   bestCatchPath:
   - Suspending Minnow
   predators:
     Bondsplitter: 2
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -6167,8 +6629,13 @@
   patch: 4.5
 - name: Stethacanthus
   location: Loch Seld
+<<<<<<< HEAD
   startHour: 16
   endHour: 18
+=======
+  startHour: 0  # possible 16
+  endHour: 24   # possible 18
+>>>>>>> hooksets
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
@@ -6176,7 +6643,8 @@
   - Rock Saltfish
   predators:
     Sculptor: 2
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -6184,7 +6652,11 @@
   patch: 4.5
 - name: The Ruby Dragon
   location: The Ruby Price
+<<<<<<< HEAD
   startHour: 4
+=======
+  startHour: 0  # possibly 4
+>>>>>>> hooksets
   endHour: 8
   previousWeatherSet:
   - Thunder
@@ -6194,7 +6666,8 @@
   - Blue Bobbit
   - Ku'er
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -6212,7 +6685,8 @@
     Firelight Goldfish: 3
     Indigo Prismfish: 3
     Green Prismfish: 5
-  hookset:
+  tug: Legendary
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -6225,11 +6699,15 @@
   previousWeatherSet:
   - Rain
   weatherSet:
+<<<<<<< HEAD
   - Clear Skies
+=======
+>>>>>>> hooksets
   bestCatchPath:
   - Stonefly Larva
   predators:
-  hookset:
+  tug: Legendary
+  hookset: Precision
   snagging:
   gig:
   folklore: true
