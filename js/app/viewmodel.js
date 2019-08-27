@@ -50,6 +50,32 @@ class SiteSettings {
   }
 }
 
+class BaitEntry {
+  constructor(itemId) {
+    this.id = itemId;
+    // Wrap the item data using reference.
+    this.itemData = DATA.ITEMS[itemId];
+    // If it's a fish, include a reference to that as well.
+    // - Unfortunately, we can't expect to find a FishEntry for this record.
+    this.fishData = DATA.FISH[itemId];
+  }
+
+  get name() {
+    return __p(this.itemData, "name");
+  }
+
+  get icon() {
+    return this.itemData.icon;
+  }
+
+  get hookset() {
+    if (this.fishData && 'hookset' in this.fishData) {
+      return this.fishData.hookset;
+    }
+    return null;
+  }
+}
+
 class FishEntry {
   constructor(fish) {
     // TODO:
@@ -117,6 +143,13 @@ class FishEntry {
     else {
       this.fishEyesDuration = '' + fish.fishEyes + 's';
     }
+
+    // View model version of bait.
+    // TODO: [FIXME-DUPLICATION]
+    // Technically, this should ONLY exist as part of the view model, and not
+    // within the Fish object.
+    // `bait`: Array[BaitEntry]
+    this.bait = _(fish.bestCatchPath).map(x => new BaitEntry(x));
   }
 
   get uptime() { return this.data.uptime(); }

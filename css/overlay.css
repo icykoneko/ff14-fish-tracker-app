@@ -12,6 +12,22 @@
 
 .bait-icon.sprite-icon {
   zoom: 0.75;
+  position: relative;
+  z-index: 2;
+}
+
+.bait-icon.sprite-icon.hookset-modifier-icon {
+  zoom: 0.5;
+  margin-left: -22px; /* half size of icon itself */
+  margin-top: -0.5em; /* half the padding size of a table cell */
+  vertical-align: top;
+  position: relative;
+  z-index: 1;
+}
+
+tr.fish-intuition-row .bait-icon.sprite-icon.hookset-modifier-icon {
+  zoom: 0.375;
+  margin-left: -22px; /* half size of icon itself */
 }
 
 tr.fish-intuition-row .fish-icon.sprite-icon,
