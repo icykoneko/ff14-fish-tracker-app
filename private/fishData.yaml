@@ -329,6 +329,87 @@
   folklore: false
   fishEyes: false
   patch: 2
+# Patch 2.0: Additional Fish
+- name: Merlthor Goby
+  bestCatchPath:
+  - Lugworm
+  hookset:
+  patch: 2
+- name: Goldfish
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  hookset:
+  patch: 2
+- name: Silverfish
+  bestCatchPath:
+  - Honey Worm
+  hookset:
+  patch: 2
+- name: Ala Mhigan Fighting Fish
+  bestCatchPath:
+  - Midge Basket
+  hookset:
+  patch: 2
+- name: Striped Goby
+  bestCatchPath:
+  - Moth Pupa
+  hookset:
+  patch: 2
+- name: Harbor Herring
+  bestCatchPath:
+  - Pill Bug
+  hookset: Powerful
+  patch: 2
+- name: Copperfish
+  bestCatchPath:
+  - Butterworm
+  hookset:
+  patch: 2
+- name: Storm Rider
+  bestCatchPath:
+  - Sand Leech
+  hookset:
+  patch: 2
+- name: Common Sculpin
+  bestCatchPath:
+  - Spinnerbait
+  hookset:
+  patch: 2
+- name: Ocean Cloud
+  bestCatchPath:
+  - Pill Bug
+  hookset:
+  patch: 2
+- name: Abalathian Smelt
+  bestCatchPath:
+  - Honey Worm
+  hookset:
+  patch: 2
+- name: Cloud Cutter
+  bestCatchPath:
+  - Hoverworm
+  hookset:
+  patch: 2
+- name: Giant Squid
+  bestCatchPath:
+  - Lugworm
+  - Merlthor Goby
+  - Wahoo
+  hookset: Powerful
+  patch: 2
+- name: Ogre Barracuda
+  bestCatchPath:
+  - Pill Bug
+  - Harbor Herring
+  hookset: Powerful
+  patch: 2
+- name: Assassin Betta
+  bestCatchPath:
+  - Honey Worm
+  - Silverfish
+  hookset:
+  patch: 2
 # Patch 2.2
 - name: Zalera
   location: Zephyr Drift
@@ -3176,6 +3257,37 @@
   folklore: false
   fishEyes: false
   patch: 3.0
+# Patch 3.0: Extra Information
+- name: Blueclaw Shrimp
+  bestCatchPath:
+  - Stonefly Nymph
+  hookset:
+  patch: 3.0
+- name: Skyworm
+  bestCatchPath:
+  - Giant Crane Fly
+  hookset:
+  patch: 3.0
+- name: Bullfrog
+  bestCatchPath:
+  - Bladed Steel Jig
+  hookset:
+  patch: 3.0
+- name: Platinum Fish
+  bestCatchPath:
+  - Fiend Worm
+  hookset:
+  patch: 3.0
+- name: Sweetfish
+  bestCatchPath:
+  - Goblin Jig
+  hookset:
+  patch: 3.0
+- name: Aether Eye
+  bestCatchPath:
+  - Purse Web Spider
+  hookset:
+  patch: 3.0
 # Patch 3.1
 - name: Functional Proto-hropken
   location: The Flagship
@@ -4890,6 +5002,32 @@
   gig:
   folklore: false
   fishEyes: false
+  patch: 4.0
+# Patch 4.0: Extra Information
+- name: Ruby Shrimp
+  bestCatchPath:
+  - Live Shrimp
+  hookset: Precision
+  patch: 4.0
+- name: Rock Saltfish
+  bestCatchPath:
+  - Silkworm
+  hookset: Powerful
+  patch: 4.0
+- name: Gyr Abanian Trout
+  bestCatchPath:
+  - Midge Larva
+  hookset: Powerful
+  patch: 4.0
+- name: Zagas Khaal
+  bestCatchPath:
+  - Nightcrawler
+  hookset: Precision
+  patch: 4.0
+- name: Balloon Frog
+  bestCatchPath:
+  - Salmon Roe
+  hookset: Precision
   patch: 4.0
 # Patch 4.1
 - name: Gyr Abanian Chub

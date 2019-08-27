@@ -12,7 +12,7 @@ except ImportError:
     from yaml import Dumper
 import json
 from operator import itemgetter, add
-from collections import OrderedDict, namedtuple
+from collections import OrderedDict, namedtuple, deque
 from functools import reduce
 from itertools import islice, repeat
 import logging
@@ -52,6 +52,14 @@ def first(iterable, pred, default=None):
 
     """
     return next(filter(pred, iterable), default)
+
+
+def consume(iterator, n=None):
+    if n is None:
+        deque(iterator, maxlen=0)
+    else:
+        next(islice(iterator, n, n), None)
+    return iterator
 
 
 def load_dats(args):
@@ -298,13 +306,22 @@ def lookup_spearfishing_spot_by_name(name):
 
 
 def convert_fish_to_json(item):
+    item.setdefault('startHour', 0)
+    item.setdefault('endHour', 24)
+    item.setdefault('weatherSet', [])
+    item.setdefault('previousWeatherSet', [])
+    item.setdefault('bestCatchPath', [])
+
     key = lookup_fish_by_name(item['name']).key
     weather_set = [lookup_weather_by_name(x).key for x in item['weatherSet'] or []]
     previous_weather_set = [lookup_weather_by_name(x).key for x in item['previousWeatherSet'] or []]
-    if item.get('gig') is not None:
-        location = lookup_spearfishing_spot_by_name(item['location']).key
+    if 'location' in item:
+        if item.get('gig') is not None:
+            location = lookup_spearfishing_spot_by_name(item['location']).key
+        else:
+            location = lookup_fishing_spot_by_name(item['location']).key
     else:
-        location = lookup_fishing_spot_by_name(item['location']).key
+        location = None  # Some fish, we simply don't care about their location.
     catch_path = [lookup_fish_by_name(x).key for x in item['bestCatchPath'] or []]
     predators = {}
     if item.get('predators') is not None:
@@ -336,7 +353,7 @@ def convert_fish_to_json(item):
             data_missing = {'weatherRestricted': fish_parameter.weather_restricted,
                             'timeRestricted': fish_parameter.time_restricted}
             logging.warning('%s still needs conditions verified', item['name'])
-    else:
+    elif item.get('gig') is None:
         logging.warning('%s does not have an entry in FishParameter?!', item['name'])
 
     is_collectable = XIV.game_data.get_sheet('Item')[key].as_boolean('IsCollectable')
@@ -481,8 +498,31 @@ def check_data_integrity(args):
     # Parse the fish data in the YAML file.
     fishes = yaml.load(open(args.yaml_file, 'r'), Loader=Loader)
 
-    # For each fish, verify time and weather restrictions have been recorded.
     for fish in fishes:
+        fish = fish  # type: dict
+
+        fish.setdefault('startHour', 0)
+        fish.setdefault('endHour', 24)
+        fish.setdefault('weatherSet', [])
+        fish.setdefault('previousWeatherSet', [])
+        fish.setdefault('bestCatchPath', [])
+
+        # Check for hookset definition.
+        # For fish that require mooching, Patience is almost always used. Knowing
+        # which hookset to use is vital, so make sure mooch fish have it defined!
+        if len(fish.get('bestCatchPath') or []) > 1:
+            if fish.get('hookset') is None:
+                logging.error('%s requires mooching and should have a hookset defined', fish['name'])
+            for mooched_name, mooched_fish in map(lambda name: (name, first(fishes, lambda x: x['name'] == name)),
+                                                  reversed(list(consume(iter(fish['bestCatchPath']), 1)))):
+                if mooched_fish is None:
+                    logging.error('%s is missing from database?!', mooched_name)
+                    continue
+                if mooched_fish.get('hookset') is None:
+                    logging.error('%s is mooched to catch %s and should have a hookset defined',
+                                  mooched_fish['name'], fish['name'])
+
+        # For each fish, verify time and weather restrictions have been recorded.
         fish_params = first(XIV.game_data.get_sheet('FishParameter'),
                             lambda x: x['Item'] is not None and x['Item']['Name'] == fish['name'])
         if fish_params is None:
@@ -495,7 +535,7 @@ def check_data_integrity(args):
         #   appear to be restricted (according to the DATs).
         #   For the sake of use experience, restrictions have often been copied
         #   over to the target fish. This should be revisted once the UI allows
-        #   better display of mootch fish (similar to intuition fish).
+        #   better display of mooch fish (similar to intuition fish).
 
         # Check if time restricted.
         if fish_params.time_restricted and \
