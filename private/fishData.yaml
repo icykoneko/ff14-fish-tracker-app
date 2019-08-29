@@ -3578,8 +3578,8 @@
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
-  tug: # Medium from comments
-  hookset: # Precision from the sole comment mentioning it, needs testing!!! Tried for a few windows and was unable to catch - Lodinn
+  tug: Medium  # tested
+  hookset: Powerful  # tested
   snagging:
   gig:
   folklore: true
@@ -4772,7 +4772,7 @@
   bestCatchPath:
   - Suspending Minnow
   tug: Light
-  hookset: # needs testing
+  hookset: Precision
   snagging:
   gig:
   folklore: false
