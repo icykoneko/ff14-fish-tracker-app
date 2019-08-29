@@ -30,6 +30,11 @@ tr.fish-intuition-row .bait-icon.sprite-icon.hookset-modifier-icon {
   margin-left: -22px; /* half size of icon itself */
 }
 
+/* Prevent hookset modifier from being separated. */
+span.bait-span {
+  white-space: nowrap;
+}
+
 tr.fish-intuition-row .fish-icon.sprite-icon,
 tr.fish-intuition-row .bait-icon.sprite-icon {
   zoom: 0.675;
