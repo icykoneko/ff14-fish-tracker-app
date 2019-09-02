@@ -120,6 +120,13 @@ class FishTableLayout {
       $fishEntry.toggleClass('fish-active');
       console.debug(`${fishEntry.id} "${fishEntry.data.name}" has changed availability.`);
       hasFishAvailabilityChanged = true;
+      
+      // WORKAROUND:
+      // See the notes in ViewModel's FishEntry; but, if we detected change in
+      // availability, there's a 50/50 chance part of the FishEntry data is
+      // stale... So, rebake it before going any further...
+      fishEntry.updateNextWindowData();
+
       // HACK: Fish whose availability state changes will always have catchableRanges.
       // That's why we don't bother checking it.
       $currentAvail
