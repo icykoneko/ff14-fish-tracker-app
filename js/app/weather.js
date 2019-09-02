@@ -132,8 +132,11 @@ class WeatherService {
       date = dateFns.utc.addHours(lastDate, 8);
     }
     
-    this.computingWeather = true;
-    console.time('computingWeather');
+    if (!this.computingWeather) {
+      // For testing; make sure you don't reuse the timer.
+      this.computingWeather = true;
+      console.time('computingWeather');
+    }
     // SAFEGUARD
     while (limit-- > 0) {
       // Move the *previous* current weather into previous weather.
