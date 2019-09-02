@@ -328,9 +328,9 @@
       }
     </style>
 
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20190823" />
-    <link rel="stylesheet" href="css/overlay.css?20190829" />
-    <link rel="stylesheet" href="css/dark_overlay.css?20190823" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css" />
+    <link rel="stylesheet" href="css/overlay.css" />
+    <link rel="stylesheet" href="css/dark_overlay.css" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js"></script>
@@ -344,20 +344,23 @@
         font-size: 125%;
         font-style: italic;
       }
+
+      .ui {
+        transition: none !important;
+        -webkit-transition: none !important;
+      }
     </style>
 
     <script id="weatherTable-template" type="text/html;x-dot-template">
-      <thead>
+      <tbody>
         <tr>
-          <th></th>
+          <td></td>
           {{~it :weather:idx}}
-            <th class="weather-to-colheader" data-id="{{=weather.id}}">
+            <td class="weather-to-colheader" data-id="{{=weather.id}}">
               <div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-{{=weather.icon}}" title="{{=__p(weather,'name')}}"></div>
-            </th>
+            </td>
           {{~}}
         </tr>
-      </thead>
-      <tbody>
         {{~it :weather:idx}}
           <tr>
             <td class="weather-from-rowheader" data-id="{{=weather.id}}">
@@ -583,6 +586,43 @@
             });
           }
         });
+
+        let siteTheme = 'dark';
+        if ('fishTrackerSettings' in window.localStorage) {
+          siteTheme = JSON.parse(window.localStorage.fishTrackerSettings).theme;
+        } else if ('theme' in window.localStorage) {
+          siteTheme = window.localStorage.theme;
+        }
+
+        function applyTheme(theme) {
+          if (theme === 'dark') {
+            $('body').addClass('dark');
+            $('*[data-tooltip]').attr('data-inverted', '');
+          } else {
+            $('body').removeClass('dark');
+            $('*[data-tooltip]').removeAttr('data-inverted');
+          }
+
+          $('.ui.container').toggleClass('inverted', theme === 'dark');
+          $('.ui.form').toggleClass('inverted', theme === 'dark');
+          $('.ui.segment').toggleClass('inverted', theme === 'dark');
+          $('.ui.table').toggleClass('inverted', theme === 'dark');
+          $('.ui.list').toggleClass('inverted', theme === 'dark');
+          $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
+        }
+
+        function themeButtonClicked(e) {
+          if (e) e.stopPropagation();
+          let $this = $(this);
+          siteTheme = $this.prop('checked') ? 'dark' : 'light';
+          applyTheme(siteTheme);
+        }
+
+        // Set the theme.
+        $('#theme-button').prop('checked', siteTheme === 'dark');
+        $('#theme-button').on('click', themeButtonClicked);
+        applyTheme(siteTheme);
+
       });
     </script>
   </head>
@@ -592,6 +632,10 @@
         <div class="header item">FFX|V Weather Forecaster</div>
         <div class="right item">
           <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
+          <div id="theme-toogle" class="ui toggle checkbox">
+            <input type="checkbox" name="theme-button" id="theme-button">
+            <label></label>
+          </div>
         </div>
       </div>
     </div>
@@ -672,7 +716,7 @@
           <div class="ui segment">
             <div class="ui top attached label">Weather&nbsp;Transitions</div>
             <div class="ui placeholder header">Please select a zone first.</div>
-            <table id="weatherTable" class="ui very compact collapsing celled definition table">
+            <table id="weatherTable" class="ui very compact collapsing celled table">
             </table>
           </div>
         </div>

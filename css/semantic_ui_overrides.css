@@ -102,3 +102,9 @@ i.icon {
   -webkit-transition: none !important;
   transition: none !important;
 }
+/*
+ * For inverted segments, make sure they don't move around...
+ */
+.ui.inverted.segment {
+  padding: calc(1em + 1px);
+}
