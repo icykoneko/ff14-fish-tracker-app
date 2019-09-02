@@ -20,22 +20,19 @@
       gtag('config', 'UA-142180509-1');
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
-
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" />
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"></script>
     <script src="js/lib/dateFns.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/4.1.0/rx.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?4.56_20190609" />
+    <link rel="stylesheet" href="public/images/sprite.css" />
 
     <!-- Spinner Control (http://jsfiddle.net/cqkr7z1h/4/) -->
     <!--
@@ -331,83 +328,10 @@
       }
     </style>
 
-    <!-- Semantic UI Overrides -->
-    <style type="text/css">
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css" />
+    <link rel="stylesheet" href="css/overlay.css" />
+    <link rel="stylesheet" href="css/dark_overlay.css" />
 
-      /* Large Monitor */
-      @media only screen and (min-width: 1200px) and (max-width: 1499px) {
-        .ui.container {
-          width: 1127px;
-          margin-left: auto !important;
-          margin-right: auto !important;
-        }
-
-        .ui.grid.container {
-          width: calc( 1127px  +  2rem ) !important;
-        }
-
-        .ui.relaxed.grid.container {
-          width: calc( 1127px  +  3rem ) !important;
-        }
-
-        .ui.very.relaxed.grid.container {
-          width: calc( 1127px  +  5rem ) !important;
-        }
-      }
-      /* Even larger Monitor */
-      @media only screen and (min-width: 1500px) {
-        .ui.container {
-          width: 1427px;
-          margin-left: auto !important;
-          margin-right: auto !important;
-        }
-
-        .ui.grid.container {
-          width: calc( 1427px  +  2rem ) !important;
-        }
-
-        .ui.relaxed.grid.container {
-          width: calc( 1427px  +  3rem ) !important;
-        }
-
-        .ui.very.relaxed.grid.container {
-          width: calc( 1427px  +  5rem ) !important;
-        }
-      }
-
-      /* Overrides for Semantic UI 2.2.10 - Icon */
-      /* i.icon {
-        margin: inherit !important;
-      } */
-
-      /* Overrides for Semantic UI 2.2.10 - Button */
-      .ui[class*="very compact"].buttons .button,
-      .ui[class*="very compact"].button {
-        padding: 0.58928571em 0.58928571em 0.58928571em;
-      }
-
-      .ui[class*="very compact"].table th {
-        padding: 0.2em 0.3em;
-      }
-
-      .ui[class*="very compact"].table td {
-        padding: 0.2em 0.3em;
-      }
-
-      [data-tooltip]:before {
-        z-index: 1102;
-      }
-      [data-tooltip]:after {
-        z-index: 1101;
-      }
-
-      .ui.labeled.icon.buttons > .button .icon i.flag:before,
-      .ui.labeled.icon.button .icon i.flag:before {
-        margin-top: 35%;
-        margin-left: 25%;
-      }
-
-    </style>
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js"></script>
     <!-- Include the data -->
@@ -420,20 +344,23 @@
         font-size: 125%;
         font-style: italic;
       }
+
+      .ui {
+        transition: none !important;
+        -webkit-transition: none !important;
+      }
     </style>
 
     <script id="weatherTable-template" type="text/html;x-dot-template">
-      <thead>
+      <tbody>
         <tr>
-          <th></th>
+          <td></td>
           {{~it :weather:idx}}
-            <th class="weather-to-colheader" data-id="{{=weather.id}}">
+            <td class="weather-to-colheader" data-id="{{=weather.id}}">
               <div class="ui middle aligned sprite-icon sprite-icon-weather sprite-icon-weather-{{=weather.icon}}" title="{{=__p(weather,'name')}}"></div>
-            </th>
+            </td>
           {{~}}
         </tr>
-      </thead>
-      <tbody>
         {{~it :weather:idx}}
           <tr>
             <td class="weather-from-rowheader" data-id="{{=weather.id}}">
@@ -470,9 +397,14 @@
     </script>
 
     <script type="text/javascript">
+      const { interval } = rxjs;
+      const { timestamp, skip } = rxjs.operators;
+
       $(() => {
         // Main header needs to display the current time.
-        Rx.Observable.interval(1000 /*ms*/).timestamp().subscribe((x) => {
+        interval(1000 /*ms*/).pipe(
+          timestamp()
+        ).subscribe(x => {
           // Update the main header's earth and eorzea times.
           $("#earthClock").text(dateFns.format(x.timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
           $("#eorzeaClock").text(moment.utc(eorzeaTime.toEorzea(x.timestamp)).format("HH:mm"));
@@ -511,16 +443,13 @@
           localizationHelper.setLanguage(lang);
         });
 
-        localizationHelper.languageChanged.skip(1).subscribe((x) => {
-          // Update the zone selector.
-          $('.menu .localized-region', $territory).each((i, el) => {
-            $el = $(el)
-            $el.text(__p(DATA.REGIONS[Number($el.data('id'))], 'name'));
-          });
-          $('.menu .localized-zone', $territory).each((i, el) => {
-            $el = $(el)
-            $el.text(__p(DATA.ZONES[Number($el.data('id'))], 'name'));
-          });
+        localizationHelper.languageChanged.pipe(
+          skip(1)
+        ).subscribe((x) => {
+          // Just reload the page... it's easier that way...
+          window.location.replace(
+            window.location.origin + window.location.pathname + "?lang=" +
+            localizationHelper.getLanguage());
         });
 
         $maxWindows = $('#maxWindows').spinner({min: 5, max: 20});
@@ -657,6 +586,43 @@
             });
           }
         });
+
+        let siteTheme = 'dark';
+        if ('fishTrackerSettings' in window.localStorage) {
+          siteTheme = JSON.parse(window.localStorage.fishTrackerSettings).theme;
+        } else if ('theme' in window.localStorage) {
+          siteTheme = window.localStorage.theme;
+        }
+
+        function applyTheme(theme) {
+          if (theme === 'dark') {
+            $('body').addClass('dark');
+            $('*[data-tooltip]').attr('data-inverted', '');
+          } else {
+            $('body').removeClass('dark');
+            $('*[data-tooltip]').removeAttr('data-inverted');
+          }
+
+          $('.ui.container').toggleClass('inverted', theme === 'dark');
+          $('.ui.form').toggleClass('inverted', theme === 'dark');
+          $('.ui.segment').toggleClass('inverted', theme === 'dark');
+          $('.ui.table').toggleClass('inverted', theme === 'dark');
+          $('.ui.list').toggleClass('inverted', theme === 'dark');
+          $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
+        }
+
+        function themeButtonClicked(e) {
+          if (e) e.stopPropagation();
+          let $this = $(this);
+          siteTheme = $this.prop('checked') ? 'dark' : 'light';
+          applyTheme(siteTheme);
+        }
+
+        // Set the theme.
+        $('#theme-button').prop('checked', siteTheme === 'dark');
+        $('#theme-button').on('click', themeButtonClicked);
+        applyTheme(siteTheme);
+
       });
     </script>
   </head>
@@ -666,6 +632,10 @@
         <div class="header item">FFX|V Weather Forecaster</div>
         <div class="right item">
           <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
+          <div id="theme-toogle" class="ui toggle checkbox">
+            <input type="checkbox" name="theme-button" id="theme-button">
+            <label></label>
+          </div>
         </div>
       </div>
     </div>
@@ -746,7 +716,7 @@
           <div class="ui segment">
             <div class="ui top attached label">Weather&nbsp;Transitions</div>
             <div class="ui placeholder header">Please select a zone first.</div>
-            <table id="weatherTable" class="ui very compact collapsing celled definition table">
+            <table id="weatherTable" class="ui very compact collapsing celled table">
             </table>
           </div>
         </div>
