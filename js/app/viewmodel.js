@@ -154,6 +154,49 @@ class FishEntry {
 
   get uptime() { return this.data.uptime(); }
 
+  updateNextWindowData() {
+    // WORKAROUND:
+    // - For some reason, there's a race condition preventing `update` from
+    //   being called with `full` set.  This is probably happening when a
+    //   fish's window closes, but the timer event triggers before the
+    //   FishWatcher event does. As a result, the cached information regarding
+    //   /next catch time/ is never updated, since we don't expect it to change
+    //   very often...
+    // - This is also due to how the popup for next windows is coded. If we
+    //   just generated it on demand, it'd be safer.  Until then, we have this.
+    // This function must be called during a `countdown` event where layout
+    // returns TRUE, indicating the fish's state has changed. Since it's
+    // less efficient to have the view model do this, we'll rely on layout to
+    // make this call before it would need to use the data.
+    // AGAIN, THIS IS BASICALLY A WORKAROUND. FIX YOUR CRAPPY CODE, PLUSHY!
+
+    let fish = this.data;
+    let crs = fish.catchableRanges;
+
+    if (crs.length > 0) {
+      // Cache the dates, they are used A LOT.
+      let currEnd = eorzeaTime.toEarth(+crs[0].end());
+      let nextStart = eorzeaTime.toEarth(+crs[1].start());
+
+      this.availability.upcoming.downtime = dateFns.distanceInWordsStrict(currEnd, nextStart) + " later";
+
+      this.availability.upcomingWindows = _(crs).map((cr, idx) => {
+        let start = eorzeaTime.toEarth(+cr.start());
+        let end = eorzeaTime.toEarth(+cr.end());
+        let downtime = "";
+        if (idx + 1 < crs.length) {
+          downtime = dateFns.distanceInWordsStrict(end, eorzeaTime.toEarth(+crs[idx+1].start()));
+        }
+        return {
+          start: start,
+          end: end,
+          duration: dateFns.distanceInWordsStrict(start, end),
+          downtime: downtime
+        };
+      });
+    }
+}
+
   update(earthTime, full = false) {
     // This function should be called whenever the underlying fish data has changed.
     // Make sure you do this BEFORE updating the display...
