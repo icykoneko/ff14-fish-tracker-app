@@ -174,7 +174,6 @@ class FishEntry {
     let crs = fish.catchableRanges;
 
     if (crs.length > 0) {
-      // Cache the dates, they are used A LOT.
       let currEnd = eorzeaTime.toEarth(+crs[0].end());
       let nextStart = eorzeaTime.toEarth(+crs[1].start());
 
@@ -242,22 +241,7 @@ class FishEntry {
 
       // Don't rebuild static information if we don't need to.
       if (full) {
-        this.availability.upcoming.downtime = dateFns.distanceInWordsStrict(currEnd, nextStart) + " later";
-
-        this.availability.upcomingWindows = _(crs).map((cr, idx) => {
-          let start = eorzeaTime.toEarth(+cr.start());
-          let end = eorzeaTime.toEarth(+cr.end());
-          let downtime = "";
-          if (idx + 1 < crs.length) {
-            downtime = dateFns.distanceInWordsStrict(end, eorzeaTime.toEarth(+crs[idx+1].start()));
-          }
-          return {
-            start: start,
-            end: end,
-            duration: dateFns.distanceInWordsStrict(start, end),
-            downtime: downtime
-          };
-        });
+        this.updateNextWindowData();
       }
     }
 
@@ -312,6 +296,10 @@ let ViewModel = new class {
 
     // Load the site settings.
     var settings = this.loadSettings();
+
+    // Initialize the "last date". This is used to keep cached relative date
+    // text fresh.
+    this.lastDate = dateFns.getDayOfYear(Date.now());
 
     // The fish!
     // This is the view model's pointer to the master list of fish.
@@ -470,11 +458,17 @@ let ViewModel = new class {
       $('#earthClock').text(dateFns.format(timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
       $('#eorzeaClock').text(moment.utc(eorzeaTime.toEorzea(timestamp)).format("HH:mm"));
 
+      // Check if the EARTH DATE has changed as well. If so, we must also
+      // refresh the cached relative date text!
+      let currDay = dateFns.getDayOfYear(timestamp);
+      let needsFullUpdate = this.lastDate != currDay;
+      this.lastDate = currDay;
+
       _(this.fishEntries).each(entry => {
         // Update the data for this entry first.
-        entry.update(timestamp);
+        entry.update(timestamp, needsFullUpdate);
         // Then have the layout make necessary updates.
-        if (this.layout.update(entry, timestamp)) {
+        if (this.layout.update(entry, timestamp, needsFullUpdate)) {
           // Queue this fish entry for resorting as well!
           // We're basically doing FishWatcher's job for it now...
           // TODO: [NEEDS-REFACTOR]
