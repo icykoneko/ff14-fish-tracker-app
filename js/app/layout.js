@@ -60,6 +60,7 @@ class FishTableLayout {
     // elements that coorespond with the affected text.
     // SPOILER: THERE'S A LOT! Maybe it would be better to simply reapply the
     // template... but that has consequences of its own...
+    // link to angler https://ff14angler.com/index.php?lang={{=localizationHelper.getLanguage()}}&search={{=it.data.name}}
 
     // AFFECTED FIELDS:
     // it.data.name
@@ -72,6 +73,9 @@ class FishTableLayout {
     let $fishEntry = $(fishEntry.element);
 
     $('.fish-name', $fishEntry).text(fishEntry.data.name);
+    $('.fish-name', $fishEntry).attr('href',
+      'https://ff14angler.com/index.php?lang='+localizationHelper.getLanguage() +
+      '&search='+encodeURIComponent(fishEntry.data.name));
     if (fishEntry.data.folklore !== null) {
       $('.sprite-icon-folklore', $fishEntry).attr(
         'data-tooltip', __p(DATA.FOLKLORE[fishEntry.data.folklore], 'name'));
@@ -107,7 +111,7 @@ class FishTableLayout {
     }
   }
 
-  update(fishEntry, baseTime) {
+  update(fishEntry, baseTime, needsFullUpdate = false) {
     // Update the countdown information for this fish.
     let $fishEntry = $(fishEntry.element);
     let $currentAvail = $('.fish-availability-current', $fishEntry);
@@ -120,11 +124,16 @@ class FishTableLayout {
       $fishEntry.toggleClass('fish-active');
       console.debug(`${fishEntry.id} "${fishEntry.data.name}" has changed availability.`);
       hasFishAvailabilityChanged = true;
-      
+    }
+
+    if (hasFishAvailabilityChanged || needsFullUpdate) {
       // WORKAROUND:
       // See the notes in ViewModel's FishEntry; but, if we detected change in
       // availability, there's a 50/50 chance part of the FishEntry data is
       // stale... So, rebake it before going any further...
+      // SECOND WORKAROUND:
+      // Not only that, but when the EARTH DATE rolls over, regardless of availability
+      // changing, we must rebake all relative date display text!!!
       fishEntry.updateNextWindowData();
 
       // HACK: Fish whose availability state changes will always have catchableRanges.
@@ -172,7 +181,7 @@ class FishTableLayout {
 
     // Update any intuition fish rows as well!
     for (let subEntry of fishEntry.intuitionEntries) {
-      this.update(subEntry, baseTime);
+      this.update(subEntry, baseTime, needsFullUpdate);
     }
 
     // Let the caller know this fish changed availability or bins.

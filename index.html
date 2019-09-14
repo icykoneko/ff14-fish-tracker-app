@@ -45,7 +45,7 @@ title: Home
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.0_20190829_1934"></script>
+    <script type="text/javascript" src="js/app/data.js?5.0_20190914_1145"></script>
 
     <!--
       - Scripts
@@ -106,7 +106,7 @@ title: Home
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
-            <span class="fish-name">{{=it.data.name}}</span><br/>
+            <span><a class="fish-name" target="_blank" href="https://ff14angler.com/index.php?lang={{=localizationHelper.getLanguage()}}&search={{=it.data.name}}">{{=it.data.name}}</a></span><br/>
             <div class="ui tiny circular label">{{=it.data.patch}}</div>
             <!-- check if fish can be put into the aquarium -->
             {{?it.data.aquarium !== null}}
@@ -239,7 +239,7 @@ title: Home
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
-          <div class="ui middle aligned fish-name" style="display: inline-block;">{{=it.data.name}}</div>
+          <div class="ui middle aligned" style="display: inline-block;"><a class="fish-name" target="_blank" href="https://ff14angler.com/index.php?lang={{=localizationHelper.getLanguage()}}&search={{=it.data.name}}">{{=it.data.name}}</a></div>
         </td>
         <!-- Availability -->
         <td>
@@ -373,9 +373,9 @@ title: Home
     {% endraw %}
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20190902"></script>
+    <script type="text/javascript" src="js/app/layout.js?20190914"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20190902"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20190914"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -488,7 +488,7 @@ title: Home
         You can display the next 10 upcoming windows by clicking on the <i class="calendar icon"></i> in front of the uptime text. You might be sad afterward though, looking at you Bobgoblin Bass...
       </p>
       <p>
-        Many fish, especially those requiring mootching, have hooksets associated with them. To make the display a bit more consise, you should interpret the badges as, when using this bait, use this hookset to reel in catch.
+        Many fish, especially those requiring mooching, have hooksets associated with them. To make the display a bit more consise, you should interpret the badges as, when using this bait, use this hookset to reel in catch.
       </p>
 
       <h2>Settings:</h2>
