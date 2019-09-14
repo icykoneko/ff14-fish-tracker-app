@@ -7439,8 +7439,8 @@
   bestCatchPath:
   - Desert Dessert Frog
   predators:
-  hookset: Powerful
-  tug: medium
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
