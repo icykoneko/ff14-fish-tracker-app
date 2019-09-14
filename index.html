@@ -101,7 +101,7 @@
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
-            <span class="fish-name">{{=it.data.name}}</span><br/>
+            <span><a class="fish-name" target="_blank" href="https://ff14angler.com/index.php?lang={{=localizationHelper.getLanguage()}}&search={{=it.data.name}}">{{=it.data.name}}</a></span><br/>
             <div class="ui tiny circular label">{{=it.data.patch}}</div>
             <!-- check if fish can be put into the aquarium -->
             {{?it.data.aquarium !== null}}
@@ -234,7 +234,7 @@
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
-          <div class="ui middle aligned fish-name" style="display: inline-block;">{{=it.data.name}}</div>
+          <div class="ui middle aligned" style="display: inline-block;"><a class="fish-name" target="_blank" href="https://ff14angler.com/index.php?lang={{=localizationHelper.getLanguage()}}&search={{=it.data.name}}">{{=it.data.name}}</a></div>
         </td>
         <!-- Availability -->
         <td>
