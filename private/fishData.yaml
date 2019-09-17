@@ -7470,8 +7470,8 @@
   - Desert Dessert Frog
   - Web-footed Sand Gecko
   predators:
-  hookset: Precision
-  tug: light
+  hookset: Powerful
+  tug: medium
   snagging:
   gig:
   fishEyes: false
