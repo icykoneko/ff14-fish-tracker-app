@@ -212,12 +212,7 @@
   startHour: 4
   endHour: 9
   previousWeatherSet: []
-  weatherSet:
-  - Fog
-  - Clouds
-  - Clear Skies
-  - Fair Skies
-  - Rain
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Spinnerbait
@@ -604,10 +599,7 @@
   startHour: 19
   endHour: 3
   previousWeatherSet: []
-  weatherSet:
-  - Fog
-  - Clouds
-  - Wind
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Northern Krill
@@ -690,10 +682,7 @@
   startHour: 17
   endHour: 3
   previousWeatherSet: []
-  weatherSet:
-  - Clouds
-  - Clear Skies
-  - Fair Skies
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Crayfish Ball
@@ -811,10 +800,7 @@
   startHour: 9
   endHour: 14
   previousWeatherSet: []
-  weatherSet:
-  - Fog
-  - Clear Skies
-  - Fair Skies
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Floating Minnow
@@ -883,10 +869,7 @@
   startHour: 17
   endHour: 21
   previousWeatherSet: []
-  weatherSet:
-  - Clouds
-  - Clear Skies
-  - Fair Skies
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Bloodworm
@@ -937,10 +920,7 @@
   startHour: 21
   endHour: 3
   previousWeatherSet: []
-  weatherSet:
-  - Fog
-  - Clouds
-  - Clear Skies
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Butterworm
@@ -1487,9 +1467,7 @@
   startHour: 17
   endHour: 20
   previousWeatherSet: []
-  weatherSet:
-  - Clear Skies
-  - Fair Skies
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Honey Worm
@@ -1625,9 +1603,7 @@
   startHour: 0
   endHour: 4
   previousWeatherSet: []
-  weatherSet:
-  - Blizzards
-  - Snow
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Glowworm
@@ -1857,9 +1833,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet:
-  - Clouds
-  - Snow
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Honey Worm
@@ -2181,7 +2155,7 @@
   patch: 2.4
 - name: Kuno the Killer
   location: The North Shards
-  startHour: 8
+  startHour: 0  # only restricted by intuition requirements
   endHour: 24
   previousWeatherSet: []
   weatherSet: []
@@ -2423,10 +2397,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet:
-  - Thunder
-  - Fair Skies
-  - Thunderstorms
+  weatherSet: []  # only limited by intuition requirements
   predators:
     Giant Takitaro: 1
   bestCatchPath:
@@ -3153,9 +3124,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet:
-  - Fair Skies
-  - Clear Skies
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
@@ -3189,10 +3158,7 @@
   startHour: 20
   endHour: 3
   previousWeatherSet: []
-  weatherSet:
-  - Thunder
-  - Fair Skies
-  - Clouds
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Fiend Worm
@@ -3381,10 +3347,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet:
-  - Fair Skies
-  - Clear Skies
-  - Clouds
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Giant Crane Fly
@@ -3625,11 +3588,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet:
-  - Fair Skies
-  - Clear Skies
-  - Rain
-  - Showers
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Purse Web Spider
@@ -3712,11 +3671,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet:
-  - Snow
-  - Blizzards
-  - Fog
-  - Clouds
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Brute Leech
@@ -3853,9 +3808,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet:
-  - Clear Skies
-  - Fair Skies
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Magma Worm
@@ -3923,9 +3876,7 @@
   startHour: 14
   endHour: 16
   previousWeatherSet: []
-  weatherSet:
-  - Fair Skies
-  - Clear Skies
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Brute Leech
@@ -5011,9 +4962,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: []
-  weatherSet:
-  - Clouds
-  - Fog
+  weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
   - Suspending Minnow

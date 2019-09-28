@@ -554,8 +554,8 @@ def check_data_integrity(args):
             has_errors = True
             logging.error('%s should be weather restricted', fish['name'])
         elif not fish_params.weather_restricted and \
-                len(fish['previousWeatherSet'] or []) != 0 and \
-                len(fish['weatherSet'] or []) != 0:
+                (len(fish['weatherSet'] or []) != 0 or
+                 len(fish['previousWeatherSet'] or []) != 0):
             has_errors = True
             logging.error('%s should not be weather restricted', fish['name'])
 
