@@ -661,8 +661,9 @@ def add_new_fish_data(args):
         def represent_none(self, _):
             return self.represent_scalar('tag:yaml.org,2002:null', '')
 
-        yaml.add_representer(type(None), represent_none)
-        yaml.dump(list(new_fishes.values()), f, Dumper=yaml.CSafeDumper, default_flow_style=False, sort_keys=False)
+        Dumper.add_representer(type(None), represent_none)
+        yaml.dump(list(new_fishes.values()), f,
+                  Dumper=Dumper, default_flow_style=False, sort_keys=False)
         f.write('---\n')
         f.writelines(['%s\n' % str(fish['name']) for fish in list(new_fishes.values())])
 

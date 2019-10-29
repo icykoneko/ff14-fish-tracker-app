@@ -7837,7 +7837,7 @@
   fishEyes: false
   patch: 5.0
 - name: Rak'tika Trout
-  location: The Rotzatl
+  location: The Lozatl
   startHour: 0
   endHour: 24
   previousWeatherSet:
@@ -7852,7 +7852,7 @@
   fishEyes: false
   patch: 5.0
 - name: Night's Bass
-  location: The Rotzatl
+  location: The Lozatl
   startHour: 0
   endHour: 24
   previousWeatherSet:
@@ -7867,7 +7867,7 @@
   fishEyes: false
   patch: 5.0
 - name: Black Tri-star
-  location: The Rotzatl
+  location: The Lozatl
   startHour: 0
   endHour: 24
   previousWeatherSet:
@@ -9093,3 +9093,200 @@
   gig: Small
   fishEyes: false
   patch: 5.0
+# Patch 5.1
+- name: Loose Pendant
+  location: Crystarium Personal Suites
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Laxan Inkhorn
+  location: The Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: The Unforgiven
+  location: The Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: White Oil Perch
+  location: White Oil Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Bronze Sole
+  location: Sharptongue Drip
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Kholusian King Crab
+  location: The Western Kholusian Coast
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Winged Dame
+  location: The Derelicts
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: The Horned King
+  location: The River of Sand
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Areng Dire
+  location: The Nabaath Severance
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Faeshine Clam
+  location: Handmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: The Sound of Fury
+  location: Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Priest of Yx'Lokwa
+  location: Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Sweetmeat Mussel
+  location: Northwest Caliban Gorge
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
+- name: Starchaser
+  location: Purpure
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.1
+  dataMissing: true
