@@ -9275,7 +9275,8 @@
   - Clown Tetra
   - Eryops
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
