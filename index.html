@@ -36,7 +36,7 @@ title: Home
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?5.1_20191029_0938" />
+    <link rel="stylesheet" href="public/images/sprite.css?5.1_20191029_1847" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20190823" />
     <link rel="stylesheet" href="css/overlay.css?20190829" />
     <link rel="stylesheet" href="css/dark_overlay.css?20190823" />
@@ -45,7 +45,7 @@ title: Home
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.1_20191029_0938"></script>
+    <script type="text/javascript" src="js/app/data.js?5.1_20191030_1700"></script>
 
     <!--
       - Scripts
@@ -125,11 +125,18 @@ title: Home
         </td>
         <!-- Availability -->
         <td>
-          {{?it.data.dataMissing !== false}}
-            <i class="question circle outline icon"></i> Unknown
-          {{??it.data.alwaysAvailable}}
+          {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.timeRestricted}}
+              <i class="question circle outline icon"></i> Unknown
+            {{??}}
+              Always
+            {{?}}
+          {{??it.data.alwaysAvailable && it.data.dataMissing === false}}
             Always
-          {{??}}
+          {{??!it.data.alwaysAvailable}}
+            {{?it.data.dataMissing !== false}}
+              <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+            {{?}}
             <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += moment(d).calendar(); } }}">
               {{=it.availability.current.duration}}
             </span><br/>
@@ -153,29 +160,39 @@ title: Home
         </td>
         <!-- Conditions -->
         <td>
+          <!-- Weather -->
           {{?it.data.dataMissing !== false}}
             {{?it.data.dataMissing.weatherRestricted}}
               <i class="cloud icon"></i> Weather Restricted
+              {{?it.data.conditions.weatherSet.length > 0}}
+                <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+              {{?}}
             {{?}}
-            <br/>
-            {{?it.data.dataMissing.timeRestricted}}
-              <i class="clock icon"></i> Time Restricted
-            {{?}}
-          {{??}}
-            {{?it.data.conditions.previousWeatherSet.length > 0}}
-              {{~it.data.conditions.previousWeatherSet :weather:windex}}
-                <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                    title="{{=__p(weather,'name')}}"
-                    data-prevWeatherIdx="{{=windex}}"></div>
-              {{~}}
-              <i class="arrow right icon"></i>
-            {{?}}
-            {{~it.data.conditions.weatherSet :weather:windex}}
+          {{?}}
+          {{?it.data.conditions.previousWeatherSet.length > 0}}
+            {{~it.data.conditions.previousWeatherSet :weather:windex}}
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
                   title="{{=__p(weather,'name')}}"
-                  data-currWeatherIdx="{{=windex}}"></div>
+                  data-prevWeatherIdx="{{=windex}}"></div>
             {{~}}
-            <br/><i class="wait icon"></i>&nbsp;
+            <i class="arrow right icon"></i>
+          {{?}}
+          {{~it.data.conditions.weatherSet :weather:windex}}
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                title="{{=__p(weather,'name')}}"
+                data-currWeatherIdx="{{=windex}}"></div>
+          {{~}}
+          <br/>
+          {{?it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.timeRestricted}}
+              <i class="clock icon"></i> Time Restricted
+              {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
+                <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+                {{=it.data.startHour + ' - ' + it.data.endHour}}
+              {{?}}
+            {{?}}
+          {{??}}
+            <i class="wait icon"></i>&nbsp;
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
@@ -186,7 +203,7 @@ title: Home
         <!-- Requirements and Bait -->
         <td>
           {{?it.data.dataMissing !== false}}
-            <i class="question circle outline icon"></i> Unknown
+            <i class="question circle outline icon" title="Unknown/Incomplete"></i>
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.data.bait.hasPredators}}
@@ -243,11 +260,18 @@ title: Home
         </td>
         <!-- Availability -->
         <td>
-          {{?it.data.dataMissing !== false}}
-            <i class="question circle outline icon"></i> Unknown
-          {{??it.data.alwaysAvailable}}
+          {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.timeRestricted}}
+              <i class="question circle outline icon"></i> Unknown
+            {{??}}
+              Always
+            {{?}}
+          {{??it.data.alwaysAvailable && it.data.dataMissing === false}}
             Always
-          {{??}}
+          {{??!it.data.alwaysAvailable}}
+            {{?it.data.dataMissing !== false}}
+              <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+            {{?}}
             <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += moment(d).calendar(); } }}">
               {{=it.availability.current.duration}}
             </span>
@@ -269,25 +293,34 @@ title: Home
           {{?it.data.dataMissing !== false}}
             {{?it.data.dataMissing.weatherRestricted}}
               <i class="cloud icon"></i> Weather Restricted
+              {{?it.data.conditions.weatherSet.length > 0}}
+                <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+              {{?}}
             {{?}}
-            <br/>
-            {{?it.data.dataMissing.timeRestricted}}
-              <i class="clock icon"></i> Time Restricted
-            {{?}}
-          {{??}}
-            {{?it.data.conditions.previousWeatherSet.length > 0}}
-              {{~it.data.conditions.previousWeatherSet :weather:windex}}
-                <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                    title="{{=__p(weather,'name')}}"
-                    data-prevWeatherIdx="{{=windex}}"></div>
-              {{~}}
-              <i class="arrow right icon"></i>
-            {{?}}
-            {{~it.data.conditions.weatherSet :weather:windex}}
+          {{?}}
+          {{?it.data.conditions.previousWeatherSet.length > 0}}
+            {{~it.data.conditions.previousWeatherSet :weather:windex}}
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
                   title="{{=__p(weather,'name')}}"
-                  data-currWeatherIdx="{{=windex}}"></div>
+                  data-prevWeatherIdx="{{=windex}}"></div>
             {{~}}
+            <i class="arrow right icon"></i>
+          {{?}}
+          {{~it.data.conditions.weatherSet :weather:windex}}
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                title="{{=__p(weather,'name')}}"
+                data-currWeatherIdx="{{=windex}}"></div>
+          {{~}}
+          <br/>
+          {{?it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.timeRestricted}}
+              <i class="clock icon"></i> Time Restricted
+              {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
+                <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+                {{=it.data.startHour + ' - ' + it.data.endHour}}
+              {{?}}
+            {{?}}
+          {{??}}
             <i class="wait icon"></i>&nbsp;
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
@@ -299,7 +332,7 @@ title: Home
         <!-- Bait -->
         <td>
           {{?it.data.dataMissing !== false}}
-            <i class="question circle outline icon"></i> Unknown
+            <i class="question circle outline icon" title="Unknown/Incomplete"></i>
           {{?}}
           {{?it.data.fishEyes !== false}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes{{?it.data.fishEyes !== true}} has-duration{{?}}" title="Fish Eyes">
