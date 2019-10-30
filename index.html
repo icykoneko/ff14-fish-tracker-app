@@ -181,7 +181,7 @@
         <!-- Requirements and Bait -->
         <td>
           {{?it.data.dataMissing !== false}}
-            <i class="question circle outline icon"></i> Unknown
+            <i class="question circle outline icon" title="Unknown/Incomplete"></i>
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.data.bait.hasPredators}}
@@ -294,7 +294,7 @@
         <!-- Bait -->
         <td>
           {{?it.data.dataMissing !== false}}
-            <i class="question circle outline icon"></i> Unknown
+            <i class="question circle outline icon" title="Unknown/Incomplete"></i>
           {{?}}
           {{?it.data.fishEyes !== false}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes{{?it.data.fishEyes !== true}} has-duration{{?}}" title="Fish Eyes">
