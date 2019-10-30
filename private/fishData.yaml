@@ -9096,13 +9096,15 @@
 # Patch 5.1
 - name: Loose Pendant
   location: Crystarium Personal Suites
-  startHour: 0
-  endHour: 24
+  startHour: 18
+  endHour: 20
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9114,23 +9116,27 @@
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Metal Spinner
   predators: 
-  hookset: 
+  hookset: Precision
+  tug: light
   snagging: 
   gig: 
   fishEyes: false
   patch: 5.1
-  dataMissing: true
 - name: The Unforgiven
   location: The Source
   startHour: 0
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9142,23 +9148,27 @@
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Metal Spinner
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: medium
   snagging: 
   gig: 
   fishEyes: false
   patch: 5.1
-  dataMissing: true
 - name: Bronze Sole
   location: Sharptongue Drip
   startHour: 0
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Rain
+  bestCatchPath:
+  - Marble Nymph
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9180,13 +9190,16 @@
   dataMissing: true
 - name: Winged Dame
   location: The Derelicts
-  startHour: 0
+  startHour: 0  # ??-14-??
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9236,13 +9249,16 @@
   dataMissing: true
 - name: The Sound of Fury
   location: Longmirror Lake
-  startHour: 0
+  startHour: 21
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9268,25 +9284,29 @@
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  hookset: 
+  hookset: Precision
+  tug: light
   snagging: 
   gig: 
   fishEyes: false
   patch: 5.1
-  dataMissing: true
 - name: Starchaser
   location: Purpure
-  startHour: 0
-  endHour: 24
+  startHour: 6
+  endHour: 10
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
-  fishEyes: false
+  fishEyes: true
   patch: 5.1
   dataMissing: true
