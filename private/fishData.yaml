@@ -9266,11 +9266,14 @@
   dataMissing: true
 - name: Priest of Yx'Lokwa
   location: Lake Tusi Mek'ta
-  startHour: 0
-  endHour: 24
+  startHour: 10
+  endHour: 12
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Robber Ball
+  - Clown Tetra
+  - Eryops
   predators: 
   hookset: 
   snagging: 
