@@ -9097,7 +9097,7 @@
 - name: Loose Pendant
   location: Crystarium Personal Suites
   startHour: 18
-  endHour: 20
+  endHour: 21
   previousWeatherSet: 
   weatherSet: 
   bestCatchPath:
@@ -9121,7 +9121,7 @@
   predators: 
   hookset: Precision
   tug: light
-  snagging: 
+  snagging: false
   gig: 
   fishEyes: false
   patch: 5.1
@@ -9180,14 +9180,15 @@
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Metal Spinner
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: medium
   snagging: 
   gig: 
   fishEyes: false
   patch: 5.1
-  dataMissing: true
 - name: Winged Dame
   location: The Derelicts
   startHour: 0  # ??-14-??
@@ -9225,28 +9226,30 @@
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Metal Spinner
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: medium
   snagging: 
   gig: 
   fishEyes: false
   patch: 5.1
-  dataMissing: true
 - name: Faeshine Clam
   location: Handmirror Lake
   startHour: 0
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Metal Spinner
   predators: 
-  hookset: 
-  snagging: 
+  hookset: Precision
+  tug: light
+  snagging: true
   gig: 
   fishEyes: false
   patch: 5.1
-  dataMissing: true
 - name: The Sound of Fury
   location: Longmirror Lake
   startHour: 21
@@ -9293,7 +9296,7 @@
   predators: 
   hookset: Precision
   tug: light
-  snagging: 
+  snagging: true
   gig: 
   fishEyes: false
   patch: 5.1
