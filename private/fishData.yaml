@@ -7373,7 +7373,7 @@
   bestCatchPath:
   - Desert Dessert Frog
   predators:
-  hookset:
+  hookset: Powerful
   tug: medium
   snagging:
   gig:
@@ -9191,8 +9191,8 @@
   patch: 5.1
 - name: Winged Dame
   location: The Derelicts
-  startHour: 0  # ??-14-??
-  endHour: 24
+  startHour: 12
+  endHour: 19
   previousWeatherSet: 
   weatherSet:
   - Clear Skies
@@ -9209,12 +9209,16 @@
 - name: The Horned King
   location: The River of Sand
   startHour: 0
-  endHour: 24
+  endHour: 6
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Dust Storms
+  bestCatchPath:
+  - Desert Dessert Frog
+  - Hornhelm
   predators: 
-  hookset: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9246,16 +9250,17 @@
   predators: 
   hookset: Precision
   tug: light
-  snagging: true
+  snagging: false  # reports indicate snagging is NOT required
   gig: 
   fishEyes: false
   patch: 5.1
 - name: The Sound of Fury
   location: Longmirror Lake
-  startHour: 21
+  startHour: 20
   endHour: 24
   previousWeatherSet: 
   weatherSet:
+  - Fair Skies
   - Clear Skies
   bestCatchPath:
   - Baitbugs
@@ -9314,6 +9319,6 @@
   tug: heavy
   snagging: 
   gig: 
-  fishEyes: true
+  fishEyes: 60
   patch: 5.1
   dataMissing: true
