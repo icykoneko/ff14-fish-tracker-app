@@ -108,3 +108,21 @@ i.icon {
 .ui.inverted.segment {
   padding: calc(1em + 1px);
 }
+
+
+/*
+ * Needed until we upgrade to Semantic UI 2.4 or later...
+ */
+@font-face {
+  font-family: brand-icons;
+  src: url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.eot);
+  src: url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.eot?#iefix) format('embedded-opentype'),url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.woff2) format('woff2'),url(themes/default/assets/fonts/brand-icons.woff) format('woff'),url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.ttf) format('truetype'),url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.svg#icons) format('svg');
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-decoration:inherit;text-transform:none}
+
+i.icon.discord:before {
+  font-family: brand-icons;
+  content: "\f392";
+}

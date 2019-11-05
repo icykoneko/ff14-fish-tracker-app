@@ -3,12 +3,11 @@ body.dark {
   color: hsl(0, 0%, 90%);
 }
 
-body.dark .ui.menu {
+body.dark .ui.inverted.fixed.menu {
   background-color: black !important;
-  color: hsl(0, 0%, 90%) !important;
 }
 
-body.dark .ui.menu .item {
+body.dark .ui.inverted.menu .header.item {
   color: hsl(0, 0%, 90%) !important;
 }
 
