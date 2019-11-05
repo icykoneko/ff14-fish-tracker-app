@@ -408,7 +408,7 @@ title: Home
     <!-- At last, we can load the layout and view model code. -->
     <script type="text/javascript" src="js/app/layout.js?20190914"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20191029"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20191104"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -461,7 +461,7 @@ title: Home
     <div class="ui main container">
       <h1>FFX|V Fish Tracker App</h1>
       <p>
-        This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="#top" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a target="#top" href="feedback.html">leave comments, kudos, report missing or incorrect data</a>, or whatever. Good luck!
+        This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="_blank" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a target="#top" href="feedback.html">leave comments, kudos, report missing or incorrect data</a>, or whatever. Good luck!
       </p>
       <!-- HTTP => HTTPS Transition Helper Messages -->
       <div class="ui hidden icon info message announcement" id="https_message">
@@ -638,11 +638,22 @@ title: Home
         </div>
       </div>
     </div>
-    <div class="ui container">
-      <p>
-        FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
-        FINAL FANTASY XIV © 2010 - 2019 SQUARE ENIX CO., LTD. All Rights Reserved.
-      </p>
+    <div class="ui bottom menu">
+      <div class="ui container">
+        <p>
+          FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
+          FINAL FANTASY XIV © 2010 - 2019 SQUARE ENIX CO., LTD. All Rights Reserved.
+        </p>
+      </div>
+      <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" target="_blank">
+        <i class="discord icon"></i>
+      </a>
+      <a class="icon item" href="https://twitter.com/CarbunclePlushy" data-tooltip="Twitter" target="_blank">
+        <i class="twitter icon"></i>
+      </a>
+      <a class="icon item" href="https://github.com/icykoneko/ff14-fish-tracker-app" data-tooltip="Github" target="_blank">
+        <i class="github icon"></i>
+      </a>
     </div>
   </body>
 </html>

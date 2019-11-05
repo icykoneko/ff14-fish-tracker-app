@@ -864,11 +864,13 @@ let ViewModel = new class {
   applyTheme(theme) {
     if (theme === 'dark') {
       $('body').addClass('dark');
+      $('.ui.menu').addClass('inverted');
       $('.ui.message.announcement').addClass('inverted');
       $('.ui.popup.upcoming-windows').addClass('inverted');
       $('*[data-tooltip]').attr('data-inverted', '');
     } else {
       $('body').removeClass('dark');
+      $('.ui.menu').removeClass('inverted');
       $('.ui.message.announcement').removeClass('inverted');
       $('.ui.popup.upcoming-windows').removeClass('inverted');
       $('*[data-tooltip]').removeAttr('data-inverted');
