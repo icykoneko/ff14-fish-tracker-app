@@ -358,6 +358,15 @@ def convert_fish_to_json(item):
 
     is_collectable = XIV.game_data.get_sheet('Item')[key].as_boolean('IsCollectable')
 
+    tug_type = item.get('tug', None)
+    if tug_type is not None:
+        tug_type = tug_type.lower()
+        if tug_type == 'legendary':
+            tug_type = 'heavy'
+        if tug_type not in ['light', 'medium', 'heavy']:
+            logging.warning('%s has an invalid tug type: %s', item['name'], item['tug'])
+            tug_type = None
+
     return (key,
             OrderedDict({'_id': key,
                          'previousWeatherSet': previous_weather_set,
@@ -373,6 +382,7 @@ def convert_fish_to_json(item):
                          'fishEyes': item.get('fishEyes', False),
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
+                         'tug': tug_type,
                          'gig': item.get('gig', None),
                          'aquarium': aquarium_entry,
                          'dataMissing': data_missing}))
