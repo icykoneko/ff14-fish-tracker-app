@@ -74,6 +74,13 @@ class BaitEntry {
     }
     return null;
   }
+
+  get tug() {
+    if (this.fishData && 'tug' in this.fishData) {
+      return this.fishData.tug;
+    }
+    return null;
+  }
 }
 
 class FishEntry {
