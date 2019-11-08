@@ -35,6 +35,59 @@ span.bait-span {
   white-space: nowrap;
 }
 
+/*
+ * This container sets the relative positioning for the badges displayed next to the fish.
+ * Remember, because the bait icons are "sprite" images, they technically have no content,
+ * and therefore place the next position in the very center of the icon.
+ */
+.bait-badge-container {
+  display: inline-block;
+  position: relative;
+  min-width: 0.5em;
+}
+
+.bait-badge-container .bait-icon.sprite-icon.hookset-modifier-icon {
+  position: absolute;
+  left: -22px; /* half size of hookset icon itself */
+  top: -50px; /* half height of the icon, plus padding excess */
+  
+  /* Unset the margin styles, they don't work as well in this context. */
+  margin-left: unset;
+  margin-top: unset;
+}
+
+.bait-badge-container .tug-indicator {
+  position: absolute;
+  left: -1.25em;
+  top: 0px;
+  display: inline-block;
+
+  padding: 0.5em;
+  line-height: 1em;
+  text-align: right;
+  font-size: 0.64285714rem;
+  border-top-left-radius: 250rem;
+  border-top-right-radius: 75rem;
+  border-bottom-right-radius: 125rem;
+  vertical-align: bottom;
+  width: 2.5em; /* this seems to line up nicely with hooksets */
+  font-weight: bolder;
+
+  color: black;
+}
+
+.tug-indicator.light-tug-indicator {
+  background-color: dodgerblue;
+}
+
+.tug-indicator.medium-tug-indicator {
+  background-color: darkseagreen;
+}
+
+.tug-indicator.heavy-tug-indicator {
+  background-color: orangered;
+}
+
 tr.fish-intuition-row .fish-icon.sprite-icon,
 tr.fish-intuition-row .bait-icon.sprite-icon {
   zoom: 0.675;
