@@ -119,6 +119,10 @@ img {
   padding-left: 5px;
 }
 
+.upcoming-windows-button:hover {
+  cursor: pointer;
+}
+
 .upcoming-windows-popup {
   display: grid;
   grid-template-columns: 15rem 7.5rem 7.5rem;
