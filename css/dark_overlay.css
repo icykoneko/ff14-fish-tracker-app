@@ -4,7 +4,7 @@ body.dark {
 }
 
 body.dark .ui.inverted.fixed.menu {
-  background-color: black !important;
+  background-color: #1B1C1D !important;
 }
 
 body.dark .ui.inverted.menu .header.item {
