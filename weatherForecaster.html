@@ -328,9 +328,9 @@
       }
     </style>
 
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css" />
-    <link rel="stylesheet" href="css/overlay.css" />
-    <link rel="stylesheet" href="css/dark_overlay.css" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20191109_1301" />
+    <link rel="stylesheet" href="css/overlay.css?20191109_1301" />
+    <link rel="stylesheet" href="css/dark_overlay.css?20191109_1301" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js"></script>
@@ -609,6 +609,7 @@
           $('.ui.table').toggleClass('inverted', theme === 'dark');
           $('.ui.list').toggleClass('inverted', theme === 'dark');
           $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
+          $('.ui.menu').toggleClass('inverted', theme === 'dark');
         }
 
         function themeButtonClicked(e) {
@@ -627,7 +628,7 @@
     </script>
   </head>
   <body>
-    <div id="topmenu" class="ui text top fixed menu" style="background-color: white;">
+    <div id="topmenu" class="ui text top fixed menu">
       <div class="ui container">
         <div class="header item">FFX|V Weather Forecaster</div>
         <div class="right item">
@@ -731,11 +732,22 @@
         </div>
       </div>
     </div>
-    <div class="ui container">
-      <p>
-        FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
-        FINAL FANTASY XIV © 2010 - 2019 SQUARE ENIX CO., LTD. All Rights Reserved.
-      </p>
+    <div class="ui bottom fixed menu">
+      <div class="ui container">
+        <p>
+          FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
+          FINAL FANTASY XIV © 2010 - 2019 SQUARE ENIX CO., LTD. All Rights Reserved.
+        </p>
+      </div>
+      <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
+        <i class="discord icon"></i>
+      </a>
+      <a class="icon item" href="https://twitter.com/CarbunclePlushy" data-tooltip="Twitter" data-position="top right" target="_blank">
+        <i class="twitter icon"></i>
+      </a>
+      <a class="icon item" href="https://github.com/icykoneko/ff14-fish-tracker-app" data-tooltip="Github" data-position="top right" target="_blank">
+        <i class="github icon"></i>
+      </a>
     </div>
   </body>
 </html>

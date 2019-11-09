@@ -126,3 +126,32 @@ i.icon.discord:before {
   font-family: brand-icons;
   content: "\f392";
 }
+
+
+/* Overrides for Menu */
+.ui.fixed.menu,
+.ui.fixed.text.menu {
+  background: #FFFFFF;
+}
+.ui.inverted.fixed.menu,
+.ui.inverted.fixed.text.menu {
+  background: #1B1C1D;
+}
+
+.ui.menu [data-tooltip]:before {
+  width: 0.71428571em;
+  height: 0.71428571em;
+}
+
+.ui.menu .item[data-position~="top"][data-tooltip]:before {
+  background: #FFFFFF;
+}
+
+.ui.menu .item[data-position="top right"][data-tooltip]:before {
+  top: auto;
+  right: 1em;
+}
+
+.ui.inverted.menu .item[data-inverted][data-position~="top"][data-tooltip]:before {
+  background: #1B1C1D;
+}
