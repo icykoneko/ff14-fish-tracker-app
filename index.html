@@ -59,6 +59,30 @@ title: Home
     <script type="text/javascript" src="js/app/fishwatcher.js?20190823"></script>
     <script type="text/javascript" src="js/app/sorters.js?20190823"></script>
 
+    {% if site.data.adjustments.size > 0 %}
+      <script type="text/javascript">
+        {% for updated_fish in site.data.adjustments %}
+          // Apply updates to: {{ updated_fish.name }}
+          (function () {
+            let item_entry = _.findWhere(DATA.ITEMS, {name_en: "{{ updated_fish.name }}"});
+            if (item_entry === undefined) {
+              console.error("FISH NOT FOUND: {{ updated_fish.name }}");
+              return;
+            }
+            let fish_entry = _.findWhere(Fishes, {id: item_entry._id});
+            {% assign string_fields = updated_fish.fields | where: "type", "string" %}
+            {% for field in string_fields %}
+              fish_entry.{{ field.key }} = "{{ field.val }}";
+            {% endfor %}
+            {% assign number_fields = updated_fish.fields | where: "type", "number" %}
+            {% for field in number_fields %}
+              fish_entry.{{ field.key }} = {{ field.val }};
+            {% endfor %}
+          })();
+        {% endfor %}
+      </script>
+    {% endif %}
+
     <!--
       - SUPER IMPORTANT!!!!!!
       - The remaining scripts are for view and layout logic. Due to document load

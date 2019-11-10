@@ -1,0 +1,28 @@
+# Adjustments to current data, designed for quick updates without rebuilding
+# the entire data.js file.
+#
+# The goal is to allow updates from anywhere!
+#
+# Example:
+# - name: <FISH_NAME_EN>
+#   fields:
+#   - type: (string|number)
+#     key: <fieldName in Fish class to update>
+#     val: <value to use>
+#
+# Remember, these modify the Fish objects, not the DATA.FISH which is what they
+# derive from...
+# Certain fields will require translation here, such as weather types.
+# In addition, some fields like "alwaysAvailable" must be accounted for here.
+# Please treat fields such as this as "number" types. The "string" type just
+# means to surround the string in quotes.
+#
+# DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
+# Just... ignore the fact that file lives on the master branch, while this one
+# lives in the gh-pages branch... Carby says it's fine.
+
+- name: Loose Pendant
+  fields:
+  - type: string
+    key: hookset
+    val: Precision
