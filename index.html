@@ -660,6 +660,25 @@ title: Home
       </div>
     </div>
     <div class="ui bottom fixed menu">
+      {% assign git_repo = site.github.public_repositories | where: "full_name", site.github.repository_nwo %}
+      <div class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version">{{ git_repo[0].updated_at }}</span></div>
+      <script>
+        function deploymentCB(response) {
+          let data = response.data;
+          let siteUpdatedDate = new Date(Date.parse(data[0].updated_at));
+          $('#site-version').text(new Intl.DateTimeFormat(undefined, {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: 'numeric', minute: 'numeric', second: 'numeric',
+            timeZoneName: 'short' }).format(siteUpdatedDate));
+        }
+        // Use JSON-P to get metadata about this deployment.
+        let script = document.createElement('script');
+        script.src = 'https://api.github.com/repos/icykoneko/ff14-fish-tracker-app/deployments?callback=deploymentCB&sha={{ site.github.build_revision }}';
+        document.getElementsByTagName('head')[0].appendChild(script);
+
+        // TODO: Eventually, should be able to check for updates to the site
+        // and let user know they should refresh their browser.
+      </script>
       <div class="right menu">
         <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
           <i class="discord icon"></i>
