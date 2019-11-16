@@ -26,3 +26,8 @@
   - type: string
     key: hookset
     val: Precision
+- name: Winged Dame
+  fields:
+  - type: string
+    key: hookset
+    val: Precision
