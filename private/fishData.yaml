@@ -3525,7 +3525,7 @@
   - Giant Crane Fly
   tug: Light
   hookset: Precision  # unsure
-  snagging: false
+  snagging: true
   gig:
   folklore: true
   fishEyes: false
@@ -7172,7 +7172,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Moyebi Shrimp
+  - Short Bill Minnow
   predators:
   hookset: Precision
   tug: light
@@ -7187,7 +7187,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Moyebi Shrimp
+  - Short Bill Minnow
   - Spearhead Squid
   predators:
   hookset: Powerful
@@ -7220,7 +7220,7 @@
   - Fog
   - Clouds
   bestCatchPath:
-  - Moyebi Shrimp
+  - Short Bill Minnow
   - Spearhead Squid
   predators:
   hookset: Powerful
@@ -9103,7 +9103,7 @@
   bestCatchPath:
   - Baitbugs
   predators: 
-  hookset: Powerful
+  hookset: Precision
   tug: heavy
   snagging: 
   gig: 
@@ -9196,7 +9196,7 @@
   bestCatchPath:
   - Squid Strip
   predators: 
-  hookset: Powerful
+  hookset: Precision
   tug: heavy
   snagging: 
   gig: 
