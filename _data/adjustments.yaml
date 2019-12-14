@@ -31,3 +31,8 @@
   - type: string
     key: hookset
     val: Precision
+- name: Heavens Coral
+  fields:
+  - type: number
+    key: snagging
+    val: true
