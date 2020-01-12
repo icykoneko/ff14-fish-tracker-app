@@ -130,7 +130,7 @@ title: Home
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
-            <span><a class="fish-name" target="_blank" href="https://ff14angler.com/index.php?lang={{=localizationHelper.getLanguage()}}&search={{=it.data.name}}">{{=it.data.name}}</a></span><br/>
+            <span><a class="fish-name" target="_blank" href="{{=it.getExternalLink('CBH')}}">{{=it.data.name}}</a></span><br/>
             <div class="ui tiny circular label">{{=it.data.patch}}</div>
             <!-- check if fish can be put into the aquarium -->
             {{?it.data.aquarium !== null}}
@@ -294,7 +294,7 @@ title: Home
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
-          <div class="ui middle aligned" style="display: inline-block;"><a class="fish-name" target="_blank" href="https://ff14angler.com/index.php?lang={{=localizationHelper.getLanguage()}}&search={{=it.data.name}}">{{=it.data.name}}</a></div>
+          <div class="ui middle aligned" style="display: inline-block;"><a class="fish-name" target="_blank" href="{{=it.getExternalLink('CBH')}}">{{=it.data.name}}</a></div>
         </td>
         <!-- Availability -->
         <td>
@@ -444,9 +444,9 @@ title: Home
     {% endraw %}
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20190914"></script>
+    <script type="text/javascript" src="js/app/layout.js?20200112"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20191107"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20200112"></script>
 
     <script type="text/javascript">
       $(() => {

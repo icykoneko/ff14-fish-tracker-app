@@ -60,7 +60,6 @@ class FishTableLayout {
     // elements that coorespond with the affected text.
     // SPOILER: THERE'S A LOT! Maybe it would be better to simply reapply the
     // template... but that has consequences of its own...
-    // link to angler https://ff14angler.com/index.php?lang={{=localizationHelper.getLanguage()}}&search={{=it.data.name}}
 
     // AFFECTED FIELDS:
     // it.data.name
@@ -73,9 +72,7 @@ class FishTableLayout {
     let $fishEntry = $(fishEntry.element);
 
     $('.fish-name', $fishEntry).text(fishEntry.data.name);
-    $('.fish-name', $fishEntry).attr('href',
-      'https://ff14angler.com/index.php?lang='+localizationHelper.getLanguage() +
-      '&search='+encodeURIComponent(fishEntry.data.name));
+    $('.fish-name', $fishEntry).attr('href', fishEntry.getExternalLink('CBH'));
     if (fishEntry.data.folklore !== null) {
       $('.sprite-icon-folklore', $fishEntry).attr(
         'data-tooltip', __p(DATA.FOLKLORE[fishEntry.data.folklore], 'name'));

@@ -256,6 +256,32 @@ class FishEntry {
       subEntry.update(earthTime, full);
     }
   }
+
+  getExternalLink(site) {
+    // 'site': Must be 'CBH', 'GT', or 'TC'.
+    if (site == 'CBH') {
+      // CBH doesn't standardize their fish info pages on the game's IDs so we must use search.
+      let lang = localizationHelper.getLanguage();
+      if (lang == 'ja') {
+        // They also don't use the standard two-letter country code for Japanese...
+        lang = 'jp';
+      }
+      return "https://ff14angler.com/index.php?lang=" + lang + "&search=" + encodeURIComponent(this.data.name);
+    }
+    else if (site == 'GT') {
+      // Garland Tools
+      return "https://garlandtools.org/db/#item/" + this.id;
+    }
+    else if (site == 'TC') {
+      // TeamCraft
+      let lang = localizationHelper.getLanguage();
+      return "https://ffxivteamcraft.com/db/" + lang + "/item/" + this.id;
+    }
+    else {
+      console.error("Invalid external site ID:", site);
+      return "";
+    }
+  }
 }
 
 class IntuitionFishEntry extends FishEntry {
