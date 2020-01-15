@@ -259,7 +259,15 @@ class FishEntry {
 
   getExternalLink(site = 'TC') {
     // 'site': Must be 'CBH', 'GT', or 'TC'.
-    if (site == 'CBH') {
+    if (site == 'TC') {
+      // Teamcraft
+      return "https://ffxivteamcraft.com/db/item/" + this.id;
+    }
+    else if (site == 'GT') {
+      // Garland Tools
+      return "https://garlandtools.org/db/#item/" + this.id;
+    }
+    else if (site == 'CBH') {
       // CBH doesn't standardize their fish info pages on the game's IDs so we must use search.
       let lang = localizationHelper.getLanguage();
       if (lang == 'ja') {
@@ -267,15 +275,6 @@ class FishEntry {
         lang = 'jp';
       }
       return "https://ff14angler.com/index.php?lang=" + lang + "&search=" + encodeURIComponent(this.data.name);
-    }
-    else if (site == 'GT') {
-      // Garland Tools
-      return "https://garlandtools.org/db/#item/" + this.id;
-    }
-    else if (site == 'TC') {
-      // TeamCraft
-      let lang = localizationHelper.getLanguage();
-      return "https://ffxivteamcraft.com/db/" + lang + "/item/" + this.id;
     }
     else {
       console.error("Invalid external site ID:", site);
