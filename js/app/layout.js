@@ -72,7 +72,7 @@ class FishTableLayout {
     let $fishEntry = $(fishEntry.element);
 
     $('.fish-name', $fishEntry).text(fishEntry.data.name);
-    $('.fish-name', $fishEntry).attr('href', fishEntry.getExternalLink('CBH'));
+    $('.fish-name', $fishEntry).attr('href', fishEntry.getExternalLink());
     if (fishEntry.data.folklore !== null) {
       $('.sprite-icon-folklore', $fishEntry).attr(
         'data-tooltip', __p(DATA.FOLKLORE[fishEntry.data.folklore], 'name'));
@@ -208,11 +208,8 @@ class FishTableLayout {
     let lastFishPinned = false;
     let lastFishActive = false;
     let lastFishUpSoon = false;
-    let careAboutUpSoon = ViewModel.settings.sortingType == 'overallRarity';
 
-    if (!careAboutUpSoon) {
-      lastFishUpSoon = null;
-    }
+    let keepChecking = false;
 
     // Remove any old classes.
     $entries
@@ -229,26 +226,36 @@ class FishTableLayout {
       // rows to have alternate border style.
       // TODO: This really needs to be managed with CSS, but because the fish
       // aren't <tbody>'s it kinda messes things up...
+      keepChecking = true;
+
       if (lastFishPinned !== null) {
         if (entry.isPinned) {
           lastFishPinned = true;
+          keepChecking = false;
         } else if (lastFishPinned === true) {
           // But this fish is not pinned, so that's the last pinned fish.
           $entryElem.addClass('entry-after-last-pinned-entry');
           // Stop tracking this.
           lastFishPinned = null;
+        } else if (lastFishPinned === false) {
+          // No fish were pinned.
+          lastFishPinned = null;
         }
       }
-      else if (lastFishActive !== null) {
+      if (keepChecking && lastFishActive !== null) {
         if (entry.isCatchable) {
           lastFishActive = true;
+          keepChecking = false;
         } else if (lastFishActive === true) {
           $entryElem.addClass('entry-after-last-active-entry');
           // Stop tracking this.
           lastFishActive = null;
+        } else if (lastFishActive === true) {
+          // No fish are active.
+          lastFishActive = null;
         }
       }
-      else if (lastFishUpSoon !== null) {
+      if (keepChecking && lastFishUpSoon !== null) {
         if (entry.isUpSoon) {
           lastFishUpSoon = true;
         } else if (lastFishUpSoon === true) {

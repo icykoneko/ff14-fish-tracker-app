@@ -257,9 +257,20 @@ class FishEntry {
     }
   }
 
-  getExternalLink(site) {
+  getExternalLink(site = 'TC') {
     // 'site': Must be 'CBH', 'GT', or 'TC'.
-    if (site == 'CBH') {
+    if (site == 'TC') {
+      // Teamcraft
+      // NOTE: While the language code does not seem to change the site's language, it
+      // is required in the URL. I suppose I could technically throw whatever into this
+      // but I like Mui, and I don't want to crash their site :)
+      return "https://ffxivteamcraft.com/db/" + localizationHelper.getLanguage() + "/item/" + this.id;
+    }
+    else if (site == 'GT') {
+      // Garland Tools
+      return "https://garlandtools.org/db/#item/" + this.id;
+    }
+    else if (site == 'CBH') {
       // CBH doesn't standardize their fish info pages on the game's IDs so we must use search.
       let lang = localizationHelper.getLanguage();
       if (lang == 'ja') {
@@ -267,15 +278,6 @@ class FishEntry {
         lang = 'jp';
       }
       return "https://ff14angler.com/index.php?lang=" + lang + "&search=" + encodeURIComponent(this.data.name);
-    }
-    else if (site == 'GT') {
-      // Garland Tools
-      return "https://garlandtools.org/db/#item/" + this.id;
-    }
-    else if (site == 'TC') {
-      // TeamCraft
-      let lang = localizationHelper.getLanguage();
-      return "https://ffxivteamcraft.com/db/" + lang + "/item/" + this.id;
     }
     else {
       console.error("Invalid external site ID:", site);
@@ -458,9 +460,7 @@ let ViewModel = new class {
     ).subscribe(e => this.updateDisplay(e));
 
     // Ok, now it's safe to have FishWatcher start listening for the next bell.
-    eorzeaTime.currentBellChanged.pipe(
-      skip(1)
-    ).subscribe(bell => fishWatcher.updateFishes());
+    eorzeaTime.currentBellChanged.subscribe(bell => fishWatcher.updateFishes());
 
     console.timeEnd("Initialization");
   }
