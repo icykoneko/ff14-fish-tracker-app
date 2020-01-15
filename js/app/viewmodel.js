@@ -261,7 +261,10 @@ class FishEntry {
     // 'site': Must be 'CBH', 'GT', or 'TC'.
     if (site == 'TC') {
       // Teamcraft
-      return "https://ffxivteamcraft.com/db/item/" + this.id;
+      // NOTE: While the language code does not seem to change the site's language, it
+      // is required in the URL. I suppose I could technically throw whatever into this
+      // but I like Mui, and I don't want to crash their site :)
+      return "https://ffxivteamcraft.com/db/" + localizationHelper.getLanguage() + "/item/" + this.id;
     }
     else if (site == 'GT') {
       // Garland Tools
