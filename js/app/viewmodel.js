@@ -257,7 +257,7 @@ class FishEntry {
     }
   }
 
-  getExternalLink(site) {
+  getExternalLink(site = 'TC') {
     // 'site': Must be 'CBH', 'GT', or 'TC'.
     if (site == 'CBH') {
       // CBH doesn't standardize their fish info pages on the game's IDs so we must use search.

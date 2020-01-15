@@ -72,7 +72,7 @@ class FishTableLayout {
     let $fishEntry = $(fishEntry.element);
 
     $('.fish-name', $fishEntry).text(fishEntry.data.name);
-    $('.fish-name', $fishEntry).attr('href', fishEntry.getExternalLink('CBH'));
+    $('.fish-name', $fishEntry).attr('href', fishEntry.getExternalLink());
     if (fishEntry.data.folklore !== null) {
       $('.sprite-icon-folklore', $fishEntry).attr(
         'data-tooltip', __p(DATA.FOLKLORE[fishEntry.data.folklore], 'name'));
