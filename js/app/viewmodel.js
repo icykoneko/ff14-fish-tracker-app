@@ -460,9 +460,7 @@ let ViewModel = new class {
     ).subscribe(e => this.updateDisplay(e));
 
     // Ok, now it's safe to have FishWatcher start listening for the next bell.
-    eorzeaTime.currentBellChanged.pipe(
-      skip(1)
-    ).subscribe(bell => fishWatcher.updateFishes());
+    eorzeaTime.currentBellChanged.subscribe(bell => fishWatcher.updateFishes());
 
     console.timeEnd("Initialization");
   }
