@@ -94,7 +94,6 @@
         currentPage = page;
         let rangeStart = currentPage - pageRange;
         let rangeEnd = currentPage + pageRange;
-        let totalItemsUsed = 0;
 
         if (rangeEnd > MAX_PAGE) {
           rangeEnd = MAX_PAGE;
@@ -111,16 +110,12 @@
         rangeEnd = Math.max(5, rangeEnd);
         rangeStart = Math.min(MAX_PAGE - 4, rangeStart);
 
-        console.log("Current Page:", currentPage, "Range:", rangeStart, rangeEnd);
-
         let item = items.first();
         item.toggleClass('disabled', page == 1)
             .data('num', page - 1);
         item = item.next()
                    .toggleClass('active', page == 1)
                    .text(1).data('num', 1);
-        totalItemsUsed++;
-        console.log("Added FIRST_PAGE to left side. TOTAL:", totalItemsUsed);
 
         if (rangeStart <= 3) {
           for (i = 2; i < rangeStart; i++) {
@@ -128,16 +123,12 @@
                        .toggleClass('active', i == currentPage)
                        .removeClass('hidden disabled')
                        .text(i).data('num', i);
-            totalItemsUsed++;
-            console.log("Added", i, "to left side. TOTAL:", totalItemsUsed);
           }
         } else {
           item = item.next()
                      .removeClass('hidden active')
                      .addClass('disabled')
                      .text('...').removeData('num');
-          totalItemsUsed++;
-          console.log("Added ... to left side. TOTAL:", totalItemsUsed);
         }
         for (i = rangeStart; i <= rangeEnd; i++) {
           if (i == 1 || i ==MAX_PAGE) {
@@ -147,8 +138,6 @@
                      .toggleClass('active', i == currentPage)
                      .removeClass('disabled hidden')
                      .text(i).data('num', i);
-          totalItemsUsed++;
-          console.log("Added", i, "to middle. TOTAL:", totalItemsUsed);
         }
         if (rangeEnd >= MAX_PAGE - 2) {
           for (i = rangeEnd + 1; i <= MAX_PAGE - 1; i++) {
@@ -156,24 +145,18 @@
                        .toggleClass('active', i == currentPage)
                        .removeClass('hidden disabled')
                        .text(i).data('num', i);
-            totalItemsUsed++;
-            console.log("Added", i, "to right side. TOTAL:", totalItemsUsed);
           }
         } else {
           item = item.next()
                      .removeClass('hidden active')
                      .addClass('disabled')
                      .text('...').removeData('num');
-          totalItemsUsed++;
-          console.log("Added ... to right side. TOTAL:", totalItemsUsed);
         }
 
         item = item.next()
                    .removeClass('disabled hidden')
                    .toggleClass('active', page == MAX_PAGE)
                    .text(MAX_PAGE).data('num', MAX_PAGE);
-        totalItemsUsed++;
-        console.log("Added LAST_PAGE to right side. TOTAL:", totalItemsUsed);
 
         // Hide all remaining elements
         item = item.nextAll().addClass('hidden').removeData('num').last();
