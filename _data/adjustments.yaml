@@ -20,4 +20,13 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
-
+- name: Little Thalaos
+  fields:
+  - type: string
+    key: tug
+    val: Medium
+- name: Sycorax
+  fields:
+  - type: number
+    key: snagging
+    val: true
