@@ -63,7 +63,8 @@ FISH_INFOS = []
 for fish in fish_in_log:
     fish_info = {'id': fish.item.key,
                  'name': fish.item.name,
-                 'icon': fish.item.get_raw('Icon'),
+                 'icon': '%06u' % fish.item.get_raw('Icon'),
+                 'extra_icon': '%06u' % (fish.item.get_raw('Icon')+50000),
                  'level': [x for x in fish['GatheringItemLevel'].column_values],
                  'record': str(fish['FishingRecordType']),
                  'desc': fish.text,

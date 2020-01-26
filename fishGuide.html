@@ -167,6 +167,13 @@
             .data('num', page + 1);
 
         // Update the page contents next.
+        let fishInfosForPage = FISH_INFO.slice(25 * (page - 1), (25 * (page - 1)) + 25);
+        $('#fishGuideGrid .fish-icon').attr('class', 'fish-icon sprite-icon');
+        let fishEntries$ = $('#fishGuideGrid .fish-entry');
+        for (i = 0; i < fishInfosForPage.length; i++) {
+          $(fishEntries$[i]).children('.fish-icon').addClass('sprite-icon-fish_n_tackle-' + fishInfosForPage[i].icon);
+          $(fishEntries$[i]).data('fishInfo', fishInfosForPage);
+        }
 
         // Deselect the current fish.
 
