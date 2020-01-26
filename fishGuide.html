@@ -43,6 +43,7 @@
     <script type="text/javascript" src="js/app/data.js"></script>
     <script type="text/javascript" src="js/app/time.js"></script>
     <script type="text/javascript" src="js/app/weather.js"></script>
+    <script type="text/javascript" src="js/app/fish_info_data.js"></script>
 
     <script type="text/javascript">
       var currentPage = 1;
@@ -71,7 +72,7 @@
         });
 
         // Determine how many pages are necessary.
-        MAX_PAGE = (_(DATA.FISH).keys().length / 25) >>> 0;
+        MAX_PAGE = Math.ceil(_(FISH_INFO).keys().length / 25.0)
         pageNumbers = _.range(1, MAX_PAGE + 1);
 
         // Initialize the Fish Guide menu selector.
@@ -239,14 +240,17 @@
     <style>
       .fish-guide {
         display: grid;
-        grid-gap: 1em;
+        row-gap: 1em;
+        column-gap: 2em;
         grid-template-areas: "page-selector fish-info"
                              "fish-grid     fish-info";
-        grid-template-columns: minmax(min-content, 360px) auto;
+        grid-template-columns: min-content 1fr;
+        grid-template-rows: min-content 1fr;
       }
       .page-selector {
         grid-area: page-selector;
         justify-self: center;
+        align-content: flex-start;
       }
       .tiny.menu .page-number.item {
         /* This attempts to keep the item widths uniform */
@@ -255,6 +259,7 @@
       .fish-grid {
         grid-area: fish-grid;
         justify-self: center;
+        align-content: flex-start;
         display: grid;
         grid-gap: 8px;
         grid-template-columns: repeat(5, max-content);
@@ -271,9 +276,42 @@
         margin-top: 2px;
         margin-left: 2px;
       }
+
       .fish-info {
         grid-area: fish-info;
+        align-content: flex-start;
+        display: grid;
+        grid-gap: 1em;
+        grid-template-areas: "fish-name      fish-name"
+                             "fish-level     fish-waters"
+                             "fish-desc      fish-desc"
+                             "fish-locations fish-meta"
+                             "fish-extra     fish-meta";
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr 1fr minmax(min-content, 6fr) 3fr 3fr;
       }
+      .fish-name {
+        grid-area: fish-name;
+      }
+      .fish-level {
+        grid-area: fish-level;
+      }
+      .fish-waters {
+        grid-area: fish-waters;
+      }
+      .fish-desc {
+        grid-area: fish-desc;
+      }
+      .fish-locations {
+        grid-area: fish-locations;
+      }
+      .fish-extra {
+        grid-area: fish-extra;
+      }
+      .fish-meta {
+        grid-area: fish-meta;
+      }
+
     </style>
   </head>
   <body>
@@ -334,7 +372,26 @@
             <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
           </div>
           <div class="fish-info">
-            <span class="fish-name">Fish Name</span><br/>
+            <div class="fish-name">Fish Name</div>
+            <div class="fish-level">Lv. 1</div>
+            <div class="fish-waters">Waters</div>
+            <div class="fish-desc">Description<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH</div>
+            <div class="fish-locations">
+              <div class="heading">Prime Locations</div>
+              <div class="text">Region<br/>Place</div>
+            </div>
+            <div class="fish-extra">
+              <div class="heading">Additional Information</div>
+              <div class="text">Collectable?</div>
+            </div>
+            <div class="fish-meta">
+              <div class="ui mini compact icon button fishCaught">
+                <i class="checkmark icon"></i>
+              </div>
+              <div class="ui mini compact icon button fishPinned">
+                <i class="pin icon"></i>
+              </div>
+            </div>
           </div>
         </div>
 
