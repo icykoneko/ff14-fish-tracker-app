@@ -71,6 +71,25 @@
           displayFishGuidePage(newPage);
         });
 
+        // Assign events to the fish entry slots as well.
+        let entries$ = $('#fishGuideGrid .fish-entry');
+        entries$.on('click', function (e) {
+          e.stopPropagation();
+          let $this = $(this);
+
+          if ($this.hasClass('disabled')) {
+            return;
+          }
+
+          // Deselect the others.
+          $this.addClass('selected').siblings().removeClass('selected');
+
+          // Get the fishInfo object from the DOM data.
+          let fishInfo = $this.data('fishInfo');
+          // Display the information.
+          displayFishInfo(fishInfo);
+        });
+
         // Determine how many pages are necessary.
         MAX_PAGE = Math.ceil(_(FISH_INFO).keys().length / 25.0)
         pageNumbers = _.range(1, MAX_PAGE + 1);
@@ -172,11 +191,32 @@
         let fishEntries$ = $('#fishGuideGrid .fish-entry');
         for (i = 0; i < fishInfosForPage.length; i++) {
           $(fishEntries$[i]).children('.fish-icon').addClass('sprite-icon-fish_n_tackle-' + fishInfosForPage[i].icon);
-          $(fishEntries$[i]).data('fishInfo', fishInfosForPage);
+          $(fishEntries$[i]).data('fishInfo', fishInfosForPage[i]);
         }
 
         // Deselect the current fish.
+        fishEntries$.removeClass('selected');
+        $('.fish-info').addClass('hidden');
 
+      }
+
+      function displayFishInfo(fishInfo) {
+        let fishInfo$ = $('.fish-info');
+
+        fishInfo$.find('.fish-name').text(fishInfo.name);
+        fishInfo$.find('.fish-level').text("Lv. " + fishInfo.level[0]);
+        fishInfo$.find('.fish-waters').text(fishInfo.record);
+        fishInfo$.find('.fish-desc').html(fishInfo.desc.replace('\n', '<br/>'));
+        fishInfo$.find('.fish-locations .text').html(fishInfo.region + '<br/>' + fishInfo.zone);
+
+        let addtInfo$ = fishInfo$.find('.fish-extra .text');
+        let extraText = "";
+        if (fishInfo.collectable) {
+          extraText += "Collectable<br/>"
+        }
+        addtInfo$.html(extraText);
+
+        fishInfo$.removeClass('hidden');
       }
     </script>
 
@@ -296,6 +336,9 @@
                              "fish-extra     fish-meta";
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1fr 1fr minmax(min-content, 6fr) 3fr 3fr;
+      }
+      .fish-info.hidden {
+        display: none;
       }
       .fish-name {
         grid-area: fish-name;
