@@ -71,6 +71,18 @@
           displayFishGuidePage(newPage);
         });
 
+        $('#fishGuideGrid .fish-entry .label .icon').on({
+          mouseenter: function() {
+            $(this).parents('.fish-entry .label').addClass('hovering');
+          },
+          mouseleave: function() {
+            $(this).parents('.fish-entry .label').removeClass('hovering');
+          },
+          click: function() {
+            $(this).parents('.fish-entry').toggleClass('caught');
+          }
+        });
+
         // Assign events to the fish entry slots as well.
         let entries$ = $('#fishGuideGrid .fish-entry');
         entries$.on('click', function (e) {
@@ -88,6 +100,14 @@
           let fishInfo = $this.data('fishInfo');
           // Display the information.
           displayFishInfo(fishInfo);
+        });
+        $('#fishGuideGrid').on('click', function(e) {
+          e.stopPropagation();
+          let $this = $(this);
+
+          // Deselect the current fish.
+          entries$.removeClass('selected');
+          $('.fish-info').addClass('hidden');
         });
 
         // Determine how many pages are necessary.
@@ -187,19 +207,20 @@
 
         // Update the page contents next.
         let fishInfosForPage = FISH_INFO.slice(25 * (page - 1), (25 * (page - 1)) + 25);
-        $('#fishGuideGrid .fish-icon').attr('class', 'fish-icon sprite-icon');
-        $('#fishGuideGrid .fish-entry').addClass('disabled');
         let fishEntries$ = $('#fishGuideGrid .fish-entry');
-        for (i = 0; i < fishInfosForPage.length; i++) {
-          $(fishEntries$[i]).children('.fish-icon').addClass('sprite-icon-fish_n_tackle-' + fishInfosForPage[i].icon);
-          $(fishEntries$[i]).data('fishInfo', fishInfosForPage[i]);
-          $(fishEntries$[i]).removeClass('disabled');
-        }
 
-        // Deselect the current fish.
-        fishEntries$.removeClass('selected');
+        // Deselect the current fish, and fixup other properties.
+        fishEntries$.removeClass('selected')
+                    .addClass('disabled')
+                    .removeClass('caught');
         $('.fish-info').addClass('hidden');
+        $('#fishGuideGrid .fish-icon').attr('class', 'fish-icon sprite-icon');
 
+        for (i = 0; i < fishInfosForPage.length; i++) {
+          $(fishEntries$[i]).data('fishInfo', fishInfosForPage[i])
+                            .removeClass('disabled')
+                            .children('.fish-icon').addClass('sprite-icon-fish_n_tackle-' + fishInfosForPage[i].icon);
+        }
       }
 
       function displayFishInfo(fishInfo) {
@@ -292,7 +313,7 @@
         row-gap: 1em;
         column-gap: 2em;
         grid-template-areas: "page-selector fish-info"
-                             "fish-grid     fish-info";
+                             "fish-grid-out fish-info";
         grid-template-columns: min-content 1fr;
         grid-template-rows: min-content 1fr;
       }
@@ -305,10 +326,13 @@
         /* This attempts to keep the item widths uniform */
         min-width: 3.5em;
       }
-      .fish-grid {
-        grid-area: fish-grid;
-        justify-self: center;
+      .fish-grid-out {
+        grid-area: fish-grid-out;
         align-content: flex-start;
+        padding-bottom: 1em;
+      }
+      .fish-grid {
+        justify-content: center;
         display: grid;
         grid-gap: 8px;
         grid-template-columns: repeat(5, max-content);
@@ -316,8 +340,10 @@
       .fish-entry {
         height: 48px;
         width: 48px;
+        position: relative;
       }
-      .fish-entry:not(.disabled) {
+      .fish-entry:not(.disabled),
+      .fish-entry:not(.disabled) .ui.left.corner.label .icon {
         cursor: pointer;
       }
       .fish-entry.selected {
@@ -327,6 +353,34 @@
       .fish-entry .fish-icon {
         margin-top: 2px;
         margin-left: 2px;
+      }
+
+      .fish-entry .ui.left.corner.label {
+        margin-top: 4px;
+        margin-left: 4px;
+        height: 3em;
+        width: 3em;
+        border-color: rgba(232, 232, 232, 0.20);
+      }
+      .fish-entry .ui.left.corner.label.hovering {
+        border-color: rgba(232, 232, 232, 0.50);
+      }
+      .fish-entry.caught .ui.left.corner.label {
+        border-color: rgba(33, 186, 69, 0.50);
+      }
+      .fish-entry.caught .ui.left.corner.label.hovering {
+        border-color: rgba(33, 186, 69, 0.75);
+      }
+      .fish-entry .ui.left.corner.label:after {
+        border-top-width: 3em;
+        border-right-width: 3em;
+      }
+      .fish-entry .ui.left.corner.label .icon {
+        left: -0.5240714em;
+        top: 0.4821429em;
+      }
+      .fish-entry.disabled .ui.left.corner.label {
+        display: none;
       }
 
       .fish-info {
@@ -404,32 +458,109 @@
               <div class="icon item"><i class="right chevron icon"></i></div>
             </div>
           </div>
-          <div class="fish-grid" id="fishGuideGrid">
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
-            <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
+          <div class="fish-grid-out">
+            <div class="fish-grid" id="fishGuideGrid">
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+              <div class="fish-entry">
+                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
+                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
+              </div>
+            </div>
           </div>
           <div class="fish-info">
             <div class="fish-name heading">Fish Name</div>
