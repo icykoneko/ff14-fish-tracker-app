@@ -188,10 +188,12 @@
         // Update the page contents next.
         let fishInfosForPage = FISH_INFO.slice(25 * (page - 1), (25 * (page - 1)) + 25);
         $('#fishGuideGrid .fish-icon').attr('class', 'fish-icon sprite-icon');
+        $('#fishGuideGrid .fish-entry').addClass('disabled');
         let fishEntries$ = $('#fishGuideGrid .fish-entry');
         for (i = 0; i < fishInfosForPage.length; i++) {
           $(fishEntries$[i]).children('.fish-icon').addClass('sprite-icon-fish_n_tackle-' + fishInfosForPage[i].icon);
           $(fishEntries$[i]).data('fishInfo', fishInfosForPage[i]);
+          $(fishEntries$[i]).removeClass('disabled');
         }
 
         // Deselect the current fish.
@@ -315,6 +317,9 @@
         height: 48px;
         width: 48px;
       }
+      .fish-entry:not(.disabled) {
+        cursor: pointer;
+      }
       .fish-entry.selected {
         border-radius: 8px;
         background-color: yellow;
@@ -340,8 +345,13 @@
       .fish-info.hidden {
         display: none;
       }
+      .fish-info .heading {
+        font-size: 125%;
+      }
       .fish-name {
         grid-area: fish-name;
+        font-size: 140%;
+        font-weight: bold;
       }
       .fish-level {
         grid-area: fish-level;
@@ -422,9 +432,9 @@
             <div class="fish-entry"><div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div></div>
           </div>
           <div class="fish-info">
-            <div class="fish-name">Fish Name</div>
-            <div class="fish-level">Lv. 1</div>
-            <div class="fish-waters">Waters</div>
+            <div class="fish-name heading">Fish Name</div>
+            <div class="fish-level heading">Lv. 1</div>
+            <div class="fish-waters heading">Waters</div>
             <div class="fish-desc">Description<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH</div>
             <div class="fish-locations">
               <div class="heading">Prime Locations</div>
