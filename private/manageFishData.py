@@ -193,14 +193,16 @@ def initialize_data(args):
         for weather in
         set(reduce(add, [t.weather_rate.possible_weathers for t in TERRITORIES], []))
         if weather.key != 0])
-    
+
+    # TODO: Support Ocean Fishing nodes as well.
     FISHING_NODES = dict([
         (spot.key,
          dict([('_id', spot.key),
                *_make_localized_field('name', spot['PlaceName'], 'Name'),
                ('territory_id', spot.get_raw('TerritoryType')),
                ('placename_id', spot.key)]))
-        for spot in XIV.game_data.get_sheet('FishingSpot')])
+        for spot in XIV.game_data.get_sheet('FishingSpot')
+        if spot.get_raw('PlaceName{Main}') == 0])
     
     SPEARFISHING_NODES = dict([
         (x['GatheringPointBase'].key,
@@ -575,7 +577,7 @@ def check_data_integrity(args):
         # is needed. It doesn't help that it also seems to apply to Fish Eyes.
         fish_eyes_needed = fish.get('fishEyes') or False
         snagging_needed = fish.get('snagging') or False
-        if not fish_params['IsHidden'] and fish_params[4]:
+        if not fish_params['IsHidden'] and fish_params['Rare']:  # Rare = index: 4
             if fish_eyes_needed is False and snagging_needed is False:
                 has_errors = True
                 logging.error('%s should require Fish Eyes or Snagging', fish['name'])
@@ -609,6 +611,9 @@ def add_new_fish_data(args):
     from pysaintcoinach.xiv.fishing_spot import FishingSpot
     for fishing_spot in XIV.game_data.get_sheet(FishingSpot):
         if fishing_spot.place_name.key == 0:
+            continue
+        if fishing_spot.get_raw("PlaceName{Main}") != 0:
+            # TODO: For now, exclude Ocean Fishing nodes.
             continue
         for fish in fishing_spot.items:
             if str(fish.name) in known_fishes:
@@ -645,7 +650,7 @@ def add_new_fish_data(args):
 
             if item.key not in new_fishes:
                 # Get the BASE gathering point only!
-                is_hidden = gathering_point[2] == 6  # super-sketch, but this is the field
+                is_hidden = gathering_point['Count'] == 6  # super-sketch, but this is the field, Index: 2
 
                 new_fishes[item.key] = {
                     'name': str(item.name),

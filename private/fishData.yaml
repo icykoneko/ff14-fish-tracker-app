@@ -9314,3 +9314,89 @@
   gig: 
   fishEyes: 60
   patch: 5.1
+# Patch 5.2
+# NOTE: The new Ocean Fishing nodes are not yet included, sorry...
+- name: The Jaws of Undeath
+  location: The Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.2
+  dataMissing: true
+- name: White Ronso
+  location: Lower Watts River
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.2
+  dataMissing: true
+- name: Ambling Caltrop
+  location: The Hills of Amber
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.2
+  dataMissing: true
+- name: Fae Rainbow
+  location: The Jealous One
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.2
+  dataMissing: true
+- name: Black Jet
+  location: The Lozatl
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.2
+  dataMissing: true
+- name: Ondo Sigh
+  location: The Flounders' Floor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  hookset: 
+  snagging: 
+  gig: 
+  fishEyes: false
+  patch: 5.2
+  dataMissing: true
