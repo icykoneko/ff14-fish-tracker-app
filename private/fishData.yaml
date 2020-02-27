@@ -94,7 +94,7 @@
   predators: {}
   bestCatchPath:
   - Northern Krill
-  tug: Legendary
+  tug: Medium
   hookset: Powerful
   snagging:
   gig:
@@ -7238,9 +7238,9 @@
   bestCatchPath:
   - Moyebi Shrimp
   predators:
-  hookset:
+  hookset: Precision
   tug: light
-  snagging:
+  snagging: true
   gig:
   fishEyes: false
   patch: 5.0
@@ -7253,9 +7253,9 @@
   bestCatchPath:
   - Moyebi Shrimp
   predators:
-  hookset:
+  hookset: Precision
   tug: light
-  snagging:
+  snagging: true
   gig:
   fishEyes: false
   patch: 5.0
@@ -8028,7 +8028,7 @@
   predators:
   hookset:
   tug: light
-  snagging:
+  snagging: true
   gig:
   fishEyes: false
   patch: 5.0
@@ -8104,6 +8104,7 @@
   bestCatchPath:
   - Short Bill Minnow
   - Ancient Shrimp
+  # Alternatively, Squid Strip > Ancient Shrimp also works.
   predators:
   hookset: Powerful
   tug: heavy
@@ -9210,7 +9211,7 @@
   weatherSet:
   - Dust Storms
   bestCatchPath:
-  - Desert Dessert Frog
+  - Jerked Ovim  # ALT: Desert Dessert Frog
   - Hornhelm
   predators: 
   hookset: Powerful
@@ -9318,13 +9319,16 @@
 # NOTE: The new Ocean Fishing nodes are not yet included, sorry...
 - name: The Jaws of Undeath
   location: The Isle of Ken
-  startHour: 0
+  startHour: 16
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  hookset: 
+  hookset: Powerful
+  tag: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9333,12 +9337,14 @@
 - name: White Ronso
   location: Lower Watts River
   startHour: 0
-  endHour: 24
+  endHour: 2
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  hookset: 
+  hookset: Precision
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9346,13 +9352,16 @@
   dataMissing: true
 - name: Ambling Caltrop
   location: The Hills of Amber
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 16
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Web-footed Sand Gecko
   predators: 
   hookset: 
+  tug: 
   snagging: 
   gig: 
   fishEyes: false
@@ -9363,10 +9372,13 @@
   startHour: 0
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Marble Nymph
   predators: 
-  hookset: 
+  hookset: Precision
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9374,13 +9386,18 @@
   dataMissing: true
 - name: Black Jet
   location: The Lozatl
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 2
+  endHour: 12
+  previousWeatherSet:
+  - Clouds
+  - Fog
+  weatherSet:
+  - Fair Skies
+  bestCatchPath:
+  - Robber Ball
   predators: 
-  hookset: 
+  hookset: Precision
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
@@ -9388,13 +9405,17 @@
   dataMissing: true
 - name: Ondo Sigh
   location: The Flounders' Floor
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 14
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Fair Skies
+  - Clear Skies
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  hookset: 
+  hookset: Precision
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
