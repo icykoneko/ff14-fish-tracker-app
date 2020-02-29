@@ -129,3 +129,24 @@ body.dark .ui.striped.table > tr.section-divider:not(.fish-entry),
 body.dark .ui.striped.table tbody tr.section-divider:not(.fish-entry) {
   background-color: hsl(0, 0%, 20%) !important;
 }
+
+/* Modal overrides */
+.ui.inverted.modal {
+  background: unset;
+}
+.ui.inverted.modal > .header {
+  background: hsla(0, 0%, 15%, 1);
+  color: hsl(0, 0%, 90%);
+  border-bottom: 1px solid hsla(0, 0%, 90%, 0.15);
+}
+.ui.inverted.modal > .content {
+  background-color: hsla(0, 0%, 15%, 1);
+}
+.ui.inverted.modal > .actions {
+  background: hsla(210, 10%, 10%, 1);
+  border-top: 1px solid hsla(0, 0%, 90%, 0.15);
+}
+.ui.inverted .ui.form .field > label,
+.ui.inverted.form .field > label {
+  color: hsl(0, 0%, 90%);
+}
