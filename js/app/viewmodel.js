@@ -386,6 +386,10 @@ let ViewModel = new class {
     $('#languageChoice .button').on('click', this.languageChoiceClicked);
     $('#checklist .button').on('click', this.onChecklistButtonClicked);
 
+    // Initialize import/export modals.
+    $('#export-settings-modal').modal();
+    $('#import-settings-modal').modal();
+
     // Special event handlers.
     // These are mainly supporting the SemanticUI widgets.
     $('#sortingType .radio.checkbox').checkbox({
@@ -898,12 +902,14 @@ let ViewModel = new class {
     if (theme === 'dark') {
       $('body').addClass('dark');
       $('.ui.menu').addClass('inverted');
+      $('.ui.modal').addClass('inverted');
       $('.ui.message.announcement').addClass('inverted');
       $('.ui.popup.upcoming-windows').addClass('inverted');
       $('*[data-tooltip]').attr('data-inverted', '');
     } else {
       $('body').removeClass('dark');
       $('.ui.menu').removeClass('inverted');
+      $('.ui.modal').removeClass('inverted');
       $('.ui.message.announcement').removeClass('inverted');
       $('.ui.popup.upcoming-windows').removeClass('inverted');
       $('*[data-tooltip]').removeAttr('data-inverted');
@@ -911,7 +917,7 @@ let ViewModel = new class {
   }
 
   loadSettings() {
-    var settings = this.settings;
+    let settings = this.settings;
 
     // Try loading the user's settings from localStorage.
     try {
@@ -937,6 +943,11 @@ let ViewModel = new class {
       console.warn("Unable to access localStorage. Settings not restored.");
     }
 
+    // Now, apply the settings to the current page, committing them if all is well.
+    return this.applySettings(settings);
+  }
+
+  applySettings(settings) {
     if (settings.filters) {
       if (settings.filters.completion) {
         $('#filterCompletion .button[data-filter="' + settings.filters.completion + '"]')
@@ -966,6 +977,9 @@ let ViewModel = new class {
 
     // Save the settings to the model.
     this.settings = settings;
+    // And update local storage.
+    this.saveSettings();
+
     return settings;
   }
 
@@ -978,58 +992,58 @@ let ViewModel = new class {
     }
   }
 
-  exportChecklist() {
-    // NOTE: THIS IS NOT THE SAME AS EXPORTING THE ENTIRE SITE'S SETTINGS
+  exportSiteSettings() {
+    let clipboard = new ClipboardJS('#export-settings-copy', {
+      container: document.getElementById('export-settings-modal')
+    });
+    clipboard.on('success', function(e) {
+      console.info("Settings copied to clipboard.");
+      e.clearSelection();
+    });
+    clipboard.on('error', function(e) {
+      console.error("Failed to copy settings");
+    });
 
-    // Pop up dialog box with completion value for user to save.
-    let result = {
-      completed: this.settings.completed,
-      pinned: this.settings.pinned
-    };
+    // Generate the exportable site data.
+    // TODO: Support compression.
+    $('#export-settings-data').text(JSON.stringify(this.settings));
 
-    // TODO: The window.prompt might not be able to fit everything now...
-    window.prompt('Fishing Checklist Code:', JSON.stringify(result));
+    // TODO: Support uploading to cl1p.net
+
+    // Display the modal.
+    $('#export-settings-modal')
+      .modal({
+        onHidden: function() {
+          // Clean up the clipboard DOM.
+          clipboard.destroy();
+        }
+      })
+      .modal('show');
   }
 
-  importChecklist() {
-    // NOTE: THIS IS NOT THE SAME AS IMPORTING THE ENTIRE SITE'S SETTINGS
-    let completion = window.prompt("Enter Fishing Checklist Code:");
-    if (completion === null || completion === "") { return; }
-    try {
-      completion = JSON.parse(completion);
-    } catch (ex) {
-      window.alert("Error: Malformed fishing checklist.");
-      return;
-    }
-    if ('pinned' in completion && completion["pinned"].length > 0) {
-      try {
-        // Update the settings
-        this.settings.pinned =
-          _(completion["pinned"]).reduce((o, v) => o.concat(Number(v)), []);
-      } catch (ex) {
-        window.alert("Error: Malformed fishing checklist.")
-        return;
-      }
-    }
-    if ('completed' in completion && completion["completed"].length > 0) {
-      try {
-        // Update the settings
-        this.settings.completed =
-          _(completion["completed"]).reduce((o, v) => o.concat(Number(v)), []);
-      } catch (ex) {
-        window.alert("Error: Malformed fishing checklist.")
-        return;
-      }
-    }
-    this.saveSettings();
-    // Update the fish entries.
-    // TODO: [NEEDS-OPTIMIZATION]
-    _(this.fishEntries).each(entry => {
-      entry.update();
-      this.layout.updatePinnedState(entry);
-      this.layout.updateCaughtState(entry);
-    });
-    this.updateDisplay();
+  importSiteSettings() {
+    $('#import-settings-modal')
+      .modal({
+        onApprove: function($element) {
+          // Apply the imported settings now.
+          ViewModel.applySettings(JSON.parse($('#import-settings-data').val()));
+          // Update the fish entries.
+          // TODO: [NEEDS-OPTIMIZATION]
+          _(ViewModel.fishEntries).each(entry => {
+            entry.update();
+            ViewModel.layout.updatePinnedState(entry);
+            ViewModel.layout.updateCaughtState(entry);
+          });
+          // Update the display to update the fish table as well.
+          ViewModel.updateDisplay(null);
+          return true;
+        },
+        onHidden: function() {
+          // Erase saved data from form please...
+          $('#import-settings-data').val("");
+        }
+      })
+      .modal('show');
   }
 
   onChecklistButtonClicked(e) {
@@ -1037,9 +1051,9 @@ let ViewModel = new class {
     let $this = $(this);
 
     if ($this.data('action') === 'export') {
-      ViewModel.exportChecklist();
+      ViewModel.exportSiteSettings();
     } else {
-      ViewModel.importChecklist();
+      ViewModel.importSiteSettings();
     }
     return false;
   }
