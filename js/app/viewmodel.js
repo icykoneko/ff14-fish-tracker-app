@@ -950,20 +950,33 @@ let ViewModel = new class {
   }
 
   applySettings(settings) {
-    if (settings.filters) {
-      if (settings.filters.completion) {
-        $('#filterCompletion .button[data-filter="' + settings.filters.completion + '"]')
-        .addClass('active').siblings().removeClass('active');
-      }
-      if (settings.filters.patch) {
-        // TODO: Consider restoring this filter. The catch is... what about when a new
-        // patch is released. No one would have it in their settings, and thus, would
-        // never see it by default :(
-        settings.filters.patch = this.settings.filters.patch;
-      }
+    // NOTE: In order to prevent data corruption, this function assumes `this.settings`
+    // is still completely valid.  As it processes the `settings` object, it will check
+    // that it contains each key, and if one is missing, it will fall back to the
+    // original valid data.
+
+    if (!(settings.filters)) {
+      // Why is `filters` missing?!
+      console.warn("Why is filters missing??? Using default then...");
+      settings.filters = this.settings.filters;
+    }
+    if (settings.filters.completion) {
+      $('#filterCompletion .button[data-filter="' + settings.filters.completion + '"]')
+      .addClass('active').siblings().removeClass('active');
+    }
+    if (settings.filters.patch) {
+      // TODO: Consider restoring this filter. The catch is... what about when a new
+      // patch is released. No one would have it in their settings, and thus, would
+      // never see it by default :(
+      settings.filters.patch = this.settings.filters.patch;
     }
 
     // Set the sorter function.
+    if (!(settings.sortingType)) {
+      // Why is `sortingType` missing???
+      console.warn("Why is sortingType missing??? Using default then...");
+      settings.sortingType = this.settings.sortingType;
+    }
     if (settings.sortingType == 'overallRarity') {
       this.sorterFunc = Sorters.sortByOverallRarity;
     } else if (settings.sortingType == 'windowPeriods') {
@@ -974,6 +987,11 @@ let ViewModel = new class {
     $('#sortingType input[value="' + settings.sortingType + '"]').parent().checkbox('check');
 
     // Set the theme.
+    if (!(settings.theme)) {
+      // Why is `theme` missing???
+      console.warn("Why is theme missing??? Using default then...");
+      settings.theme = this.settings.theme;
+    }
     $('#theme-button').prop('checked', settings.theme === 'dark');
     this.applyTheme(settings.theme);
 
