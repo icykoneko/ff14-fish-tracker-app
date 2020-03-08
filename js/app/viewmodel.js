@@ -941,6 +941,8 @@ let ViewModel = new class {
     } catch (ex) {
       // Ignore this. This may happen if localStorage is disabled or private browsing.
       console.warn("Unable to access localStorage. Settings not restored.");
+      // Just in case, use the default settings...
+      settings = this.settings;
     }
 
     // Now, apply the settings to the current page, committing them if all is well.
@@ -992,6 +994,14 @@ let ViewModel = new class {
     }
   }
 
+  overwriteChecklist(checklist) {
+    // NOTE: It's fine if the checklist contains IDs that aren't in the list...
+    // Again, if a user provides bad data, they're just gonna break the page for
+    // themselves...
+    console.info("Overwriting checklist...\nWas:", this.settings.completed, "\nNow:", checklist);
+    this.settings.completed = checklist;
+  }
+
   exportSiteSettings() {
     let clipboard = new ClipboardJS('#export-settings-copy', {
       container: document.getElementById('export-settings-modal')
@@ -1026,7 +1036,16 @@ let ViewModel = new class {
       .modal({
         onApprove: function($element) {
           // Apply the imported settings now.
-          ViewModel.applySettings(JSON.parse($('#import-settings-data').val()));
+          let settings = JSON.parse($('#import-settings-data').val());
+          // Check if the `settings` is a list or object.
+          if (settings instanceof Array) {
+            // Array means it's just a checklist. Don't overwrite any other settings...
+            // NOTE: This will OVERWRITE the checklist! I'm assuming you've tracked the fish elsewhere...
+            ViewModel.overwriteChecklist(settings);
+          } else {
+            // Otherwise, it should be valid settings.
+            ViewModel.applySettings(settings);
+          }
           // Update the fish entries.
           // TODO: [NEEDS-OPTIMIZATION]
           _(ViewModel.fishEntries).each(entry => {
