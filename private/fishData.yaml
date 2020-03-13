@@ -9333,7 +9333,6 @@
   gig: 
   fishEyes: false
   patch: 5.2
-  dataMissing: true
 - name: White Ronso
   location: Lower Watts River
   startHour: 0
@@ -9349,7 +9348,6 @@
   gig: 
   fishEyes: false
   patch: 5.2
-  dataMissing: true
 - name: Ambling Caltrop
   location: The Hills of Amber
   startHour: 12
@@ -9358,15 +9356,15 @@
   weatherSet:
   - Clear Skies
   bestCatchPath:
+  - Desert Dessert Frog
   - Web-footed Sand Gecko
   predators: 
-  hookset: 
-  tug: 
+  hookset: Powerful
+  tug: heavy
   snagging: 
   gig: 
   fishEyes: false
   patch: 5.2
-  dataMissing: true
 - name: Fae Rainbow
   location: The Jealous One
   startHour: 0
@@ -9383,7 +9381,6 @@
   gig: 
   fishEyes: false
   patch: 5.2
-  dataMissing: true
 - name: Black Jet
   location: The Lozatl
   startHour: 2
@@ -9402,7 +9399,6 @@
   gig: 
   fishEyes: false
   patch: 5.2
-  dataMissing: true
 - name: Ondo Sigh
   location: The Flounders' Floor
   startHour: 12
@@ -9420,4 +9416,3 @@
   gig: 
   fishEyes: false
   patch: 5.2
-  dataMissing: true
