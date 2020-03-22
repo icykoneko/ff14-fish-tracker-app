@@ -232,7 +232,7 @@
         let fishInfo$ = $('.fish-info');
 
         fishInfo$.find('.fish-name').text(fishInfo.name);
-        fishInfo$.find('.fish-level').text("Lv. " + fishInfo.level[0]);
+        fishInfo$.find('.fish-level').text("Lv. " + fishInfo.level[0] + " " + "★".repeat(fishInfo.level[1]));
         fishInfo$.find('.fish-waters').text(fishInfo.record);
         fishInfo$.find('.fish-desc').html(fishInfo.desc.replace('\n', '<br/>'));
         fishInfo$.find('.fish-locations .text').html(fishInfo.region + '<br/>' + fishInfo.zone);
