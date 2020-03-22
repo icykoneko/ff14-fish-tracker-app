@@ -45,6 +45,8 @@
     <script type="text/javascript" src="js/app/weather.js"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js"></script>
 
+    <script type="text/javascript" src="js/app/fishguide.js"></script>
+
     <script type="text/javascript">
       var currentPage = 1;
       let MAX_PAGE = 30;
@@ -90,6 +92,9 @@
           let $this = $(this);
 
           if ($this.hasClass('disabled')) {
+            // Deselect the current fish.
+            entries$.removeClass('selected');
+            $('.fish-info').addClass('hidden');
             return;
           }
 
@@ -279,6 +284,7 @@
           $('.ui.list').toggleClass('inverted', theme === 'dark');
           $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
           $('.ui.menu').toggleClass('inverted', theme === 'dark');
+          $('.ui.modal').toggleClass('inverted', theme === 'dark');
         }
 
         function themeButtonClicked(e) {
@@ -288,6 +294,9 @@
           applyTheme(siteTheme);
         }
 
+        // Render the fish guide from template.
+        FishGuide.render(document.getElementById('fishGuideElem'));
+
         // Set the theme.
         $('#theme-button').prop('checked', siteTheme === 'dark');
         $('#theme-button').on('click', themeButtonClicked);
@@ -295,6 +304,11 @@
 
         // Initialize the fish guide.
         initializeFishGuide();
+
+        $('#displayFishGuideButton').on('click', function(e) {
+          if (e) e.stopPropagation();
+          $('#fishGuideModal').modal('show');
+        });
       });
     </script>
     <style>
@@ -338,8 +352,8 @@
         grid-template-columns: repeat(5, max-content);
       }
       .fish-entry {
-        height: 48px;
-        width: 48px;
+        height: 60px;
+        width: 60px;
         position: relative;
       }
       .fish-entry:not(.disabled),
@@ -353,6 +367,7 @@
       .fish-entry .fish-icon {
         margin-top: 2px;
         margin-left: 2px;
+        transform: scale(1.27) translate(5px, 5px);
       }
 
       .fish-entry .ui.left.corner.label {
@@ -444,148 +459,11 @@
     <div class="ui main container">
       <h1>FFX|V Fish Guide</h1>
       <div class="ui container">
-        <div class="fish-guide">
-          <div class="page-selector">
-            <div class="ui tiny pagination link menu" id="fishGuidePageSelector">
-              <div class="icon item"><i class="left chevron icon"></i></div>
-              <div class="page-number item"></div>
-              <div class="page-number item"></div>
-              <div class="page-number item"></div>
-              <div class="page-number item"></div>
-              <div class="page-number item"></div>
-              <div class="page-number item"></div>
-              <div class="page-number item"></div>
-              <div class="icon item"><i class="right chevron icon"></i></div>
-            </div>
-          </div>
-          <div class="fish-grid-out">
-            <div class="fish-grid" id="fishGuideGrid">
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-              <div class="fish-entry">
-                <div class="fish-icon sprite-icon sprite-icon-DEFAULT"></div>
-                <div class="ui left corner mini label"><i class="checkmark icon"></i></div>
-              </div>
-            </div>
-          </div>
-          <div class="fish-info">
-            <div class="fish-name heading">Fish Name</div>
-            <div class="fish-level heading">Lv. 1</div>
-            <div class="fish-waters heading">Waters</div>
-            <div class="fish-desc">Description<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH<br/>BLAH</div>
-            <div class="fish-locations">
-              <div class="heading">Prime Locations</div>
-              <div class="text">Region<br/>Place</div>
-            </div>
-            <div class="fish-extra">
-              <div class="heading">Additional Information</div>
-              <div class="text">Collectable?</div>
-            </div>
-            <div class="fish-meta">
-              <div class="ui mini compact icon button fishCaught">
-                <i class="checkmark icon"></i>
-              </div>
-              <div class="ui mini compact icon button fishPinned">
-                <i class="pin icon"></i>
-              </div>
-            </div>
-          </div>
+        <div class="ui longer modal" id="fishGuideModal">
+          <div class="scrolling content" id="fishGuideElem"></div>
         </div>
 
+        <div class="ui button" id="displayFishGuideButton">Display Fish Guide</div>
 
         <p>
           FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
