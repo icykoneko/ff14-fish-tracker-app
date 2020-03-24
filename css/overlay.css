@@ -76,9 +76,9 @@ span.bait-span {
   display: inline-block;
   transform: translate(-40%, 80%);
 
-  padding: 0.5em;
+  padding: 0.5em 0.3em 0.5em 0.5em;
   line-height: 1em;
-  text-align: right;
+  text-align: center;
   font-size: 0.64285714rem;
   border-top-left-radius: 250rem;
   border-top-right-radius: 75rem;
