@@ -1,3 +1,13 @@
+/*
+ * NOTE:
+ * Since I use background-image sprite trick, the only way to scale any image
+ * is via the `transform: scale` style. This DOES NOT affect the CSS box layout.
+ * Therefore, you must assign the `margin` for the node to specifically deal with
+ * scaling in order to prevent extra margins, or not enough margins.
+ *
+ * Use the formula: ((H * sH) - H) / 2 for height and width.
+ */
+
 .main.container {
   padding-top: 3em;
   padding-bottom: 3em;
@@ -8,32 +18,41 @@
 }
 
 .weather-icon.sprite-icon {
-  zoom: 0.675;
+  transform-origin: center;
+  transform: scale(0.675);
+  margin: -5.85px; /* weather-icon sprites are 36x36 */
 }
 
 .bait-icon.sprite-icon {
-  zoom: 0.75;
   position: relative;
   z-index: 2;
+  transform-origin: center;
+  transform: scale(0.75);
+  margin: -5.5px; /* bait-icon sprites are 44x44 */
 }
 
 .bait-icon.sprite-icon.hookset-modifier-icon {
-  zoom: 0.5;
-  margin-left: -22px; /* half size of icon itself */
-  margin-top: -0.5em; /* half the padding size of a table cell */
   vertical-align: top;
   position: relative;
   z-index: 1;
+  transform-origin: center;
+  transform: scale(0.50) translate(-33.3%, -50%);
+  margin: -11px; /* hookset-modifier-icon sprites are 44x44 */
 }
 
 tr.fish-intuition-row .bait-icon.sprite-icon.hookset-modifier-icon {
-  zoom: 0.375;
-  margin-left: -22px; /* half size of icon itself */
+  transform-origin: center;
+  transform: scale(0.375) translate(-33.3%, -25%);
+  margin: -13.75px;
 }
 
 /* Prevent hookset modifier from being separated. */
 span.bait-span {
   white-space: nowrap;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 3px;
+  display: inline-block;
 }
 
 /*
@@ -44,24 +63,18 @@ span.bait-span {
 .bait-badge-container {
   display: inline-block;
   position: relative;
-  min-width: 0.5em;
+  min-width: 0.75em;
+  height: 1em;
 }
 
 .bait-badge-container .bait-icon.sprite-icon.hookset-modifier-icon {
   position: absolute;
-  left: -22px; /* half size of hookset icon itself */
-  top: -50px; /* half height of the icon, plus padding excess */
-  
-  /* Unset the margin styles, they don't work as well in this context. */
-  margin-left: unset;
-  margin-top: unset;
 }
 
 .bait-badge-container .tug-indicator {
   position: absolute;
-  left: -1.25em;
-  top: 0px;
   display: inline-block;
+  transform: translate(-40%, 80%);
 
   padding: 0.5em;
   line-height: 1em;
@@ -91,11 +104,15 @@ span.bait-span {
 
 tr.fish-intuition-row .fish-icon.sprite-icon,
 tr.fish-intuition-row .bait-icon.sprite-icon {
-  zoom: 0.675;
+  transform-origin: center;
+  transform: scale(0.675);
+  margin: -7.15px;
 }
 
 tr.fish-intuition-row .weather-icon.sprite-icon {
-  zoom: 0.5;
+  transform-origin: center;
+  transform: scale(0.50);
+  margin: -9px;
 }
 
 img {

@@ -24,22 +24,22 @@ title: Home
       gtag('config', 'UA-142180509-1');
     </script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.3/doT.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"></script>
     <script src="js/lib/dateFns.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?5.2_20200219_1052" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20191109_1301" />
-    <link rel="stylesheet" href="css/overlay.css?20191109_1301" />
+    <link rel="stylesheet" href="css/overlay.css?20200324_1344" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -135,15 +135,15 @@ title: Home
             <div class="ui tiny circular label">{{=it.data.patch}}</div>
             <!-- check if fish can be put into the aquarium -->
             {{?it.data.aquarium !== null}}
-              <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
+              <div class="ui middle aligned sprite-icon sprite-icon-aquarium" 
                    data-tooltip="Tier {{=it.data.aquarium.size}} {{=it.data.aquarium.water}}" data-position="right center" data-variation="mini"></div>
             {{?}}
             {{?it.data.folklore !== null}}
-              <div class="ui middle aligned sprite-icon sprite-icon-folklore"
+              <div class="ui middle aligned sprite-icon sprite-icon-folklore" 
                    data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
             {{?}}
             {{?it.data.collectable === true}}
-              <div class="ui middle aligned sprite-icon sprite-icon-collectable"
+              <div class="ui middle aligned sprite-icon sprite-icon-collectable" 
                    data-tooltip="Collectable" data-position="right center" data-variation="mini"></div>
             {{?}}
           </div>
@@ -179,7 +179,7 @@ title: Home
         </td>
         <!-- Location -->
         <td>
-          <a href="http://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}"
+          <a href="http://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}" 
              target="cp_gt" class="location-name">{{=it.data.location.name}}</a><br/>
           <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
         </td>
@@ -196,15 +196,15 @@ title: Home
           {{?}}
           {{?it.data.conditions.previousWeatherSet.length > 0}}
             {{~it.data.conditions.previousWeatherSet :weather:windex}}
-              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                  title="{{=__p(weather,'name')}}"
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}" 
+                  title="{{=__p(weather,'name')}}" 
                   data-prevWeatherIdx="{{=windex}}"></div>
             {{~}}
             <i class="arrow right icon"></i>
           {{?}}
           {{~it.data.conditions.weatherSet :weather:windex}}
-            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                title="{{=__p(weather,'name')}}"
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}" 
+                title="{{=__p(weather,'name')}}" 
                 data-currWeatherIdx="{{=windex}}"></div>
           {{~}}
           <br/>
@@ -255,8 +255,8 @@ title: Home
               {{??}}
                 <div class="bait-badge-container">
                   {{?item.hookset}}
-                    <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
-                        title="{{=item.hookset}} Hookset"></div>
+                    <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset" 
+                         title="{{=item.hookset}} Hookset"></div>
                   {{?}}
                   {{?item.tug}}
                     <div class="tug-indicator {{=item.tug}}-tug-indicator" title="{{=item.tug}} tug">
@@ -264,7 +264,7 @@ title: Home
                     </div>
                   {{?}}
                 </div>
-                </span> <!-- bait-span -->
+                </span><!-- bait-span -->
                 <i class="arrow right icon"></i>
                 <span class="bait-span">
               {{?}}
@@ -283,7 +283,7 @@ title: Home
                 </div>
               {{?}}
             </div>
-          </span> <!-- bait span -->
+          </span><!-- bait span -->
         </td>
       </tr>
     </script>
@@ -339,16 +339,16 @@ title: Home
           {{?}}
           {{?it.data.conditions.previousWeatherSet.length > 0}}
             {{~it.data.conditions.previousWeatherSet :weather:windex}}
-              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                  title="{{=__p(weather,'name')}}"
-                  data-prevWeatherIdx="{{=windex}}"></div>
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}" 
+                   title="{{=__p(weather,'name')}}" 
+                   data-prevWeatherIdx="{{=windex}}"></div>
             {{~}}
             <i class="arrow right icon"></i>
           {{?}}
           {{~it.data.conditions.weatherSet :weather:windex}}
-            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
-                title="{{=__p(weather,'name')}}"
-                data-currWeatherIdx="{{=windex}}"></div>
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}" 
+                 title="{{=__p(weather,'name')}}" 
+                 data-currWeatherIdx="{{=windex}}"></div>
           {{~}}
           <br/>
           {{?it.data.dataMissing !== false}}
@@ -392,10 +392,10 @@ title: Home
               <a href="http://www.garlandtools.org/db/#item/{{=item.id}}" target="cp_gt">
             {{??}}
               {{?item.hookset}}
-                <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
+                <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset" 
                      title="{{=item.hookset}} Hookset"></div>
               {{?}}
-              </span> <!-- bait span -->
+              </span><!-- bait span -->
               <i class="arrow right icon"></i>
               <span class="bait-span">
             {{?}}
@@ -407,7 +407,7 @@ title: Home
           {{?it.data.hookset}}
             <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
           {{?}}
-          </span> <!-- bait span -->
+          </span><!-- bait span -->
         </td>
       </tr>
     </script>
