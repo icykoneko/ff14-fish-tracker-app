@@ -35,7 +35,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.2_20200219_1052" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20191109_1301" />
-    <link rel="stylesheet" href="css/overlay.css?20200324_1344" />
+    <link rel="stylesheet" href="css/overlay.css?20200324_1422" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -231,7 +231,7 @@
                   {{?}}
                   {{?item.tug}}
                     <div class="tug-indicator {{=item.tug}}-tug-indicator" title="{{=item.tug}} tug">
-                      {{={'light': 'L', 'medium': 'M', 'heavy': 'H'}[item.tug]}}
+                      {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[item.tug]}}
                     </div>
                   {{?}}
                 </div>
@@ -250,7 +250,7 @@
               {{?}}
               {{?it.data.tug}}
                 <div class="tug-indicator {{=it.data.tug}}-tug-indicator" title="{{=it.data.tug}} tug">
-                  {{={'light': 'L', 'medium': 'M', 'heavy': 'H'}[it.data.tug]}}
+                  {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.data.tug]}}
                 </div>
               {{?}}
             </div>
