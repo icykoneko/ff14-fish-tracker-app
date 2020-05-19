@@ -7213,7 +7213,7 @@
   patch: 5.0
 - name: Henodus
   location: The Eastern Kholusian Coast
-  startHour: 12
+  startHour: 16
   endHour: 24
   previousWeatherSet:
   weatherSet:
@@ -8181,8 +8181,8 @@
   bestCatchPath:
   - Short Bill Minnow
   predators:
-  hookset:
-  tug: medium
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
@@ -9309,7 +9309,7 @@
   bestCatchPath:
   - Squid Strip
   predators: 
-  hookset: Powerful
+  hookset: Precision
   tug: heavy
   snagging: 
   gig: 
@@ -9369,7 +9369,9 @@
   location: The Jealous One
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
+  previousWeatherSet:
+  - Fair Skies
+  - Clear Skies
   weatherSet:
   - Fog
   bestCatchPath:
