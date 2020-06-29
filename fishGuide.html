@@ -231,11 +231,11 @@
       function displayFishInfo(fishInfo) {
         let fishInfo$ = $('.fish-info');
 
-        fishInfo$.find('.fish-name').text(fishInfo.name);
+        fishInfo$.find('.fish-name').text(__p(fishInfo, 'name'));
         fishInfo$.find('.fish-level').text("Lv. " + fishInfo.level[0] + " " + "★".repeat(fishInfo.level[1]));
-        fishInfo$.find('.fish-waters').text(fishInfo.record);
-        fishInfo$.find('.fish-desc').html(fishInfo.desc.replace('\n', '<br/>'));
-        fishInfo$.find('.fish-locations .text').html(fishInfo.region + '<br/>' + fishInfo.zone);
+        fishInfo$.find('.fish-waters').text(__p(fishInfo, 'record'));
+        fishInfo$.find('.fish-desc').html(__p(fishInfo, 'desc').replace('\n', '<br/>'));
+        fishInfo$.find('.fish-locations .text').html(__p(fishInfo, 'region') + '<br/>' + __p(fishInfo, 'zone'));
 
         let addtInfo$ = fishInfo$.find('.fish-extra .text');
         let extraText = "";

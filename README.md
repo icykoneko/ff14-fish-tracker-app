@@ -36,7 +36,11 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
 * Rebuild the fish data JS file: `python ./private/manageFishData.py rebuild -i ./private/fishData.yaml -o ./js/app/data.js --with-icons`
   * If changes to the SaintCoinach library break the script, fix it, then commit the changes as a separate commit.
   * **NOTE:** Pay attention to the log messages. If the script extracted any new textures, you'll need to update the sprite image.
-* Update the *cache buster* in `index.html` for `js/app/data.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
+  * Update the *cache buster* in `index.html` for `js/app/data.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
+* Rebuild the fish guide JS file: `python ./private/rebuildFishGuide.py -o ./js/app/fish_info_data.js --with-icons`
+  * If changes to the SaintCoinach library break the script, fix it, then commit the changes as a separate commit.
+  * **NOTE:** Pay attention to the log messages. If the script extracted any new textures, you'll need to update the sprite image.
+  * Update the *cache buster* in `index.html` for `js/app/fish_info_data.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
 * If adding fish for a new patch;
   * Update the `viewModel.filter` definition in `index.html` by adding the patch version. (You'll also need to update the entry in `js/app/viewmodel.js`)
   * Remove the `disabled` class from the new patch version.
