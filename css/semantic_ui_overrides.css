@@ -155,3 +155,12 @@ i.icon.discord:before {
 .ui.inverted.menu .item[data-inverted][data-position~="top"][data-tooltip]:before {
   background: #1B1C1D;
 }
+
+.ui.inverted.link.menu .item.disabled,
+.ui.inverted.link.menu .item.disabled:hover {
+  color: rgba(225, 225, 225, 0.3);
+}
+
+.ui.menu .item.hidden {
+  display: none;
+}
