@@ -34,8 +34,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?5.2_20200219_1052" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20191109_1301" />
-    <link rel="stylesheet" href="css/overlay.css?20200324_1422" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20200629_1131" />
+    <link rel="stylesheet" href="css/overlay.css?20200629_1131" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -43,6 +43,7 @@
 
     <!-- Include the data -->
     <script type="text/javascript" src="js/app/data.js?5.2_20200518_2332"></script>
+    <script type="text/javascript" src="js/app/fish_info_data.js?5.2_20200629_1110"></script>
 
     <!--
       - Scripts
@@ -416,8 +417,9 @@
 
     <!-- At last, we can load the layout and view model code. -->
     <script type="text/javascript" src="js/app/layout.js?20200115"></script>
+    <script type="text/javascript" src="js/app/fishguide.js?20200629_1131"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20200308_1825"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20200629_1131"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -521,6 +523,12 @@
       <p>
         Many fish, especially those requiring mooching, have hooksets associated with them. To make the display a bit more consise, you should interpret the badges as, when using this bait, use this hookset to reel in catch.
       </p>
+
+      <div class="ui longer modal" id="fishGuideModal">
+        <div class="scrolling content" id="fishGuideElem"></div>
+      </div>
+
+      <div class="ui button" id="displayFishGuideButton">Display Fish Guide</div>
 
       <!-- Modal for exporting settings (checklist and filters, etc.) -->
       <div id="export-settings-modal" class="ui tiny modal">
