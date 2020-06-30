@@ -314,3 +314,137 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
 .fish-entry.entry-after-last-upsoon-entry > td {
   border-top: 2px solid black !important;
 }
+
+/*
+ * Fish Guide style rules
+ * NOTE: All rules MUST be bounded to .fish-guide to prevent matching against
+ * other UI elements. `.fish-entry` in particular is re-used here.
+ */
+
+.fish-guide {
+  display: grid;
+  row-gap: 1em;
+  column-gap: 2em;
+  grid-template-areas: "page-selector fish-info"
+                       "fish-grid-out fish-info";
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: min-content 1fr;
+}
+/* Handle mobile devices in portrait orientation. */
+@media (max-width: 600px) {
+  .fish-guide {
+    grid-template-areas: "page-selector"
+                         "fish-grid-out"
+                         "fish-info";
+    grid-template-rows: min-content min-content minmax(min-content, 200px);
+  }
+}
+.fish-guide .page-selector {
+  grid-area: page-selector;
+  justify-self: center;
+  align-content: flex-start;
+}
+.fish-guide .tiny.menu .page-number.item {
+  /* This attempts to keep the item widths uniform */
+  min-width: 3.5em;
+}
+.fish-guide .fish-grid-out {
+  grid-area: fish-grid-out;
+  align-content: flex-start;
+  padding-bottom: 1em;
+}
+.fish-guide .fish-grid {
+  justify-content: center;
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(5, max-content);
+}
+.fish-guide .fish-entry {
+  height: 60px;
+  width: 60px;
+  position: relative;
+}
+.fish-guide .fish-entry:not(.disabled),
+.fish-guide .fish-entry:not(.disabled) .ui.left.corner.label .icon {
+  cursor: pointer;
+}
+.fish-guide .fish-entry.selected {
+  border-radius: 8px;
+  background-color: yellow;
+}
+.fish-guide .fish-entry .fish-icon {
+  margin-top: 2px;
+  margin-left: 2px;
+  transform: scale(1.27) translate(5px, 5px);
+}
+
+.fish-guide .fish-entry .ui.left.corner.label {
+  margin-top: 4px;
+  margin-left: 4px;
+  height: 3em;
+  width: 3em;
+  border-color: rgba(232, 232, 232, 0.20);
+}
+.fish-guide .fish-entry .ui.left.corner.label.hovering {
+  border-color: rgba(232, 232, 232, 0.50);
+}
+.fish-guide .fish-entry.caught .ui.left.corner.label {
+  border-color: rgba(33, 186, 69, 0.50);
+}
+.fish-guide .fish-entry.caught .ui.left.corner.label.hovering {
+  border-color: rgba(33, 186, 69, 0.75);
+}
+.fish-guide .fish-entry .ui.left.corner.label:after {
+  border-top-width: 3em;
+  border-right-width: 3em;
+}
+.fish-guide .fish-entry .ui.left.corner.label .icon {
+  left: -0.5240714em;
+  top: 0.4821429em;
+}
+.fish-guide .fish-entry.disabled .ui.left.corner.label {
+  display: none;
+}
+
+.fish-guide .fish-info {
+  grid-area: fish-info;
+  align-content: flex-start;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-areas: "fish-name      fish-name"
+                       "fish-level     fish-waters"
+                       "fish-desc      fish-desc"
+                       "fish-locations fish-meta"
+                       "fish-extra     fish-meta";
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr minmax(min-content, 6fr) 3fr 3fr;
+}
+.fish-guide .fish-info.hidden {
+  display: none;
+}
+.fish-guide .fish-info .heading {
+  font-size: 125%;
+}
+.fish-guide .fish-name {
+  grid-area: fish-name;
+  font-size: 140%;
+  font-weight: bold;
+}
+.fish-guide .fish-level {
+  grid-area: fish-level;
+}
+.fish-guide .fish-waters {
+  grid-area: fish-waters;
+}
+.fish-guide .fish-desc {
+  grid-area: fish-desc;
+}
+.fish-guide .fish-locations {
+  grid-area: fish-locations;
+}
+.fish-guide .fish-extra {
+  grid-area: fish-extra;
+}
+.fish-guide .fish-meta {
+  grid-area: fish-meta;
+}

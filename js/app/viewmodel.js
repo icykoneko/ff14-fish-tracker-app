@@ -352,6 +352,26 @@ let ViewModel = new class {
     // Initialize checkbox controls.
     $('.ui.radio.checkbox').checkbox();
 
+    // Render the fish guide from template.
+    FishGuide.render(document.getElementById('fishGuideElem'));
+    $('#fishGuideModal').modal({
+      onShow: function() {
+        // Before displaying, make sure any completion data is updated
+        // first.
+        FishGuide.preShowHandler();
+      }
+    });
+
+    // Apply theme to elements now.
+    // DO NOT ADD ANY MORE UI ELEMENTS AFTER THIS LINE OR THEY WILL
+    // NOT AUTOMATICALLY BE UPDATED.
+    this.applyTheme(this.settings.theme);
+
+    $('#displayFishGuideButton').on('click', function(e) {
+      if (e) e.stopPropagation();
+      $('#fishGuideModal').modal('show');
+    });
+
     // The language buttons aren't managed by ViewModel's settings, so we need
     // to set the active button here...
     $('#languageChoice .button')
@@ -901,19 +921,22 @@ let ViewModel = new class {
   applyTheme(theme) {
     if (theme === 'dark') {
       $('body').addClass('dark');
-      $('.ui.menu').addClass('inverted');
-      $('.ui.modal').addClass('inverted');
-      $('.ui.message.announcement').addClass('inverted');
-      $('.ui.popup.upcoming-windows').addClass('inverted');
       $('*[data-tooltip]').attr('data-inverted', '');
     } else {
       $('body').removeClass('dark');
-      $('.ui.menu').removeClass('inverted');
-      $('.ui.modal').removeClass('inverted');
-      $('.ui.message.announcement').removeClass('inverted');
-      $('.ui.popup.upcoming-windows').removeClass('inverted');
       $('*[data-tooltip]').removeAttr('data-inverted');
     }
+
+    $('.ui.menu').toggleClass('inverted', theme === 'dark');
+    $('.ui.modal').toggleClass('inverted', theme === 'dark');
+    $('.ui.message.announcement').toggleClass('inverted', theme === 'dark');
+    $('.ui.popup.upcoming-windows').toggleClass('inverted', theme === 'dark');
+    $('.ui.container').toggleClass('inverted', theme === 'dark');
+    $('.ui.form').toggleClass('inverted', theme === 'dark');
+    $('.ui.segment').toggleClass('inverted', theme === 'dark');
+    $('.ui.table').toggleClass('inverted', theme === 'dark');
+    $('.ui.list').toggleClass('inverted', theme === 'dark');
+    $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
   }
 
   loadSettings() {
