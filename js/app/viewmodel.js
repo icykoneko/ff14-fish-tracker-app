@@ -354,6 +354,13 @@ let ViewModel = new class {
 
     // Render the fish guide from template.
     FishGuide.render(document.getElementById('fishGuideElem'));
+    $('#fishGuideModal').modal({
+      onShow: function() {
+        // Before displaying, make sure any completion data is updated
+        // first.
+        FishGuide.preShowHandler();
+      }
+    });
 
     // Apply theme to elements now.
     // DO NOT ADD ANY MORE UI ELEMENTS AFTER THIS LINE OR THEY WILL

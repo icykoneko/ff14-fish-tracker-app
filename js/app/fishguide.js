@@ -119,7 +119,11 @@ let FishGuide = function(){
           $(this).parents('.fish-entry .label').removeClass('hovering');
         },
         click: function() {
-          $(this).parents('.fish-entry').toggleClass('caught');
+          // Okay, this gets tricky because if the fish isn't displayed, it's
+          // more complicated. Either way, we need to update the ViewModel's
+          // settings at a minimum...
+          // TODO: The completion list really needs to be a set...
+          self.toggleFishCaughtState($(this).parents('.fish-entry'));
         }
       });
 
@@ -264,6 +268,7 @@ let FishGuide = function(){
       for (i = 0; i < fishInfosForPage.length; i++) {
         $(this.fishGridEntries$[i]).data('fishInfo', fishInfosForPage[i])
                                    .removeClass('disabled')
+                                   .toggleClass('caught', ViewModel.isFishCaught(fishInfosForPage[i].id))
                                    .children('.fish-icon').addClass('sprite-icon-fish_n_tackle-' + fishInfosForPage[i].icon);
       }
     }
@@ -286,6 +291,50 @@ let FishGuide = function(){
       addtInfo$.html(extraText);
 
       this.fishInfo$.removeClass('hidden');
+    }
+
+    toggleFishCaughtState(fishEntry$) {
+      let fishInfo = fishEntry$.data('fishInfo');
+      // Assuming everything has stayed up-to-date, we can trust the 'caught'
+      // class' presense to determine if the fish is caught or not.
+      var isCaught = null;
+      if (!fishEntry$.hasClass('caught')) {
+        // The fish has been marked as caught now.
+        isCaught = true;
+      } else {
+        // The fish was previously marked as caught, but no longer is.  Oops?
+        isCaught = false;
+      }
+
+      // Check if the ViewModel has an entry for this fish. We have to manually
+      // update it otherwise (for now at least...)
+      // We always start by updating the settings object.
+      if (isCaught) {
+        ViewModel.settings.completed.push(fishInfo.id);
+      } else {
+        ViewModel.settings.completed = _(ViewModel.settings.completed).without(fishInfo.id);
+      }
+      ViewModel.saveSettings();
+
+      let fishEntry = ViewModel.fishEntries[fishInfo.id];
+      if (fishEntry !== undefined) {
+        // Since the fish is currently visible, we need to do a little more work.
+        fishEntry.isCaught = !fishEntry.isCaught;
+        ViewModel.layout.updateCaughtState(fishEntry);
+      }
+      ViewModel.updateDisplay();
+
+      // Toggle the visible check mark.
+      fishEntry$.toggleClass('caught');
+    }
+
+    preShowHandler() {
+      // Before the guide is displayed, we must refresh the current page's
+      // entries, in particular, the caught state for the fish entries.
+      this.fishGridEntries$.filter(':not(.disabled)').each(function(idx, elem) {
+        let fishInfo = $(elem).data('fishInfo');
+        $(elem).toggleClass('caught', ViewModel.isFishCaught(fishInfo.id));
+      });
     }
   };
 
