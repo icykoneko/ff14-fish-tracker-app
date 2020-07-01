@@ -301,17 +301,17 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > sp
 }
 
 /* Entry after the last pinned fish entry */
-.fish-entry.entry-after-last-pinned-entry > td {
+.ui.table .fish-entry.entry-after-last-pinned-entry > td {
   border-top: 2px solid red !important;
 }
 
 /* Entry after the last currently available fish entry */
-.fish-entry.entry-after-last-active-entry > td {
+.ui.table .fish-entry.entry-after-last-active-entry > td {
   border-top: 2px solid blue !important;
 }
 
 /* Entry after the last fish that's soon to come available */
-.fish-entry.entry-after-last-upsoon-entry > td {
+.ui.table .fish-entry.entry-after-last-upsoon-entry > td {
   border-top: 2px solid black !important;
 }
 
