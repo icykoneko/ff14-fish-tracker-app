@@ -280,7 +280,7 @@ let FishGuide = function(){
       this.fishInfo$.find('.fish-name').text(__p(fishInfo, 'name'));
       this.fishInfo$.find('.fish-level').text("Lv. " + fishInfo.level[0] + " " + "★".repeat(fishInfo.level[1]));
       this.fishInfo$.find('.fish-waters').text(__p(fishInfo, 'record'));
-      this.fishInfo$.find('.fish-desc').html(__p(fishInfo, 'desc').replace('\n', '<br/>'));
+      this.fishInfo$.find('.fish-desc').html(__p(fishInfo, 'desc').replace(/\n/g, '<br/>'));
       this.fishInfo$.find('.fish-locations .text').html(__p(fishInfo, 'region') + '<br/>' + __p(fishInfo, 'zone'));
 
       let addtInfo$ = this.fishInfo$.find('.fish-extra .text');

@@ -39,9 +39,7 @@ def _init_saintcoinach(args):
     _string_decoder = text.XivStringDecoder.default()
 
     # Load up the game data
-    XIV = ARealmReversed(args.game_path,
-                         Language.english)
-
+    XIV = ARealmReversed(args.game_path, Language.english)
     # Override the tag decoder for emphasis so it doesn't produce tags in string...
     def omit_tag_decoder(i, t, l):
         text.XivStringDecoder.get_integer(i)
@@ -49,8 +47,11 @@ def _init_saintcoinach(args):
 
     _string_decoder.set_decoder(text.TagType.Emphasis.value, omit_tag_decoder)
     _string_decoder.set_decoder(
+        text.TagType.Indent.value,
+        lambda i,t,l: text.nodes.StaticString(" "))
+    _string_decoder.set_decoder(
         text.TagType.SoftHyphen.value,
-        lambda i,t,l: text.nodes.StaticString("\x26shy;"))
+        lambda i,t,l: text.nodes.StaticString("\u00AD"))
 
     return XIV
 
