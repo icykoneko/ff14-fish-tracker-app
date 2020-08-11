@@ -311,6 +311,14 @@ def lookup_spearfishing_spot_by_name(name):
 
 
 def convert_fish_to_json(item):
+    try:
+        return _convert_fish_to_json(item)
+    except Exception as exc:
+        logging.exception("Failed to process: %r" % item)
+        raise
+
+
+def _convert_fish_to_json(item):
     item.setdefault('startHour', 0)
     item.setdefault('endHour', 24)
     item.setdefault('weatherSet', [])
@@ -633,9 +641,9 @@ def add_new_fish_data(args):
                     'weatherSet': None,
                     'bestCatchPath': None,
                     'predators': None,
+                    'tug': None,
                     'hookset': None,
                     'snagging': None,
-                    'gig': None,
                     'fishEyes': False,
                     'patch': float(args.patch),
                     'dataMissing': True
@@ -664,10 +672,7 @@ def add_new_fish_data(args):
                     'weatherSet': None,
                     'bestCatchPath': None,
                     'predators': None,
-                    'hookset': None,
-                    'snagging': None,
                     'gig': 'UNKNOWN',
-                    'fishEyes': False,
                     'patch': float(args.patch),
                     'dataMissing': True
                 }
