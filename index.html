@@ -80,6 +80,27 @@ title: Home
             {% for field in number_fields %}
               fish_entry.{{ field.key }} = {{ field.val }};
             {% endfor %}
+            {% assign weather_fields = updated_fish.fields | where: "type", "weather" %}
+            {% for field in weather_fields %}
+              {% if field.op == "add" %}
+                fish_entry.{{ field.key }}.push({{ field.val }});
+              {% else %}
+                fish_entry.{{ field.key }} = _(fish_entry.{{ field.key }}).without({{ field.val }});
+              {% endif %}
+              fish_entry.conditions.{{ field.key }} =
+                _(fish_entry.{{ field.key }}).map((w) => DATA.WEATHER_TYPES[w]);
+            {% endfor %}
+            {% assign bait_fields = updated_fish.fields | where: "type", "bait" %}
+            {% for field in bait_fields %}
+              {% if field.key == "path" %}
+                fish_entry.bestCatchPath = [];
+                {% for path_entry in field.val %}
+                  var bait_item_entry = _.findWhere(DATA.ITEMS, {name_en: "{{ path_entry }}"});
+                  fish_entry.bestCatchPath.push(bait_item_entry._id);
+                {% endfor %}
+                fish_entry.bait.path = _(fish_entry.bestCatchPath).map((x) => DATA.ITEMS[x]);
+              {% endif %}
+            {% endfor %}
           })();
         {% endfor %}
       </script>

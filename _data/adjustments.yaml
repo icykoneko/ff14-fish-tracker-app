@@ -10,6 +10,19 @@
 #     key: <fieldName in Fish class to update>
 #     val: <value to use>
 #
+# For updating array fields, it's trickier.
+# To add something to the array:
+#   - type: array
+#     key: conditions.weatherSet
+#     val: 4
+#     op: (add|rem)
+#
+# For bait:
+#   - type: bait
+#     key: path
+#     val: ["Rat Tail", "Other Fish"]
+#
+#
 # Remember, these modify the Fish objects, not the DATA.FISH which is what they
 # derive from...
 # Certain fields will require translation here, such as weather types.
