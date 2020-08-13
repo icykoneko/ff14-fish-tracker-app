@@ -33,3 +33,54 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
+- name: Blue Crab
+  fields:
+  - type: bait
+    key: path
+    val: Squid Strip
+  - type: string
+    key: tug
+    val: light
+  - type: string
+    key: hookset
+    val: Precision
+- name: Fuchsia Bloom
+  fields:
+  - type: bait
+    key: path
+    val: Robber Ball
+  - type: string
+    key: tug
+    val: light
+  - type: string
+    key: hookset
+    val: Precision
+- name: Giant Taimen
+  fields:
+  - type: bait
+    key: path
+    val: Baitbugs
+  - type: string
+    key: tug
+    val: heavy
+  - type: string
+    key: hookset
+    val: Powerful
+- name: Gold Hammer
+  fields:
+  - type: bait
+    key: path
+    val: Baitbugs
+  - type: string
+    key: tug
+    val: heavy
+  - type: string
+    key: hookset
+    val: Powerful
+  - type: weather
+    key: weatherSet
+    op: add
+    val: 1
+  - type: number
+    key: alwaysAvailable
+    val: false
