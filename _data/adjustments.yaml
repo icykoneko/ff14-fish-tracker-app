@@ -79,8 +79,99 @@
     val: Powerful
   - type: weather
     key: weatherSet
-    op: add
-    val: 1
+    val: Clear Skies
+  - type: number
+    key: alwaysAvailable
+    val: false
+- name: Sweetheart
+  fields:
+  - type: bait
+    key: path
+    val: Baitbugs
+  - type: string
+    key: tug
+    val: heavy
+  - type: string
+    key: hookset
+    val: Powerful
+  - type: weather
+    key: previousWeatherSet
+    val: Fog
+  - type: weather
+    key: weatherSet
+    val: [Clear Skies, Fair Skies]
+  - type: number
+    key: alwaysAvailable
+    val: false
+- name: Opal Shrimp
+  fields:
+  - type: bait
+    key: path
+    val: Squid Strip
+  - type: string
+    key: tug
+    val: heavy
+  - type: string
+    key: hookset
+    val: Powerful
+  - type: weather
+    key: weatherSet
+    val: Clear Skies
+  - type: number
+    key: startHour
+    val: 18
+  - type: number
+    key: endHour
+    val: 20
+  - type: number
+    key: alwaysAvailable
+    val: false
+- name: The Sinsteeped
+  fields:
+  - type: bait
+    key: path
+    val: Fruit Worm
+  - type: string
+    key: tug
+    val: heavy
+  - type: string
+    key: hookset
+    val: Precision
+  - type: weather
+    key: weatherSet
+    val: [Clear Skies, Fair Skies]
+  - type: number
+    key: startHour
+    val: 22
+  - type: number
+    key: endHour
+    val: 24
+  - type: number
+    key: alwaysAvailable
+    val: false
+- name: Recordkiller
+  fields:
+  - type: bait
+    key: path
+    val: Baitbugs
+  - type: string
+    key: tug
+    val: heavy
+  - type: string
+    key: hookset
+    val: Powerful
+  - type: weather
+    key: previousWeatherSet
+    val: [Clear Skies, Fair Skies]
+  - type: weather
+    key: weatherSet
+    val: Fog
+  - type: number
+    key: startHour
+    val: 18
+  - type: number
+    key: endHour
+    val: 24
   - type: number
     key: alwaysAvailable
     val: false
