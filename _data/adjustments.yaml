@@ -5,173 +5,79 @@
 #
 # Example:
 # - name: <FISH_NAME_EN>
-#   fields:
-#   - type: (string|number)
-#     key: <fieldName in Fish class to update>
-#     val: <value to use>
+#   bait: [<BAIT_NAME_EN>,<BAIT_NAME_EN>*]
+#   tug: (light|medium|heavy)
+#   hookset: (Precision|Powerful)
+#   previousWeatherSet: [<WEATHER_NAME_EN>,<WEATHER_NAME_EN>*]
+#   weatherSet: [<WEATHER_NAME_EN>,<WEATHER_NAME_EN>*]
+#   startHour: [0-23]
+#   endHour: [1-24]
+#   fishEyes: (true|false|<TIME_IN_SECS>)
+#   snagging: (true|false)
 #
-# For updating array fields, it's trickier.
-# To add something to the array:
-#   - type: array
-#     key: conditions.weatherSet
-#     val: 4
-#     op: (add|rem)
-#
-# For bait:
-#   - type: bait
-#     key: path
-#     val: ["Rat Tail", "Other Fish"]
-#
-#
-# Remember, these modify the Fish objects, not the DATA.FISH which is what they
-# derive from...
-# Certain fields will require translation here, such as weather types.
-# In addition, some fields like "alwaysAvailable" must be accounted for here.
-# Please treat fields such as this as "number" types. The "string" type just
-# means to surround the string in quotes.
+# This does not support intuition at the moment...
 #
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
+
 - name: Blue Crab
-  fields:
-  - type: bait
-    key: path
-    val: Squid Strip
-  - type: string
-    key: tug
-    val: light
-  - type: string
-    key: hookset
-    val: Precision
+  bait: Squid Strip
+  tug: light
+  hookset: Precision
 - name: Fuchsia Bloom
-  fields:
-  - type: bait
-    key: path
-    val: Robber Ball
-  - type: string
-    key: tug
-    val: light
-  - type: string
-    key: hookset
-    val: Precision
+  bait: Robber Ball
+  tug: light
+  hookset: Precision
 - name: Giant Taimen
-  fields:
-  - type: bait
-    key: path
-    val: Baitbugs
-  - type: string
-    key: tug
-    val: heavy
-  - type: string
-    key: hookset
-    val: Powerful
+  bait: Baitbugs
+  tug: heavy
+  hookset: Powerful
 - name: Gold Hammer
-  fields:
-  - type: bait
-    key: path
-    val: Baitbugs
-  - type: string
-    key: tug
-    val: heavy
-  - type: string
-    key: hookset
-    val: Powerful
-  - type: weather
-    key: weatherSet
-    val: Clear Skies
-  - type: number
-    key: alwaysAvailable
-    val: false
+  bait: Baitbugs
+  tug: heavy
+  hookset: Powerful
+  weatherSet: Clear Skies
 - name: Sweetheart
-  fields:
-  - type: bait
-    key: path
-    val: Baitbugs
-  - type: string
-    key: tug
-    val: heavy
-  - type: string
-    key: hookset
-    val: Powerful
-  - type: weather
-    key: previousWeatherSet
-    val: Fog
-  - type: weather
-    key: weatherSet
-    val: [Clear Skies, Fair Skies]
-  - type: number
-    key: alwaysAvailable
-    val: false
+  bait: Baitbugs
+  tug: heavy
+  hookset: Powerful
+  previousWeatherSet: Fog
+  weatherSet: [Clear Skies, Fair Skies]
 - name: Opal Shrimp
-  fields:
-  - type: bait
-    key: path
-    val: Squid Strip
-  - type: string
-    key: tug
-    val: heavy
-  - type: string
-    key: hookset
-    val: Powerful
-  - type: weather
-    key: weatherSet
-    val: Clear Skies
-  - type: number
-    key: startHour
-    val: 18
-  - type: number
-    key: endHour
-    val: 20
-  - type: number
-    key: alwaysAvailable
-    val: false
+  bait: Squid Strip
+  tug: heavy
+  hookset: Powerful
+  weatherSet: Clear Skies
+  startHour: 18
+  endHour: 20
 - name: The Sinsteeped
-  fields:
-  - type: bait
-    key: path
-    val: Fruit Worm
-  - type: string
-    key: tug
-    val: heavy
-  - type: string
-    key: hookset
-    val: Precision
-  - type: weather
-    key: weatherSet
-    val: [Clear Skies, Fair Skies]
-  - type: number
-    key: startHour
-    val: 22
-  - type: number
-    key: endHour
-    val: 24
-  - type: number
-    key: alwaysAvailable
-    val: false
+  bait: Fruit Worm
+  tug: heavy
+  hookset: Precision
+  weatherSet: [Clear Skies, Fair Skies]
+  startHour: 22
+  endHour: 24
 - name: Recordkiller
-  fields:
-  - type: bait
-    key: path
-    val: Baitbugs
-  - type: string
-    key: tug
-    val: heavy
-  - type: string
-    key: hookset
-    val: Powerful
-  - type: weather
-    key: previousWeatherSet
-    val: [Clear Skies, Fair Skies]
-  - type: weather
-    key: weatherSet
-    val: Fog
-  - type: number
-    key: startHour
-    val: 18
-  - type: number
-    key: endHour
-    val: 24
-  - type: number
-    key: alwaysAvailable
-    val: false
+  bait: Baitbugs
+  tug: heavy
+  hookset: Powerful
+  previousWeatherSet: [Clear Skies, Fair Skies]
+  weatherSet: Fog
+  startHour: 18
+  endHour: 24
+- name: The Mother of All Pancakes
+  bait: Squid Strip
+  tug: heavy
+  hookset: Precision
+  previousWeatherSet: Clouds
+  weatherSet: Clear Skies
+  startHour: 0
+  endHour: 3
+- name: Leannisg
+  bait: Marble Nymph
+  tug: heavy
+  # previousWeatherSet: Clouds
+  weatherSet: Rain
+  # startHour: 7
+  # endHour: 8

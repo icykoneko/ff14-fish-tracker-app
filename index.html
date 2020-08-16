@@ -63,51 +63,69 @@ title: Home
 
     {% if site.data.adjustments.size > 0 %}
       <script type="text/javascript">
-        {% for updated_fish in site.data.adjustments %}
-          // Apply updates to: {{ updated_fish.name }}
+        {% for e in site.data.adjustments %}
+          // Apply updates to: {{ e.name }}
           (function () {
-            let item_entry = _.findWhere(DATA.ITEMS, {name_en: "{{ updated_fish.name }}"});
+            let item_entry = _.findWhere(DATA.ITEMS, {name_en: "{{ e.name }}"});
             if (item_entry === undefined) {
-              console.error("FISH NOT FOUND: {{ updated_fish.name }}");
+              console.error("FISH NOT FOUND: {{ e.name }}");
               return;
             }
-            console.info("Applying inline adjustments for: {{ updated_fish.name }}");
+            console.info("Applying inline adjustments for: {{ e.name }}");
             let fish_entry = _.findWhere(Fishes, {id: item_entry._id});
-            {%- assign string_fields = updated_fish.fields | where: "type", "string" -%}
-            {% for field in string_fields %}
-              fish_entry.{{ field.key }} = "{{ field.val }}";
-            {%- endfor -%}
-            {%- assign number_fields = updated_fish.fields | where: "type", "number" -%}
-            {% for field in number_fields %}
-              fish_entry.{{ field.key }} = {{ field.val }};
-              {% if field.key == "startHour" or field.key == "endHour" %}
-                {
-                  var diff = Math.abs(fish_entry.endHour - fish_entry.startHour);
-                  fish_entry.dailyDuration =
-                    moment.duration(fish_entry.endHour < fish_entry.startHour ? 24 - diff : diff, 'hours');
-                }
-              {%- endif -%}
-            {%- endfor -%}
-            {%- assign weather_fields = updated_fish.fields | where: "type", "weather" -%}
-            {% for field in weather_fields %}
-              fish_entry.{{ field.key }} = [];
-              {% for weather_entry in field.val %}
-                fish_entry.{{ field.key }}.push(Number(
-                  _(DATA.WEATHER_TYPES).chain().pairs().find((x) => x[1]['name_en'] == "{{ weather_entry }}").value()[0]));
+            {% if e.tug %}
+              fish_entry.tug = "{{ e.tug }}";
+            {%- endif -%}
+            {% if e.hookset %}
+              fish_entry.hookset = "{{ e.hookset }}";
+            {%- endif -%}
+            {% if e.bait %}
+              fish_entry.bestCatchPath = [];
+              {% for bait in e.bait %}
+                fish_entry.bestCatchPath.push(_.findWhere(DATA.ITEMS, {name_en: "{{ bait }}"})._id);
               {% endfor %}
-              fish_entry.conditions.{{ field.key }} =
-                _(fish_entry.{{ field.key }}).map((w) => DATA.WEATHER_TYPES[w]);
-            {%- endfor -%}
-            {%- assign bait_fields = updated_fish.fields | where: "type", "bait" -%}
-            {% for field in bait_fields %}
-              {% if field.key == "path" %}
-                fish_entry.bestCatchPath = [];
-                {% for path_entry in field.val %}
-                  fish_entry.bestCatchPath.push(_.findWhere(DATA.ITEMS, {name_en: "{{ path_entry }}"})._id);
-                {% endfor %}
-                fish_entry.bait.path = _(fish_entry.bestCatchPath).map((x) => DATA.ITEMS[x]);
-              {% endif %}
-            {%- endfor -%}
+              fish_entry.bait.path = _(fish_entry.bestCatchPath).map((x) => DATA.ITEMS[x]);
+            {%- endif -%}
+            {% if e.weatherSet %}
+              fish_entry.weatherSet = [];
+              {% for weather in e.weatherSet %}
+                fish_entry.weatherSet.push(Number(
+                  _(DATA.WEATHER_TYPES).chain().pairs().find((x) => x[1]['name_en'] == "{{ weather }}").value()[0]));
+              {% endfor %}
+              fish_entry.conditions.weatherSet =
+                _(fish_entry.weatherSet).map((w) => DATA.WEATHER_TYPES[w]);
+            {%- endif -%}
+            {% if e.previousWeatherSet %}
+              fish_entry.previousWeatherSet = [];
+              {% for weather in e.previousWeatherSet %}
+                fish_entry.previousWeatherSet.push(Number(
+                  _(DATA.WEATHER_TYPES).chain().pairs().find((x) => x[1]['name_en'] == "{{ weather }}").value()[0]));
+              {% endfor %}
+              fish_entry.conditions.previousWeatherSet =
+                _(fish_entry.previousWeatherSet).map((w) => DATA.WEATHER_TYPES[w]);
+            {%- endif -%}
+            {% if e.startHour %}
+              fish_entry.startHour = {{ e.startHour }};
+            {%- endif -%}
+            {% if e.endHour %}
+              fish_entry.endHour = {{ e.endHour }};
+            {%- endif -%}
+            {% if e.startHour or e.endHour %}
+              {
+                var diff = Math.abs(fish_entry.endHour - fish_entry.startHour);
+                fish_entry.dailyDuration =
+                  moment.duration(fish_entry.endHour < fish_entry.startHour ? 24 - diff : diff, 'hours');
+              }
+            {%- endif -%}
+            {% if e.fishEyes %}
+              fish_entry.fishEyes = {{ e.fishEyes }};
+            {%- endif -%}
+            {% if e.snagging %}
+              fish_entry.snagging = {{ e.snagging }};
+            {% endif %}
+            // Reset the "alwaysAvailable" flag.
+            fish_entry.alwaysAvailable =
+              fish_entry.weatherSet.length == 0 && fish_entry.startHour == 0 && fish_entry.endHour == 24;
           })();
         {% endfor %}
       </script>
