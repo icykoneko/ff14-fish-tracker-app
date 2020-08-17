@@ -454,6 +454,7 @@
 
         $maxWindows = $('#maxWindows').spinner({min: 5, max: 20});
         $clusterWindows = $('#clusterWindows').first().checkbox();
+        $timePeriods = $('#times .ui.checkbox').checkbox();
         $('#downloadCSV').click(function() {
           var file;
           var data = ["fromWeather, toWeather, earthTime, eorzeaTimeStart, eorzeaTimeEnd\n"];
@@ -554,7 +555,11 @@
               } else {
                 prevWeatherSet = [];
               }
-              var numWindows = $maxWindows.spinner('value')
+              var numWindows = $maxWindows.spinner('value');
+              var timePeriods = _.reduce($("input", $timePeriods), (x, e) => {
+                if (e.checked) { x.push(Number(e.value)); }
+                return x;
+              }, []);
 
               // Compute the next 10 instances of this weather transition.
               var iter = weatherService.findWeatherPattern(
@@ -569,7 +574,15 @@
                   console.warn("Stopped iterating early!");
                   break;
                 }
-                windows.push(_iterItem.value);
+                if (timePeriods.length != 3) {
+                  var w = _iterItem.value;
+                  if (timePeriods.includes(dateFns.utc.getHours(w.start()))) {
+                    windows.push(w);
+                  }
+                } else {
+                  // Don't bother checking, all three choices were entered.
+                  windows.push(_iterItem.value);
+                }
               }
               $nextWindows.empty();
               var labelText = "Next Windows for <span class='window-qualifier-text'>";
@@ -726,6 +739,27 @@
           <div class="ui segment">
             <div class="ui top attached label" id="nextWindowsLabel">Next Windows for Weather</div>
             <div class="ui fluid container">
+              <div class="ui basic form segment" style="padding-left: inherit; padding-right: inherit; padding-bottom: inherit;">
+                <div class="fields">
+                  <div class="sixteen wide field" id="times">
+                    <label>Time Periods</label>
+                    <div class="inline fields">
+                      <div class="ui field checkbox checked" style="float: left; margin-right: 1rem;">
+                        <input type="checkbox" name="timePeriods" checked="checked" class="hidden" value="0"/>
+                        <label>00:00 - 08:00</label>
+                      </div>
+                      <div class="ui field checkbox checked" style="float: left; margin-right: 1rem;">
+                        <input type="checkbox" name="timePeriods" checked="checked" class="hidden" value="8"/>
+                        <label>08:00 - 16:00</label>
+                      </div>
+                      <div class="ui field checkbox checked" style="float: left">
+                        <input type="checkbox" name="timePeriods" checked="checked" class="hidden" value="16"/>
+                        <label>16:00 - 24:00</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="ui relaxed divided list" id="nextWindows"></div>
             </div>
           </div>
@@ -734,7 +768,7 @@
       <div class="ui container">
         <p>
           FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
-          FINAL FANTASY XIV © 2010 - 2019 SQUARE ENIX CO., LTD. All Rights Reserved.
+          FINAL FANTASY XIV © 2010 - 2020 SQUARE ENIX CO., LTD. All Rights Reserved.
         </p>
       </div>
     </div>
