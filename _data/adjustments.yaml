@@ -37,6 +37,7 @@
   bait: Baitbugs
   tug: heavy
   hookset: Powerful
+  previousWeatherSet: [Clear Skies, Fair Skies]
   weatherSet: Clear Skies
 - name: Sweetheart
   bait: Baitbugs
@@ -77,7 +78,8 @@
 - name: Leannisg
   bait: Marble Nymph
   tug: heavy
+  hookset: Powerful
   # previousWeatherSet: Clouds
   weatherSet: Rain
-  # startHour: 7
+  # startHour: 6
   # endHour: 8
