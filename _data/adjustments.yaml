@@ -79,7 +79,6 @@
   bait: Marble Nymph
   tug: heavy
   hookset: Powerful
-  # previousWeatherSet: Clouds
   weatherSet: Rain
-  # startHour: 6
-  # endHour: 8
+  startHour: 6
+  endHour: 8
