@@ -9491,141 +9491,156 @@
   dataMissing: true
 - name: The Sinsteeped
   location: The Quadrivium
-  startHour: 0
+  startHour: 22
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  bestCatchPath:
+  - Fruit Worm
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: Sweetheart
   location: The Rift of Sighs
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  previousWeatherSet:
+  - Fog
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: Giant Taimen
   location: Upper Watts River
   startHour: 0
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: Blue Crab
   location: The Western Kholusian Coast
   startHour: 0
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  tug: 
-  hookset: 
+  tug: light
+  hookset: Precision
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: Leannisg
   location: Handmirror Lake
-  startHour: 0
-  endHour: 24
+  startHour: 6
+  endHour: 8
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Rain
+  bestCatchPath:
+  - Marble Nymph
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: Fuchsia Bloom
   location: Longmirror Lake
   startHour: 0
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Robber Ball
   predators: 
-  tug: 
-  hookset: 
+  tug: light
+  hookset: Precision
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: Gold Hammer
   location: Saint Fathric's Temple
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: Recordkiller
   location: South Mjrl's Regret
-  startHour: 0
+  startHour: 18
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: The Mother of All Pancakes
   location: East Caliban Gap
   startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  endHour: 3
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
 - name: Opal Shrimp
   location: The Norvrandt Slope
-  startHour: 0
-  endHour: 24
+  startHour: 18
+  endHour: 20
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   fishEyes: false
   patch: 5.3
-  dataMissing: true
