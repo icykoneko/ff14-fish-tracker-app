@@ -584,10 +584,17 @@ title: Home
       <!-- ANNOUNCEMENT MESSAGES -->
       <div class="announcements">
         {% for post in site.posts %}
-          <div class="ui message announcement">
-            <div class="header">{{ post.title }}</div>
-            {{ post.content }}
-          </div>
+          {%- assign expires = post.date | date: "%s" | plus: 1209600 | date: "%s" -%}
+          {%- assign current = site.time | date: "%s" -%}
+          {%- if expires > current -%}
+            <div class="ui message announcement">
+              <span class="ui blue label" style="float: right;">{{ post.date | date: "%F" }}</span>
+              <div class="content">
+                <div class="header">{{ post.title }}</div>
+                {{ post.content }}
+              </div>
+            </div>
+          {%- endif -%}
         {% endfor %}
       </div>
 
