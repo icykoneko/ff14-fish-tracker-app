@@ -25,3 +25,5 @@
   endHour: 6
 - name: Recordkiller
   hookset: Precision
+- name: Gold Hammer
+  hookset: Precision
