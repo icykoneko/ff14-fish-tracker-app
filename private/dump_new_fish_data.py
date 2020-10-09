@@ -11,6 +11,18 @@ import timeit
 
 from tqdm import tqdm
 
+try:
+    _SCRIPT_PATH = os.path.abspath(__path__)
+except:
+    _SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
+
+# _HELPER_LIBS_PATH = os.path.join(_SCRIPT_PATH, '..', '..')
+_HELPER_LIBS_PATH = _SCRIPT_PATH
+
+
+# Add the Saint Coinach python API to the path.
+sys.path += [os.path.join(_HELPER_LIBS_PATH, 'saintcoinach-py')]
+
 import pysaintcoinach
 from pysaintcoinach.ex.language import Language
 
@@ -24,14 +36,6 @@ from pysaintcoinach.xiv.weather import Weather
 from pysaintcoinach.xiv.placename import PlaceName
 
 # logging.basicConfig(level=logging.INFO, stream=sys.stderr)
-
-try:
-    _SCRIPT_PATH = os.path.abspath(__path__)
-except:
-    _SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
-
-# _HELPER_LIBS_PATH = os.path.join(_SCRIPT_PATH, '..', '..')
-_HELPER_LIBS_PATH = _SCRIPT_PATH
 
 
 def nth(iterable, n, default=None):
@@ -141,6 +145,11 @@ SpearfishingNode = make_dataclass('SpearfishingNode',
                                    ('place_name', as_row_type('PlaceName')),
                                    ('hidden', bool, field(default=False))])
 
+def _prop_SpearfishingNode_getkey(self):
+    return self.gathering_point_base.key
+
+setattr(SpearfishingNode, 'key', property(_prop_SpearfishingNode_getkey))
+
 
 def tracked_iter(_iter, desc, **kwargs):
     return tqdm(_iter,
@@ -156,6 +165,8 @@ catchable_fish = {}  # type: Dict[int, Fish]
 for fishing_spot in tracked_iter(realm.game_data.get_sheet(FishingSpot),
                                  'Scanning fishing spots'):
     if fishing_spot.place_name.key == 0:
+        continue
+    if fishing_spot.territory_type is None:
         continue
 
     logging.info("Checking spot: %s" % fishing_spot.place_name.name)
@@ -606,7 +617,7 @@ def convert_fish_to_json(fish: Fish):
             if isinstance(spot, SpearfishingNode):
                 if spot.hidden:
                     return spot.gathering_point_base.key
-            return spot.place_name.key
+            return spot.key
 
         aquarium_entry = None
         if fish.aquarium is not None:
@@ -742,7 +753,8 @@ def __build_supporting_json_tables(_iter: Iterable[Fish]):
                         ('_id', spot.key),
                         *_make_localized_field('name', spot.place_name, 'Name'),
                         ('territory_id', spot.get_raw('TerritoryType')),
-                        ('placename_id', spot.place_name.key)])
+                        ('placename_id', spot.place_name.key),
+                        ('map_coords', [spot.map_x, spot.map_y, spot.radius])])
                     territories_to_add.add(spot.territory_type)
 
         for territory in territories_to_add:
@@ -753,6 +765,7 @@ def __build_supporting_json_tables(_iter: Iterable[Fish]):
                 territories[territory.key] = dict({
                     '_id': territory.key,
                     'map_id': territory.map.key,
+                    'map_scale': territory.map.size_factor,
                     'zone_id': territory.place_name.key,
                     'region_id': territory.region_place_name.key,
                     'weather_rates': _collect_weather_rates(territory.weather_rate)})
