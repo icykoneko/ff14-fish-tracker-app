@@ -9644,3 +9644,32 @@
   snagging: 
   fishEyes: false
   patch: 5.3
+# Patch 5.35 (2020-10-13)
+- name: Allagan Hunter
+  location: Alpha Quadrant
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  fishEyes: false
+  patch: 5.35
+  dataMissing: true
+- name: Petal Shell
+  location: Plum Spring
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  fishEyes: false
+  patch: 5.35
+  dataMissing: true
