@@ -3515,7 +3515,7 @@
 - name: Heavens Coral
   location: Mok Oogl Island
   startHour: 0
-  endHour: 5
+  endHour: 6
   previousWeatherSet: []
   weatherSet:
   - Clear Skies
@@ -9592,7 +9592,7 @@
   - Baitbugs
   predators: 
   tug: heavy
-  hookset: Powerful
+  hookset: Precision
   snagging: 
   fishEyes: false
   patch: 5.3
@@ -9609,7 +9609,7 @@
   - Baitbugs
   predators: 
   tug: heavy
-  hookset: Powerful
+  hookset: Precision
   snagging: 
   fishEyes: false
   patch: 5.3
@@ -9640,7 +9640,7 @@
   - Squid Strip
   predators: 
   tug: heavy
-  hookset: Powerful
+  hookset: Precision
   snagging: 
   fishEyes: false
   patch: 5.3
