@@ -634,7 +634,20 @@ let ViewModel = new class {
       return false;
 
     // Filter by patch.
-    if (!_(this.settings.filters.patch).contains(fish.patch))
+    // Patches can be... odd sometimes.  Convert to string, and only compare
+    // with the first number following the decimal.
+    function normalizePatch(patch) {
+      let strPatch = String(patch);
+      let pos = strPatch.indexOf(".");
+      if (pos > 0) {
+        // Convert to a number keeping only the first digit after decimal.
+        return Number(strPatch.substr(0, pos+2))
+      } else {
+        // Otherwise, it's already a flat number.
+        return patch;
+      }
+    }
+    if (!_(this.settings.filters.patch).contains(normalizePatch(fish.patch)))
       return true;
 
     // Filter by completion state.
