@@ -362,6 +362,9 @@ let ViewModel = new class {
       }
     });
 
+    // Initialize the fishing spot location map modal.
+    FishingSpotMap.initialize();
+
     // Apply theme to elements now.
     // DO NOT ADD ANY MORE UI ELEMENTS AFTER THIS LINE OR THEY WILL
     // NOT AUTOMATICALLY BE UPDATED.
@@ -751,6 +754,9 @@ let ViewModel = new class {
     });
     entry.upcomingWindowsPopupElement = $('.ui.popup.upcoming-windows', $entry)[0];
 
+    // Connect location button.
+    $('.location-button', $entry).on('click', this.onFishEntryShowLocationClicked);
+
     if (this.settings.theme === 'dark') {
       $('.ui.popup.upcoming-windows', $entry).addClass('inverted');
       $('*[data-tooltip]', $entry).attr('data-inverted', '');
@@ -805,6 +811,16 @@ let ViewModel = new class {
     // TODO: Determine if this fish should still be displayed efficiently.
     ViewModel.layout.updatePinnedState(entry);
     ViewModel.updateDisplay();
+
+    return false;
+  }
+
+  onFishEntryShowLocationClicked(e) {
+    e.stopPropagation();
+    let $this = $(this);
+
+    let entry = $this.closest('.fish-entry').data('view');
+    FishingSpotMap.displayMap(entry.data);
 
     return false;
   }

@@ -148,6 +148,52 @@ img {
   grid-column-gap: 1rem;
 }
 
+.location-button:hover {
+  cursor: pointer;
+}
+
+#fishingSpotMapModal {
+  /* We need a little more control over the horizontal positioning please. */
+  margin-left: auto;
+  width: auto;
+  left: calc(50% - 256px);
+}
+#fishingSpotMapModal .map-container {
+  width: 512px;
+  height: 512px;
+  overflow: scroll;
+  overflow: -moz-scrollbars-none;
+  cursor: grab;
+  /* Override built-in settings for this */
+  padding: 0px;
+  background-color: transparent;
+  /* In order to properly support zooming, this must use "relative" position. */
+  position: relative;
+}
+#fishingSpotMapModal .map-container canvas {
+  /*
+   * In order to properly support zooming, the canvas uses "absolute" position.
+   * See https://stackoverflow.com/a/21305283 for an explaination why, but the
+   * basic problem is, by applying CSS transformations, it does not alter the
+   * actual layout size, and thus, when zooming out, the scroll size would remain
+   * the initial map size. But when the combination of relative/absolute is used,
+   * the transformation's effects are reflected in the scroll size, and we don't
+   * have to worry about scrolling off the map.
+   */
+   position: absolute;
+}
+
+#fishingSpotMapModal .map-container::-webkit-scrollbar {
+  display: none;
+}
+#fishingSpotMapModal .map-container.dragging {
+  cursor: grabbing;
+}
+#fishingSpotMapModal .map-container.loading {
+  cursor: progress;
+}
+
+
 /*
  * These rules match the Fish Eyes status requirement when a duration is present.
  * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(

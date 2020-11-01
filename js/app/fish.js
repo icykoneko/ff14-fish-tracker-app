@@ -17,12 +17,14 @@ class Fish {
     if (fishData.location !== null) {
       var fishingSpot = null;
       var spearfishing = false;
+      var coords = null;
       if (fishData.gig !== null && fishData.gig !== undefined) {
         fishingSpot = DATA.SPEARFISHING_SPOTS[fishData.location];
         spearfishing = true;
       } else {
         fishingSpot = DATA.FISHING_SPOTS[fishData.location];
         spearfishing = false;
+        coords = fishingSpot.map_coords;
       }
       if (fishingSpot.territory_id !== 0){
         this.location = {
@@ -31,12 +33,13 @@ class Fish {
           zoneId: fishingSpot.territory_id, /* This is not a typo! */
           zoneName: __p(DATA.ZONES[DATA.WEATHER_RATES[fishingSpot.territory_id].zone_id], "name"),
           spearfishing: spearfishing,
+          coords: coords,
         };
       } else {
-        this.location = {name: '', zoneName: '', id: 0, zoneId: 0, spearfishing: false};
+        this.location = {name: '', zoneName: '', id: 0, zoneId: 0, coords: null, spearfishing: false};
       }
     } else {
-      this.location = {name: '', zoneName: '', id: 0, zoneId: 0, spearfishing: false};
+      this.location = {name: '', zoneName: '', id: 0, zoneId: 0, coords: null, spearfishing: false};
     }
     this.catchableRanges = [];
     {

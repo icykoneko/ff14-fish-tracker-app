@@ -39,14 +39,14 @@ title: Home
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20200629_1131" />
-    <link rel="stylesheet" href="css/overlay.css?20200630_1120" />
+    <link rel="stylesheet" href="css/overlay.css?20201031" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.35_20201013_1657"></script>
+    <script type="text/javascript" src="js/app/data.js?5.35_20201031_2227"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?5.35_20201013_1657"></script>
 
     <!--
@@ -56,7 +56,7 @@ title: Home
       -   to other classes until an initialization method can be called safely.
       -->
     <script type="text/javascript" src="js/app/time.js?20190824"></script>
-    <script type="text/javascript" src="js/app/fish.js?20190824"></script>
+    <script type="text/javascript" src="js/app/fish.js?20201031"></script>
     <script type="text/javascript" src="js/app/weather.js?20190824"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20190823"></script>
     <script type="text/javascript" src="js/app/sorters.js?20190823"></script>
@@ -226,7 +226,7 @@ title: Home
         </td>
         <!-- Location -->
         <td>
-          <a href="http://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}" 
+          <i class="location-button map icon"></i> <a href="http://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}" 
              target="cp_gt" class="location-name">{{=it.data.location.name}}</a><br/>
           <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
         </td>
@@ -494,8 +494,9 @@ title: Home
     <!-- At last, we can load the layout and view model code. -->
     <script type="text/javascript" src="js/app/layout.js?20200115"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20200730_1059"></script>
+    <script type="text/javascript" src="js/app/map.js?20201031"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201014_1801"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201031"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -617,10 +618,22 @@ title: Home
       <p>
         Many fish, especially those requiring mooching, have hooksets associated with them. To make the display a bit more consise, you should interpret the badges as, when using this bait, use this hookset to reel in catch.
       </p>
+      <p>
+        You can display the map for a fishing spot by clicking the <i class="map icon"></i> in front of the location name. Use the scroll wheel to zoom in or out, and drag the map to pan around. Clicking on the name itself still opens a new tab linking to Garland Tools.
+      </p>
 
       <div class="ui longer modal" id="fishGuideModal">
         <div class="scrolling content" id="fishGuideElem"></div>
       </div>
+
+      <div class="ui modal" id="fishingSpotMapModal">
+        <div class="content map-container">
+          <canvas height="2048" width="2048"></canvas>
+        </div>
+        <div class="ui active dimmer">
+          <div class="ui text loader">Loading Map...</div>
+        </div>
+    </div>
 
       <div class="ui button" id="displayFishGuideButton">Display Fish Guide</div>
 
