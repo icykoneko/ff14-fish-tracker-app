@@ -514,8 +514,7 @@ let ViewModel = new class {
       // countdown event itself.
       let timestamp = reason.countdown;
 
-      // Update the main header's earth and eorzea times.
-      $('#earthClock').text(dateFns.format(timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
+      // Update the main header's times.
       $('#eorzeaClock').text(moment.utc(eorzeaTime.toEorzea(timestamp)).format("HH:mm"));
 
       // Check if the EARTH DATE has changed as well. If so, we must also
