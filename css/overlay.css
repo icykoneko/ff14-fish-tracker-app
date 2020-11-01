@@ -163,6 +163,7 @@ img {
   height: 512px;
   overflow: scroll;
   overflow: -moz-scrollbars-none;
+  scrollbar-width: none; /* Firefox */
   cursor: grab;
   /* Override built-in settings for this */
   padding: 0px;
