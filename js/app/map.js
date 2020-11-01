@@ -201,8 +201,8 @@ let FishingSpotMap = function(){
             });
           },
           wheel: e => {
-            console.log("Zooming",
-              e.originalEvent.wheelDelta > 0 ? "in" : "out");
+            let zoomIn = e.originalEvent.deltaY < 0;
+            console.log("Zooming", zoomIn ? "in" : "out", e.originalEvent);
 
             let el = self.$mapContainer[0];
 
@@ -212,23 +212,21 @@ let FishingSpotMap = function(){
             // of the zoom level, the act of panning the map is unaffected!
 
             // Check if we can still zoom out.
-            if ((e.originalEvent.wheelDelta <= 0) &&
-                (el.scrollWidth == el.clientWidth))
+            if (!zoomIn && (el.scrollWidth == el.clientWidth))
             {
               console.debug("Map is already zoomed out to maximum range.");
               return false;
             }
 
             // Only zoom in up to 200%
-            if ((e.originalEvent.wheelDelta > 0) &&
-                (self.zoomScale >= 2.0))
+            if (zoomIn && (self.zoomScale >= 2.0))
             {
               console.debug("Map is already zoomed in to maximum range.");
               return false;
             }
 
             // Each increment adjusts the zoom by 25%
-            let delta = e.originalEvent.wheelDelta > 0 ? 0.25 : -0.25;
+            let delta = zoomIn > 0 ? 0.25 : -0.25;
 
             // This will "mess up" the current position of the map though, so we
             // have to fix the scrollLeft/scrollTop values to account for the new
