@@ -34,8 +34,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20200629_1131" />
-    <link rel="stylesheet" href="css/overlay.css?20201031_2321" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201101_1542" />
+    <link rel="stylesheet" href="css/overlay.css?20201101_1542" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -420,7 +420,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20200730_1059"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201031"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201101_1542"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -461,11 +461,26 @@
     <div id="topmenu" class="ui text top fixed menu">
       <div class="ui container">
         <div class="header item">FFX|V Fish Tracker App</div>
-        <div class="right item">
-          <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
-          <div id="theme-toogle" class="ui toggle checkbox">
-            <input type="checkbox" name="theme-button" id="theme-button">
-            <label></label>
+        <div class="ui right borderless menu">
+          <!-- Eorzea Time (realtime updated) -->
+          <div class="item" id="eorzeaClock" title="Eorzea Time">##:##</div>
+          <!-- Light/Dark Mode Toggle (sun/moon) -->
+          <div class="item" id="theme-toggle" title="Toggle theme">
+            <span class="toggle dark-mode-toggle" data-theme="dark">🌙</span>
+            <span class="toggle light-mode-toggle" data-theme="light">☀️</span>
+          </div>
+          <!-- Language Selector -->
+          <div class="ui dropdown item" id="languageChoice">
+            <input type="hidden" name="language">
+            <!-- <i class="dropdown icon"></i> -->
+            <div class="default text" title="Switch language"><i class="flag icon"></i></div>
+            <div class="ui left mini menu">
+              <div class="item" data-value="en"><i class="us flag"></i><span class="text">English</span></div>
+              <div class="item" data-value="ja"><i class="jp flag"></i><span class="text">日本語</span></div>
+              <div class="item" data-value="de"><i class="de flag"></i><span class="text">Deutsch</span></div>
+              <div class="item" data-value="fr"><i class="fr flag"></i><span class="text">Français</span></div>
+              <div class="item" data-value="ko"><i class="kr flag"></i><span class="text">한국어</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -665,33 +680,6 @@
                   <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
                   <label>Overall Rarity</label>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="language" style="padding-top: 0x.25rem; padding-bottom: 0.25rem;">
-          <div class="column">Language:</div>
-          <div class="fifteen wide column">
-            <div class="ui mini compact buttons" id="languageChoice">
-              <div class="ui labeled icon button" data-lang="en">
-                <div class="icon"><i class="us flag"></i></div>
-                English
-              </div>
-              <div class="ui labeled icon button" data-lang="ja">
-                <div class="icon"><i class="jp flag"></i></div>
-                日本語
-              </div>
-              <div class="ui labeled icon button" data-lang="de">
-                <div class="icon"><i class="de flag"></i></div>
-                Deutsch
-              </div>
-              <div class="ui labeled icon button" data-lang="fr">
-                <div class="icon"><i class="fr flag"></i></div>
-                Français
-              </div>
-              <div class="ui labeled icon button" data-lang="ko">
-                <div class="icon"><i class="kr flag"></i></div>
-                한국어
               </div>
             </div>
           </div>

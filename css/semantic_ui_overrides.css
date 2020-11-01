@@ -138,6 +138,11 @@ i.icon.discord:before {
   background: #1B1C1D;
 }
 
+.ui.menu .ui.borderless.menu {
+  border: 0px solid transparent;
+  box-shadow: none;
+}
+
 .ui.menu [data-tooltip]:before {
   width: 0.71428571em;
   height: 0.71428571em;
@@ -163,4 +168,30 @@ i.icon.discord:before {
 
 .ui.menu .item.hidden {
   display: none;
+}
+
+.ui.inverted.menu .ui.dropdown .menu {
+  border: 0px solid transparent;
+  background: #1B1C1D;
+  box-shadow: none;
+}
+
+.ui.inverted.menu .ui.dropdown .menu > .item,
+.ui.inverted.menu .ui.dropdown .menu > .item > a:not(.ui) {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.ui.inverted.menu .ui.dropdown .menu .item:before {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.ui.inverted.menu .ui.dropdown .menu > .item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+.ui.inverted.menu .ui.dropdown .menu > .active.item {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
 }
