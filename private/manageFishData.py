@@ -178,6 +178,7 @@ def initialize_data(args):
     WEATHER_RATES = dict([
         (territory.key,
          dict({'map_id': territory.map.key,
+               'map_scale': territory.map.size_factor,
                'zone_id': territory.place_name.key,
                'region_id': territory.region_place_name.key,
                'weather_rates': _collect_weather_rates(territory.weather_rate)}))
@@ -203,9 +204,10 @@ def initialize_data(args):
          dict([('_id', spot.key),
                *_make_localized_field('name', spot['PlaceName'], 'Name'),
                ('territory_id', spot.get_raw('TerritoryType')),
-               ('placename_id', spot.key)]))
+               ('placename_id', spot.key),
+               ('map_coords', [spot.map_x, spot.map_y, spot.radius])]))
         for spot in XIV.game_data.get_sheet('FishingSpot')
-        if spot.get_raw('PlaceName{Main}') == 0])
+        if spot.get_raw('PlaceName{Main}') == 0 and spot.get_raw('TerritoryType') != 0])
     
     SPEARFISHING_NODES = dict([
         (x['GatheringPointBase'].key,
