@@ -420,7 +420,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20200730_1059"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201101_1542"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201106_1203"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -464,6 +464,10 @@
         <div class="ui right borderless menu">
           <!-- Eorzea Time (realtime updated) -->
           <div class="item" id="eorzeaClock" title="Eorzea Time">##:##</div>
+          <!-- Settings Popup Button -->
+          <div class="icon item" id="settings-button" title="Advanced Settings" style="cursor: pointer;">
+            <i class="cogs icon"></i>
+          </div>
           <!-- Light/Dark Mode Toggle (sun/moon) -->
           <div class="item" id="theme-toggle" title="Toggle theme">
             <span class="toggle dark-mode-toggle" data-theme="dark">🌙</span>
@@ -554,7 +558,7 @@
         <div class="ui active dimmer">
           <div class="ui text loader">Loading Map...</div>
         </div>
-    </div>
+      </div>
 
       <div class="ui button" id="displayFishGuideButton">Display Fish Guide</div>
 
@@ -606,80 +610,92 @@
         </div>
       </div>
 
-      <h2>Settings:</h2>
-      <div class="ui vertically padded grid">
-        <div class="row" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
-          <div class="column">Completion:</div>
-          <div class="fifteen wide column">
-            <div class="ui mini very compact buttons" id="filterCompletion">
-              <button class="ui active button" data-filter="all">All</button>
-              <button class="ui button" data-filter="caught">Caught</button>
-              <button class="ui button" data-filter="uncaught">Uncaught</button>
-            </div>
-            <div class="ui very compact buttons" id="checklist">
-              <div class="ui icon button" data-action="import" data-tooltip="Import Settings"><i class="upload icon"></i></div>
-              <div class="ui icon button" data-action="export" data-tooltip="Export Settings"><i class="download icon"></i></div>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="filterPatch" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
-          <div class="column">Patch:</div>
-          <div class="fifteen wide column">
-            <div class="ui vertically padded stacked grid">
-              <div class="ui mini very compact buttons">
-                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="2">ARR (2.x)</div>
-                <div class="ui active button" data-filter="2">2.0</div>
-                <div class="ui active button" data-filter="2.1">2.1</div>
-                <div class="ui active button" data-filter="2.2">2.2</div>
-                <div class="ui active button" data-filter="2.3">2.3</div>
-                <div class="ui active button" data-filter="2.4">2.4</div>
-                <div class="ui active button" data-filter="2.5">2.5</div>
-              </div>
-              <div class="ui mini very compact buttons">
-                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="3">Heavensward (3.x)</div>
-                <div class="ui active button" data-filter="3">3.0</div>
-                <div class="ui active button" data-filter="3.1">3.1</div>
-                <div class="ui active button" data-filter="3.2">3.2</div>
-                <div class="ui active button" data-filter="3.3">3.3</div>
-                <div class="ui active button" data-filter="3.4">3.4</div>
-                <div class="ui active button" data-filter="3.5">3.5</div>
-              </div>
-              <div class="ui mini very compact buttons">
-                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="4">Stormblood (4.x)</div>
-                <div class="ui active button" data-filter="4">4.0</div>
-                <div class="ui active button" data-filter="4.1">4.1</div>
-                <div class="ui active button" data-filter="4.2">4.2</div>
-                <div class="ui active button" data-filter="4.3">4.3</div>
-                <div class="ui active button" data-filter="4.4">4.4</div>
-                <div class="ui active button" data-filter="4.5">4.5</div>
-              </div>
-              <div class="ui mini very compact buttons">
-                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="5">Shadowbringers (5.x)</div>
-                <div class="ui active button" data-filter="5">5.0</div>
-                <div class="ui active button" data-filter="5.1">5.1</div>
-                <div class="ui active button" data-filter="5.2">5.2</div>
-                <div class="ui active button" data-filter="5.3">5.3</div>
-                <div class="ui disabled active button" data-filter="5.4">5.4</div>
-                <div class="ui disabled active button" data-filter="5.5">5.5</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="sorting" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
-          <div class="column">Sorting:</div>
-          <div class="six wide column" id="sortingType">
-            <div class="inline fields">
-              <div class="field" style="float: left; margin-right: 1rem;">
-                <div class="ui radio checked checkbox">
-                  <input type="radio" name="sortingType" checked="checked" class="hidden" value="windowPeriods"/>
-                  <label>Window Periods</label>
+      <div id="advanced-settings-modal" class="ui small longer modal">
+        <div class="header">Advanced Settings</div>
+        <div class="content">
+          <div class="ui grid">
+            <div class="row">
+              <div class="column" id="filterPatch" style="width: unset;">
+                <div class="row" style="padding-bottom: 0.5rem;">
+                  Filter by Expansion or Patch:
                 </div>
-              </div>
-              <div class="field" style="float: left;">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
-                  <label>Overall Rarity</label>
+                <div class="row">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="2">ARR (2.x)</div>
+                    <div class="ui active button" data-filter="2">2.0</div>
+                    <div class="ui active button" data-filter="2.1">2.1</div>
+                    <div class="ui active button" data-filter="2.2">2.2</div>
+                    <div class="ui active button" data-filter="2.3">2.3</div>
+                    <div class="ui active button" data-filter="2.4">2.4</div>
+                    <div class="ui active button" data-filter="2.5">2.5</div>
+                  </div>
                 </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="3">Heavensward (3.x)</div>
+                    <div class="ui active button" data-filter="3">3.0</div>
+                    <div class="ui active button" data-filter="3.1">3.1</div>
+                    <div class="ui active button" data-filter="3.2">3.2</div>
+                    <div class="ui active button" data-filter="3.3">3.3</div>
+                    <div class="ui active button" data-filter="3.4">3.4</div>
+                    <div class="ui active button" data-filter="3.5">3.5</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="4">Stormblood (4.x)</div>
+                    <div class="ui active button" data-filter="4">4.0</div>
+                    <div class="ui active button" data-filter="4.1">4.1</div>
+                    <div class="ui active button" data-filter="4.2">4.2</div>
+                    <div class="ui active button" data-filter="4.3">4.3</div>
+                    <div class="ui active button" data-filter="4.4">4.4</div>
+                    <div class="ui active button" data-filter="4.5">4.5</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="5">Shadowbringers (5.x)</div>
+                    <div class="ui active button" data-filter="5">5.0</div>
+                    <div class="ui active button" data-filter="5.1">5.1</div>
+                    <div class="ui active button" data-filter="5.2">5.2</div>
+                    <div class="ui active button" data-filter="5.3">5.3</div>
+                    <div class="ui disabled active button" data-filter="5.4">5.4</div>
+                    <div class="ui disabled active button" data-filter="5.5">5.5</div>
+                  </div>
+                </div>
+              </div><!-- column -->
+              <div class="column" style="width: unset;">
+                <div class="row" style="padding-bottom: 0.5rem;">Display:</div>
+                <div class="row">
+                  <div class="ui mini compact buttons" id="filterCompletion">
+                    <button class="ui active button" data-filter="all">All</button>
+                    <button class="ui button" data-filter="caught">Caught</button>
+                    <button class="ui button" data-filter="uncaught">Uncaught</button>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+                  Sorting Options:
+                </div>
+                <div class="row" id="sortingType">
+                  <div class="field">
+                    <div class="ui radio checked checkbox">
+                      <input type="radio" name="sortingType" checked="checked" class="hidden" value="windowPeriods"/>
+                      <label>Window Periods</label>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="ui radio checkbox">
+                      <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
+                      <label>Overall Rarity</label>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- column -->
+            </div><!-- row -->
+            <div class="centered row">
+              <div class="ui mini very compact buttons" id="checklist">
+                <div class="ui labeled icon button" data-action="import" data-tooltip="Import Settings"><i class="upload icon"></i>Import Settings</div>
+                <div class="ui right labeled icon button" data-action="export" data-tooltip="Export Settings"><i class="download icon"></i>Export Settings</div>
               </div>
             </div>
           </div>

@@ -375,6 +375,11 @@ let ViewModel = new class {
       $('#fishGuideModal').modal('show');
     });
 
+    $('#settings-button').on('click', function(e) {
+      if (e) e.stopPropagation();
+      $('#advanced-settings-modal').modal('show');
+    });
+
     // The language selection isn't managed by ViewModel's settings, so we need
     // to set the active language here...
     $('#languageChoice.dropdown')
