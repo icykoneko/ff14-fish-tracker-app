@@ -133,8 +133,37 @@ img {
   float: left;
 }
 
-#theme-toogle {
-  padding-left: 5px;
+#theme-toggle .toggle {
+  cursor: pointer;
+}
+
+body:not(.dark) #theme-toggle .light-mode-toggle,
+body.dark #theme-toggle .dark-mode-toggle
+{
+  display: none;
+}
+
+/* Hide the actual text when dropdown is not active */
+#languageChoice.dropdown > .text span.text {
+  display: none;
+}
+
+/* In order to force the menu to display leftward, we have to trick UI */
+#languageChoice.dropdown > .loading.left.menu {
+  margin-left: 100rem; /* force to load leftward */
+  left: 0px !important;
+  right: auto !important;
+  display: block;
+}
+
+#languageChoice.dropdown > .left.menu {
+  display: none; /* because this is inside a .ui.menu, we have to fix this... */
+}
+#languageChoice.dropdown > .visible.left.menu {
+  display: block;
+}
+#languageChoice.dropdown .mini.menu {
+  font-size: 0.78571429rem;
 }
 
 .upcoming-windows-button:hover {
@@ -194,6 +223,18 @@ img {
   cursor: progress;
 }
 
+
+#fishes thead tr th {
+  position: sticky;
+  top: 40px; /* This needs to sync with the top menu */
+  z-index: 3;
+  border-radius: unset;
+  background-color: hsla(0, 0%, 100%, 1) !important; /* This should match the page background */
+}
+
+body.dark #fishes thead tr th {
+  background-color: hsla(0, 0%, 15%, 1) !important; /* This should match the page background */
+}
 
 /*
  * These rules match the Fish Eyes status requirement when a duration is present.

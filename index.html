@@ -34,8 +34,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20200629_1131" />
-    <link rel="stylesheet" href="css/overlay.css?20201031_2321" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201111_1046" />
+    <link rel="stylesheet" href="css/overlay.css?20201111_1217" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -420,7 +420,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201031"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201111_1145"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -460,12 +460,40 @@
   <body>
     <div id="topmenu" class="ui text top fixed menu">
       <div class="ui container">
+        <div class="ui dropdown icon item" id="main-menu">
+          <i class="bars icon"></i>
+          <div class="menu">
+            <a class="item" id="fish-guide-button"><i class="fish icon"></i> Fish Guide</a>
+            <a class="item" target="#top" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
+            <a class="item" id="tips-and-tricks-button"><i class="lightbulb icon"></i> Tips and Tricks</a>
+            <a class="item" target="#top" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
+          </div>
+        </div>
         <div class="header item">FFX|V Fish Tracker App</div>
-        <div class="right item">
-          <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
-          <div id="theme-toogle" class="ui toggle checkbox">
-            <input type="checkbox" name="theme-button" id="theme-button">
-            <label></label>
+        <div class="ui right borderless menu">
+          <!-- Eorzea Time (realtime updated) -->
+          <div class="item" id="eorzeaClock" title="Eorzea Time">##:##</div>
+          <!-- Settings Popup Button -->
+          <div class="icon item" id="settings-button" title="Advanced Settings" style="cursor: pointer;">
+            <i class="cogs icon"></i>
+          </div>
+          <!-- Light/Dark Mode Toggle (sun/moon) -->
+          <div class="item" id="theme-toggle" title="Toggle theme">
+            <span class="toggle dark-mode-toggle" data-theme="dark">🌙</span>
+            <span class="toggle light-mode-toggle" data-theme="light">☀️</span>
+          </div>
+          <!-- Language Selector -->
+          <div class="ui dropdown item" id="languageChoice">
+            <input type="hidden" name="language">
+            <!-- <i class="dropdown icon"></i> -->
+            <div class="default text" title="Switch language"><i class="flag icon"></i></div>
+            <div class="ui left mini menu">
+              <div class="item" data-value="en"><i class="us flag"></i><span class="text">English</span></div>
+              <div class="item" data-value="ja"><i class="jp flag"></i><span class="text">日本語</span></div>
+              <div class="item" data-value="de"><i class="de flag"></i><span class="text">Deutsch</span></div>
+              <div class="item" data-value="fr"><i class="fr flag"></i><span class="text">Français</span></div>
+              <div class="item" data-value="ko"><i class="kr flag"></i><span class="text">한국어</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -505,28 +533,33 @@
           </p>
         </div>
       </div>
-      <h2>Tips and Tricks:</h2>
-      <p>
-        Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).  You can also single-click the expansion button to toggle an entire expansion from being displayed.
-      </p>
-      <p>
-        Having trouble picking out those super rare fish from the vast list of upcoming fish windows? Now you can sort by <b>Overall Rarity</b>.  As always, the rarest fish currently available will be shown first, followed by the sorted list of fish coming up in the next 15 minutes. But after that, the remaining fish will be sorted by rarity first, making those super rare fish jump to the top (even if they are days away.) I hope this helps you plan out catching the super rare ones.  Good luck!
-      </p>
-      <p>
-        Another tool you may find useful for researching is the <a href="weatherForecaster.html">Weather Forecaster</a> app. It can display all the possible weather transitions for a zone, as well as when each transition will occur. Some are much more rare than others.
-      </p>
-      <p>
-        Partial localization support is here! Select the language to change the in-game names and locations to your client's language. I'm very sorry the UI does not automatically translate well, please forgive me.
-      </p>
-      <p>
-        You can display the next 10 upcoming windows by clicking on the <i class="calendar icon"></i> in front of the uptime text. You might be sad afterward though, looking at you Bobgoblin Bass...
-      </p>
-      <p>
-        Many fish, especially those requiring mooching, have hooksets associated with them. To make the display a bit more consise, you should interpret the badges as, when using this bait, use this hookset to reel in catch.
-      </p>
-      <p>
-        You can display the map for a fishing spot by clicking the <i class="map icon"></i> in front of the location name. Use the scroll wheel to zoom in or out, and drag the map to pan around. Clicking on the name itself still opens a new tab linking to Garland Tools.
-      </p>
+
+      <div class="ui longer modal" id="tips-and-tricks-modal">
+        <div class="header">Tips and Tricks</div>
+        <div class="content">
+          <p>
+            Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).  You can also single-click the expansion button to toggle an entire expansion from being displayed.
+          </p>
+          <p>
+            Having trouble picking out those super rare fish from the vast list of upcoming fish windows? Now you can sort by <b>Overall Rarity</b>.  As always, the rarest fish currently available will be shown first, followed by the sorted list of fish coming up in the next 15 minutes. But after that, the remaining fish will be sorted by rarity first, making those super rare fish jump to the top (even if they are days away.) I hope this helps you plan out catching the super rare ones.  Good luck!
+          </p>
+          <p>
+            Another tool you may find useful for researching is the <a href="weatherForecaster.html">Weather Forecaster</a> app. It can display all the possible weather transitions for a zone, as well as when each transition will occur. Some are much more rare than others.
+          </p>
+          <p>
+            Partial localization support is here! Select the language to change the in-game names and locations to your client's language. I'm very sorry the UI does not automatically translate well, please forgive me.
+          </p>
+          <p>
+            You can display the next 10 upcoming windows by clicking on the <i class="calendar icon"></i> in front of the uptime text. You might be sad afterward though, looking at you Bobgoblin Bass...
+          </p>
+          <p>
+            Many fish, especially those requiring mooching, have hooksets associated with them. To make the display a bit more consise, you should interpret the badges as, when using this bait, use this hookset to reel in catch.
+          </p>
+          <p>
+            You can display the map for a fishing spot by clicking the <i class="map icon"></i> in front of the location name. Use the scroll wheel to zoom in or out, and drag the map to pan around. Clicking on the name itself still opens a new tab linking to Garland Tools.
+          </p>
+        </div>
+      </div>
 
       <div class="ui longer modal" id="fishGuideModal">
         <div class="scrolling content" id="fishGuideElem"></div>
@@ -539,9 +572,7 @@
         <div class="ui active dimmer">
           <div class="ui text loader">Loading Map...</div>
         </div>
-    </div>
-
-      <div class="ui button" id="displayFishGuideButton">Display Fish Guide</div>
+      </div>
 
       <!-- Modal for exporting settings (checklist and filters, etc.) -->
       <div id="export-settings-modal" class="ui tiny modal">
@@ -591,107 +622,92 @@
         </div>
       </div>
 
-      <h2>Settings:</h2>
-      <div class="ui vertically padded grid">
-        <div class="row" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
-          <div class="column">Completion:</div>
-          <div class="fifteen wide column">
-            <div class="ui mini very compact buttons" id="filterCompletion">
-              <button class="ui active button" data-filter="all">All</button>
-              <button class="ui button" data-filter="caught">Caught</button>
-              <button class="ui button" data-filter="uncaught">Uncaught</button>
-            </div>
-            <div class="ui very compact buttons" id="checklist">
-              <div class="ui icon button" data-action="import" data-tooltip="Import Settings"><i class="upload icon"></i></div>
-              <div class="ui icon button" data-action="export" data-tooltip="Export Settings"><i class="download icon"></i></div>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="filterPatch" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
-          <div class="column">Patch:</div>
-          <div class="fifteen wide column">
-            <div class="ui vertically padded stacked grid">
-              <div class="ui mini very compact buttons">
-                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="2">ARR (2.x)</div>
-                <div class="ui active button" data-filter="2">2.0</div>
-                <div class="ui active button" data-filter="2.1">2.1</div>
-                <div class="ui active button" data-filter="2.2">2.2</div>
-                <div class="ui active button" data-filter="2.3">2.3</div>
-                <div class="ui active button" data-filter="2.4">2.4</div>
-                <div class="ui active button" data-filter="2.5">2.5</div>
-              </div>
-              <div class="ui mini very compact buttons">
-                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="3">Heavensward (3.x)</div>
-                <div class="ui active button" data-filter="3">3.0</div>
-                <div class="ui active button" data-filter="3.1">3.1</div>
-                <div class="ui active button" data-filter="3.2">3.2</div>
-                <div class="ui active button" data-filter="3.3">3.3</div>
-                <div class="ui active button" data-filter="3.4">3.4</div>
-                <div class="ui active button" data-filter="3.5">3.5</div>
-              </div>
-              <div class="ui mini very compact buttons">
-                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="4">Stormblood (4.x)</div>
-                <div class="ui active button" data-filter="4">4.0</div>
-                <div class="ui active button" data-filter="4.1">4.1</div>
-                <div class="ui active button" data-filter="4.2">4.2</div>
-                <div class="ui active button" data-filter="4.3">4.3</div>
-                <div class="ui active button" data-filter="4.4">4.4</div>
-                <div class="ui active button" data-filter="4.5">4.5</div>
-              </div>
-              <div class="ui mini very compact buttons">
-                <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="5">Shadowbringers (5.x)</div>
-                <div class="ui active button" data-filter="5">5.0</div>
-                <div class="ui active button" data-filter="5.1">5.1</div>
-                <div class="ui active button" data-filter="5.2">5.2</div>
-                <div class="ui active button" data-filter="5.3">5.3</div>
-                <div class="ui disabled active button" data-filter="5.4">5.4</div>
-                <div class="ui disabled active button" data-filter="5.5">5.5</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="sorting" style="padding-top: 0.25rem; padding-bottom: 0.25rem;">
-          <div class="column">Sorting:</div>
-          <div class="six wide column" id="sortingType">
-            <div class="inline fields">
-              <div class="field" style="float: left; margin-right: 1rem;">
-                <div class="ui radio checked checkbox">
-                  <input type="radio" name="sortingType" checked="checked" class="hidden" value="windowPeriods"/>
-                  <label>Window Periods</label>
+      <div id="advanced-settings-modal" class="ui small longer modal">
+        <div class="header">Advanced Settings</div>
+        <div class="content">
+          <div class="ui grid">
+            <div class="centered row">
+              <div class="column" id="filterPatch" style="width: unset;">
+                <div class="row" style="padding-bottom: 0.5rem;">
+                  Filter by Expansion or Patch:
                 </div>
-              </div>
-              <div class="field" style="float: left;">
-                <div class="ui radio checkbox">
-                  <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
-                  <label>Overall Rarity</label>
+                <div class="row">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="2">ARR (2.x)</div>
+                    <div class="ui active button" data-filter="2">2.0</div>
+                    <div class="ui active button" data-filter="2.1">2.1</div>
+                    <div class="ui active button" data-filter="2.2">2.2</div>
+                    <div class="ui active button" data-filter="2.3">2.3</div>
+                    <div class="ui active button" data-filter="2.4">2.4</div>
+                    <div class="ui active button" data-filter="2.5">2.5</div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="language" style="padding-top: 0x.25rem; padding-bottom: 0.25rem;">
-          <div class="column">Language:</div>
-          <div class="fifteen wide column">
-            <div class="ui mini compact buttons" id="languageChoice">
-              <div class="ui labeled icon button" data-lang="en">
-                <div class="icon"><i class="us flag"></i></div>
-                English
-              </div>
-              <div class="ui labeled icon button" data-lang="ja">
-                <div class="icon"><i class="jp flag"></i></div>
-                日本語
-              </div>
-              <div class="ui labeled icon button" data-lang="de">
-                <div class="icon"><i class="de flag"></i></div>
-                Deutsch
-              </div>
-              <div class="ui labeled icon button" data-lang="fr">
-                <div class="icon"><i class="fr flag"></i></div>
-                Français
-              </div>
-              <div class="ui labeled icon button" data-lang="ko">
-                <div class="icon"><i class="kr flag"></i></div>
-                한국어
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="3">Heavensward (3.x)</div>
+                    <div class="ui active button" data-filter="3">3.0</div>
+                    <div class="ui active button" data-filter="3.1">3.1</div>
+                    <div class="ui active button" data-filter="3.2">3.2</div>
+                    <div class="ui active button" data-filter="3.3">3.3</div>
+                    <div class="ui active button" data-filter="3.4">3.4</div>
+                    <div class="ui active button" data-filter="3.5">3.5</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="4">Stormblood (4.x)</div>
+                    <div class="ui active button" data-filter="4">4.0</div>
+                    <div class="ui active button" data-filter="4.1">4.1</div>
+                    <div class="ui active button" data-filter="4.2">4.2</div>
+                    <div class="ui active button" data-filter="4.3">4.3</div>
+                    <div class="ui active button" data-filter="4.4">4.4</div>
+                    <div class="ui active button" data-filter="4.5">4.5</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="5">Shadowbringers (5.x)</div>
+                    <div class="ui active button" data-filter="5">5.0</div>
+                    <div class="ui active button" data-filter="5.1">5.1</div>
+                    <div class="ui active button" data-filter="5.2">5.2</div>
+                    <div class="ui active button" data-filter="5.3">5.3</div>
+                    <div class="ui disabled active button" data-filter="5.4">5.4</div>
+                    <div class="ui disabled active button" data-filter="5.5">5.5</div>
+                  </div>
+                </div>
+              </div><!-- column -->
+              <div class="column" style="width: unset;">
+                <div class="row" style="padding-bottom: 0.5rem;">Display:</div>
+                <div class="row">
+                  <div class="ui mini compact buttons" id="filterCompletion">
+                    <div class="ui active button" data-filter="all">All</div>
+                    <div class="ui button" data-filter="caught">Caught</div>
+                    <div class="ui button" data-filter="uncaught">Uncaught</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+                  Sorting Options:
+                </div>
+                <div class="row" id="sortingType">
+                  <div class="field">
+                    <div class="ui radio checked checkbox">
+                      <input type="radio" name="sortingType" checked="checked" class="hidden" value="windowPeriods"/>
+                      <label>Window Periods</label>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <div class="ui radio checkbox">
+                      <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
+                      <label>Overall Rarity</label>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- column -->
+            </div><!-- row -->
+            <div class="centered row">
+              <div class="ui mini very compact buttons" id="checklist">
+                <div class="ui labeled icon button" data-action="import"><i class="upload icon"></i>Import Settings</div>
+                <div class="ui right labeled icon button" data-action="export"><i class="download icon"></i>Export Settings</div>
               </div>
             </div>
           </div>
