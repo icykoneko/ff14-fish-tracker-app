@@ -110,21 +110,47 @@ i.icon {
 }
 
 
-/*
- * Needed until we upgrade to Semantic UI 2.4 or later...
+/*!
+ * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
-  font-family: brand-icons;
-  src: url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.eot);
-  src: url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.eot?#iefix) format('embedded-opentype'),url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.woff2) format('woff2'),url(themes/default/assets/fonts/brand-icons.woff) format('woff'),url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.ttf) format('truetype'),url(https://semantic-ui.com/dist/themes/default/assets/fonts/brand-icons.svg#icons) format('svg');
+  font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: 400;
-  font-variant: normal;
-  text-decoration:inherit;text-transform:none}
+  font-display: block;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-brands-400.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-brands-400.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-brands-400.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-brands-400.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-brands-400.svg#fontawesome") format("svg");
+}
 
 i.icon.discord:before {
-  font-family: brand-icons;
+  font-family: 'Font Awesome 5 Brands';
+  font-weight: 400;
   content: "\f392";
+}
+
+/*!
+ * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.eot");
+  src: url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.woff2") format("woff2"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.woff") format("woff"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.ttf") format("truetype"), url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+i.icon.fish:before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: "\f578";
+}
+i.icon.cloud.sun.rain:before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: "\f743";
 }
 
 
@@ -136,6 +162,11 @@ i.icon.discord:before {
 .ui.inverted.fixed.menu,
 .ui.inverted.fixed.text.menu {
   background: #1B1C1D;
+}
+
+.ui.menu .ui.borderless.menu {
+  border: 0px solid transparent;
+  box-shadow: none;
 }
 
 .ui.menu [data-tooltip]:before {
@@ -163,4 +194,30 @@ i.icon.discord:before {
 
 .ui.menu .item.hidden {
   display: none;
+}
+
+.ui.inverted.menu .ui.dropdown .menu {
+  border: 0px solid transparent;
+  background: #1B1C1D;
+  box-shadow: none;
+}
+
+.ui.inverted.menu .ui.dropdown .menu > .item,
+.ui.inverted.menu .ui.dropdown .menu > .item > a:not(.ui) {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.ui.inverted.menu .ui.dropdown .menu .item:before {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.ui.inverted.menu .ui.dropdown .menu > .item:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+.ui.inverted.menu .ui.dropdown .menu > .active.item {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
 }

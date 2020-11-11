@@ -370,17 +370,34 @@ let ViewModel = new class {
     // NOT AUTOMATICALLY BE UPDATED.
     this.applyTheme(this.settings.theme);
 
-    $('#displayFishGuideButton').on('click', function(e) {
+    $('#fish-guide-button').on('click', function(e) {
       if (e) e.stopPropagation();
+      $('#main-menu.dropdown').dropdown('hide');
       $('#fishGuideModal').modal('show');
     });
 
-    // The language buttons aren't managed by ViewModel's settings, so we need
-    // to set the active button here...
-    $('#languageChoice .button')
-      .filter('[data-lang="' + localizationHelper.getLanguage() + '"]')
-      .addClass('active');
+    $('#tips-and-tricks-button').on('click', function(e) {
+      if (e) e.stopPropagation();
+      $('#main-menu.dropdown').dropdown('hide');
+      $('#tips-and-tricks-modal').modal('show');
+    });
 
+    $('#settings-button').on('click', function(e) {
+      if (e) e.stopPropagation();
+      $('#advanced-settings-modal').modal('show');
+    });
+
+    $('#main-menu.dropdown').dropdown({
+      action: 'hide'
+    });
+
+    // The language selection isn't managed by ViewModel's settings, so we need
+    // to set the active language here...
+    $('#languageChoice.dropdown')
+      .dropdown('set selected', localizationHelper.getLanguage())
+      .dropdown({
+        onChange: (value, text, $choice) => localizationHelper.setLanguage(value),
+      });
 
     const { Subject, BehaviorSubject, merge, interval } = rxjs;
     const { buffer, debounceTime, map, filter, skip, timestamp } = rxjs.operators;
@@ -405,8 +422,7 @@ let ViewModel = new class {
       dblclick: this.filterPatchDblClicked
     });
     $('#filterPatch .button.patch-set').on('click', this.filterPatchSetClicked);
-    $('#theme-button').on('click', this.themeButtonClicked);
-    $('#languageChoice .button').on('click', this.languageChoiceClicked);
+    $('#theme-toggle .toggle').on('click', this.themeButtonClicked);
     $('#checklist .button').on('click', this.onChecklistButtonClicked);
 
     // Initialize import/export modals.
@@ -514,8 +530,7 @@ let ViewModel = new class {
       // countdown event itself.
       let timestamp = reason.countdown;
 
-      // Update the main header's earth and eorzea times.
-      $('#earthClock').text(dateFns.format(timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
+      // Update the main header's times.
       $('#eorzeaClock').text(moment.utc(eorzeaTime.toEorzea(timestamp)).format("HH:mm"));
 
       // Check if the EARTH DATE has changed as well. If so, we must also
@@ -922,29 +937,13 @@ let ViewModel = new class {
   themeButtonClicked(e) {
     if (e) e.stopPropagation();
     let $this = $(this);
-    let theme = $this.prop('checked') ? 'dark' : 'light';
+    let theme = $this.data('theme');
 
     // Apply the theme.
     ViewModel.applyTheme(theme);
     // And save it to settings.
     ViewModel.settings.theme = theme;
     ViewModel.saveSettings();
-  }
-
-  languageChoiceClicked(e) {
-    if (e) e.stopPropagation();
-    let $this = $(this);
-    
-    let lang = $this.data('lang');
-    // Update the `active` status for the language buttons.
-    $this.addClass('active').siblings().removeClass('active');
-    // Tell localization helper to update the language setting.
-    // TODO: This is the only setting that's NOT managed directly by the
-    //       ViewModel. That needs to be fixed so everything's in one
-    //       central location :/
-    localizationHelper.setLanguage(lang);
-    // We really should still defer updating the display so the click
-    // event can actually finish within reasonable time.
   }
 
   applyTheme(theme) {
@@ -1044,7 +1043,6 @@ let ViewModel = new class {
       console.warn("Why is theme missing??? Using default then...");
       settings.theme = this.settings.theme;
     }
-    $('#theme-button').prop('checked', settings.theme === 'dark');
     this.applyTheme(settings.theme);
 
     // Save the settings to the model.
