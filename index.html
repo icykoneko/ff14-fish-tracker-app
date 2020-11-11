@@ -34,7 +34,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201101_1542" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201111_1046" />
     <link rel="stylesheet" href="css/overlay.css?20201101_1542" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
@@ -420,7 +420,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20200730_1059"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201106_1203"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201111_1145"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -460,6 +460,15 @@
   <body>
     <div id="topmenu" class="ui text top fixed menu">
       <div class="ui container">
+        <div class="ui dropdown icon item" id="main-menu">
+          <i class="bars icon"></i>
+          <div class="menu">
+            <a class="item" id="fish-guide-button"><i class="fish icon"></i> Fish Guide</a>
+            <a class="item" target="#top" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
+            <a class="item" id="tips-and-tricks-button"><i class="lightbulb icon"></i> Tips and Tricks</a>
+            <a class="item" target="#top" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
+          </div>
+        </div>
         <div class="header item">FFX|V Fish Tracker App</div>
         <div class="ui right borderless menu">
           <!-- Eorzea Time (realtime updated) -->
@@ -524,28 +533,33 @@
           </p>
         </div>
       </div>
-      <h2>Tips and Tricks:</h2>
-      <p>
-        Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).  You can also single-click the expansion button to toggle an entire expansion from being displayed.
-      </p>
-      <p>
-        Having trouble picking out those super rare fish from the vast list of upcoming fish windows? Now you can sort by <b>Overall Rarity</b>.  As always, the rarest fish currently available will be shown first, followed by the sorted list of fish coming up in the next 15 minutes. But after that, the remaining fish will be sorted by rarity first, making those super rare fish jump to the top (even if they are days away.) I hope this helps you plan out catching the super rare ones.  Good luck!
-      </p>
-      <p>
-        Another tool you may find useful for researching is the <a href="weatherForecaster.html">Weather Forecaster</a> app. It can display all the possible weather transitions for a zone, as well as when each transition will occur. Some are much more rare than others.
-      </p>
-      <p>
-        Partial localization support is here! Select the language to change the in-game names and locations to your client's language. I'm very sorry the UI does not automatically translate well, please forgive me.
-      </p>
-      <p>
-        You can display the next 10 upcoming windows by clicking on the <i class="calendar icon"></i> in front of the uptime text. You might be sad afterward though, looking at you Bobgoblin Bass...
-      </p>
-      <p>
-        Many fish, especially those requiring mooching, have hooksets associated with them. To make the display a bit more consise, you should interpret the badges as, when using this bait, use this hookset to reel in catch.
-      </p>
-      <p>
-        You can display the map for a fishing spot by clicking the <i class="map icon"></i> in front of the location name. Use the scroll wheel to zoom in or out, and drag the map to pan around. Clicking on the name itself still opens a new tab linking to Garland Tools.
-      </p>
+
+      <div class="ui longer modal" id="tips-and-tricks-modal">
+        <div class="header">Tips and Tricks</div>
+        <div class="content">
+          <p>
+            Too many fish displayed? Wish you could just show a single patch? Try double-clicking on the patch number to display just the fish from that patch! (You can toggle other patches by clicking on them as well).  You can also single-click the expansion button to toggle an entire expansion from being displayed.
+          </p>
+          <p>
+            Having trouble picking out those super rare fish from the vast list of upcoming fish windows? Now you can sort by <b>Overall Rarity</b>.  As always, the rarest fish currently available will be shown first, followed by the sorted list of fish coming up in the next 15 minutes. But after that, the remaining fish will be sorted by rarity first, making those super rare fish jump to the top (even if they are days away.) I hope this helps you plan out catching the super rare ones.  Good luck!
+          </p>
+          <p>
+            Another tool you may find useful for researching is the <a href="weatherForecaster.html">Weather Forecaster</a> app. It can display all the possible weather transitions for a zone, as well as when each transition will occur. Some are much more rare than others.
+          </p>
+          <p>
+            Partial localization support is here! Select the language to change the in-game names and locations to your client's language. I'm very sorry the UI does not automatically translate well, please forgive me.
+          </p>
+          <p>
+            You can display the next 10 upcoming windows by clicking on the <i class="calendar icon"></i> in front of the uptime text. You might be sad afterward though, looking at you Bobgoblin Bass...
+          </p>
+          <p>
+            Many fish, especially those requiring mooching, have hooksets associated with them. To make the display a bit more consise, you should interpret the badges as, when using this bait, use this hookset to reel in catch.
+          </p>
+          <p>
+            You can display the map for a fishing spot by clicking the <i class="map icon"></i> in front of the location name. Use the scroll wheel to zoom in or out, and drag the map to pan around. Clicking on the name itself still opens a new tab linking to Garland Tools.
+          </p>
+        </div>
+      </div>
 
       <div class="ui longer modal" id="fishGuideModal">
         <div class="scrolling content" id="fishGuideElem"></div>
@@ -559,8 +573,6 @@
           <div class="ui text loader">Loading Map...</div>
         </div>
       </div>
-
-      <div class="ui button" id="displayFishGuideButton">Display Fish Guide</div>
 
       <!-- Modal for exporting settings (checklist and filters, etc.) -->
       <div id="export-settings-modal" class="ui tiny modal">

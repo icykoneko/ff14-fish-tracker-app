@@ -370,14 +370,25 @@ let ViewModel = new class {
     // NOT AUTOMATICALLY BE UPDATED.
     this.applyTheme(this.settings.theme);
 
-    $('#displayFishGuideButton').on('click', function(e) {
+    $('#fish-guide-button').on('click', function(e) {
       if (e) e.stopPropagation();
+      $('#main-menu.dropdown').dropdown('hide');
       $('#fishGuideModal').modal('show');
+    });
+
+    $('#tips-and-tricks-button').on('click', function(e) {
+      if (e) e.stopPropagation();
+      $('#main-menu.dropdown').dropdown('hide');
+      $('#tips-and-tricks-modal').modal('show');
     });
 
     $('#settings-button').on('click', function(e) {
       if (e) e.stopPropagation();
       $('#advanced-settings-modal').modal('show');
+    });
+
+    $('#main-menu.dropdown').dropdown({
+      action: 'hide'
     });
 
     // The language selection isn't managed by ViewModel's settings, so we need
