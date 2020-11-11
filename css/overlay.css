@@ -224,6 +224,18 @@ body.dark #theme-toggle .dark-mode-toggle
 }
 
 
+#fishes thead tr th {
+  position: sticky;
+  top: 40px; /* This needs to sync with the top menu */
+  z-index: 3;
+  border-radius: unset;
+  background-color: hsla(0, 0%, 100%, 1) !important; /* This should match the page background */
+}
+
+body.dark #fishes thead tr th {
+  background-color: hsla(0, 0%, 15%, 1) !important; /* This should match the page background */
+}
+
 /*
  * These rules match the Fish Eyes status requirement when a duration is present.
  * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(

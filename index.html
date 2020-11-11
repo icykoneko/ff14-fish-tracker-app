@@ -35,7 +35,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201111_1046" />
-    <link rel="stylesheet" href="css/overlay.css?20201101_1542" />
+    <link rel="stylesheet" href="css/overlay.css?20201111_1217" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -626,7 +626,7 @@
         <div class="header">Advanced Settings</div>
         <div class="content">
           <div class="ui grid">
-            <div class="row">
+            <div class="centered row">
               <div class="column" id="filterPatch" style="width: unset;">
                 <div class="row" style="padding-bottom: 0.5rem;">
                   Filter by Expansion or Patch:
@@ -680,9 +680,9 @@
                 <div class="row" style="padding-bottom: 0.5rem;">Display:</div>
                 <div class="row">
                   <div class="ui mini compact buttons" id="filterCompletion">
-                    <button class="ui active button" data-filter="all">All</button>
-                    <button class="ui button" data-filter="caught">Caught</button>
-                    <button class="ui button" data-filter="uncaught">Uncaught</button>
+                    <div class="ui active button" data-filter="all">All</div>
+                    <div class="ui button" data-filter="caught">Caught</div>
+                    <div class="ui button" data-filter="uncaught">Uncaught</div>
                   </div>
                 </div>
                 <div class="row" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
@@ -706,8 +706,8 @@
             </div><!-- row -->
             <div class="centered row">
               <div class="ui mini very compact buttons" id="checklist">
-                <div class="ui labeled icon button" data-action="import" data-tooltip="Import Settings"><i class="upload icon"></i>Import Settings</div>
-                <div class="ui right labeled icon button" data-action="export" data-tooltip="Export Settings"><i class="download icon"></i>Export Settings</div>
+                <div class="ui labeled icon button" data-action="import"><i class="upload icon"></i>Import Settings</div>
+                <div class="ui right labeled icon button" data-action="export"><i class="download icon"></i>Export Settings</div>
               </div>
             </div>
           </div>
