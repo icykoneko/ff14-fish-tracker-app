@@ -48,7 +48,7 @@ let FishGuide = function(){
     <div class="text">Collectable?</div>
   </div>
   <div class="fish-meta">
-    <!-- TODO: Include things like, when is it up next, bait, etc.
+    <!-- TODO: Include things like, when is it up next, bait, etc. -->
   </div>
 </div>`
   };
