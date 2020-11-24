@@ -2,11 +2,66 @@ class FishWatcher {
   constructor() {
     // Total number of windows to keep track of.
     this.maxWindows = 10;
+    // Using fish eyes to ignore time?
+    this.fishEyesEnabled = false;
 
     // IMPORTANT!!!
     // The new view model does not regenerate templates every time. This means
     // we MUST NOT RACE the view model! We'll still schedule the updateFishes
     // function for every new bell, but let the view model do it please...
+  }
+
+  resetAllWindows() {
+    // CAUTION:
+    // Calling this *WILL CLEAR* all catchableRanges for *ALL FISH*.
+    // It does not update the fish afterwards though. It's intended to be called
+    // prior to the caller enabling/disabling Fish Eyes buff.
+    console.info("Clearing all windows now!");
+    _(Fishes).each(fish => {
+      fish.catchableRanges = [];
+      fish.notifyCatchableRangesUpdated();
+    });
+  }
+
+  setFishEyes(enabled) {
+    // Make sure it'll actually cause a change first...
+    if (this.fishEyesEnabled === enabled) {
+      return;
+    }
+
+    // The next steps must be done before anyone else mucks with the catch
+    // windows. It probably needs locks to ensure that won't happen...
+    // For now, let's just wing it...
+    // "What could possibly go wrong" - Carby 2020
+
+    console.info("Look! Look at then with your special Fish Eyes.");
+    console.time('toggleFishEyes');
+
+    // STEP 1: Clear ALL catch windows for ALL fish!
+    this.resetAllWindows();
+    // STEP 2: Toggle "Fish Eyes" mode.
+    this.fishEyesEnabled = enabled;
+    // STEP 3: Rebuild catch windows.
+    this.updateFishes();
+
+    console.timeEnd('toggleFishEyes');
+    console.info("My Fish!")
+  }
+
+  _isFishAlwaysUp(fish) {
+    // If the fish watcher's got on their "special eyes", only weather can stop
+    // them from catching a fish!
+    if (this.fishEyesEnabled) {
+      if (fish.alwaysAvailable) return true;
+      else if (fish.conditions.weatherSet.length == 0) {
+        console.info(fish.name, "is always up thanks to Fish Eyes!");
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return fish.alwaysAvailable;
+    }
   }
 
   updateFishes() {
@@ -46,7 +101,7 @@ class FishWatcher {
     //   Ensure each fish has at least 'n' windows defined.
     console.time('updateRanges');
     for (let fish of trackedFish) {
-      if (fish.alwaysAvailable) { continue; }
+      if (this._isFishAlwaysUp(fish)) { continue; }
       if (fish.catchableRanges.length >= this.maxWindows) { continue; }
       // Okay, update it please.
       this.updateRangesForFish(fish);
@@ -72,7 +127,7 @@ class FishWatcher {
     // PHASE 1:
     //   Ensure each fish has at least 'n' windows defined.
     do {
-      if (fish.alwaysAvailable) { break; }
+      if (this._isFishAlwaysUp(fish)) { break; }
       if (fish.catchableRanges.length >= this.maxWindows) { break; }
       // Okay, update it please.
       this.updateRangesForFish(fish);
@@ -141,7 +196,8 @@ class FishWatcher {
   __checkToAddCatchableRange(fish, window) {
     // Found a time period where the weather is favorable. Now check if the
     // fish is even up. This really should be the other way around -_-
-    var nextRange = fish.availableRangeDuring(window);
+    // ^^ Who's laughing now? *puts on Fish Eyes shades*
+    var nextRange = fish.availableRangeDuring(window, this.fishEyesEnabled);
     if (!window.overlaps(nextRange)) {
       // Oops, this is why you need to optimize this...
       return false;
@@ -166,7 +222,7 @@ class FishWatcher {
       var predatorsAlwaysAvailable = true;
       _(fish.predators).chain().keys().each((predId) => {
         var predatorFish = _(Fishes).findWhere({id: Number(predId)});
-        if (predatorFish.alwaysAvailable) return nextRange;
+        if (this._isFishAlwaysUp(predatorFish)) return nextRange;
         predatorsAlwaysAvailable = false;
         // Once again, we need to check if the weather right now works for
         // the predator fish.
@@ -192,7 +248,7 @@ class FishWatcher {
           if (_iterItem.done) { return; }
         }
         var predWindow = _iterItem.value;
-        var predRange = predatorFish.availableRangeDuring(predWindow);
+        var predRange = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
         if (!predWindow.overlaps(predRange)) { return /*nextRange = null*/; }
         if (dateFns.isSameOrBefore(+predRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
           return /*nextRange = null*/;

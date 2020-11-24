@@ -35,7 +35,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201111_1046" />
-    <link rel="stylesheet" href="css/overlay.css?20201111_1217" />
+    <link rel="stylesheet" href="css/overlay.css?20201123_2338" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -52,9 +52,9 @@
       -   to other classes until an initialization method can be called safely.
       -->
     <script type="text/javascript" src="js/app/time.js?20190824"></script>
-    <script type="text/javascript" src="js/app/fish.js?20201031"></script>
+    <script type="text/javascript" src="js/app/fish.js?20201123_2338"></script>
     <script type="text/javascript" src="js/app/weather.js?20190824"></script>
-    <script type="text/javascript" src="js/app/fishwatcher.js?20190823"></script>
+    <script type="text/javascript" src="js/app/fishwatcher.js?20201123_2338"></script>
     <script type="text/javascript" src="js/app/sorters.js?20190823"></script>
 
     <!--
@@ -420,7 +420,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201111_1145"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201123_2338"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -470,6 +470,12 @@
           </div>
         </div>
         <div class="header item">FFX|V Fish Tracker App</div>
+        <div class="ui center borderless menu">
+          <!-- Fish Eyes toggle -->
+          <div class="link item" id="fish-eyes-button" title="Toggle Fish Eyes">
+              <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes"></div>
+          </div>
+        </div>
         <div class="ui right borderless menu">
           <!-- Eorzea Time (realtime updated) -->
           <div class="item" id="eorzeaClock" title="Eorzea Time">##:##</div>

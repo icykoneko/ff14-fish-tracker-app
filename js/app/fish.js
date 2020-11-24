@@ -125,9 +125,11 @@ class Fish {
     return this.__uptime;
   }
 
-  availableRangeDuring(r) {
+  availableRangeDuring(r, fe = false) {
     // If the fish is always available, just return the given range.
-    if (this.startHour == 0 && this.endHour == 24) {
+    // Also, if Fish Eyes is enabled, assuming this fish supports it, just
+    // return the given range as well.
+    if (fe === true || (this.startHour == 0 && this.endHour == 24)) {
       return r;
     }
     // How long is the fish normally available?

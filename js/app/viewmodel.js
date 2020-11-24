@@ -424,6 +424,7 @@ let ViewModel = new class {
     $('#filterPatch .button.patch-set').on('click', this.filterPatchSetClicked);
     $('#theme-toggle .toggle').on('click', this.themeButtonClicked);
     $('#checklist .button').on('click', this.onChecklistButtonClicked);
+    $('#fish-eyes-button').on('click', this.onFishEyesButtonClicked)
 
     // Initialize import/export modals.
     $('#export-settings-modal').modal();
@@ -932,6 +933,25 @@ let ViewModel = new class {
     ViewModel.settings.sortingType = sortingType;
     ViewModel.sortingTypeSubject.next(sortingType);
     ViewModel.saveSettings();
+  }
+
+  onFishEyesButtonClicked(e) {
+    if (e) e.stopPropagation();
+
+    // Toggle the "active" class on the button, and use this to
+    // determine what to set Fish Eyes enabled to in FishWatcher.
+    let $fe = $('#fish-eyes-button');
+    let enabled = $fe.toggleClass('active').hasClass('active');
+
+    // STOP TIME!!!
+    let origDateNow = Date.now;
+    let frozenDate = origDateNow();
+    Date.now = () => { return frozenDate; };
+
+    fishWatcher.setFishEyes(enabled);
+
+    // RESUME TIME!!!
+    Date.now = origDateNow;
   }
 
   themeButtonClicked(e) {
