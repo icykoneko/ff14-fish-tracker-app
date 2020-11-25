@@ -436,6 +436,21 @@ let ViewModel = new class {
       onChecked: this.sortingTypeChecked
     });
 
+    var resumeTime = null;
+    $('#eorzeaClock').on('click', () => {
+      if (resumeTime !== null) {
+        resumeTime();
+      } else {
+        eorzeaTime.zawarudo(resolve => {
+          $('#eorzeaClock').css({filter: 'drop-shadow(orange 2px 2px 2px)', color: 'yellow'}).text("ザ・ワールド");
+          resumeTime = resolve;
+        }).then(() => {
+          $('#eorzeaClock').css({filter: '', color: ''});
+          resumeTime = null;
+        });
+      }
+    });
+
     // Register for changes.
     // Things we care about...
     //   - Changes in filter settings.
@@ -488,6 +503,7 @@ let ViewModel = new class {
 
     merge(
       interval(1000).pipe(
+        filter(() => resumeTime === null),
         timestamp(),
         map(e => { return {countdown: e.timestamp} })
       ),
@@ -943,15 +959,12 @@ let ViewModel = new class {
     let $fe = $('#fish-eyes-button');
     let enabled = $fe.toggleClass('active').hasClass('active');
 
-    // STOP TIME!!!
-    let origDateNow = Date.now;
-    let frozenDate = origDateNow();
-    Date.now = () => { return frozenDate; };
-
-    fishWatcher.setFishEyes(enabled);
-
-    // RESUME TIME!!!
-    Date.now = origDateNow;
+    // Stop time while making this change to prevent JoJo from... err...
+    // you know, nevermind.
+    eorzeaTime.zawarudo(resolve => {
+      fishWatcher.setFishEyes(enabled);
+      resolve();
+    });
   }
 
   themeButtonClicked(e) {
