@@ -203,7 +203,7 @@ class FishEntry {
         };
       });
     }
-}
+  }
 
   update(earthTime, full = false) {
     // This function should be called whenever the underlying fish data has changed.
@@ -223,7 +223,7 @@ class FishEntry {
       // Cache the dates, they are used A LOT.
       let currStart = eorzeaTime.toEarth(+crs[0].start());
       let currEnd = eorzeaTime.toEarth(+crs[0].end());
-      // NOTE: If it has once entry, it'll have 2...
+      // NOTE: If it has one entry, it'll have 2...
       if (crs.length < 2) {
         console.error("Expected at least 2 catchable ranges for " + fish.name);
         return;
@@ -563,7 +563,7 @@ let ViewModel = new class {
       let needsFullUpdate = this.lastDate != currDay;
       this.lastDate = currDay;
 
-      _(this.fishEntries).each(entry => {
+      _(this.fishEntries).chain().reject(entry => entry.data.alwaysAvailable).each(entry => {
         // Update the data for this entry first.
         entry.update(timestamp, needsFullUpdate);
         // Then have the layout make necessary updates.
@@ -596,7 +596,7 @@ let ViewModel = new class {
       // availability values getting computed...
       // Either way... we'll update ALL THE FISH ENTRIES to prevent a
       // double-resort.
-      _(this.fishEntries).each(entry => {
+      _(this.fishEntries).chain().reject(entry => entry.data.alwaysAvailable).each(entry => {
         // Update the data for this entry first.
         entry.update(timestamp, true);
         // Then have the layout make necessary updates.

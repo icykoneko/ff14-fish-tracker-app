@@ -109,21 +109,39 @@ class FishTableLayout {
   }
 
   update(fishEntry, baseTime, needsFullUpdate = false) {
+    // NOTE: You should NEVER run any of this for fish that are naturally
+    // always available. The "full update" is just a hint that the layout
+    // needs to update the displayed text for availability; cause... that's
+    // how I divided their responsibilities...
+    // Sometimes I wonder if I'm holding this code together by fishing line.
+    // You know what, best not to think about it!
+    if (fishEntry.data.alwaysAvailable) {
+      console.warn("Layout::update shouldn't be called for fish such as " +
+                   "%s which are always available.", fishEntry.data.name);
+      return false;
+    }
+
     // Update the countdown information for this fish.
     let $fishEntry = $(fishEntry.element);
     let $currentAvail = $('.fish-availability-current', $fishEntry);
     let $upcomingAvail = $('.fish-availability-upcoming', $fishEntry);
+    let $availability = $('.fish-availability', $fishEntry);
 
     let hasFishAvailabilityChanged = false;
+    let hasLimitedAvailability = fishEntry.data.catchableRanges.length != 0;
 
     // First, check if the fish's availability changed.
+    // YES, you still want to do this because of Fish Eyes.
     if (fishEntry.isCatchable != $fishEntry.hasClass('fish-active')) {
       $fishEntry.toggleClass('fish-active');
       console.debug(`${fishEntry.id} "${fishEntry.data.name}" has changed availability.`);
       hasFishAvailabilityChanged = true;
     }
 
-    if (hasFishAvailabilityChanged || needsFullUpdate) {
+    // Because of Fish Eyes, some fish might NOT have catchableRanges! That's because
+    // Fish Eyes removed the only restriction on the fish, time! As a result,
+    // displaying the whole "next available" time is sorta useless.
+    if (hasLimitedAvailability && (hasFishAvailabilityChanged || needsFullUpdate)) {
       // WORKAROUND:
       // See the notes in ViewModel's FishEntry; but, if we detected change in
       // availability, there's a 50/50 chance part of the FishEntry data is
@@ -133,8 +151,6 @@ class FishTableLayout {
       // changing, we must rebake all relative date display text!!!
       fishEntry.updateNextWindowData();
 
-      // HACK: Fish whose availability state changes will always have catchableRanges.
-      // That's why we don't bother checking it.
       $currentAvail
         .attr('data-val', fishEntry.availability.current.date)
         .attr('data-tooltip', moment(fishEntry.availability.current.date).calendar());
@@ -156,12 +172,15 @@ class FishTableLayout {
         .text((fishEntry.uptime * 100.0).toFixed(1));
     }
 
-    // Set the "current availability" time. Remember, we've cached the other
-    // date in the data `val`.
-    $currentAvail.text(
-      ($fishEntry.hasClass('fish-active') ? 'closes ' : '') + 'in ' +
-      dateFns.distanceInWordsStrict(baseTime, fishEntry.availability.current.date)
-    );
+    // Omit this if the fish doesn't have limited availability.. obviously...
+    if (hasLimitedAvailability) {
+      // Set the "current availability" time. Remember, we've cached the other
+      // date in the data `val`.
+      $currentAvail.text(
+        ($fishEntry.hasClass('fish-active') ? 'closes ' : '') + 'in ' +
+        dateFns.distanceInWordsStrict(baseTime, fishEntry.availability.current.date)
+      );
+    }
 
     // Is this fish going to be up soon...
     // TODO: [NEEDS-OPTIMIZATION]
@@ -176,9 +195,16 @@ class FishTableLayout {
       }
     }
 
+    // During Fish Eyes, we want to hide the availability text when it doesn't matter.
+    // We have to be deliberate about it.
+    // This class will only get assigned to fish which do not have natural alwaysAvailable
+    // status, so it's okay to use it here, and create style rules for it.
+    $fishEntry.toggleClass('fish-unlimited', !hasLimitedAvailability);
+
     // Update any intuition fish rows as well!
     for (let subEntry of fishEntry.intuitionEntries) {
-      this.update(subEntry, baseTime, needsFullUpdate);
+      if (!subEntry.data.alwaysAvailable)
+        this.update(subEntry, baseTime, needsFullUpdate);
     }
 
     // Let the caller know this fish changed availability or bins.
