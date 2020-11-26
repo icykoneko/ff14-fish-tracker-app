@@ -35,7 +35,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201111_1046" />
-    <link rel="stylesheet" href="css/overlay.css?20201123_2338" />
+    <link rel="stylesheet" href="css/overlay.css?20201125" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -51,11 +51,11 @@
       -   circular dependencies.  Where it cannot be avoided, defer references
       -   to other classes until an initialization method can be called safely.
       -->
-    <script type="text/javascript" src="js/app/time.js?20190824"></script>
-    <script type="text/javascript" src="js/app/fish.js?20201123_2338"></script>
+    <script type="text/javascript" src="js/app/time.js?20201125"></script>
+    <script type="text/javascript" src="js/app/fish.js?20201125"></script>
     <script type="text/javascript" src="js/app/weather.js?20190824"></script>
-    <script type="text/javascript" src="js/app/fishwatcher.js?20201123_2338"></script>
-    <script type="text/javascript" src="js/app/sorters.js?20190823"></script>
+    <script type="text/javascript" src="js/app/fishwatcher.js?20201125"></script>
+    <script type="text/javascript" src="js/app/sorters.js?20201125"></script>
 
     <!--
       - SUPER IMPORTANT!!!!!!
@@ -88,7 +88,7 @@
     </script>
 
     <script id="fish-template" type="text/html;x-dot-template">
-      <tr class="fish-entry{{?it.isCatchable}} fish-active{{?}}{{?it.isCaught || false}} fish-caught{{?}}{{?it.isPinned || false}} fish-pinned{{?}}{{?it.isUpSoon}} fish-bin-15{{?}}" data-id="{{=it.id}}">
+      <tr class="fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}}{{?it.isCatchable}} fish-active{{?}}{{?it.isCaught || false}} fish-caught{{?}}{{?it.isPinned || false}} fish-pinned{{?}}{{?it.isUpSoon}} fish-bin-15{{?}}" data-id="{{=it.id}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
           <div class="ui middle aligned vertical mini very compact icon buttons">
@@ -121,7 +121,7 @@
           </div>
         </td>
         <!-- Availability -->
-        <td>
+        <td class="fish-availability">
           {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
             {{?it.data.dataMissing.timeRestricted}}
               <i class="question circle outline icon"></i> Unknown
@@ -270,7 +270,7 @@
           <div class="ui middle aligned" style="display: inline-block;"><a class="fish-name" target="_blank" href="{{=it.getExternalLink()}}">{{=it.data.name}}</a></div>
         </td>
         <!-- Availability -->
-        <td>
+        <td class="fish-availability">
           {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
             {{?it.data.dataMissing.timeRestricted}}
               <i class="question circle outline icon"></i> Unknown
@@ -288,7 +288,7 @@
             </span>
           {{?}}
         </td>
-        <td>
+        <td class="fish-availability">
           {{?!it.data.alwaysAvailable}}
             <span style="font-size: smaller">
               <span style="white-space: nowrap !important">

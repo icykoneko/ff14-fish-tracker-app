@@ -101,10 +101,67 @@ class Fish {
     }
   }
 
-  isCatchable() {
+  isCatchable(fe = false, dt = null) {
+    if (dt === null) dt = Date.now();
     var crs = this.catchableRanges;
     if (crs.length > 0) {
-      return dateFns.isSameOrAfter(Date.now(), eorzeaTime.toEarth(+crs[0].start()));
+      return dateFns.isSameOrAfter(dt, eorzeaTime.toEarth(+crs[0].start()));
+    }
+    if (fe === true) {
+      // This logic is a little odd... Callers expect `isCatchable` to only
+      // return true iif the fish is not always available, but is available
+      // right now. So for Fish Eyes, the fish still needs to not always be
+      // available in addition to having no weather restrictions for this to
+      // return true.
+      if (!this.alwaysAvailable && this.conditions.weatherSet.length == 0) {
+        // But wait... does it require intuition? If so, you gotta check with
+        // those fish as well...
+        if (this.intuitionFish.length != 0) {
+          return _(this.intuitionFish).any((iFish) => {
+            return iFish.data.isCatchable(fe, dt);
+          });
+        } else {
+          // Nope? Then yer good!
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  getNextWindow(fe = false) {
+    // Mostly to aid with sorting. This function returns the next time the fish
+    // is catchable, factoring in Fish Eyes. The time is EORZEA TIME!
+    var crs = this.catchableRanges;
+    if (crs.length > 0) {
+      return +crs[0].start();
+    }
+    if (fe === true) {
+      if (!this.alwaysAvailable && this.conditions.weatherSet.length == 0) {
+        // But wait... does it require intuition? If so, you gotta check with
+        // those fish as well...
+        if (this.intuitionFish.length != 0) {
+          return _.min(_(this.intuitionFish).map(iFish => iFish.data.getNextWindow(fe)));
+        } else {
+          // Nope? Then yer good!
+          return 0;
+        }
+      }
+    }
+    return 0x7FFFFFFFFFFF; /* max time */
+  }
+
+  isFishAlwaysUpUsingFishEyes() {
+    // Well, is it?
+    if (this.alwaysAvailable) return true;
+    if (!this.alwaysAvailable && this.conditions.weatherSet.length == 0) {
+      // Check intuition fish too...
+      if (this.intuitionFish.length != 0) {
+        return _(this.intuitionFish).any(iFish => {
+          return iFish.data.isFishAlwaysUpUsingFishEyes();
+        });
+      }
+      return true;
     }
     return false;
   }

@@ -4,6 +4,7 @@ class FishWatcher {
     this.maxWindows = 10;
     // Using fish eyes to ignore time?
     this.fishEyesEnabled = false;
+    this.fishEyesChanged = new rxjs.BehaviorSubject(this.fishEyesEnabled);
 
     // IMPORTANT!!!
     // The new view model does not regenerate templates every time. This means
@@ -34,7 +35,7 @@ class FishWatcher {
     // For now, let's just wing it...
     // "What could possibly go wrong" - Carby 2020
 
-    console.info("Look! Look at then with your special Fish Eyes.");
+    console.info("Look! Look at them with your special Fish Eyes.");
     console.time('toggleFishEyes');
 
     // STEP 1: Clear ALL catch windows for ALL fish!
@@ -44,6 +45,9 @@ class FishWatcher {
     // STEP 3: Rebuild catch windows.
     this.updateFishes();
 
+    // Notify others of the change.
+    this.fishEyesChanged.next(enabled);
+
     console.timeEnd('toggleFishEyes');
     console.info("My Fish!")
   }
@@ -52,13 +56,7 @@ class FishWatcher {
     // If the fish watcher's got on their "special eyes", only weather can stop
     // them from catching a fish!
     if (this.fishEyesEnabled) {
-      if (fish.alwaysAvailable) return true;
-      else if (fish.conditions.weatherSet.length == 0) {
-        console.info(fish.name, "is always up thanks to Fish Eyes!");
-        return true;
-      } else {
-        return false;
-      }
+      return fish.isFishAlwaysUpUsingFishEyes();
     } else {
       return fish.alwaysAvailable;
     }

@@ -151,6 +151,8 @@ class FishEntry {
       this.fishEyesDuration = '' + fish.fishEyes + 's';
     }
 
+    this.isWeatherRestricted = fish.conditions.weatherSet.length != 0;
+
     // View model version of bait.
     // TODO: [FIXME-DUPLICATION]
     // Technically, this should ONLY exist as part of the view model, and not
@@ -212,7 +214,7 @@ class FishEntry {
     // TODO: Even this is pretty heavy-handed. We should really only update
     // the fields which have changed... [NEEDS-OPTIMIZATION]
 
-    this.isCatchable = fish.isCatchable();
+    this.isCatchable = fish.isCatchable(fishWatcher.fishEyesEnabled);
     this.isCaught = ViewModel.isFishCaught(this.id);
     this.isPinned = ViewModel.isFishPinned(this.id);
     
@@ -488,18 +490,23 @@ let ViewModel = new class {
       skip(1),
       debounceTime(250),
       map(e => { return {sortingType: e} })
-    )
+    );
     const language$ = localizationHelper.languageChanged.pipe(
       skip(1),
       map(e => { return {language: e} })
-    )
+    );
+    const fishEyes$ = fishWatcher.fishEyesChanged.pipe(
+      skip(1),
+      map(e => { return {fishEyes: e} })
+    );
 
     const updateDisplaySources$ = merge(
       bufferedFishAvailability$,
       filterCompletion$,
       filterPatch$,
       sortingType$,
-      language$);
+      language$,
+      fishEyes$);
 
     merge(
       interval(1000).pipe(
@@ -508,7 +515,7 @@ let ViewModel = new class {
         map(e => { return {countdown: e.timestamp} })
       ),
       updateDisplaySources$.pipe(
-        buffer(updateDisplaySources$.pipe(debounceTime(100))),
+        buffer(updateDisplaySources$.pipe(debounceTime(250))),
         filter(x => x.length > 0),
         map(e => {
           // Combine these into a single object.
@@ -964,6 +971,9 @@ let ViewModel = new class {
     eorzeaTime.zawarudo(resolve => {
       fishWatcher.setFishEyes(enabled);
       resolve();
+    }).then(() => {
+      // Afterwards, update the styles please.
+      $('#fishes').toggleClass('fish-eyes-enabled', enabled);
     });
   }
 
