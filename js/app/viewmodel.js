@@ -589,7 +589,7 @@ let ViewModel = new class {
     // We need a base time!
     let timestamp = Date.now();
 
-    if (reason !== null && 'fishAvailability' in reason)
+    if (reason !== null && ('fishAvailability' in reason || 'fishEyes' in reason))
     {
       // FishWatcher doesn't send a message when a fish window opens...
       // But it's important to know that one closed, since this results in new
@@ -600,7 +600,8 @@ let ViewModel = new class {
         // Update the data for this entry first.
         entry.update(timestamp, true);
         // Then have the layout make necessary updates.
-        this.layout.update(entry, timestamp);
+        // If Fish Eyes effect was recently changed, tell layout to do FULL update!
+        this.layout.update(entry, timestamp, 'fishEyes' in reason);
       });
       // Fall-through just in case filters were changed at the same time...
     }
