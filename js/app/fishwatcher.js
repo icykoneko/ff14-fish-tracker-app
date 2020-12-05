@@ -12,18 +12,6 @@ class FishWatcher {
     // function for every new bell, but let the view model do it please...
   }
 
-  resetAllWindows() {
-    // CAUTION:
-    // Calling this *WILL CLEAR* all catchableRanges for *ALL FISH*.
-    // It does not update the fish afterwards though. It's intended to be called
-    // prior to the caller enabling/disabling Fish Eyes buff.
-    console.info("Clearing all windows now!");
-    _(Fishes).each(fish => {
-      fish.catchableRanges = [];
-      fish.notifyCatchableRangesUpdated();
-    });
-  }
-
   setFishEyes(enabled) {
     // Make sure it'll actually cause a change first...
     if (this.fishEyesEnabled === enabled) {
@@ -38,8 +26,14 @@ class FishWatcher {
     console.info("Look! Look at them with your special Fish Eyes.");
     console.time('toggleFishEyes');
 
-    // STEP 1: Clear ALL catch windows for ALL fish!
-    this.resetAllWindows();
+    // STEP 1: Clear catch windows for fish affected by Fish Eyes buff.
+    // And yes, we must do this for fish not currently active otherwise when
+    // they become active, they'll display the wrong information...
+    console.info("Clearing windows for fish affected by Fish Eyes buff!");
+    _(Fishes).chain().filter(fish => fish.fishEyes).each(fish => {
+      fish.catchableRanges = [];
+      fish.notifyCatchableRangesUpdated();
+    });
     // STEP 2: Toggle "Fish Eyes" mode.
     this.fishEyesEnabled = enabled;
     // STEP 3: Rebuild catch windows.

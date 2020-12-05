@@ -134,7 +134,8 @@ Fish = make_dataclass('Fish',
                        ('craft', list, field(default_factory=list)),
                        ('reduce', Any, field(default=None)),
                        ('aquarium', Any, field(default=None)),
-                       ('ecology', bool, field(default=False))])
+                       ('ecology', bool, field(default=False)),
+                       ('expansion', Any, field(default=None))])
 
 GCSupplyDutyTurnin = make_dataclass('GCSupplyDutyTurnin',
                                     [('count', int), ('exp', int), ('seals', int)])
@@ -176,6 +177,21 @@ for fishing_spot in tracked_iter(realm.game_data.get_sheet(FishingSpot),
             catchable_fish[item.key] = Fish(item,
                                             reduce=item.is_aetherial_reducible)
         catchable_fish[item.key].spots.append(fishing_spot)
+        if catchable_fish[item.key].expansion is not None:
+            # Warn if a fish is posted to more than one expansion please.
+            if catchable_fish[item.key].expansion != fishing_spot.territory_type['ExVersion']:
+                # FUSE: Shirogane's territory type is set to 0 (ARR).
+                # So if that's the territory, you can ignore this...
+                if fishing_spot.territory_type.place_name.name != 'Shirogane':
+                    if catchable_fish[item.key].expansion.key > fishing_spot.territory_type['ExVersion'].key:
+                        logging.warning("%s is found in areas belonging to both %s and %s" %
+                                        (item.name,
+                                         catchable_fish[item.key].expansion,
+                                         fishing_spot.territory_type['ExVersion']))
+                        logging.warning("Entry for fishing spot %u (%s) is from an earlier expac." %
+                                        (fishing_spot.key, fishing_spot.place_name.name))
+        else:
+            catchable_fish[item.key].expansion = fishing_spot.territory_type['ExVersion']
 
 # Now, we'll check for spearfishing nodes.
 for gathering_point in tracked_iter(realm.game_data.get_sheet(GatheringPoint),
@@ -481,7 +497,7 @@ from yaml import CLoader as Loader
 from yaml import CDumper as Dumper
 
 # Import the OLD data...
-fishes = yaml.load(open("fishData.yaml", 'r'), Loader=Loader)
+fishes = yaml.load(open("private/fishData.yaml", 'r'), Loader=Loader)
 known_fishes = dict([(fish['name'], fish) for fish in fishes])
 
 
@@ -490,6 +506,24 @@ def get_spot(spot):
         if spot.hidden:
             return spot.gathering_point_base.key
     return str(spot.place_name.name)
+
+
+def supports_fish_eyes(fish):
+    # Fish Eyes does not affect spearfishing.
+    if fish.spearfishing:
+        return False
+    # The fish must not be legendary: i.e. not include the phase: "のヌシ".
+    if "のヌシ" in fish.item.source_row['Description', Language.japanese]:
+        return False
+    # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
+    if fish.expansion.key >= 2:
+        return False
+
+    # While technically any other fish does support Fish Eyes, only fish with
+    # time restrictions truly can use it.
+    # NOTE: Disabled because... well, run integrity checks and you'll see -_-
+    # return fish.params is not None and fish.params.time_restricted
+    return True
 
 
 new_fishes = {}
@@ -513,7 +547,6 @@ for fish in tracked_iter(important_fish,
         'tug': None,
         'snagging': None,
         'gig': None,
-        'fishEyes': False,
         'patch': None,
         'computed': {
             'locations': [get_spot(spot) for spot in fish.spots],
@@ -530,7 +563,8 @@ for fish in tracked_iter(important_fish,
             'leve': len(fish.leve) > 0,
             'scrip': fish.scrip is not None,
             'reduce': fish.reduce,
-            'aquarium': fish.aquarium is not None
+            'aquarium': fish.aquarium is not None,
+            'fishEyes': supports_fish_eyes(fish)
         }
     }
 
@@ -549,7 +583,6 @@ for fish in tracked_iter(important_fish,
                 'tug': known_fish.get('tug', None),
                 'snagging': known_fish.get('snagging', None),
                 'gig': known_fish.get('gig', None),
-                'fishEyes': known_fish.get('fishEyes', False),
                 'patch': known_fish.get('patch', None)
             })
         except Exception:
@@ -578,7 +611,7 @@ WEATHER = dict([(x.name, x.key) for x in realm.game_data.get_sheet(Weather)])
 ITEM = dict(_get_item_lookup_dict_entries())
 
 
-with open("fishDataNew.yaml", 'w') as f:
+with open("private/fishDataNew.yaml", 'w') as f:
     # Make things prettier...
     def represent_none(self, _):
         return self.represent_scalar('tag:yaml.org,2002:null', '')
@@ -643,7 +676,6 @@ def convert_fish_to_json(fish: Fish):
             'hookset': db_entry['hookset'],
             'tug': db_entry['tug'],
             'snagging': db_entry['snagging'],
-            'fishEyes': db_entry['fishEyes'],
             'patch': db_entry['patch'],
             # Information sourced via DATs
             'location': [get_location_key(x) for x in fish.spots],
@@ -660,7 +692,8 @@ def convert_fish_to_json(fish: Fish):
             'leve': len(fish.leve) > 0,
             'scrip': fish.scrip is not None,
             'reduce': fish.reduce,
-            'aquarium': aquarium_entry
+            'aquarium': aquarium_entry,
+            'fishEyes': supports_fish_eyes(fish)
         }
 
         return fish.item.key, json_entry
@@ -806,7 +839,7 @@ def pretty_dump(obj):
     return json.dumps(obj, sort_keys=False, indent=2).replace('\n', '\n  ')
 
 
-with open("new_data.js", 'w') as f:
+with open("private/new_data.js", 'w') as f:
     # Output everything in JavaScript format, using IDs to support localization.
     import json
     import datetime

@@ -107,7 +107,7 @@ class Fish {
     if (crs.length > 0) {
       return dateFns.isSameOrAfter(dt, eorzeaTime.toEarth(+crs[0].start()));
     }
-    if (fe === true) {
+    if (fe === true && this.fishEyes) {
       // This logic is a little odd... Callers expect `isCatchable` to only
       // return true iif the fish is not always available, but is available
       // right now. So for Fish Eyes, the fish still needs to not always be
@@ -136,7 +136,7 @@ class Fish {
     if (crs.length > 0) {
       return +crs[0].start();
     }
-    if (fe === true) {
+    if (fe === true && this.fishEyes) {
       if (!this.alwaysAvailable && this.conditions.weatherSet.length == 0) {
         // But wait... does it require intuition? If so, you gotta check with
         // those fish as well...
@@ -154,7 +154,7 @@ class Fish {
   isFishAlwaysUpUsingFishEyes() {
     // Well, is it?
     if (this.alwaysAvailable) return true;
-    if (!this.alwaysAvailable && this.conditions.weatherSet.length == 0) {
+    if (this.fishEyes && !this.alwaysAvailable && this.conditions.weatherSet.length == 0) {
       // Check intuition fish too...
       if (this.intuitionFish.length != 0) {
         return _(this.intuitionFish).any(iFish => {
@@ -186,7 +186,7 @@ class Fish {
     // If the fish is always available, just return the given range.
     // Also, if Fish Eyes is enabled, assuming this fish supports it, just
     // return the given range as well.
-    if (fe === true || (this.startHour == 0 && this.endHour == 24)) {
+    if ((fe === true && this.fishEyes) || (this.startHour == 0 && this.endHour == 24)) {
       return r;
     }
     // How long is the fish normally available?
