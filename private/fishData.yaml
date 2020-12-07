@@ -3011,7 +3011,6 @@
   predators: {}
   bestCatchPath:
   - Magma Worm
-  - Granite Crab
   tug: Medium
   hookset: Powerful
   snagging: false
@@ -3400,7 +3399,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Brute Leech
+  - Stonefly Nymph
   tug: Light
   hookset: Precision
   snagging:
