@@ -28,6 +28,21 @@ class EorzeaTime {
   toEarth(eorzeaDate) {
     return Math.ceil(+eorzeaDate * EORZEA_TO_EARTH);
   }
+
+  zawarudo(muda, ctx) {
+    // Really?
+    let origDateNow = Date.now;
+    let currDateTime = origDateNow();
+    Date.now = () => currDateTime;
+    console.info("ザ・ワールド");
+    return new Promise(resolve => {
+      // Counting on you to not screw us up...
+      muda(resolve, ctx);
+    }).then(() => {
+      console.info("%s have passed!", dateFns.distanceInWordsStrict(origDateNow(), currDateTime));
+      Date.now = origDateNow;
+    });
+  }
 }
 
 let eorzeaTime = new EorzeaTime;

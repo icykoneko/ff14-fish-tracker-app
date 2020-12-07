@@ -151,6 +151,8 @@ class FishEntry {
       this.fishEyesDuration = '' + fish.fishEyes + 's';
     }
 
+    this.isWeatherRestricted = fish.conditions.weatherSet.length != 0;
+
     // View model version of bait.
     // TODO: [FIXME-DUPLICATION]
     // Technically, this should ONLY exist as part of the view model, and not
@@ -201,7 +203,7 @@ class FishEntry {
         };
       });
     }
-}
+  }
 
   update(earthTime, full = false) {
     // This function should be called whenever the underlying fish data has changed.
@@ -212,7 +214,7 @@ class FishEntry {
     // TODO: Even this is pretty heavy-handed. We should really only update
     // the fields which have changed... [NEEDS-OPTIMIZATION]
 
-    this.isCatchable = fish.isCatchable();
+    this.isCatchable = fish.isCatchable(fishWatcher.fishEyesEnabled);
     this.isCaught = ViewModel.isFishCaught(this.id);
     this.isPinned = ViewModel.isFishPinned(this.id);
     
@@ -221,7 +223,7 @@ class FishEntry {
       // Cache the dates, they are used A LOT.
       let currStart = eorzeaTime.toEarth(+crs[0].start());
       let currEnd = eorzeaTime.toEarth(+crs[0].end());
-      // NOTE: If it has once entry, it'll have 2...
+      // NOTE: If it has one entry, it'll have 2...
       if (crs.length < 2) {
         console.error("Expected at least 2 catchable ranges for " + fish.name);
         return;
@@ -424,6 +426,7 @@ let ViewModel = new class {
     $('#filterPatch .button.patch-set').on('click', this.filterPatchSetClicked);
     $('#theme-toggle .toggle').on('click', this.themeButtonClicked);
     $('#checklist .button').on('click', this.onChecklistButtonClicked);
+    $('#fish-eyes-button').on('click', this.onFishEyesButtonClicked)
 
     // Initialize import/export modals.
     $('#export-settings-modal').modal();
@@ -433,6 +436,21 @@ let ViewModel = new class {
     // These are mainly supporting the SemanticUI widgets.
     $('#sortingType .radio.checkbox').checkbox({
       onChecked: this.sortingTypeChecked
+    });
+
+    var resumeTime = null;
+    $('#eorzeaClock').on('click', () => {
+      if (resumeTime !== null) {
+        resumeTime();
+      } else {
+        eorzeaTime.zawarudo(resolve => {
+          $('#eorzeaClock').css({filter: 'drop-shadow(orange 2px 2px 2px)', color: 'yellow'}).text("ザ・ワールド");
+          resumeTime = resolve;
+        }).then(() => {
+          $('#eorzeaClock').css({filter: '', color: ''});
+          resumeTime = null;
+        });
+      }
     });
 
     // Register for changes.
@@ -472,26 +490,32 @@ let ViewModel = new class {
       skip(1),
       debounceTime(250),
       map(e => { return {sortingType: e} })
-    )
+    );
     const language$ = localizationHelper.languageChanged.pipe(
       skip(1),
       map(e => { return {language: e} })
-    )
+    );
+    const fishEyes$ = fishWatcher.fishEyesChanged.pipe(
+      skip(1),
+      map(e => { return {fishEyes: e} })
+    );
 
     const updateDisplaySources$ = merge(
       bufferedFishAvailability$,
       filterCompletion$,
       filterPatch$,
       sortingType$,
-      language$);
+      language$,
+      fishEyes$);
 
     merge(
       interval(1000).pipe(
+        filter(() => resumeTime === null),
         timestamp(),
         map(e => { return {countdown: e.timestamp} })
       ),
       updateDisplaySources$.pipe(
-        buffer(updateDisplaySources$.pipe(debounceTime(100))),
+        buffer(updateDisplaySources$.pipe(debounceTime(250))),
         filter(x => x.length > 0),
         map(e => {
           // Combine these into a single object.
@@ -539,7 +563,7 @@ let ViewModel = new class {
       let needsFullUpdate = this.lastDate != currDay;
       this.lastDate = currDay;
 
-      _(this.fishEntries).each(entry => {
+      _(this.fishEntries).chain().reject(entry => entry.data.alwaysAvailable).each(entry => {
         // Update the data for this entry first.
         entry.update(timestamp, needsFullUpdate);
         // Then have the layout make necessary updates.
@@ -565,18 +589,19 @@ let ViewModel = new class {
     // We need a base time!
     let timestamp = Date.now();
 
-    if (reason !== null && 'fishAvailability' in reason)
+    if (reason !== null && ('fishAvailability' in reason || 'fishEyes' in reason))
     {
       // FishWatcher doesn't send a message when a fish window opens...
       // But it's important to know that one closed, since this results in new
       // availability values getting computed...
       // Either way... we'll update ALL THE FISH ENTRIES to prevent a
       // double-resort.
-      _(this.fishEntries).each(entry => {
+      _(this.fishEntries).chain().reject(entry => entry.data.alwaysAvailable).each(entry => {
         // Update the data for this entry first.
         entry.update(timestamp, true);
         // Then have the layout make necessary updates.
-        this.layout.update(entry, timestamp);
+        // If Fish Eyes effect was recently changed, tell layout to do FULL update!
+        this.layout.update(entry, timestamp, 'fishEyes' in reason);
       });
       // Fall-through just in case filters were changed at the same time...
     }
@@ -932,6 +957,25 @@ let ViewModel = new class {
     ViewModel.settings.sortingType = sortingType;
     ViewModel.sortingTypeSubject.next(sortingType);
     ViewModel.saveSettings();
+  }
+
+  onFishEyesButtonClicked(e) {
+    if (e) e.stopPropagation();
+
+    // Toggle the "active" class on the button, and use this to
+    // determine what to set Fish Eyes enabled to in FishWatcher.
+    let $fe = $('#fish-eyes-button');
+    let enabled = $fe.toggleClass('active').hasClass('active');
+
+    // Stop time while making this change to prevent JoJo from... err...
+    // you know, nevermind.
+    eorzeaTime.zawarudo(resolve => {
+      fishWatcher.setFishEyes(enabled);
+      resolve();
+    }).then(() => {
+      // Afterwards, update the styles please.
+      $('#fishes').toggleClass('fish-eyes-enabled', enabled);
+    });
   }
 
   themeButtonClicked(e) {

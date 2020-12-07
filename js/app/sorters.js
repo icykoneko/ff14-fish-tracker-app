@@ -34,18 +34,32 @@ let Sorters = function() {
   }
 
   function sortByNextAvailable(a, b, baseTime) {
-    return compareWindows(getWindowStart(a.catchableRanges, 0),
-                          getWindowStart(b.catchableRanges, 0),
+    return compareWindows(a.getNextWindow(fishWatcher.fishEyesEnabled),
+                          b.getNextWindow(fishWatcher.fishEyesEnabled),
                           baseTime);
   }
 
   function isFishUpNow(f, baseTime) {
-    return dateFns.isBefore(getWindowStart(f.catchableRanges, 0), baseTime);
+    return dateFns.isBefore(f.getNextWindow(fishWatcher.fishEyesEnabled), baseTime);
   }
 
   function isUpVerySoon(f, baseTime) {
-    return eorzeaTime.toEarth(getWindowStart(f.catchableRanges, 0)) <
+    return eorzeaTime.toEarth(f.getNextWindow(fishWatcher.fishEyesEnabled)) <
       +dateFns.addMinutes(eorzeaTime.toEarth(baseTime), 15);
+  }
+
+  function adjustedUptime(f) {
+    // When Fish Eyes is applied to a fish without weather restrictions, the
+    // computed uptime remains (this is technically a bug).
+    // Or... is it a feature. Let's check if Fish Eyes is enabled, and if the
+    // fish is not weather restricted, increase it's uptime by 100%.
+    // By doing this, the fish remains sorted by its original uptime amonst
+    // other non-weather restricted fishes.
+    if (fishWatcher.fishEyesEnabled && f.isFishAlwaysUpUsingFishEyes()) {
+      return f.uptime() + 1;
+    } else {
+      return f.uptime();
+    }
   }
 
   function sortByOverallRarity(a, b, baseTime) {
@@ -73,8 +87,8 @@ let Sorters = function() {
     var bRanges = b.catchableRanges;
 
     // How long is it up over the next n windows, relative to the other fish!
-    aUptime = a.uptime();
-    bUptime = b.uptime();
+    aUptime = adjustedUptime(a);
+    bUptime = adjustedUptime(b);
 
     result = compare(isFishUpNow(a, baseTime) ? -1 : 1,
                       isFishUpNow(b, baseTime) ? -1 : 1);
@@ -92,8 +106,8 @@ let Sorters = function() {
                         bUpSoon ? -1 : 1);
       if (shouldLog(a, b))
         console.log("Comparing 'is up very soon':", winner(a,b,result), +dateFns.addMinutes(baseTime, 15),
-          "\n", a.name, aUpSoon, getWindowStart(aRanges, 0),
-          "\n", b.name, bUpSoon, getWindowStart(bRanges, 0));
+          "\n", a.name, aUpSoon, a.getNextWindow(fishWatcher.fishEyesEnabled),
+          "\n", b.name, bUpSoon, b.getNextWindow(fishWatcher.fishEyesEnabled));
       if (result != 0) return result;
     }
 
@@ -158,15 +172,15 @@ let Sorters = function() {
     result = sortByNextAvailable(a, b, baseTime);
     if (shouldLog(a, b))
       console.log("Comparing next available:", result,
-        "\n", a.name, getWindowStart(aRanges, 0).toUTCString(),
-        "\n", b.name, getWindowStart(bRanges, 0).toUTCString());
+        "\n", a.name, a.getNextWindow(fishWatcher.fishEyesEnabled).toUTCString(),
+        "\n", b.name, b.getNextWindow(fishWatcher.fishEyesEnabled).toUTCString());
     if (result != 0) {
       return result;
     }
 
     // How long is it up over the next n windows, relative to the other fish!
-    aUptime = a.uptime();
-    bUptime = b.uptime();
+    aUptime = adjustedUptime(a);
+    bUptime = adjustedUptime(b);
     // Compare uptime (shorter comes first)
     result = compare(aUptime, bUptime);
     if (shouldLog(a, b))

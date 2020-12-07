@@ -35,14 +35,14 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201111_1046" />
-    <link rel="stylesheet" href="css/overlay.css?20201111_1217" />
+    <link rel="stylesheet" href="css/overlay.css?20201126_1639" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.35_20201031_2227"></script>
+    <script type="text/javascript" src="js/app/data.js?5.4pre_20201205_1343"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?5.35_20201013_1657"></script>
 
     <!--
@@ -51,11 +51,11 @@
       -   circular dependencies.  Where it cannot be avoided, defer references
       -   to other classes until an initialization method can be called safely.
       -->
-    <script type="text/javascript" src="js/app/time.js?20190824"></script>
-    <script type="text/javascript" src="js/app/fish.js?20201031"></script>
+    <script type="text/javascript" src="js/app/time.js?20201125"></script>
+    <script type="text/javascript" src="js/app/fish.js?20201205"></script>
     <script type="text/javascript" src="js/app/weather.js?20190824"></script>
-    <script type="text/javascript" src="js/app/fishwatcher.js?20190823"></script>
-    <script type="text/javascript" src="js/app/sorters.js?20190823"></script>
+    <script type="text/javascript" src="js/app/fishwatcher.js?20201205"></script>
+    <script type="text/javascript" src="js/app/sorters.js?20201125"></script>
 
     <!--
       - SUPER IMPORTANT!!!!!!
@@ -88,7 +88,7 @@
     </script>
 
     <script id="fish-template" type="text/html;x-dot-template">
-      <tr class="fish-entry{{?it.isCatchable}} fish-active{{?}}{{?it.isCaught || false}} fish-caught{{?}}{{?it.isPinned || false}} fish-pinned{{?}}{{?it.isUpSoon}} fish-bin-15{{?}}" data-id="{{=it.id}}">
+      <tr class="fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}}{{?it.isCatchable}} fish-active{{?}}{{?it.isCaught || false}} fish-caught{{?}}{{?it.isPinned || false}} fish-pinned{{?}}{{?it.isUpSoon}} fish-bin-15{{?}}" data-id="{{=it.id}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
           <div class="ui middle aligned vertical mini very compact icon buttons">
@@ -121,7 +121,7 @@
           </div>
         </td>
         <!-- Availability -->
-        <td>
+        <td class="fish-availability">
           {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
             {{?it.data.dataMissing.timeRestricted}}
               <i class="question circle outline icon"></i> Unknown
@@ -206,14 +206,6 @@
           {{?it.data.bait.hasPredators}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
           {{?}}
-          <!-- Put fishEyes if fishEyes is not false and if true enter fishEyesDuration()  -->
-          {{?it.data.fishEyes !== false}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes{{?it.data.fishEyes !== true}} has-duration{{?}}" title="Fish Eyes">
-              {{?it.data.fishEyes !== true}}
-                <span>{{=it.fishEyesDuration}}</span>
-              {{?}}
-            </div>
-          {{?}}
           {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
@@ -261,7 +253,7 @@
     </script>
 
     <script id="fish-intuition-template" type="text/html;x-dot-template">
-      <tr class="fish-intuition-row fish-entry{{?it.isCatchable}} fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor.id}}">
+      <tr class="fish-intuition-row fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}}{{?it.isCatchable}} fish-active{{?}}" data-id="{{=it.id}}" data-intuitionFor="{{=it.intuitionFor.id}}">
         <td class="collapsing right aligned">
           <div class="intuition-count">{{=it.intuitionCount}}</div>
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
@@ -270,7 +262,7 @@
           <div class="ui middle aligned" style="display: inline-block;"><a class="fish-name" target="_blank" href="{{=it.getExternalLink()}}">{{=it.data.name}}</a></div>
         </td>
         <!-- Availability -->
-        <td>
+        <td class="fish-availability">
           {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
             {{?it.data.dataMissing.timeRestricted}}
               <i class="question circle outline icon"></i> Unknown
@@ -288,7 +280,7 @@
             </span>
           {{?}}
         </td>
-        <td>
+        <td class="fish-availability">
           {{?!it.data.alwaysAvailable}}
             <span style="font-size: smaller">
               <span style="white-space: nowrap !important">
@@ -344,13 +336,6 @@
         <td>
           {{?it.data.dataMissing !== false}}
             <i class="question circle outline icon" title="Unknown/Incomplete"></i>
-          {{?}}
-          {{?it.data.fishEyes !== false}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes{{?it.data.fishEyes !== true}} has-duration{{?}}" title="Fish Eyes">
-              {{?it.data.fishEyes !== true}}
-                <span>{{=it.fishEyesDuration}}</span>
-              {{?}}
-            </div>
           {{?}}
           {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
@@ -416,11 +401,11 @@
     </script>
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20200115"></script>
+    <script type="text/javascript" src="js/app/layout.js?20201126_1639"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201111_1145"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201126_1639"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -428,7 +413,9 @@
         var $https_message = $("#https_message");
         var $transition_message = $("#transition_message");
 
-        if (document.location.protocol == "http:") {
+        if (document.location.protocol == "http:" &&
+            document.location.hostname != "localhost" &&
+            !document.location.hostname.startsWith("192.")) {
           // Display the secure mode announcement.
           $https_message.removeClass("hidden");
         } else {
@@ -455,6 +442,46 @@
       // display belongs in the ViewModel or Layout classes.
       // DO NOT ADD CODE AFTER THIS POINT!!!
     });
+
+    CarbyUtils = (function () {
+      // HOW TO USE THIS:
+      // CarbyUtils.timeTravel(eorzeaTime.toEarth(Date.UTC(3017,1,26,23,45,0)))
+
+      var theRealDateNow = Date.now;
+
+      function resetSiteData(datetime) {
+        console.debug("Resetting site data...");
+        weatherService.__weatherData = [];
+        _(Fishes).each(fish => { fish.catchableRanges = [] });
+        let prevPeriod = startOfPeriod(dateFns.utc.subHours(eorzeaTime.toEorzea(datetime), 8));
+        weatherService.insertForecast(prevPeriod, weatherService.calculateForecastTarget(eorzeaTime.toEarth(prevPeriod)));
+      }
+
+      return {
+        timeTravel: function(datetime) {
+          // Don't worry if it's the real Date.now...
+          let origDateNow = Date.now;
+          let currDateTime = origDateNow();
+          if (dateFns.isAfter(datetime, currDateTime)) {
+            let dateOffset = datetime - currDateTime;
+            resetSiteData(datetime);
+            Date.now = () => { return origDateNow() + dateOffset; };
+          } else {
+            // Traveling to the past will corrupt the weather service.
+            let dateOffset = currDateTime - datetime;
+            resetSiteData(datetime);
+            Date.now = () => { return origDateNow() - dateOffset; };
+          }
+          console.debug("Traveled to %s", moment.utc(eorzeaTime.toEorzea(datetime)).format());
+        },
+
+        restoreTime: function() {
+          // Restoring time may corrupt the weather service...
+          resetSiteData(theRealDateNow());
+          Date.now = theRealDateNow;
+        }
+      };
+    })();
     </script>
   </head>
   <body>
@@ -470,6 +497,12 @@
           </div>
         </div>
         <div class="header item">FFX|V Fish Tracker App</div>
+        <div class="ui center borderless menu">
+          <!-- Fish Eyes toggle -->
+          <div class="link item" id="fish-eyes-button" title="Toggle Fish Eyes">
+              <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes"></div>
+          </div>
+        </div>
         <div class="ui right borderless menu">
           <!-- Eorzea Time (realtime updated) -->
           <div class="item" id="eorzeaClock" title="Eorzea Time">##:##</div>

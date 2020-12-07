@@ -166,6 +166,37 @@ body.dark #theme-toggle .dark-mode-toggle
   font-size: 0.78571429rem;
 }
 
+.center.menu {
+  flex-grow: 1;
+  justify-content: center;
+}
+
+#fish-eyes-button.link.item {
+  /* Remove vertical padding. */
+  padding-top: unset;
+  padding-bottom: unset;
+}
+
+#fish-eyes-button.link.item .sprite-icon-status-fish_eyes {
+  filter: brightness(0.75);
+}
+body.dark #fish-eyes-button.link.item .sprite-icon-status-fish_eyes {
+  filter: brightness(0.333333);
+}
+#fish-eyes-button.link.item:hover .sprite-icon-status-fish_eyes {
+  filter: brightness(0.90);
+}
+body.dark #fish-eyes-button.link.item:hover .sprite-icon-status-fish_eyes {
+  filter: brightness(0.666667);
+}
+
+#fish-eyes-button.link.item.active .sprite-icon-status-fish_eyes,
+#fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes,
+body.dark #fish-eyes-button.link.item.active .sprite-icon-status-fish_eyes,
+body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes {
+  filter: drop-shadow(0px 0px 6px gold);
+}
+
 .upcoming-windows-button:hover {
   cursor: pointer;
 }
@@ -234,6 +265,12 @@ body.dark #theme-toggle .dark-mode-toggle
 
 body.dark #fishes thead tr th {
   background-color: hsla(0, 0%, 15%, 1) !important; /* This should match the page background */
+}
+
+#fishes.fish-eyes-enabled tr.fish-entry.fish-active.fish-unlimited td.fish-availability > span {
+  /* Blur the /text/ in the availablity cell when fish eyes is enabled. */
+  filter: blur(2px);
+  pointer-events: none;
 }
 
 /*

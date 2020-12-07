@@ -312,6 +312,31 @@ def lookup_spearfishing_spot_by_name(name):
     return KeyValuePair(*result)
 
 
+def supports_fish_eyes(fish_id, location_id, fish_params, patch):
+    from pysaintcoinach.ex.language import Language
+
+    # The fish must not be legendary: i.e. not include the phase: "のヌシ".
+    fish = XIV.game_data.get_sheet('Item')[fish_id]
+    if "のヌシ" in fish.source_row['Description', Language.japanese]:
+        return False
+    # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
+    if location_id is not None:
+        spot = XIV.game_data.get_sheet('FishingSpot')[location_id]
+        if spot.territory_type['ExVersion'].key >= 2:
+            return False
+    else:
+        # Sigh... let's just use the patch instead... One more reason to switch
+        # to the new-and-improved back-end data processor...
+        if int(patch) >= 4:
+            return False
+
+    # While technically any other fish does support Fish Eyes, only fish with
+    # time restrictions truly can use it.
+    # NOTE: Disabled because... well, run integrity checks and you'll see -_-
+    # return fish_params is not None and fish_params.time_restricted
+    return True
+
+
 def convert_fish_to_json(item):
     try:
         return _convert_fish_to_json(item)
@@ -382,6 +407,19 @@ def _convert_fish_to_json(item):
             logging.warning('%s has an invalid tug type: %s', item['name'], item['tug'])
             tug_type = None
 
+    # TODO: Reconfirm this after 5.4 patch is live.
+    # Patch 5.4 removes Fish Eyes as a requirement for catching certain fish.
+    # Instead, the action will be a buff that enables non-legendary fish with
+    # only a time restriction to be caught whenever. According the Live Letter
+    # on 11/27/2020, the buff only affects fish in areas introduced prior to
+    # Stormblood. Hopefully this will be in the data; otherwise, it's a pain
+    # to compute with this old system...
+    if item.get('gig') is None:
+        fish_eyes = supports_fish_eyes(key, location, fish_parameter, item.get('patch'))
+    else:
+        # Fish Eyes doesn't affect spearfishing.
+        fish_eyes = False
+
     return (key,
             OrderedDict({'_id': key,
                          'previousWeatherSet': previous_weather_set,
@@ -394,7 +432,7 @@ def _convert_fish_to_json(item):
                          'patch': item.get('patch'),
                          'folklore': folklore,
                          'collectable': is_collectable,
-                         'fishEyes': item.get('fishEyes', False),
+                         'fishEyes': fish_eyes,
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
                          'tug': tug_type,
@@ -588,9 +626,11 @@ def check_data_integrity(args):
         # This is not 100% accurate yet. According to crowd-sourced data, even when
         # this check says Snagging isn't required, the majority of comments say it
         # is needed. It doesn't help that it also seems to apply to Fish Eyes.
+        # NOTE: I've left the "Fish Eyes" check in there for now. I expect this
+        # table to undergo significant changes in 5.2... Please look forward to it.
         fish_eyes_needed = fish.get('fishEyes') or False
         snagging_needed = fish.get('snagging') or False
-        if not fish_params['IsHidden'] and fish_params['Rare']:  # Rare = index: 4
+        if not fish_params['IsHidden'] and fish_params[5]:  # Rare = index: 5
             if fish_eyes_needed is False and snagging_needed is False:
                 has_errors = True
                 logging.error('%s should require Fish Eyes or Snagging', fish['name'])
@@ -646,7 +686,6 @@ def add_new_fish_data(args):
                     'tug': None,
                     'hookset': None,
                     'snagging': None,
-                    'fishEyes': False,
                     'patch': float(args.patch),
                     'dataMissing': True
                 }
