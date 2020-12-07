@@ -39,7 +39,7 @@ title: Home
 
     <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201111_1046" />
-    <link rel="stylesheet" href="css/overlay.css?20201126_1639" />
+    <link rel="stylesheet" href="css/overlay.css?20201207_1818" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -573,17 +573,15 @@ title: Home
           </div>
         </div>
         <div class="header item">FFX|V Fish Tracker App</div>
-        <div class="ui center borderless menu">
-          <!-- Fish Eyes toggle -->
-          <div class="link item" id="fish-eyes-button" title="Toggle Fish Eyes">
-              <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes"></div>
-          </div>
-        </div>
         <div class="ui right borderless menu">
           <!-- Eorzea Time (realtime updated) -->
           <div class="item" id="eorzeaClock" title="Eorzea Time">##:##</div>
+          <!-- Fish Eyes toggle -->
+          <div class="link item" id="fish-eyes-button" title="Toggle Fish Eyes">
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes"></div>
+          </div>
           <!-- Settings Popup Button -->
-          <div class="icon item" id="settings-button" title="Advanced Settings" style="cursor: pointer;">
+          <div class="link icon item" id="settings-button" title="Advanced Settings">
             <i class="cogs icon"></i>
           </div>
           <!-- Light/Dark Mode Toggle (sun/moon) -->
@@ -683,6 +681,9 @@ title: Home
           </p>
           <p>
             You can display the map for a fishing spot by clicking the <i class="map icon"></i> in front of the location name. Use the scroll wheel to zoom in or out, and drag the map to pan around. Clicking on the name itself still opens a new tab linking to Garland Tools.
+          </p>
+          <p>
+            As of Patch 5.4, the <b>Fish Eyes</b> action removes the time restriction from non legendary fish introduced prior to Stormblood. Clicking the Fish Eyes icon will toggle this mode on and off. You can tell it's on when the icon has a circular halo around it and is fully colored.
           </p>
         </div>
       </div>
