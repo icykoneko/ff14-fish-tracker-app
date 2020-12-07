@@ -177,21 +177,26 @@ body.dark #theme-toggle .dark-mode-toggle
   padding-bottom: unset;
 }
 
-#fish-eyes-button.link.item .sprite-icon-status-fish_eyes {
-  filter: brightness(0.75);
-}
+#fish-eyes-button.link.item .sprite-icon-status-fish_eyes,
 body.dark #fish-eyes-button.link.item .sprite-icon-status-fish_eyes {
-  filter: brightness(0.333333);
+  filter: saturate(0);
 }
-#fish-eyes-button.link.item:hover .sprite-icon-status-fish_eyes {
-  filter: brightness(0.90);
-}
+#fish-eyes-button.link.item:hover .sprite-icon-status-fish_eyes,
 body.dark #fish-eyes-button.link.item:hover .sprite-icon-status-fish_eyes {
-  filter: brightness(0.666667);
+  filter: saturate(1);
 }
 
+#fish-eyes-button.link.item.active {
+  background-color: rgb(0 0 0 / 10%) !important;
+  border-radius: 50%;
+}
 #fish-eyes-button.link.item.active .sprite-icon-status-fish_eyes,
-#fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes,
+#fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes {
+  filter: drop-shadow(0px 0px 6px blue);
+}
+body.dark #fish-eyes-button.link.item.active {
+  background-color: rgb(255 255 255 / 10%) !important;
+}
 body.dark #fish-eyes-button.link.item.active .sprite-icon-status-fish_eyes,
 body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes {
   filter: drop-shadow(0px 0px 6px gold);
