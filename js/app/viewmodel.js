@@ -780,27 +780,24 @@ let ViewModel = new class {
     $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
     $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
     
-    $('.ui.popup.upcoming-windows', $entry).append(
+    $('.ui.modal.upcoming-windows', $entry).append(
       this.layout.templates.upcomingWindows(entry));
-    $('.upcoming-windows-button', $entry).popup({
-      addTouchEvents: false,
-      hoverable: true,
-      popup: '.ui.popup.upcoming-windows',
-      position: 'right center',
-      target: $('.upcoming-windows-button', $entry).parent(),
-      on: 'click',
-      maxSearchDepth: 3,
-      observeChanges: false
+    entry.upcomingWindowsPopupElement = $('.ui.modal.upcoming-windows', $entry)[0];
+    $('.upcoming-windows-button', $entry).on('click', e => {
+      console.info("Displaying upcoming windows for %s", fish.name);
+      $(entry.upcomingWindowsPopupElement).modal('show');
     });
-    entry.upcomingWindowsPopupElement = $('.ui.popup.upcoming-windows', $entry)[0];
 
     // Connect location button.
     $('.location-button', $entry).on('click', this.onFishEntryShowLocationClicked);
 
     if (this.settings.theme === 'dark') {
-      $('.ui.popup.upcoming-windows', $entry).addClass('inverted');
+      $('.ui.modal.upcoming-windows', $entry).addClass('inverted');
       $('*[data-tooltip]', $entry).attr('data-inverted', '');
     }
+
+    // This must be done last because it causes the element to move out of this row!
+    $('.ui.modal.upcoming-windows', $entry).modal();
 
     return entry;
   }
@@ -1002,7 +999,6 @@ let ViewModel = new class {
     $('.ui.menu').toggleClass('inverted', theme === 'dark');
     $('.ui.modal').toggleClass('inverted', theme === 'dark');
     $('.ui.message.announcement').toggleClass('inverted', theme === 'dark');
-    $('.ui.popup.upcoming-windows').toggleClass('inverted', theme === 'dark');
     $('.ui.container').toggleClass('inverted', theme === 'dark');
     $('.ui.form').toggleClass('inverted', theme === 'dark');
     $('.ui.segment').toggleClass('inverted', theme === 'dark');
