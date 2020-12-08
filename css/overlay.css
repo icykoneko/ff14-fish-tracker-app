@@ -206,11 +206,18 @@ body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes
   cursor: pointer;
 }
 
-.upcoming-windows-popup {
+.upcoming-windows-grid {
   display: grid;
-  grid-template-columns: 15rem 7.5rem 7.5rem;
+  grid-template-columns: 3fr 1fr 1fr;
   grid-row-gap: 0.2rem;
   grid-column-gap: 1rem;
+}
+
+.upcoming-windows-grid .header {
+  border-bottom: thin black solid;
+}
+.inverted .upcoming-windows-grid .header {
+  border-bottom: thin white solid;
 }
 
 .location-button:hover {

@@ -162,8 +162,8 @@ class FishTableLayout {
       
       // If this fish has upcoming windows data, update it now.
       if (fishEntry.upcomingWindowsPopupElement !== null) {
-        $('.upcoming-windows-button', $fishEntry).popup('hide');
-        $(fishEntry.upcomingWindowsPopupElement).children().first().replaceWith(
+        $(fishEntry.upcomingWindowsPopupElement).modal('hide');
+        $(fishEntry.upcomingWindowsPopupElement).empty().append(
           this.templates.upcomingWindows(fishEntry));
       }
 
