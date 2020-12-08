@@ -315,9 +315,9 @@ def lookup_spearfishing_spot_by_name(name):
 def supports_fish_eyes(fish_id, location_id, fish_params, patch):
     from pysaintcoinach.ex.language import Language
 
-    # The fish must not be legendary: i.e. not include the phase: "のヌシ".
+    # The fish must not be legendary: i.e. not include the phase: "のオオヌシ".
     fish = XIV.game_data.get_sheet('Item')[fish_id]
-    if "のヌシ" in fish.source_row['Description', Language.japanese]:
+    if "のオオヌシ" in fish.source_row['Description', Language.japanese]:
         return False
     # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
     if location_id is not None:
