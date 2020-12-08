@@ -33,7 +33,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?5.3_20200811_1236" />
+    <link rel="stylesheet" href="public/images/sprite.css?5.4_20201208_0518" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
     <link rel="stylesheet" href="css/overlay.css?20201207_2149" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
@@ -42,8 +42,8 @@
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.4pre_20201207_1729"></script>
-    <script type="text/javascript" src="js/app/fish_info_data.js?5.35_20201013_1657"></script>
+    <script type="text/javascript" src="js/app/data.js?5.4_20201208_0518"></script>
+    <script type="text/javascript" src="js/app/fish_info_data.js?5.4_20201208_0518"></script>
 
     <!--
       - Scripts
@@ -55,7 +55,7 @@
     <script type="text/javascript" src="js/app/fish.js?20201205"></script>
     <script type="text/javascript" src="js/app/weather.js?20190824"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20201205"></script>
-    <script type="text/javascript" src="js/app/sorters.js?20201125"></script>
+    <script type="text/javascript" src="js/app/sorters.js?20201208"></script>
 
     <!--
       - SUPER IMPORTANT!!!!!!
@@ -199,7 +199,7 @@
         </td>
         <!-- Requirements and Bait -->
         <td>
-          {{?it.data.dataMissing !== false}}
+          {{?it.data.dataMissing !== false || it.data.gig === "UNKNOWN"}}
             <i class="question circle outline icon" title="Unknown/Incomplete"></i>
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
@@ -210,7 +210,11 @@
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
           {{?it.data.gig}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
+            {{?it.data.gig === "UNKNOWN"}}
+              <span>Spearfishing</span>
+            {{??}}
+              <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
+            {{?}}
           {{?}}
           <span class="bait-span">
             {{~it.bait :item:idx}}
@@ -413,7 +417,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201207_1933"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201208_0518"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -713,7 +717,7 @@
                     <div class="ui active button" data-filter="5.1">5.1</div>
                     <div class="ui active button" data-filter="5.2">5.2</div>
                     <div class="ui active button" data-filter="5.3">5.3</div>
-                    <div class="ui disabled active button" data-filter="5.4">5.4</div>
+                    <div class="ui active button" data-filter="5.4">5.4</div>
                     <div class="ui disabled active button" data-filter="5.5">5.5</div>
                   </div>
                 </div>

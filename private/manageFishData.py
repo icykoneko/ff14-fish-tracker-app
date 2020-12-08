@@ -407,13 +407,9 @@ def _convert_fish_to_json(item):
             logging.warning('%s has an invalid tug type: %s', item['name'], item['tug'])
             tug_type = None
 
-    # TODO: Reconfirm this after 5.4 patch is live.
     # Patch 5.4 removes Fish Eyes as a requirement for catching certain fish.
-    # Instead, the action will be a buff that enables non-legendary fish with
-    # only a time restriction to be caught whenever. According the Live Letter
-    # on 11/27/2020, the buff only affects fish in areas introduced prior to
-    # Stormblood. Hopefully this will be in the data; otherwise, it's a pain
-    # to compute with this old system...
+    # Instead, the action is now a buff that enables non-legendary fish with
+    # only a time restriction to be caught whenever.
     if item.get('gig') is None:
         fish_eyes = supports_fish_eyes(key, location, fish_parameter, item.get('patch'))
     else:

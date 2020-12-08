@@ -9672,3 +9672,93 @@
   fishEyes: false
   patch: 5.35
   dataMissing: true
+# Patch 5.4 (2020-12-08)
+- name: Moonlight Guppy
+  location: The Rusted Reservoir
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.4
+  dataMissing: true
+- name: Steel Fan
+  location: White Oil Falls
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.4
+  dataMissing: true
+- name: Henodus Grandis
+  location: The Eastern Kholusian Coast
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.4
+  dataMissing: true
+- name: Sunken Tome
+  location: The Haughty One
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.4
+  dataMissing: true
+- name: Pearl Pipira
+  location: The Red Chalice
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.4
+  dataMissing: true
+- name: The Ondotaker
+  location: Where the Dry Return
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.4
+  dataMissing: true
+- name: Tiny Tatsunoko
+  location: 480
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  gig: UNKNOWN
+  patch: 5.4
+  dataMissing: true
