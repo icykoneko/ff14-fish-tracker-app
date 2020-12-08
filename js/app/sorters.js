@@ -56,7 +56,10 @@ let Sorters = function() {
     // By doing this, the fish remains sorted by its original uptime amonst
     // other non-weather restricted fishes.
     if (fishWatcher.fishEyesEnabled && f.isFishAlwaysUpUsingFishEyes()) {
-      return f.uptime() + 1;
+      // Currently disabled due to how disruptive it is to the table.
+      // 2020-12-08: Plushy says to revisit later, maybe after more tweaks to
+      // rarity algorithm.
+      return f.uptime() + 0;
     } else {
       return f.uptime();
     }
