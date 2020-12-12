@@ -22,17 +22,20 @@
 # lives in the gh-pages branch... Carby says it's fine.
 - name: Steel Fan
   bait: [Marble Nymph]
+  tug: heavy
+  hookset: Precision
   previousWeatherSet: [Clouds]
   weatherSet: [Fog]
-  tug: heavy
 - name: Henodus Grandis
   bait: [Short Bill Minnow, Spearhead Squid]
+  hookset: Powerful
   previousWeatherSet: [Fog, Fair Skies]
   weatherSet: [Clouds]
   startHour: 16
   endHour: 24
 - name: Pearl Pipira
   bait: [Robber Ball, Diamond Pipira]
+  hookset: Powerful
   previousWeatherSet: [Fair Skies]
   weatherSet: [Fog]
   startHour: 16
