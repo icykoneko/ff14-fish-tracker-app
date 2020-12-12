@@ -20,3 +20,20 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
+- name: Steel Fan
+  bait: [Marble Nymph]
+  previousWeatherSet: [Clouds]
+  weatherSet: [Fog]
+  tug: heavy
+- name: Henodus Grandis
+  bait: [Short Bill Minnow, Spearhead Squid]
+  previousWeatherSet: [Fog, Fair Skies]
+  weatherSet: [Clouds]
+  startHour: 16
+  endHour: 24
+- name: Pearl Pipira
+  bait: [Robber Ball, Diamond Pipira]
+  previousWeatherSet: [Fair Skies]
+  weatherSet: [Fog]
+  startHour: 16
+  endHour: 20
