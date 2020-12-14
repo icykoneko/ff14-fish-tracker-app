@@ -29,9 +29,9 @@
 - name: Henodus Grandis
   bait: [Short Bill Minnow, Spearhead Squid]
   hookset: Powerful
-  previousWeatherSet: [Fog, Fair Skies]
+  previousWeatherSet: [Fog, Fair Skies, Gales]
   weatherSet: [Clouds]
-  startHour: 16
+  startHour: 22
   endHour: 24
 - name: Pearl Pipira
   bait: [Robber Ball, Diamond Pipira]
@@ -40,3 +40,8 @@
   weatherSet: [Fog]
   startHour: 16
   endHour: 20
+- name: Sunken Tome
+  bait: [Marble Nymph]
+  weatherSet: [Thunderstorms]
+  startHour: 8
+  endHour: 16
