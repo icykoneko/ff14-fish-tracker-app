@@ -33,9 +33,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rest.js/15.2.6/octokit-rest.min.js"
+            integrity="sha512-uiSucQ5TdEImoU68Gp+mxXJ54l4lQm5bTd+T0tj7KcCupCDrKr+FdmgXipF+2Exfc6xDAcnPbr5rXB5bEZS0bw=="
+            crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="public/images/sprite.css?5.4_20201208_0518" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20201207_2149" />
+    <link rel="stylesheet" href="css/overlay.css?20201214_2150" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -417,7 +421,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20201208_0518"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20201214_2150"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -447,6 +451,7 @@
     </script>
 
     <script type="text/javascript">
+    const octokit = new Octokit();
     $(() => {
       // Document is ready, initialize the view model now.
       ViewModel.initialize();
@@ -775,6 +780,7 @@
       </div>
     </div>
     <div class="ui bottom fixed menu">
+      <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version"></span></div>
       <div class="right menu">
         <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
           <i class="discord icon"></i>
