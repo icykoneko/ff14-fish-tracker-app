@@ -29,7 +29,6 @@
 - name: Henodus Grandis
   bait: [Short Bill Minnow, Spearhead Squid]
   hookset: Powerful
-  previousWeatherSet: [Fog, Fair Skies, Gales]
   weatherSet: [Clouds]
   startHour: 22
   endHour: 24
@@ -42,6 +41,8 @@
   endHour: 20
 - name: Sunken Tome
   bait: [Marble Nymph]
+  hookset: Precision
+  previousWeatherSet: [Fair Skies]
   weatherSet: [Thunderstorms]
-  startHour: 8
+  startHour: 12
   endHour: 16
