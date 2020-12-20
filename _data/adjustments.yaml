@@ -46,3 +46,9 @@
   weatherSet: [Thunderstorms]
   startHour: 12
   endHour: 16
+- name: The Ondotaker
+  bait: [Squid Strip]
+  tug: heavy
+  hookset: Powerful
+  previousWeatherSet: [Clear Skies]
+  weatherSet: [Clouds]
