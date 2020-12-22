@@ -52,3 +52,5 @@
   hookset: Powerful
   previousWeatherSet: [Clear Skies]
   weatherSet: [Clouds]
+  startHour: 8
+  endHour: 11
