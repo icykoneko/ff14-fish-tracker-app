@@ -54,3 +54,10 @@
   weatherSet: [Clouds]
   startHour: 8
   endHour: 11
+- name: Moonlight Guppy
+  bait: [Baitbugs]
+  tug: heavy
+  previousWeatherSet: [Clear Skies]
+  weatherSet: [Fair Skies]
+  startHour: 6
+  endHour: 8
