@@ -35,7 +35,6 @@
 - name: Pearl Pipira
   bait: [Robber Ball, Diamond Pipira]
   hookset: Powerful
-  previousWeatherSet: [Fair Skies]
   weatherSet: [Fog]
   startHour: 16
   endHour: 20
