@@ -9675,82 +9675,94 @@
 # Patch 5.4 (2020-12-08)
 - name: Moonlight Guppy
   location: The Rusted Reservoir
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 6
+  endHour: 8
+  previousWeatherSet:
+  - Clear Skies
+  weatherSet:
+  - Fair Skies
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  tug: 
+  tug: heavy
   hookset: 
   snagging: 
   patch: 5.4
-  dataMissing: true
 - name: Steel Fan
   location: White Oil Falls
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Marble Nymph
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.4
-  dataMissing: true
 - name: Henodus Grandis
   location: The Eastern Kholusian Coast
-  startHour: 0
+  startHour: 22
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Short Bill Minnow
+  - Spearhead Squid
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   patch: 5.4
-  dataMissing: true
 - name: Sunken Tome
   location: The Haughty One
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 12
+  endHour: 16
+  previousWeatherSet:
+  - Fair Skies
+  weatherSet:
+  - Thunderstorms
+  bestCatchPath:
+  - Marble Nymph
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.4
-  dataMissing: true
 - name: Pearl Pipira
   location: The Red Chalice
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 20
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Robber Ball
+  - Diamond Pipira
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   patch: 5.4
-  dataMissing: true
 - name: The Ondotaker
   location: Where the Dry Return
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 8
+  endHour: 11
+  previousWeatherSet:
+  - Clear Skies
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   patch: 5.4
-  dataMissing: true
 - name: Tiny Tatsunoko
   location: 480
   startHour: 0
