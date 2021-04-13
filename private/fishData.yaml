@@ -4737,8 +4737,8 @@
   predators: {}
   bestCatchPath:
   - Blue Bobbit
-  tug: Light
-  hookset: Precision
+  tug: medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
