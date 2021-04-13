@@ -508,3 +508,9 @@ Grade 4 Artisanal Skybuilders' Meganeura
 # Patch 5.45
 Pickled Pom
 Flintstrike
+# Patch 5.5
+Dravanian Scallop
+Cloud Kelp
+White Clam
+Fragrant Sweetfish
+Scarlet Frog

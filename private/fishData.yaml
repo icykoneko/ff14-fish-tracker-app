@@ -9774,3 +9774,147 @@
   gig: UNKNOWN
   patch: 5.4
   dataMissing: true
+# Patch 5.5 (2021-04-13)
+- name: Aster Trivi
+  location: The Trivium
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Python Discus
+  location: Sullen
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Steel Razor
+  location: The Western Kholusian Coast
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Shadeshifter
+  location: Seagazer Shoals
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Nabaath Saw
+  location: The Nabaath Severance
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Celestial
+  location: Father Collard's Failings
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Dammroen Herring
+  location: The Spoiled One
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Deephaunt
+  location: Woven Oath
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Mora Tecta
+  location: Northwest Caliban Gorge
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Maru Crab
+  location: West Caliban Gap
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
+- name: Golden Pipira
+  location: Mjrl's Tears
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.5
+  dataMissing: true
