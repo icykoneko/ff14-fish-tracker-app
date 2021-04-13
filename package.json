@@ -13,13 +13,18 @@
   },
   "homepage": "https://github.com/icykoneko/ff14-fish-tracker-app#readme",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "preinstall": "npx npm-force-resolutions"
   },
   "dependencies": {
     "express": "^4.15.3"
   },
   "devDependencies": {
+    "graceful-fs": "^4.2.4",
     "sprity": "^1.0.8",
     "sprity-jimp": "0.0.1"
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.4"
   }
 }

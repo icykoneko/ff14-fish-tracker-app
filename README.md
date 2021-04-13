@@ -23,6 +23,7 @@ The webapp itself is completely static. At this time, some of the development en
 * You need to install sprity-cli globally to get access to the CLI `sprity`.
   * `npm i sprity-cli -g`
 
+**NOTE:** Sprity doesn't seem to work in newer versions of Node due to dependencies... I've only had success running it via Node v10.24.1 on Windows.
 
 ## Step-by-step Instructions for Updating Data
 Sometimes you forget how to do this after several months... Clearly the TODO list isn't getting done...
