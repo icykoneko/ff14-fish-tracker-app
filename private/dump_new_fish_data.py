@@ -27,7 +27,7 @@ import pysaintcoinach
 from pysaintcoinach.ex.language import Language
 
 from pysaintcoinach.xiv import as_row_type, XivRow
-from pysaintcoinach.xiv.masterpiece_supply_duty import MasterpieceSupplyDuty
+# from pysaintcoinach.xiv.masterpiece_supply_duty import MasterpieceSupplyDuty
 from pysaintcoinach.xiv.item import Item
 from pysaintcoinach.xiv.fishing_spot import FishingSpot
 from pysaintcoinach.xiv.fish_parameter import FishParameter
@@ -127,7 +127,8 @@ Fish = make_dataclass('Fish',
                        ('spots', list, field(default_factory=list)),
                        ('quest', list, field(default_factory=list)),
                        ('shop', list, field(default_factory=list)),
-                       ('scrip', MasterpieceSupplyDuty.CollectableItem, field(default=None)),
+                    #    ('scrip', MasterpieceSupplyDuty.CollectableItem, field(default=None)),
+                       ('scrip', Any, field(default=None)),
                        ('satisfaction', Any, field(default=None)),
                        ('gc', Any, field(default=None)),
                        ('leve', list, field(default_factory=list)),
@@ -244,20 +245,20 @@ def scan_fish_params(orig_stdout, n=None):
     return True
 
 
-@scan_task
-def scan_scrip_turnins(orig_stdout, n=None):
-    for duty in tracked_iter(realm.game_data.get_sheet(MasterpieceSupplyDuty),
-                             'Scanning scrip turn-ins',
-                             file=orig_stdout, position=n):
-        # Ignore non-FSH entries.
-        if str(duty.class_job.abbreviation) != 'FSH':
-            continue
+# @scan_task
+# def scan_scrip_turnins(orig_stdout, n=None):
+#     for duty in tracked_iter(realm.game_data.get_sheet(MasterpieceSupplyDuty),
+#                              'Scanning scrip turn-ins',
+#                              file=orig_stdout, position=n):
+#         # Ignore non-FSH entries.
+#         if str(duty.class_job.abbreviation) != 'FSH':
+#             continue
 
-        for item in duty.collectable_items:
-            if item.required_item.key in catchable_fish:
-                catchable_fish[item.required_item.key].scrip = item
+#         for item in duty.collectable_items:
+#             if item.required_item.key in catchable_fish:
+#                 catchable_fish[item.required_item.key].scrip = item
 
-    return True
+#     return True
 
 
 @scan_task
@@ -513,7 +514,7 @@ def supports_fish_eyes(fish):
     if fish.spearfishing:
         return False
     # The fish must not be legendary: i.e. not include the phase: "のオオヌシ".
-    if "のオオヌシ" in fish.source_row['Description', Language.japanese]:
+    if "のオオヌシ" in fish.item.source_row['Description', Language.japanese]:
         return False
     # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
     if fish.expansion.key >= 2:
