@@ -27,6 +27,8 @@ The webapp itself is completely static. At this time, some of the development en
 ## Step-by-step Instructions for Updating Data
 Sometimes you forget how to do this after several months... Clearly the TODO list isn't getting done...
 
+* Generate new YAML data for new fish using: `python ./private/manageFishData.py addnew -p <NEW_PATCH_NUMBER> -x ./private/ignoredFish.txt`
+  * Add the new fish entries to the master YAML data file at a minimum before continuing.
 * Collect information from the Fish'cord regarding new fishies. Include only those fish with special catch conditions (such as weather or time of day), and all *big fish*. Update the `private/fishData.yaml` with the new additions (or changes).
   * Use the `private/fishDataTemplate.yaml` as a template for adding new records. For new patches, include a comment before the start of the patch additions (for readability-sake, I dunno...).
 * Update clone of `SaintCoinach` master branch, then compare with the *my-current* branch for changes.

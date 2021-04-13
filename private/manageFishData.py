@@ -717,15 +717,23 @@ def add_new_fish_data(args):
         # Dump the new fish data to a YAML file.
 
     with open(args.new_data, 'w') as f:
+        # Exclude fish without a name.
+        def exclude_nameless_fish(fish):
+            return fish['name'] != ''
         # Make things prettier...
         def represent_none(self, _):
             return self.represent_scalar('tag:yaml.org,2002:null', '')
 
         Dumper.add_representer(type(None), represent_none)
-        yaml.dump(list(new_fishes.values()), f,
+        yaml.dump(list(filter(exclude_nameless_fish, new_fishes.values())), f,
                   Dumper=Dumper, default_flow_style=False, sort_keys=False)
         f.write('---\n')
-        f.writelines(['%s\n' % str(fish['name']) for fish in list(new_fishes.values())])
+        def new_fish_name(_id, fish):
+            if fish['name'] != '':
+                return fish['name']
+            else:
+                return '# %d *Unnamed fish* at %s' % (_id, fish['location'])
+        f.writelines(['%s\n' % new_fish_name(_id, fish) for (_id, fish) in list(new_fishes.items())])
 
     return True
 
