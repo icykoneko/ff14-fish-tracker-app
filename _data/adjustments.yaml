@@ -20,7 +20,26 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
+- name: Steel Razor
+  bait: [Moyebi Shrimp]
+  tug: heavy
+- name: Shadeshifter
+  bait: [Squid Strip]
+  tug: heavy
 - name: Dammroen Herring
   bait: [Baitbugs]
+  tug: heavy
+  hookset: Precision
+- name: Celestial
+  bait: [Baitbugs]
+  tug: heavy
+- name: Golden Pipira
+  bait: [Robber Ball]
+  tug: heavy
+- name: Mora Tecta
+  bait: [Short Bill Minnow]
+  tug: heavy
+- name: Maru Crab
+  bait: [Short Bill Minnow, Ancient Shrimp]
   tug: heavy
   hookset: Precision
