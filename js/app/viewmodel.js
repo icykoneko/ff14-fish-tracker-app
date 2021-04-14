@@ -47,6 +47,11 @@ class SiteSettings {
     // * pinned: An array of fish ids which should be pinned.
     this.completed = [];
     this.pinned = [];
+
+    // Latest Patch:
+    // * Records the latest patch available when the user last visited.
+    //   Used for including NEW patch data to filter on next visit.
+    this.latestPatch = 5.5;
   }
 }
 
@@ -889,6 +894,11 @@ let ViewModel = new class {
         _(ViewModel.settings.filters.patch).without(patch);
     }
 
+    // If all of the sub-patches (that aren't disabled) are active, then the patch-set is too.
+    var $patchSet = $this.siblings('.patch-set.button');
+    var patchSetActive = $patchSet.siblings().not('.disabled').not('.active') == 0;
+    $patchSet.toggleClass('active', patchSetActive);
+
     // Notify others about the change.
     ViewModel.filterPatchSubject.next(ViewModel.settings.filters.patch);
     ViewModel.saveSettings();
@@ -901,7 +911,7 @@ let ViewModel = new class {
 
     // Update the UI making only the selected patch visible.
     $this.addClass('active').siblings().removeClass('active');
-    $this.parent().siblings().children().removeClass('active');
+    $this.parent().parent().siblings().find('.button').removeClass('active');
     var patch = Number($this.data('filter'));
 
     // Just this patch is included now.
@@ -1056,10 +1066,28 @@ let ViewModel = new class {
       .addClass('active').siblings().removeClass('active');
     }
     if (settings.filters.patch) {
-      // TODO: Consider restoring this filter. The catch is... what about when a new
-      // patch is released. No one would have it in their settings, and thus, would
-      // never see it by default :(
+      // Check if they've been here since the latest patch.
+      if (settings.latestPatch !== this.settings.latestPatch) {
+        console.info("Welcome back! There's new fishies to be caught!");
+        settings.filters.patch.push(Number(this.settings.latestPatch));
+      }
+    } else {
+      // For some reason, the patch filter setting is missing?! Just use the default then.
       settings.filters.patch = this.settings.filters.patch;
+    }
+    // Always reset the latest patch; fish that have been seen, cannot be unseen... CUPFISH!
+    settings.latestPatch = this.settings.latestPatch;
+    // Probably need to adjust the patch filter UI as a result...
+    $('#filterPatch .button').removeClass('active');
+    for (let includedPatch of settings.filters.patch) {
+      // Activate THIS patch's filter button.
+      $('#filterPatch .button[data-filter="' + includedPatch + '"]:not(.patch-set)').toggleClass('active', true);
+    }
+    // Second pass to determine if the patch-set button should be active or not.
+    // If all of the sub-patches (that aren't disabled) are active, then the patch-set is too.
+    for (let patchSet of $('#filterPatch .patch-set.button')) {
+      let patchSetActive = $(patchSet).siblings().not('.disabled').not('.active') == 0;
+      $(patchSet).toggleClass('active', patchSetActive);
     }
 
     // Set the sorter function.
