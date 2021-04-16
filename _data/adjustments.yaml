@@ -30,6 +30,10 @@
   bait: [Baitbugs]
   tug: heavy
   hookset: Precision
+- name: Nabaath Saw
+  bait: [Jerked Ovim, Desert Saw]
+  tug: heavy
+  hookset: Powerful
 - name: Celestial
   bait: [Baitbugs]
   tug: heavy
