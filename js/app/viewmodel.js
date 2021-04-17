@@ -62,7 +62,8 @@ class BaitEntry {
     this.itemData = DATA.ITEMS[itemId];
     // If it's a fish, include a reference to that as well.
     // - Unfortunately, we can't expect to find a FishEntry for this record.
-    this.fishData = DATA.FISH[itemId];
+    // Using Fishes in order to support live adjustments.
+    this.fishData = _(Fishes).findWhere({id: itemId});
   }
 
   get name() {
