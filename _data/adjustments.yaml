@@ -40,7 +40,7 @@
   bait: [Jerked Ovim, Desert Saw]
   tug: heavy
   hookset: Powerful
-  previousWeatherSet: [Fair Skies]
+  previousWeatherSet: [Clear Skies, Fair Skies]
   weatherSet: [Heat Waves]
   startHour: 6
   endHour: 10
@@ -71,7 +71,6 @@
   bait: [Short Bill Minnow, Ancient Shrimp]
   tug: heavy
   hookset: Precision
-  previousWeatherSet: [Fair Skies, Clouds]
   weatherSet: [Clouds]
   startHour: 16
   endHour: 20
