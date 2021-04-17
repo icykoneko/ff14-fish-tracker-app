@@ -202,7 +202,7 @@ title: Home
         <!-- Availability -->
         <td class="fish-availability">
           {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
-            {{?it.data.dataMissing.timeRestricted}}
+            {{?it.data.dataMissing.timeRestricted || it.data.dataMissing.weatherRestricted}}
               <i class="question circle outline icon"></i> Unknown
             {{??}}
               Always
@@ -347,7 +347,7 @@ title: Home
         <!-- Availability -->
         <td class="fish-availability">
           {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
-            {{?it.data.dataMissing.timeRestricted}}
+            {{?it.data.dataMissing.timeRestricted || it.data.dataMissing.weatherRestricted}}
               <i class="question circle outline icon"></i> Unknown
             {{??}}
               Always
@@ -497,7 +497,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20210414_1927"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20210416_2210"></script>
 
     <script type="text/javascript">
       $(() => {
