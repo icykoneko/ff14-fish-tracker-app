@@ -20,30 +20,58 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
+- name: Desert Saw
+  hookset: Powerful
 - name: Steel Razor
   bait: [Moyebi Shrimp]
   tug: heavy
+  hookset: Precision
+  startHour: 6
+  endHour: 8
 - name: Shadeshifter
   bait: [Squid Strip]
   tug: heavy
-- name: Dammroen Herring
-  bait: [Baitbugs]
-  tug: heavy
   hookset: Precision
+  previousWeatherSet: [Clear Skies, Fair Skies]
+  weatherSet: [Gales]
+  startHour: 10
+  endHour: 14
 - name: Nabaath Saw
   bait: [Jerked Ovim, Desert Saw]
   tug: heavy
   hookset: Powerful
+  previousWeatherSet: [Fair Skies]
+  weatherSet: [Heat Waves]
+  startHour: 6
+  endHour: 10
+- name: Dammroen Herring
+  bait: [Baitbugs]
+  tug: heavy
+  hookset: Precision
 - name: Celestial
   bait: [Baitbugs]
   tug: heavy
+  hookset: Precision
+  previousWeatherSet: [Thunderstorms]
+  weatherSet: [Clear Skies]
+  startHour: 7
+  endHour: 24
 - name: Golden Pipira
   bait: [Robber Ball]
   tug: heavy
+  startHour: 6
+  endHour: 7
 - name: Mora Tecta
   bait: [Short Bill Minnow]
   tug: heavy
+  weatherSet: [Fair Skies]
+  startHour: 22
+  endHour: 24
 - name: Maru Crab
   bait: [Short Bill Minnow, Ancient Shrimp]
   tug: heavy
   hookset: Precision
+  previousWeatherSet: [Fair Skies, Clouds]
+  weatherSet: [Clouds]
+  startHour: 16
+  endHour: 20
