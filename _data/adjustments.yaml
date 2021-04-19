@@ -74,3 +74,6 @@
   weatherSet: [Clouds]
   startHour: 16
   endHour: 20
+- name: Loose Pendant
+  startHour: 18
+  endHour: 22
