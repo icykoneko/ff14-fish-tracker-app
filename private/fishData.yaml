@@ -5253,6 +5253,17 @@
   folklore: false
   fishEyes: false
   patch: 4.0
+- name: Tiny Tatsunoko
+  location: 480
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators:
+    Bashful Batfish: 7
+  gig: Large
+  patch: 4.0
 # Patch 4.0: Extra Information
 - name: Ruby Shrimp
   bestCatchPath:
@@ -9763,17 +9774,6 @@
   hookset: Powerful
   snagging: 
   patch: 5.4
-- name: Tiny Tatsunoko
-  location: 480
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
-  predators: 
-  gig: UNKNOWN
-  patch: 5.4
-  dataMissing: true
 # Patch 5.5 (2021-04-13)
 - name: Aster Trivi
   location: The Trivium
