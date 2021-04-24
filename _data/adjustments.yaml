@@ -22,6 +22,14 @@
 # lives in the gh-pages branch... Carby says it's fine.
 - name: Desert Saw
   hookset: Powerful
+- name: Aster Trivi
+  bait: [Marble Nymph]
+  tug: heavy
+  hookset: Precision
+  previousWeatherSet: [Clear Skies]
+  weatherSet: [Clear Skies]
+  startHour: 22
+  endHour: 24
 - name: Python Discus
   bait: [Fruit Worm]
   tug: heavy
@@ -46,7 +54,7 @@
   bait: [Jerked Ovim, Desert Saw]
   tug: heavy
   hookset: Powerful
-  # previousWeatherSet: [Clear Skies, Fair Skies, Heat Waves] # It's probably all weather, maybe revert this later.
+  previousWeatherSet: [Clear Skies, Fair Skies, Heat Waves]
   weatherSet: [Heat Waves]
   startHour: 6
   endHour: 10
@@ -61,15 +69,15 @@
   previousWeatherSet: [Thunderstorms]
   weatherSet: [Clear Skies]
   startHour: 7
-  endHour: 24
+  endHour: 17
 - name: Deephaunt
   bait: [Baitbugs]
   tug: heavy
   hookset: Precision
   previousWeatherSet: [Clouds]
   weatherSet: [Fog]
-  startHour: 0
-  endHour: 8
+  startHour: 2
+  endHour: 6
 - name: Golden Pipira
   bait: [Robber Ball]
   tug: heavy
