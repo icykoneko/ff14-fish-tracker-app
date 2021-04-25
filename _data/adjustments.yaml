@@ -101,3 +101,9 @@
 - name: Loose Pendant
   startHour: 18
   endHour: 22
+- name: Pearl Pipira
+  startHour: 17  # During research, at least one person claimed to catch it during 16XX
+  endHour: 20
+- name: The Ondotaker
+  startHour: 8
+  endHour: 10
