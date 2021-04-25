@@ -81,11 +81,13 @@
 - name: Golden Pipira
   bait: [Robber Ball]
   tug: heavy
+  hookset: Powerful
   startHour: 6
   endHour: 7
 - name: Mora Tecta
   bait: [Short Bill Minnow]
   tug: heavy
+  hookset: Powerful
   weatherSet: [Fair Skies]
   startHour: 22
   endHour: 24
