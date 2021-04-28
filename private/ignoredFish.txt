@@ -451,6 +451,12 @@ Grade 2 Artisanal Skybuilders' Dragon's Soul
 # Patch 5.25
 Dragonspine
 Thinker's Coral
+# Patch 5.3
+Hoplite
+Inkshell
+Cloudweed
+Fatty Herring
+Hook Fish
 # Patch 5.31
 Grade 3 Skybuilders' Cherax
 Grade 3 Skybuilders' Marimo
@@ -478,6 +484,9 @@ Grade 3 Artisanal Skybuilders' Wyvern
 Grade 3 Skybuilders' Gurnard
 Grade 3 Artisanal Skybuilders' Storm Chaser
 Grade 3 Artisanal Skybuilders' Helicoprion
+# Patch 5.35
+Allagan Hunter
+Petal Shell
 # Patch 5.41
 Grade 4 Skybuilders' Starflower
 Grade 4 Skybuilders' Cyan Crab

@@ -7509,7 +7509,7 @@
   bestCatchPath:
   - Jerked Ovim
   predators:
-  hookset:
+  hookset: Powerful
   tug: heavy
   snagging:
   gig:
@@ -9124,7 +9124,7 @@
 - name: Loose Pendant
   location: Crystarium Personal Suites
   startHour: 18
-  endHour: 21
+  endHour: 22
   previousWeatherSet: 
   weatherSet: 
   bestCatchPath:
@@ -9445,76 +9445,6 @@
   fishEyes: false
   patch: 5.2
 # Patch 5.3 (2020-08-11)
-- name: Hoplite
-  location: Anyx Old
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
-  predators: 
-  tug: 
-  hookset: 
-  snagging: 
-  fishEyes: false
-  patch: 5.3
-  dataMissing: true
-- name: Inkshell
-  location: Middle Thaliak River
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
-  predators: 
-  tug: 
-  hookset: 
-  snagging: 
-  fishEyes: false
-  patch: 5.3
-  dataMissing: true
-- name: Cloudweed
-  location: The Blue Window
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
-  predators: 
-  tug: 
-  hookset: 
-  snagging: 
-  fishEyes: false
-  patch: 5.3
-  dataMissing: true
-- name: Fatty Herring
-  location: The Isle of Bekko
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
-  predators: 
-  tug: 
-  hookset: 
-  snagging: 
-  fishEyes: false
-  patch: 5.3
-  dataMissing: true
-- name: Hook Fish
-  location: Onokoro
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
-  predators: 
-  tug: 
-  hookset: 
-  snagging: 
-  fishEyes: false
-  patch: 5.3
-  dataMissing: true
 - name: The Sinsteeped
   location: The Quadrivium
   startHour: 22
@@ -9670,35 +9600,6 @@
   snagging: 
   fishEyes: false
   patch: 5.3
-# Patch 5.35 (2020-10-13)
-- name: Allagan Hunter
-  location: Alpha Quadrant
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
-  predators: 
-  tug: 
-  hookset: 
-  snagging: 
-  fishEyes: false
-  patch: 5.35
-  dataMissing: true
-- name: Petal Shell
-  location: Plum Spring
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
-  predators: 
-  tug: 
-  hookset: 
-  snagging: 
-  fishEyes: false
-  patch: 5.35
-  dataMissing: true
 # Patch 5.4 (2020-12-08)
 - name: Moonlight Guppy
   location: The Rusted Reservoir
@@ -9762,7 +9663,7 @@
   patch: 5.4
 - name: Pearl Pipira
   location: The Red Chalice
-  startHour: 16
+  startHour: 17
   endHour: 20
   previousWeatherSet: 
   weatherSet:
@@ -9778,7 +9679,7 @@
 - name: The Ondotaker
   location: Where the Dry Return
   startHour: 8
-  endHour: 11
+  endHour: 10
   previousWeatherSet:
   - Clear Skies
   weatherSet:
@@ -9793,144 +9694,163 @@
 # Patch 5.5 (2021-04-13)
 - name: Aster Trivi
   location: The Trivium
-  startHour: 0
+  startHour: 22
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  previousWeatherSet:
+  - Clear Skies
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Marble Nymph
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Python Discus
   location: Sullen
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  previousWeatherSet:
+  - Rain
+  weatherSet:
+  - Thunderstorms
+  bestCatchPath:
+  - Fruit Worm
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Steel Razor
   location: The Western Kholusian Coast
-  startHour: 0
-  endHour: 24
+  startHour: 6
+  endHour: 8
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Moyebi Shrimp
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Shadeshifter
   location: Seagazer Shoals
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 10
+  endHour: 14
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  weatherSet:
+  - Gales
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Nabaath Saw
   location: The Nabaath Severance
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 6
+  endHour: 10
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
+  - Heat Waves
+  weatherSet:
+  - Heat Waves
+  bestCatchPath:
+  - Jerked Ovim
+  - Desert Saw
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Celestial
   location: Father Collard's Failings
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 7
+  endHour: 17
+  previousWeatherSet:
+  - Thunderstorms
+  weatherSet:
+  - Clear Skies
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Dammroen Herring
   location: The Spoiled One
   startHour: 0
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Deephaunt
   location: Woven Oath
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 2
+  endHour: 6
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Fog
+  bestCatchPath:
+  - Baitbugs
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Mora Tecta
   location: Northwest Caliban Gorge
-  startHour: 0
+  startHour: 22
   endHour: 24
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Fair Skies
+  bestCatchPath:
+  - Short Bill Minnow
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Maru Crab
   location: West Caliban Gap
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 20
   previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Short Bill Minnow
+  - Ancient Shrimp
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Precision
   snagging: 
   patch: 5.5
-  dataMissing: true
 - name: Golden Pipira
   location: Mjrl's Tears
-  startHour: 0
-  endHour: 24
+  startHour: 6
+  endHour: 7
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Robber Ball
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   patch: 5.5
-  dataMissing: true
