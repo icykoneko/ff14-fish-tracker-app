@@ -1946,6 +1946,7 @@
   weatherSet: []
   predators:
     Jungle Catfish: 3
+  intuitionLength: 600
   bestCatchPath:
   - Honey Worm
   - Silverfish
@@ -1987,6 +1988,7 @@
   - Showers
   predators:
     Little Thalaos: 3
+  intuitionLength: 600
   bestCatchPath:
   - Northern Krill
   tug: Legendary
@@ -2106,6 +2108,7 @@
   weatherSet: []
   predators:
     Boxing Pleco: 5
+  intuitionLength: 300
   bestCatchPath:
   - Rainbow Spoon Lure
   tug: Legendary
@@ -2161,6 +2164,7 @@
   weatherSet: []
   predators:
     Canavan: 1
+  intuitionLength: 1400
   bestCatchPath:
   - Honey Worm
   - Silverfish
@@ -2180,6 +2184,7 @@
   weatherSet: []
   predators:
     Wahoo: 6
+  intuitionLength: 120
   bestCatchPath:
   - Lugworm
   - Merlthor Goby
@@ -2282,6 +2287,7 @@
   - Snow
   predators:
     Lamp Marimo: 5
+  intuitionLength: 120
   bestCatchPath:
   - Honey Worm
   - Abalathian Smelt
@@ -2400,6 +2406,7 @@
   weatherSet: []  # only limited by intuition requirements
   predators:
     Giant Takitaro: 1
+  intuitionLength: 60
   bestCatchPath:
   - Topwater Frog
   tug: Legendary
@@ -4419,6 +4426,7 @@
   predators:
     Fossiltongue: 3
     Granite Crab: 5
+  intuitionLength: 180
   bestCatchPath:
   - Magma Worm
   - Granite Crab
@@ -4438,6 +4446,7 @@
   - Thunder
   predators:
     Functional Proto-hropken: 3
+  intuitionLength: 105
   bestCatchPath:
   - Fiend Worm
   - Platinum Fish
@@ -4457,6 +4466,7 @@
   - Clear Skies
   predators:
     Hedgemole Cricket: 6
+  intuitionLength: 160
   bestCatchPath:
   - Purse Web Spider  # Slightly better than nymph
   - Hedgemole Cricket
@@ -4477,6 +4487,7 @@
   predators:
     Scorpionfly: 3
     Sky Faerie: 3
+  intuitionLength: 60
   bestCatchPath:
   - Giant Crane Fly
   tug: Legendary
@@ -4495,6 +4506,7 @@
   - Blizzards
   predators:
     Ice Faerie: 5
+  intuitionLength: 120
   bestCatchPath:
   - Purse Web Spider
   - Ice Faerie
@@ -4514,6 +4526,7 @@
   - Gales
   predators:
     Rudderfish: 5
+  intuitionLength: 100
   bestCatchPath:
   - Giant Crane Fly
   - Rudderfish
@@ -6491,6 +6504,7 @@
   - Suspending Minnow
   predators:
     Bondsplitter: 2
+  intuitionLength: 175
   tug: Legendary
   hookset: Powerful
   snagging:
@@ -6509,6 +6523,7 @@
   - Rock Saltfish
   predators:
     Sculptor: 2
+  intuitionLength: 350
   tug: Legendary
   hookset: Powerful
   snagging:
@@ -6547,6 +6562,7 @@
     Firelight Goldfish: 3
     Indigo Prismfish: 3
     Green Prismfish: 5
+  intuitionLength: 175
   tug: Legendary
   hookset: Powerful
   snagging:
