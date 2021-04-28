@@ -212,13 +212,17 @@ class FishWatcher {
     if (_(fish.predators).size() > 0) {
       var overallPredRange = null;
       var predatorsAlwaysAvailable = true;
-      // This key value is in seconds
+      // This key value is in seconds, we will need to convert it to Eorzean time first
       var intuitionLength = fish.intuitionLength;
       // If no key was defined, default to 1 Eorzean hour duration
-      if(!intuitionLength) intuitionLength = 175;
+      // Keeping precision down to seconds here because of non-aligning intuition durations
+      // (e.g. 100 Earth seconds)
+      if (intuitionLength !== undefined) {
+        intuitionLength = eorzeaTime.toEorzea(intuitionLength);
+      } else { intuitionLength = 3600; }
       _(fish.predators).chain().keys().each((predId) => {
         var predatorFish = _(Fishes).findWhere({id: Number(predId)});
-        if (this._isFishAlwaysUp(predatorFish)) return nextRange;
+        if (this._isFishAlwaysUp(predatorFish)) { return nextRange; }
         predatorsAlwaysAvailable = false;
         // Once again, we need to check if the weather right now works for
         // the predator fish.

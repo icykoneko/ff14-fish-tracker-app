@@ -425,6 +425,7 @@ def _convert_fish_to_json(item):
                          'location': location,
                          'bestCatchPath': catch_path,
                          'predators': predators,
+                         'intuitionLength': item.get('intuitionLength', None),
                          'patch': item.get('patch'),
                          'folklore': folklore,
                          'collectable': is_collectable,
