@@ -217,7 +217,7 @@ class FishWatcher {
       // If no key was defined, default to 1 Eorzean hour duration
       // Keeping precision down to seconds here because of non-aligning intuition durations
       // (e.g. 100 Earth seconds)
-      if (intuitionLength !== undefined) {
+      if (intuitionLength !== null && intuitionLength !== undefined) {
         intuitionLength = eorzeaTime.toEorzea(intuitionLength);
       } else { intuitionLength = 3600; }
       _(fish.predators).chain().keys().each((predId) => {
