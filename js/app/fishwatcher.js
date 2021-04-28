@@ -212,6 +212,10 @@ class FishWatcher {
     if (_(fish.predators).size() > 0) {
       var overallPredRange = null;
       var predatorsAlwaysAvailable = true;
+      // This key value is in seconds
+      var intuitionLength = fish.intuitionLength;
+      // If no key was defined, default to 1 Eorzean hour duration
+      if(!intuitionLength) intuitionLength = 175;
       _(fish.predators).chain().keys().each((predId) => {
         var predatorFish = _(Fishes).findWhere({id: Number(predId)});
         if (this._isFishAlwaysUp(predatorFish)) return nextRange;
@@ -230,7 +234,7 @@ class FishWatcher {
           // Wait wait wait, try one more thing.
           // Let's say you catch the fish during the intuition buff period!
           iter = weatherService.findWeatherPattern(
-            +nextRange.start().subtract(1, 'hour'), // FIXME: Completely arbitrary "intuition window" selected here...
+            +nextRange.start().subtract(intuitionLength, 'seconds'),
             predatorFish.location.zoneId,
             predatorFish.previousWeatherSet,
             predatorFish.weatherSet,
@@ -264,7 +268,7 @@ class FishWatcher {
         nextRange = null;
       } else {
         // Increase the pred range by intuition buff time first.
-        overallPredRange = overallPredRange.start().twix(overallPredRange.end().add(1, 'hour'))
+        overallPredRange = overallPredRange.start().twix(overallPredRange.end().add(intuitionLength, 'seconds'))
         nextRange = nextRange.intersection(overallPredRange);
       }
     }
