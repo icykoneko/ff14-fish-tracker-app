@@ -9854,3 +9854,82 @@
   hookset: Powerful
   snagging: 
   patch: 5.5
+# Patch 5.55 (2021-05-25)
+- name: Listracanthus
+  location: The Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.55
+  dataMissing: true
+- name: Aquamaton
+  location: Seagazer Shoals
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.55
+  dataMissing: true
+- name: Cinder Surprise
+  location: The River of Sand
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.55
+  dataMissing: true
+- name: Ealad Skaan
+  location: Longmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.55
+  dataMissing: true
+- name: Greater Serpent of Ronka
+  location: Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.55
+  dataMissing: true
+- name: Lancetfish
+  location: Northwest Caliban Gorge
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: 
+  weatherSet: 
+  bestCatchPath: 
+  predators: 
+  tug: 
+  hookset: 
+  snagging: 
+  patch: 5.55
+  dataMissing: true
