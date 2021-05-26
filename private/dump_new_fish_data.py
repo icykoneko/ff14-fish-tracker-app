@@ -595,6 +595,34 @@ for fish in tracked_iter(important_fish,
             raise
 
 
+for fish in tracked_iter(new_fishes.values(),
+                         'Integrity Checking'):
+    errors = []
+
+    # Check if time restricted.
+    if fish['computed']['timeRestricted'] and \
+            fish['start'] == 0 and fish['end'] == 24:
+        errors += ['should be time restricted']
+    elif not fish['computed']['timeRestricted'] and \
+            not (fish['start'] == 0 and fish['end'] == 24):
+        errors += ['should not be time restricted']
+
+    # Check if weather restricted.
+    if fish['computed']['weatherRestricted'] and \
+            len(fish['prevWeather'] or []) == 0 and \
+            len(fish['weather'] or []) == 0:
+        errors += ['should be weather restricted']
+    elif not fish['computed']['weatherRestricted'] and \
+            (len(fish['weather'] or []) != 0 or \
+             len(fish['prevWeather'] or []) != 0):
+        errors += ['should not be weather restricted']
+
+    if len(errors) > 0:
+        if 'dataMissing' in fish and fish['dataMissing']:
+            errors += ['data missing for limited-time fish']
+        fish['integrityErrors'] = errors
+
+
 def _get_item_lookup_dict_entries():
     # Collect all of the fish and tackle names.
     fish_and_tackle_names = list(set(filter(None, reduce(
