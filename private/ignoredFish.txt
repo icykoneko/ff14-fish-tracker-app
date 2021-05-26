@@ -8,7 +8,6 @@ Eunuch Crayfish
 Bone Crayfish
 Moat Carp
 Tri-colored Carp
-Black Eel
 Ala Mhigan Fighting Fish
 Monke Onke
 Mitten Crab
@@ -20,7 +19,6 @@ Mudskipper
 Clown Loach
 Seema
 River Crab
-Dark Sleeper
 Rainbow Trout
 Copperfish
 Climbing Perch
@@ -29,7 +27,6 @@ Fall Jumper
 Bluebell Salmon
 Giant Bass
 Velodyna Carp
-Oakroot
 Common Sculpin
 Southern Pike
 Acorn Snail
@@ -121,7 +118,6 @@ Spotted Puffer
 Discus
 Kobold Puffer
 Lamprey
-Archerfish
 Agelyss Carp
 Vampire Lampern
 Halibut
@@ -137,7 +133,6 @@ Sea Devil
 Gigant Octopus
 Giant Squid
 Megalodon
-Jade Eel
 Warmwater Trout
 Four-eyed Fish
 Coeurlfish
@@ -146,7 +141,6 @@ Monkfish
 Haraldr Haddock
 Aegis Shrimp
 Bone Cleaner
-Trader Eel
 Gigantpole
 Plaguefish
 Ropefish
@@ -271,7 +265,6 @@ River Barramundi
 Nogoi
 Yellow Prismfish
 Blue Prismfish
-Doman Eel
 Samurai Fish
 Blank Oscar
 Dragonfish
@@ -333,7 +326,6 @@ Heather Charr
 Invisible Crayfish
 Adamantite Bichir
 Abalathian Salamander
-Meditator
 Stonytongue
 Peeping Pisces
 Gigant Bass

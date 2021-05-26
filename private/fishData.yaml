@@ -345,6 +345,63 @@
   folklore: false
   fishEyes: false
   patch: 2
+- name: Dark Sleeper
+  location: Hidden Falls
+  startHour: 15
+  endHour: 10
+  bestCatchPath:
+  - Midge Basket
+  tug: Light
+  hookset: Precision
+  patch: 2
+- name: Jade Eel
+  location: Bronze Lake Shallows
+  startHour: 17
+  endHour: 10
+  bestCatchPath:
+  - Butterworm
+  tug: Medium
+  hookset: Powerful
+  patch: 2
+- name: Black Eel
+  location: Yugr'am River
+  startHour: 17
+  endHour: 10
+  bestCatchPath:
+  - Butterworm
+  tug: Medium
+  hookset: Powerful
+  patch: 2
+- name: Trader Eel
+  location: Yugr'am River
+  startHour: 17
+  endHour: 10
+  bestCatchPath:
+  - Honey Worm
+  tug: Medium
+  hookset: Powerful
+  patch: 2
+- name: Oakroot
+  location: Sylphlands
+  startHour: 17
+  endHour: 10
+  bestCatchPath:
+  - Stem Borer
+  tug: Medium
+  hookset: Powerful
+  patch: 2
+- name: Archerfish
+  location: East Agelyss River
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
+  - Clouds
+  - Fog
+  bestCatchPath:
+  - Snurble Fly
+  tug: Light
+  hookset: Precision
+  patch: 2
 # Patch 2.0: Additional Fish
 - name: Merlthor Goby
   bestCatchPath:
@@ -4810,6 +4867,18 @@
   folklore: false
   fishEyes: false
   patch: 4.0
+- name: Meditator
+  location: The Ephor
+  weatherSet:
+  - Clouds
+  - Wind
+  - Fog
+  - Dust Storms
+  bestCatchPath:
+  - Stonefly Larva
+  tug: Medium
+  hookset: Powerful
+  patch: 4.0
 - name: Deemster
   location: The Ephor
   startHour: 0
@@ -5000,6 +5069,15 @@
   gig:
   folklore: false
   fishEyes: false
+  patch: 4.0
+- name: Doman Eel
+  location: Prism Canyon
+  startHour: 17
+  endHour: 10
+  bestCatchPath:
+  - Versatile Lure
+  tug: Medium
+  hookset: Powerful
   patch: 4.0
 - name: Steppe Skipper
   location: Nem Khaal
