@@ -9425,9 +9425,12 @@
   location: The Isle of Ken
   startHour: 16
   endHour: 24
-  previousWeatherSet: 
+  previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
   weatherSet:
   - Clouds
+  - Fog
   bestCatchPath:
   - Baitbugs
   predators: 
@@ -9437,6 +9440,7 @@
   gig: 
   fishEyes: false
   patch: 5.2
+  dataMissing: true
 - name: White Ronso
   location: Lower Watts River
   startHour: 0
@@ -9935,14 +9939,17 @@
 # Patch 5.55 (2021-05-25)
 - name: Listracanthus
   location: The Isle of Ken
-  startHour: 0
+  startHour: 16
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+    - Clear Skies
+    - Fair Skies
+  weatherSet:
+    - Fog
   bestCatchPath: 
   predators: 
-  tug: 
-  hookset: 
+  tug: heavy
+  hookset: Powerful
   snagging: 
   patch: 5.55
   dataMissing: true
@@ -9957,7 +9964,7 @@
     Shadeshifter: 1
     Shapeshifter: 5
   intuitionLength: 350
-  tug: 
+  tug: heavy
   hookset: 
   snagging: 
   patch: 5.55
