@@ -9942,13 +9942,14 @@
   startHour: 16
   endHour: 24
   previousWeatherSet:
-    - Clear Skies
-    - Fair Skies
+  - Clear Skies
+  - Fair Skies
   weatherSet:
-    - Fog
-  bestCatchPath: 
+  - Fog
+  bestCatchPath:
+  - Squid Strip
   predators: 
-  tug: heavy
+  tug: Heavy
   hookset: Powerful
   snagging: 
   patch: 5.55
@@ -9959,40 +9960,49 @@
   endHour: 24
   previousWeatherSet: 
   weatherSet: 
-  bestCatchPath: 
+  bestCatchPath:
+  - Short Bill Minnow
   predators:
     Shadeshifter: 1
     Shapeshifter: 5
   intuitionLength: 350
-  tug: heavy
-  hookset: 
+  tug: Heavy
+  hookset:
   snagging: 
   patch: 5.55
   dataMissing: true
 - name: Cinder Surprise
   location: The River of Sand
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  startHour: 16
+  endHour: 8
+  previousWeatherSet:
+  - Dust Storms
+  - Clouds
+  weatherSet:
+  - Heat Waves
+  bestCatchPath:
+  - Desert Dessert Frog
   predators:
     Sand Egg: 10
   intuitionLength: 350
-  tug: 
+  tug: Heavy
   hookset: 
   snagging: 
   patch: 5.55
   dataMissing: true
 - name: Ealad Skaan
   location: Longmirror Lake
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  startHour: 20
+  endHour: 4
+  previousWeatherSet:
+  - Rain
+  - Thunderstorms
+  weatherSet:
+  - Clear Skies
+  - Fair Skies
   bestCatchPath: 
   predators: 
-  tug: 
+  tug: Heavy
   hookset: 
   snagging: 
   patch: 5.55
@@ -10018,14 +10028,17 @@
   location: Northwest Caliban Gorge
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  previousWeatherSet:
+  - Fair Skies
+  weatherSet:
+  - Clouds
+  bestCatchPath:
+  - Squid Strip
   predators:
     Mora Tecta: 2
   intuitionLength: 700
-  tug: 
-  hookset: 
+  tug: Heavy
+  hookset: Powerful
   snagging: 
   patch: 5.55
   dataMissing: true
