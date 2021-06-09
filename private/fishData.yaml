@@ -9973,8 +9973,8 @@
   dataMissing: true
 - name: Cinder Surprise
   location: The River of Sand
-  startHour: 16
-  endHour: 8
+  startHour: 22
+  endHour: 4
   previousWeatherSet:
   - Dust Storms
   weatherSet:
@@ -9998,12 +9998,11 @@
   - Thunderstorms
   weatherSet:
   - Clear Skies
-  - Fair Skies
   bestCatchPath:
   - Baitbugs
   predators: 
   tug: Heavy
-  hookset: 
+  hookset: Precision
   snagging: 
   patch: 5.55
   dataMissing: true
@@ -10026,7 +10025,7 @@
 - name: Lancetfish
   location: Northwest Caliban Gorge
   startHour: 0
-  endHour: 24
+  endHour: 2
   previousWeatherSet:
   - Fair Skies
   weatherSet:
