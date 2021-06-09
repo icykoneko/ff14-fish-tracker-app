@@ -20,35 +20,3 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
-- name: The Jaws of Undeath
-  weatherSet:
-  - Clouds
-  - Fog
-- name: Listracanthus
-  startHour: 16
-  endHour: 24
-  previousWeatherSet:
-  - Fair Skies
-  weatherSet:
-  - Fog
-  bait:
-  - Baitbugs
-  - The Jaws of Undeath
-  tug: heavy
-  hookset: Powerful
-- name: Aquamaton
-  startHour: 10
-  endHour: 16
-  bait:
-  - Short Bill Minnow
-  tug: heavy
-- name: Lancetfish
-  startHour: 0
-  endHour: 2
-  previousWeatherSet:
-  - Fair Skies
-  weatherSet:
-  - Clouds
-  bait:
-  - Squid Strip
-  tug: heavy
