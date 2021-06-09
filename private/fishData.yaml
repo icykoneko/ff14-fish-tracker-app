@@ -9947,17 +9947,17 @@
   weatherSet:
   - Fog
   bestCatchPath:
-  - Squid Strip
+  - Baitbugs
+  - The Jaws of Undeath
   predators: 
   tug: Heavy
   hookset: Powerful
   snagging: 
   patch: 5.55
-  dataMissing: true
 - name: Aquamaton
   location: Seagazer Shoals
-  startHour: 0
-  endHour: 24
+  startHour: 10
+  endHour: 16
   previousWeatherSet: 
   weatherSet: 
   bestCatchPath:
@@ -9967,7 +9967,7 @@
     Shapeshifter: 5
   intuitionLength: 350
   tug: Heavy
-  hookset:
+  hookset: Powerful
   snagging: 
   patch: 5.55
   dataMissing: true
@@ -9977,7 +9977,6 @@
   endHour: 8
   previousWeatherSet:
   - Dust Storms
-  - Clouds
   weatherSet:
   - Heat Waves
   bestCatchPath:
@@ -9986,7 +9985,7 @@
     Sand Egg: 10
   intuitionLength: 350
   tug: Heavy
-  hookset: 
+  hookset: Precision
   snagging: 
   patch: 5.55
   dataMissing: true
@@ -10000,7 +9999,8 @@
   weatherSet:
   - Clear Skies
   - Fair Skies
-  bestCatchPath: 
+  bestCatchPath:
+  - Baitbugs
   predators: 
   tug: Heavy
   hookset: 
@@ -10023,7 +10023,6 @@
   hookset: Powerful
   snagging: 
   patch: 5.55
-  dataMissing: true
 - name: Lancetfish
   location: Northwest Caliban Gorge
   startHour: 0
