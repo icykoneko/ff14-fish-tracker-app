@@ -10025,7 +10025,7 @@
 - name: Lancetfish
   location: Northwest Caliban Gorge
   startHour: 0
-  endHour: 24
+  endHour: 2
   previousWeatherSet:
   - Fair Skies
   weatherSet:
