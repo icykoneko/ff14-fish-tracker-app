@@ -9967,14 +9967,14 @@
     Shapeshifter: 5
   intuitionLength: 350
   tug: Heavy
-  hookset:
+  hookset: Powerful
   snagging: 
   patch: 5.55
   dataMissing: true
 - name: Cinder Surprise
   location: The River of Sand
-  startHour: 16
-  endHour: 8
+  startHour: 22
+  endHour: 4
   previousWeatherSet:
   - Dust Storms
   - Clouds
@@ -9986,7 +9986,7 @@
     Sand Egg: 10
   intuitionLength: 350
   tug: Heavy
-  hookset: 
+  hookset: Precision
   snagging: 
   patch: 5.55
   dataMissing: true
@@ -9999,11 +9999,11 @@
   - Thunderstorms
   weatherSet:
   - Clear Skies
-  - Fair Skies
-  bestCatchPath: 
+  bestCatchPath:
+  - Baitbugs
   predators: 
   tug: Heavy
-  hookset: 
+  hookset: Precision
   snagging: 
   patch: 5.55
   dataMissing: true
