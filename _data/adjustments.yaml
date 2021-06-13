@@ -22,3 +22,8 @@
 # lives in the gh-pages branch... Carby says it's fine.
 - name: Asteroidea
   snagging: false
+- name: Ealad Skaan
+  previousWeatherSet:
+  - Thunderstorms
+  weatherSet:
+  - Clear Skies
