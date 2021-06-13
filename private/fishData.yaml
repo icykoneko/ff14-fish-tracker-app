@@ -3085,7 +3085,7 @@
 - name: Caiman
   location: Voor Sian Siran
   startHour: 18
-  endHour: 21  # seemingly 20:30
+  endHour: 20.5
   previousWeatherSet: []
   weatherSet: []
   predators: {}
@@ -3304,7 +3304,7 @@
 - name: Thunderbolt Eel
   location: The Iron Feast
   startHour: 22
-  endHour: 4 # 3:30
+  endHour: 3.5
   previousWeatherSet: []
   weatherSet: []
   predators: {}
@@ -6650,8 +6650,8 @@
   patch: 4.5
 - name: The Unconditional
   location: Dotharl Khaa
-  startHour: 5  # 5:30 to 6:30
-  endHour: 7
+  startHour: 5.5
+  endHour: 6.5
   previousWeatherSet:
   - Rain
   weatherSet:
@@ -9991,8 +9991,7 @@
   dataMissing: true
 - name: Ealad Skaan
   location: Longmirror Lake
-  # 23.5-24 supposedly
-  startHour: 23
+  startHour: 23.5
   endHour: 24
   previousWeatherSet:
   - Thunderstorms

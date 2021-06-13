@@ -192,28 +192,33 @@ class Fish {
     // How long is the fish normally available?
     var d = this.dailyDuration;
     var m = +r.start();
+    // Ugly addMinutes hack is there for fractional windows like 5:30-6:30
     if (this.endHour < this.startHour) {
       // Available times wraps around date...
       if (dateFns.utc.getHours(m) < this.endHour) {
         // Return the *remaining* portion of the catchable range which started
         // yesterday.
         return d.afterMoment(
-          moment.utc(dateFns.utc.setHours(dateFns.utc.subDays(m, 1), this.startHour)));
+          moment.utc(dateFns.utc.addMinutes(dateFns.utc.setHours(dateFns.utc.subDays(m, 1), this.startHour)),
+                                           (this.startHour % 1) * 60));
       } else {
         // Otherwise, return the window for today.
         return d.afterMoment(
-          moment.utc(dateFns.utc.setHours(m, this.startHour)));
+          moment.utc(dateFns.utc.addMinutes(dateFns.utc.setHours(m, this.startHour),
+                                           (this.startHour % 1) * 60)));
       }
     } else {
       // Available times limited to this date.
       if (dateFns.utc.getHours(m) < this.endHour) {
         // The fish's *current* range begins (or began) today.
         return d.afterMoment(
-          moment.utc(dateFns.utc.setHours(m, this.startHour)));
+          moment.utc(dateFns.utc.addMinutes(dateFns.utc.setHours(m, this.startHour),
+                                           (this.startHour % 1) * 60)));
       } else {
         // Return tomorrow's range since we're already past today's window.
         return d.afterMoment(
-          moment.utc(dateFns.utc.setHours(dateFns.utc.addDays(m, 1), this.startHour)));
+          moment.utc(dateFns.utc.addMinutes(dateFns.utc.setHours(dateFns.utc.addDays(m, 1), this.startHour),
+                                           (this.startHour % 1) * 60)));
       }
     }
   }
