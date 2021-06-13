@@ -23,6 +23,9 @@
 - name: Asteroidea
   snagging: false
 - name: Ealad Skaan
+  # 23.5
+  startHour: 23
+  endHour: 24
   previousWeatherSet:
   - Thunderstorms
   weatherSet:
