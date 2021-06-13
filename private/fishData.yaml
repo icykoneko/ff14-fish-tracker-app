@@ -3304,7 +3304,7 @@
 - name: Thunderbolt Eel
   location: The Iron Feast
   startHour: 22
-  endHour: 4
+  endHour: 4 # 3:30
   previousWeatherSet: []
   weatherSet: []
   predators: {}
@@ -9991,6 +9991,7 @@
   dataMissing: true
 - name: Ealad Skaan
   location: Longmirror Lake
+  # 23.5-24 supposedly
   startHour: 23
   endHour: 24
   previousWeatherSet:
