@@ -42,6 +42,7 @@ class Fish {
       this.location = {name: '', zoneName: '', id: 0, zoneId: 0, coords: null, spearfishing: false};
     }
     this.catchableRanges = [];
+    this.incompleteRanges = [];
     {
       var diff = Math.abs(this.endHour - this.startHour);
       this.dailyDuration =
@@ -183,39 +184,51 @@ class Fish {
   }
 
   availableRangeDuring(r, fe = false) {
+    // This function returns an array of ranges the fish is up based on the start
+    // time of the specified range, r. The caller must still intersect this range
+    // if necessary though... Normally, this will only ever return two items if
+    // the fish's duration wraps around a given period (since the input to this
+    // function is normally an 8-hour weather period.)
+
     // If the fish is always available, just return the given range.
     // Also, if Fish Eyes is enabled, assuming this fish supports it, just
     // return the given range as well.
     if ((fe === true && this.fishEyes) || (this.startHour == 0 && this.endHour == 24)) {
-      return r;
+      return [r];
     }
     // How long is the fish normally available?
     var d = this.dailyDuration;
     var m = +r.start();
+    let o = [];
     if (this.endHour < this.startHour) {
       // Available times wraps around date...
       if (dateFns.utc.getHours(m) < this.endHour) {
-        // Return the *remaining* portion of the catchable range which started
-        // yesterday.
-        return d.afterMoment(
-          moment.utc(dateFns.utc.setHours(dateFns.utc.subDays(m, 1), this.startHour)));
+        // Use the *remaining* portion of the catchable range which started
+        // yesterday, as well as any portion intersecting today's window.
+        console.debug("Including early portion of wrapped range...");
+        o.push(d.afterMoment(
+          moment.utc(dateFns.utc.setHours(dateFns.utc.subDays(m, 1), this.startHour))));
+        if (dateFns.utc.getHours(+r.end()) > this.startHour) {
+          console.debug("Including other part of window when fish is back up again...");
+          // Also include the portion of the window when the fish is available once again.
+          o.push(d.afterMoment(
+            moment.utc(dateFns.utc.setHours(m, this.startHour))));
+        }
       } else {
-        // Otherwise, return the window for today.
-        return d.afterMoment(
-          moment.utc(dateFns.utc.setHours(m, this.startHour)));
+        console.debug("Just including late portion of wrapped ranged...");
+        o.push(d.afterMoment(
+          moment.utc(dateFns.utc.setHours(m, this.startHour))));
       }
-    } else {
+    } else if (dateFns.utc.getHours(m) < this.endHour) {
       // Available times limited to this date.
-      if (dateFns.utc.getHours(m) < this.endHour) {
-        // The fish's *current* range begins (or began) today.
-        return d.afterMoment(
-          moment.utc(dateFns.utc.setHours(m, this.startHour)));
-      } else {
-        // Return tomorrow's range since we're already past today's window.
-        return d.afterMoment(
-          moment.utc(dateFns.utc.setHours(dateFns.utc.addDays(m, 1), this.startHour)));
-      }
+      // The fish's *current* range begins (or began) today.
+      o.push(d.afterMoment(
+        moment.utc(dateFns.utc.setHours(m, this.startHour))));
     }
+    var checked = o.map(x => x.intersection(r));
+    console.debug("Returning ranges:   ", o.map(x => x.simpleFormat('ddd, hA')));
+    console.debug("Intersected ranges: ", checked.map(x => x.isValid() ? x.simpleFormat('ddd, hA') : "INVALID"));
+    return o;
   }
 
   addCatchableRange(nextRange) {
@@ -226,6 +239,7 @@ class Fish {
     if (_(this.catchableRanges).isEmpty()) {
       // The first entry is special. We can simply push it into the array.
       // Remember, it's observable!
+      console.debug("New range: %s", nextRange.simpleFormat('hA'));
       this.catchableRanges.push(nextRange);
       this.notifyCatchableRangesUpdated();
       return;
@@ -250,9 +264,21 @@ class Fish {
          nextRange: nextRange.simpleFormat()});
       return;
     }
+    console.debug("New merged range(s): %s", merged.map(x => x.simpleFormat('hA')).join(", "));
     this.catchableRanges.splice.apply(
       this.catchableRanges, [-1, 1].concat(merged) );
     this.notifyCatchableRangesUpdated();
+  }
+
+  stashIncompleteWindows(maxWindows) {
+    // Helper function to work around messy wrap-around windows that are incomplete.
+    if (this.catchableRanges.length > maxWindows) {
+      // Oops, we ended up holding on to an extra window...
+      console.debug("Stashing excess, incomplete windows from catchableRanges array...");
+      this.__uptimeDirty = true;
+      this.incompleteRanges = this.catchableRanges.splice(maxWindows);
+      this.notifyCatchableRangesUpdated();
+    }
   }
 }
 
