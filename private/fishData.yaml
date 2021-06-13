@@ -9991,8 +9991,8 @@
   dataMissing: true
 - name: Ealad Skaan
   location: Longmirror Lake
-  startHour: 20
-  endHour: 4
+  startHour: 23
+  endHour: 24
   previousWeatherSet:
   - Thunderstorms
   weatherSet:
