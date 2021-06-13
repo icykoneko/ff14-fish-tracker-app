@@ -9994,7 +9994,6 @@
   startHour: 20
   endHour: 4
   previousWeatherSet:
-  - Rain
   - Thunderstorms
   weatherSet:
   - Clear Skies
