@@ -128,6 +128,21 @@ class FishWatcher {
   }
 
   updateRangesForFish(fish) {
+    // Need to know if the last range could span periods.
+    var lastRangeSpansPeriods = false;
+
+    // Restore any incomplete ranges first.
+    if (fish.incompleteRanges.length > 0) {
+      while (fish.catchableRanges.length < this.maxWindows) {
+        var incompleteRange = fish.incompleteRanges.shift();
+        if (incompleteRange !== undefined) {
+          fish.catchableRanges.push(incompleteRange);
+          // Set flag so that we don't immediately stop processing...
+          lastRangeSpansPeriods = true;
+        }
+      }
+    }
+
     // Resume from when the last window ended (if possible)
     var startOfWindow = null;
     var latestWindow = _(fish.catchableRanges).last();
@@ -152,8 +167,6 @@ class FishWatcher {
       fish.location.zoneId,
       fish.previousWeatherSet,
       fish.weatherSet);
-    // Need to know if the last range could span periods.
-    var lastRangeSpansPeriods = false;
 
     while (fish.catchableRanges.length < this.maxWindows) {
       var _iterItem = weatherIter.next();
@@ -189,7 +202,23 @@ class FishWatcher {
     // Found a time period where the weather is favorable. Now check if the
     // fish is even up. This really should be the other way around -_-
     // ^^ Who's laughing now? *puts on Fish Eyes shades*
-    var nextRange = fish.availableRangeDuring(window, this.fishEyesEnabled);
+    let spansPeriods = undefined;
+    var nextRanges = fish.availableRangeDuring(window, this.fishEyesEnabled);
+    for (var nextRange of nextRanges) {
+      spansPeriods = this.__checkToAddCatchableRangeInner(fish, window, nextRange);
+      // If will span periods, we need to double-check if we've already found enough
+      // windows. If not, this will cause an infinite loop because of the late
+      // side of the fish's window spanning periods.
+      if (spansPeriods === true && fish.catchableRanges.length > this.maxWindows) {
+        fish.stashIncompleteWindows(this.maxWindows);
+        spansPeriods = false;
+        break;
+      }
+    }
+    return spansPeriods;
+  }
+
+  __checkToAddCatchableRangeInner(fish, window, nextRange) {
     if (!window.overlaps(nextRange)) {
       // Oops, this is why you need to optimize this...
       return false;
@@ -204,6 +233,7 @@ class FishWatcher {
     // fish, without clipping to the window if the range is "already in progress".
     // As a result, if a fish is up for multiple 8-hour windows, `nextRange` will keep
     // getting set to the same value. To solve this, we'll intersect nextRange with window.
+    var origNextRange = nextRange;
     nextRange = nextRange.intersection(window);
 
     // If this fish has predators, we have to consider their windows too...
@@ -248,20 +278,22 @@ class FishWatcher {
           if (_iterItem.done) { return; }
         }
         var predWindow = _iterItem.value;
-        var predRange = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
-        if (!predWindow.overlaps(predRange)) { return /*nextRange = null*/; }
-        if (dateFns.isSameOrBefore(+predRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
-          return /*nextRange = null*/;
-        }
-        // Because of the "intuition window" being added, we need to re-constrain the predRange.
-        predRange = predRange.intersection(predWindow);
-        if (overallPredRange === null) {
-          overallPredRange = predRange;
-        } else {
-          // COMBINE this predators range with the others.
-          // This is necessary for fish with multiple predators which have
-          // non-overlapping availability...
-          overallPredRange = overallPredRange.union(predRange);
+        var predRanges = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
+        for (var predRange of predRanges) {
+          if (!predWindow.overlaps(predRange)) { continue /*nextRange = null*/; }
+          if (dateFns.isSameOrBefore(+predRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
+            continue /*nextRange = null*/;
+          }
+          // Because of the "intuition window" being added, we need to re-constrain the predRange.
+          predRange = predRange.intersection(predWindow);
+          if (overallPredRange === null) {
+            overallPredRange = predRange;
+          } else {
+            // COMBINE this predators range with the others.
+            // This is necessary for fish with multiple predators which have
+            // non-overlapping availability...
+            overallPredRange = overallPredRange.union(predRange);
+          }
         }
         return nextRange;
       });
@@ -285,7 +317,7 @@ class FishWatcher {
     // Update the catchable ranges using the intersection of the next range
     // and the window itself. Merge together bordering windows.
     fish.addCatchableRange(nextRange.intersection(window));
-    return nextRange.contains(+window.end() + 1);
+    return origNextRange.contains(+window.end() + 1);
   }
 }
 
