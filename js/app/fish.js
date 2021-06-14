@@ -200,9 +200,8 @@ class Fish {
     var d = this.dailyDuration;
     var m = +r.start();
     let o = [];
-
     var rs = dateFns.utc.setHours(m, this.startHour);
-    
+
     if (this.endHour < this.startHour) {
       // Available times wraps around date...
       if (dateFns.utc.getHours(m) < this.endHour) {
