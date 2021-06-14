@@ -205,17 +205,14 @@ class Fish {
       if (dateFns.utc.getHours(m) < this.endHour) {
         // Use the *remaining* portion of the catchable range which started
         // yesterday, as well as any portion intersecting today's window.
-        console.debug("Including early portion of wrapped range...");
         o.push(d.afterMoment(
           moment.utc(dateFns.utc.setHours(dateFns.utc.subDays(m, 1), this.startHour))));
         if (dateFns.utc.getHours(+r.end()) > this.startHour) {
-          console.debug("Including other part of window when fish is back up again...");
           // Also include the portion of the window when the fish is available once again.
           o.push(d.afterMoment(
             moment.utc(dateFns.utc.setHours(m, this.startHour))));
         }
       } else {
-        console.debug("Just including late portion of wrapped ranged...");
         o.push(d.afterMoment(
           moment.utc(dateFns.utc.setHours(m, this.startHour))));
       }
@@ -225,9 +222,6 @@ class Fish {
       o.push(d.afterMoment(
         moment.utc(dateFns.utc.setHours(m, this.startHour))));
     }
-    var checked = o.map(x => x.intersection(r));
-    console.debug("Returning ranges:   ", o.map(x => x.simpleFormat('ddd, hA')));
-    console.debug("Intersected ranges: ", checked.map(x => x.isValid() ? x.simpleFormat('ddd, hA') : "INVALID"));
     return o;
   }
 
@@ -239,7 +233,6 @@ class Fish {
     if (_(this.catchableRanges).isEmpty()) {
       // The first entry is special. We can simply push it into the array.
       // Remember, it's observable!
-      console.debug("New range: %s", nextRange.simpleFormat('hA'));
       this.catchableRanges.push(nextRange);
       this.notifyCatchableRangesUpdated();
       return;
@@ -264,7 +257,6 @@ class Fish {
          nextRange: nextRange.simpleFormat()});
       return;
     }
-    console.debug("New merged range(s): %s", merged.map(x => x.simpleFormat('hA')).join(", "));
     this.catchableRanges.splice.apply(
       this.catchableRanges, [-1, 1].concat(merged) );
     this.notifyCatchableRangesUpdated();
@@ -274,7 +266,6 @@ class Fish {
     // Helper function to work around messy wrap-around windows that are incomplete.
     if (this.catchableRanges.length > maxWindows) {
       // Oops, we ended up holding on to an extra window...
-      console.debug("Stashing excess, incomplete windows from catchableRanges array...");
       this.__uptimeDirty = true;
       this.incompleteRanges = this.catchableRanges.splice(maxWindows);
       this.notifyCatchableRangesUpdated();

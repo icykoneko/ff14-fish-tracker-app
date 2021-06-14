@@ -128,8 +128,6 @@ class FishWatcher {
   }
 
   updateRangesForFish(fish) {
-    console.groupCollapsed(`Updating ranges for ${fish.name}`);
-
     // Need to know if the last range could span periods.
     var lastRangeSpansPeriods = false;
 
@@ -141,7 +139,6 @@ class FishWatcher {
           fish.catchableRanges.push(incompleteRange);
           // Set flag so that we don't immediately stop processing...
           lastRangeSpansPeriods = true;
-          console.debug(`Restored incomplete range: ${incompleteRange.simpleFormat('ddd, hA')}`);
         }
       }
     }
@@ -161,10 +158,6 @@ class FishWatcher {
     } else {
       // Use the current date as the start time (first run)
       startOfWindow = eorzeaTime.getCurrentEorzeaDate();
-    }
-    console.debug(`Using ${moment.utc(startOfWindow).format('ddd, hA')} as starting point...`);
-    if (latestWindow) {
-      console.debug(`The last known window was: ${latestWindow.simpleFormat('ddd, hA')}`);
     }
 
     // Create a new iterator with no limit to get periods with favorable weather.
@@ -203,7 +196,6 @@ class FishWatcher {
       lastRangeSpansPeriods =
         this.__checkToAddCatchableRange(fish, _iterItem.value);
     }
-    console.groupEnd();
   }
 
   __checkToAddCatchableRange(fish, window) {
@@ -211,26 +203,18 @@ class FishWatcher {
     // fish is even up. This really should be the other way around -_-
     // ^^ Who's laughing now? *puts on Fish Eyes shades*
     let spansPeriods = undefined;
-    console.group(`Checking window: ${window.simpleFormat('ddd, hA')}`);
     var nextRanges = fish.availableRangeDuring(window, this.fishEyesEnabled);
     for (var nextRange of nextRanges) {
-      console.group(`Processing range: ${nextRange.simpleFormat('ddd, hA')}`);
       spansPeriods = this.__checkToAddCatchableRangeInner(fish, window, nextRange);
-      console.debug("Spans periods? ", spansPeriods);
-      console.debug("Total ranges recorded: ", fish.catchableRanges.length);
       // If will span periods, we need to double-check if we've already found enough
       // windows. If not, this will cause an infinite loop because of the late
       // side of the fish's window spanning periods.
       if (spansPeriods === true && fish.catchableRanges.length > this.maxWindows) {
-        console.debug("Exceeded maximum number of catchable ranges with an incomplete range!");
         fish.stashIncompleteWindows(this.maxWindows);
         spansPeriods = false;
-        console.groupEnd();
         break;
       }
-      console.groupEnd();
     }
-    console.groupEnd();
     return spansPeriods;
   }
 
