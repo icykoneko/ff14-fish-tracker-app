@@ -200,27 +200,26 @@ class Fish {
     var d = this.dailyDuration;
     var m = +r.start();
     let o = [];
+
+    var rs = dateFns.utc.setHours(m, this.startHour);
+    
     if (this.endHour < this.startHour) {
       // Available times wraps around date...
       if (dateFns.utc.getHours(m) < this.endHour) {
         // Use the *remaining* portion of the catchable range which started
         // yesterday, as well as any portion intersecting today's window.
-        o.push(d.afterMoment(
-          moment.utc(dateFns.utc.setHours(dateFns.utc.subDays(m, 1), this.startHour))));
+        o.push(d.afterMoment(moment.utc(dateFns.utc.subDays(rs, 1))));
         if (dateFns.utc.getHours(+r.end()) > this.startHour) {
           // Also include the portion of the window when the fish is available once again.
-          o.push(d.afterMoment(
-            moment.utc(dateFns.utc.setHours(m, this.startHour))));
+          o.push(d.afterMoment(moment.utc(rs)));
         }
       } else {
-        o.push(d.afterMoment(
-          moment.utc(dateFns.utc.setHours(m, this.startHour))));
+        o.push(d.afterMoment(moment.utc(rs)));
       }
     } else if (dateFns.utc.getHours(m) < this.endHour) {
       // Available times limited to this date.
       // The fish's *current* range begins (or began) today.
-      o.push(d.afterMoment(
-        moment.utc(dateFns.utc.setHours(m, this.startHour))));
+      o.push(d.afterMoment(moment.utc(rs)));
     }
     return o;
   }
