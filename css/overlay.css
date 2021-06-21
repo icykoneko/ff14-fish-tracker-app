@@ -13,6 +13,15 @@
   padding-bottom: 3em;
 }
 
+span.catchtime-hour {
+  /* no special style */
+}
+span.catchtime-minute {
+  /* font-variant-position: super; */
+  vertical-align: super;
+  font-size: x-small;
+}
+
 .sprite-icon {
   display: inline-block;
 }
