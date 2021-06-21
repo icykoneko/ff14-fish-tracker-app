@@ -9970,11 +9970,10 @@
   hookset: Powerful
   snagging: 
   patch: 5.55
-  dataMissing: true
 - name: Cinder Surprise
   location: The River of Sand
-  startHour: 22
-  endHour: 4
+  startHour: 0
+  endHour: 2
   previousWeatherSet:
   - Dust Storms
   weatherSet:
@@ -9991,10 +9990,9 @@
   dataMissing: true
 - name: Ealad Skaan
   location: Longmirror Lake
-  startHour: 20
-  endHour: 4
+  startHour: 23.5
+  endHour: 24
   previousWeatherSet:
-  - Rain
   - Thunderstorms
   weatherSet:
   - Clear Skies
