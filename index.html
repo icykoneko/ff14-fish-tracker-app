@@ -43,14 +43,14 @@ title: Home
 
     <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20201214_2150" />
+    <link rel="stylesheet" href="css/overlay.css?20210620_2150" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.55_20210609_1748"></script>
+    <script type="text/javascript" src="js/app/data.js?5.55_20210620_2213"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?5.55_20210525_0637"></script>
 
     <!--
@@ -60,7 +60,7 @@ title: Home
       -   to other classes until an initialization method can be called safely.
       -->
     <script type="text/javascript" src="js/app/time.js?20201125"></script>
-    <script type="text/javascript" src="js/app/fish.js?20210613_2021"></script>
+    <script type="text/javascript" src="js/app/fish.js?20210620_2157"></script>
     <script type="text/javascript" src="js/app/weather.js?20190824"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20210613"></script>
     <script type="text/javascript" src="js/app/sorters.js?20201208"></script>
@@ -264,7 +264,9 @@ title: Home
               <i class="clock icon"></i> Time Restricted
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-                {{=it.data.startHour + ' - ' + it.data.endHour}}
+                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+                -
+                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
               {{?}}
             {{?}}
           {{??}}
@@ -272,7 +274,9 @@ title: Home
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              {{=it.data.startHour + ' - ' + it.data.endHour}}
+              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+              -
+              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
             {{?}}
           {{?}}
         </td>
@@ -403,7 +407,9 @@ title: Home
               <i class="clock icon"></i> Time Restricted
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-                {{=it.data.startHour + ' - ' + it.data.endHour}}
+                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+                -
+                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
               {{?}}
             {{?}}
           {{??}}
@@ -411,7 +417,9 @@ title: Home
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              {{=it.data.startHour + ' - ' + it.data.endHour}}
+              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+              -
+              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
             {{?}}
           {{?}}
         </td>
