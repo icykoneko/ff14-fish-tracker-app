@@ -30,6 +30,6 @@
   - Thunderstorms
   weatherSet:
   - Clear Skies
-- name: Cinder Suprise
+- name: Cinder Surprise
   startHour: 0
   endHour: 2
