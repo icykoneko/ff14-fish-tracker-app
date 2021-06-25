@@ -208,7 +208,7 @@ def initialize_data(args):
                ('map_coords', [spot.map_x, spot.map_y, spot.radius])]))
         for spot in XIV.game_data.get_sheet('FishingSpot')
         if spot.get_raw('PlaceName{Main}') == 0 and spot.get_raw('TerritoryType') != 0])
-    
+
     SPEARFISHING_NODES = dict([
         (x['GatheringPointBase'].key,
          dict([('_id', x['GatheringPointBase'].key),
@@ -217,12 +217,12 @@ def initialize_data(args):
                ('placename_id', x.key)]))
         for x in XIV.game_data.get_sheet('GatheringPoint')
         if x['GatheringPointBase']['GatheringType'].key == 4])
-    
+
     REGIONS = dict([
         (territory.region_place_name.key,
          dict(_make_localized_field('name', territory.region_place_name, 'Name')))
         for territory in TERRITORIES])
-    
+
     ZONES = dict([
         (territory.place_name.key,
          dict(_make_localized_field('name', territory.place_name, 'Name')))
@@ -249,7 +249,7 @@ def initialize_data(args):
             (11103, 'fish_eyes.png'),  # Status[Name="Fish Eyes"]
         ]
     }
-    
+
     # Store the dictionaries sorted by key
     # This makes the generated JS a bit more consistent.
     WEATHER_RATES = OrderedDict(sorted(WEATHER_RATES.items(), key=lambda t: t[0]))
@@ -259,7 +259,7 @@ def initialize_data(args):
     REGIONS = OrderedDict(sorted(REGIONS.items(), key=lambda t: t[0]))
     ZONES = OrderedDict(sorted(ZONES.items(), key=lambda t: t[0]))
     GATHERING_SUB_CATEGORIES = OrderedDict(sorted(GATHERING_SUB_CATEGORIES.items(), key=lambda t: t[0]))
-    
+
     KeyValuePair = namedtuple('KeyValuePair', ['key', 'value'])
 
 
@@ -315,9 +315,9 @@ def lookup_spearfishing_spot_by_name(name):
 def supports_fish_eyes(fish_id, location_id, fish_params, patch):
     from pysaintcoinach.ex.language import Language
 
-    # The fish must not be legendary: i.e. not include the phase: "のオオヌシ".
+    # The fish must not be legendary: i.e. not include the phase: "オオヌシ".
     fish = XIV.game_data.get_sheet('Item')[fish_id]
-    if "のオオヌシ" in fish.source_row['Description', Language.japanese]:
+    if "オオヌシ" in fish.source_row['Description', Language.japanese]:
         return False
     # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
     if location_id is not None:
