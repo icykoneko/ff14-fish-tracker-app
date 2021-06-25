@@ -513,8 +513,8 @@ def supports_fish_eyes(fish):
     # Fish Eyes does not affect spearfishing.
     if fish.spearfishing:
         return False
-    # The fish must not be legendary: i.e. not include the phase: "のオオヌシ".
-    if "のオオヌシ" in fish.item.source_row['Description', Language.japanese]:
+    # The fish must not be legendary: i.e. not include the phase: "オオヌシ".
+    if "オオヌシ" in fish.item.source_row['Description', Language.japanese]:
         return False
     # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
     if fish.expansion.key >= 2:
