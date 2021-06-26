@@ -21,6 +21,11 @@ class SiteSettings {
               3, 3.1, 3.2, 3.3, 3.4, 3.5,
               4, 4.1, 4.2, 4.3, 4.4, 4.5,
               5, 5.1, 5.2, 5.3, 5.4, 5.5],
+      // Extra filtering:
+      // * all: Display all fish, regardless of extra status.
+      // * collectable: Display only collectable fish.
+      // * aquarium: Display only aquarium fish.
+      extra: 'all',
     };
 
     // Upcoming Window Format:
@@ -94,10 +99,10 @@ class FishEntry {
     // TODO:
     this.active = false;
     this.id = fish.id;
-    
+
     // This is the DOM element associated with this Fish.
     this.element = null;
-    
+
     this.upcomingWindowsPopupElement = null;
 
     // TODO: Improve this
@@ -134,7 +139,7 @@ class FishEntry {
       upcomingWindows: [],
     };
     this.isCatchable = false;
-    
+
     // Fish Eyes...
     if (fish.fishEyes === false) {
       this.fishEyesDuration = '';
@@ -223,7 +228,7 @@ class FishEntry {
     this.isCatchable = fish.isCatchable(fishWatcher.fishEyesEnabled);
     this.isCaught = ViewModel.isFishCaught(this.id);
     this.isPinned = ViewModel.isFishPinned(this.id);
-    
+
     // The rest requires catchable ranges.
     if (crs.length > 0) {
       // Cache the dates, they are used A LOT.
@@ -414,6 +419,7 @@ let ViewModel = new class {
     // These are used for RxJS to allow subscription events to changes.
     this.fishChangedSubject = new Subject();
     this.filterCompletionSubject = new BehaviorSubject(settings.filters.completion);
+    this.filterExtraSubject = new BehaviorSubject(settings.filters.extra);
     this.filterPatchSubject = new BehaviorSubject(settings.filters.patch);
     this.sortingTypeSubject = new BehaviorSubject(settings.sortingType);
 
@@ -425,6 +431,7 @@ let ViewModel = new class {
 
     // Set event handlers.
     $('#filterCompletion .button').on('click', this.filterCompletionClicked);
+    $('#filterExtra .button').on('click', this.filterExtraClicked);
     $('#filterPatch .button:not(.patch-set)').on({
       click: this.filterPatchClicked,
       dblclick: this.filterPatchDblClicked
@@ -492,6 +499,11 @@ let ViewModel = new class {
       debounceTime(250),
       map(e => { return {filterPatch: e} })
     );
+    const filterExtra$ = this.filterExtraSubject.pipe(
+      skip(1),
+      debounceTime(250),
+      map(e => { return {filterExtra: e} })
+    );
     const sortingType$ = this.sortingTypeSubject.pipe(
       skip(1),
       debounceTime(250),
@@ -510,6 +522,7 @@ let ViewModel = new class {
       bufferedFishAvailability$,
       filterCompletion$,
       filterPatch$,
+      filterExtra$,
       sortingType$,
       language$,
       fishEyes$);
@@ -613,7 +626,7 @@ let ViewModel = new class {
     }
 
     if ((reason === null) ||
-        (reason !== null && ('filterCompletion' in reason || 'filterPatch' in reason)))
+        (reason !== null && ('filterCompletion' in reason || 'filterPatch' in reason || 'filterExtra' in reason)))
     {
       // Mark all existing entries as stale (or not active).
       // Anything that's not active, won't be displayed, and at the end of this
@@ -641,7 +654,7 @@ let ViewModel = new class {
     }
 
     // Was this change caused by filter change?
-    if (reason !== null && ('filterCompletion' in reason || 'filterPatch' in reason))
+    if (reason !== null && ('filterCompletion' in reason || 'filterPatch' in reason || 'filterExtra' in reason))
     {
       // Let FishWatcher know!
       fishWatcher.updateFishes();
@@ -650,6 +663,7 @@ let ViewModel = new class {
     if ((reason === null) ||
         (reason !== null && ('filterCompletion' in reason ||
                              'filterPatch' in reason ||
+                             'filterExtra' in reason ||
                              'fishAvailability' in reason ||
                              'sortingType' in reason)))
     {
@@ -706,6 +720,17 @@ let ViewModel = new class {
     } else if (this.settings.filters.completion == 'caught') {
       if (!this.isFishCaught(fish.id))
         return true;
+    }
+
+    // Filter by extra criteria.
+    if (this.settings.filters.extra == 'collectable') {
+      return !fish.collectable;
+    } else if (this.settings.filters.extra == 'aquarium') {
+      if (fish.aquarium) {
+        return false;
+      } else {
+        return true;
+      }
     }
 
     // No other reason to filter.
@@ -785,7 +810,7 @@ let ViewModel = new class {
     // Connect the new entry's events.
     $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
     $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
-    
+
     $('.ui.modal.upcoming-windows', $entry).append(
       this.layout.templates.upcomingWindows(entry));
     entry.upcomingWindowsPopupElement = $('.ui.modal.upcoming-windows', $entry)[0];
@@ -948,6 +973,20 @@ let ViewModel = new class {
     return false;
   }
 
+  filterExtraClicked(e) {
+    e.stopPropagation();
+    var $this = $(this);
+
+    // Set the active filter.
+    $this.addClass('active').siblings().removeClass('active');
+    ViewModel.settings.filters.extra = $this.data('filter');
+
+    // Notify anyone interested in this change.
+    ViewModel.filterExtraSubject.next(ViewModel.settings.filters.extra);
+    ViewModel.saveSettings();
+    return false;
+  }
+
   sortingTypeChecked(e) {
     if (e) e.stopPropagation();
     let $this = $(this);
@@ -1064,6 +1103,10 @@ let ViewModel = new class {
     }
     if (settings.filters.completion) {
       $('#filterCompletion .button[data-filter="' + settings.filters.completion + '"]')
+      .addClass('active').siblings().removeClass('active');
+    }
+    if (settings.filters.extra) {
+      $('#filterExtra .button[data-filter="' + settings.filters.extra + '"]')
       .addClass('active').siblings().removeClass('active');
     }
     if (settings.filters.patch) {
