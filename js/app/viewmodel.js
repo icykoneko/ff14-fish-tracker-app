@@ -26,6 +26,10 @@ class SiteSettings {
       // * collectable: Display only collectable fish.
       // * aquarium: Display only aquarium fish.
       extra: 'all',
+      /// Big fish filtering:
+      // * all: Display all fish, regardless if they're a big fish or not.
+      // * big: Display only "Big" fish, the 249 that currently count towards achievements
+      big: 'all',
     };
 
     // Upcoming Window Format:
@@ -420,6 +424,7 @@ let ViewModel = new class {
     this.fishChangedSubject = new Subject();
     this.filterCompletionSubject = new BehaviorSubject(settings.filters.completion);
     this.filterExtraSubject = new BehaviorSubject(settings.filters.extra);
+    this.filterBigSubject = new BehaviorSubject(settings.filters.big);
     this.filterPatchSubject = new BehaviorSubject(settings.filters.patch);
     this.sortingTypeSubject = new BehaviorSubject(settings.sortingType);
 
@@ -432,6 +437,7 @@ let ViewModel = new class {
     // Set event handlers.
     $('#filterCompletion .button').on('click', this.filterCompletionClicked);
     $('#filterExtra .button').on('click', this.filterExtraClicked);
+    $('#filterBig .button').on('click', this.filterBigClicked);
     $('#filterPatch .button:not(.patch-set)').on({
       click: this.filterPatchClicked,
       dblclick: this.filterPatchDblClicked
@@ -504,6 +510,11 @@ let ViewModel = new class {
       debounceTime(250),
       map(e => { return {filterExtra: e} })
     );
+    const filterBig$ = this.filterBigSubject.pipe(
+      skip(1),
+      debounceTime(250),
+      map(e => { return {filterBig: e} })
+    );
     const sortingType$ = this.sortingTypeSubject.pipe(
       skip(1),
       debounceTime(250),
@@ -523,6 +534,7 @@ let ViewModel = new class {
       filterCompletion$,
       filterPatch$,
       filterExtra$,
+      filterBig$,
       sortingType$,
       language$,
       fishEyes$);
@@ -626,7 +638,10 @@ let ViewModel = new class {
     }
 
     if ((reason === null) ||
-        (reason !== null && ('filterCompletion' in reason || 'filterPatch' in reason || 'filterExtra' in reason)))
+        (reason !== null && ('filterCompletion' in reason ||
+                             'filterPatch' in reason ||
+                             'filterExtra' in reason ||
+                             'filterBig' in reason)))
     {
       // Mark all existing entries as stale (or not active).
       // Anything that's not active, won't be displayed, and at the end of this
@@ -654,7 +669,10 @@ let ViewModel = new class {
     }
 
     // Was this change caused by filter change?
-    if (reason !== null && ('filterCompletion' in reason || 'filterPatch' in reason || 'filterExtra' in reason))
+    if (reason !== null && ('filterCompletion' in reason ||
+                            'filterPatch' in reason ||
+                            'filterExtra' in reason ||
+                            'filterBig' in reason))
     {
       // Let FishWatcher know!
       fishWatcher.updateFishes();
@@ -664,6 +682,7 @@ let ViewModel = new class {
         (reason !== null && ('filterCompletion' in reason ||
                              'filterPatch' in reason ||
                              'filterExtra' in reason ||
+                             'filterBig' in reason ||
                              'fishAvailability' in reason ||
                              'sortingType' in reason)))
     {
@@ -731,6 +750,11 @@ let ViewModel = new class {
       } else {
         return true;
       }
+    }
+
+    // Filter by big fish status.
+    if (this.settings.filters.big == 'big') {
+      return !fish.bigFish;
     }
 
     // No other reason to filter.
@@ -987,6 +1011,20 @@ let ViewModel = new class {
     return false;
   }
 
+  filterBigClicked(e) {
+    e.stopPropagation();
+    var $this = $(this);
+
+    // Set the active filter.
+    $this.addClass('active').siblings().removeClass('active');
+    ViewModel.settings.filters.big = $this.data('filter');
+
+    // Notify anyone interested in this change.
+    ViewModel.filterBigSubject.next(ViewModel.settings.filters.big);
+    ViewModel.saveSettings();
+    return false;
+  }
+
   sortingTypeChecked(e) {
     if (e) e.stopPropagation();
     let $this = $(this);
@@ -1107,6 +1145,10 @@ let ViewModel = new class {
     }
     if (settings.filters.extra) {
       $('#filterExtra .button[data-filter="' + settings.filters.extra + '"]')
+      .addClass('active').siblings().removeClass('active');
+    }
+    if (settings.filters.big) {
+      $('#filterBig .button[data-filter="' + settings.filters.big + '"]')
       .addClass('active').siblings().removeClass('active');
     }
     if (settings.filters.patch) {
