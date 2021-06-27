@@ -50,7 +50,7 @@ title: Home
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.55_20210625_1749"></script>
+    <script type="text/javascript" src="js/app/data.js?5.55_20210626_1005"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?5.55_20210525_0637"></script>
 
     <!--
@@ -186,15 +186,15 @@ title: Home
             <div class="ui tiny circular label">{{=it.data.patch}}</div>
             <!-- check if fish can be put into the aquarium -->
             {{?it.data.aquarium !== null}}
-              <div class="ui middle aligned sprite-icon sprite-icon-aquarium" 
+              <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
                    data-tooltip="Tier {{=it.data.aquarium.size}} {{=it.data.aquarium.water}}" data-position="right center" data-variation="mini"></div>
             {{?}}
             {{?it.data.folklore !== null}}
-              <div class="ui middle aligned sprite-icon sprite-icon-folklore" 
+              <div class="ui middle aligned sprite-icon sprite-icon-folklore"
                    data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
             {{?}}
             {{?it.data.collectable === true}}
-              <div class="ui middle aligned sprite-icon sprite-icon-collectable" 
+              <div class="ui middle aligned sprite-icon sprite-icon-collectable"
                    data-tooltip="Collectable" data-position="right center" data-variation="mini"></div>
             {{?}}
           </div>
@@ -230,7 +230,7 @@ title: Home
         </td>
         <!-- Location -->
         <td>
-          <i class="location-button map icon"></i> <a href="https://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}" 
+          <i class="location-button map icon"></i> <a href="https://garlandtools.org/db/#{{?it.data.location.spearfishing}}node{{??}}fishing{{?}}/{{=it.data.location.id}}"
              target="cp_gt" class="location-name">{{=it.data.location.name}}</a><br/>
           <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
         </td>
@@ -247,15 +247,15 @@ title: Home
           {{?}}
           {{?it.data.conditions.previousWeatherSet.length > 0}}
             {{~it.data.conditions.previousWeatherSet :weather:windex}}
-              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}" 
-                  title="{{=__p(weather,'name')}}" 
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                  title="{{=__p(weather,'name')}}"
                   data-prevWeatherIdx="{{=windex}}"></div>
             {{~}}
             <i class="arrow right icon"></i>
           {{?}}
           {{~it.data.conditions.weatherSet :weather:windex}}
-            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}" 
-                title="{{=__p(weather,'name')}}" 
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                title="{{=__p(weather,'name')}}"
                 data-currWeatherIdx="{{=windex}}"></div>
           {{~}}
           <br/>
@@ -306,7 +306,7 @@ title: Home
               {{??}}
                 <div class="bait-badge-container">
                   {{?item.hookset}}
-                    <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset" 
+                    <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
                          title="{{=item.hookset}} Hookset"></div>
                   {{?}}
                   {{?item.tug}}
@@ -390,15 +390,15 @@ title: Home
           {{?}}
           {{?it.data.conditions.previousWeatherSet.length > 0}}
             {{~it.data.conditions.previousWeatherSet :weather:windex}}
-              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}" 
-                   title="{{=__p(weather,'name')}}" 
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                   title="{{=__p(weather,'name')}}"
                    data-prevWeatherIdx="{{=windex}}"></div>
             {{~}}
             <i class="arrow right icon"></i>
           {{?}}
           {{~it.data.conditions.weatherSet :weather:windex}}
-            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}" 
-                 title="{{=__p(weather,'name')}}" 
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                 title="{{=__p(weather,'name')}}"
                  data-currWeatherIdx="{{=windex}}"></div>
           {{~}}
           <br/>
@@ -440,7 +440,7 @@ title: Home
               <a href="https://garlandtools.org/db/#item/{{=item.id}}" target="cp_gt">
             {{??}}
               {{?item.hookset}}
-                <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset" 
+                <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
                      title="{{=item.hookset}} Hookset"></div>
               {{?}}
               </span><!-- bait span -->
@@ -505,7 +505,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20210416_2210"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20210627_0704"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -798,6 +798,14 @@ title: Home
                     <div class="ui active button" data-filter="all">All</div>
                     <div class="ui button" data-filter="caught">Caught</div>
                     <div class="ui button" data-filter="uncaught">Uncaught</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px; padding-bottom: 0.5rem;">
+                  <div class="ui mini compact buttons" id="filterExtra">
+                    <div class="ui active button" data-filter="all">All</div>
+                    <div class="ui button" data-filter="big">Big</div>
+                    <div class="ui button" data-filter="collectable">Collectable</div>
+                    <div class="ui button" data-filter="aquarium">Aquarium</div>
                   </div>
                 </div>
                 <div class="row" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
