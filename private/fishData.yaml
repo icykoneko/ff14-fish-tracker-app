@@ -2797,7 +2797,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Red Balloon
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:
@@ -3157,7 +3157,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Giant Crane Fly
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:
@@ -4032,7 +4032,7 @@
   - Clear Skies
   predators: {}
   bestCatchPath:
-  - Red Balloon
+  - Metal Spinner
   - Sky Faerie
   tug: Legendary
   hookset: Powerful
