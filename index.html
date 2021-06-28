@@ -212,8 +212,9 @@
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.data.bait.hasPredators}}
-            <div class="ui middle aligned sprite-icon sprite-icon sprite-icon-status-intuition"
-                 data-tooltip="Fisher's Intuition: {{var d = it.data.intuitionLength; if (d) { out += Math.floor(d/60) + 'm' + (d % 60); }}}s" data-position="left center" data-variation="mini"></div>
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition has-duration" title="Fisher's Intuition">
+                <span>{{var d = it.data.intuitionLength; if (d) { out += Math.floor(d/60) + 'm' + (d % 60); }}}s</span>
+            </div>
           {{?}}
           {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
