@@ -39,7 +39,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20210620_2150" />
+    <link rel="stylesheet" href="css/overlay.css?20210628_1839" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -212,7 +212,9 @@
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.data.bait.hasPredators}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition" title="Fisher's Intuition"></div>
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition has-duration" title="Fisher's Intuition">
+                <span>{{var d = it.data.intuitionLength; if (d) { out += Math.floor(d/60) + 'm' + (d % 60); }}}s</span>
+            </div>
           {{?}}
           {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
