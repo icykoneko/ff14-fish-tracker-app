@@ -2797,7 +2797,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Red Balloon
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:
@@ -3157,7 +3157,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Giant Crane Fly
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:
@@ -4032,7 +4032,7 @@
   - Clear Skies
   predators: {}
   bestCatchPath:
-  - Red Balloon
+  - Metal Spinner
   - Sky Faerie
   tug: Legendary
   hookset: Powerful
@@ -9695,7 +9695,7 @@
   - Baitbugs
   predators: 
   tug: heavy
-  hookset: 
+  hookset: Precision
   snagging: 
   patch: 5.4
 - name: Steel Fan
