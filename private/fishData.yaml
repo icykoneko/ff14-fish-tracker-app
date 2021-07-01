@@ -2834,7 +2834,8 @@
   bestCatchPath:
   - Stonefly Nymph
   - Blueclaw Shrimp
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
