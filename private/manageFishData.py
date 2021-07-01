@@ -349,6 +349,19 @@ def is_big_fish(fish_id):
     return False
 
 
+def get_min_rating(fish_name):
+    try:
+        fsh_collectable_shop_refine = next((row['CollectablesShopRefine']
+                                            for row in XIV.game_data.get_sheet('CollectablesShopItem')
+                                            if str(row['Item']) == fish_name))
+    except StopIteration:
+        min_collect = 1
+    else:
+        key = int(str(fsh_collectable_shop_refine).split('#')[1])
+        min_collect = XIV.game_data.get_sheet('CollectablesShopRefine')[key]['LowCollectability']
+    return min_collect
+
+
 def convert_fish_to_json(item):
     try:
         return _convert_fish_to_json(item)
@@ -410,6 +423,10 @@ def _convert_fish_to_json(item):
 
     is_collectable = XIV.game_data.get_sheet('Item')[key].as_boolean('IsCollectable')
 
+    min_rating = 0
+    if is_collectable:
+        min_rating = get_min_rating(item['name'])
+
     tug_type = item.get('tug', None)
     if tug_type is not None:
         tug_type = tug_type.lower()
@@ -443,6 +460,7 @@ def _convert_fish_to_json(item):
                          'patch': item.get('patch'),
                          'folklore': folklore,
                          'collectable': is_collectable,
+                         'minRating': min_rating,
                          'fishEyes': fish_eyes,
                          'bigFish': big_fish,
                          'snagging': item.get('snagging', False),

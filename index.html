@@ -39,14 +39,14 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20210628_1839" />
+    <link rel="stylesheet" href="css/overlay.css?20210630_2208" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.55_20210626_1005"></script>
+    <script type="text/javascript" src="js/app/data.js?5.55_20210630_2258"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?5.55_20210525_0637"></script>
 
     <!--
@@ -119,8 +119,13 @@
                    data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
             {{?}}
             {{?it.data.collectable === true}}
-              <div class="ui middle aligned sprite-icon sprite-icon-collectable"
-                   data-tooltip="Collectable" data-position="right center" data-variation="mini"></div>
+              <div class="ui middle aligned" style="display: inline-block;">
+                   <span class="ui middle aligned sprite-icon sprite-icon-collectable has-rating" data-tooltip="Collectable" data-position="right center" data-variation="mini">
+                   </span>
+                   <span data-tooltip="Minimum Collectability" data-position="right center" data-variation="mini">
+                     {{=it.data.minRating}}+
+                   </span>
+              </div>
             {{?}}
           </div>
         </td>
@@ -212,8 +217,10 @@
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.data.bait.hasPredators}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition has-duration" title="Fisher's Intuition">
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition{{?it.data.intuitionLength}} has-duration{{?}}" title="Fisher's Intuition">
+              {{?it.data.intuitionLength}}
                 <span>{{var d = it.data.intuitionLength; if (d) { out += Math.floor(d/60) + 'm' + (d % 60); }}}s</span>
+              {{?}}
             </div>
           {{?}}
           {{?it.data.snagging}}

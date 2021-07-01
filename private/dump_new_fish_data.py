@@ -34,6 +34,7 @@ from pysaintcoinach.xiv.fish_parameter import FishParameter
 from pysaintcoinach.xiv.gathering_point import GatheringPoint
 from pysaintcoinach.xiv.weather import Weather
 from pysaintcoinach.xiv.placename import PlaceName
+from pysaintcoinach.xiv.
 
 # logging.basicConfig(level=logging.INFO, stream=sys.stderr)
 
@@ -535,6 +536,16 @@ def is_big_fish(fish):
     return False
 
 
+def get_min_rating(fish):
+    for collectable in tracked_iter(realm.game_data.get_sheet('CollectablesShopItem'),
+                                    'Checking Collectable Shop for Scrip Fish Rating'):
+        if fish.item.name == collectable.as_string('Item'):
+            for rating_set in tracked_iter(realm.game_data.get_sheet('CollectablesShopRefine'),
+                                           'Getting rating set for fish'):
+                if collectable.as_string('CollectablesShopRefine').split('#')[1] == rating_set.key:
+                    return rating_set.as_int16('LowCollectability')
+
+
 new_fishes = {}
 for fish in tracked_iter(important_fish,
                          'Generating new fish database'):
@@ -702,6 +713,12 @@ def convert_fish_to_json(fish: Fish):
             folklore = fish.params['GatheringSubCategory']
             if folklore is not None:
                 folklore_key = folklore.key
+
+        min_rating = 0
+        if fish.scrip is not None:
+            min_rating = get_min_rating(fish)
+        elif fish.reducible:
+            min_rating = 1
 
         json_entry = {
             '_id': fish.item.key,
