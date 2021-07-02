@@ -34,7 +34,6 @@ from pysaintcoinach.xiv.fish_parameter import FishParameter
 from pysaintcoinach.xiv.gathering_point import GatheringPoint
 from pysaintcoinach.xiv.weather import Weather
 from pysaintcoinach.xiv.placename import PlaceName
-from pysaintcoinach.xiv.
 
 # logging.basicConfig(level=logging.INFO, stream=sys.stderr)
 
@@ -536,16 +535,6 @@ def is_big_fish(fish):
     return False
 
 
-def get_min_rating(fish):
-    for collectable in tracked_iter(realm.game_data.get_sheet('CollectablesShopItem'),
-                                    'Checking Collectable Shop for Scrip Fish Rating'):
-        if fish.item.name == collectable.as_string('Item'):
-            for rating_set in tracked_iter(realm.game_data.get_sheet('CollectablesShopRefine'),
-                                           'Getting rating set for fish'):
-                if collectable.as_string('CollectablesShopRefine').split('#')[1] == rating_set.key:
-                    return rating_set.as_int16('LowCollectability')
-
-
 new_fishes = {}
 for fish in tracked_iter(important_fish,
                          'Generating new fish database'):
@@ -578,11 +567,11 @@ for fish in tracked_iter(important_fish,
             'bigfish': fish.item.rarity >= 2,
             'quest': len(fish.quest) > 0,
             # 'shop': len(fish.shop) > 0,
-            'satisfaction': fish.satisfaction is not None,
+            'satisfaction': fish.satisfaction,
             'craft': len(fish.craft) > 0,
             'gc': fish.gc is not None,
             'leve': len(fish.leve) > 0,
-            'scrip': fish.scrip is not None,
+            'scrip': fish.scrip,
             'reduce': fish.reduce,
             'aquarium': fish.aquarium is not None,
             'fishEyes': supports_fish_eyes(fish),
@@ -714,12 +703,6 @@ def convert_fish_to_json(fish: Fish):
             if folklore is not None:
                 folklore_key = folklore.key
 
-        min_rating = 0
-        if fish.scrip is not None:
-            min_rating = get_min_rating(fish)
-        elif fish.reducible:
-            min_rating = 1
-
         json_entry = {
             '_id': fish.item.key,
             # Information sourced via players
@@ -744,12 +727,12 @@ def convert_fish_to_json(fish: Fish):
             'bigfish': fish.item.rarity >= 2,
             'quest': len(fish.quest) > 0,
             # 'shop': len(fish.shop) > 0,
-            'satisfaction': fish.satisfaction is not None,
+            'satisfaction': fish.satisfaction['Collectability{High}'] if fish.satisfaction else None,
             'craft': len(fish.craft) > 0,
             'gc': fish.gc is not None,
             'leve': len(fish.leve) > 0,
-            'scrip': fish.scrip is not None,
-            'reduce': fish.reduce,
+            'scrip': fish.scrip['CollectablesShopRefine']['LowCollectability'] if fish.scrip else None,
+            'reduce': 1 if fish.reduce else None,
             'aquarium': aquarium_entry,
             'fishEyes': supports_fish_eyes(fish),
             'bigFish': is_big_fish(fish)

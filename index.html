@@ -39,14 +39,14 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20210630_2208" />
+    <link rel="stylesheet" href="css/overlay.css?20210701_1904" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.55_20210630_2258"></script>
+    <script type="text/javascript" src="js/app/data.js?5.55_20210701_2120"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?5.55_20210525_0637"></script>
 
     <!--
@@ -118,14 +118,9 @@
               <div class="ui middle aligned sprite-icon sprite-icon-folklore"
                    data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            {{?it.data.collectable === true}}
-              <div class="ui middle aligned" style="display: inline-block;">
-                   <span class="ui middle aligned sprite-icon sprite-icon-collectable has-rating" data-tooltip="Collectable" data-position="right center" data-variation="mini">
-                   </span>
-                   <span data-tooltip="Minimum Collectability" data-position="right center" data-variation="mini">
-                     {{=it.data.minRating}}+
-                   </span>
-              </div>
+            {{?it.data.collectable !== null}}
+              <div class="ui middle aligned sprite-icon sprite-icon-collectable"
+                   data-tooltip="Minimum Collectability: {{=it.data.collectable}}" data-position="right center" data-variation="mini"></div>
             {{?}}
           </div>
         </td>
@@ -438,7 +433,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20210627_0704"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20210701_2121"></script>
 
     <script type="text/javascript">
       $(() => {

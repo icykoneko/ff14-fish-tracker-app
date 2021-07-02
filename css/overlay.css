@@ -348,31 +348,6 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-intuition.has-duration > sp
   margin-right: auto;
 }
 
-/* This rule matches the Collectable icon when a rating is present */
-tr.fish-entry .sprite-icon-collectable.has-rating + span {
-  display: inline-block;
-  position: relative;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -moz-inline-blox;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-align: center;
-  -webkit-flex-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  width: auto;
-  height: auto;
-  white-space: nowrap;
-  text-align: center;
-  font-size: 12px;
-  margin-left: -3px;
-  margin-right: -6px;
-}
-
 /* Active, non-caught, non-pinned fish */
 .ui.striped.table > tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned),
 .ui.striped.table tbody tr.fish-entry.fish-active:hover:not(.fish-caught):not(.fish-pinned) {
