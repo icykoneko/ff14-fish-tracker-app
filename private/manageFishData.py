@@ -349,12 +349,9 @@ def is_big_fish(fish_id):
     return False
 
 
-def get_min_collectability(fish_id):
-    try:
-        shop_item = next(filter(lambda row: row.get_raw('Item') == fish_id,
-                         XIV.game_data.get_sheet('CollectablesShopItem')))
-    except StopIteration:
-        shop_item = None
+def get_min_collectability(fish_id, default=None):
+    shop_item = next(filter(lambda row: row.get_raw('Item') == fish_id,
+                            XIV.game_data.get_sheet('CollectablesShopItem')), default)
     if shop_item is not None:
         return shop_item['CollectablesShopRefine']['LowCollectability']
     return 1

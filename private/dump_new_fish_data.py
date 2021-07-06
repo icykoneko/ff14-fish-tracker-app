@@ -732,7 +732,7 @@ def convert_fish_to_json(fish: Fish):
             'gc': fish.gc is not None,
             'leve': len(fish.leve) > 0,
             'scrip': fish.scrip['CollectablesShopRefine']['LowCollectability'] if fish.scrip else None,
-            'reduce': 1 if fish.reduce else None,
+            'reduce': fish.reduce,
             'aquarium': aquarium_entry,
             'fishEyes': supports_fish_eyes(fish),
             'bigFish': is_big_fish(fish)
