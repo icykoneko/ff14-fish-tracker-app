@@ -527,6 +527,14 @@ def supports_fish_eyes(fish):
     return True
 
 
+def is_big_fish(fish):
+    # The fish must include ヌシ in its description
+    if "ヌシ" in fish.item.source_row['Description', Language.japanese]:
+        return True
+
+    return False
+
+
 new_fishes = {}
 for fish in tracked_iter(important_fish,
                          'Generating new fish database'):
@@ -566,7 +574,8 @@ for fish in tracked_iter(important_fish,
             'scrip': fish.scrip is not None,
             'reduce': fish.reduce,
             'aquarium': fish.aquarium is not None,
-            'fishEyes': supports_fish_eyes(fish)
+            'fishEyes': supports_fish_eyes(fish),
+            'bigFish': is_big_fish(fish)
         }
     }
 
@@ -725,7 +734,8 @@ def convert_fish_to_json(fish: Fish):
             'scrip': fish.scrip is not None,
             'reduce': fish.reduce,
             'aquarium': aquarium_entry,
-            'fishEyes': supports_fish_eyes(fish)
+            'fishEyes': supports_fish_eyes(fish),
+            'bigFish': is_big_fish(fish)
         }
 
         return fish.item.key, json_entry
