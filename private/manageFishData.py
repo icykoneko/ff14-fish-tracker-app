@@ -337,6 +337,18 @@ def supports_fish_eyes(fish_id, location_id, fish_params, patch):
     return True
 
 
+def is_big_fish(fish_id):
+    from pysaintcoinach.ex.language import Language
+
+    # If "ヌシ" is in the Japanese text then it's a big fish.
+    # There's technically one fish where the text appears twice, Namitaro, but that doesn't matter here
+    fish = XIV.game_data.get_sheet('Item')[fish_id]
+    if "ヌシ" in fish.source_row['Description', Language.japanese]:
+        return True
+
+    return False
+
+
 def convert_fish_to_json(item):
     try:
         return _convert_fish_to_json(item)
@@ -416,6 +428,8 @@ def _convert_fish_to_json(item):
         # Fish Eyes doesn't affect spearfishing.
         fish_eyes = False
 
+    big_fish = is_big_fish(key)
+
     return (key,
             OrderedDict({'_id': key,
                          'previousWeatherSet': previous_weather_set,
@@ -430,6 +444,7 @@ def _convert_fish_to_json(item):
                          'folklore': folklore,
                          'collectable': is_collectable,
                          'fishEyes': fish_eyes,
+                         'bigFish': big_fish,
                          'snagging': item.get('snagging', False),
                          'hookset': item.get('hookset', None),
                          'tug': tug_type,
