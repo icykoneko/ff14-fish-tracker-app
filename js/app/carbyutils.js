@@ -13,7 +13,7 @@ let CarbyUtils = function(){
   function resetSiteData(datetime) {
     console.debug("Resetting site data...");
     weatherService.__weatherData = [];
-    _(Fishes).each(fish => { fish.catchableRanges = [] });
+    _(Fishes).each(fish => { fish.catchableRanges = []; fish.incompleteRanges = []; });
     let prevPeriod = startOfPeriod(dateFns.utc.subHours(eorzeaTime.toEorzea(datetime), 8));
     weatherService.insertForecast(prevPeriod, weatherService.calculateForecastTarget(eorzeaTime.toEarth(prevPeriod)));
   }
@@ -28,11 +28,13 @@ let CarbyUtils = function(){
       let origDateNow = Date.now;
       let currDateTime = origDateNow();
       if (dateFns.isAfter(datetime, currDateTime)) {
+        console.log("Traveling into the future...");
         let dateOffset = datetime - currDateTime;
-        resetSiteData(datetime);
+        // resetSiteData(datetime);
         Date.now = () => { return origDateNow() + dateOffset; };
       } else {
         // Traveling to the past will corrupt the weather service.
+        console.log("Traveling into the past...");
         let dateOffset = currDateTime - datetime;
         resetSiteData(datetime);
         Date.now = () => { return origDateNow() - dateOffset; };

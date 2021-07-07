@@ -23,8 +23,7 @@
 - name: Asteroidea
   snagging: false
 - name: Ealad Skaan
-  # 23.5
-  startHour: 23
+  startHour: 23.5
   endHour: 24
   previousWeatherSet:
   - Thunderstorms
@@ -32,4 +31,6 @@
   - Clear Skies
 - name: Nepto Dragon
   intuitionLength: 350
-
+- name: Cinder Surprise
+  startHour: 0
+  endHour: 2

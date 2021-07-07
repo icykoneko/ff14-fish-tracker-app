@@ -13,6 +13,15 @@
   padding-bottom: 3em;
 }
 
+span.catchtime-hour {
+  /* no special style */
+}
+span.catchtime-minute {
+  /* font-variant-position: super; */
+  vertical-align: super;
+  font-size: x-small;
+}
+
 .sprite-icon {
   display: inline-block;
 }
@@ -286,17 +295,17 @@ body.dark #fishes thead tr th {
 }
 
 /*
- * These rules match the Fish Eyes status requirement when a duration is present.
+ * These rules match the Intuition status requirement when a duration is present.
  * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(
  */
-tr.fish-entry .sprite-icon-status-fish_eyes.has-duration {
+tr.fish-entry .sprite-icon-status-intuition.has-duration {
   margin-top: -6px;
   /* Sometimes, we need some extra room... */
   margin-left: 6px;
   margin-right: 6px;
 }
 
-tr.fish-entry .sprite-icon-status-fish_eyes.has-duration > span {
+tr.fish-entry .sprite-icon-status-intuition.has-duration > span {
   display: inline-block;
   position: relative;
   top: 26px;
@@ -308,7 +317,7 @@ tr.fish-entry .sprite-icon-status-fish_eyes.has-duration > span {
   margin-right: -6px;
 }
 
-tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration {
+tr.fish-entry.fish-intuition-row .sprite-icon-status-intuition.has-duration {
   margin-left: 24px;
   margin-top: auto;
   margin-right: auto;
@@ -327,7 +336,7 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration {
   flex-direction: row;
 }
 
-tr.fish-entry.fish-intuition-row .sprite-icon-status-fish_eyes.has-duration > span {
+tr.fish-entry.fish-intuition-row .sprite-icon-status-intuition.has-duration > span {
   position: unset;
   left: auto;
   top: auto;
