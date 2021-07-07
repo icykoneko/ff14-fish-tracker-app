@@ -6711,7 +6711,7 @@
   predators:
   hookset:
   tug: light
-  snagging: true
+  snagging: false
   gig:
   fishEyes: false
   patch: 5.0
@@ -9441,7 +9441,6 @@
   gig: 
   fishEyes: false
   patch: 5.2
-  dataMissing: true
 - name: White Ronso
   location: Lower Watts River
   startHour: 0
@@ -9988,7 +9987,6 @@
   hookset: Precision
   snagging: 
   patch: 5.55
-  dataMissing: true
 - name: Ealad Skaan
   location: Longmirror Lake
   startHour: 23.5
@@ -10004,7 +10002,6 @@
   hookset: Precision
   snagging: 
   patch: 5.55
-  dataMissing: true
 - name: Greater Serpent of Ronka
   location: Lake Tusi Mek'ta
   startHour: 10
@@ -10038,4 +10035,3 @@
   hookset: Powerful
   snagging: 
   patch: 5.55
-  dataMissing: true
