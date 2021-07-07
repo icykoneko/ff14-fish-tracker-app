@@ -2045,7 +2045,7 @@
   - Showers
   predators:
     Little Thalaos: 3
-  intuitionLength: 600
+  intuitionLength: 350
   bestCatchPath:
   - Northern Krill
   tug: Legendary
@@ -2834,7 +2834,8 @@
   bestCatchPath:
   - Stonefly Nymph
   - Blueclaw Shrimp
-  hookset:
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: false
