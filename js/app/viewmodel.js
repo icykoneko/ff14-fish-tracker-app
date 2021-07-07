@@ -731,7 +731,11 @@ let ViewModel = new class {
     if (this.settings.filters.extra == 'big') {
       return !fish.bigFish;
     } else if (this.settings.filters.extra == 'collectable') {
-      return !fish.collectable;
+      if (fish.collectable) {
+        return false;
+      } else {
+        return true;
+      }
     } else if (this.settings.filters.extra == 'aquarium') {
       if (fish.aquarium) {
         return false;

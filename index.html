@@ -43,14 +43,14 @@ title: Home
 
     <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20210628_1839" />
+    <link rel="stylesheet" href="css/overlay.css?20210701_1904" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js?20190824"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.55_20210629_2024"></script>
+    <script type="text/javascript" src="js/app/data.js?5.55_20210707_1648"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?5.55_20210525_0637"></script>
 
     <!--
@@ -193,9 +193,9 @@ title: Home
               <div class="ui middle aligned sprite-icon sprite-icon-folklore"
                    data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
             {{?}}
-            {{?it.data.collectable === true}}
+            {{?it.data.collectable !== null}}
               <div class="ui middle aligned sprite-icon sprite-icon-collectable"
-                   data-tooltip="Collectable" data-position="right center" data-variation="mini"></div>
+                   data-tooltip="Minimum Collectability: {{=it.data.collectable}}" data-position="right center" data-variation="mini"></div>
             {{?}}
           </div>
         </td>
@@ -287,8 +287,10 @@ title: Home
           {{?}}
           <!-- Put Fishers intuition if fish has at least 1 predetor -->
           {{?it.data.bait.hasPredators}}
-            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition has-duration" title="Fisher's Intuition">
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition{{?it.data.intuitionLength}} has-duration{{?}}" title="Fisher's Intuition">
+              {{?it.data.intuitionLength}}
                 <span>{{var d = it.data.intuitionLength; if (d) { out += Math.floor(d/60) + 'm' + (d % 60); }}}s</span>
+              {{?}}
             </div>
           {{?}}
           {{?it.data.snagging}}
@@ -507,7 +509,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20210627_0704"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20210701_2121"></script>
 
     <script type="text/javascript">
       $(() => {
