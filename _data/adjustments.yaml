@@ -20,15 +20,3 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
-- name: Asteroidea
-  snagging: false
-- name: Ealad Skaan
-  startHour: 23.5
-  endHour: 24
-  previousWeatherSet:
-  - Thunderstorms
-  weatherSet:
-  - Clear Skies
-- name: Cinder Surprise
-  startHour: 0
-  endHour: 2
