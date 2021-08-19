@@ -6,7 +6,7 @@ A webapp designed for tracking big fish and arranging them by which fish are les
 This repo makes use of submodules. When cloning, please include the `--recurse-submodules` option.
 
 ```
-git clone --recurse-submodules git@github.com:icykoneko/ff14-fish-tracker-app.git
+git clone --recurse-submodules https://github.com/icykoneko/ff14-fish-tracker-app.git
 ```
 
 If you forgot to include the submodules during cloning, don't worry. Assuming you haven't checked them out yet, running `git submodules update --recursive --init` should take care of it.
