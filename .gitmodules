@@ -1,3 +1,3 @@
 [submodule "private/saintcoinach-py"]
 	path = private/saintcoinach-py
-	url = git://github.com/icykoneko/saintcoinach-py.git
+	url = ../../icykoneko/saintcoinach-py.git
