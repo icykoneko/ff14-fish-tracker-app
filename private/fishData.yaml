@@ -3484,7 +3484,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Magma Worm
+  - Metal Spinner
   predators:
   tug: Light
   hookset: Precision
@@ -5400,7 +5400,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Salmon Roe
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:
@@ -5416,7 +5416,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Live Shrimp
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:  false
@@ -5448,7 +5448,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Nightcrawler
+  - Metal Spinner
   tug: Medium
   hookset: Powerful
   snagging:
@@ -8117,7 +8117,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Squid Strip
   predators:
   hookset:
   tug: medium
@@ -10038,3 +10038,19 @@
   hookset: Powerful
   snagging: 
   patch: 5.55
+- name: Cloud Kelp
+  location: Voor Sian Siran
+  startHour: 0
+  endHour: 24
+  previousWeatherSet: []
+  weatherSet: []
+  predators: {}
+  bestCatchPath:
+  - Metal Spinner
+  tug: Light
+  hookset: Precision
+  snagging:
+  gig:
+  folklore: false
+  fishEyes: false
+  patch: 5.5
