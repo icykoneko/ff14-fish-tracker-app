@@ -117,11 +117,11 @@ class WeatherService {
       lastDate = w.date;
       currentWeather = weatherForArea(area, w.target);
       // Has the previous weather condition been met?
-      if (previousWeatherSet.length > 0 && !_(previousWeatherSet).contains(previousWeather)) {
+      if (previousWeatherSet.length > 0 && !_(previousWeatherSet).includes(previousWeather)) {
         continue;
       }
       // Does the current weather condition work?
-      if (currentWeatherSet.length == 0 || _(currentWeatherSet).contains(currentWeather)) {
+      if (currentWeatherSet.length == 0 || _(currentWeatherSet).includes(currentWeather)) {
         // Yield a date range for this weather period.
         yield dateFns.intervalAfter(+lastDate, {hours: 8});
       }
@@ -148,11 +148,11 @@ class WeatherService {
       this.insertForecast(lastDate, target);
       currentWeather = weatherForArea(area, target);
       // Has the previous weather condition been met?
-      if (previousWeatherSet.length > 0 && !_(previousWeatherSet).contains(previousWeather)) {
+      if (previousWeatherSet.length > 0 && !_(previousWeatherSet).includes(previousWeather)) {
         continue;
       }
       // Does the current weather condition work?
-      if (currentWeatherSet.length == 0 || _(currentWeatherSet).contains(currentWeather)) {
+      if (currentWeatherSet.length == 0 || _(currentWeatherSet).includes(currentWeather)) {
         // Yield a date range for this weather period.
         yield dateFns.intervalAfter(+lastDate, {hours: 8});
       }

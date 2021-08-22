@@ -69,7 +69,7 @@ class BaitEntry {
     // If it's a fish, include a reference to that as well.
     // - Unfortunately, we can't expect to find a FishEntry for this record.
     // Using Fishes in order to support live adjustments.
-    this.fishData = _(Fishes).findWhere({id: itemId});
+    this.fishData = _(Fishes).find({id: itemId});
   }
 
   get name() {
@@ -602,7 +602,7 @@ let ViewModel = new class {
           // TODO: [NEEDS-REFACTOR]
           fishWithUpdatedState.push(entry.id);
         }
-      });
+      }).value() /* value activates the chain */;
 
       if (fishWithUpdatedState.length > 0) {
         // Looks like we need to resort the display.
@@ -631,7 +631,7 @@ let ViewModel = new class {
         // Then have the layout make necessary updates.
         // If Fish Eyes effect was recently changed, tell layout to do FULL update!
         this.layout.update(entry, timestamp, 'fishEyes' in reason);
-      });
+      }).value() /* value activates the chain */;
       // Fall-through just in case filters were changed at the same time...
     }
 
@@ -653,7 +653,7 @@ let ViewModel = new class {
       // this!
       _(Fishes).chain()
         .reject(fish => this.isFishFiltered(fish))
-        .each(fish => this.activateEntry(fish, timestamp));
+        .each(fish => this.activateEntry(fish, timestamp)).value() /* value activates the chain */;
 
       // Remove any entries which are still inactive.
       for (let k in this.fishEntries) {

@@ -1,7 +1,7 @@
 let Sorters = function() {
   function shouldLog(a, b) {
     //fishes = _([a,b]).map((x) => x.name);
-    //return _(fishes).contains("Vip Viper");
+    //return _(fishes).includes("Vip Viper");
     return false;
   }
   function compare(a, b) {

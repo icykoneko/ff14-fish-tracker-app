@@ -9,7 +9,8 @@ class Fish {
       _(this).clone(fishData);
       return;
     }
-    _(this).extend(fishData);
+    Object.assign(this, fishData);
+    this._DATA = fishData;
     this.id = fishData._id;
     this.name = __p(DATA.ITEMS[this.id], "name");
     this.icon = DATA.ITEMS[this.id].icon;
@@ -62,6 +63,7 @@ class Fish {
       }),
       path: _(this.bestCatchPath).map((x) => DATA.ITEMS[x])
     };
+    if (this._id == 4869) { console.warn("BAD FISH", this, fishData); }
     this.alwaysAvailable =
       this.weatherSet.length == 0 && this.startHour == 0 && this.endHour == 24;
     this.intuitionFish = [];
@@ -277,11 +279,11 @@ function muxinIntuitionReqs(fish, idx, fishes) {
     // look up on updates.
     fish.intuitionFish = _(fish.bait.predators).map((predFish) => {
       return {count: predFish.count,
-              data: _(fishes).findWhere({id: predFish.id}) };
+              data: _(fishes).find({id: predFish.id}) };
     });
     if (fish.alwaysAvailable) {
       // Make sure its intuition requirements are ALSO always available...
-      fish.alwaysAvailable = _(fish.intuitionFish).all((iFish) => {
+      fish.alwaysAvailable = _(fish.intuitionFish).every((iFish) => {
         return iFish.data.alwaysAvailable;
       });
     }

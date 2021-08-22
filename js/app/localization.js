@@ -15,14 +15,14 @@ class LocalizationHelper {
     let url = new URL(window.location);
     if (url.searchParams.has('lang')) {
       var lang = url.searchParams.get('lang');
-      if (_(LANGUAGES).chain().values().contains("_" + lang).value()) {
+      if (_(LANGUAGES).chain().values().includes("_" + lang).value()) {
         this.language_suffix = "_" + lang;
       }
     }
     // Otherwise, check saved preferences from last visit.
     else if (window.localStorage.getItem('lang')) {
       var lang = window.localStorage.getItem('lang');
-      if (_(LANGUAGES).chain().values().contains("_" + lang).value()) {
+      if (_(LANGUAGES).chain().values().includes("_" + lang).value()) {
         this.language_suffix = "_" + lang;
       }
     }
@@ -49,7 +49,7 @@ class LocalizationHelper {
   }
 
   setLanguage(lang) {
-    if (_(LANGUAGES).chain().values().contains("_" + lang).value()) {
+    if (_(LANGUAGES).chain().values().includes("_" + lang).value()) {
       this.language_suffix = "_" + lang;
       window.localStorage.setItem('lang', lang);
       this.languageChanged.next(this.language_suffix);

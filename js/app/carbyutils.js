@@ -8,7 +8,7 @@ let CarbyUtils = function(){
   var theRealDateNow = Date.now;
 
   var WEATHER_NAME_TO_INDEX = _(DATA.WEATHER_TYPES).chain()
-    .pairs().map(x => [x[1]['name_en'], Number(x[0])]).object().value();
+    .toPairs().map(x => [x[1]['name_en'], Number(x[0])]).fromPairs().value() /* value activates the chain */;
 
   function resetSiteData(datetime) {
     console.debug("Resetting site data...");
@@ -72,7 +72,7 @@ let CarbyUtils = function(){
     setFishConditions(fishName, options={})
     {
       // Verify the fish exists in the database first.
-      let item_entry = _(DATA.ITEMS).findWhere({name_en: fishName});
+      let item_entry = _(DATA.ITEMS).find({name_en: fishName});
       if (item_entry === undefined) {
         console.error("FISH NOT FOUND: %s", fishName);
         return;
@@ -87,7 +87,7 @@ let CarbyUtils = function(){
         view_entry = true;
       }
 
-      let fish_entry = _(Fishes).findWhere({id: item_entry._id});
+      let fish_entry = _(Fishes).find({id: item_entry._id});
       if (options.weatherSet !== undefined) {
         fish_entry.weatherSet =
           _(options.weatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);

@@ -34,7 +34,7 @@ class FishWatcher {
       fish.catchableRanges = [];
       fish.incompleteRanges = [];
       fish.notifyCatchableRangesUpdated();
-    });
+    }).value() /* value activates the chain */;
     // STEP 2: Toggle "Fish Eyes" mode.
     this.fishEyesEnabled = enabled;
     // STEP 3: Rebuild catch windows.
@@ -252,7 +252,7 @@ class FishWatcher {
         intuitionLength = eorzeaTime.toEorzea(intuitionLength);
       } else { intuitionLength = 3600; }
       _(fish.predators).chain().keys().each((predId) => {
-        var predatorFish = _(Fishes).findWhere({id: Number(predId)});
+        var predatorFish = _(Fishes).find({id: Number(predId)});
         if (this._isFishAlwaysUp(predatorFish)) { return nextRange; }
         predatorsAlwaysAvailable = false;
         // Once again, we need to check if the weather right now works for
@@ -297,7 +297,7 @@ class FishWatcher {
           }
         }
         return nextRange;
-      });
+      }).value() /* value activates the chain */;
       // Reduce the next range by intersecting with OVERALL predator's range.
       if (predatorsAlwaysAvailable) {
         // Do nothing; keep nextRange intact
