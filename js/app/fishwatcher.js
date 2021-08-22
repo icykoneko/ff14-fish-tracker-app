@@ -30,7 +30,7 @@ class FishWatcher {
     // And yes, we must do this for fish not currently active otherwise when
     // they become active, they'll display the wrong information...
     console.info("Clearing windows for fish affected by Fish Eyes buff!");
-    _(Fishes).chain().filter(fish => fish.fishEyes).each(fish => {
+    _.chain(Fishes).filter(fish => fish.fishEyes).each(fish => {
       fish.catchableRanges = [];
       fish.incompleteRanges = [];
       fish.notifyCatchableRangesUpdated();
@@ -68,9 +68,9 @@ class FishWatcher {
     // - Due to this optimization, some fish may go out of scope and miss
     //   getting windows assigned to them.
 
-    let trackedFish = _(ViewModel.fishEntries).reduce((acc, curr) => {
+    let trackedFish = _.reduce(ViewModel.fishEntries, (acc, curr) => {
       acc.push(curr.data);
-      _(curr.data.intuitionFish).each(e => acc.push(e.data));
+      _.each(curr.data.intuitionFish, e => acc.push(e.data));
       return acc;
     }, []);
 
@@ -146,7 +146,7 @@ class FishWatcher {
 
     // Resume from when the last window ended (if possible)
     var startOfWindow = null;
-    var latestWindow = _(fish.catchableRanges).last();
+    var latestWindow = _.last(fish.catchableRanges);
     if (latestWindow) {
       startOfWindow = new Date(+latestWindow.end);
       var h = dateFns.utc.getHours(startOfWindow);
@@ -186,7 +186,7 @@ class FishWatcher {
       lastRangeSpansPeriods = false;
       // This time, just peek at the NEXT period.
       var iter = weatherService.findWeatherPattern(
-        +_(fish.catchableRanges).last().end,
+        +_.last(fish.catchableRanges).end,
         fish.location.zoneId,
         fish.previousWeatherSet,
         fish.weatherSet,
@@ -240,7 +240,7 @@ class FishWatcher {
     // If this fish has predators, we have to consider their windows too...
     // Basically, to ensure we get the same number of windows for every fish,
     // we'll intersect this range with the UNION of its predators' ranges.
-    if (_(fish.predators).size() > 0) {
+    if (_.size(fish.predators) > 0) {
       var overallPredRange = null;
       var predatorsAlwaysAvailable = true;
       // This key value is in seconds, we will need to convert it to Eorzean time first
@@ -251,8 +251,8 @@ class FishWatcher {
       if (intuitionLength !== null && intuitionLength !== undefined) {
         intuitionLength = eorzeaTime.toEorzea(intuitionLength);
       } else { intuitionLength = 3600; }
-      _(fish.predators).chain().keys().each((predId) => {
-        var predatorFish = _(Fishes).find({id: Number(predId)});
+      _.chain(fish.predators).keys().each((predId) => {
+        var predatorFish = _.find(Fishes, {id: Number(predId)});
         if (this._isFishAlwaysUp(predatorFish)) { return nextRange; }
         predatorsAlwaysAvailable = false;
         // Once again, we need to check if the weather right now works for

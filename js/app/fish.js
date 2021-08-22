@@ -6,7 +6,7 @@ class Fish {
   constructor(fishData) {
     // Copy constructor version.
     if (fishData instanceof Fish) {
-      _(this).clone(fishData);
+      _.clone(this, fishData);
       return;
     }
     Object.assign(this, fishData);
@@ -50,18 +50,18 @@ class Fish {
         hours: this.endHour < this.startHour ? 24 - diff : diff });
     }
     this.conditions = {
-      previousWeatherSet: _(this.previousWeatherSet).map((w) => DATA.WEATHER_TYPES[w]),
-      weatherSet: _(this.weatherSet).map((w) => DATA.WEATHER_TYPES[w])
+      previousWeatherSet: _.map(this.previousWeatherSet, (w) => DATA.WEATHER_TYPES[w]),
+      weatherSet: _.map(this.weatherSet, (w) => DATA.WEATHER_TYPES[w])
     };
     this.bait = {
-      hasPredators: _(this.predators).size() > 0,
-      predators: _(this.predators).map((v, k) => {
+      hasPredators: _.size(this.predators) > 0,
+      predators: _.map(this.predators, (v, k) => {
         return { id: Number(k),
                  count: v,
                  name: __p(DATA.ITEMS[k], "name"),
                  icon: DATA.ITEMS[k].icon };
       }),
-      path: _(this.bestCatchPath).map((x) => DATA.ITEMS[x])
+      path: _.map(this.bestCatchPath, (x) => DATA.ITEMS[x])
     };
     if (this._id == 4869) { console.warn("BAD FISH", this, fishData); }
     this.alwaysAvailable =
@@ -98,7 +98,7 @@ class Fish {
       this.location.zoneName = __p(DATA.ZONES[DATA.WEATHER_RATES[this.location.zoneId].zone_id], "name");
     }
     if (this.bait.hasPredators) {
-      _(this.bait.predators).each((p) => {
+      _.each(this.bait.predators, (p) => {
         p.name = __p(DATA.ITEMS[p.id], "name");
       });
     }
@@ -120,7 +120,7 @@ class Fish {
         // But wait... does it require intuition? If so, you gotta check with
         // those fish as well...
         if (this.intuitionFish.length != 0) {
-          return _(this.intuitionFish).any((iFish) => {
+          return _.any(this.intuitionFish, (iFish) => {
             return iFish.data.isCatchable(fe, dt);
           });
         } else {
@@ -144,7 +144,7 @@ class Fish {
         // But wait... does it require intuition? If so, you gotta check with
         // those fish as well...
         if (this.intuitionFish.length != 0) {
-          return _.min(_(this.intuitionFish).map(iFish => iFish.data.getNextWindow(fe)));
+          return _.min(_.map(this.intuitionFish, iFish => iFish.data.getNextWindow(fe)));
         } else {
           // Nope? Then yer good!
           return 0;
@@ -160,7 +160,7 @@ class Fish {
     if (this.fishEyes && !this.alwaysAvailable && this.conditions.weatherSet.length == 0) {
       // Check intuition fish too...
       if (this.intuitionFish.length != 0) {
-        return _(this.intuitionFish).any(iFish => {
+        return _.any(this.intuitionFish, iFish => {
           return iFish.data.isFishAlwaysUpUsingFishEyes();
         });
       }
@@ -174,7 +174,7 @@ class Fish {
       let crs = this.catchableRanges;
       if (crs.length > 0) {
         // Compute the overall time this fish is up for.
-        let overallTime = +_(crs).last().end - +_(crs).first().start;
+        let overallTime = +_.last(crs).end - +_.first(crs).start;
         this.__uptime = _(crs).reduce(
           (uptime, range) => uptime += dateFns.milliseconds(dateFns.intervalToDuration(range)), 0) / overallTime;
       } else {
@@ -230,7 +230,7 @@ class Fish {
     this.__uptimeDirty = true;
 
     // Add or merge next range with existing catchable ranges.
-    if (_(this.catchableRanges).isEmpty()) {
+    if (_.isEmpty(this.catchableRanges)) {
       // The first entry is special. We can simply push it into the array.
       // Remember, it's observable!
       this.catchableRanges.push(nextRange);
@@ -238,7 +238,7 @@ class Fish {
       return;
     }
 
-    var lastRange = _(this.catchableRanges).last();
+    var lastRange = _.last(this.catchableRanges);
     // WARNING:
     //   You should never call this function giving the same range as the last
     //   one. Also, the next range BETTER be AFTER the last one!!!
@@ -277,20 +277,20 @@ function muxinIntuitionReqs(fish, idx, fishes) {
   if (fish.bait.hasPredators) {
     // Attach the generated intuition requirement fish to this so it's easier to
     // look up on updates.
-    fish.intuitionFish = _(fish.bait.predators).map((predFish) => {
+    fish.intuitionFish = _.map(fish.bait.predators, (predFish) => {
       return {count: predFish.count,
-              data: _(fishes).find({id: predFish.id}) };
+              data: _.find(fishes, {id: predFish.id}) };
     });
     if (fish.alwaysAvailable) {
       // Make sure its intuition requirements are ALSO always available...
-      fish.alwaysAvailable = _(fish.intuitionFish).every((iFish) => {
+      fish.alwaysAvailable = _.every(fish.intuitionFish, (iFish) => {
         return iFish.data.alwaysAvailable;
       });
     }
   }
 }
 
-let Fishes = _(DATA.FISH).chain()
+let Fishes = _.chain(DATA.FISH)
   .values()
   .map((fishData) => new Fish(fishData))
   .each(muxinIntuitionReqs)

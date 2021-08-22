@@ -1,6 +1,6 @@
 function weatherForArea(area, target) {
   if (area in DATA.WEATHER_RATES){
-    var rate = _(DATA.WEATHER_RATES[area].weather_rates).find((r) => { return target < r[1]; });
+    var rate = _.find(DATA.WEATHER_RATES[area].weather_rates, (r) => { return target < r[1]; });
     return rate[0];
   }else{
     return 0;
@@ -48,14 +48,14 @@ class WeatherService {
         var cutoffDate =
           dateFns.utc.subDays(startOfPeriod(
             eorzeaTime.getCurrentEorzeaDate()), 2);
-        if (_(this.__weatherData).first().date < cutoffDate) {
-          this.__weatherData = _(this.__weatherData).drop();
+        if (_.first(this.__weatherData).date < cutoffDate) {
+          this.__weatherData = _.drop(this.__weatherData);
         }
         console.debug("Weather Cache:", this.__weatherData.length, "entries spanning",
           (dateFns.differenceInMilliseconds(
             eorzeaTime.toEarth(
-              dateFns.utc.addHours(_(this.__weatherData).last().date, 8)),
-            eorzeaTime.toEarth(_(this.__weatherData).first().date)) / 86400000).toFixed(2),
+              dateFns.utc.addHours(_.last(this.__weatherData).date, 8)),
+            eorzeaTime.toEarth(_.first(this.__weatherData).date)) / 86400000).toFixed(2),
           "days");
       }
     }
@@ -64,7 +64,7 @@ class WeatherService {
   insertForecast(date, target) {
     // Make sure it's newer than the previous entry.
     // Technically, it should be newer by 8 hours...
-    if (this.__weatherData.length > 0 && date <= _(this.__weatherData).last().date) {
+    if (this.__weatherData.length > 0 && date <= _.last(this.__weatherData).date) {
       // See, previous Carby told me I'm not allowed to record the past.
       console.error("Attempted to insert record for earlier date.", date);
       return;
@@ -117,11 +117,11 @@ class WeatherService {
       lastDate = w.date;
       currentWeather = weatherForArea(area, w.target);
       // Has the previous weather condition been met?
-      if (previousWeatherSet.length > 0 && !_(previousWeatherSet).includes(previousWeather)) {
+      if (previousWeatherSet.length > 0 && !_.includes(previousWeatherSet, previousWeather)) {
         continue;
       }
       // Does the current weather condition work?
-      if (currentWeatherSet.length == 0 || _(currentWeatherSet).includes(currentWeather)) {
+      if (currentWeatherSet.length == 0 || _.includes(currentWeatherSet, currentWeather)) {
         // Yield a date range for this weather period.
         yield dateFns.intervalAfter(+lastDate, {hours: 8});
       }
@@ -148,11 +148,11 @@ class WeatherService {
       this.insertForecast(lastDate, target);
       currentWeather = weatherForArea(area, target);
       // Has the previous weather condition been met?
-      if (previousWeatherSet.length > 0 && !_(previousWeatherSet).includes(previousWeather)) {
+      if (previousWeatherSet.length > 0 && !_.includes(previousWeatherSet, previousWeather)) {
         continue;
       }
       // Does the current weather condition work?
-      if (currentWeatherSet.length == 0 || _(currentWeatherSet).includes(currentWeather)) {
+      if (currentWeatherSet.length == 0 || _.includes(currentWeatherSet, currentWeather)) {
         // Yield a date range for this weather period.
         yield dateFns.intervalAfter(+lastDate, {hours: 8});
       }

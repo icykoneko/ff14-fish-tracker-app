@@ -69,7 +69,7 @@ class BaitEntry {
     // If it's a fish, include a reference to that as well.
     // - Unfortunately, we can't expect to find a FishEntry for this record.
     // Using Fishes in order to support live adjustments.
-    this.fishData = _(Fishes).find({id: itemId});
+    this.fishData = _.find(Fishes, {id: itemId});
   }
 
   get name() {
@@ -168,7 +168,7 @@ class FishEntry {
     // Technically, this should ONLY exist as part of the view model, and not
     // within the Fish object.
     // `bait`: Array[BaitEntry]
-    this.bait = _(fish.bestCatchPath).map(x => new BaitEntry(x));
+    this.bait = _.map(fish.bestCatchPath, x => new BaitEntry(x));
   }
 
   get uptime() { return this.data.uptime(); }
@@ -199,7 +199,7 @@ class FishEntry {
       this.availability.upcoming.downtime = dateFns.formatDistanceStrict(
         nextStart, currEnd, { roundingMethod: 'floor' }) + " later";
 
-      this.availability.upcomingWindows = _(crs).map((cr, idx) => {
+      this.availability.upcomingWindows = _.map(crs, (cr, idx) => {
         let start = eorzeaTime.toEarth(+cr.start);
         let end = eorzeaTime.toEarth(+cr.end);
         let downtime = "";
@@ -592,7 +592,7 @@ let ViewModel = new class {
       let needsFullUpdate = this.lastDate != currDay;
       this.lastDate = currDay;
 
-      _(this.fishEntries).chain().reject(entry => entry.data.alwaysAvailable).each(entry => {
+      _.chain(this.fishEntries).reject(entry => entry.data.alwaysAvailable).each(entry => {
         // Update the data for this entry first.
         entry.update(timestamp, needsFullUpdate);
         // Then have the layout make necessary updates.
@@ -625,7 +625,7 @@ let ViewModel = new class {
       // availability values getting computed...
       // Either way... we'll update ALL THE FISH ENTRIES to prevent a
       // double-resort.
-      _(this.fishEntries).chain().reject(entry => entry.data.alwaysAvailable).each(entry => {
+      _.chain(this.fishEntries).reject(entry => entry.data.alwaysAvailable).each(entry => {
         // Update the data for this entry first.
         entry.update(timestamp, true);
         // Then have the layout make necessary updates.
@@ -643,7 +643,7 @@ let ViewModel = new class {
       // Mark all existing entries as stale (or not active).
       // Anything that's not active, won't be displayed, and at the end of this
       // function, will be removed from the list, making future updates faster.
-      _(this.fishEntries).each((entry) => entry.active = false);
+      _.each(this.fishEntries, (entry) => entry.active = false);
 
       // Next, we'll apply the current filters to the entire list, and only
       // (re-)activate the fish that remain.
@@ -651,7 +651,7 @@ let ViewModel = new class {
       // chaining.
       // TODO: If the filter settings haven't changed, there's no reason to do
       // this!
-      _(Fishes).chain()
+      _.chain(Fishes)
         .reject(fish => this.isFishFiltered(fish))
         .each(fish => this.activateEntry(fish, timestamp)).value() /* value activates the chain */;
 
@@ -691,7 +691,7 @@ let ViewModel = new class {
     // Now that everything's been resorted, ask the layout to update any fields
     // which are language-dependent.
     if (reason !== null && 'language' in reason) {
-      _(this.fishEntries).each(entry => this.layout.updateLanguage(entry));
+      _.each(this.fishEntries, entry => this.layout.updateLanguage(entry));
     }
 
     // console.timeEnd('updateDisplay');
@@ -1321,7 +1321,7 @@ let ViewModel = new class {
           // Update the fish entries.
           // TODO: [NEEDS-OPTIMIZATION]
           let earthTime = new Date();
-          _(ViewModel.fishEntries).each(entry => {
+          _.each(ViewModel.fishEntries, entry => {
             entry.update(earthTime, true);
             ViewModel.layout.updatePinnedState(entry);
             ViewModel.layout.updateCaughtState(entry);

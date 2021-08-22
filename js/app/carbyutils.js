@@ -7,13 +7,13 @@ let CarbyUtils = function(){
 
   var theRealDateNow = Date.now;
 
-  var WEATHER_NAME_TO_INDEX = _(DATA.WEATHER_TYPES).chain()
+  var WEATHER_NAME_TO_INDEX = _.chain(DATA.WEATHER_TYPES)
     .toPairs().map(x => [x[1]['name_en'], Number(x[0])]).fromPairs().value() /* value activates the chain */;
 
   function resetSiteData(datetime) {
     console.debug("Resetting site data...");
     weatherService.__weatherData = [];
-    _(Fishes).each(fish => { fish.catchableRanges = []; fish.incompleteRanges = []; });
+    _.each(Fishes, fish => { fish.catchableRanges = []; fish.incompleteRanges = []; });
     let prevPeriod = startOfPeriod(dateFns.utc.subHours(eorzeaTime.toEorzea(datetime), 8));
     weatherService.insertForecast(prevPeriod, weatherService.calculateForecastTarget(eorzeaTime.toEarth(prevPeriod)));
   }
@@ -72,7 +72,7 @@ let CarbyUtils = function(){
     setFishConditions(fishName, options={})
     {
       // Verify the fish exists in the database first.
-      let item_entry = _(DATA.ITEMS).find({name_en: fishName});
+      let item_entry = _.find(DATA.ITEMS, {name_en: fishName});
       if (item_entry === undefined) {
         console.error("FISH NOT FOUND: %s", fishName);
         return;
@@ -87,18 +87,18 @@ let CarbyUtils = function(){
         view_entry = true;
       }
 
-      let fish_entry = _(Fishes).find({id: item_entry._id});
+      let fish_entry = _.find(Fishes, {id: item_entry._id});
       if (options.weatherSet !== undefined) {
         fish_entry.weatherSet =
-          _(options.weatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
+          _.map(options.weatherSet, w => WEATHER_NAME_TO_INDEX[w]);
         fish_entry.conditions.weatherSet =
-          _(fish_entry.weatherSet).map(w => DATA.WEATHER_TYPES[w]);
+          _.map(fish_entry.weatherSet, w => DATA.WEATHER_TYPES[w]);
       }
       if (options.previousWeatherSet !== undefined) {
         fish_entry.previousWeatherSet =
-          _(options.previousWeatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
+          _.map(options.previousWeatherSet, w => WEATHER_NAME_TO_INDEX[w]);
         fish_entry.conditions.previousWeatherSet =
-          _(fish_entry.previousWeatherSet).map(w => DATA.WEATHER_TYPES[w]);
+          _.map(fish_entry.previousWeatherSet, w => DATA.WEATHER_TYPES[w]);
       }
       if (options.startHour !== undefined) {
         fish_entry.startHour = options.startHour;

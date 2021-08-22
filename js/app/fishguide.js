@@ -67,7 +67,7 @@ let FishGuide = function(){
       this.fishGuideFn = doT.template(fishGuideTmpl, undefined, templates);
 
       // Initialize fields.
-      this.MAX_PAGE = Math.ceil(_(FISH_INFO).keys().length / 25.0);
+      this.MAX_PAGE = Math.ceil(_.keys(FISH_INFO).length / 25.0);
       this.pageNumbers = _.range(1, this.MAX_PAGE + 1);
       this.currentPage = 1;
       this.pageRange = 1;
