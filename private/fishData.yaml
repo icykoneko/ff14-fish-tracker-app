@@ -10038,19 +10038,4 @@
   hookset: Powerful
   snagging: 
   patch: 5.55
-- name: Cloud Kelp
-  location: Voor Sian Siran
-  startHour: 0
-  endHour: 24
-  previousWeatherSet: []
-  weatherSet: []
-  predators: {}
-  bestCatchPath:
-  - Metal Spinner
-  tug: Light
-  hookset: Precision
-  snagging:
-  gig:
-  folklore: false
-  fishEyes: false
-  patch: 5.5
+  
