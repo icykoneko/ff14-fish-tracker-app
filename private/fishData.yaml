@@ -70,7 +70,7 @@
 - name: Rock Lobster
   location: Crescent Cove
   startHour: 17
-  endHour: 21
+  endHour: 22
   previousWeatherSet: []
   weatherSet: []
   predators: {}
@@ -120,7 +120,7 @@
 - name: Coelacanth
   location: Isles of Umbra Southshore
   startHour: 18
-  endHour: 5
+  endHour: 6
   previousWeatherSet: []
   weatherSet: []
   predators: {}
@@ -571,6 +571,7 @@
   weatherSet:
   - Fog
   - Clouds
+  - Wind
   predators: {}
   bestCatchPath:
   - Butterworm
@@ -906,7 +907,7 @@
 - name: Mud Pilgrim
   location: South Drybone
   startHour: 17
-  endHour: 8
+  endHour: 7
   previousWeatherSet: []
   weatherSet:
   - Rain
@@ -1146,6 +1147,7 @@
   previousWeatherSet: []
   weatherSet:
   - Clouds
+  - Fog
   - Wind
   predators: {}
   bestCatchPath:
@@ -1487,7 +1489,7 @@
 - name: Sweetnewt
   location: The Lavender Beds
   startHour: 23
-  endHour: 5
+  endHour: 4
   previousWeatherSet: []
   weatherSet:
   - Fog
@@ -2078,7 +2080,7 @@
 - name: Endoceras
   location: Isles of Umbra Southshore
   startHour: 20
-  endHour: 5
+  endHour: 4
   previousWeatherSet:
   - Clear Skies
   - Fair Skies
@@ -2625,7 +2627,8 @@
   - Blizzards
   predators: {}
   bestCatchPath:
-  - Brute Leech
+  - Purse Web Spider
+  - Ice Faerie
   tug: Medium
   hookset: Powerful
   snagging:
@@ -2727,7 +2730,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Stonefly Nymph
+  - Brute Leech
   tug: Light
   hookset: Precision  # tested
   snagging:
@@ -2813,7 +2816,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Stonefly Nymph
+  - Purse Web Spider
   tug: Light
   hookset: Precision
   snagging:
@@ -2869,7 +2872,8 @@
   - Blizzards
   predators: {}
   bestCatchPath:
-  - Brute Leech
+  - Caddisfly Larva
+  - Ice Faerie
   tug: Medium
   hookset: Powerful  # tested
   snagging:
@@ -2922,7 +2926,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Purse Web Spider
+  - Brute Leech
   tug: Medium  # not 100% but nearly sure
   hookset: Powerful
   snagging:
@@ -2972,7 +2976,7 @@
   - Fair Skies
   predators: {}
   bestCatchPath:
-  - Red Balloon
+  - Metal Spinner
   - Sky Faerie
   - Rudderfish
   tug: Medium
@@ -3040,7 +3044,8 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Brute Leech
+  - Metal Spinner
+  - Ice Faerie
   tug: Medium
   hookset: Powerful  # tested, that's one smol octopus
   snagging:
@@ -3237,7 +3242,7 @@
 - name: Pteranodon
   location: Sohm Al Summit
   startHour: 9
-  endHour: 16
+  endHour: 17
   previousWeatherSet: []
   weatherSet: []
   predators: {}
@@ -3464,7 +3469,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Stonefly Nymph
+  - Brute Leech
   tug: Light
   hookset: Precision
   snagging:
@@ -3479,7 +3484,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Magma Worm
+  - Metal Spinner
   predators:
   tug: Light
   hookset: Precision
@@ -4066,6 +4071,7 @@
   startHour: 0
   endHour: 24
   previousWeatherSet:
+  - Blizzards
   - Snow
   weatherSet:
   - Blizzards
@@ -4640,7 +4646,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Nightcrawler
+  - Stonefly Larva
   tug: Legendary
   hookset: Powerful
   snagging:
@@ -4656,7 +4662,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Suspending Minnow
+  - Stonefly Larva
   tug: Medium  # ~25s
   hookset: Powerful  # tested - looked suspicious (the fish is tiny),
   snagging:
@@ -4733,7 +4739,7 @@
 - name: Tawny Wench Shark
   location: The Isle of Bekko
   startHour: 10
-  endHour: 19
+  endHour: 18
   previousWeatherSet: []
   weatherSet:
   - Clear Skies
@@ -4791,7 +4797,7 @@
   - Clear Skies
   predators: {}
   bestCatchPath:
-  - Suspending Minnow
+  - Stonefly Larva
   tug: Light
   hookset: Precision
   snagging:
@@ -4927,7 +4933,7 @@
   - Fog
   predators: {}
   bestCatchPath:
-  - Salmon Roe
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:
@@ -4961,7 +4967,7 @@
   - Fog
   predators:
   bestCatchPath:
-  - Salmon Roe
+  - Suspending Minnow
   tug: Medium
   hookset: Powerful
   snagging:
@@ -4995,8 +5001,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Live Shrimp
-  - Ruby Shrimp
+  - Bream Lure
   tug: Legendary
   hookset: Powerful
   snagging:
@@ -5012,8 +5017,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Live Shrimp
-  - Ruby Shrimp
+  - Bream Lure
   tug: Legendary
   hookset: Powerful
   snagging:
@@ -5329,7 +5333,7 @@
   patch: 4.0
 - name: Castaway Chocobo Chick
   location: North Isle of Endless Summer
-  startHour: 9
+  startHour: 8
   endHour: 16
   previousWeatherSet: []
   weatherSet: []
@@ -5396,7 +5400,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Salmon Roe
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:
@@ -5412,7 +5416,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Live Shrimp
+  - Metal Spinner
   tug: Light
   hookset: Precision
   snagging:  false
@@ -5444,7 +5448,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Nightcrawler
+  - Metal Spinner
   tug: Medium
   hookset: Powerful
   snagging:
@@ -5683,7 +5687,6 @@
   weatherSet:
   bestCatchPath:
   - Live Shrimp
-  - Ruby Shrimp
   predators:
   tug: Legendary
   hookset: Powerful
@@ -6707,7 +6710,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Robber Ball
   predators:
   hookset:
   tug: light
@@ -6722,7 +6725,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Marble Nymph
   predators:
   hookset:
   tug: light
@@ -6737,7 +6740,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Marble Nymph
   predators:
   hookset:
   snagging:
@@ -6751,7 +6754,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Marble Nymph
   predators:
   hookset:
   tug: light
@@ -6766,7 +6769,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Baitbugs
   predators:
   hookset:
   tug: light
@@ -6796,7 +6799,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Marble Nymph
   predators:
   hookset:
   tug: light
@@ -6841,7 +6844,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Metal Spinner
   predators:
   hookset:
   tug: light
@@ -6856,7 +6859,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Baitbugs
   predators:
   hookset:
   tug: light
@@ -6871,7 +6874,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Robber Ball
   predators:
   hookset:
   tug: medium
@@ -6886,7 +6889,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Robber Ball
   predators:
   hookset:
   tug: light
@@ -6962,7 +6965,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Baitbugs
   predators:
   hookset:
   tug: light
@@ -6977,7 +6980,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Baitbugs
   predators:
   hookset:
   tug: light
@@ -6992,7 +6995,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Robber Ball
+  - Marble Nymph
   predators:
   hookset: Powerful
   tug: medium
@@ -7007,7 +7010,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Robber Ball
+  - Baitbugs
   predators:
   hookset: Powerful
   tug: heavy
@@ -7067,7 +7070,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Robber Ball
+  - Baitbugs
   predators:
   hookset:
   tug: medium
@@ -7097,7 +7100,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Marble Nymph
   predators:
   hookset:
   tug: light
@@ -7112,7 +7115,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Marble Nymph
   predators:
   hookset:
   tug: light
@@ -7127,7 +7130,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Fruit Worm
+  - Marble Nymph
   predators:
   hookset:
   tug: light
@@ -7217,7 +7220,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Moyebi Shrimp
+  - Short Bill Minnow
   predators:
   hookset:
   tug: light
@@ -7262,7 +7265,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Moyebi Shrimp
+  - Short Bill Minnow
   predators:
   hookset:
   tug: medium
@@ -7308,7 +7311,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Moyebi Shrimp
+  - Short Bill Minnow
   predators:
   hookset: Precision
   tug: light
@@ -7416,7 +7419,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Moyebi Shrimp
+  - Squid Strip
   predators:
   hookset:
   tug: medium
@@ -7506,7 +7509,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Desert Dessert Frog
+  - Metal Spinner
   predators:
   hookset:
   tug: light
@@ -7646,7 +7649,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Marble Nymph
+  - Baitbugs
   predators:
   hookset:
   tug: light
@@ -7706,7 +7709,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Marble Nymph
+  - Baitbugs
   predators:
   hookset:
   tug: light
@@ -7812,7 +7815,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Robber Ball
+  - Marble Nymph
   predators:
   hookset: Precision
   tug: light
@@ -8069,7 +8072,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Squid Strip
   predators:
   hookset:
   tug: light
@@ -8084,7 +8087,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Squid Strip
   predators:
   hookset:
   tug: medium
@@ -8114,7 +8117,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Squid Strip
   predators:
   hookset:
   tug: medium
@@ -8160,7 +8163,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Squid Strip
   predators:
   hookset:
   tug: light
@@ -8239,7 +8242,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Squid Strip
   predators:
   hookset: Precision
   tug: light
@@ -8284,7 +8287,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Squid Strip
   predators:
   hookset: Precision
   tug: light
@@ -8328,7 +8331,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Short Bill Minnow
+  - Squid Strip
   predators:
   hookset:
   snagging:
@@ -10035,3 +10038,4 @@
   hookset: Powerful
   snagging: 
   patch: 5.55
+  
