@@ -160,10 +160,11 @@ class FishTableLayout {
         .attr('data-tooltip', moment(fishEntry.availability.upcoming.date).calendar())
         .text(fishEntry.availability.upcoming.downtime);
       
-      // If this fish has upcoming windows data, update it now.
-      if (fishEntry.upcomingWindowsPopupElement !== null) {
-        $(fishEntry.upcomingWindowsPopupElement).modal('hide');
-        $(fishEntry.upcomingWindowsPopupElement).empty().append(
+      // If this fish is currently being displayed in the upcoming windows, update it now!
+      if (ViewModel.upcomingWindowsEntry === fishEntry) {
+        // Update it in real-time. Just re-run the template after clearing... it's not a
+        // lot of data, so it should hopefully process quickly.
+        ViewModel.$upcomingWindows.empty().append(
           this.templates.upcomingWindows(fishEntry));
       }
 
