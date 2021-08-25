@@ -382,9 +382,9 @@ let ViewModel = new class {
 
     // Save the upcoming windows element.
     this.$upcomingWindows = $('#upcoming-windows');
-    // this.$upcomingWindows.modal({
-    //   onHide: this.onHideUpcomingWindows
-    // });
+    this.$upcomingWindows.modal({
+      onHide: this.onHideUpcomingWindows
+    });
 
     // Apply theme to elements now.
     // DO NOT ADD ANY MORE UI ELEMENTS AFTER THIS LINE OR THEY WILL
@@ -773,7 +773,6 @@ let ViewModel = new class {
 
     // Now we can display the modal. If it wasn't already initialized, this should
     // take can of that too.
-    this.$upcomingWindows.modal('setting', 'onHide', this.onHideUpcomingWindows)
     this.$upcomingWindows.modal('show');
     console.timeEnd("Display upcoming windows");
   }
