@@ -39,7 +39,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20210701_1904" />
+    <link rel="stylesheet" href="css/overlay.css?20210824_2130" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -414,13 +414,13 @@
             <b>Downtime</b>
           </div>
           {{~it.availability.upcomingWindows :nextWindow:idx}}
-            <div style="white-space: nowrap;">
-              <b>{{=moment(nextWindow.start).calendar()}}</b>
+            <div class="window-start">
+              {{=moment(nextWindow.start).calendar()}}
             </div>
-            <div style="white-space: nowrap;">
+            <div class="window-duration">
               {{=nextWindow.duration}}
             </div>
-            <div style="white-space: nowrap;">
+            <div class="window-downtime">
               {{=nextWindow.downtime}}
             </div>
           {{~}}
@@ -429,11 +429,11 @@
     </script>
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20201207_1933"></script>
+    <script type="text/javascript" src="js/app/layout.js?20210824_2130"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20210701_2121"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20210824_2130"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -747,6 +747,9 @@
           </div>
         </div>
       </div>
+
+      <!-- Modal for displaying upcoming windows -->
+      <div id="upcoming-windows" class="ui longer flushed modal upcoming-windows"></div>
 
       <!-- Display the list of fish -->
       <div id="fish-table-container">

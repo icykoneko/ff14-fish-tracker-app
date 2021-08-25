@@ -104,8 +104,6 @@ class FishEntry {
     // This is the DOM element associated with this Fish.
     this.element = null;
 
-    this.upcomingWindowsPopupElement = null;
-
     // TODO: Improve this
     // For fish with intuition requirements, include their entries here as
     // well.
@@ -328,6 +326,9 @@ let ViewModel = new class {
 
     // Initialize the layout components.
     this.layout = new FishTableLayout();
+
+    // The entry being used for upcoming windows modal.
+    this.upcomingWindowsEntry = null;
   }
 
   initialize() {
@@ -378,6 +379,12 @@ let ViewModel = new class {
 
     // Initialize the fishing spot location map modal.
     FishingSpotMap.initialize();
+
+    // Save the upcoming windows element.
+    this.$upcomingWindows = $('#upcoming-windows');
+    // this.$upcomingWindows.modal({
+    //   onHide: this.onHideUpcomingWindows
+    // });
 
     // Apply theme to elements now.
     // DO NOT ADD ANY MORE UI ELEMENTS AFTER THIS LINE OR THEY WILL
@@ -748,6 +755,36 @@ let ViewModel = new class {
     return false;
   }
 
+  displayUpcomingWindows(entry) {
+    console.time("Display upcoming windows");
+    // If for some reason, the modal is already showing, we should hide it first.
+    // This really cannot happen unless this function was called directly... so
+    // don't do that...
+    if (this.$upcomingWindows.hasClass('active')) {
+      this.$upcomingWindows.modal('hide');
+    }
+
+    // First, we need to update the contents of the modal. It may already be empty,
+    // but either way, we're going to clear out, and start fresh.
+    // We also want to remember which fish is being displayed.
+    this.upcomingWindowsEntry = entry;
+    this.$upcomingWindows.empty().append(
+      this.layout.templates.upcomingWindows(entry));
+
+    // Now we can display the modal. If it wasn't already initialized, this should
+    // take can of that too.
+    this.$upcomingWindows.modal('setting', 'onHide', this.onHideUpcomingWindows)
+    this.$upcomingWindows.modal('show');
+    console.timeEnd("Display upcoming windows");
+  }
+
+  onHideUpcomingWindows($element) {
+    // Since the modal is now hidden, let's remove the setting too.
+    ViewModel.upcomingWindowsEntry = null;
+    // Always allow the modal to hide.
+    return true;
+  }
+
   activateEntry(fish, earthTime) {
     // Check if there's already an entry for this fish.
     if (this.fishEntries[fish.id]) {
@@ -822,24 +859,17 @@ let ViewModel = new class {
     $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
     $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
 
-    $('.ui.modal.upcoming-windows', $entry).append(
-      this.layout.templates.upcomingWindows(entry));
-    entry.upcomingWindowsPopupElement = $('.ui.modal.upcoming-windows', $entry)[0];
     $('.upcoming-windows-button', $entry).on('click', e => {
       console.info("Displaying upcoming windows for %s", fish.name);
-      $(entry.upcomingWindowsPopupElement).modal('show');
+      this.displayUpcomingWindows(entry);
     });
 
     // Connect location button.
     $('.location-button', $entry).on('click', this.onFishEntryShowLocationClicked);
 
     if (this.settings.theme === 'dark') {
-      $('.ui.modal.upcoming-windows', $entry).addClass('inverted');
       $('*[data-tooltip]', $entry).attr('data-inverted', '');
     }
-
-    // This must be done last because it causes the element to move out of this row!
-    $('.ui.modal.upcoming-windows', $entry).modal();
 
     return entry;
   }
