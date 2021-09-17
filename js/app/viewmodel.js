@@ -452,6 +452,7 @@ let ViewModel = new class {
     // Initialize import/export modals.
     $('#export-settings-modal').modal();
     $('#import-settings-modal').modal();
+    $('#alarm-cmd-modal').modal();
 
     // Special event handlers.
     // These are mainly supporting the SemanticUI widgets.
@@ -755,6 +756,32 @@ let ViewModel = new class {
     return false;
   }
 
+  displayAlarmCommand(entry) {
+    let clipboard = new ClipboardJS('#alarm-cmd-copy', {
+      container: document.getElementById('alarm-cmd-modal')
+    });
+    clipboard.on('success', function(e) {
+      console.info("Command copied to clipboard.");
+      e.clearSelection();
+    });
+    clipboard.on('error', function(e) {
+      console.error("Failed to copy command");
+    });
+    // eg /alarm "アラームaaaaaa" et 0500 6 (max 10 chars)
+    const fourDigitEoTime = ('0' + (entry.data.startHour | 0)).slice(-2) + ('0' + (60*(entry.data.startHour % 1) | 0)).slice(-2)
+    $('#alarm-cmd-data').text('/alarm "' + entry.data.name.substring(0,10) + '" et ' + fourDigitEoTime + ' 3');
+    // Display the modal.
+    $('#alarm-cmd-modal')
+      .modal({
+        onHidden: function() {
+          // Clean up the clipboard DOM.
+          clipboard.destroy();
+        }
+      })
+      .modal('show');
+  }
+
+
   displayUpcomingWindows(entry) {
     console.time("Display upcoming windows");
     // If for some reason, the modal is already showing, we should hide it first.
@@ -862,6 +889,12 @@ let ViewModel = new class {
       console.info("Displaying upcoming windows for %s", fish.name);
       this.displayUpcomingWindows(entry);
     });
+
+    $('.alarm-cmd-button', $entry).on('click', e => {
+      console.info("Displaying in-game alarm command for %s", fish.name);
+      this.displayAlarmCommand(entry);
+    });
+    
 
     // Connect location button.
     $('.location-button', $entry).on('click', this.onFishEntryShowLocationClicked);
