@@ -32,6 +32,7 @@ class FishWatcher {
     console.info("Clearing windows for fish affected by Fish Eyes buff!");
     _(Fishes).chain().filter(fish => fish.fishEyes).each(fish => {
       fish.catchableRanges = [];
+      fish.incompleteRanges = [];
       fish.notifyCatchableRangesUpdated();
     });
     // STEP 2: Toggle "Fish Eyes" mode.

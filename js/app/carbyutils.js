@@ -115,10 +115,11 @@ let CarbyUtils = function(){
         fish_entry.weatherSet.length == 0 && fish_entry.startHour == 0 && fish_entry.endHour == 24;
 
       // Update the windows for this fish now (unless it wasn't being displayed)
-      // Of course, confuzzled carbuncles would really like to know why you'd can this
+      // Of course, confuzzled carbuncles would really like to know why you'd call this
       // function if you didn't have the fish displayed in the first place... but maybe
       // that could happen... filters and such.
       fish_entry.catchableRanges = [];
+      fish_entry.incompleteRanges = [];
       if (view_entry === true) {
         // Recreate the viewmodel entry for this fish.
         ViewModel.activateEntry(fish_entry, Date.now());
