@@ -215,6 +215,10 @@ body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes
   cursor: pointer;
 }
 
+.alarm-cmd-button:hover {
+  cursor: pointer;
+}
+
 .upcoming-windows-grid {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;

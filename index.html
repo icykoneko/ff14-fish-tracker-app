@@ -43,7 +43,7 @@ title: Home
 
     <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20210824_2130" />
+    <link rel="stylesheet" href="css/overlay.css?20210925_1237" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -270,7 +270,7 @@ title: Home
               {{?}}
             {{?}}
           {{??}}
-            <i class="wait icon"></i>&nbsp;
+            <i class="alarm-cmd-button wait icon"></i>&nbsp;
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
@@ -417,7 +417,7 @@ title: Home
               {{?}}
             {{?}}
           {{??}}
-            <i class="wait icon"></i>&nbsp;
+            <i class="alarm-cmd-button wait icon"></i>&nbsp;
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
@@ -509,7 +509,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20201111_1232"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20210824_2130"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20210925_1237"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -712,6 +712,25 @@ title: Home
           <div id="export-settings-upload" class="ui labeled icon disabled button">
             <i class="cloud upload icon"></i>
             Upload
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal for copying alarm command -->
+      <div id="alarm-cmd-modal" class="ui tiny modal">
+        <div class="header">In-game Alarm command</div>
+        <div class="content">
+          <div class="ui form">
+            <p>Copy the command below and execute in-game.</p>
+            <div class="field">
+              <textarea rows="8" id="alarm-cmd-data" style="font-family: monospace;"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <div id="alarm-cmd-copy" class="ui labeled icon button" data-clipboard-target="#alarm-cmd-data">
+            <i class="copy icon"></i>
+            Copy
           </div>
         </div>
       </div>
