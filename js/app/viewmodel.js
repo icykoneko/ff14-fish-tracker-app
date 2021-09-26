@@ -17,10 +17,10 @@ class SiteSettings {
       completion: 'all',
       // Patch filtering:
       // * Display fish from the specified patches.
-      patch: [2, 2.1, 2.2, 2.3, 2.4, 2.5,
-              3, 3.1, 3.2, 3.3, 3.4, 3.5,
-              4, 4.1, 4.2, 4.3, 4.4, 4.5,
-              5, 5.1, 5.2, 5.3, 5.4, 5.5],
+      patch: new Set([2, 2.1, 2.2, 2.3, 2.4, 2.5,
+                      3, 3.1, 3.2, 3.3, 3.4, 3.5,
+                      4, 4.1, 4.2, 4.3, 4.4, 4.5,
+                      5, 5.1, 5.2, 5.3, 5.4, 5.5]),
       // Extra filtering:
       // * all: Display all fish, regardless of extra status.
       // * collectable: Display only collectable fish.
@@ -49,10 +49,10 @@ class SiteSettings {
     this.theme = 'dark';
 
     // Recorded information:
-    // * completed: An array of fish ids which have been caught.
-    // * pinned: An array of fish ids which should be pinned.
-    this.completed = [];
-    this.pinned = [];
+    // * completed: A set of fish ids which have been caught.
+    // * pinned: A set of fish ids which should be pinned.
+    this.completed = new Set();
+    this.pinned = new Set();
 
     // Latest Patch:
     // * Records the latest patch available when the user last visited.
@@ -697,11 +697,11 @@ let ViewModel = new class {
   }
 
   isFishPinned(fishId) {
-    return _(this.settings.pinned).contains(fishId);
+    return this.settings.pinned.has(fishId);
   }
 
   isFishCaught(fishId) {
-    return _(this.settings.completed).contains(fishId);
+    return this.settings.completed.has(fishId);
   }
 
   isFishFiltered(fish) {
@@ -723,7 +723,7 @@ let ViewModel = new class {
         return patch;
       }
     }
-    if (!_(this.settings.filters.patch).contains(normalizePatch(fish.patch)))
+    if (!this.settings.filters.patch.has(normalizePatch(fish.patch)))
       return true;
 
     // Filter by completion state.
@@ -922,9 +922,9 @@ let ViewModel = new class {
 
     let entry = $this.closest('.fish-entry').data('view');
     if (entry.isCaught) {
-      ViewModel.settings.completed = _(ViewModel.settings.completed).without(entry.id);
+      ViewModel.settings.completed.delete(entry.id);
     } else {
-      ViewModel.settings.completed.push(entry.id);
+      ViewModel.settings.completed.add(entry.id);
     }
     entry.isCaught = !entry.isCaught;
     ViewModel.saveSettings();
@@ -942,9 +942,9 @@ let ViewModel = new class {
 
     let entry = $this.closest('.fish-entry').data('view');
     if (entry.isPinned) {
-      ViewModel.settings.pinned = _(ViewModel.settings.pinned).without(entry.id);
+      ViewModel.settings.pinned.delete(entry.id);
     } else {
-      ViewModel.settings.pinned.push(entry.id);
+      ViewModel.settings.pinned.add(entry.id);
     }
     entry.isPinned = !entry.isPinned;
     ViewModel.saveSettings();
@@ -986,11 +986,11 @@ let ViewModel = new class {
 
     // Update the UI and get the patch number together.
     var patch = Number($this.toggleClass('active').data('filter'));
+    // Update the settings (after having toggled the patch element).
     if ($this.hasClass('active')) {
-      ViewModel.settings.filters.patch.push(patch);
+      ViewModel.settings.filters.patch.add(patch);
     } else {
-      ViewModel.settings.filters.patch =
-        _(ViewModel.settings.filters.patch).without(patch);
+      ViewModel.settings.filters.patch.delete(patch);
     }
 
     // If all of the sub-patches (that aren't disabled) are active, then the patch-set is too.
@@ -1014,7 +1014,8 @@ let ViewModel = new class {
     var patch = Number($this.data('filter'));
 
     // Just this patch is included now.
-    ViewModel.settings.filters.patch = [patch];
+    ViewModel.settings.filters.patch.clear();
+    ViewModel.settings.filters.patch.add(patch);
     // Notify others about this change.
     ViewModel.filterPatchSubject.next(ViewModel.settings.filters.patch);
     ViewModel.saveSettings();
@@ -1030,13 +1031,12 @@ let ViewModel = new class {
     if ($this.hasClass('active')) {
       // Activate the rest of the buttons as well, and add to the filter settings.
       $this.siblings(":not(.disabled)").addClass('active').each(function() {
-        ViewModel.settings.filters.patch.push(Number($(this).data('filter')));
+        ViewModel.settings.filters.patch.add(Number($(this).data('filter')));
       });
     } else {
       // Deactivate the rest of the button as well, and remove from the filter settings.
       $this.siblings(":not(.disabled)").removeClass('active').each(function() {
-        ViewModel.settings.filters.patch =
-          _(ViewModel.settings.filters.patch).without(Number($(this).data('filter')));
+        ViewModel.settings.filters.patch.delete(Number($(this).data('filter')));
       });
     }
 
@@ -1143,10 +1143,10 @@ let ViewModel = new class {
         //   first, and upgrade to the new model.
         console.warn("Trying to restore settings from legacy version...");
         if (localStorage.completed) {
-          settings.completed = JSON.parse(localStorage.completed);
+          settings.completed = new Set(JSON.parse(localStorage.completed));
         }
         if (localStorage.pinned) {
-          settings.pinned = JSON.parse(localStorage.pinned);
+          settings.pinned = new Set(JSON.parse(localStorage.pinned));
         }
         if (localStorage.theme) {
           settings.theme = localStorage.theme;
@@ -1169,6 +1169,14 @@ let ViewModel = new class {
     // that it contains each key, and if one is missing, it will fall back to the
     // original valid data.
 
+    // Make sure `completed` and `pinned` are stored internally as Sets.
+    if (settings.completed && !(settings.completed instanceof Set)) {
+      settings.completed = new Set(settings.completed);
+    }
+    if (settings.pinned && !(settings.pinned instanceof Set)) {
+      settings.pinned = new Set(settings.pinned);
+    }
+
     if (!(settings.filters)) {
       // Why is `filters` missing?!
       console.warn("Why is filters missing??? Using default then...");
@@ -1183,10 +1191,14 @@ let ViewModel = new class {
       .addClass('active').siblings().removeClass('active');
     }
     if (settings.filters.patch) {
+      // Convert to a Set if it's not already.
+      if (!(settings.filters.patch instanceof Set)) {
+        settings.filters.patch = new Set(settings.filters.patch);
+      }
       // Check if they've been here since the latest patch.
       if (settings.latestPatch !== this.settings.latestPatch) {
         console.info("Welcome back! There's new fishies to be caught!");
-        settings.filters.patch.push(Number(this.settings.latestPatch));
+        settings.filters.patch.add(Number(this.settings.latestPatch));
       }
     } else {
       // For some reason, the patch filter setting is missing?! Just use the default then.
@@ -1241,7 +1253,9 @@ let ViewModel = new class {
   saveSettings() {
     // Save the site settings to localStorage.
     try {
-      localStorage.fishTrackerSettings = JSON.stringify(this.settings);
+      localStorage.fishTrackerSettings =
+        JSON.stringify(this.settings,
+                       (key, value) => value instanceof Set ? [...value] : value);
     } catch (ex) {
       console.warn("Unable to save settings to local storage.");
     }
@@ -1251,8 +1265,8 @@ let ViewModel = new class {
     // NOTE: It's fine if the checklist contains IDs that aren't in the list...
     // Again, if a user provides bad data, they're just gonna break the page for
     // themselves...
-    console.info("Overwriting checklist...\nWas:", this.settings.completed, "\nNow:", checklist);
-    this.settings.completed = checklist;
+    console.info("Overwriting checklist...\nWas:", [...this.settings.completed], "\nNow:", checklist);
+    this.settings.completed = new Set(checklist);
   }
 
   exportSiteSettings() {
@@ -1269,7 +1283,9 @@ let ViewModel = new class {
 
     // Generate the exportable site data.
     // TODO: Support compression.
-    $('#export-settings-data').text(JSON.stringify(this.settings));
+    $('#export-settings-data').val(
+      JSON.stringify(this.settings,
+                     (key, value) => value instanceof Set ? [...value] : value));
 
     // TODO: Support uploading to cl1p.net
 
@@ -1279,6 +1295,8 @@ let ViewModel = new class {
         onHidden: function() {
           // Clean up the clipboard DOM.
           clipboard.destroy();
+          // Erase displayed data from form please...
+          $('#export-settings-data').val("");
         }
       })
       .modal('show');
