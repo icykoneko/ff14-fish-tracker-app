@@ -1203,7 +1203,7 @@ let ViewModel = new class {
     // Second pass to determine if the patch-set button should be active or not.
     // If all of the sub-patches (that aren't disabled) are active, then the patch-set is too.
     for (let patchSet of $('#filterPatch .patch-set.button')) {
-      let patchSetActive = $(patchSet).siblings().not('.disabled').not('.active') == 0;
+      let patchSetActive = $(patchSet).siblings().not('.disabled').not('.active').length == 0;
       $(patchSet).toggleClass('active', patchSetActive);
     }
 
