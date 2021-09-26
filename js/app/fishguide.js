@@ -310,9 +310,9 @@ let FishGuide = function(){
       // update it otherwise (for now at least...)
       // We always start by updating the settings object.
       if (isCaught) {
-        ViewModel.settings.completed.push(fishInfo.id);
+        ViewModel.settings.completed.add(fishInfo.id);
       } else {
-        ViewModel.settings.completed = _(ViewModel.settings.completed).without(fishInfo.id);
+        ViewModel.settings.completed.delete(fishInfo.id);
       }
       ViewModel.saveSettings();
 
