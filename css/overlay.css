@@ -124,6 +124,11 @@ tr.fish-intuition-row .weather-icon.sprite-icon {
   margin: -9px;
 }
 
+tr.fish-intuition-row .tug-indicator {
+  /* Attempt to shrink the display a little */
+  transform: scale(0.75) translate(-60%, 95%);
+}
+
 img {
   vertical-align: middle;
 }
