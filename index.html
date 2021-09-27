@@ -39,7 +39,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20210925_1237" />
+    <link rel="stylesheet" href="css/overlay.css?20210926_2035" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -364,26 +364,40 @@
             <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
           {{?}}
           <span class="bait-span">
-          {{~it.bait :item:idx}}
-            {{?idx == 0}}
-              <a href="https://garlandtools.org/db/#item/{{=item.id}}" target="cp_gt">
-            {{??}}
-              {{?item.hookset}}
-                <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
-                     title="{{=item.hookset}} Hookset"></div>
+            {{~it.bait :item:idx}}
+              {{?idx == 0}}
+                <a href="https://garlandtools.org/db/#item/{{=item.id}}" target="cp_gt">
+              {{??}}
+                <div class="bait-badge-container">
+                  {{?item.hookset}}
+                    <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
+                         title="{{=item.hookset}} Hookset"></div>
+                  {{?}}
+                  {{?item.tug}}
+                    <div class="tug-indicator {{=item.tug}}-tug-indicator" title="{{=item.tug}} tug">
+                      {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[item.tug]}}
+                    </div>
+                  {{?}}
+                </div>
+                </span><!-- bait-span -->
+                <i class="arrow right icon"></i>
+                <span class="bait-span">
               {{?}}
-              </span><!-- bait span -->
-              <i class="arrow right icon"></i>
-              <span class="bait-span">
-            {{?}}
-            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}" data-baitIdx="{{=idx}}"></div>
-            {{?idx == 0}}
-              </a>
-            {{?}}
-          {{~}}
-          {{?it.data.hookset}}
-            <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
-          {{?}}
+              <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}" data-baitIdx="{{=idx}}"></div>
+              {{?idx == 0}}
+                </a>
+              {{?}}
+            {{~}}
+            <div class="bait-badge-container">
+              {{?it.data.hookset}}
+                <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
+              {{?}}
+              {{?it.data.tug}}
+                <div class="tug-indicator {{=it.data.tug}}-tug-indicator" title="{{=it.data.tug}} tug">
+                  {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.data.tug]}}
+                </div>
+              {{?}}
+            </div>
           </span><!-- bait span -->
         </td>
       </tr>
