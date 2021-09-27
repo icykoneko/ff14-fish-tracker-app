@@ -23,3 +23,5 @@
 - name: Charon's Lantern
   startHour: 22
   endHour: 4
+- name: Shapeshifter
+  hookset: Precision
