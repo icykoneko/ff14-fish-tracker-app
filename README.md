@@ -58,14 +58,17 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
     * **NOTE:** This command **must** be run via CMD, not bash. For some reason, bash will cause the entries in the CSS to be different...
   * Edit the `public/images/sprite.css` file and add a *cache buster* to the main image. Use the format: `?YYYYMMDD`.
   * Compress the `public/images/sprite.png` file using https://tinypng.com/. This should reduce its size by ~67% and that reduces bandwidth, and costs.
+* Rebuild any changes made to `date-fns` using the `npm run build` command.
 * Test the site locally!!! `npm start` then open http://localhost:3000/.
 * Commit changes to master with an appropriate message. Don't forget to `git push` all changes to GitHub as well.
 * Go fish?!
 
 ### Updating the website
+* Rebuild any changes made to `date-fns` using the `npm run build` command.
 * Switch to the `gh-pages` branch (or `cd dist`.)
 * Merge the `master` branch in. You'll need to remove the entries that only exist in master... it's annoying, sorry.
 * If changes were made to the sprites, you need to place the compressed `sprite.png` and `sprite.css` files in `public/images/` for the `gh-pages` branch. This is not included in the master branch!
+* Copy the contents of `public/js` from master to the `gh-pages` branch as well.
 * Commit, and push changes to GitHub.
 
 ## TODOs
