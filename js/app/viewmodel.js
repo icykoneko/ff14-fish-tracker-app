@@ -196,19 +196,19 @@ class FishEntry {
       let currEnd = eorzeaTime.toEarth(+crs[0].end());
       let nextStart = eorzeaTime.toEarth(+crs[1].start());
 
-      this.availability.upcoming.downtime = dateFns.distanceInWordsStrict(currEnd, nextStart) + " later";
+      this.availability.upcoming.downtime = dateFns.formatDistanceStrict(currEnd, nextStart) + " later";
 
       this.availability.upcomingWindows = _(crs).map((cr, idx) => {
         let start = eorzeaTime.toEarth(+cr.start());
         let end = eorzeaTime.toEarth(+cr.end());
         let downtime = "";
         if (idx + 1 < crs.length) {
-          downtime = dateFns.distanceInWordsStrict(end, eorzeaTime.toEarth(+crs[idx+1].start()));
+          downtime = dateFns.formatDistanceStrict(end, eorzeaTime.toEarth(+crs[idx+1].start()));
         }
         return {
           start: start,
           end: end,
-          duration: dateFns.distanceInWordsStrict(start, end),
+          duration: dateFns.formatDistanceStrict(start, end),
           downtime: downtime
         };
       });
@@ -244,16 +244,16 @@ class FishEntry {
         // The fish is not currently available.
         this.isUpSoon = dateFns.differenceInMinutes(currStart, earthTime) < 15;
         this.availability.current.duration =
-          "in " + dateFns.distanceInWordsStrict(earthTime, currStart);
+          "in " + dateFns.formatDistanceStrict(earthTime, currStart);
         this.availability.current.date = currStart;
       } else {
         // The fish is currently available!
         this.isUpSoon = false; // It's already up! XD
         this.availability.current.duration =
-          "closes in " + dateFns.distanceInWordsStrict(earthTime, currEnd);
+          "closes in " + dateFns.formatDistanceStrict(earthTime, currEnd);
         this.availability.current.date = currEnd;
       }
-      this.availability.upcoming.duration = "in " + dateFns.distanceInWordsStrict(earthTime, nextStart);
+      this.availability.upcoming.duration = "in " + dateFns.formatDistanceStrict(earthTime, nextStart);
 
       this.availability.upcoming.date = nextStart;
       this.availability.upcoming.prevdate = currEnd;

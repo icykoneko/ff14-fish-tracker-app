@@ -179,7 +179,7 @@ class FishTableLayout {
       // date in the data `val`.
       $currentAvail.text(
         ($fishEntry.hasClass('fish-active') ? 'closes ' : '') + 'in ' +
-        dateFns.distanceInWordsStrict(baseTime, fishEntry.availability.current.date)
+        dateFns.formatDistanceStrict(baseTime, fishEntry.availability.current.date)
       );
     }
 
