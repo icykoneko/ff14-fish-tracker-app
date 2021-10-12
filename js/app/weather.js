@@ -123,7 +123,7 @@ class WeatherService {
       // Does the current weather condition work?
       if (currentWeatherSet.length == 0 || _(currentWeatherSet).contains(currentWeather)) {
         // Yield a date range for this weather period.
-        yield moment.duration(8, 'hours').afterMoment(moment.utc(lastDate));
+        yield dateFns.intervalAfter(+lastDate, {hours: 8});
       }
     }
     // That's it for the cached data, now you'll need to generate more...
@@ -143,7 +143,7 @@ class WeatherService {
       previousWeather = currentWeather;
       lastDate = new Date(date);
       // Calculate the next weather target and insert into the table.
-      date = dateFns.addHours(date, 8);
+      date = dateFns.utc.addHours(date, 8);
       var target = this.calculateForecastTarget(eorzeaTime.toEarth(lastDate));
       this.insertForecast(lastDate, target);
       currentWeather = weatherForArea(area, target);
@@ -154,7 +154,7 @@ class WeatherService {
       // Does the current weather condition work?
       if (currentWeatherSet.length == 0 || _(currentWeatherSet).contains(currentWeather)) {
         // Yield a date range for this weather period.
-        yield moment.duration(8, 'hours').afterMoment(moment.utc(lastDate));
+        yield dateFns.intervalAfter(+lastDate, {hours: 8});
       }
     }
     // The end =D

@@ -39,7 +39,7 @@ let CarbyUtils = function(){
         resetSiteData(datetime);
         Date.now = () => { return origDateNow() - dateOffset; };
       }
-      console.debug("Traveled to %s", moment.utc(eorzeaTime.toEorzea(datetime)).format());
+      console.debug("Traveled to %s", dateFns.formatISO(eorzeaTime.toEorzea(datetime)));
     }
 
     restoreTime() {
@@ -107,9 +107,8 @@ let CarbyUtils = function(){
       }
       if ((options.startHour !== undefined) || (options.endHour !== undefined)) {
         let totalHoursUp = Math.abs(fish_entry.endHour - fish_entry.startHour);
-        fish_entry.dailyDuration = moment.duration(
-          fish_entry.endHour < fish_entry.startHour ? 24 - totalHoursUp : totalHoursUp,
-          'hours');
+        fish_entry.dailyDuration = dateFns.normalizeDuration({
+          hours: fish_entry.endHour < fish_entry.startHour ? 24 - totalHoursUp : totalHoursUp });
       }
       fish_entry.alwaysAvailable =
         fish_entry.weatherSet.length == 0 && fish_entry.startHour == 0 && fish_entry.endHour == 24;

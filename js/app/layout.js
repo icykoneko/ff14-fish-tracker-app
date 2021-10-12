@@ -153,11 +153,11 @@ class FishTableLayout {
 
       $currentAvail
         .attr('data-val', fishEntry.availability.current.date)
-        .attr('data-tooltip', moment(fishEntry.availability.current.date).calendar());
+        .attr('data-tooltip', dateFns.formatRelative(fishEntry.availability.current.date, Date.now()));
       $upcomingAvail
         .attr('data-val', fishEntry.availability.upcoming.date)
         .attr('data-prevclose', fishEntry.availability.upcoming.prevdate)
-        .attr('data-tooltip', moment(fishEntry.availability.upcoming.date).calendar())
+        .attr('data-tooltip', dateFns.formatRelative(fishEntry.availability.upcoming.date, Date.now()))
         .text(fishEntry.availability.upcoming.downtime);
       
       // If this fish is currently being displayed in the upcoming windows, update it now!

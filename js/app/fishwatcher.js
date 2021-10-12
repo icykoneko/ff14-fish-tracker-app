@@ -82,7 +82,7 @@ class FishWatcher {
     for (let fish of trackedFish) {
       // SAFEGUARD: Consume /all/ expired entries.
       while (fish.catchableRanges.length > 0 &&
-          dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
+          dateFns.isSameOrAfter(eDate, fish.catchableRanges[0].end)) {
         // Remove the first entry from the array.
         fish.catchableRanges.shift();
         fish.notifyCatchableRangesUpdated();
@@ -111,7 +111,7 @@ class FishWatcher {
     //   Remove expired windows first.
     var eDate = eorzeaTime.getCurrentEorzeaDate();
     while (fish.catchableRanges.length > 0 &&
-        dateFns.isSameOrAfter(eDate, +fish.catchableRanges[0].end())) {
+        dateFns.isSameOrAfter(eDate, fish.catchableRanges[0].end)) {
       // Remove the first entry from the array.
       fish.catchableRanges.shift();
       fish.notifyCatchableRangesUpdated();
@@ -148,7 +148,7 @@ class FishWatcher {
     var startOfWindow = null;
     var latestWindow = _(fish.catchableRanges).last();
     if (latestWindow) {
-      startOfWindow = new Date(+latestWindow.end());
+      startOfWindow = new Date(+latestWindow.end);
       var h = dateFns.utc.getHours(startOfWindow);
       if (h != 0 && h != 8 && h != 16) {
         // OPTIMIZATION (and safeguard):
@@ -186,7 +186,7 @@ class FishWatcher {
       lastRangeSpansPeriods = false;
       // This time, just peek at the NEXT period.
       var iter = weatherService.findWeatherPattern(
-        +_(fish.catchableRanges).last().end(),
+        +_(fish.catchableRanges).last().end,
         fish.location.zoneId,
         fish.previousWeatherSet,
         fish.weatherSet,
@@ -220,13 +220,13 @@ class FishWatcher {
   }
 
   __checkToAddCatchableRangeInner(fish, window, nextRange) {
-    if (!window.overlaps(nextRange)) {
+    if (!dateFns.areIntervalsOverlapping(window, nextRange)) {
       // Oops, this is why you need to optimize this...
       return false;
     }
     // SAFEGUARD! Verify this range hasn't already expired!!!
     // This is more here to prevent any future stupidity...
-    if (dateFns.isSameOrBefore(+nextRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
+    if (dateFns.isSameOrBefore(nextRange.end, eorzeaTime.getCurrentEorzeaDate())) {
       //console.error("Range has already expired:", nextRange.simpleFormat());
       return false;
     }
@@ -235,7 +235,7 @@ class FishWatcher {
     // As a result, if a fish is up for multiple 8-hour windows, `nextRange` will keep
     // getting set to the same value. To solve this, we'll intersect nextRange with window.
     var origNextRange = nextRange;
-    nextRange = nextRange.intersection(window);
+    nextRange = dateFns.intervalIntersection(nextRange, window);
 
     // If this fish has predators, we have to consider their windows too...
     // Basically, to ensure we get the same number of windows for every fish,
@@ -258,7 +258,7 @@ class FishWatcher {
         // Once again, we need to check if the weather right now works for
         // the predator fish.
         var iter = weatherService.findWeatherPattern(
-          +nextRange.start(),
+          +nextRange.start,
           predatorFish.location.zoneId,
           predatorFish.previousWeatherSet,
           predatorFish.weatherSet,
@@ -269,7 +269,7 @@ class FishWatcher {
           // Wait wait wait, try one more thing.
           // Let's say you catch the fish during the intuition buff period!
           iter = weatherService.findWeatherPattern(
-            +nextRange.start().subtract(intuitionLength, 'seconds'),
+            +dateFns.utc.subSeconds(nextRange.start, intuitionLength),
             predatorFish.location.zoneId,
             predatorFish.previousWeatherSet,
             predatorFish.weatherSet,
@@ -281,19 +281,19 @@ class FishWatcher {
         var predWindow = _iterItem.value;
         var predRanges = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
         for (var predRange of predRanges) {
-          if (!predWindow.overlaps(predRange)) { continue /*nextRange = null*/; }
-          if (dateFns.isSameOrBefore(+predRange.end(), eorzeaTime.getCurrentEorzeaDate())) {
+          if (!dateFns.areIntervalsOverlapping(predWindow, predRange)) { continue /*nextRange = null*/; }
+          if (dateFns.isSameOrBefore(predRange.end, eorzeaTime.getCurrentEorzeaDate())) {
             continue /*nextRange = null*/;
           }
           // Because of the "intuition window" being added, we need to re-constrain the predRange.
-          predRange = predRange.intersection(predWindow);
+          predRange = dateFns.intervalIntersection(predRange, predWindow);
           if (overallPredRange === null) {
             overallPredRange = predRange;
           } else {
             // COMBINE this predators range with the others.
             // This is necessary for fish with multiple predators which have
             // non-overlapping availability...
-            overallPredRange = overallPredRange.union(predRange);
+            overallPredRange = dateFns.intervalUnion(overallPredRange, predRange);
           }
         }
         return nextRange;
@@ -305,8 +305,8 @@ class FishWatcher {
         nextRange = null;
       } else {
         // Increase the pred range by intuition buff time first.
-        overallPredRange = overallPredRange.start().twix(overallPredRange.end().add(intuitionLength, 'seconds'))
-        nextRange = nextRange.intersection(overallPredRange);
+        overallPredRange = { start: overallPredRange.start, end: dateFns.utc.addSeconds(overallPredRange.end, intuitionLength) };
+        nextRange = dateFns.intervalIntersection(nextRange, overallPredRange);
       }
     }
     if (nextRange === null) {
@@ -317,8 +317,8 @@ class FishWatcher {
     // Now for the complicated part...
     // Update the catchable ranges using the intersection of the next range
     // and the window itself. Merge together bordering windows.
-    fish.addCatchableRange(nextRange.intersection(window));
-    return origNextRange.contains(+window.end() + 1);
+    fish.addCatchableRange(dateFns.intervalIntersection(nextRange, window));
+    return dateFns.isWithinInterval(+window.end + 1, origNextRange);
   }
 }
 

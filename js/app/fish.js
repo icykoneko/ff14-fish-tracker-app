@@ -45,8 +45,8 @@ class Fish {
     this.incompleteRanges = [];
     {
       var diff = Math.abs(this.endHour - this.startHour);
-      this.dailyDuration =
-        moment.duration(this.endHour < this.startHour ? 24 - diff : diff, 'hours');
+      this.dailyDuration = dateFns.normalizeDuration({
+        hours: this.endHour < this.startHour ? 24 - diff : diff });
     }
     this.conditions = {
       previousWeatherSet: _(this.previousWeatherSet).map((w) => DATA.WEATHER_TYPES[w]),
@@ -106,7 +106,7 @@ class Fish {
     if (dt === null) dt = Date.now();
     var crs = this.catchableRanges;
     if (crs.length > 0) {
-      return dateFns.isSameOrAfter(dt, eorzeaTime.toEarth(+crs[0].start()));
+      return dateFns.isSameOrAfter(dt, eorzeaTime.toEarth(+crs[0].start));
     }
     if (fe === true && this.fishEyes) {
       // This logic is a little odd... Callers expect `isCatchable` to only
@@ -135,7 +135,7 @@ class Fish {
     // is catchable, factoring in Fish Eyes. The time is EORZEA TIME!
     var crs = this.catchableRanges;
     if (crs.length > 0) {
-      return +crs[0].start();
+      return +crs[0].start;
     }
     if (fe === true && this.fishEyes) {
       if (!this.alwaysAvailable && this.conditions.weatherSet.length == 0) {
@@ -172,9 +172,9 @@ class Fish {
       let crs = this.catchableRanges;
       if (crs.length > 0) {
         // Compute the overall time this fish is up for.
-        let overallTime = +_(crs).last().end() - +_(crs).first().start();
+        let overallTime = +_(crs).last().end - +_(crs).first().start;
         this.__uptime = _(crs).reduce(
-          (uptime, range) => uptime += range.asDuration('milliseconds'), 0) / overallTime;
+          (uptime, range) => uptime += dateFns.milliseconds(dateFns.intervalToDuration(range)), 0) / overallTime;
       } else {
         this.__uptime = 1;
       }
@@ -198,7 +198,7 @@ class Fish {
     }
     // How long is the fish normally available?
     var d = this.dailyDuration;
-    var m = +r.start();
+    var m = +r.start;
     let o = [];
     var rs = dateFns.utc.addMinutes(dateFns.utc.setHours(m, this.startHour), (this.startHour % 1) * 60);
 
@@ -207,18 +207,18 @@ class Fish {
       if (dateFns.utc.getHours(m) < this.endHour) {
         // Use the *remaining* portion of the catchable range which started
         // yesterday, as well as any portion intersecting today's window.
-        o.push(d.afterMoment(moment.utc(dateFns.utc.subDays(rs, 1))));
-        if (dateFns.utc.getHours(+r.end()) > this.startHour) {
+        o.push(dateFns.intervalAfter(dateFns.utc.subDays(rs, 1), d));
+        if (dateFns.utc.getHours(+r.end) > this.startHour) {
           // Also include the portion of the window when the fish is available once again.
-          o.push(d.afterMoment(moment.utc(rs)));
+          o.push(dateFns.intervalAfter(rs, d));
         }
       } else {
-        o.push(d.afterMoment(moment.utc(rs)));
+        o.push(dateFns.intervalAfter(rs, d));
       }
     } else if (dateFns.utc.getHours(m) < this.endHour) {
       // Available times limited to this date.
       // The fish's *current* range begins (or began) today.
-      o.push(d.afterMoment(moment.utc(rs)));
+      o.push(dateFns.intervalAfter(rs, d));
     }
     return o;
   }
@@ -240,19 +240,19 @@ class Fish {
     // WARNING:
     //   You should never call this function giving the same range as the last
     //   one. Also, the next range BETTER be AFTER the last one!!!
-    if (nextRange.start().isBefore(lastRange.end())) {
+    if (dateFns.isBefore(nextRange.start, lastRange.end)) {
       console.error("CRITICAL BUG: The next range starts before the end of the last range!");
       return;
     }
-    var merged = lastRange.xor(nextRange);
+    var merged = dateFns.intervalXor(lastRange, nextRange);
     // SAFEGUARD:
     //   If everything's being done right, xor should NEVER return a list
     //   of nothing! But, mistakes happen, and to avoid deleting data by
     //   mistake in addition, we'll just abort right here... and complain...
     if (merged === null || merged.length == 0) {
       console.error("CRITICAL BUG: merged is empty?!",
-        {lastRange: lastRange.simpleFormat(),
-         nextRange: nextRange.simpleFormat()});
+        {lastRange: dateFns.formatISO(lastRange.start) + " - " + dateFns.formatISO(lastRange.end),
+         nextRange: dateFns.formatISO(nextRange.start) + " - " + dateFns.formatISO(nextRange.end)});
       return;
     }
     this.catchableRanges.splice.apply(

@@ -193,17 +193,17 @@ class FishEntry {
     let crs = fish.catchableRanges;
 
     if (crs.length > 0) {
-      let currEnd = eorzeaTime.toEarth(+crs[0].end());
-      let nextStart = eorzeaTime.toEarth(+crs[1].start());
+      let currEnd = eorzeaTime.toEarth(+crs[0].end);
+      let nextStart = eorzeaTime.toEarth(+crs[1].start);
 
       this.availability.upcoming.downtime = dateFns.formatDistanceStrict(currEnd, nextStart) + " later";
 
       this.availability.upcomingWindows = _(crs).map((cr, idx) => {
-        let start = eorzeaTime.toEarth(+cr.start());
-        let end = eorzeaTime.toEarth(+cr.end());
+        let start = eorzeaTime.toEarth(+cr.start);
+        let end = eorzeaTime.toEarth(+cr.end);
         let downtime = "";
         if (idx + 1 < crs.length) {
-          downtime = dateFns.formatDistanceStrict(end, eorzeaTime.toEarth(+crs[idx+1].start()));
+          downtime = dateFns.formatDistanceStrict(end, eorzeaTime.toEarth(+crs[idx+1].start));
         }
         return {
           start: start,
@@ -231,14 +231,14 @@ class FishEntry {
     // The rest requires catchable ranges.
     if (crs.length > 0) {
       // Cache the dates, they are used A LOT.
-      let currStart = eorzeaTime.toEarth(+crs[0].start());
-      let currEnd = eorzeaTime.toEarth(+crs[0].end());
+      let currStart = eorzeaTime.toEarth(+crs[0].start);
+      let currEnd = eorzeaTime.toEarth(+crs[0].end);
       // NOTE: If it has one entry, it'll have 2...
       if (crs.length < 2) {
         console.error("Expected at least 2 catchable ranges for " + fish.name);
         return;
       }
-      let nextStart = eorzeaTime.toEarth(+crs[1].start());
+      let nextStart = eorzeaTime.toEarth(+crs[1].start);
 
       if (dateFns.isAfter(currStart, earthTime)) {
         // The fish is not currently available.
@@ -333,7 +333,15 @@ let ViewModel = new class {
 
   initialize() {
     // When displaying a date that's more than a week away, include the time as well.
-    moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
+    const orig_formatRelative = dateFns.defaultLocale.formatRelative;
+    function formatRelative_wrapper(token, _date, _baseDate, _options) {
+      if (token === 'other') {
+        return "eee, M/d 'at' p";
+      } else {
+        return orig_formatRelative(token, _date, _baseDate, _options);
+      }
+    }
+    dateFns.defaultLocale.formatRelative = formatRelative_wrapper;
     doT.templateSettings.strip = false;
 
     // Finally, initialize the display.
@@ -583,7 +591,7 @@ let ViewModel = new class {
       let timestamp = reason.countdown;
 
       // Update the main header's times.
-      $('#eorzeaClock').text(moment.utc(eorzeaTime.toEorzea(timestamp)).format("HH:mm"));
+      $('#eorzeaClock').text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(timestamp)), "HH:mm"));
 
       // Check if the EARTH DATE has changed as well. If so, we must also
       // refresh the cached relative date text!

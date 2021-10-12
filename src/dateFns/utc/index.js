@@ -1,6 +1,7 @@
 import { toDate } from 'date-fns'
 import toInteger from 'date-fns/_lib/toInteger/index'
 import requiredArgs from 'date-fns/_lib/requiredArgs/index'
+import getTimezoneOffsetInMilliseconds from 'date-fns/_lib/getTimezoneOffsetInMilliseconds/index'
 
 import { addHours as addHoursOrig,
          addMilliseconds as addMillisecondsOrig,
@@ -198,3 +199,18 @@ export let subHours = subHoursOrig;
 export let subMilliseconds = subMillisecondsOrig;
 export let subMinutes = subMinutesOrig;
 export let subSeconds = subSecondsOrig;
+
+function toUTCDate(dirtyDate) {
+    const date = toDate(dirtyDate);
+    // return Date.UTC(date.getUTCFullYear(),
+    //                 date.getUTCMonth(),
+    //                 date.getUTCDate(),
+    //                 date.getUTCHours(),
+    //                 date.getUTCMinutes(),
+    //                 date.getUTCSeconds(),
+    //                 date.getUTCMilliseconds());
+    const utcDate = addMillisecondsOrig(date, getTimezoneOffsetInMilliseconds(date));
+    return utcDate;
+}
+
+export { toUTCDate as toDate };
