@@ -1319,8 +1319,9 @@ let ViewModel = new class {
           }
           // Update the fish entries.
           // TODO: [NEEDS-OPTIMIZATION]
+          let earthTime = new Date();
           _(ViewModel.fishEntries).each(entry => {
-            entry.update();
+            entry.update(earthTime, true);
             ViewModel.layout.updatePinnedState(entry);
             ViewModel.layout.updateCaughtState(entry);
           });
