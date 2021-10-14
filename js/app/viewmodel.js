@@ -196,19 +196,21 @@ class FishEntry {
       let currEnd = eorzeaTime.toEarth(+crs[0].end);
       let nextStart = eorzeaTime.toEarth(+crs[1].start);
 
-      this.availability.upcoming.downtime = dateFns.formatDistanceStrict(currEnd, nextStart) + " later";
+      this.availability.upcoming.downtime = dateFns.formatDistanceStrict(
+        nextStart, currEnd, { roundingMethod: 'floor' }) + " later";
 
       this.availability.upcomingWindows = _(crs).map((cr, idx) => {
         let start = eorzeaTime.toEarth(+cr.start);
         let end = eorzeaTime.toEarth(+cr.end);
         let downtime = "";
         if (idx + 1 < crs.length) {
-          downtime = dateFns.formatDistanceStrict(end, eorzeaTime.toEarth(+crs[idx+1].start));
+          downtime = dateFns.formatDistanceStrict(
+            eorzeaTime.toEarth(+crs[idx+1].start), end, { roundingMethod: 'floor' });
         }
         return {
           start: start,
           end: end,
-          duration: dateFns.formatDistanceStrict(start, end),
+          duration: dateFns.formatDistanceStrict(end, start, { roundingMethod: 'floor' }),
           downtime: downtime
         };
       });
@@ -244,16 +246,17 @@ class FishEntry {
         // The fish is not currently available.
         this.isUpSoon = dateFns.differenceInMinutes(currStart, earthTime) < 15;
         this.availability.current.duration =
-          "in " + dateFns.formatDistanceStrict(earthTime, currStart);
+          "in " + dateFns.formatDistanceStrict(currStart, earthTime, { roundingMethod: 'floor' });
         this.availability.current.date = currStart;
       } else {
         // The fish is currently available!
         this.isUpSoon = false; // It's already up! XD
         this.availability.current.duration =
-          "closes in " + dateFns.formatDistanceStrict(earthTime, currEnd);
+          "closes in " + dateFns.formatDistanceStrict(currEnd, earthTime, { roundingMethod: 'floor' });
         this.availability.current.date = currEnd;
       }
-      this.availability.upcoming.duration = "in " + dateFns.formatDistanceStrict(earthTime, nextStart);
+      this.availability.upcoming.duration =
+        "in " + dateFns.formatDistanceStrict(nextStart, earthTime, { roundingMethod: 'floor' });
 
       this.availability.upcoming.date = nextStart;
       this.availability.upcoming.prevdate = currEnd;
@@ -332,16 +335,6 @@ let ViewModel = new class {
   }
 
   initialize() {
-    // When displaying a date that's more than a week away, include the time as well.
-    const orig_formatRelative = dateFns.defaultLocale.formatRelative;
-    function formatRelative_wrapper(token, _date, _baseDate, _options) {
-      if (token === 'other') {
-        return "eee, M/d 'at' p";
-      } else {
-        return orig_formatRelative(token, _date, _baseDate, _options);
-      }
-    }
-    dateFns.defaultLocale.formatRelative = formatRelative_wrapper;
     doT.templateSettings.strip = false;
 
     // Finally, initialize the display.
