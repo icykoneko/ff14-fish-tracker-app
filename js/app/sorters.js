@@ -15,12 +15,12 @@ let Sorters = function() {
   function getWindowStart(windows, offset) {
     if (windows === undefined) { return maxTime; }
     if (windows.length <= offset) { return maxTime; }
-    return +windows[offset].start();
+    return +windows[offset].start;
   }
   function getWindowEnd(windows, offset) {
     if (windows === undefined) { return maxTime; }
     if (windows.length <= offset) { return maxTime; }
-    return +windows[offset].end();
+    return +windows[offset].end;
   }
 
   function compareWindows(aStart, bStart, baseTime) {

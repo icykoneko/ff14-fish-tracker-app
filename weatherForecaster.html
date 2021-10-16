@@ -20,16 +20,13 @@
       gtag('config', 'UA-142180509-1');
     </script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twix.js/1.1.5/twix.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js"></script>
-    <script src="js/lib/dateFns.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.3/doT.min.js"></script>
+    <script src="public/js/lib/dateFns/2.25.0/dateFns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css" />
@@ -328,9 +325,9 @@
       }
     </style>
 
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20191109_1301" />
-    <link rel="stylesheet" href="css/overlay.css?20191109_1301" />
-    <link rel="stylesheet" href="css/dark_overlay.css?20191109_1301" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css" />
+    <link rel="stylesheet" href="css/overlay.css" />
+    <link rel="stylesheet" href="css/dark_overlay.css" />
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js"></script>
@@ -390,8 +387,8 @@
     <script id="weatherWindows-template" type="text/html;x-dot-template">
       {{~it :w:idx}}
         <div class="item">
-          <div class="header">{{=dateFns.format(eorzeaTime.toEarth(+w.start()), "dddd, MMMM Do YYYY, h:mm:ss a")}}</div>
-          {{=moment.utc(w.start()).format("HH:mm")}} - {{=moment.utc(w.end()).format("HH:mm")}}
+          <div class="header">{{=dateFns.format(eorzeaTime.toEarth(w.start), "PPPPpppp")}}</div>
+          {{=dateFns.format(dateFns.utc.toDate(w.start), "HH:mm")}} - {{=dateFns.format(dateFns.utc.toDate(w.end), "HH:mm")}}
         </div>
       {{~}}
     </script>
@@ -406,19 +403,15 @@
           timestamp()
         ).subscribe(x => {
           // Update the main header's earth and eorzea times.
-          $("#earthClock").text(dateFns.format(x.timestamp, "dddd, MMMM Do YYYY, h:mm:ss a"));
-          $("#eorzeaClock").text(moment.utc(eorzeaTime.toEorzea(x.timestamp)).format("HH:mm"));
+          $("#eorzeaClock").text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(x.timestamp)), "HH:mm"));
         });
 
-        var $languageButtons = $('#languageChoice .button');
         $nextWindows = $("#nextWindows");
         $nextWindowsLabel = $("#nextWindowsLabel");
         var weatherWindowsTemplate = doT.template($('#weatherWindows-template').text());
 
         $weatherTable = $('#weatherTable');
         var weatherTableTemplate = doT.template($('#weatherTable-template').text());
-
-        $($languageButtons).filter('[data-lang="' + localizationHelper.getLanguage() + '"]').addClass('active');
 
         var territory_id = null;
         var territory_name = null;
@@ -437,11 +430,13 @@
           });
         });
 
-        $languageButtons.on('click', function() {
-          var lang = $(this).addClass('active').data('lang');
-          $(this).siblings().removeClass('active');
-          localizationHelper.setLanguage(lang);
-        });
+        // The language selection isn't managed by ViewModel's settings, so we need
+        // to set the active language here...
+        $('#languageChoice.dropdown')
+          .dropdown('set selected', localizationHelper.getLanguage())
+          .dropdown({
+            onChange: (value, text, $choice) => localizationHelper.setLanguage(value),
+          });
 
         localizationHelper.languageChanged.pipe(
           skip(1)
@@ -491,9 +486,9 @@
                 }
                 var w = _iterItem.value;
                 rows.push("\"" + (fromWeather === null ? "" : fromWeather.name) + "\",\"" + toWeather.name + "\"," +
-                  new Date(eorzeaTime.toEarth(+w.start())).toISOString() + "," +
-                  moment.utc(w.start()).format("HH:mm") + "," +
-                  moment.utc(w.end()).format("HH:mm") + "\n");
+                  new Date(eorzeaTime.toEarth(w.start)).toISOString() + "," +
+                  dateFns.format(dateFns.utc.toDate(w.start), "HH:mm") + "," +
+                  dateFns.format(dateFns.utc.toDate(w.end), "HH:mm") + "\n");
               }
               data = data.concat(rows);
             });
@@ -576,7 +571,7 @@
                 }
                 if (timePeriods.length != 3) {
                   var w = _iterItem.value;
-                  if (timePeriods.includes(dateFns.utc.getHours(w.start()))) {
+                  if (timePeriods.includes(dateFns.utc.getHours(w.start))) {
                     windows.push(w);
                   }
                 } else {
@@ -628,13 +623,13 @@
         function themeButtonClicked(e) {
           if (e) e.stopPropagation();
           let $this = $(this);
-          siteTheme = $this.prop('checked') ? 'dark' : 'light';
-          applyTheme(siteTheme);
+          let theme = $this.data('theme');
+          // Apply the theme.
+          applyTheme(theme);
         }
+        $('#theme-toggle .toggle').on('click', themeButtonClicked);
 
         // Set the theme.
-        $('#theme-button').prop('checked', siteTheme === 'dark');
-        $('#theme-button').on('click', themeButtonClicked);
         applyTheme(siteTheme);
 
       });
@@ -644,11 +639,26 @@
     <div id="topmenu" class="ui text top fixed menu">
       <div class="ui container">
         <div class="header item">FFX|V Weather Forecaster</div>
-        <div class="right item">
-          <b>Current Time:</b>&nbsp;<span id="eorzeaClock">##:##</span>&nbsp;(<span id="earthClock">#########</span>)
-          <div id="theme-toogle" class="ui toggle checkbox">
-            <input type="checkbox" name="theme-button" id="theme-button">
-            <label></label>
+        <div class="ui right borderless menu">
+          <!-- Eorzea Time (realtime updated) -->
+          <div class="item" id="eorzeaClock" title="Eorzea Time">##:##</div>
+          <!-- Light/Dark Mode Toggle (sun/moon) -->
+          <div class="item" id="theme-toggle" title="Toggle theme">
+            <span class="toggle dark-mode-toggle" data-theme="dark">🌙</span>
+            <span class="toggle light-mode-toggle" data-theme="light">☀️</span>
+          </div>
+          <!-- Language Selector -->
+          <div class="ui dropdown item" id="languageChoice">
+            <input type="hidden" name="language">
+            <!-- <i class="dropdown icon"></i> -->
+            <div class="default text" title="Switch language"><i class="flag icon"></i></div>
+            <div class="ui left mini menu">
+              <div class="item" data-value="en"><i class="us flag"></i><span class="text">English</span></div>
+              <div class="item" data-value="ja"><i class="jp flag"></i><span class="text">日本語</span></div>
+              <div class="item" data-value="de"><i class="de flag"></i><span class="text">Deutsch</span></div>
+              <div class="item" data-value="fr"><i class="fr flag"></i><span class="text">Français</span></div>
+              <div class="item" data-value="ko"><i class="kr flag"></i><span class="text">한국어</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -656,72 +666,45 @@
     <div class="ui main container">
       <h1>FFX|V Weather Forecaster</h1>
       <div class="ui basic form segment">
-          <div class="fields">
-            <div class="seven wide field" style="flex-grow: 7;">
-              <label>Zone</label>
-              <div class="ui fluid search selection dropdown" id="territory">
-                <input type="hidden" name="territory" />
-                <i class="dropdown icon"></i>
-                <div class="default text">Select Zone</div>
-                <div class="menu"></div>
-              </div>
-            </div>
-            <div class="two wide field" style="flex-shrink: 2;">
-              <label>Max&nbsp;Windows</label>
-              <div class="ui spinner input" id="maxWindows">
-                <input type="text" value="10" name="maxWindows" autocomplete="off" />
-                <div class="ui vertical icon buttons">
-                  <div class="ui spinner up icon button">
-                    <i class="chevron up icon"></i>
-                  </div>
-                  <div class="ui spinner down icon button">
-                    <i class="chevron down icon"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="three wide field" style="flex-shrink: 3;">
-              <label>&nbsp;</label>
-              <div class="ui checkbox disabled" id="clusterWindows">
-                <input type="checkbox" name="clusterWindows" />
-                <label>Cluster&nbsp;Windows</label>
-              </div>
-            </div>
-            <div class="four wide field" style="flex: 1 1 0;">
-              <label>&nbsp;</label>
-              <div class="ui labeled icon button disabled" id="downloadCSV">
-                <i class="download icon"></i>
-                Download&nbsp;<abbr title="Comma Seprated Values format">CSV</abbr>
-              </div>
+        <div class="fields">
+          <div class="seven wide field" style="flex-grow: 7;">
+            <label>Zone</label>
+            <div class="ui fluid search selection dropdown" id="territory">
+              <input type="hidden" name="territory" />
+              <i class="dropdown icon"></i>
+              <div class="default text">Select Zone</div>
+              <div class="menu"></div>
             </div>
           </div>
-          <div class="fields">
-            <div class="sixteen wide field" id="language">
-              <label>Language</label>
-              <div class="ui mini compact buttons" id="languageChoice">
-                <div class="ui labeled icon button" data-lang="en">
-                  <div class="icon"><i class="us flag"></i></div>
-                  English
+          <div class="two wide field" style="flex-shrink: 2;">
+            <label>Max&nbsp;Windows</label>
+            <div class="ui spinner input" id="maxWindows">
+              <input type="text" value="10" name="maxWindows" autocomplete="off" />
+              <div class="ui vertical icon buttons">
+                <div class="ui spinner up icon button">
+                  <i class="chevron up icon"></i>
                 </div>
-                <div class="ui labeled icon button" data-lang="ja">
-                  <div class="icon"><i class="jp flag"></i></div>
-                  日本語
-                </div>
-                <div class="ui labeled icon button" data-lang="de">
-                  <div class="icon"><i class="de flag"></i></div>
-                  Deutsch
-                </div>
-                <div class="ui labeled icon button" data-lang="fr">
-                  <div class="icon"><i class="fr flag"></i></div>
-                  Français
-                </div>
-                <div class="ui labeled icon button" data-lang="ko">
-                  <div class="icon"><i class="kr flag"></i></div>
-                  한국어
+                <div class="ui spinner down icon button">
+                  <i class="chevron down icon"></i>
                 </div>
               </div>
             </div>
           </div>
+          <div class="three wide field" style="flex-shrink: 3;">
+            <label>&nbsp;</label>
+            <div class="ui checkbox disabled" id="clusterWindows">
+              <input type="checkbox" name="clusterWindows" />
+              <label>Cluster&nbsp;Windows</label>
+            </div>
+          </div>
+          <div class="four wide field" style="flex: 1 1 0;">
+            <label>&nbsp;</label>
+            <div class="ui labeled icon button disabled" id="downloadCSV">
+              <i class="download icon"></i>
+              Download&nbsp;<abbr title="Comma Seprated Values format">CSV</abbr>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- <div class="ui grid">
         <div class="nine wide column"> -->

@@ -39,7 +39,8 @@ class EorzeaTime {
       // Counting on you to not screw us up...
       muda(resolve, ctx);
     }).then(() => {
-      console.info("%s have passed!", dateFns.distanceInWordsStrict(origDateNow(), currDateTime));
+      console.info("%s have passed!",
+        dateFns.formatDistanceStrict(currDateTime, origDateNow(), { roundingMethod: 'floor' }));
       Date.now = origDateNow;
     });
   }

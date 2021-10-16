@@ -65,3 +65,24 @@ class LocalizationHelper {
 
 let localizationHelper = new LocalizationHelper();
 let __p = _.bind(localizationHelper.getLocalizedProperty, localizationHelper);
+
+// Make adjustments to date-fns localization settings.
+// For now, this only supports the default locale, which is en-US
+(function () {
+  var formatRelativeLocale = {
+    lastWeek: "'Last' eeee 'at' p",
+    yesterday: "'Yesterday at' p",
+    today: "'Today at' p",
+    tomorrow: "'Tomorrow at' p",
+    nextWeek: "eeee 'at' p",
+    other: "eee, M/d 'at' p"
+  };
+  
+  var formatRelative = function (token, _date, _baseDate, _options) {
+    return formatRelativeLocale[token];
+  };
+  
+  // Override the defaultLocale's formatRelative function.
+  // This is a monkeypatch for 'date-fns/locale/en-US/_lib/formatRelative'.
+  dateFns.defaultLocale.formatRelative = formatRelative;
+})();

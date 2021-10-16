@@ -193,22 +193,24 @@ class FishEntry {
     let crs = fish.catchableRanges;
 
     if (crs.length > 0) {
-      let currEnd = eorzeaTime.toEarth(+crs[0].end());
-      let nextStart = eorzeaTime.toEarth(+crs[1].start());
+      let currEnd = eorzeaTime.toEarth(+crs[0].end);
+      let nextStart = eorzeaTime.toEarth(+crs[1].start);
 
-      this.availability.upcoming.downtime = dateFns.distanceInWordsStrict(currEnd, nextStart) + " later";
+      this.availability.upcoming.downtime = dateFns.formatDistanceStrict(
+        nextStart, currEnd, { roundingMethod: 'floor' }) + " later";
 
       this.availability.upcomingWindows = _(crs).map((cr, idx) => {
-        let start = eorzeaTime.toEarth(+cr.start());
-        let end = eorzeaTime.toEarth(+cr.end());
+        let start = eorzeaTime.toEarth(+cr.start);
+        let end = eorzeaTime.toEarth(+cr.end);
         let downtime = "";
         if (idx + 1 < crs.length) {
-          downtime = dateFns.distanceInWordsStrict(end, eorzeaTime.toEarth(+crs[idx+1].start()));
+          downtime = dateFns.formatDistanceStrict(
+            eorzeaTime.toEarth(+crs[idx+1].start), end, { roundingMethod: 'floor' });
         }
         return {
           start: start,
           end: end,
-          duration: dateFns.distanceInWordsStrict(start, end),
+          duration: dateFns.formatDistanceStrict(end, start, { roundingMethod: 'floor' }),
           downtime: downtime
         };
       });
@@ -231,29 +233,30 @@ class FishEntry {
     // The rest requires catchable ranges.
     if (crs.length > 0) {
       // Cache the dates, they are used A LOT.
-      let currStart = eorzeaTime.toEarth(+crs[0].start());
-      let currEnd = eorzeaTime.toEarth(+crs[0].end());
+      let currStart = eorzeaTime.toEarth(+crs[0].start);
+      let currEnd = eorzeaTime.toEarth(+crs[0].end);
       // NOTE: If it has one entry, it'll have 2...
       if (crs.length < 2) {
         console.error("Expected at least 2 catchable ranges for " + fish.name);
         return;
       }
-      let nextStart = eorzeaTime.toEarth(+crs[1].start());
+      let nextStart = eorzeaTime.toEarth(+crs[1].start);
 
       if (dateFns.isAfter(currStart, earthTime)) {
         // The fish is not currently available.
         this.isUpSoon = dateFns.differenceInMinutes(currStart, earthTime) < 15;
         this.availability.current.duration =
-          "in " + dateFns.distanceInWordsStrict(earthTime, currStart);
+          "in " + dateFns.formatDistanceStrict(currStart, earthTime, { roundingMethod: 'floor' });
         this.availability.current.date = currStart;
       } else {
         // The fish is currently available!
         this.isUpSoon = false; // It's already up! XD
         this.availability.current.duration =
-          "closes in " + dateFns.distanceInWordsStrict(earthTime, currEnd);
+          "closes in " + dateFns.formatDistanceStrict(currEnd, earthTime, { roundingMethod: 'floor' });
         this.availability.current.date = currEnd;
       }
-      this.availability.upcoming.duration = "in " + dateFns.distanceInWordsStrict(earthTime, nextStart);
+      this.availability.upcoming.duration =
+        "in " + dateFns.formatDistanceStrict(nextStart, earthTime, { roundingMethod: 'floor' });
 
       this.availability.upcoming.date = nextStart;
       this.availability.upcoming.prevdate = currEnd;
@@ -332,8 +335,6 @@ let ViewModel = new class {
   }
 
   initialize() {
-    // When displaying a date that's more than a week away, include the time as well.
-    moment.updateLocale('en', {calendar: {sameElse: 'ddd, M/D [at] LT'}});
     doT.templateSettings.strip = false;
 
     // Finally, initialize the display.
@@ -583,7 +584,7 @@ let ViewModel = new class {
       let timestamp = reason.countdown;
 
       // Update the main header's times.
-      $('#eorzeaClock').text(moment.utc(eorzeaTime.toEorzea(timestamp)).format("HH:mm"));
+      $('#eorzeaClock').text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(timestamp)), "HH:mm"));
 
       // Check if the EARTH DATE has changed as well. If so, we must also
       // refresh the cached relative date text!
@@ -1319,8 +1320,9 @@ let ViewModel = new class {
           }
           // Update the fish entries.
           // TODO: [NEEDS-OPTIMIZATION]
+          let earthTime = new Date();
           _(ViewModel.fishEntries).each(entry => {
-            entry.update();
+            entry.update(earthTime, true);
             ViewModel.layout.updatePinnedState(entry);
             ViewModel.layout.updateCaughtState(entry);
           });
