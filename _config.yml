@@ -9,11 +9,13 @@ exclude:
   - vendor/ruby/
   - pyvirt/
   - private/
+  - src/
   - index.js
   - LICENSE
   - package-lock.json
   - package.json
   - README.md
+  - rollup.config.js
 defaults:
   - scope:
       path: public/images/sprite.png
