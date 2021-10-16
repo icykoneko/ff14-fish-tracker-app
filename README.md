@@ -29,6 +29,11 @@ The webapp itself is completely static. At this time, some of the development en
 
 **NOTE:** Sprity doesn't seem to work in newer versions of Node due to dependencies... I've only had success running it via Node v10.24.1 on Windows.
 
+This application uses GitHub Pages to host the site, but the branch isn't a perfect copy of the main branch... I highly recommend using a worktree to have the `gh-pages` branch checked out in a folder named `dist`.
+```
+git worktree add --track ./dist gh-pages
+```
+
 ## Step-by-step Instructions for Updating Data
 Sometimes you forget how to do this after several months... Clearly the TODO list isn't getting done...
 
@@ -70,6 +75,28 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
 * If changes were made to the sprites, you need to place the compressed `sprite.png` and `sprite.css` files in `public/images/` for the `gh-pages` branch. This is not included in the master branch!
 * Copy the contents of `public/js` from master to the `gh-pages` branch as well.
 * Commit, and push changes to GitHub.
+
+```bash
+npm run build
+# Assuming you've created a "workspace" folder dist that's tied to the gh-pages branch...
+cd dist
+# Merge master branch (deal with any "missing" files...)
+git merge master
+git status --porcelain | grep "^DU" | cut -f2 -d' ' | xargs git rm
+# In case anything changed, copy files from public into the branch too.
+cp -vrf ../public/images/sprite.* ./public/images/
+cp -vrf ../public/js/* ./public/js/
+# Remember to add them.
+git add public/images/ public/js/
+
+# Always do one final check of the site to be sure nothing got messed up in the merge.
+# (This is especially important when making large changes.)
+bundle exec jekyll serve
+
+# If everything's good, commit and push.
+git commit
+git push
+```
 
 ## TODOs
 * Automation of sprite generation
