@@ -114,12 +114,9 @@ title: Home
             {% if e.startHour or e.endHour %}
               {
                 var diff = Math.abs(fish_entry.endHour - fish_entry.startHour);
-                fish_entry.dailyDuration =
-                  moment.duration(fish_entry.endHour < fish_entry.startHour ? 24 - diff : diff, 'hours');
+                fish_entry.dailyDuration = dateFns.normalizeDuration({
+                  hours: fish_entry.endHour < fish_entry.startHour ? 24 - diff : diff });
               }
-            {%- endif -%}
-            {% if e.fishEyes %}
-              fish_entry.fishEyes = {{ e.fishEyes }};
             {%- endif -%}
             {% if e.snagging %}
               fish_entry.snagging = {{ e.snagging }};
