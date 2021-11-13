@@ -1659,7 +1659,7 @@
   patch: 2.3
 - name: Charon's Lantern
   location: Daniffen Pass
-  startHour: 0
+  startHour: 22
   endHour: 4
   previousWeatherSet: []
   weatherSet: []  # no longer restricted
@@ -7252,7 +7252,7 @@
   bestCatchPath:
   - Moyebi Shrimp
   predators:
-  hookset:
+  hookset: Precision
   tug: light
   snagging:
   gig:
