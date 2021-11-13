@@ -513,9 +513,9 @@ def rebuild_fish_data(args):
     # Re-sort the ITEMS dictionary.
     fish_and_tackle_data = OrderedDict(sorted(fish_and_tackle_data.items(), key=lambda t: t[0]))
 
-    with open(args.js_file, 'w') as f:
+    with open(args.js_file, 'w', encoding='utf-8') as f:
         def dump_foldable(o):
-            s = json.dumps(o)
+            s = json.dumps(o, ensure_ascii=False)
             return s[0] + '\n    ' + s[1:][:-1] + '\n  ' + s[-1]
 
         f.write("const DATA = {\n")

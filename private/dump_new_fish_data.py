@@ -878,10 +878,10 @@ def __build_supporting_json_tables(_iter: Iterable[Fish]):
 
 
 def pretty_dump(obj):
-    return json.dumps(obj, sort_keys=False, indent=2).replace('\n', '\n  ')
+    return json.dumps(obj, sort_keys=False, indent=2, ensure_ascii=False).replace('\n', '\n  ')
 
 
-with open("private/new_data.js", 'w') as f:
+with open("private/new_data.js", 'w', encoding='utf-8') as f:
     # Output everything in JavaScript format, using IDs to support localization.
     import json
     import datetime

@@ -143,9 +143,9 @@ def _update_icons(fish_infos):
 
 def _output_javascript(args, fish_infos):
     def pretty_dump(obj):
-        return json.dumps(obj, sort_keys=False, indent=2).replace('\n', '\n  ')
+        return json.dumps(obj, sort_keys=False, indent=2, ensure_ascii=False).replace('\n', '\n  ')
 
-    with open(args.js_file, 'w') as f:
+    with open(args.js_file, 'w', encoding='utf-8') as f:
         f.write('const FISH_INFO = %s;' % pretty_dump(fish_infos))
 
 
