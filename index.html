@@ -444,7 +444,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20210926_1839"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20111013_2022"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20211129_2146"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -731,6 +731,17 @@
                     <div class="ui active button" data-filter="5.5">5.5</div>
                   </div>
                 </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui primary patch-set button" style="width: 12.5em;" data-filter="6">Endwalker (6.x)</div>
+                    <div class="ui button" data-filter="6">6.0</div>
+                    <div class="ui disabled button" data-filter="6.1">6.1</div>
+                    <div class="ui disabled button" data-filter="6.2">6.2</div>
+                    <div class="ui disabled button" data-filter="6.3">6.3</div>
+                    <div class="ui disabled button" data-filter="6.4">6.4</div>
+                    <div class="ui disabled button" data-filter="6.5">6.5</div>
+                  </div>
+                </div>
               </div><!-- column -->
               <div class="column" style="width: unset;">
                 <div class="row" style="padding-bottom: 0.5rem;">Display:</div>
@@ -780,6 +791,26 @@
 
       <!-- Modal for displaying upcoming windows -->
       <div id="upcoming-windows" class="ui longer flushed modal upcoming-windows"></div>
+
+      <!-- Modal for displaying alert about new patch -->
+      <div id="new-fish-available-modal" class="ui tiny modal new-fish-available">
+        <div class="header">New Fish Available</div>
+        <div class="content">
+          <p>
+            Welcome back! New fish have been added since your last visit. In order to avoid possible spoilers, this patch is not displayed automatically.
+          </p>
+          <p>
+            Would you like the new fish to be displayed now?
+          </p>
+          <p>
+            <i>(You can display these new fish later on via the site settings - the gears icon in the upper right)</i>
+          </p>
+        </div>
+        <div class="actions">
+          <div id="show-the-new-fishies" class="ui approve positive button">Yes</div>
+          <div id="hide-the-new-fishies" class="ui cancel negative button">No</div>
+        </div>
+      </div>
 
       <!-- Display the list of fish -->
       <div id="fish-table-container">
