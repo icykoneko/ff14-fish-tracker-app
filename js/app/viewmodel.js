@@ -27,6 +27,8 @@ class SiteSettings {
       // * aquarium: Display only aquarium fish.
       // * big: Display only big fish.
       extra: 'all',
+      // Filter out fish that are always available?
+      hideAlwaysAvailable: true,
     };
 
     // Upcoming Window Format:
@@ -430,6 +432,7 @@ let ViewModel = new class {
     this.filterCompletionSubject = new BehaviorSubject(settings.filters.completion);
     this.filterExtraSubject = new BehaviorSubject(settings.filters.extra);
     this.filterPatchSubject = new BehaviorSubject(settings.filters.patch);
+    this.filterAlwaysAvailableSubject = new BehaviorSubject(settings.filters.hideAlwaysAvailable);
     this.sortingTypeSubject = new BehaviorSubject(settings.sortingType);
 
     // Update the table!
@@ -441,6 +444,9 @@ let ViewModel = new class {
     // Set event handlers.
     $('#filterCompletion .button').on('click', this.filterCompletionClicked);
     $('#filterExtra .button').on('click', this.filterExtraClicked);
+    $('#filterHideAlwaysAvailable.checkbox').checkbox({
+      onChange: this.filterHideAlwaysAvailableChecked
+    });
     $('#filterPatch .button:not(.patch-set)').on({
       click: this.filterPatchClicked,
       dblclick: this.filterPatchDblClicked
@@ -514,6 +520,11 @@ let ViewModel = new class {
       debounceTime(250),
       map(e => { return {filterExtra: e} })
     );
+    const filterAlwaysAvailable$ = this.filterAlwaysAvailableSubject.pipe(
+      skip(1),
+      debounceTime(250),
+      map(e => { return {filterAlwaysAvailable: e} })
+    );
     const sortingType$ = this.sortingTypeSubject.pipe(
       skip(1),
       debounceTime(250),
@@ -533,6 +544,7 @@ let ViewModel = new class {
       filterCompletion$,
       filterPatch$,
       filterExtra$,
+      filterAlwaysAvailable$,
       sortingType$,
       language$,
       fishEyes$);
@@ -638,7 +650,8 @@ let ViewModel = new class {
     if ((reason === null) ||
         (reason !== null && ('filterCompletion' in reason ||
                              'filterPatch' in reason ||
-                             'filterExtra' in reason)))
+                             'filterExtra' in reason ||
+                             'filterAlwaysAvailable' in reason)))
     {
       // Mark all existing entries as stale (or not active).
       // Anything that's not active, won't be displayed, and at the end of this
@@ -668,7 +681,8 @@ let ViewModel = new class {
     // Was this change caused by filter change?
     if (reason !== null && ('filterCompletion' in reason ||
                             'filterPatch' in reason ||
-                            'filterExtra' in reason))
+                            'filterExtra' in reason ||
+                            'filterAlwaysAvailable' in reason))
     {
       // Let FishWatcher know!
       fishWatcher.updateFishes();
@@ -678,6 +692,7 @@ let ViewModel = new class {
         (reason !== null && ('filterCompletion' in reason ||
                              'filterPatch' in reason ||
                              'filterExtra' in reason ||
+                             'filterAlwaysAvailable' in reason ||
                              'fishAvailability' in reason ||
                              'sortingType' in reason)))
     {
@@ -738,19 +753,16 @@ let ViewModel = new class {
 
     // Filter by extra criteria.
     if (this.settings.filters.extra == 'big') {
-      return !fish.bigFish;
+      if (!fish.bigFish) return true;
     } else if (this.settings.filters.extra == 'collectable') {
-      if (fish.collectable) {
-        return false;
-      } else {
-        return true;
-      }
+      if (!fish.collectable) return true;
     } else if (this.settings.filters.extra == 'aquarium') {
-      if (fish.aquarium) {
-        return false;
-      } else {
-        return true;
-      }
+      if (!fish.aquarium) return true;
+    }
+
+    // Filter by availability.
+    if (this.settings.filters.hideAlwaysAvailable) {
+      if (fish.alwaysAvailable) return true;
     }
 
     // No other reason to filter.
@@ -1061,6 +1073,17 @@ let ViewModel = new class {
     return false;
   }
 
+  filterHideAlwaysAvailableChecked(e) {
+    if (e) e.stopPropagation();
+    let $this = $(this);
+
+    ViewModel.settings.filters.hideAlwaysAvailable = $this.closest('.checkbox').checkbox('is checked');
+
+    // Notify anyone interested in this change.
+    ViewModel.filterAlwaysAvailableSubject.next(ViewModel.settings.filters.extra);
+    ViewModel.saveSettings();
+  }
+
   sortingTypeChecked(e) {
     if (e) e.stopPropagation();
     let $this = $(this);
@@ -1190,6 +1213,20 @@ let ViewModel = new class {
     if (settings.filters.extra) {
       $('#filterExtra .button[data-filter="' + settings.filters.extra + '"]')
       .addClass('active').siblings().removeClass('active');
+    }
+    if (settings.filters.hideAlwaysAvailable === undefined) {
+      console.info("Defaulting the 'hideAlwaysAvailable' setting to TRUE");
+      settings.filters.hideAlwaysAvailable = true;
+      let $message = $('#hideAlwaysAvailable_message');
+      $message.removeClass('hidden');
+      $message.find(".close").on('click', function() {
+        $(this).closest('.message').transition('fade');
+      });
+    }
+    if (settings.filters.hideAlwaysAvailable) {
+      $('#filterHideAlwaysAvailable').checkbox('set checked');
+    } else {
+      $('#filterHideAlwaysAvailable').checkbox('set unchecked');
     }
     if (settings.filters.patch) {
       // Convert to a Set if it's not already.
