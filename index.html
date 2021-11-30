@@ -517,7 +517,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20210926_1839"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20111013_2022"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20211129_2325"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -637,6 +637,21 @@ title: Home
             Welcome back to the secure version of this site.
             You should have copied your previous settings to the clipboard.
             Now, click the <i class="upload icon"></i> import button to restore your settings.
+          </p>
+        </div>
+      </div>
+
+      <!-- Message regarding change to hide fish that are always available -->
+      <div class="ui hidden icon info message announcement" id="hideAlwaysAvailable_message">
+        <i class="close icon"></i>
+        <i class="exclamation circle icon"></i>
+        <div class="content">
+          <div class="header">
+            Site Default Settings Updated
+          </div>
+          <p>
+            In order to reduce clutter and improve performance, any fish that is always available (without the use of Fish Eyes), is hidden by default.
+            You may change this setting in the site settings (click the <i class="cogs icon"></i> icon in the upper right).
           </p>
         </div>
       </div>
@@ -837,6 +852,14 @@ title: Home
                     <div class="ui button" data-filter="big">Big</div>
                     <div class="ui button" data-filter="collectable">Collectable</div>
                     <div class="ui button" data-filter="aquarium">Aquarium</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px; padding-bottom: 0.5rem;">
+                  <div class="field">
+                    <div id="filterHideAlwaysAvailable" class="ui checked checkbox">
+                      <input type="checkbox" name="hideAlwaysAvailable" checked="checked" class="hidden" value="hideAlwaysAvailable"/>
+                      <label>Hide Always Available</label>
+                    </div>
                   </div>
                 </div>
                 <div class="row" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
