@@ -516,8 +516,8 @@ def supports_fish_eyes(fish):
     # The fish must not be legendary: i.e. not include the phase: "オオヌシ".
     if "オオヌシ" in fish.item.source_row['Description', Language.japanese]:
         return False
-    # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
-    if fish.expansion.key >= 2:
+    # As of 6.0, Fish Eyes only works on fish in areas prior to Shadowbringers.
+    if fish.expansion.key >= 3:
         return False
 
     # While technically any other fish does support Fish Eyes, only fish with
@@ -567,7 +567,7 @@ for fish in tracked_iter(important_fish,
             'bigfish': fish.item.rarity >= 2,
             'quest': len(fish.quest) > 0,
             # 'shop': len(fish.shop) > 0,
-            'satisfaction': fish.satisfaction,
+            'satisfaction': fish.satisfaction['Collectability{High}'] if fish.satisfaction else None,
             'craft': len(fish.craft) > 0,
             'gc': fish.gc is not None,
             'leve': len(fish.leve) > 0,

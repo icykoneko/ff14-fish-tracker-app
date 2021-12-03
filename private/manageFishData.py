@@ -319,15 +319,15 @@ def supports_fish_eyes(fish_id, location_id, fish_params, patch):
     fish = XIV.game_data.get_sheet('Item')[fish_id]
     if "オオヌシ" in fish.source_row['Description', Language.japanese]:
         return False
-    # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
+    # As of 6.0, Fish Eyes only works on fish in areas prior to Shadowbringers.
     if location_id is not None:
         spot = XIV.game_data.get_sheet('FishingSpot')[location_id]
-        if spot.territory_type['ExVersion'].key >= 2:
+        if spot.territory_type['ExVersion'].key >= 3:
             return False
     else:
         # Sigh... let's just use the patch instead... One more reason to switch
         # to the new-and-improved back-end data processor...
-        if int(patch) >= 4:
+        if int(patch) >= 5:
             return False
 
     # While technically any other fish does support Fish Eyes, only fish with
@@ -745,7 +745,7 @@ def add_new_fish_data(args):
 
         # Dump the new fish data to a YAML file.
 
-    with open(args.new_data, 'w') as f:
+    with open(args.new_data, 'w', encoding='utf-8') as f:
         # Exclude fish without a name.
         def exclude_nameless_fish(fish):
             return fish['name'] != ''
