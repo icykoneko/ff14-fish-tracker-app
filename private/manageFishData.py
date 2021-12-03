@@ -701,7 +701,7 @@ def add_new_fish_data(args):
     global XIV  # type: 'pysaintcoinach.ARealmReversed'
 
     # Parse the fish data in the YAML file.
-    fishes = yaml.load(open(args.existing_data, 'r'), Loader=Loader)
+    fishes = yaml.load(open(args.existing_data, 'r', encoding='utf-8'), Loader=Loader)
     known_fishes = [fish['name'] for fish in fishes]
 
     # Add ignored fish as well please.

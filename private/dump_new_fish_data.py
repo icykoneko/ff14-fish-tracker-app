@@ -498,7 +498,7 @@ from yaml import CLoader as Loader
 from yaml import CDumper as Dumper
 
 # Import the OLD data...
-fishes = yaml.load(open("private/fishData.yaml", 'r'), Loader=Loader)
+fishes = yaml.load(open("private/fishData.yaml", 'r', encoding='utf-8'), Loader=Loader)
 known_fishes = dict([(fish['name'], fish) for fish in fishes])
 
 
@@ -651,7 +651,7 @@ WEATHER = dict([(x.name, x.key) for x in realm.game_data.get_sheet(Weather)])
 ITEM = dict(_get_item_lookup_dict_entries())
 
 
-with open("private/fishDataNew.yaml", 'w') as f:
+with open("private/fishDataNew.yaml", 'w', encoding='utf-8') as f:
     # Make things prettier...
     def represent_none(self, _):
         return self.represent_scalar('tag:yaml.org,2002:null', '')
@@ -664,7 +664,8 @@ with open("private/fishDataNew.yaml", 'w') as f:
 
     Dumper.add_representer(type(None), represent_none)
     yaml.dump(dict([transformed_fish_pair(fish) for fish in new_fishes.values()]),
-              f, Dumper=Dumper, default_flow_style=False, sort_keys=False)
+              f, Dumper=Dumper, default_flow_style=False, sort_keys=False,
+              allow_unicode=True, encoding='utf-8')
     # f.write('---\n')
     # f.writelines(['%s\n' % str(fish['name']) for fish in list(new_fishes.values())])
 
