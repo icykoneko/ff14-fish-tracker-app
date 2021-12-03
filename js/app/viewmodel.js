@@ -768,7 +768,9 @@ let ViewModel = new class {
 
     // Filter by availability.
     if (this.settings.filters.hideAlwaysAvailable) {
-      if (fish.alwaysAvailable) return true;
+      if (fish.alwaysAvailable && !fish.dataMissing) return true;
+      if (fish.alwaysAvailable && fish.dataMissing !== false &&
+          !(fish.dataMissing.weatherRestricted || fish.dataMissing.timeRestricted)) return true;
     }
 
     // No other reason to filter.
