@@ -267,7 +267,14 @@ def lookup_fish_by_name(name):
     result = nth(filter(lambda item: item[1]['name_en'] == name,
                         fish_and_tackle_data.items()), 0)
     if result is None:
-        raise ValueError(name)
+        # Why you do this SE? Mahi-mahi =_= Also fish with an extra space at the end?!
+        result = nth(filter(lambda item: item[1]['name_en'].strip().lower() == name.lower(),
+                            fish_and_tackle_data.items()), 0)
+        if result is None:
+            raise ValueError(name)
+        else:
+            logging.warning('The formatting of "%s" has changed in the DATs to: "%s"',
+                            name, result[1]['name_en'])
     return KeyValuePair(*result)
 
 
@@ -319,15 +326,15 @@ def supports_fish_eyes(fish_id, location_id, fish_params, patch):
     fish = XIV.game_data.get_sheet('Item')[fish_id]
     if "オオヌシ" in fish.source_row['Description', Language.japanese]:
         return False
-    # As of 5.4, Fish Eyes only works on fish in areas prior to Stormblood.
+    # As of 6.0, Fish Eyes only works on fish in areas prior to Shadowbringers.
     if location_id is not None:
         spot = XIV.game_data.get_sheet('FishingSpot')[location_id]
-        if spot.territory_type['ExVersion'].key >= 2:
+        if spot.territory_type['ExVersion'].key >= 3:
             return False
     else:
         # Sigh... let's just use the patch instead... One more reason to switch
         # to the new-and-improved back-end data processor...
-        if int(patch) >= 4:
+        if int(patch) >= 5:
             return False
 
     # While technically any other fish does support Fish Eyes, only fish with
@@ -466,10 +473,21 @@ def _convert_fish_to_json(item):
                          'dataMissing': data_missing}))
 
 
+def _unformated_name(obj):
+    return obj['name_en'].strip().lower()
+
+
 def rebuild_fish_data(args):
     global fish_and_tackle_data
     # Parse the fish data in the YAML file.
-    fishes = yaml.load(open(args.yaml_file, 'r'), Loader=Loader)
+    fishes = yaml.load(open(args.yaml_file, 'r', encoding='utf-8'), Loader=Loader)
+
+    # WORKAROUND:
+    # As of 6.0, spearfishing is ... different. It doesn't appear the nodes exist anymore.
+    # Since this script depends on all of that information linking up correctly, we need
+    # to filter out the spearfishing data (for now at least).
+    fishes = list(filter(lambda fish: fish.get('gig', None) is None, fishes))
+
     # Collect all of the fish/tackle names.
     fish_and_tackle_names = list(set(filter(None, reduce(
         add, [[fish['name']] +
@@ -480,7 +498,9 @@ def rebuild_fish_data(args):
     fish_and_tackle_data = OrderedDict()
     for item in XIV.game_data.get_sheet('Item'):
         if item['Name'] not in fish_and_tackle_names:
-            continue
+            # Try a little harder...
+            if item['Name'].strip().lower() not in map(lambda x: x.lower(), fish_and_tackle_names):
+                continue
         fish_and_tackle_data[item.key] = dict([
             ('_id', item.key),
             *_make_localized_field('name', item, 'Name'),
@@ -490,7 +510,11 @@ def rebuild_fish_data(args):
     diffs = set(fish_and_tackle_names) - \
             set(map(itemgetter('name_en'), fish_and_tackle_data.values()))
     if len(diffs) != 0:
-        raise KeyError("Missing item names: %s" % ', '.join(diffs))
+        # Allow minor formatting issues.
+        non_formatting_diffs = set(map(lambda x: x.strip().lower(), diffs)) - \
+                               set(map(_unformated_name, fish_and_tackle_data.values()))
+        if len(non_formatting_diffs) != 0:
+            raise KeyError("Missing item names: %s" % ', '.join(non_formatting_diffs))
 
     # Make sure any predators have data defined for them too!
     predators = set(filter(None,
@@ -501,7 +525,11 @@ def rebuild_fish_data(args):
             set([fish['name'] for fish in fishes]) - \
             set(map(itemgetter('name_en'), fish_and_tackle_data.values()))
     if len(diffs) != 0:
-        raise KeyError("Missing predators: %s" % ', '.join(diffs))
+        # Allow minor formatting issues.
+        non_formatting_diffs = set(map(lambda x: x.strip().lower(), diffs)) - \
+                               set(map(_unformated_name, fish_and_tackle_data.values()))
+        if len(non_formatting_diffs) != 0:
+            raise KeyError("Missing predators: %s" % ', '.join(non_formatting_diffs))
 
     diffs = predators - \
             set([fish['name'] for fish in fishes])
@@ -696,6 +724,12 @@ def add_new_fish_data(args):
         for fish in fishing_spot.items:
             if str(fish.name) in known_fishes:
                 continue
+            # Try a little harder (formatting?)
+            misformatted_fish_name = next(filter(lambda n: n.lower() == str(fish.name).strip().lower(), known_fishes), None)
+            if misformatted_fish_name is not None:
+                logging.warning("Fish name formatting mismatch. Have \"%s\" but DATs had \"%s\".",
+                                misformatted_fish_name, str(fish.name))
+                continue
 
             if fish.key not in new_fishes:
 
@@ -745,7 +779,7 @@ def add_new_fish_data(args):
 
         # Dump the new fish data to a YAML file.
 
-    with open(args.new_data, 'w') as f:
+    with open(args.new_data, 'w', encoding='utf-8') as f:
         # Exclude fish without a name.
         def exclude_nameless_fish(fish):
             return fish['name'] != ''
@@ -755,7 +789,8 @@ def add_new_fish_data(args):
 
         Dumper.add_representer(type(None), represent_none)
         yaml.dump(list(filter(exclude_nameless_fish, new_fishes.values())), f,
-                  Dumper=Dumper, default_flow_style=False, sort_keys=False)
+                  Dumper=Dumper, default_flow_style=False, sort_keys=False,
+                  encoding='utf-8', allow_unicode=True)
         f.write('---\n')
         def new_fish_name(_id, fish):
             if fish['name'] != '':

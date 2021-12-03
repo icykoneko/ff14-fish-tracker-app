@@ -10038,4 +10038,1538 @@
   hookset: Powerful
   snagging: 
   patch: 5.55
-  
+# ENDWALKER - Patch 6.0
+- name: Pecten
+  location: Scholar's Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Northern Herring
+  location: Scholar's Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Dog-faced Puffer
+  location: Scholar's Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Cobalt Chromis
+  location: Scholar's Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Guitarfish
+  location: Scholar's Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Astacus
+  location: Oinops
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Peacock Bass
+  location: Oinops
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Academician
+  location: Oinops
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Swordspine Snook
+  location: Oinops
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Ponderer
+  location: Reflecting Pool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Tidal Dahlia
+  location: Reflecting Pool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Butterfly Fry
+  location: Unmoved Source Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Topminnow
+  location: Unmoved Source Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Tessera
+  location: Unmoved Source Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Giant Aetherlouse
+  location: Unmoved Source Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Fat Snook
+  location: Unmoved Source Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Prochilodus Luminosus
+  location: The Mover Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Xenocypris
+  location: The Mover Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Mesonauta
+  location: The Mover Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Greengill Salmon
+  location: The Mover Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Raiamas
+  location: Unmoved Source Beta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Red Bowfin
+  location: Unmoved Source Beta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Macrobrachium Lar
+  location: The Mover Beta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Blowgun
+  location: The Mover Beta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Darksteel Knifefish
+  location: The Mover Beta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Astacus Aetherius
+  location: Deepmoat
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Labyrinthos Tilapia
+  location: Deepmoat
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Trunkblessed
+  location: Meghaduta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Seema Duta
+  location: Meghaduta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Longear Sunfish
+  location: Meghaduta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Silver Characin
+  location: Meghaduta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Thavnairian Goby
+  location: Yedlihmad
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Qeyiq Sole
+  location: Yedlihmad
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Gwl Crab
+  location: Yedlihmad
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Pantherscale Grouper
+  location: Yedlihmad
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Fate's Design
+  location: The Thavnairian Coast
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Shadowdart Sardine
+  location: The Thavnairian Coast
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Paksa Fish
+  location: The Thavnairian Coast
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Garjana Wrasse
+  location: The Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Golden Barramundi
+  location: The Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Kadjaya's Castaway
+  location: Giantsgall Grounds
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Marid Frog
+  location: Giantsgall Grounds
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Bluegill
+  location: Giantsgall Grounds
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Bronze Pipira
+  location: Giantsgall Grounds
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Green Swordtail
+  location: The Wakeful Torana
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Ksirapayin
+  location: The Wakeful Torana
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Wakeful Watcher
+  location: The Wakeful Torana
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Red Drum
+  location: The Wakeful Torana
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Forgeflame
+  location: Ksiroda
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Bicuda
+  location: Ksiroda
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Radzbalik
+  location: Pavana's Remorse
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Half-moon Betta
+  location: Pavana's Remorse
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Banana Eel
+  location: Pavana's Remorse
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Handy Hamsa
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Flowerhorn
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Thavnairian Caiman
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Fiery Goby
+  location: The Perfumed Tides
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Puff-paya
+  location: The Perfumed Tides
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Narunnairian Octopus
+  location: The Perfumed Tides
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Roosterfish
+  location: The Perfumed Tides
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Basilosaurus
+  location: The Perfumed Tides
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Garlean Clam
+  location: The Eblan Thaw
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Animulus
+  location: The Eblan Thaw
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Eblan Trout
+  location: The Eblan Thaw
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Cerule Core
+  location: The Eblan Thaw
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Icepike
+  location: The Eblan Thaw
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Dark Crown
+  location: The Stainless Course
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Imperial Pleco
+  location: The Stainless Course
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Bluetail
+  location: The Stainless Course
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Star-blue Guppy
+  location: Greatest Endsvale
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Lunar Cichlid
+  location: Greatest Endsvale
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Teareye
+  location: Greatest Endsvale
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Replipirarucu
+  location: Greatest Endsvale
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Feverfish
+  location: The Chlorophospond
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Calicia
+  location: The Chlorophospond
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: 'Protomyke #987'
+  location: The Chlorophospond
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Lunar Deathworm
+  location: The Chlorophospond
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Fleeting Brand
+  location: The Frozen Fissure
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Regotoise
+  location: The Frozen Fissure
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Isle Skipper
+  location: Rumination's Ramble
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Albino Loach
+  location: Rumination's Ramble
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Iribainion
+  location: Rumination's Ramble
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Golden Shiner
+  location: Rumination's Ramble
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Mangar
+  location: Rumination's Ramble
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Dermogenys
+  location: The Lower Hungering Gardens
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Colossoma
+  location: The Lower Hungering Gardens
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Antheia
+  location: Lethe
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Smaragdos
+  location: Lethe
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Superstring
+  location: Apohelos 18-γ
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Vacuum Shrimp
+  location: Apohelos 18-γ
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Star Eater
+  location: Apohelos 18-γ
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Cosmic Noise
+  location: Apohelos 18-γ
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Glassfish
+  location: Apohelos 18-β
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Foun Myhk
+  location: Apohelos 18-β
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Dragonscale
+  location: Apohelos 18-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Ypupîara
+  location: Apohelos 18-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Eehs Forhnesh
+  location: Apohelos 18-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Protoflesh
+  location: The Wellspring of Regret
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Katoptron
+  location: The Wellspring of Regret
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Comet Tail
+  location: The Wellspring of Regret
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Aoide
+  location: The Wellspring of Regret
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Wandering Starscale
+  location: Elegeia
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Wormhole Worm
+  location: Limne 18
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Unidentified Flying Biomass II
+  location: Limne 18
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Sophos Deka-okto
+  location: Limne 18
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Class Twenty-four
+  location: Limne 18
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Terrifyingway
+  location: Limne 18
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Alien Mertone
+  location: Limne 18
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Monster Carrot
+  location: Limne 18
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Triaina
+  location: Limne 3-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Argonaut
+  location: Limne 3-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Echinos
+  location: Limne 3-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Space Bishop
+  location: Limne 3-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Alyketos
+  location: Limne 3-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Horizon Event
+  location: Limne 3-β
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: E.B.E.-9318
+  location: Limne 3-β
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Unbegotten
+  location: Limne 3-β
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
+- name: Phallaina
+  location: Limne 3-β
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.0
+  dataMissing: true
