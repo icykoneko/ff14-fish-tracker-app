@@ -6,6 +6,11 @@
 // back to the back-end data model. On initialization, the view model will still
 // need to wrap the data model to support all of its fields.
 
+// Update this whenever a new patch is released.
+const LATEST_PATCH = 6;
+// Set this to the date at which new patch fishes are displayed by default.
+const SHOW_LATEST_PATCH_AFTER = dateFns.add(new Date(2021, 11, 7), { weeks: 2 });
+
 class SiteSettings {
   constructor() {
     // Filter Settings
@@ -20,7 +25,8 @@ class SiteSettings {
       patch: new Set([2, 2.1, 2.2, 2.3, 2.4, 2.5,
                       3, 3.1, 3.2, 3.3, 3.4, 3.5,
                       4, 4.1, 4.2, 4.3, 4.4, 4.5,
-                      5, 5.1, 5.2, 5.3, 5.4, 5.5]),
+                      5, 5.1, 5.2, 5.3, 5.4, 5.5,
+                      6]),
       // Extra filtering:
       // * all: Display all fish, regardless of extra status.
       // * collectable: Display only collectable fish.
@@ -59,7 +65,7 @@ class SiteSettings {
     // Latest Patch:
     // * Records the latest patch available when the user last visited.
     //   Used for including NEW patch data to filter on next visit.
-    this.latestPatch = 5.5;
+    this.latestPatch = LATEST_PATCH;
   }
 }
 
@@ -1156,24 +1162,30 @@ let ViewModel = new class {
 
   loadSettings() {
     let settings = this.settings;
+    let newUser = false;
 
     // Try loading the user's settings from localStorage.
     try {
       if (localStorage.getItem('fishTrackerSettings')) {
         settings = JSON.parse(localStorage.fishTrackerSettings);
       } else {
-        // COMPATIBILITY SUPPORT:
-        // * The old view model stores settings in individual keys. Check for them
-        //   first, and upgrade to the new model.
-        console.warn("Trying to restore settings from legacy version...");
-        if (localStorage.completed) {
-          settings.completed = new Set(JSON.parse(localStorage.completed));
-        }
-        if (localStorage.pinned) {
-          settings.pinned = new Set(JSON.parse(localStorage.pinned));
-        }
-        if (localStorage.theme) {
-          settings.theme = localStorage.theme;
+        newUser = true;
+        if (localStorage.completed ||
+            localStorage.pinned ||
+            localStorage.theme) {
+          // COMPATIBILITY SUPPORT:
+          // * The old view model stores settings in individual keys. Check for them
+          //   first, and upgrade to the new model.
+          console.warn("Trying to restore settings from legacy version...");
+          if (localStorage.completed) {
+            settings.completed = new Set(JSON.parse(localStorage.completed));
+          }
+          if (localStorage.pinned) {
+            settings.pinned = new Set(JSON.parse(localStorage.pinned));
+          }
+          if (localStorage.theme) {
+            settings.theme = localStorage.theme;
+          }
         }
       }
     } catch (ex) {
@@ -1181,6 +1193,14 @@ let ViewModel = new class {
       console.warn("Unable to access localStorage. Settings not restored.");
       // Just in case, use the default settings...
       settings = this.settings;
+    }
+
+    if (newUser) {
+      // New users will always have properly configured filter settings (initially).
+      // But let's prevent spoiling any brand new content by checking first.
+      if (dateFns.isBefore(Date.now(), SHOW_LATEST_PATCH_AFTER)) {
+        settings.filters.patch.delete(LATEST_PATCH);
+      }
     }
 
     // Now, apply the settings to the current page, committing them if all is well.
@@ -1234,16 +1254,44 @@ let ViewModel = new class {
         settings.filters.patch = new Set(settings.filters.patch);
       }
       // Check if they've been here since the latest patch.
-      if (settings.latestPatch !== this.settings.latestPatch) {
+      if (settings.latestPatch !== LATEST_PATCH) {
         console.info("Welcome back! There's new fishies to be caught!");
-        settings.filters.patch.add(Number(this.settings.latestPatch));
+        // Rather than force the new patch into the filters, display a message
+        // for the user so they are aware there's new fish to track.
+        $('#new-fish-available-modal').modal({
+          onApprove: function($element) {
+            // Approval means they want the latest patch's fish displayed, NOW!
+            ViewModel.settings.filters.patch.add(Number(LATEST_PATCH));
+
+            // FIXME: Duplicate code!
+            $('#filterPatch .button').removeClass('active');
+            for (let includedPatch of ViewModel.settings.filters.patch) {
+              // Activate THIS patch's filter button.
+              $('#filterPatch .button[data-filter="' + includedPatch + '"]:not(.patch-set)').toggleClass('active', true);
+            }
+            // Second pass to determine if the patch-set button should be active or not.
+            // If all of the sub-patches (that aren't disabled) are active, then the patch-set is too.
+            for (let patchSet of $('#filterPatch .patch-set.button')) {
+              let patchSetActive = $(patchSet).siblings().not('.disabled').not('.active').length == 0;
+              $(patchSet).toggleClass('active', patchSetActive);
+            }
+
+            // Notify others about the change.
+            ViewModel.filterPatchSubject.next(ViewModel.settings.filters.patch);
+            ViewModel.saveSettings();
+
+            return true;
+          }
+        })
+        .modal('show');
       }
     } else {
       // For some reason, the patch filter setting is missing?! Just use the default then.
       settings.filters.patch = this.settings.filters.patch;
     }
     // Always reset the latest patch; fish that have been seen, cannot be unseen... CUPFISH!
-    settings.latestPatch = this.settings.latestPatch;
+    // This will prevent the site from notifying the user as well.
+    settings.latestPatch = LATEST_PATCH;
     // Probably need to adjust the patch filter UI as a result...
     $('#filterPatch .button').removeClass('active');
     for (let includedPatch of settings.filters.patch) {

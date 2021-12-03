@@ -38,7 +38,7 @@ title: Home
             integrity="sha512-uiSucQ5TdEImoU68Gp+mxXJ54l4lQm5bTd+T0tj7KcCupCDrKr+FdmgXipF+2Exfc6xDAcnPbr5rXB5bEZS0bw=="
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?5.55_20210525" />
+    <link rel="stylesheet" href="public/images/sprite.css?6.0_20211202" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
     <link rel="stylesheet" href="css/overlay.css?20210926_2035" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
@@ -47,8 +47,8 @@ title: Home
     <script type="text/javascript" src="js/app/localization.js?20111013_2022"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?5.55_20211113_1041"></script>
-    <script type="text/javascript" src="js/app/fish_info_data.js?5.55_20211113_1041"></script>
+    <script type="text/javascript" src="js/app/data.js?6.0_20211202_1127"></script>
+    <script type="text/javascript" src="js/app/fish_info_data.js?6.0_20211202_1127"></script>
 
     <!--
       - Scripts
@@ -698,7 +698,7 @@ title: Home
             You can display the map for a fishing spot by clicking the <i class="map icon"></i> in front of the location name. Use the scroll wheel to zoom in or out, and drag the map to pan around. Clicking on the name itself still opens a new tab linking to Teamcraft which will show you tons of useful data about that fishing spot.
           </p>
           <p>
-            As of Patch 5.4, the <b>Fish Eyes</b> action removes the time restriction from non legendary fish introduced prior to Stormblood. Clicking the Fish Eyes icon will toggle this mode on and off. You can tell it's on when the icon has a circular halo around it and is fully colored.
+            As of Patch 6.0, the <b>Fish Eyes</b> action removes the time restriction from non legendary fish introduced prior to Shadowbringers. Clicking the Fish Eyes icon will toggle this mode on and off. You can tell it's on when the icon has a circular halo around it and is fully colored.
           </p>
         </div>
       </div>
@@ -836,6 +836,17 @@ title: Home
                     <div class="ui active button" data-filter="5.5">5.5</div>
                   </div>
                 </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui primary patch-set button" style="width: 12.5em;" data-filter="6">Endwalker (6.x)</div>
+                    <div class="ui button" data-filter="6">6.0</div>
+                    <div class="ui disabled button" data-filter="6.1">6.1</div>
+                    <div class="ui disabled button" data-filter="6.2">6.2</div>
+                    <div class="ui disabled button" data-filter="6.3">6.3</div>
+                    <div class="ui disabled button" data-filter="6.4">6.4</div>
+                    <div class="ui disabled button" data-filter="6.5">6.5</div>
+                  </div>
+                </div>
               </div><!-- column -->
               <div class="column" style="width: unset;">
                 <div class="row" style="padding-bottom: 0.5rem;">Display:</div>
@@ -893,6 +904,26 @@ title: Home
 
       <!-- Modal for displaying upcoming windows -->
       <div id="upcoming-windows" class="ui longer flushed modal upcoming-windows"></div>
+
+      <!-- Modal for displaying alert about new patch -->
+      <div id="new-fish-available-modal" class="ui tiny modal new-fish-available">
+        <div class="header">New Fish Available</div>
+        <div class="content">
+          <p>
+            Welcome back! New fish have been added since your last visit. In order to avoid possible spoilers, this patch is not displayed automatically.
+          </p>
+          <p>
+            Would you like the new fish to be displayed now?
+          </p>
+          <p>
+            <i>(You can display these new fish later on via the site settings - the gears icon in the upper right)</i>
+          </p>
+        </div>
+        <div class="actions">
+          <div id="show-the-new-fishies" class="ui approve positive button">Yes</div>
+          <div id="hide-the-new-fishies" class="ui cancel negative button">No</div>
+        </div>
+      </div>
 
       <!-- Display the list of fish -->
       <div id="fish-table-container">
