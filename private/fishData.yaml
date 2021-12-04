@@ -10059,9 +10059,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10072,9 +10073,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10085,8 +10087,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10098,9 +10101,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10111,9 +10115,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10124,8 +10129,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10137,8 +10143,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10150,8 +10157,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10163,12 +10171,12 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
-  dataMissing: true
 - name: Tidal Dahlia
   location: Reflecting Pool
   startHour: 0
@@ -10176,12 +10184,12 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
-  dataMissing: true
 - name: Butterfly Fry
   location: Unmoved Source Alpha
   startHour: 0
@@ -10189,9 +10197,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10202,9 +10211,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10215,9 +10225,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10228,9 +10239,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10241,9 +10253,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10254,8 +10267,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Leech
   predators:
-  tug:
+  tug: light
   hookset:
   snagging:
   patch: 6.0
@@ -10267,9 +10281,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10280,8 +10295,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10306,8 +10322,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10332,9 +10349,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10345,9 +10363,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10358,8 +10377,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10397,9 +10417,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10423,8 +10444,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10436,8 +10458,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10449,8 +10472,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: light
   hookset:
   snagging:
   patch: 6.0
@@ -10462,8 +10486,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: light
   hookset:
   snagging:
   patch: 6.0
@@ -10475,8 +10500,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10488,8 +10514,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10501,8 +10528,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10514,10 +10542,12 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
+  mooching: true
   patch: 6.0
   dataMissing: true
 - name: Paksa Fish
@@ -10527,8 +10557,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10540,8 +10571,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10566,8 +10598,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Leech
   predators:
-  tug:
+  tug: light
   hookset:
   snagging:
   patch: 6.0
@@ -10579,8 +10612,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Leech
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10605,8 +10639,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
+  tug: medium
   hookset:
   snagging:
   patch: 6.0
@@ -10839,9 +10874,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Leech
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10852,9 +10888,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10865,9 +10902,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Gold Salmon Roe
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.0
   dataMissing: true
@@ -10891,9 +10929,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Leech
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.0
   dataMissing: true
