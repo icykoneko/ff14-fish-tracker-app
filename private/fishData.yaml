@@ -10046,10 +10046,11 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
+  tug: light
   hookset:
-  snagging:
+  snagging: true
   patch: 6.0
   dataMissing: true
 - name: Northern Herring
