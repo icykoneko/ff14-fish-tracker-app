@@ -1,5 +1,5 @@
 from typing import Dict, Any, List, Iterable
-from dataclasses import make_dataclass, field
+from dataclasses import dataclass, make_dataclass, field
 import logging
 import sys
 import os
@@ -120,37 +120,41 @@ def _init_saintcoinach():
 
 realm = _init_saintcoinach()
 
-Fish = make_dataclass('Fish',
-                      [('item', as_row_type('Item')),
-                       ('params', Any, field(default=None)),
-                       ('spearfishing', bool, field(default=False)),
-                       ('spots', list, field(default_factory=list)),
-                       ('quest', list, field(default_factory=list)),
-                       ('shop', list, field(default_factory=list)),
-                    #    ('scrip', MasterpieceSupplyDuty.CollectableItem, field(default=None)),
-                       ('scrip', Any, field(default=None)),
-                       ('satisfaction', Any, field(default=None)),
-                       ('gc', Any, field(default=None)),
-                       ('leve', list, field(default_factory=list)),
-                       ('craft', list, field(default_factory=list)),
-                       ('reduce', Any, field(default=None)),
-                       ('aquarium', Any, field(default=None)),
-                       ('ecology', bool, field(default=False)),
-                       ('expansion', Any, field(default=None))])
+@dataclass
+class Fish(object):
+    item: as_row_type('Item')
+    params: Any = field(default=None)
+    spearfishing: bool = field(default=False)
+    spots: list = field(default_factory=list)
+    quest: list = field(default_factory=list)
+    shop: list = field(default_factory=list)
+    scrip: Any = field(default=None)
+    satisfaction: Any = field(default=None)
+    gc: Any = field(default=None)
+    leve: list = field(default_factory=list)
+    craft: list = field(default_factory=list)
+    reduce: Any = field(default=None)
+    aquarium: Any = field(default=None)
+    ecology: bool = field(default=False)
+    expansion: Any = field(default=None)
 
-GCSupplyDutyTurnin = make_dataclass('GCSupplyDutyTurnin',
-                                    [('count', int), ('exp', int), ('seals', int)])
 
-SpearfishingNode = make_dataclass('SpearfishingNode',
-                                  [('gathering_point_base', as_row_type('GatheringPointBase')),
-                                   ('territory_type', as_row_type('TerritoryType')),
-                                   ('place_name', as_row_type('PlaceName')),
-                                   ('hidden', bool, field(default=False))])
+@dataclass
+class GCSupplyDutyTurnin(object):
+    count: int
+    exp: int
+    seals: int
 
-def _prop_SpearfishingNode_getkey(self):
-    return self.gathering_point_base.key
 
-setattr(SpearfishingNode, 'key', property(_prop_SpearfishingNode_getkey))
+@dataclass
+class SpearfishingNode(object):
+    gathering_point_base: as_row_type('GatheringPointBase')
+    territory_type: as_row_type('TerritoryType')
+    place_name: as_row_type('PlaceName')
+    hidden: bool = field(default=False)
+
+    @property
+    def key(self): return self.gathering_point_base.key
 
 
 def tracked_iter(_iter, desc, **kwargs):
@@ -197,7 +201,7 @@ for fishing_spot in tracked_iter(realm.game_data.get_sheet(FishingSpot),
 # Now, we'll check for spearfishing nodes.
 for gathering_point in tracked_iter(realm.game_data.get_sheet(GatheringPoint),
                                     'Scanning spearfishing nodes'):
-    if gathering_point.base.type.key != 4:
+    if gathering_point.base.type.key != 5:
         continue
 
     # Each GatheringPoint represents a single map spawn node. You need to normalize
@@ -218,7 +222,7 @@ for gathering_point in tracked_iter(realm.game_data.get_sheet(GatheringPoint),
                 SpearfishingNode(gathering_point_base,
                                  gathering_point.territory_type,
                                  gathering_point.place_name,
-                                 gathering_point[2] == 6))
+                                 gathering_point['Count'] == 1))
 
 #
 # Attempt to run the rest in parallel

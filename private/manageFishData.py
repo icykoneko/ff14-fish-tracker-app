@@ -17,7 +17,16 @@ from functools import reduce
 from itertools import islice, repeat
 import logging
 
+try:
+    _SCRIPT_PATH = os.path.abspath(__path__)
+except:
+    _SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
+
+# _HELPER_LIBS_PATH = os.path.join(_SCRIPT_PATH, '..', '..')
+_HELPER_LIBS_PATH = _SCRIPT_PATH
+
 logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+
 fish_and_tackle_data = {}
 XIV = None  # type: 'pysaintcoinach.ARealmReversed'
 KeyValuePair = None
@@ -30,14 +39,6 @@ REGIONS = {}
 ZONES = {}
 LANGUAGES = []
 GATHERING_SUB_CATEGORIES = None
-
-try:
-    _SCRIPT_PATH = os.path.abspath(__path__)
-except:
-    _SCRIPT_PATH = os.path.abspath(os.path.dirname(__file__))
-
-# _HELPER_LIBS_PATH = os.path.join(_SCRIPT_PATH, '..', '..')
-_HELPER_LIBS_PATH = _SCRIPT_PATH
 
 
 def nth(iterable, n, default=None):
@@ -216,7 +217,7 @@ def initialize_data(args):
                ('territory_id', x.get_raw('TerritoryType')),
                ('placename_id', x.key)]))
         for x in XIV.game_data.get_sheet('GatheringPoint')
-        if x['GatheringPointBase']['GatheringType'].key == 4])
+        if x['GatheringPointBase']['GatheringType'].key == 5])
 
     REGIONS = dict([
         (territory.region_place_name.key,
@@ -481,12 +482,6 @@ def rebuild_fish_data(args):
     global fish_and_tackle_data
     # Parse the fish data in the YAML file.
     fishes = yaml.load(open(args.yaml_file, 'r', encoding='utf-8'), Loader=Loader)
-
-    # WORKAROUND:
-    # As of 6.0, spearfishing is ... different. It doesn't appear the nodes exist anymore.
-    # Since this script depends on all of that information linking up correctly, we need
-    # to filter out the spearfishing data (for now at least).
-    fishes = list(filter(lambda fish: fish.get('gig', None) is None, fishes))
 
     # Collect all of the fish/tackle names.
     fish_and_tackle_names = list(set(filter(None, reduce(
@@ -753,7 +748,7 @@ def add_new_fish_data(args):
     from pysaintcoinach.xiv.gathering_point import GatheringPoint
     for gathering_point in XIV.game_data.get_sheet(GatheringPoint):
         # We only care about spearfishing gathering points.
-        if gathering_point.base.type.key != 4:
+        if gathering_point.base.type.key != 5:
             continue
         for item in gathering_point.base.items:
             if str(item.name) in known_fishes:
@@ -761,6 +756,8 @@ def add_new_fish_data(args):
 
             if item.key not in new_fishes:
                 # Get the BASE gathering point only!
+                # This check is broken, but for now, it doesn't appear to trigger on any data.
+                # Revisit later please.
                 is_hidden = gathering_point['Count'] == 6  # super-sketch, but this is the field, Index: 2
 
                 new_fishes[item.key] = {
