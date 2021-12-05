@@ -11613,3 +11613,730 @@
   snagging:
   patch: 6.0
   dataMissing: true
+# Spearfishing (Patch 6.0)
+- name: Thavnairian Cucumber
+  location: Southern Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Spiny King Crab
+  location: Southern Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Thavnairian Eel
+  location: Southern Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Gilled Topknot
+  location: Southern Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Purusa Fish
+  location: Southern Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Giantsgall Jaw
+  location: Southern Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Coffer Shell
+  location: Northern Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Onihige
+  location: Northern Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Onokoro Carp
+  location: Northern Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Ruby-spotted Crab
+  location: Northern Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Marrow-eater
+  location: Northern Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Cloudy Catshark
+  location: Northern Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Red Gurnard
+  location: Isari Slope
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Dream Pickle
+  location: Isari Slope
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Ruby Haddock
+  location: Isari Slope
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Crown Fish
+  location: Isari Slope
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: 'Sword of Isari '
+  location: Isari Slope
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Blue Shark
+  location: Isari Slope
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Barb of Exile
+  location: Exile
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Smooth Lumpfish
+  location: Exile
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Hells' Cap
+  location: Exile
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Keeled Fugu
+  location: Exile
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Eastern Seerfish
+  location: Exile
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: False Fusilier
+  location: Exile
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Othardian Wrasse
+  location: Exile
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Akyaali Sardine
+  location: Western Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Spicy Pickle
+  location: Western Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Mayavahana
+  location: Western Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Hedonfish
+  location: Western Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Satrap Trapfish
+  location: Western Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Blue Marlin
+  location: Western Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Satrap's Whisper
+  location: Southern Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Meyhane Reveler
+  location: Southern Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Shallows Cod
+  location: Southern Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Rasa Fish
+  location: Southern Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Daemir's Alloy
+  location: Southern Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Dusky Shark
+  location: Southern Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Agama's Palm
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Rummy-nosed Tetra
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Monksblade
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Atamra Cichlid
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Root of Maya
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Floral Snakehead
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Skipping Stone
+  location: Northeastern Bekko
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Red-spotted Blenny
+  location: Northeastern Bekko
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Deepbody Boarfish
+  location: Northeastern Bekko
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Grey Mullet
+  location: Northeastern Bekko
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Prayer Cushion
+  location: Northeastern Bekko
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Uzumaki
+  location: Northeastern Bekko
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Kitefin Shark
+  location: Northeastern Bekko
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Jointed Razorfish
+  location: Eastern Barrier Isle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Mini Yasha
+  location: Eastern Barrier Isle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Righteye Flounder
+  location: Eastern Barrier Isle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Othardian Lumpsucker
+  location: Eastern Barrier Isle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Sawshark
+  location: Eastern Barrier Isle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Bluefin Trevally
+  location: Eastern Barrier Isle
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Natron Puffer
+  location: Loch Seld Northeastern Lakebed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Diamond Dagger
+  location: Loch Seld Northeastern Lakebed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Queenly Fan
+  location: Loch Seld Northeastern Lakebed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Pale Panther
+  location: Loch Seld Northeastern Lakebed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Saltsquid
+  location: Loch Seld Northeastern Lakebed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Platinum Hammerhead
+  location: Loch Seld Northeastern Lakebed
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Shogun's Kabuto
+  location: Northwestern Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Pipefish
+  location: Northwestern Onokoro
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Xiphactinus
+  location: Outer Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
+- name: Tebqeyiq Smelt
+  location: Outer Akyaali
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.0
+  dataMissing: true
