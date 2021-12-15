@@ -11136,9 +11136,6 @@
   startHour: 0
   endHour: 24
   previousWeatherSet:
-  - Fair Skies
-  - Clouds
-  - Umbral Wind
   weatherSet:
   - Clouds
   bestCatchPath:
