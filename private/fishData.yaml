@@ -11583,7 +11583,7 @@
 - name: Phallaina
   location: Limne 3-β
   startHour: 22
-  endHour: 3
+  endHour: 4
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
