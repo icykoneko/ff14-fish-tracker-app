@@ -10658,8 +10658,6 @@
   startHour: 16
   endHour: 24
   previousWeatherSet:
-  - Showers
-  - Clouds
   weatherSet:
   - Fair Skies
   bestCatchPath:
@@ -10887,7 +10885,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Leech
   predators:
   tug: medium
   hookset: Powerful
@@ -10965,7 +10963,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Leech
   predators:
   tug: light
   hookset: Precision
@@ -10991,7 +10989,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Sky Spoon Lure
   predators:
   tug: medium
   hookset: Powerful
@@ -11098,7 +11096,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Mayfly
   predators:
   tug: light
   hookset: Precision
@@ -11125,7 +11123,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Mayfly
   predators:
   tug: medium
   hookset: Powerful
@@ -11153,7 +11151,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Leech
   predators:
   tug: light
   hookset: Precision
@@ -11166,7 +11164,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Leech
   predators:
   tug: medium
   hookset: Powerful
@@ -11767,7 +11765,7 @@
   gig: UNKNOWN
   patch: 6.0
   dataMissing: true
-- name: 'Sword of Isari '
+- name: Sword of Isari
   location: Isari Slope
   startHour: 0
   endHour: 24
