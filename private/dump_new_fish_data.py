@@ -249,20 +249,17 @@ def scan_fish_params(orig_stdout, n=None):
     return True
 
 
-# @scan_task
-# def scan_scrip_turnins(orig_stdout, n=None):
-#     for duty in tracked_iter(realm.game_data.get_sheet(MasterpieceSupplyDuty),
-#                              'Scanning scrip turn-ins',
-#                              file=orig_stdout, position=n):
-#         # Ignore non-FSH entries.
-#         if str(duty.class_job.abbreviation) != 'FSH':
-#             continue
-
-#         for item in duty.collectable_items:
-#             if item.required_item.key in catchable_fish:
-#                 catchable_fish[item.required_item.key].scrip = item
-
-#     return True
+@scan_task
+def scan_scrip_turnins(orig_stdout, n=None):
+    for fish_key in tracked_iter(catchable_fish,
+                             'Scanning scrip turn-ins',
+                             file=orig_stdout, position=n):
+        if realm.game_data.get_sheet(Item)[fish_key].as_boolean('IsCollectable'):
+            shop_item = next(filter(lambda row: row.get_raw('Item') == fish_key,
+                                    realm.game_data.get_sheet('CollectablesShopItem')), None)
+            if shop_item is not None:
+                catchable_fish[fish_key].scrip = shop_item
+    return True
 
 
 @scan_task
@@ -575,7 +572,7 @@ for fish in tracked_iter(important_fish,
             'craft': len(fish.craft) > 0,
             'gc': fish.gc is not None,
             'leve': len(fish.leve) > 0,
-            'scrip': fish.scrip,
+            'scrip': fish.scrip['CollectablesShopRefine']['LowCollectability'] if fish.scrip else None,
             'reduce': fish.reduce,
             'aquarium': fish.aquarium is not None,
             'fishEyes': supports_fish_eyes(fish),
