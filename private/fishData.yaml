@@ -643,8 +643,8 @@
   - Fair Skies
   predators: {}
   bestCatchPath:
-  - Lugworm
-  - Merlthor Goby
+  - Floating Minnow
+  - Harbor Herring
   tug: Legendary
   hookset: Powerful
   snagging:
@@ -4492,7 +4492,7 @@
     Granite Crab: 5
   intuitionLength: 180
   bestCatchPath:
-  - Magma Worm
+  - Metal Spinner
   - Granite Crab
   tug: Legendary
   hookset: Powerful
@@ -9707,6 +9707,7 @@
   endHour: 24
   previousWeatherSet:
   - Clouds
+  # - Fog  # may want to double-check on this.
   weatherSet:
   - Fog
   bestCatchPath:
@@ -10320,6 +10321,7 @@
   weatherSet:
   bestCatchPath:
   - Sky Spoon Lure
+  # or Mayfly
   predators:
   tug: medium
   hookset: Powerful
@@ -10661,7 +10663,7 @@
   weatherSet:
   - Fair Skies
   bestCatchPath:
-  - Leech
+  - Mayfly
   predators:
   tug: medium
   hookset: Powerful
@@ -10726,7 +10728,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Sky Spoon Lure
   predators:
   tug: medium
   hookset: Powerful
@@ -10739,7 +10741,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Sky Spoon Lure
   predators:
   tug: light
   hookset: Precision
@@ -10752,7 +10754,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Sky Spoon Lure
   predators:
   tug: medium
   hookset: Powerful
@@ -10765,7 +10767,8 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Sky Spoon Lure
+  # or Mayfly
   predators:
   tug: medium
   hookset: Powerful
@@ -10805,7 +10808,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Shrimp Ball
+  - Mackerel Strip
+  # Shrimp Ball, and slap Fiery Goby for completion.
+  # Can also mooch from Puff-paya.
   predators:
   tug: medium
   hookset: Powerful
@@ -10819,6 +10824,7 @@
   weatherSet:
   bestCatchPath:
   - Mackerel Strip
+  - Puff-paya
   predators:
   tug: medium
   hookset: Powerful
@@ -10898,7 +10904,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Leech
   predators:
   tug: medium
   hookset: Powerful
@@ -10911,7 +10917,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Leech
   predators:
   tug: light
   hookset: Precision
@@ -10924,7 +10930,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Leech
   predators:
   tug: medium
   hookset: Powerful
@@ -10937,7 +10943,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Leech
   predators:
   tug: medium
   hookset: Powerful
@@ -11043,7 +11049,7 @@
   weatherSet:
   - Fair Skies
   bestCatchPath:
-  - Grey Worm
+  - Grey Worm  # Could also use Chimera Worm... but scrip
   - Calicia
   predators:
   tug: heavy
@@ -11057,7 +11063,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Grey Worm
+  - Versatile Lure
   predators:
   tug: medium
   hookset: Powerful
@@ -11096,7 +11102,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Mayfly
+  - Versatile Lure
   predators:
   tug: light
   hookset: Precision
@@ -11123,7 +11129,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Mayfly
+  - Sky Spoon Lure
   predators:
   tug: medium
   hookset: Powerful
@@ -11137,7 +11143,7 @@
   weatherSet:
   - Clouds
   bestCatchPath:
-  - Gold Salmon Roe
+  - Mayfly
   - Albino Loach
   predators:
   tug: medium
@@ -11164,7 +11170,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Sky Spoon Lure
   predators:
   tug: medium
   hookset: Powerful
@@ -11177,7 +11183,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Gold Salmon Roe
+  - Sky Spoon Lure
   predators:
   tug: light
   hookset: Precision
@@ -11346,7 +11352,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Sky Spoon Lure
   predators:
   tug: light
   hookset: Precision
@@ -11359,7 +11365,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Sky Spoon Lure
   predators:
   tug: medium
   hookset: Powerful
@@ -11372,7 +11378,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Versatile Lure
   predators:
   tug: medium
   hookset: Powerful
@@ -11582,7 +11588,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Panic Jig
+  - Stardust  # Panic Jig works too
   - Horizon Event
   predators:
   tug: heavy
