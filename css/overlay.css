@@ -626,3 +626,9 @@ body.dark #site-last-update.update-available {
   color: currentColor;
   text-decoration: underline;
 }
+
+/* Make filter patch settings easier to tell if it's selected */
+#filterPatch .ui.active.button:not(.patch-set) {
+  text-decoration-style: double;
+  text-decoration-line: underline;
+}
