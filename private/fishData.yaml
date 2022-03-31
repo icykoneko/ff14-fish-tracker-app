@@ -3551,7 +3551,7 @@
 - name: Coerthan Clione
   location: Unfrozen Pond
   startHour: 0
-  endHour: 2
+  endHour: 4
   previousWeatherSet: []
   weatherSet:
   - Blizzards
