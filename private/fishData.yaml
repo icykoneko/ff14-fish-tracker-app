@@ -3213,7 +3213,7 @@
   - Thunder
   predators: {}
   bestCatchPath:
-  - Fiend Worm
+  - Signature Skyball
   - Platinum Fish
   tug: Medium
   hookset: Powerful
@@ -3230,7 +3230,7 @@
   weatherSet: []  # no longer restricted
   predators: {}
   bestCatchPath:
-  - Fiend Worm
+  - Signature Skyball
   - Platinum Fish
   tug: Light  # tested; long wait
   hookset: Precision  # tested
@@ -3298,7 +3298,7 @@
   - Thunder
   predators: {}
   bestCatchPath:
-  - Fiend Worm
+  - Signature Skyball
   - Platinum Fish
   tug: Medium
   hookset: Powerful
@@ -4057,7 +4057,7 @@
   - Thunder
   predators: {}
   bestCatchPath:
-  - Fiend Worm
+  - Signature Skyball
   - Platinum Fish
   tug: Legendary
   hookset: Powerful
@@ -4512,7 +4512,7 @@
     Functional Proto-hropken: 3
   intuitionLength: 105
   bestCatchPath:
-  - Fiend Worm
+  - Signature Skyball
   - Platinum Fish
   tug: Legendary
   hookset: Precision
