@@ -498,6 +498,19 @@
   tug: Medium
   hookset: Powerful
   patch: 2
+- name: Tricolored Carp
+  location: The Mirror
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  - Butterworm
+  predators:
+  tug: medium
+  hookset: Powerful
+  snagging:
+  patch: 2.0
 # Patch 2.2
 - name: Zalera
   location: Zephyr Drift
@@ -12321,3 +12334,108 @@
     Xiphactinus: 2
   gig: Small
   patch: 6.0
+# Patch 6.1 (2022-04-12)
+- name: Aetherolectric Guitarfish
+  location: Scholar's Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.1
+  dataMissing: true
+- name: Jumbo Snook
+  location: Unmoved Source Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.1
+  dataMissing: true
+- name: Earful
+  location: Meghaduta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.1
+  dataMissing: true
+- name: Hippo Frog
+  location: Giantsgall Grounds
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.1
+  dataMissing: true
+- name: Thavnairian Calamari
+  location: The Perfumed Tides
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.1
+  dataMissing: true
+- name: Rimepike
+  location: The Eblan Thaw
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.1
+  dataMissing: true
+- name: Foun Ahlm
+  location: Apohelos 18-β
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.1
+  dataMissing: true
+- name: Forbiddingway
+  location: Limne 18
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.1
+  dataMissing: true
