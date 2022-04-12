@@ -3534,6 +3534,7 @@
 - name: Sweetfish
   bestCatchPath:
   - Goblin Jig
+  # - Bladed Steel Jig (depends on the location)
   tug: Medium
   hookset: Powerful
   patch: 3.0
@@ -3910,7 +3911,7 @@
   weatherSet: []
   predators: {}
   bestCatchPath:
-  - Goblin Jig
+  - Bladed Steel Jig
   - Sweetfish
   tug: Legendary
   hookset: Powerful
@@ -4250,10 +4251,8 @@
   - Showers
   predators: {}
   bestCatchPath:
-  - Brute Leech
+  - Goblin Jig
   - Sweetfish
-  # - Sweetfish
-  # - Sweetfish
   tug: Legendary
   hookset: Powerful
   snagging:
