@@ -20,3 +20,48 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
+- name: Aetherolectric Guitarfish
+  startHour: 16
+  endHour: 24
+  bait: [Mackerel Strip]
+  tug: heavy
+  hookset: Powerful
+- name: Jumbo Snook
+  startHour: 16
+  endHour: 0
+  previousWeatherSet: [Clear Skies, Fair Skies, Rain]
+  weatherSet: [Clouds]
+  bait: [Mayfly]
+  tug: heavy
+- name: Earful
+  startHour: 0
+  endHour: 8
+  bait: [Mayfly]
+  tug: heavy
+  hookset: Powerful
+- name: Hippo Frog
+  previousWeatherSet: [Fair Skies]
+  weatherSet: [Showers]
+  bait: [Mayfly]
+  tug: heavy
+- name: Rimepike
+  weatherSet: [Snow]
+  bait: [Leech, Cerule Core]
+  tug: heavy
+  hookset: Powerful
+- name: Foun Ahlm
+  startHour: 8
+  endHour: 16
+  previousWeatherSet: [Fair Skies]
+  weatherSet: [Umbral Wind]
+  bait: [Chimera Worm]
+  tug: heavy
+  hookset: Powerful
+- name: Forbiddingway
+  startHour: 8
+  endHour: 16
+  previousWeatherSet: [Fair Skies]
+  weatherSet: [Astromagnetic Storm]
+  bait: [Stardust]
+  tug: heavy
+  hookset: Powerful
