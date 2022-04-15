@@ -21,46 +21,44 @@
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
 - name: Aetherolectric Guitarfish
-  startHour: 16
+  startHour: 20
   endHour: 24
   bait: [Mackerel Strip]
   tug: heavy
   hookset: Powerful
 - name: Jumbo Snook
-  startHour: 16
-  endHour: 0
-  previousWeatherSet: [Clear Skies, Fair Skies, Rain]
+  startHour: 18
+  endHour: 22
   weatherSet: [Clouds]
   bait: [Mayfly]
   tug: heavy
 - name: Earful
-  startHour: 0
+  startHour: 4
   endHour: 8
   bait: [Mayfly]
   tug: heavy
   hookset: Powerful
 - name: Hippo Frog
-  previousWeatherSet: [Fair Skies]
   weatherSet: [Showers]
   bait: [Mayfly]
   tug: heavy
+  hookset: Powerful
 - name: Rimepike
   weatherSet: [Snow]
   bait: [Leech, Cerule Core]
   tug: heavy
   hookset: Powerful
 - name: Foun Ahlm
-  startHour: 8
-  endHour: 16
-  previousWeatherSet: [Fair Skies]
+  startHour: 10
+  endHour: 14
+  previousWeatherSet: [Fair Skies, Umbral Wind]
   weatherSet: [Umbral Wind]
   bait: [Chimera Worm]
   tug: heavy
   hookset: Powerful
 - name: Forbiddingway
   startHour: 8
-  endHour: 16
-  previousWeatherSet: [Fair Skies]
+  endHour: 12
   weatherSet: [Astromagnetic Storm]
   bait: [Stardust]
   tug: heavy
