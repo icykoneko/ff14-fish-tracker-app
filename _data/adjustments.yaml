@@ -28,10 +28,11 @@
   hookset: Powerful
 - name: Jumbo Snook
   startHour: 18
-  endHour: 22
+  endHour: 23
   weatherSet: [Clouds]
   bait: [Mayfly]
   tug: heavy
+  hookset: Powerful
 - name: Earful
   startHour: 4
   endHour: 8
@@ -51,7 +52,6 @@
 - name: Foun Ahlm
   startHour: 10
   endHour: 14
-  previousWeatherSet: [Fair Skies, Umbral Wind]
   weatherSet: [Umbral Wind]
   bait: [Chimera Worm]
   tug: heavy
