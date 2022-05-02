@@ -12336,56 +12336,58 @@
 # Patch 6.1 (2022-04-12)
 - name: Aetherolectric Guitarfish
   location: Scholar's Harbor
-  startHour: 0
+  startHour: 20
   endHour: 24
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Mackerel Strip
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.1
-  dataMissing: true
 - name: Jumbo Snook
   location: Unmoved Source Alpha
-  startHour: 0
-  endHour: 24
+  startHour: 18
+  endHour: 23
   previousWeatherSet:
   weatherSet:
+  - Clouds
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.1
-  dataMissing: true
 - name: Earful
   location: Meghaduta
-  startHour: 0
-  endHour: 24
+  startHour: 4
+  endHour: 8
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.1
-  dataMissing: true
 - name: Hippo Frog
   location: Giantsgall Grounds
   startHour: 0
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Showers
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.1
-  dataMissing: true
 - name: Thavnairian Calamari
   location: The Perfumed Tides
   startHour: 0
@@ -12393,48 +12395,52 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Mackerel Strip
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.1
-  dataMissing: true
 - name: Rimepike
   location: The Eblan Thaw
   startHour: 0
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Snow
   bestCatchPath:
+  - Leech
+  - Cerule Core
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.1
-  dataMissing: true
 - name: Foun Ahlm
   location: Apohelos 18-β
-  startHour: 0
-  endHour: 24
+  startHour: 10
+  endHour: 14
   previousWeatherSet:
   weatherSet:
+  - Umbral Wind
   bestCatchPath:
+  - Chimera Worm
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.1
-  dataMissing: true
 - name: Forbiddingway
   location: Limne 18
-  startHour: 0
-  endHour: 24
+  startHour: 8
+  endHour: 12
   previousWeatherSet:
   weatherSet:
+  - Astromagnetic Storm
   bestCatchPath:
+  - Stardust
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.1
-  dataMissing: true
