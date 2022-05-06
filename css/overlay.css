@@ -632,3 +632,7 @@ body.dark #site-last-update.update-available {
   text-decoration-style: double;
   text-decoration-line: underline;
 }
+
+a.plainlink {
+  color: inherit !important;
+}
