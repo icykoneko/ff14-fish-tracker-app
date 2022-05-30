@@ -2359,7 +2359,7 @@
   - Snow
   predators:
     Lamp Marimo: 5
-  intuitionLength: 120
+  intuitionLength: 180
   bestCatchPath:
   - Honey Worm
   - Abalathian Smelt
@@ -3399,7 +3399,7 @@
   - Clear Skies
   predators: {}
   bestCatchPath:
-  - Magma Worm
+  - Metal Spinner
   - Granite Crab
   tug: Legendary
   hookset: Powerful
@@ -4006,7 +4006,7 @@
   patch: 3.3
 - name: Aphotic Pirarucu
   location: Delta Quadrant
-  startHour: 22
+  startHour: 21
   endHour: 2
   previousWeatherSet: []
   weatherSet:
@@ -4426,7 +4426,7 @@
   - Fair Skies
   predators: {}
   bestCatchPath:
-  - Magma Worm
+  - Metal Spinner
   - Granite Crab
   tug: Legendary
   hookset: Powerful
@@ -4741,8 +4741,8 @@
   predators: {}
   bestCatchPath:
   - Stonefly Larva
-  tug: # Medium from angler comments, looks bit fishy and needs more info!!! (tested Seraphim which has similar circumstances)
-  hookset: # Powerful from angler comments
+  tug: Medium
+  hookset: Powerful
   snagging:
   gig:
   folklore: true
@@ -5365,9 +5365,9 @@
   location: 480
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
-  bestCatchPath: 
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
   predators:
     Bashful Batfish: 7
   gig: Large
@@ -8331,7 +8331,8 @@
   bestCatchPath:
   - Short Bill Minnow
   predators:
-  hookset:
+  hookset: Precision
+  tug: light
   snagging:
   gig:
   fishEyes: false
@@ -8345,7 +8346,8 @@
   bestCatchPath:
   - Squid Strip
   predators:
-  hookset:
+  hookset: Powerful
+  tug: medium
   snagging:
   gig:
   fishEyes: false
@@ -9219,220 +9221,220 @@
   location: Crystarium Personal Suites
   startHour: 18
   endHour: 22
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   hookset: Precision
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Laxan Inkhorn
   location: The Source
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Metal Spinner
-  predators: 
+  predators:
   hookset: Precision
   tug: light
   snagging: false
-  gig: 
+  gig:
   fishEyes: false
   patch: 5.1
 - name: The Unforgiven
   location: The Source
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Fog
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   hookset: Powerful
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: White Oil Perch
   location: White Oil Falls
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Metal Spinner
-  predators: 
+  predators:
   hookset: Powerful
   tug: medium
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Bronze Sole
   location: Sharptongue Drip
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Rain
   bestCatchPath:
   - Marble Nymph
-  predators: 
+  predators:
   hookset: Powerful
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Kholusian King Crab
   location: The Western Kholusian Coast
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Metal Spinner
-  predators: 
+  predators:
   hookset: Powerful
   tug: medium
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Winged Dame
   location: The Derelicts
   startHour: 12
   endHour: 19
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Clear Skies
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   hookset: Precision
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: The Horned King
   location: The River of Sand
   startHour: 0
   endHour: 6
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Dust Storms
   bestCatchPath:
   - Jerked Ovim  # ALT: Desert Dessert Frog
   - Hornhelm
-  predators: 
+  predators:
   hookset: Powerful
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Areng Dire
   location: The Nabaath Severance
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Metal Spinner
-  predators: 
+  predators:
   hookset: Powerful
   tug: medium
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Faeshine Clam
   location: Handmirror Lake
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Metal Spinner
-  predators: 
+  predators:
   hookset: Precision
   tug: light
   snagging: false  # reports indicate snagging is NOT required
-  gig: 
+  gig:
   fishEyes: false
   patch: 5.1
 - name: The Sound of Fury
   location: Longmirror Lake
   startHour: 20
   endHour: 24
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Fair Skies
   - Clear Skies
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   hookset: Precision
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Priest of Yx'Lokwa
   location: Lake Tusi Mek'ta
   startHour: 10
   endHour: 12
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Robber Ball
   - Clown Tetra
   - Eryops
-  predators: 
+  predators:
   hookset: Powerful
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Sweetmeat Mussel
   location: Northwest Caliban Gorge
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   hookset: Precision
   tug: light
   snagging: true
-  gig: 
+  gig:
   fishEyes: false
   patch: 5.1
 - name: Starchaser
   location: Purpure
   startHour: 6
   endHour: 10
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Clouds
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   hookset: Precision
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: 60
   patch: 5.1
 # Patch 5.2
@@ -9449,43 +9451,43 @@
   - Fog
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   hookset: Powerful
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.2
 - name: White Ronso
   location: Lower Watts River
   startHour: 0
   endHour: 2
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   hookset: Precision
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.2
 - name: Ambling Caltrop
   location: The Hills of Amber
   startHour: 12
   endHour: 16
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Clear Skies
   bestCatchPath:
   - Desert Dessert Frog
   - Web-footed Sand Gecko
-  predators: 
+  predators:
   hookset: Powerful
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.2
 - name: Fae Rainbow
@@ -9499,11 +9501,11 @@
   - Fog
   bestCatchPath:
   - Marble Nymph
-  predators: 
+  predators:
   hookset: Precision
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.2
 - name: Black Jet
@@ -9517,28 +9519,28 @@
   - Fair Skies
   bestCatchPath:
   - Robber Ball
-  predators: 
+  predators:
   hookset: Precision
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.2
 - name: Ondo Sigh
   location: The Flounders' Floor
   startHour: 12
   endHour: 14
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Fair Skies
   - Clear Skies
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   hookset: Precision
   tug: heavy
-  snagging: 
-  gig: 
+  snagging:
+  gig:
   fishEyes: false
   patch: 5.2
 # Patch 5.3 (2020-08-11)
@@ -9546,16 +9548,16 @@
   location: The Quadrivium
   startHour: 22
   endHour: 24
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Clear Skies
   - Fair Skies
   bestCatchPath:
   - Fruit Worm
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: Sweetheart
@@ -9569,67 +9571,67 @@
   - Fair Skies
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: Giant Taimen
   location: Upper Watts River
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: Blue Crab
   location: The Western Kholusian Coast
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   tug: light
   hookset: Precision
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: Leannisg
   location: Handmirror Lake
   startHour: 6
   endHour: 8
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Rain
   bestCatchPath:
   - Marble Nymph
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: Fuchsia Bloom
   location: Longmirror Lake
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Robber Ball
-  predators: 
+  predators:
   tug: light
   hookset: Precision
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: Gold Hammer
@@ -9643,10 +9645,10 @@
   - Clear Skies
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: Recordkiller
@@ -9660,10 +9662,10 @@
   - Fog
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: The Mother of All Pancakes
@@ -9676,25 +9678,25 @@
   - Clear Skies
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 - name: Opal Shrimp
   location: The Norvrandt Slope
   startHour: 18
   endHour: 20
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Clear Skies
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   fishEyes: false
   patch: 5.3
 # Patch 5.4 (2020-12-08)
@@ -9708,10 +9710,10 @@
   - Fair Skies
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.4
 - name: Steel Fan
   location: White Oil Falls
@@ -9724,25 +9726,25 @@
   - Fog
   bestCatchPath:
   - Marble Nymph
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.4
 - name: Henodus Grandis
   location: The Eastern Kholusian Coast
   startHour: 22
   endHour: 24
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Clouds
   bestCatchPath:
   - Short Bill Minnow
   - Spearhead Squid
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.4
 - name: Sunken Tome
   location: The Haughty One
@@ -9754,25 +9756,25 @@
   - Thunderstorms
   bestCatchPath:
   - Marble Nymph
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.4
 - name: Pearl Pipira
   location: The Red Chalice
   startHour: 17
   endHour: 20
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Fog
   bestCatchPath:
   - Robber Ball
   - Diamond Pipira
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.4
 - name: The Ondotaker
   location: Where the Dry Return
@@ -9784,10 +9786,10 @@
   - Clouds
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.4
 # Patch 5.5 (2021-04-13)
 - name: Aster Trivi
@@ -9800,10 +9802,10 @@
   - Clear Skies
   bestCatchPath:
   - Marble Nymph
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Python Discus
   location: Sullen
@@ -9815,23 +9817,23 @@
   - Thunderstorms
   bestCatchPath:
   - Fruit Worm
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Steel Razor
   location: The Western Kholusian Coast
   startHour: 6
   endHour: 8
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Moyebi Shrimp
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Shadeshifter
   location: Seagazer Shoals
@@ -9844,10 +9846,10 @@
   - Gales
   bestCatchPath:
   - Squid Strip
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Nabaath Saw
   location: The Nabaath Severance
@@ -9862,10 +9864,10 @@
   bestCatchPath:
   - Jerked Ovim
   - Desert Saw
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Celestial
   location: Father Collard's Failings
@@ -9877,23 +9879,23 @@
   - Clear Skies
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Dammroen Herring
   location: The Spoiled One
   startHour: 0
   endHour: 24
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Deephaunt
   location: Woven Oath
@@ -9905,52 +9907,52 @@
   - Fog
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Mora Tecta
   location: Northwest Caliban Gorge
   startHour: 22
   endHour: 24
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Fair Skies
   bestCatchPath:
   - Short Bill Minnow
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Maru Crab
   location: West Caliban Gap
   startHour: 16
   endHour: 20
-  previousWeatherSet: 
+  previousWeatherSet:
   weatherSet:
   - Clouds
   bestCatchPath:
   - Short Bill Minnow
   - Ancient Shrimp
-  predators: 
+  predators:
   tug: heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.5
 - name: Golden Pipira
   location: Mjrl's Tears
   startHour: 6
   endHour: 7
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Robber Ball
-  predators: 
+  predators:
   tug: heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.5
 # Patch 5.55 (2021-05-25)
 - name: Listracanthus
@@ -9965,17 +9967,17 @@
   bestCatchPath:
   - Baitbugs
   - The Jaws of Undeath
-  predators: 
+  predators:
   tug: Heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.55
 - name: Aquamaton
   location: Seagazer Shoals
   startHour: 10
   endHour: 16
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Short Bill Minnow
   predators:
@@ -9984,7 +9986,7 @@
   intuitionLength: 350
   tug: Heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.55
 - name: Cinder Surprise
   location: The River of Sand
@@ -9998,10 +10000,10 @@
   - Desert Dessert Frog
   predators:
     Sand Egg: 10
-  intuitionLength: 350
+  intuitionLength: 360
   tug: Heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.55
 - name: Ealad Skaan
   location: Longmirror Lake
@@ -10013,26 +10015,26 @@
   - Clear Skies
   bestCatchPath:
   - Baitbugs
-  predators: 
+  predators:
   tug: Heavy
   hookset: Precision
-  snagging: 
+  snagging:
   patch: 5.55
 - name: Greater Serpent of Ronka
   location: Lake Tusi Mek'ta
   startHour: 10
   endHour: 12
-  previousWeatherSet: 
-  weatherSet: 
+  previousWeatherSet:
+  weatherSet:
   bestCatchPath:
   - Robber Ball
   - Clown Tetra
   - Eryops
   - Priest of Yx'Lokwa
-  predators: 
+  predators:
   tug: Heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.55
 - name: Lancetfish
   location: Northwest Caliban Gorge
@@ -10049,7 +10051,7 @@
   intuitionLength: 700
   tug: Heavy
   hookset: Powerful
-  snagging: 
+  snagging:
   patch: 5.55
 # ENDWALKER - Patch 6.0
 - name: Pecten
@@ -11595,7 +11597,7 @@
   patch: 6.0
 - name: Phallaina
   location: Limne 3-β
-  startHour: 22
+  startHour: 0
   endHour: 4
   previousWeatherSet:
   weatherSet:
@@ -12350,7 +12352,7 @@
 - name: Jumbo Snook
   location: Unmoved Source Alpha
   startHour: 18
-  endHour: 23
+  endHour: 22
   previousWeatherSet:
   weatherSet:
   - Clouds
