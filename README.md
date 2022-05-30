@@ -70,6 +70,13 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
 * Commit changes to master with an appropriate message. Don't forget to `git push` all changes to GitHub as well.
 * Go fish?!
 
+### Updating Video Links
+* Remember to use ENGLISH item names, or Item ID as the key.
+* Update the *cache buster* in `index.html` for `js/app/data_ex.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
+* Validate changes when testing site locally. Open the console and run `_validate_extra_data()`.
+* **NOTE:** You do not need to rebuild the database if only adding/updating video links.
+* Changes _should_ be commited to master, then merged with gh-pages branch. This will reduce confusion later, maybe...
+
 ### Updating the website
 * Rebuild any changes made to `date-fns` using the `npm run build` command.
 * Switch to the `gh-pages` branch (or `cd dist`.)

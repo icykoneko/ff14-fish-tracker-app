@@ -71,6 +71,14 @@ class Fish {
       this.dataMissing = false;
     }
 
+    // Extra data, such as video links.
+    if (EXTRA_DATA.FISH[this.id] !== undefined) {
+      _(this).extend(EXTRA_DATA.FISH[this.id]);
+    } else if (EXTRA_DATA.FISH[DATA.ITEMS[this.id].name_en] !== undefined) {
+      // Allow name properties too... at least until it's part of the built dataset.
+      _(this).extend(EXTRA_DATA.FISH[DATA.ITEMS[this.id].name_en]);
+    }
+
     // Create a subject for catchableRanges that we can subscribe to.
     this.catchableRangesObserver = new rxjs.Subject([]);
 
