@@ -39,8 +39,8 @@ title: Home
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?6.1_20220412_2112" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20201207_2149" />
-    <link rel="stylesheet" href="css/overlay.css?20220226_1427" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20220506_1500" />
+    <link rel="stylesheet" href="css/overlay.css?20220506_1500" />
     <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
 
     <!-- Localization Support script -->
@@ -48,6 +48,7 @@ title: Home
 
     <!-- Include the data -->
     <script type="text/javascript" src="js/app/data.js?6.1_20220502_1844"></script>
+    <script type="text/javascript" src="js/app/data_ex.js?6.1_20220530_1734"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?6.1_20220412_0045"></script>
 
     <!--
@@ -57,7 +58,7 @@ title: Home
       -   to other classes until an initialization method can be called safely.
       -->
     <script type="text/javascript" src="js/app/time.js?20111013_2022"></script>
-    <script type="text/javascript" src="js/app/fish.js?20211011_2133"></script>
+    <script type="text/javascript" src="js/app/fish.js?20220506_1500"></script>
     <script type="text/javascript" src="js/app/weather.js?20211011_2133"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20211011_2133"></script>
     <script type="text/javascript" src="js/app/sorters.js?20211011_2133"></script>
@@ -190,6 +191,12 @@ title: Home
             {{?it.data.collectable !== null}}
               <div class="ui middle aligned sprite-icon sprite-icon-collectable"
                    data-tooltip="Minimum Collectability: {{=it.data.collectable}}" data-position="right center" data-variation="mini"></div>
+            {{?}}
+            {{?it.data.video !== null}}
+              <!-- Include link to video guide -->
+              {{~it.getVideoInfo() :videoInfo}}
+                <a class="plainlink" href="{{=videoInfo.url}}" target="cp_vguide"><i class="{{=videoInfo.iconClass}} icon"></i></a>
+              {{~}}
             {{?}}
           </div>
         </td>
@@ -517,7 +524,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20210926_1839"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20220412_0045"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20220506_1500"></script>
 
     <script type="text/javascript">
       $(() => {

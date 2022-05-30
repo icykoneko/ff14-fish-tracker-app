@@ -307,6 +307,23 @@ class FishEntry {
       return "";
     }
   }
+
+  getVideoInfo() {
+    if (this.data.video !== null) {
+      // We need to return an object with the following fields:
+      // * url
+      // * icon class
+      return _(this.data.video).map((contentId, contentType) => {
+        let videoInfo = null;
+        if (contentType == "youtube") {
+          videoInfo = {iconClass: 'youtube', url: `https://youtu.be/${contentId}`};
+        }
+        return videoInfo;
+      });
+    } else {
+      return null;
+    }
+  }
 }
 
 class IntuitionFishEntry extends FishEntry {
