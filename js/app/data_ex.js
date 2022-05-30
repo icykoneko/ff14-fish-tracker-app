@@ -96,5 +96,6 @@ const EXTRA_DATA = {
         "Rakshasa": { video: { youtube: "COrTexMOscU" } },
         "Madam Butterfly": { video: { youtube: "Ajg7o_gBxgQ" } },
         "Forbiddingway": { video: { youtube: "8oLcTi53xbU" } },
+        "Earful": { video: { youtube: "vxML0lnas1c" } },
     },
 };
