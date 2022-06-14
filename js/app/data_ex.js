@@ -97,5 +97,6 @@ const EXTRA_DATA = {
         "Madam Butterfly": { video: { youtube: "Ajg7o_gBxgQ" } },
         "Forbiddingway": { video: { youtube: "8oLcTi53xbU" } },
         "Earful": { video: { youtube: "vxML0lnas1c" } },
+        "Jumbo Snook": { video: { youtube: "Sn86CTFPMcc" } },
     },
 };
