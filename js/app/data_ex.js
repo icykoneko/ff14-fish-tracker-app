@@ -98,5 +98,7 @@ const EXTRA_DATA = {
         "Forbiddingway": { video: { youtube: "8oLcTi53xbU" } },
         "Earful": { video: { youtube: "vxML0lnas1c" } },
         "Jumbo Snook": { video: { youtube: "Sn86CTFPMcc" } },
+        "Foun Ahlm": { video: { youtube: "4_LOm8VzKBI" } },
+        "Drepanaspis": { video: { youtube: "ObesgoS8szY" } },
     },
 };
