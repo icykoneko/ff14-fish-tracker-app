@@ -100,5 +100,6 @@ const EXTRA_DATA = {
         "Jumbo Snook": { video: { youtube: "Sn86CTFPMcc" } },
         "Foun Ahlm": { video: { youtube: "4_LOm8VzKBI" } },
         "Drepanaspis": { video: { youtube: "ObesgoS8szY" } },
+        "Hippo Frog": { video: { youtube: "H4tjuH9cafA" } },
     },
 };
