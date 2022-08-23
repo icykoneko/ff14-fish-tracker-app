@@ -22,7 +22,13 @@
 # lives in the gh-pages branch... Carby says it's fine.
 - name: Greatsword Snook
   bait: [Mayfly]
+- name: Swampsucker Bowfin
+  bait: [Sky Spoon Lure]
+- name: Lale Crab
+  bait: [Shrimp Ball]
 - name: Disappirarucu
+  bait: [Mayfly]
+- name: Starscryer
   bait: [Mayfly]
 - name: Planetes
   bait: [Versatile Lure, Albino Loach]
