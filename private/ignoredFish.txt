@@ -515,3 +515,9 @@ Cloud Kelp
 White Clam
 Fragrant Sweetfish
 Scarlet Frog
+# Patch 6.15
+Inksquid
+Seedtoad
+Auroral Clam
+Holier-than Mogpom
+Chalky Coral
