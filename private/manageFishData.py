@@ -509,7 +509,12 @@ def rebuild_fish_data(args):
         non_formatting_diffs = set(map(lambda x: x.strip().lower(), diffs)) - \
                                set(map(_unformated_name, fish_and_tackle_data.values()))
         if len(non_formatting_diffs) != 0:
-            raise KeyError("Missing item names: %s" % ', '.join(non_formatting_diffs))
+            # Okay... allow for a few more formatting issues... Gura...
+            gura_diffs = set(map(lambda x: x.replace(' ',''), non_formatting_diffs)) - \
+                         set(map(lambda x: x['name_en'].strip().lower().replace(' ',''),
+                                 fish_and_tackle_data.values()))
+            if len(gura_diffs) != 0:
+                raise KeyError("Missing item names: %s" % ', '.join(gura_diffs))
 
     # Make sure any predators have data defined for them too!
     predators = set(filter(None,
@@ -524,7 +529,12 @@ def rebuild_fish_data(args):
         non_formatting_diffs = set(map(lambda x: x.strip().lower(), diffs)) - \
                                set(map(_unformated_name, fish_and_tackle_data.values()))
         if len(non_formatting_diffs) != 0:
-            raise KeyError("Missing predators: %s" % ', '.join(non_formatting_diffs))
+            # Okay... allow for a few more formatting issues... Gura...
+            gura_diffs = set(map(lambda x: x.replace(' ',''), non_formatting_diffs)) - \
+                         set(map(lambda x: x['name_en'].strip().lower().replace(' ',''),
+                                 fish_and_tackle_data.values()))
+            if len(gura_diffs) != 0:
+                raise KeyError("Missing predators: %s" % ', '.join(gura_diffs))
 
     diffs = predators - \
             set([fish['name'] for fish in fishes])
@@ -720,7 +730,9 @@ def add_new_fish_data(args):
             if str(fish.name) in known_fishes:
                 continue
             # Try a little harder (formatting?)
-            misformatted_fish_name = next(filter(lambda n: n.lower() == str(fish.name).strip().lower(), known_fishes), None)
+            misformatted_fish_name = next(filter(lambda n: n.lower() == str(fish.name).strip().lower()
+                                                           or n.lower().replace(' ', '') == str(fish.name).strip().lower().replace(' ', ''),
+                                                 known_fishes), None)
             if misformatted_fish_name is not None:
                 logging.warning("Fish name formatting mismatch. Have \"%s\" but DATs had \"%s\".",
                                 misformatted_fish_name, str(fish.name))
