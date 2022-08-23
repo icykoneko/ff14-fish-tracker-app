@@ -56,8 +56,11 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
   * **NOTE:** Pay attention to the log messages. If the script extracted any new textures, you'll need to update the sprite image.
   * Update the *cache buster* in `index.html` for `js/app/fish_info_data.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
 * If adding fish for a new patch;
-  * Update the `viewModel.filter` definition in `index.html` by adding the patch version. (You'll also need to update the entry in `js/app/viewmodel.js`)
-  * Remove the `disabled` class from the new patch version.
+  * Add the new patch to `SiteSettings::filters::patch` in `viewmodel.js`.
+  * Update the `LATEST_PATCH` to the new patch number (only needed for M.m patches, not M.mm)
+    * Set the date for `SHOW_LATEST_PATCH_AFTER` to patch release date, plus 2 weeks to prevent spoilers.
+  * Update the *cache buster* in `index.html` for `js/app/viewmodel.js`. Use the format: `?YYYYMMDD_HHMM`.
+  * Replace the `disabled` class from the new patch version with `active` in `index.html`.
     * **NOTE:** If it's a new expansion, well... make sure it looks nice, and set the patch buttons to `disabled` at first.
 * If new textures were extracted (i.e. new fish images, or new bait images);
   * Update the *cache buster* in `index.html` for `public/images/sprite.css`. Use the format `?${ver}_YYYYMMDD`.
