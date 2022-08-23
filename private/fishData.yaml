@@ -11731,7 +11731,8 @@
   gig: UNKNOWN
   patch: 6.0
   dataMissing: true
-- name: Cloudy Catshark
+- name: Cloudy Cat Shark
+  # Previously named: "Cloudy Catshark" in 6.0; reformatted in 6.2.
   location: Northern Onokoro
   startHour: 0
   endHour: 24
@@ -12297,7 +12298,7 @@
   weatherSet:
   bestCatchPath:
   predators:
-    Cloudy Catshark: 10  # to spawn node
+    Cloudy Cat Shark: 10  # to spawn node
   gig: Large
   patch: 6.0
 - name: Pipefish
@@ -12308,7 +12309,7 @@
   weatherSet:
   bestCatchPath:
   predators:
-    Cloudy Catshark: 10  # to spawn node
+    Cloudy Cat Shark: 10  # to spawn node
   gig: Small
   patch: 6.0
 - name: Xiphactinus
@@ -12446,3 +12447,134 @@
   hookset: Powerful
   snagging:
   patch: 6.1
+# Patch 6.2 (2022-08-23)
+- name: Greatsword Snook
+  location: Oinops
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Swampsucker Bowfin
+  location: Unmoved Source Beta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Lale Crab
+  location: Yedlihmad
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Bigcuda
+  location: Ksiroda
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Mayashell
+  location: The Font of Maya
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Sovereign Shadow
+  location: The Stainless Course
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Disappirarucu
+  location: Greatest Endsvale
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Planetes
+  location: Rumination's Ramble
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Starscryer
+  location: The Wellspring of Regret
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
+- name: Argonauta argo
+  location: Limne 3-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.2
+  dataMissing: true
