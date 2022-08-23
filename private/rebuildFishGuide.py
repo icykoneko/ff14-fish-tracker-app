@@ -78,7 +78,7 @@ def _make_localized_field(fld_name, row, col_name):
 
         # Use the default language name instead...
         value = str(row[col_name])
-        logging.warning("Missing %s data for %s[%u][%s], using \"%s\" instead.",
+        logging.debug("Missing %s data for %s[%u][%s], using \"%s\" instead.",
                         lang.name,
                         row.sheet.name,
                         row.key,
