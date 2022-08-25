@@ -58,3 +58,7 @@
 - name: Planetes
   weatherSet: [Umbral Wind]
   bait: [Versatile Lure, Albino Loach]
+- name: Mayashell
+  startHour: 0
+  endHour: 8
+  bait: [Mayfly, Handy Hamsa]
