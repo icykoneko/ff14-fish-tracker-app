@@ -22,43 +22,53 @@
 # lives in the gh-pages branch... Carby says it's fine.
 - name: Greatsword Snook
   startHour: 16
-  endHour: 24  # most likely 20
+  endHour: 20
   weatherSet: [Snow]
   bait: [Mayfly]
+  tug: heavy
 - name: Swampsucker Bowfin
   startHour: 8
   endHour: 16
   weatherSet: [Clouds]
   bait: [Sky Spoon Lure]
+  tug: heavy
 - name: Lale Crab
   weatherSet: [Fog]
   bait: [Shrimp Ball]
+  tug: heavy
 - name: Bigcuda
   startHour: 8
   endHour: 16
   weatherSet: [Rain]
   bait: [Sky Spoon Lure]
+  tug: heavy
 - name: Sovereign Shadow
   startHour: 0
   endHour: 8
   weatherSet: [Snow]
   bait: [Mayfly]
+  tug: heavy
 - name: Disappirarucu
   startHour: 0
   endHour: 8
   bait: [Mayfly]
+  tug: heavy
 - name: Starscryer
   weatherSet: [Astromagnetic Storm]
   bait: [Mayfly]
+  tug: heavy
 - name: Argonauta argo
-  startHour: 0
-  endHour: 8
+  startHour: 2
+  endHour: 4
   weatherSet: [Umbral Wind]
   bait: [Stardust]
+  tug: heavy
 - name: Planetes
   weatherSet: [Umbral Wind]
   bait: [Versatile Lure, Albino Loach]
+  tug: heavy
 - name: Mayashell
   startHour: 0
   endHour: 8
   bait: [Mayfly, Handy Hamsa]
+  tug: medium
