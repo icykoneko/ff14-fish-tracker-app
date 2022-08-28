@@ -101,5 +101,6 @@ const EXTRA_DATA = {
         "Foun Ahlm": { video: { youtube: "4_LOm8VzKBI" } },
         "Drepanaspis": { video: { youtube: "ObesgoS8szY" } },
         "Hippo Frog": { video: { youtube: "H4tjuH9cafA" } },
+        "Mayashell": { video: { youtube: "9bqf7Qd_a-4" } },
     },
 };
