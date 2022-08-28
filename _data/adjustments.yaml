@@ -50,7 +50,7 @@
   tug: heavy
 - name: Disappirarucu
   startHour: 0
-  endHour: 8
+  endHour: 2
   bait: [Mayfly]
   tug: heavy
 - name: Starscryer
@@ -68,7 +68,7 @@
   bait: [Versatile Lure, Albino Loach]
   tug: heavy
 - name: Mayashell
-  startHour: 0
-  endHour: 8
+  startHour: 3
+  endHour: 6
   bait: [Mayfly, Handy Hamsa]
   tug: medium
