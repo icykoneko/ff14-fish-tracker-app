@@ -29,10 +29,12 @@
 - name: Swampsucker Bowfin
   startHour: 8
   endHour: 16
+  previousWeatherSet: [Clear Skies, Fair Skies]
   weatherSet: [Clouds]
   bait: [Sky Spoon Lure]
   tug: heavy
 - name: Lale Crab
+  previousWeatherSet: [Clear Skies, Fair Skies]
   weatherSet: [Fog]
   bait: [Shrimp Ball]
   tug: heavy
