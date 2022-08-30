@@ -12450,131 +12450,150 @@
 # Patch 6.2 (2022-08-23)
 - name: Greatsword Snook
   location: Oinops
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 20
   previousWeatherSet:
   weatherSet:
+  - Snow
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Swampsucker Bowfin
   location: Unmoved Source Beta
-  startHour: 0
-  endHour: 24
+  startHour: 8
+  endHour: 16
   previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
   weatherSet:
+  - Clouds
   bestCatchPath:
+  - Sky Spoon Lure
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Lale Crab
   location: Yedlihmad
   startHour: 0
   endHour: 24
   previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
   weatherSet:
+  - Fog
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Bigcuda
   location: Ksiroda
-  startHour: 0
-  endHour: 24
+  startHour: 8
+  endHour: 16
   previousWeatherSet:
+  - Clear Skies
+  - Fair Skies
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Sky Spoon Lure
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.2
   dataMissing: true
 - name: Mayashell
   location: The Font of Maya
-  startHour: 0
-  endHour: 24
+  startHour: 3
+  endHour: 6
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Mayfly
+  - Handy Hamsa
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Sovereign Shadow
   location: The Stainless Course
-  startHour: 0
-  endHour: 24
+  startHour: 2
+  endHour: 8
   previousWeatherSet:
+  - Clouds
+  - Fog
   weatherSet:
+  - Snow
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Precision
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Disappirarucu
   location: Greatest Endsvale
   startHour: 0
-  endHour: 24
+  endHour: 2
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Planetes
   location: Rumination's Ramble
   startHour: 0
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Umbral Wind
   bestCatchPath:
+  - Versatile Lure
+  - Albino Loach
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Starscryer
   location: The Wellspring of Regret
-  startHour: 0
-  endHour: 24
+  startHour: 2
+  endHour: 4
   previousWeatherSet:
   weatherSet:
+  - Astromagnetic Storm
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Argonauta argo
   location: Limne 3-α
-  startHour: 0
-  endHour: 24
+  startHour: 2
+  endHour: 4
   previousWeatherSet:
   weatherSet:
+  - Umbral Wind
   bestCatchPath:
+  - Stardust
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Precision
   snagging:
   patch: 6.2
-  dataMissing: true
