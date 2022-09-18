@@ -12503,6 +12503,7 @@
   - Fair Skies
   weatherSet:
   - Rain
+  - Showers
   bestCatchPath:
   - Sky Spoon Lure
   predators:
@@ -12510,7 +12511,6 @@
   hookset: Powerful
   snagging:
   patch: 6.2
-  dataMissing: true
 - name: Mayashell
   location: The Font of Maya
   startHour: 3
