@@ -38,7 +38,7 @@ let CarbyUtils = function(){
         let dateOffset = currDateTime - datetime;
         resetSiteData(datetime);
         Date.now = () => { return origDateNow() - dateOffset; };
-        fishWatcher.updateFishes();
+        fishWatcher.updateFishes({earthTime: datetime});
       }
       console.debug("Traveled to %s", dateFns.formatISO(eorzeaTime.toEorzea(datetime)));
     }

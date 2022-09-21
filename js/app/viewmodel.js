@@ -362,6 +362,12 @@ let ViewModel = new class {
   initialize() {
     doT.templateSettings.strip = false;
 
+    // Share reference of fishEntries with fishWatcher.
+    fishWatcher.fishEntries = this.fishEntries;
+
+    // Initialize the weather tracking.
+    weatherService.initializeWeatherTracking();
+
     // Finally, initialize the display.
     this.initializeDisplay();
   }
