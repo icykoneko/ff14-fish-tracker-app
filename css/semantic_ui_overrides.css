@@ -1,40 +1,40 @@
 /* Large Monitor */
 @media only screen and (min-width: 1200px) and (max-width: 1499px) {
-  .ui.container {
+  .ui.ui.ui.container:not(.fluid) {
     width: 1127px;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  .ui.grid.container {
+  .ui.ui.ui.grid.container {
     width: calc( 1127px  +  2rem ) !important;
   }
 
-  .ui.relaxed.grid.container {
+  .ui.ui.ui.relaxed.grid.container {
     width: calc( 1127px  +  3rem ) !important;
   }
 
-  .ui.very.relaxed.grid.container {
+  .ui.ui.ui.very.relaxed.grid.container {
     width: calc( 1127px  +  5rem ) !important;
   }
 }
 /* Even larger Monitor */
 @media only screen and (min-width: 1500px) {
-  .ui.container {
+  .ui.ui.ui.container:not(.fluid) {
     width: 1427px;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  .ui.grid.container {
+  .ui.ui.ui.grid.container {
     width: calc( 1427px  +  2rem ) !important;
   }
 
-  .ui.relaxed.grid.container {
+  .ui.ui.ui.relaxed.grid.container {
     width: calc( 1427px  +  3rem ) !important;
   }
 
-  .ui.very.relaxed.grid.container {
+  .ui.ui.ui.very.relaxed.grid.container {
     width: calc( 1427px  +  5rem ) !important;
   }
 }
