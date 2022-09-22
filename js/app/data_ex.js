@@ -103,5 +103,6 @@ const EXTRA_DATA = {
         "Hippo Frog": { video: { youtube: "H4tjuH9cafA" } },
         "Mayashell": { video: { youtube: "9bqf7Qd_a-4" } },
         "Bigcuda": { video: { youtube: "pi_7oLORVWo" } },
+        "Disappirarucu": { video: { youtube: "hcdDz3tQu6s" } },
     },
 };
