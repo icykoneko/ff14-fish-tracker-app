@@ -14,8 +14,6 @@ function startOfPeriod(d) {
 
 class WeatherService {
   constructor() {
-    const { filter, skip } = rxjs.operators;
-
     // Cache weather information.
     this.__weatherData = [];
     
@@ -25,6 +23,7 @@ class WeatherService {
   }
 
   initializeWeatherTracking() {
+    const { filter, skip } = rxjs.operators;
     // In order to optimize the iterator function, initialize the cached data
     // with the previous weather period first.
     var date = startOfPeriod(
