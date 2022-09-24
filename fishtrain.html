@@ -137,7 +137,7 @@
               </div>
               <div class="field">
                 <label>Interval</label>
-                <div class="ui compact selection dropdown">
+                <div class="ui compact selection dropdown" id="timelineInterval">
                   <i class="dropdown icon"></i>
                   <div class="default text">Interval</div>
                   <div class="menu">
@@ -232,49 +232,20 @@
         </div>
       </div>
 
-      <table class="ui selectable compact fixed table">
-        <thead>
-          <tr>
-            <th>Fish</th>
-            <th>Location</th>
-            <th style="width: 4rem;">0:00</th>
-            <th style="width: 4rem;">0:15</th>
-            <th style="width: 4rem;">0:30</th>
-            <th style="width: 4rem;">0:45</th>
-            <th style="width: 4rem;">1:00</th>
-            <th style="width: 4rem;">1:15</th>
-            <th style="width: 4rem;">1:30</th>
-            <th style="width: 4rem;">1:45</th>
-            <th style="width: 4rem;">2:00</th>
-            <th style="width: 4rem;">2:15</th>
-            <th style="width: 4rem;">2:30</th>
-            <th style="width: 4rem;">2:45</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-029164" style="transform: scale(0.75);"></div>
-              <div class="ui middle aligned" style="display: inline-block;">
-                <span><a class="fish-name" target="_blank" href="#">The Ruby Dragon</a></span>
-              </div>
-            </td>
-            <td><i class="location-button map icon"></i> <a href="https://ffxivteamcraft.com/db/en/fishing-spot/158" target="cp_gt" class="location-name">The Ruby Price</a><br> <span style="font-size: smaller" class="zone-name">The Ruby Sea</span></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="flex-direction: column; display: flex;">
+        <div style="overflow-x: scroll; width: 100%; flex-grow: 1;">
+          <table id="fishtrain" class="ui selectable compact fixed unstackable table" style="width: unset;">
+            <thead>
+              <tr>
+                <th class="sticky">Fish</th>
+                <th class="sticky">Location</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="ui container">
         <p>
           FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>

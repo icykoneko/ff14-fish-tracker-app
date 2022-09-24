@@ -10,13 +10,53 @@
 
 let FishTrain = function(){
 
+  var templates = {
+    fishEntryInterval:
+      `<td class="fishtrain-fishentry-interval">
+         <span class="interval-indicator"
+               style="margin-left: {{=it.indicatorLeft}}%; width: {{=it.indicatorWidth}}%;"></span>
+       </td>`,
 
+    fishEntry: `<tr>
+  <td class="sticky">
+    <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"
+         style="transform: scale(0.5);"></div>
+    <div class="ui middle aligned" style="display: inline-block;">
+      <span>{{=it.data.name}}</span>
+    </div>
+  </td>
+  <td class="sticky">
+    <i class="location-button map icon"></i> <a href="https://ffxivteamcraft.com/db/en/{{?it.data.location.spearfishing}}spearfishing{{??}}fishing{{?}}-spot/{{=it.data.location.id}}"
+       target="cp_gt" class="location-name">{{=it.data.location.name}}</a><br/>
+    <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
+  </td>
+  {{~ it.intervals :p}}
+    {{#def.fishEntryInterval:p}}
+  {{~}}
+</tr>`,
+
+    intervalHeadings:
+     `{{~ it :k}}
+        <th class="interval">{{=k}}</th>
+      {{~}}`,
+  };
+
+  class FishEntry {
+    constructor(fish) {
+      this.active = true;
+      this.intervals = [];
+      this.data = fish;
+    }
+  }
 
 
   class _FishTrain {
     constructor() {
       // Compile the templates.
-
+      this.templates = {
+        fishEntry: doT.template(templates.fishEntry, undefined, templates),
+        intervalHeadings: doT.template(templates.intervalHeadings)
+      };
     }
 
     initialize() {
@@ -47,6 +87,8 @@ let FishTrain = function(){
       // In order to calculate rarity, we need to check everything (otherwise
       // you could always guestimate.)
       this.fishEntries = {};
+      // Link it to the fishWatcher.
+      fishWatcher.fishEntries = this.fishEntries;
 
       // We don't want to actually fully initialize the weather service
       // because this tool doesn't need to update anything after the user
@@ -58,12 +100,10 @@ let FishTrain = function(){
     }
 
     initializeView() {
-      $('#rangestart').calendar({
-        endCalendar: '#rangeend'
-      });
-      $('#rangeend').calendar({
-        startCalendar: '#rangestart'
-      });
+      // Track certain DOM objects.
+      this.fishTrainTableHeader$ = $('table#fishtrain thead tr').first();
+      this.fishTrainTableBody$ = $('table#fishtrain tbody');
+
       $('.ui.dropdown').dropdown();
       $('#main-menu.dropdown').dropdown({
         action: 'hide'
@@ -80,6 +120,9 @@ let FishTrain = function(){
       // NOT AUTOMATICALLY BE UPDATED.
       this.applyTheme(this.settings.theme);
 
+      // Calendar's are special... they need to be reinitialized to pick up inverted class.
+      this.reinitCalendarFields();
+
       $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
 
       $('#updateList').on('click', this, this.updateList);
@@ -92,9 +135,123 @@ let FishTrain = function(){
       $('#filterExtra .button').on('click', this, this.filterExtraClicked);
     }
 
-    updateList() {
-      // Start by reinitializing the availability data and weather.
-      CarbyUtils._resetSiteData()
+    reinitCalendarFields(opts={}) {
+      var startDate = $('#rangestart').calendar('get date');
+      var endDate = $('#rangeend').calendar('get date');
+      $('#rangestart').calendar({
+        endCalendar: '#rangeend',
+        initialDate: startDate
+      });
+      $('#rangeend').calendar({
+        startCalendar: '#rangestart',
+        initialDate: endDate
+      });
+    }
+
+    updateList(e) {
+      e.stopPropagation();
+      // Reset the main context.
+      var _this = e.data;
+
+      // Clear the table.
+      _this.fishTrainTableBody$.empty();
+      _this.fishTrainTableHeader$.find('.interval').remove();
+
+      // Determine the intervals.
+      _this.settings.timelineInterval = $('#timelineInterval').dropdown('get value');
+      _this.timeline.start = $('#rangestart').calendar('get date');
+      _this.timeline.end = $('#rangeend').calendar('get date');
+
+      // Reinitialize the availability data and weather.
+      CarbyUtils._resetSiteData(+_this.timeline.start)
+
+      // Get intervals but exclude the last entry if it matches an interval.
+      // To accomplish this, we subtract one second from the end date.
+      var intervals = dateFns.eachMinuteOfInterval(
+        {start: _this.timeline.start, end: _this.timeline.end-1},
+        {step: _this.settings.timelineInterval});
+
+      // Update the table headers.
+      _this.fishTrainTableHeader$.append(
+        _this.templates.intervalHeadings(_(intervals).map(x => dateFns.format(x, 'p'))));
+
+      // Now it's time to compute the availability for our fishies...
+      // This might take a while...
+      _(Fishes).chain()
+        .reject(fish => _this.isFishFiltered.call(_this, fish))
+        .each(fish => _this.activateEntry.call(_this, fish, +_this.timeline.start));
+
+      // Remove any left-over entries.
+      for (let k in this.fishEntries) {
+        var entry = this.fishEntries[k];
+        if (!entry.active) {
+          this.removeEntry(entry, k);
+        }
+      }
+
+      // Finally, let FishWatcher know it needs to reinit everything.
+      fishWatcher.updateFishes({earthTime: +_this.timeline.start});
+
+      return;
+    }
+
+    isFishFiltered(fish) {
+      // Filter by patch.
+      // Patches can be... odd sometimes.  Convert to string, and only compare
+      // with the first number following the decimal.
+      function normalizePatch(patch) {
+        let strPatch = String(patch);
+        let pos = strPatch.indexOf(".");
+        if (pos > 0) {
+          // Convert to a number keeping only the first digit after decimal.
+          return Number(strPatch.substr(0, pos+2))
+        } else {
+          // Otherwise, it's already a flat number.
+          return patch;
+        }
+      }
+      if (!this.settings.filters.patch.has(normalizePatch(fish.patch)))
+        return true;
+
+      // Filter by extra criteria.
+      if (this.settings.filters.extra == 'big') {
+        if (!fish.bigFish) return true;
+      } else if (this.settings.filters.extra == 'collectable') {
+        if (!fish.collectable) return true;
+      } else if (this.settings.filters.extra == 'aquarium') {
+        if (!fish.aquarium) return true;
+      }
+
+      // No other reason to filter.
+      return false;
+    }
+
+    activateEntry(fish, earthTime) {
+      // Check if there's already an entry for this fish.
+      if (this.fishEntries[fish.id]) {
+        // There is, so just mark it as active and return.
+        this.fishEntries[fish.id].active = true;
+        return;
+      }
+
+      // Otherwise, we have to create a new entry for this fish.
+      this.createEntry(fish, earthTime);
+    }
+
+    createEntry(fish, earthTime) {
+      let entry = new FishEntry(fish);
+
+      // Don't forget to activate the new entry!!!
+      entry.active = true;
+      // Add the new entry to the set of tracked fish entry.
+      this.fishEntries[fish.id] = entry;
+
+      return entry;
+    }
+
+    removeEntry(entry, k) {
+      // TODO: Remove entry from DOM.
+      delete this.fishEntries[k];
     }
 
     filterPatchClicked(e) {
@@ -200,9 +357,11 @@ let FishTrain = function(){
       $('.ui.table').toggleClass('inverted', theme === 'dark');
       $('.ui.list').toggleClass('inverted', theme === 'dark');
       $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
-      $('.ui.calendar').toggleClass('inverted', theme === 'dark');
       $('.ui.dropdown').toggleClass('inverted', theme === 'dark');
       $('.ui.input').toggleClass('inverted', theme === 'dark');
+
+      $('.ui.calendar').toggleClass('inverted', theme === 'dark');
+      this.reinitCalendarFields();
     }
 
     loadSettings() {

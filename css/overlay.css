@@ -615,6 +615,38 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-intuition.has-duration > sp
   grid-area: fish-meta;
 }
 
+
+table#fishtrain thead tr > th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+table.inverted#fishtrain thead tr > th {
+  background-color: hsl(0, 0%, 15%);
+}
+table#fishtrain thead tr > th.sticky {
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+table#fishtrain thead tr > th.sticky:nth-child(1) {
+  min-width: 15vw;
+}
+table#fishtrain thead tr > th.sticky:nth-child(2) {
+  left: 15vw;
+}
+table#fishtrain tbody tr > td.sticky {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+table.inverted#fishtrain tbody tr > td.sticky {
+  background-color: #333;
+}
+table#fishtrain tbody tr > td.sticky:nth-child(2) {
+  left: 15vw;
+}
+
 #site-last-update.update-available {
   color: olive;
 }

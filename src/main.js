@@ -8,6 +8,7 @@ export {
     compareAsc,
     differenceInMilliseconds,
     differenceInMinutes,
+    eachMinuteOfInterval,
     format,
     formatDistanceStrict,
     formatDuration,
