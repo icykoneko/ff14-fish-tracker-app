@@ -10,51 +10,143 @@
 
 let FishTrain = function(){
 
-  var templates = {
-    fishEntryInterval:
-      `<td class="fishtrain-fishentry-interval">
-         <span class="interval-indicator"
-               style="margin-left: {{=it.indicatorLeft}}%; width: {{=it.indicatorWidth}}%;"></span>
-       </td>`,
+  var sub_templates = {
+    fishEntryInterval: {arg: 'it', text:
+     `{{? it.lastDT != it.i.dt }}
+        <td class="fishtrain-fishentry-interval {{? !it.i.skip}}has-window{{?}}">
+      {{?}}
+      {{? !it.i.skip }}
+        <span class="interval-indicator"
+              style="margin-left: {{=it.i.indicatorLeft}}%; width: {{=it.i.indicatorWidth}}%;"></span>
+      {{?}}
+      {{? it.lastDT != it.i.dt }}
+        </td>
+      {{?}}`
+    },
+  };
 
+  var templates = {
     fishEntry: `<tr>
   <td class="sticky">
-    <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"
-         style="transform: scale(0.5);"></div>
+    <div class="ui middle aligned small fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
     <div class="ui middle aligned" style="display: inline-block;">
       <span>{{=it.data.name}}</span>
     </div>
   </td>
-  <td class="sticky">
+  <td class="sticky location">
     <i class="location-button map icon"></i> <a href="https://ffxivteamcraft.com/db/en/{{?it.data.location.spearfishing}}spearfishing{{??}}fishing{{?}}-spot/{{=it.data.location.id}}"
        target="cp_gt" class="location-name">{{=it.data.location.name}}</a><br/>
     <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
   </td>
+  {{ var lastDT=0; }}
   {{~ it.intervals :p}}
-    {{#def.fishEntryInterval:p}}
+    {{#def.fishEntryInterval:{i:p,lastDT:lastDT} }}
+    {{ lastDT=p.dt; }}
   {{~}}
 </tr>`,
 
     intervalHeadings:
      `{{~ it :k}}
-        <th class="interval">{{=k}}</th>
+        <th class="interval"><span>{{=k}}</span></th>
       {{~}}`,
   };
 
   class FishEntry {
     constructor(fish) {
       this.active = true;
+      this.id = fish.id;
       this.intervals = [];
       this.data = fish;
+    }
+
+    get uptime() { return this.data.uptime(); }
+
+    updateIntervals(intervals, duration) {
+      let fish = this.data;
+      let crs = fish.catchableRanges;
+
+      let durationMS = dateFns.milliseconds(duration);
+
+      if (fish.alwaysAvailable == true) {
+        this.intervals = _(intervals).map(start => { 
+          return { dt: +start, skip: false, indicatorLeft: 0, indicatorWidth: 100 };
+        });
+        return;
+      }
+
+      let crs_idx = 0;
+
+      // Is the fish going to be up AT ALL during any interval?!
+      let eEndOfIntervals = eorzeaTime.toEorzea(dateFns.add(_(intervals).last(), duration));
+      if (dateFns.isSameOrAfter(_(crs).first().start, eEndOfIntervals)) {
+        console.warn("%s won't be up for another %s", fish.name,
+          dateFns.formatDistanceStrict(_(intervals).first(), eorzeaTime.toEarth(_(crs).first().start)));
+        // Just deactivate this entry so we skip it.
+        this.active = false;
+        return;
+      }
+
+      this.intervals = _(intervals).reduce((memo, start) => {
+        let eStart = eorzeaTime.toEorzea(start);
+        let eEnd = eorzeaTime.toEorzea(dateFns.add(start, duration));
+        let hit = false;
+        while (crs_idx < crs.length) {
+          // Does the next catchable range start AFTER this interval ends?
+          if (dateFns.isSameOrAfter(crs[crs_idx].start, eEnd)) {
+            // Skip this interval and move on to the next.
+            if (hit) {
+              return memo;
+            } else {
+              return memo.concat({ dt: +start, skip: true });
+            }
+          }
+          // Try intersecting this catchable range first.
+          let range = dateFns.intervalIntersection(crs[crs_idx], {start: eStart, end: eEnd});
+          if (range === null) {
+            // Not up during this interval; move on to the next.
+            if (hit) {
+              return memo;
+            } else {
+              return memo.concat({ dt: +start, skip: true });
+            }
+          } else {
+            // At least part of this catchable range is during this interval.
+            // Add to the list, but continue checking catchable ranges for wrap-around.
+            let totalMS = dateFns.milliseconds(dateFns.intervalToDuration({
+              start: eorzeaTime.toEarth(range.start),
+              end: eorzeaTime.toEarth(range.end)}));
+            let offsetMS = dateFns.differenceInMilliseconds(
+              eorzeaTime.toEarth(range.start), start);
+            memo = memo.concat({
+              dt: +start, skip: false,
+              earth: { start: +eorzeaTime.toEarth(crs[crs_idx].start),
+                       end: +eorzeaTime.toEarth(crs[crs_idx].end) },
+              eorzea: crs[crs_idx],
+              indicatorLeft: Math.round(offsetMS / durationMS * 100),
+              indicatorWidth: Math.round(totalMS / durationMS * 100)
+            });
+            hit = true;
+            if (dateFns.isBefore(crs[crs_idx].end, eEnd)) {
+              // The catchable range ends BEFORE the interval; check for multiple ranges.
+              crs_idx++;
+            }
+            // Otherwise, the interval ends BEFORE this range. Return, but stay on the same range.
+            return memo;
+          }
+        }
+        return memo;
+      }, []);
     }
   }
 
 
   class _FishTrain {
     constructor() {
+      // Fix bug in doT.js template regex.
+      doT.templateSettings.use = /\{\{#([\s\S\}]+?)\}\}/g;
       // Compile the templates.
       this.templates = {
-        fishEntry: doT.template(templates.fishEntry, undefined, templates),
+        fishEntry: doT.template(templates.fishEntry, undefined, sub_templates),
         intervalHeadings: doT.template(templates.intervalHeadings)
       };
     }
@@ -138,9 +230,16 @@ let FishTrain = function(){
     reinitCalendarFields(opts={}) {
       var startDate = $('#rangestart').calendar('get date');
       var endDate = $('#rangeend').calendar('get date');
+
+      if (startDate === null) {
+        startDate = new Date();
+        endDate = dateFns.addHours(startDate, 3);
+      }
+
       $('#rangestart').calendar({
         endCalendar: '#rangeend',
-        initialDate: startDate
+        initialDate: startDate,
+        today: true
       });
       $('#rangeend').calendar({
         startCalendar: '#rangestart',
@@ -152,6 +251,8 @@ let FishTrain = function(){
       e.stopPropagation();
       // Reset the main context.
       var _this = e.data;
+
+      console.time("Generate Timeline");
 
       // Clear the table.
       _this.fishTrainTableBody$.empty();
@@ -175,24 +276,63 @@ let FishTrain = function(){
       _this.fishTrainTableHeader$.append(
         _this.templates.intervalHeadings(_(intervals).map(x => dateFns.format(x, 'p'))));
 
+      // Mark all existing entries as stale (or not active).
+      // Anything that's not active, won't be displayed, and at the end of this
+      // function, will be removed from the list, making future updates faster.
+      _(_this.fishEntries).each((entry) => entry.active = false);
+
       // Now it's time to compute the availability for our fishies...
       // This might take a while...
       _(Fishes).chain()
         .reject(fish => _this.isFishFiltered.call(_this, fish))
         .each(fish => _this.activateEntry.call(_this, fish, +_this.timeline.start));
 
-      // Remove any left-over entries.
-      for (let k in this.fishEntries) {
-        var entry = this.fishEntries[k];
+      // Remove any left-over entries (so we only have fish matching the FILTER).
+      for (let k in _this.fishEntries) {
+        var entry = _this.fishEntries[k];
         if (!entry.active) {
-          this.removeEntry(entry, k);
+          _this.removeEntry.call(_this, entry, k);
         }
       }
 
-      // Finally, let FishWatcher know it needs to reinit everything.
+      // Let FishWatcher know it needs to reinit everything.
+      // This will calculate the catchable ranges of the next 10 windows.
+      // Hopefully, this is more than enough to cover the user's requested duration.
       fishWatcher.updateFishes({earthTime: +_this.timeline.start});
 
+      // Update the intervals for all active fish entries.
+      // (At this point, there should only be ACTIVE entries)
+      console.time('Updating intervals');
+
+      _(_this.fishEntries).each(
+        entry => entry.updateIntervals(intervals, {minutes: _this.settings.timelineInterval}));
+
+      // Remove any entries which ARE NOT UP during this time period.
+      for (let k in _this.fishEntries) {
+        var entry = _this.fishEntries[k];
+        if (!entry.active) {
+          _this.removeEntry.call(_this, entry, k);
+        }
+      }
+
+      console.timeEnd('Updating intervals');
+
+      // Defer call to redraw the timeline.
+      $(() => {
+        _this.redrawTimeline.call(_this);
+      });
+
+      console.timeEnd("Generate Timeline");
+
       return;
+    }
+
+    redrawTimeline() {
+      // TODO: Sort the fish entries by rarity first.
+
+      _(this.fishEntries).each(entry => {
+        this.fishTrainTableBody$.append(this.templates.fishEntry(entry));
+      });
     }
 
     isFishFiltered(fish) {

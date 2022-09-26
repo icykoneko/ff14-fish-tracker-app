@@ -316,3 +316,9 @@ i.icon.cloud.sun.rain:before {
     transform: translateX(-50%) scale(0.9);
   }
 }
+
+/* Scrollbar corner */
+
+body ::-webkit-scrollbar-corner {
+  display: none;
+}
