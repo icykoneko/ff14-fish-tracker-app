@@ -104,5 +104,6 @@ const EXTRA_DATA = {
         "Mayashell": { video: { youtube: "9bqf7Qd_a-4" } },
         "Bigcuda": { video: { youtube: "pi_7oLORVWo" } },
         "Disappirarucu": { video: { youtube: "hcdDz3tQu6s" } },
+        "Kitefin Shark": { video: { youtube: "zhD_7V1MaX8" } },
     },
 };
