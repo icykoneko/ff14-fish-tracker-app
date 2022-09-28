@@ -62,9 +62,9 @@
     <script type="text/javascript" src="js/app/fish.js?20220506_1500"></script>
     <script type="text/javascript" src="js/app/weather.js?20220922_1828"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
-    <script type="text/javascript" src="js/app/sorters.js?20211011_2133"></script>
+    <script type="text/javascript" src="js/app/sorters.js?20220928_1705"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20220926"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20220928"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="js/app/carbyutils.js?20220922_1828"></script>
 
@@ -76,7 +76,7 @@
       });
     </script>
   </head>
-  <body>
+  <body class="dark">
     <div id="topmenu" class="ui text top fixed menu">
       <div class="ui container">
         <div class="ui dropdown icon item" id="main-menu">
@@ -158,7 +158,7 @@
               </div>
             </div>
 
-            <div class="two fields">
+            <div class="three fields">
               <div class="field" id="filterPatch" style="width: unset;">
                 <label>Filter by Expansion or Patch:</label>
                 <div class="row">
@@ -218,13 +218,33 @@
                 </div>
               </div>
 
-              <div class="field">
+              <div class="field" style="/*width: unset;*/">
                 <label>Fish Filter Type</label>
                 <div class="ui mini compact buttons" id="filterExtra">
                   <div class="ui active button" data-filter="all">All</div>
                   <div class="ui button" data-filter="big">Big</div>
                   <div class="ui button" data-filter="collectable">Collectable</div>
                   <div class="ui button" data-filter="aquarium">Aquarium</div>
+                </div>
+              </div>
+
+              <div class="grouped fields" id="sortingType">
+                <div class="row">
+                  <div class="field">
+                    <label>Sorting</label>
+                    <div class="ui radio checked checkbox">
+                      <input type="radio" name="sortingType" checked="checked" class="hidden" value="windowPeriods"/>
+                      <label>Window Periods</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <div class="ui radio checkbox">
+                      <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
+                      <label>Overall Rarity</label>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -235,12 +255,12 @@
           </div>
         </div>
         <div class="four wide column">
-          <div class="ui fluid button" id="updateList">Update List</div>
+          <div class="ui /*fluid*/ button" id="updateList">Update List</div>
         </div>
       </div>
 
-      <div style="/*flex-direction: column; display: flex;*/max-width: 100%">
-        <div style="overflow: scroll; max-width: min-content; max-height: 50vh; /*flex-grow: 1;*/">
+      <div style="flex-direction: column; display: flex; max-width: 100%">
+        <div style="overflow: scroll; max-width: min-content; max-height: 50vh; flex-grow: 1;">
           <table id="fishtrain" class="ui very compact single line unstackable table" style="width: unset;">
             <thead>
               <tr>

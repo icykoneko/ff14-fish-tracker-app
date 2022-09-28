@@ -30,7 +30,10 @@ let FishTrain = function(){
   <td class="sticky">
     <div class="ui middle aligned small fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
     <div class="ui middle aligned" style="display: inline-block;">
-      <span>{{=it.data.name}}</span>
+      <span class="fish-name">{{=it.data.name}}</span>
+    </div>
+    <div class="ui middle aligned" style="display: inline-block; font-size: smaller; float: right;">
+      (<b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%)
     </div>
   </td>
   <td class="sticky location">
@@ -162,6 +165,7 @@ let FishTrain = function(){
                           6, 6.1, 6.2]),
           extra: 'all',
         },
+        sortingType: 'overallRarity',
         theme: 'dark',
         timelineInterval: 15,
       };
@@ -172,6 +176,8 @@ let FishTrain = function(){
         fish: [],
       };
 
+      this.sorterFunc = (a, b) => a < b;
+
       // Load the settings for this tool.
       this.loadSettings();
 
@@ -181,6 +187,11 @@ let FishTrain = function(){
       this.fishEntries = {};
       // Link it to the fishWatcher.
       fishWatcher.fishEntries = this.fishEntries;
+      // Configure sorters.
+      configureSorters({
+        isFishPinned: (x) => false,
+        includeVerySoonBin: false
+      });
 
       // We don't want to actually fully initialize the weather service
       // because this tool doesn't need to update anything after the user
@@ -205,6 +216,9 @@ let FishTrain = function(){
       .dropdown('set selected', localizationHelper.getLanguage())
       .dropdown({
         onChange: (value, text, $choice) => localizationHelper.setLanguage(value),
+      });
+      $('#sortingType .radio.checkbox').checkbox({
+        onChecked: _(this.sortingTypeChecked).partial(this)
       });
 
       // Apply theme to elements now.
@@ -239,11 +253,13 @@ let FishTrain = function(){
       $('#rangestart').calendar({
         endCalendar: '#rangeend',
         initialDate: startDate,
-        today: true
+        selectAdjacentDays: true,
+        today: true,
       });
       $('#rangeend').calendar({
         startCalendar: '#rangestart',
-        initialDate: endDate
+        initialDate: endDate,
+        selectAdjacentDays: true
       });
     }
 
@@ -328,9 +344,13 @@ let FishTrain = function(){
     }
 
     redrawTimeline() {
-      // TODO: Sort the fish entries by rarity first.
+      // Sort the entries. While this technically creates a separate list, each
+      // entry is still just a reference to the master list `fishEntries`.
+      let sortedEntries = _(this.fishEntries).values().sort((a, b) => {
+        return this.sorterFunc(a.data, b.data, +this.timeline.start);
+      });
 
-      _(this.fishEntries).each(entry => {
+      _(sortedEntries).each(entry => {
         this.fishTrainTableBody$.append(this.templates.fishEntry(entry));
       });
     }
@@ -467,6 +487,23 @@ let FishTrain = function(){
       return false;
     }
 
+    sortingTypeChecked(_this) {
+      let $this = $(this);
+      let sortingType = $this.val();
+  
+      if (sortingType == 'overallRarity') {
+        _this.sorterFunc = Sorters.sortByOverallRarity;
+      } else if (sortingType == 'windowPeriods') {
+        _this.sorterFunc = Sorters.sortByWindowPeriods;
+      } else {
+        console.error("Invalid sortingType: ", sortingType);
+        return;
+      }
+  
+      _this.settings.sortingType = sortingType;
+      _this.saveSettings();
+    }
+  
     themeButtonClicked(e) {
       if (e) e.stopPropagation();
       let $this = $(this);
@@ -558,6 +595,21 @@ let FishTrain = function(){
         let patchSetActive = $(patchSet).siblings().not('.disabled').not('.active').length == 0;
         $(patchSet).toggleClass('active', patchSetActive);
       }
+
+      // Set the sorter function.
+      if (!(settings.sortingType)) {
+        // Why is `sortingType` missing???
+        console.warn("Why is sortingType missing??? Using default then...");
+        settings.sortingType = this.settings.sortingType;
+      }
+      if (settings.sortingType == 'overallRarity') {
+        this.sorterFunc = Sorters.sortByOverallRarity;
+      } else if (settings.sortingType == 'windowPeriods') {
+        this.sorterFunc = Sorters.sortByWindowPeriods;
+      } else {
+        console.error("Invalid sortingType: ", settings.sortingType);
+      }
+      $('#sortingType input[value="' + settings.sortingType + '"]').parent().checkbox('check');
 
       // Set the theme.
       if (!(settings.theme)) {

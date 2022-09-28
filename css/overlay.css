@@ -626,6 +626,7 @@ table#fishtrain thead tr > th {
   position: sticky;
   top: 0;
   z-index: 2;
+  white-space: normal;
 }
 table.inverted#fishtrain thead tr > th {
   background-color: hsl(0, 0%, 15%);
@@ -637,11 +638,11 @@ table#fishtrain thead tr > th.sticky {
 }
 table#fishtrain thead tr > th.sticky:nth-child(1),
 table#fishtrain tbody tr > td.sticky:nth-child(1) {
-  min-width: 20vw;
+  min-width: 25vw;
 }
 table#fishtrain thead tr > th.sticky:nth-child(2),
 table#fishtrain tbody tr > td.sticky:nth-child(2) {
-  left: 20vw;
+  left: 25vw;
 }
 table#fishtrain tbody tr > td.sticky {
   position: sticky;
@@ -653,8 +654,8 @@ table.inverted#fishtrain tbody tr > td.sticky {
 }
 
 table#fishtrain .fishtrain-fishentry-interval {
-  min-width: 2.5vw;
-  max-width: 2.5vw;
+  min-width: 3.33vw;
+  max-width: 3.33vw;
   position: relative;
   padding: 0;
 }
