@@ -122,10 +122,9 @@ let Sorters = function() {
         "\n", b.name, bUptime);
     if (result != 0) return result;
 
-    // If both are the same, the fish with the longer time till next window
-    // comes first.
-    result = compare(getWindowStart(bRanges, 1) || 0,
-                      getWindowStart(aRanges, 1) || 0);
+    // If both are the same, the fish whose window comes sooner comes first.
+    result = compare(getWindowStart(aRanges, 1) || 0,
+                      getWindowStart(bRanges, 1) || 0);
     if (shouldLog(a, b))
       console.log("Comparing time till next window:", winner(a,b,result),
         "\n", a.name, getWindowStart(aRanges, 1),
