@@ -167,7 +167,7 @@ let FishTrain = function(){
         },
         sortingType: 'overallRarity',
         theme: 'dark',
-        timelineInterval: 15,
+        timelineInterval: 30,
       };
 
       this.timeline = {
