@@ -41,7 +41,8 @@
 
 /* Overrides for Semantic UI 2.2.10 - Icon */
 i.icon {
-  margin: inherit;
+  /* margin: inherit; */
+  margin: revert;
 }
 
 /* Overrides for Semantic UI 2.2.10 - Button */

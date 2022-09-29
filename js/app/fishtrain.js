@@ -23,11 +23,146 @@ let FishTrain = function(){
         </td>
       {{?}}`
     },
+
+    fishEntryDetailsInner: {arg: 'it', text:
+     `<span><b>Details:</b></span>
+      <!-- Additional Details -->
+      <div class="ui middle aligned" style="display: inline-block; margin-left: 1em;">
+        <div class="ui tiny circular label">{{=it.data.patch}}</div>
+        <!-- check if fish can be put into the aquarium -->
+        {{?it.data.aquarium !== null}}
+          <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
+               data-tooltip="Tier {{=it.data.aquarium.size}} {{=it.data.aquarium.water}}" data-position="right center" data-variation="mini"></div>
+        {{?}}
+        {{?it.data.folklore !== null}}
+          <div class="ui middle aligned sprite-icon sprite-icon-folklore"
+               data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
+        {{?}}
+        {{?it.data.collectable !== null}}
+          <div class="ui middle aligned sprite-icon sprite-icon-collectable"
+               data-tooltip="Minimum Collectability: {{=it.data.collectable}}" data-position="right center" data-variation="mini"></div>
+        {{?}}
+        {{?it.data.video !== null}}
+          <!-- Include link to video guide -->
+          {{~it.getVideoInfo() :videoInfo}}
+            <a class="plainlink" href="{{=videoInfo.url}}" target="cp_vguide"><i class="{{=videoInfo.iconClass}} icon"></i></a>
+          {{~}}
+        {{?}}
+      </div>
+      <!-- Conditions Details -->
+      <div class="ui middle aligned" style="display: inline-block; margin-left: 4em;">
+        <!-- Weather -->
+        {{?it.data.dataMissing !== false}}
+          {{?it.data.dataMissing.weatherRestricted}}
+            <i class="cloud icon"></i> Weather Restricted
+            {{?it.data.conditions.weatherSet.length > 0}}
+              <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+            {{?}}
+          {{?}}
+        {{?}}
+        {{?it.data.conditions.previousWeatherSet.length > 0}}
+          {{~it.data.conditions.previousWeatherSet :weather:windex}}
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+                 title="{{=__p(weather,'name')}}"
+                 data-prevWeatherIdx="{{=windex}}"></div>
+          {{~}}
+          <i class="arrow right icon"></i>
+        {{?}}
+        {{~it.data.conditions.weatherSet :weather:windex}}
+          <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=weather.icon}}"
+               title="{{=__p(weather,'name')}}"
+               data-currWeatherIdx="{{=windex}}"></div>
+        {{~}}
+        <span style="{{?it.data.conditions.weatherSet.length > 0}}padding-left: 1em;{{?}}"></span>
+        <!-- Time -->
+        {{?it.data.dataMissing !== false}}
+          {{?it.data.dataMissing.timeRestricted}}
+            <i class="clock icon"></i> Time Restricted
+            {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
+              <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+              -
+              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
+            {{?}}
+          {{?}}
+        {{??}}
+          <i class="alarm-cmd-button wait icon"></i>&nbsp;
+          {{? it.data.startHour === 0 && it.data.endHour === 24}}
+            All Day
+          {{??}}
+            <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+            -
+            <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
+          {{?}}
+        {{?}}
+      </div>
+      <!-- Requirements and Bait -->
+      <div class="ui middle aligned" style="display: inline-block; margin-left: 4em;">
+        {{?it.data.dataMissing !== false || it.data.gig === "UNKNOWN"}}
+          <i class="question circle outline icon" title="Unknown/Incomplete"></i>
+        {{?}}
+        <!-- Put Fishers intuition if fish has at least 1 predetor -->
+        {{?it.data.bait.hasPredators}}
+          <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition{{?it.data.intuitionLength}} has-duration{{?}}" title="Fisher's Intuition">
+            {{?it.data.intuitionLength}}
+              <span>{{var d = it.data.intuitionLength; if (d) { out += Math.floor(d/60) + 'm' + (d % 60); }}}s</span>
+            {{?}}
+          </div>
+        {{?}}
+        {{?it.data.snagging}}
+          <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
+        {{?}}
+        {{?it.data.gig}}
+          {{?it.data.gig === "UNKNOWN"}}
+            <span>Spearfishing</span>
+          {{??}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
+          {{?}}
+        {{?}}
+        <span class="bait-span">
+          {{~it.bait :item:idx}}
+            {{?idx == 0}}
+              <a href="https://garlandtools.org/db/#item/{{=item.id}}" target="cp_gt">
+            {{??}}
+              <div class="bait-badge-container">
+                {{?item.hookset}}
+                  <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
+                       title="{{=item.hookset}} Hookset"></div>
+                {{?}}
+                {{?item.tug}}
+                  <div class="tug-indicator {{=item.tug}}-tug-indicator" title="{{=item.tug}} tug">
+                    {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[item.tug]}}
+                  </div>
+                {{?}}
+              </div>
+              </span><!-- bait-span -->
+              <i class="arrow right icon"></i>
+              <span class="bait-span">
+            {{?}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}" data-baitIdx="{{=idx}}"></div>
+            {{?idx == 0}}
+              </a>
+            {{?}}
+          {{~}}
+          <div class="bait-badge-container">
+            {{?it.data.hookset}}
+              <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
+            {{?}}
+            {{?it.data.tug}}
+              <div class="tug-indicator {{=it.data.tug}}-tug-indicator" title="{{=it.data.tug}} tug">
+                {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.data.tug]}}
+              </div>
+            {{?}}
+          </div>
+        </span><!-- bait span -->
+      </div>
+      `
+    },
   };
 
   var templates = {
-    fishEntry: `<tr>
-  <td class="sticky">
+    fishEntry: `<tr class="fishtrain-fishentry" data-id={{=it.id}}>
+  <td class="sticky col-fish">
     <div class="ui middle aligned small fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
     <div class="ui middle aligned" style="display: inline-block;">
       <span class="fish-name">{{=it.data.name}}</span>
@@ -36,7 +171,7 @@ let FishTrain = function(){
       (<b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%)
     </div>
   </td>
-  <td class="sticky location">
+  <td class="sticky col-location">
     <i class="location-button map icon"></i> <a href="https://ffxivteamcraft.com/db/en/{{?it.data.location.spearfishing}}spearfishing{{??}}fishing{{?}}-spot/{{=it.data.location.id}}"
        target="cp_gt" class="location-name">{{=it.data.location.name}}</a><br/>
     <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
@@ -52,7 +187,50 @@ let FishTrain = function(){
      `{{~ it :k}}
         <th class="interval"><span>{{=k}}</span></th>
       {{~}}`,
+
+    fishEntryDetails:
+     `<tr class="fishtrain-fishentrydetails" data-id={{=it.entry.id}}>
+        <td colspan="{{=it.colspan}}">
+          <div class="contents" style="width: 0px">
+            {{#def.fishEntryDetailsInner:it.entry }}
+          </div>
+        </td>
+      </tr>`,
   };
+
+  class BaitEntry {
+    constructor(itemId) {
+      this.id = itemId;
+      // Wrap the item data using reference.
+      this.itemData = DATA.ITEMS[itemId];
+      // If it's a fish, include a reference to that as well.
+      // - Unfortunately, we can't expect to find a FishEntry for this record.
+      // Using Fishes in order to support live adjustments.
+      this.fishData = _(Fishes).findWhere({id: itemId});
+    }
+
+    get name() {
+      return __p(this.itemData, "name");
+    }
+
+    get icon() {
+      return this.itemData.icon;
+    }
+
+    get hookset() {
+      if (this.fishData && 'hookset' in this.fishData) {
+        return this.fishData.hookset;
+      }
+      return null;
+    }
+
+    get tug() {
+      if (this.fishData && 'tug' in this.fishData) {
+        return this.fishData.tug;
+      }
+      return null;
+    }
+  }
 
   class FishEntry {
     constructor(fish) {
@@ -60,6 +238,16 @@ let FishTrain = function(){
       this.id = fish.id;
       this.intervals = [];
       this.data = fish;
+
+      this.isWeatherRestricted = fish.conditions.weatherSet.length != 0;
+      this.bait = _(fish.bestCatchPath).map(x => new BaitEntry(x));
+
+      // Reference to DOM element in timeline table.
+      this.timelineEl = null;
+      // Reference to DOM element in schedule table.
+      this.scheduleEl = null;
+      // Reference to DOM element for more details.
+      this.detailsEl = null;
     }
 
     get uptime() { return this.data.uptime(); }
@@ -140,6 +328,51 @@ let FishTrain = function(){
         return memo;
       }, []);
     }
+
+    getExternalLink(site = 'TC') {
+      // 'site': Must be 'CBH', 'GT', or 'TC'.
+      if (site == 'TC') {
+        // Teamcraft
+        // NOTE: While the language code does not seem to change the site's language, it
+        // is required in the URL. I suppose I could technically throw whatever into this
+        // but I like Miu, and I don't want to crash their site :)
+        return "https://ffxivteamcraft.com/db/" + localizationHelper.getLanguage() + "/item/" + this.id;
+      }
+      else if (site == 'GT') {
+        // Garland Tools
+        return "https://garlandtools.org/db/#item/" + this.id;
+      }
+      else if (site == 'CBH') {
+        // CBH doesn't standardize their fish info pages on the game's IDs so we must use search.
+        let lang = localizationHelper.getLanguage();
+        if (lang == 'ja') {
+          // They also don't use the standard two-letter country code for Japanese...
+          lang = 'jp';
+        }
+        return "https://ff14angler.com/index.php?lang=" + lang + "&search=" + encodeURIComponent(this.data.name);
+      }
+      else {
+        console.error("Invalid external site ID:", site);
+        return "";
+      }
+    }
+
+    getVideoInfo() {
+      if (this.data.video !== null) {
+        // We need to return an object with the following fields:
+        // * url
+        // * icon class
+        return _(this.data.video).map((contentId, contentType) => {
+          let videoInfo = null;
+          if (contentType == "youtube") {
+            videoInfo = {iconClass: 'youtube', url: `https://youtu.be/${contentId}`};
+          }
+          return videoInfo;
+        });
+      } else {
+        return null;
+      }
+    }
   }
 
 
@@ -150,7 +383,8 @@ let FishTrain = function(){
       // Compile the templates.
       this.templates = {
         fishEntry: doT.template(templates.fishEntry, undefined, sub_templates),
-        intervalHeadings: doT.template(templates.intervalHeadings)
+        intervalHeadings: doT.template(templates.intervalHeadings),
+        fishEntryDetails: doT.template(templates.fishEntryDetails, undefined, sub_templates),
       };
     }
 
@@ -174,6 +408,7 @@ let FishTrain = function(){
         start: null,
         end: null,
         fish: [],
+        intervals: [],
       };
 
       this.sorterFunc = (a, b) => a < b;
@@ -239,6 +474,13 @@ let FishTrain = function(){
       }, this);
       $('#filterPatch .button.patch-set').on('click', this, this.filterPatchSetClicked);
       $('#filterExtra .button').on('click', this, this.filterExtraClicked);
+
+      // Add delegated event listeners to the timeline table.
+      this.fishTrainTableBody$.on(
+        'click', 'span.fish-name', this, this.showDetailsInTimeline);
+      
+      // We need to awake of resizing...
+      $(window).resize(this, this.adjustTimelineDetailsElements);
     }
 
     reinitCalendarFields(opts={}) {
@@ -287,6 +529,8 @@ let FishTrain = function(){
       var intervals = dateFns.eachMinuteOfInterval(
         {start: _this.timeline.start, end: _this.timeline.end-1},
         {step: _this.settings.timelineInterval});
+
+      _this.timeline.intervals = intervals;
 
       // Update the table headers.
       _this.fishTrainTableHeader$.append(
@@ -351,8 +595,58 @@ let FishTrain = function(){
       });
 
       _(sortedEntries).each(entry => {
-        this.fishTrainTableBody$.append(this.templates.fishEntry(entry));
+        // Append the DOM for this entry first.
+        let entry$ =
+          $(this.templates.fishEntry(entry)).appendTo(this.fishTrainTableBody$);
+        // Save reference to element on the entry.
+        entry.timelineEl = entry$[0];
+        // Just in case there's stale data here...
+        entry.detailsEl = null;
       });
+    }
+
+    showDetailsInTimeline(e) {
+      let _this = e.data;
+      // Find the FishEntry for this event.
+      let entry = _this.fishEntries[
+        Number($(this).closest('tr.fishtrain-fishentry').data('id'))];
+      // Check if we already created the DOM for this fish first,
+      // and if not, create it now.
+      if (entry.detailsEl == null) {
+        // Determine the size of the table without scrolling so we can prevent
+        // the details element from moving if the user scrolls horizontally.
+        var scrollContext = $('#fishtrain').parent()[0];
+        var scrollWidth = scrollContext.offsetWidth - scrollContext.clientWidth;
+        var details$ = $(_this.templates.fishEntryDetails({
+          colspan: 2 + _this.timeline.intervals.length,
+          entry: entry
+        }));
+        // Add the element to the DOM after the fish entry.
+        $(entry.timelineEl).after(details$);
+        // And fixup its width.
+        // var containerMeasurements = $('.contents', details$).parent().css(['padding-left', 'padding-right']);
+        // var calculatedWidth = `calc(${scrollContext.clientWidth}px - ${containerMeasurements['padding-left']} - ${containerMeasurements['padding-right']})`;
+        $('.contents', details$).css({
+          // left: containerMeasurements['padding-left'],
+          left: 0,
+          width: scrollContext.clientWidth,
+          position: 'sticky'
+        });
+
+        entry.detailsEl = details$[0];
+      }
+
+      if ($(entry.detailsEl).hasClass('visible')) {
+        $(entry.detailsEl).removeClass('visible').addClass('hidden');
+      } else {
+        $(entry.detailsEl).removeClass('hidden').addClass('visible');
+      }
+    }
+
+    adjustTimelineDetailsElements(e) {
+      let _this = e.data;
+      var scrollContext = $('#fishtrain').parent()[0];
+      $('.fishtrain-fishentrydetails .contents').css('width', scrollContext.clientWidth);
     }
 
     isFishFiltered(fish) {
@@ -410,7 +704,6 @@ let FishTrain = function(){
     }
 
     removeEntry(entry, k) {
-      // TODO: Remove entry from DOM.
       delete this.fishEntries[k];
     }
 
