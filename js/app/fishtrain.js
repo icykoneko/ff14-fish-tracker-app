@@ -524,11 +524,12 @@ let FishTrain = function(){
 
       console.time("Generate Timeline");
 
-      // Destroy any existing popups!
-      if (_this.currentPopup !== null) {
-        var popup$ = $(_this.currentPopup).popup('get popup');
-        popup$.removeClass('visible').addClass('hidden').appendTo($('#popups-storage'));
-      }
+      // Hide and stash the timeline details popup.
+      $('#timeline-window-details')
+        .removeClass('visible')
+        .addClass('hidden')
+        .appendTo($('#popups-storage'));
+      _this.currentPopup = null;
 
       // Clear the table.
       _this.fishTrainTableBody$.empty();
