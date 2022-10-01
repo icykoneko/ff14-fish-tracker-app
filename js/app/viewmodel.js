@@ -368,6 +368,12 @@ let ViewModel = new class {
     // Initialize the weather tracking.
     weatherService.initializeWeatherTracking();
 
+    // Configure Sorters.
+    configureSorters({
+      isFishPinned: this.isFishPinned.bind(this),
+      includeVerySoonBin: true,
+    });
+
     // Finally, initialize the display.
     this.initializeDisplay();
   }

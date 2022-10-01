@@ -230,11 +230,6 @@ let Sorters = function() {
     return result;
   }
 
-  if (typeof(ViewModel) !== 'undefined') {
-    // Default to `ViewModel`'s implementation of `isFishPinned`.
-    __isFishPinned = ViewModel.isFishPinned;
-  }
-
   return {
     sortByWindowPeriods: sortByWindowPeriods,
     sortByOverallRarity: sortByOverallRarity
