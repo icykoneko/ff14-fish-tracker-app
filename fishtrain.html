@@ -35,7 +35,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?6.2_20220823_0421" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20220926" />
-    <link rel="stylesheet" href="css/overlay.css?20220926" />
+    <link rel="stylesheet" href="css/overlay.css?20221001_1235" />
     <link rel="stylesheet" href="css/dark_overlay.css?20220926" />
 
     <style>
@@ -44,6 +44,8 @@
         display: none;
       }
     </style>
+
+    <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js?20111013_2022"></script>
@@ -82,9 +84,9 @@
         <div class="ui dropdown icon item" id="main-menu">
           <i class="bars icon"></i>
           <div class="menu">
-            <a class="item" target="_blank" href="/index.html"><i class="home icon"></i> Main Fish Tracker Page</a>
-            <a class="item" target="_blank" href="/weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
-            <a class="item" target="_blank" href="/feedback.html"><i class="comment outline icon"></i> Feedback</a>
+            <a class="item" target="_blank" href="index.html"><i class="home icon"></i> Main Fish Tracker Page</a>
+            <a class="item" target="_blank" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
+            <a class="item" target="_blank" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
           </div>
         </div>
         <div class="header item">FFX|V Fish Tracker App: Fish Train Tool</div>
@@ -303,6 +305,9 @@
     </div>
     <div class="ui bottom fixed menu">
       <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version"></span></div>
+      <script>
+        CheckForUpdates.checkForUpdates("");
+      </script>
       <div class="right menu">
         <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
           <i class="discord icon"></i>
