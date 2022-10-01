@@ -64,7 +64,7 @@
     <script type="text/javascript" src="js/app/fish.js?20220506_1500"></script>
     <script type="text/javascript" src="js/app/weather.js?20220922_1828"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
-    <script type="text/javascript" src="js/app/sorters.js?20220928_1705"></script>
+    <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
     <script type="text/javascript" src="js/app/fishtrain.js?20220928"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
@@ -307,9 +307,10 @@
       </div>
     </div>
     <div class="ui bottom fixed menu">
-      <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version"></span></div>
+      {% assign git_repo = site.github.public_repositories | where: "full_name", site.github.repository_nwo %}
+      <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version">{{ git_repo[0].updated_at }}</span></div>
       <script>
-        CheckForUpdates.checkForUpdates("");
+        CheckForUpdates.checkForUpdates("{{ site.github.build_revision }}");
       </script>
       <div class="right menu">
         <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
