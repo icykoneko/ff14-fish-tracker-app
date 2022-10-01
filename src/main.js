@@ -24,6 +24,7 @@ export {
     milliseconds,
     setHours,
     startOfHour,
+    startOfMinute,
     sub,
     subDays,
     subHours,

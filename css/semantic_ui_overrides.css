@@ -318,6 +318,12 @@ i.icon.cloud.sun.rain:before {
   }
 }
 
+/* Popup */
+.ui.inverted.popup {
+  border: rgba(255, 255, 255, 0.15) solid 1px;
+}
+
+
 /* Scrollbar corner */
 
 body ::-webkit-scrollbar-corner {
