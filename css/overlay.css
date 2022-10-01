@@ -711,6 +711,19 @@ td.fishtrain-fishentry-interval.has-window {
   padding: .4em .6em
 }
 
+#timeline-window-details > .actions {
+  background: #f9fafb;
+  padding: 1rem 1rem;
+  border-top: 1px solid rgba(34,36,38,.15);
+  text-align: right;
+}
+
+body.dark #timeline-window-details > .actions {
+  background: #191a1b;
+  border-top: 1px solid rgba(34,36,38,.85);
+  color: #fff;
+}
+
 #site-last-update.update-available {
   color: olive;
 }

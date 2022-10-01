@@ -17,7 +17,9 @@ let FishTrain = function(){
       {{?}}
       {{? !it.i.skip }}
         <span class="interval-indicator"
-              style="margin-left: {{=it.i.indicatorLeft}}%; width: {{=it.i.indicatorWidth}}%;"></span>
+              style="margin-left: {{=it.i.indicatorLeft}}%; width: {{=it.i.indicatorWidth}}%;"
+              data-crsidx="{{=it.i.crsIdx}}"
+              data-myidx="{{=it.idx}}"></span>
       {{?}}
       {{? it.lastDT != it.i.dt }}
         </td>
@@ -177,8 +179,8 @@ let FishTrain = function(){
     <span style="font-size: smaller" class="zone-name">{{=it.data.location.zoneName}}</span>
   </td>
   {{ var lastDT=0; }}
-  {{~ it.intervals :p}}
-    {{#def.fishEntryInterval:{i:p,lastDT:lastDT} }}
+  {{~ it.intervals :p:idx}}
+    {{#def.fishEntryInterval:{i:p,idx:idx,lastDT:lastDT} }}
     {{ lastDT=p.dt; }}
   {{~}}
 </tr>`,
@@ -314,7 +316,8 @@ let FishTrain = function(){
                        end: +eorzeaTime.toEarth(crs[crs_idx].end) },
               eorzea: crs[crs_idx],
               indicatorLeft: Math.round(offsetMS / durationMS * 100),
-              indicatorWidth: Math.round(totalMS / durationMS * 100)
+              indicatorWidth: Math.round(totalMS / durationMS * 100),
+              crsIdx: crs_idx,
             });
             hit = true;
             if (dateFns.isBefore(crs[crs_idx].end, eEnd)) {
@@ -411,6 +414,9 @@ let FishTrain = function(){
         intervals: [],
       };
 
+      this.currentSelection = null;
+      this.currentPopup = null;
+
       this.sorterFunc = (a, b) => a < b;
 
       // Load the settings for this tool.
@@ -478,7 +484,13 @@ let FishTrain = function(){
       // Add delegated event listeners to the timeline table.
       this.fishTrainTableBody$.on(
         'click', 'span.fish-name', this, this.showDetailsInTimeline);
-      
+      this.fishTrainTableBody$.on(
+        'click', 'span.interval-indicator', this, this.timelineFishEntryIntervalClicked);
+
+      // Listen for "Add to schedule" events.
+      $('#timeline-window-details .approve.button').on(
+        'click', this, this.addSelectionToSchedule);
+
       // We need to awake of resizing...
       $(window).resize(this, this.adjustTimelineDetailsElements);
     }
@@ -511,6 +523,12 @@ let FishTrain = function(){
       var _this = e.data;
 
       console.time("Generate Timeline");
+
+      // Destroy any existing popups!
+      if (_this.currentPopup !== null) {
+        var popup$ = $(_this.currentPopup).popup('get popup');
+        popup$.removeClass('visible').addClass('hidden').appendTo($('#popups-storage'));
+      }
 
       // Clear the table.
       _this.fishTrainTableBody$.empty();
@@ -647,6 +665,105 @@ let FishTrain = function(){
       let _this = e.data;
       var scrollContext = $('#fishtrain').parent()[0];
       $('.fishtrain-fishentrydetails .contents').css('width', scrollContext.clientWidth);
+    }
+
+    timelineFishEntryIntervalClicked(e) {
+      let _this = e.data;
+      var indicator$ = $(this);
+      // Find the FishEntry for this event.
+      let entry$ = indicator$.closest('tr.fishtrain-fishentry');
+      let entry = _this.fishEntries[Number(entry$.data('id'))];
+      // If this fish isn't always up, make sure we are looking at the START
+      // of its window (within the intervals).
+      var content = "";
+
+      if (!entry.data.alwaysAvailable) {
+        let crsIdx = indicator$.data('crsidx');
+        indicator$ =
+          entry$.find('span.interval-indicator')
+                .filter((e, x) => $(x).data('crsidx') == crsIdx).first();
+
+        if (_this.currentPopup == indicator$[0]) {
+          console.debug("Popup already visible:", indicator$[0]);
+          e.stopPropagation();
+          return;
+        }
+
+        let r = entry.data.catchableRanges[crsIdx];
+        var windowStartTime = dateFns.format(eorzeaTime.toEarth(r.start), 'p');
+        var gameTime = dateFns.format(r.start, 'HH:mm')
+        content = `Starts ${windowStartTime} (${gameTime} ET)`;
+
+        _this.currentSelection = {
+          entry: entry,
+          range: {
+            start: eorzeaTime.toEarth(r.start),
+            end: eorzeaTime.toEarth(r.end)
+          },
+          adjustable: false
+        };
+      } else {
+        if (_this.currentPopup == indicator$[0]) {
+          console.debug("Popup already visible:", indicator$[0]);
+          e.stopPropagation();
+          return;
+        }
+        // Indicate the fish is always up and ask to add just THIS interval
+        // to the schedule.
+        var interval = entry.intervals[indicator$.data('myidx')];
+        var intervalStartTime = dateFns.format(interval.dt, 'p');
+        content = `Fish is always up.<br/>Add interval starting at ${intervalStartTime} to schedule?`;
+
+        _this.currentSelection = {
+          entry: entry,
+          range: {
+            start: interval.dt,
+            end: dateFns.addMinutes(interval.dt, _this.settings.timelineInterval)
+          },
+          adjustable: true
+        };
+      }
+
+      if (_this.currentPopup !== null) {
+        // Close the current popup first.
+        console.debug("Closing current popup first:", _this.currentPopup);
+        $(_this.currentPopup).popup('hide');
+      }
+      // Store the current popup so UI reacts nicely...
+      _this.currentPopup = indicator$[0];
+
+      // Update the content for the popup.
+      $('#timeline-window-details .content').html(content);
+
+      indicator$.popup({
+        popup: '#timeline-window-details',
+        // hoverable: true,
+        on: 'manual',
+        boundary: '#fishtrain tbody',
+        scrollContext: $('#fishtrain').parent(),
+        variation: _this.settings.theme == 'dark' ? 'inverted' : '',
+        lastResort: true,
+        onHide: function (m) {
+          console.debug("Popup hiding:", m);
+          _this.currentPopup = null;
+          return true;
+        },
+        onHidden: function (m) {
+          console.debug("Popup hidden:", m);
+          // $(m).popup('destroy');
+        }
+      });
+      console.debug("Showing popup:", indicator$[0]);
+      indicator$.popup('show');
+    }
+
+    addSelectionToSchedule(e) {
+      let _this = e.data;
+
+      console.info("Adding selection to schedule:", _this.currentSelection);
+
+      // Close the popup now.
+      $(_this.currentPopup).popup('hide');
     }
 
     isFishFiltered(fish) {
