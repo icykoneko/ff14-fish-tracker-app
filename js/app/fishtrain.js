@@ -938,6 +938,7 @@ let FishTrain = function(){
 
       $('.ui.menu').toggleClass('inverted', theme === 'dark');
       $('.ui.modal').toggleClass('inverted', theme === 'dark');
+      $('.ui.message').toggleClass('inverted', theme === 'dark');
       $('.ui.message.announcement').toggleClass('inverted', theme === 'dark');
       $('.ui.container').toggleClass('inverted', theme === 'dark');
       $('.ui.form').toggleClass('inverted', theme === 'dark');

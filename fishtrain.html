@@ -82,9 +82,9 @@
         <div class="ui dropdown icon item" id="main-menu">
           <i class="bars icon"></i>
           <div class="menu">
-            <a class="item" target="#top" href="index.html"><i class="home icon"></i> Main Fish Tracker Page</a>
-            <a class="item" target="#top" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
-            <a class="item" target="#top" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
+            <a class="item" target="_blank" href="/index.html"><i class="home icon"></i> Main Fish Tracker Page</a>
+            <a class="item" target="_blank" href="/weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
+            <a class="item" target="_blank" href="/feedback.html"><i class="comment outline icon"></i> Feedback</a>
           </div>
         </div>
         <div class="header item">FFX|V Fish Tracker App: Fish Train Tool</div>
@@ -115,6 +115,16 @@
       <p>
         Want to plan out a fun fishing trip with a bunch of friends? Need to know what fish will be up during your next stream? The Fish Train Tool is here to help not only with planning, but also guide your friends or community during the event by providing customized itinerary. Just fill in the forms below, and select fish to create a schedule.
       </p>
+
+      <div class="ui icon message">
+        <i class="exclamation icon"></i>
+        <div class="content">
+          <div class="header">
+            Beta Version
+          </div>
+          <p>This is a beta version of the tool. Certain features such as creating schedules or itinerary are still in development. The language options will work, but you must reload the page after selecting a language. It will remember afterwards. For the latest news on this tool, please follow me on <a href="https://twitter.com/CarbunclePlushy" target="#top">Twitter</a>. You may leave feedback there, or via the normal <a href="/feedback.html" target="#top">feedback page.</a></p>
+        </div>
+      </div>
 
       <div class="ui grid container">
         <div class="twelve wide column">
@@ -265,7 +275,7 @@
           <div class="header">Window Details</div>
           <div class="content"></div>
           <div class="actions">
-            <div class="ui green approve button">Add to schedule</div>
+            <div class="ui green approve button disabled">Add to schedule</div>
           </div>
         </div>
       </div>
@@ -292,6 +302,7 @@
       </div>
     </div>
     <div class="ui bottom fixed menu">
+      <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version"></span></div>
       <div class="right menu">
         <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
           <i class="discord icon"></i>
