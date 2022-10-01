@@ -14,10 +14,16 @@ function startOfPeriod(d) {
 
 class WeatherService {
   constructor() {
-    const { filter, skip } = rxjs.operators;
-
     // Cache weather information.
     this.__weatherData = [];
+    
+    this.computingWeather = false;
+
+    // Remember to run initializeWeatherTracking to keep weather up-to-date.
+  }
+
+  initializeWeatherTracking() {
+    const { filter, skip } = rxjs.operators;
     // In order to optimize the iterator function, initialize the cached data
     // with the previous weather period first.
     var date = startOfPeriod(
@@ -29,8 +35,6 @@ class WeatherService {
       filter(bell => bell == 0 || bell == 8 || bell == 16),
       skip(1) /* skip the first since we really don't have any filtering to do yet */
     ).subscribe(bell => this.onCurrentBellChanged(bell));
-    
-    this.computingWeather = false;
   }
 
   finishedWithIter() {
@@ -51,12 +55,16 @@ class WeatherService {
         if (_(this.__weatherData).first().date < cutoffDate) {
           this.__weatherData = _(this.__weatherData).drop();
         }
-        console.debug("Weather Cache:", this.__weatherData.length, "entries spanning",
-          (dateFns.differenceInMilliseconds(
-            eorzeaTime.toEarth(
-              dateFns.utc.addHours(_(this.__weatherData).last().date, 8)),
-            eorzeaTime.toEarth(_(this.__weatherData).first().date)) / 86400000).toFixed(2),
-          "days");
+        if (this.__weatherData.length > 0) {
+          console.debug("Weather Cache:", this.__weatherData.length, "entries spanning",
+            (dateFns.differenceInMilliseconds(
+              eorzeaTime.toEarth(
+                dateFns.utc.addHours(_(this.__weatherData).last().date, 8)),
+              eorzeaTime.toEarth(_(this.__weatherData).first().date)) / 86400000).toFixed(2),
+            "days");
+        } else {
+          console.debug("Weather Cache: EMPTY!");
+        }
       }
     }
   }

@@ -26,6 +26,12 @@ span.catchtime-minute {
   display: inline-block;
 }
 
+.fish-icon.small.sprite-icon {
+  transform-origin: center;
+  transform: scale(0.50);
+  margin: -11px; /* fish-icon sprites are 44x44 */
+}
+
 .weather-icon.sprite-icon {
   transform-origin: center;
   transform: scale(0.675);
@@ -49,7 +55,8 @@ span.catchtime-minute {
   margin: -11px; /* hookset-modifier-icon sprites are 44x44 */
 }
 
-tr.fish-intuition-row .bait-icon.sprite-icon.hookset-modifier-icon {
+tr.fish-intuition-row .bait-icon.sprite-icon.hookset-modifier-icon,
+tr.fishtrain-fishentrydetails .bait-icon.sprite-icon.hookset-modifier-icon {
   transform-origin: center;
   transform: scale(0.375) translate(-33.3%, -25%);
   margin: -13.75px;
@@ -112,7 +119,9 @@ span.bait-span {
 }
 
 tr.fish-intuition-row .fish-icon.sprite-icon,
-tr.fish-intuition-row .bait-icon.sprite-icon {
+tr.fish-intuition-row .bait-icon.sprite-icon,
+tr.fishtrain-fishentrydetails .fish-icon.sprite-icon,
+tr.fishtrain-fishentrydetails .bait-icon.sprite-icon {
   transform-origin: center;
   transform: scale(0.675);
   margin: -7.15px;
@@ -124,7 +133,8 @@ tr.fish-intuition-row .weather-icon.sprite-icon {
   margin: -9px;
 }
 
-tr.fish-intuition-row .tug-indicator {
+tr.fish-intuition-row .tug-indicator,
+tr.fishtrain-fishentrydetails .tug-indicator {
   /* Attempt to shrink the display a little */
   transform: scale(0.75) translate(-60%, 95%);
 }
@@ -366,6 +376,13 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-intuition.has-duration > sp
   line-height: 14px;
   margin-left: -24px;
   margin-right: auto;
+}
+
+tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration {
+
+}
+tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span {
+  display: none;
 }
 
 /* Active, non-caught, non-pinned fish */
@@ -613,6 +630,98 @@ tr.fish-entry.fish-intuition-row .sprite-icon-status-intuition.has-duration > sp
 }
 .fish-guide .fish-meta {
   grid-area: fish-meta;
+}
+
+
+table#fishtrain thead tr > th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  white-space: normal;
+}
+table.inverted#fishtrain thead tr > th {
+  background-color: hsl(0, 0%, 15%);
+}
+table#fishtrain thead tr > th.sticky {
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+table#fishtrain thead tr > th.sticky.col-fish,
+table#fishtrain tbody tr > td.sticky.col-fish {
+  min-width: 25vw;
+}
+table#fishtrain thead tr > th.sticky.col-location,
+table#fishtrain tbody tr > td.sticky.col-location {
+  left: 25vw;
+}
+table#fishtrain tbody tr > td.sticky {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+table.inverted#fishtrain tbody tr > td.sticky {
+  background-color: #333;
+}
+
+table#fishtrain .fishtrain-fishentry-interval {
+  min-width: 3.33vw;
+  max-width: 3.33vw;
+  position: relative;
+  padding: 0;
+}
+table#fishtrain .fishtrain-fishentry-interval .interval-indicator {
+  height: 50%;
+  background-color: lightgreen;
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 25%;
+  cursor: pointer;
+}
+table#fishtrain .fishtrain-fishentry-interval .interval-indicator:hover {
+  background-color: darkgoldenrod;
+}
+body.dark table#fishtrain .fishtrain-fishentry-interval .interval-indicator {
+  background-color: green;
+}
+body.dark table#fishtrain .fishtrain-fishentry-interval .interval-indicator:hover {
+  background-color: gold;
+}
+td.fishtrain-fishentry-interval.has-window {
+  background-color: rgb(0 255 0 / 10%);
+}
+.fishtrain-fishentry .fish-name {
+  cursor: pointer;
+}
+
+.fishtrain-fishentrydetails.hidden {
+  display: none;
+}
+.fishtrain-fishentrydetails td {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  padding-top: 0px !important;
+  border-top-style: dashed !important;
+}
+.fishtrain-fishentrydetails .contents {
+  border-left: rgba(255,255,255,.1) solid 5px;
+  border-bottom: rgba(255,255,255,.1) solid 1px;
+  border-bottom-left-radius: 10px;
+  padding: .4em .6em
+}
+
+#timeline-window-details > .actions {
+  background: #f9fafb;
+  padding: 1rem 1rem;
+  border-top: 1px solid rgba(34,36,38,.15);
+  text-align: right;
+}
+
+body.dark #timeline-window-details > .actions {
+  background: #191a1b;
+  border-top: 1px solid rgba(34,36,38,.85);
+  color: #fff;
 }
 
 #site-last-update.update-available {

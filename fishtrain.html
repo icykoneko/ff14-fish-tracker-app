@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Looks up rare fish that are available during a certain period of time" />
+    <meta name="author" content="Carbuncle Plushy (Balmung)" />
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+
+    <title>FFX|V Fish Tracker App: Fish Train Tool</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142180509-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-142180509-1');
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.3/doT.min.js"></script>
+    <script src="public/js/lib/dateFns/2.25.0/dateFns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rest.js/15.2.6/octokit-rest.min.js"
+            integrity="sha512-uiSucQ5TdEImoU68Gp+mxXJ54l4lQm5bTd+T0tj7KcCupCDrKr+FdmgXipF+2Exfc6xDAcnPbr5rXB5bEZS0bw=="
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="public/images/sprite.css?6.2_20220823_0421" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20220926" />
+    <link rel="stylesheet" href="css/overlay.css?20221001_1235" />
+    <link rel="stylesheet" href="css/dark_overlay.css?20220926" />
+
+    <style>
+      /* Hide Zone Name to condense display more */
+      table#fishtrain .col-location .zone-name {
+        display: none;
+      }
+    </style>
+
+    <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
+
+    <!-- Localization Support script -->
+    <script type="text/javascript" src="js/app/localization.js?20111013_2022"></script>
+
+    <!-- Include the data -->
+    <script type="text/javascript" src="js/app/data.js?6.2_20220918_1749"></script>
+    <script type="text/javascript" src="js/app/data_ex.js?20220828_1419"></script>
+    <script type="text/javascript" src="js/app/fish_info_data.js?6.2_20220823_0421"></script>
+    <!--
+      - Scripts
+      - * NOTE: The order is somewhat important. Care must be taken to avoid
+      -   circular dependencies.  Where it cannot be avoided, defer references
+      -   to other classes until an initialization method can be called safely.
+      -->
+    <script type="text/javascript" src="js/app/time.js?20111013_2022"></script>
+    <script type="text/javascript" src="js/app/fish.js?20220506_1500"></script>
+    <script type="text/javascript" src="js/app/weather.js?20220922_1828"></script>
+    <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
+    <script type="text/javascript" src="js/app/sorters.js?20220928_1705"></script>
+
+    <script type="text/javascript" src="js/app/fishtrain.js?20220928"></script>
+    <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
+    <script type="text/javascript" src="js/app/carbyutils.js?20220922_1828"></script>
+
+    <script type="text/javascript">
+      const octokit = new Octokit();
+      $(() => {
+        // Initialize FishTrain tool.
+        FishTrain.initialize();
+      });
+    </script>
+  </head>
+  <body class="dark">
+    <div id="topmenu" class="ui text top fixed menu">
+      <div class="ui container">
+        <div class="ui dropdown icon item" id="main-menu">
+          <i class="bars icon"></i>
+          <div class="menu">
+            <a class="item" target="_blank" href="index.html"><i class="home icon"></i> Main Fish Tracker Page</a>
+            <a class="item" target="_blank" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
+            <a class="item" target="_blank" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
+          </div>
+        </div>
+        <div class="header item">FFX|V Fish Tracker App: Fish Train Tool</div>
+        <div class="ui right borderless menu">
+          <!-- Light/Dark Mode Toggle (sun/moon) -->
+          <div class="item" id="theme-toggle" title="Toggle theme">
+            <span class="toggle dark-mode-toggle" data-theme="dark">🌙</span>
+            <span class="toggle light-mode-toggle" data-theme="light">☀️</span>
+          </div>
+          <!-- Language Selector -->
+          <div class="ui dropdown item" id="languageChoice">
+            <input type="hidden" name="language">
+            <!-- <i class="dropdown icon"></i> -->
+            <div class="default text" title="Switch language"><i class="flag icon"></i></div>
+            <div class="ui left mini menu">
+              <div class="item" data-value="en"><i class="us flag"></i><span class="text">English</span></div>
+              <div class="item" data-value="ja"><i class="jp flag"></i><span class="text">日本語</span></div>
+              <div class="item" data-value="de"><i class="de flag"></i><span class="text">Deutsch</span></div>
+              <div class="item" data-value="fr"><i class="fr flag"></i><span class="text">Français</span></div>
+              <div class="item" data-value="ko"><i class="kr flag"></i><span class="text">한국어</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui main container">
+      <h1>FFX|V Fish Tracker App: Fish Train Tool</h1>
+      <p>
+        Want to plan out a fun fishing trip with a bunch of friends? Need to know what fish will be up during your next stream? The Fish Train Tool is here to help not only with planning, but also guide your friends or community during the event by providing customized itinerary. Just fill in the forms below, and select fish to create a schedule.
+      </p>
+      <p>
+        Developed by <a target="_blank" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.
+      </p>
+
+      <div class="ui icon message">
+        <i class="exclamation icon"></i>
+        <div class="content">
+          <div class="header">
+            Beta Version
+          </div>
+          <p>This is a beta version of the tool. Certain features such as creating schedules or itinerary are still in development. The language options will work, but you must reload the page after selecting a language. It will remember afterwards. For the latest news on this tool, please follow me on <a href="https://twitter.com/CarbunclePlushy" target="#top">Twitter</a>. You may leave feedback there, or via the normal <a href="/feedback.html" target="#top">feedback page.</a></p>
+        </div>
+      </div>
+
+      <div class="ui grid container">
+        <div class="twelve wide column">
+          <div class="ui form">
+            <!--
+              Select time for the event. Rarity will be based on each fish's rarity
+              as of the beginning of the event itself.
+              -->
+            <div class="three fields">
+              <div class="field">
+                <label>Start</label>
+                <div class="ui calendar" id="rangestart">
+                  <div class="ui input left icon">
+                    <i class="calendar icon"></i>
+                    <input type="datetime" placeholder="Start" />
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label>End</label>
+                <div class="ui calendar" id="rangeend">
+                  <div class="ui input left icon">
+                    <i class="calendar icon"></i>
+                    <input type="datetime" placeholder="End" />
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label>Interval</label>
+                <div class="ui compact selection dropdown" id="timelineInterval">
+                  <input type="hidden" name="timelineInterval" value="30"/>
+                  <i class="dropdown icon"></i>
+                  <div class="default text">Interval</div>
+                  <div class="menu">
+                    <div class="item" data-value="10">10 minutes</div>
+                    <div class="item" data-value="15">15 minutes</div>
+                    <div class="item" data-value="20">20 minutes</div>
+                    <div class="item" data-value="30">30 minutes</div>
+                    <div class="item" data-value="60">1 hour</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="three fields">
+              <div class="field" id="filterPatch" style="width: unset;">
+                <label>Filter by Expansion or Patch:</label>
+                <div class="row">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="2">ARR (2.x)</div>
+                    <div class="ui active button" data-filter="2">2.0</div>
+                    <div class="ui active button" data-filter="2.1">2.1</div>
+                    <div class="ui active button" data-filter="2.2">2.2</div>
+                    <div class="ui active button" data-filter="2.3">2.3</div>
+                    <div class="ui active button" data-filter="2.4">2.4</div>
+                    <div class="ui active button" data-filter="2.5">2.5</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="3">Heavensward (3.x)</div>
+                    <div class="ui active button" data-filter="3">3.0</div>
+                    <div class="ui active button" data-filter="3.1">3.1</div>
+                    <div class="ui active button" data-filter="3.2">3.2</div>
+                    <div class="ui active button" data-filter="3.3">3.3</div>
+                    <div class="ui active button" data-filter="3.4">3.4</div>
+                    <div class="ui active button" data-filter="3.5">3.5</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="4">Stormblood (4.x)</div>
+                    <div class="ui active button" data-filter="4">4.0</div>
+                    <div class="ui active button" data-filter="4.1">4.1</div>
+                    <div class="ui active button" data-filter="4.2">4.2</div>
+                    <div class="ui active button" data-filter="4.3">4.3</div>
+                    <div class="ui active button" data-filter="4.4">4.4</div>
+                    <div class="ui active button" data-filter="4.5">4.5</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="5">Shadowbringers (5.x)</div>
+                    <div class="ui active button" data-filter="5">5.0</div>
+                    <div class="ui active button" data-filter="5.1">5.1</div>
+                    <div class="ui active button" data-filter="5.2">5.2</div>
+                    <div class="ui active button" data-filter="5.3">5.3</div>
+                    <div class="ui active button" data-filter="5.4">5.4</div>
+                    <div class="ui active button" data-filter="5.5">5.5</div>
+                  </div>
+                </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="6">Endwalker (6.x)</div>
+                    <div class="ui active button" data-filter="6">6.0</div>
+                    <div class="ui active button" data-filter="6.1">6.1</div>
+                    <div class="ui active button" data-filter="6.2">6.2</div>
+                    <div class="ui disabled button" data-filter="6.3">6.3</div>
+                    <div class="ui disabled button" data-filter="6.4">6.4</div>
+                    <div class="ui disabled button" data-filter="6.5">6.5</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="field" style="/*width: unset;*/">
+                <label>Fish Filter Type</label>
+                <div class="ui mini compact buttons" id="filterExtra">
+                  <div class="ui active button" data-filter="all">All</div>
+                  <div class="ui button" data-filter="big">Big</div>
+                  <div class="ui button" data-filter="collectable">Collectable</div>
+                  <div class="ui button" data-filter="aquarium">Aquarium</div>
+                </div>
+              </div>
+
+              <div class="grouped fields" id="sortingType">
+                <div class="row">
+                  <div class="field">
+                    <label>Sorting</label>
+                    <div class="ui radio checked checkbox">
+                      <input type="radio" name="sortingType" checked="checked" class="hidden" value="windowPeriods"/>
+                      <label>Window Periods</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <div class="ui radio checkbox">
+                      <input type="radio" name="sortingType" class="hidden" value="overallRarity"/>
+                      <label>Overall Rarity</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+        </div>
+        <div class="four wide column">
+          <div class="ui /*fluid*/ button" id="updateList">Update List</div>
+        </div>
+      </div>
+
+      <div id="popups-storage">
+        <div id="timeline-window-details" class="ui popup hidden">
+          <div class="header">Window Details</div>
+          <div class="content"></div>
+          <div class="actions">
+            <div class="ui green approve button disabled">Add to schedule</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex-direction: column; display: flex; max-width: 100%">
+        <div style="overflow: scroll; max-width: min-content; max-height: 50vh; flex-grow: 1;">
+          <table id="fishtrain" class="ui very compact single line unstackable table" style="width: unset;">
+            <thead>
+              <tr>
+                <th class="sticky col-fish">Fish</th>
+                <th class="sticky col-location">Location</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="ui container">
+        <p>
+          FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
+          FINAL FANTASY XIV © 2010 - 2022 SQUARE ENIX CO., LTD. All Rights Reserved.
+        </p>
+      </div>
+    </div>
+    <div class="ui bottom fixed menu">
+      <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version"></span></div>
+      <script>
+        CheckForUpdates.checkForUpdates("");
+      </script>
+      <div class="right menu">
+        <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
+          <i class="discord icon"></i>
+        </a>
+        <a class="icon item" href="https://twitter.com/CarbunclePlushy" data-tooltip="Twitter" data-position="top right" target="_blank">
+          <i class="twitter icon"></i>
+        </a>
+        <a class="icon item" href="https://github.com/icykoneko/ff14-fish-tracker-app" data-tooltip="Github" data-position="top right" target="_blank">
+          <i class="github icon"></i>
+        </a>
+      </div>
+    </div>
+  </body>

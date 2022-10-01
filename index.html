@@ -39,9 +39,11 @@ title: Home
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?6.2_20220823_0421" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20220506_1500" />
-    <link rel="stylesheet" href="css/overlay.css?20220506_1500" />
-    <link rel="stylesheet" href="css/dark_overlay.css?20200229_1723" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20220922_1828" />
+    <link rel="stylesheet" href="css/overlay.css?20221001_1235" />
+    <link rel="stylesheet" href="css/dark_overlay.css?20220922_1828" />
+
+    <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
 
     <!-- Localization Support script -->
     <script type="text/javascript" src="js/app/localization.js?20111013_2022"></script>
@@ -58,9 +60,9 @@ title: Home
       -->
     <script type="text/javascript" src="js/app/time.js?20111013_2022"></script>
     <script type="text/javascript" src="js/app/fish.js?20220506_1500"></script>
-    <script type="text/javascript" src="js/app/weather.js?20211011_2133"></script>
-    <script type="text/javascript" src="js/app/fishwatcher.js?20211011_2133"></script>
-    <script type="text/javascript" src="js/app/sorters.js?20211011_2133"></script>
+    <script type="text/javascript" src="js/app/weather.js?20220922_1828"></script>
+    <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
+    <script type="text/javascript" src="js/app/sorters.js?20220928_1705"></script>
 
     {% if site.data.adjustments.size > 0 %}
       <script type="text/javascript">
@@ -523,7 +525,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20210926_1839"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20220823_0421"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20221001_1249"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -564,7 +566,7 @@ title: Home
     </script>
 
     <!-- DEV MODE EXTRAS -->
-    <script type="text/javascript" src="js/app/carbyutils.js?20210925_1326"></script>
+    <script type="text/javascript" src="js/app/carbyutils.js?20220922_1828"></script>
   </head>
   <body>
     <div id="topmenu" class="ui text top fixed menu">
@@ -572,10 +574,11 @@ title: Home
         <div class="ui dropdown icon item" id="main-menu">
           <i class="bars icon"></i>
           <div class="menu">
+            <a class="item" target="_blank" href="fishtrain.html"><i class="train icon"></i> Fish Train Tool</a>
             <a class="item" id="fish-guide-button"><i class="fish icon"></i> Fish Guide</a>
-            <a class="item" target="#top" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
+            <a class="item" target="_blank" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
             <a class="item" id="tips-and-tricks-button"><i class="lightbulb icon"></i> Tips and Tricks</a>
-            <a class="item" target="#top" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
+            <a class="item" target="_blank" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
           </div>
         </div>
         <div class="header item">FFX|V Fish Tracker App</div>
@@ -614,7 +617,7 @@ title: Home
     <div class="ui main container">
       <h1>FFX|V Fish Tracker App</h1>
       <p>
-        This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="_blank" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a target="#top" href="feedback.html">leave comments, kudos, report missing or incorrect data</a>, or whatever. Good luck!
+        This application tracks big fish, making it easy to spot hard-to-catch fish as they become available - <a target="_blank" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.  You may <a target="_blank" href="feedback.html">leave comments, kudos, report missing or incorrect data</a>, or whatever. Good luck!
       </p>
       <!-- HTTP => HTTPS Transition Helper Messages -->
       <div class="ui hidden icon info message announcement" id="https_message">
@@ -949,7 +952,7 @@ title: Home
       {% assign git_repo = site.github.public_repositories | where: "full_name", site.github.repository_nwo %}
       <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version">{{ git_repo[0].updated_at }}</span></div>
       <script>
-        ViewModel.checkForUpdates("{{ site.github.build_revision }}");
+        CheckForUpdates.checkForUpdates("{{ site.github.build_revision }}");
       </script>
       <div class="right menu">
         <a class="icon item" href="https://discord.gg/AnFaDpN" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">

@@ -10,42 +10,53 @@ let CarbyUtils = function(){
   var WEATHER_NAME_TO_INDEX = _(DATA.WEATHER_TYPES).chain()
     .pairs().map(x => [x[1]['name_en'], Number(x[0])]).object().value();
 
-  function resetSiteData(datetime) {
-    console.debug("Resetting site data...");
-    weatherService.__weatherData = [];
-    _(Fishes).each(fish => { fish.catchableRanges = []; fish.incompleteRanges = []; });
-    let prevPeriod = startOfPeriod(dateFns.utc.subHours(eorzeaTime.toEorzea(datetime), 8));
-    weatherService.insertForecast(prevPeriod, weatherService.calculateForecastTarget(eorzeaTime.toEarth(prevPeriod)));
-  }
-
   class _CarbyUtils {
     constructor() {
     }
 
+    _resetSiteData(datetime) {
+      console.debug("Resetting site data...");
+      weatherService.__weatherData = [];
+      _(Fishes).each(fish => { fish.catchableRanges = []; fish.incompleteRanges = []; });
+      let prevPeriod = startOfPeriod(dateFns.utc.subHours(eorzeaTime.toEorzea(datetime), 8));
+      weatherService.insertForecast(prevPeriod, weatherService.calculateForecastTarget(eorzeaTime.toEarth(prevPeriod)));
+    }
+  
     // CarbyUtils.timeTravel(eorzeaTime.toEarth(Date.UTC(3017,1,26,23,45,0)))
     timeTravel(datetime) {
+      // Prevent running this code unless on the main page.
+      if (ViewModel === undefined) {
+        console.error("The setFishConditions function can only be used on the main page.");
+        return;
+      }
+
       // Don't worry if it's the real Date.now...
       let origDateNow = Date.now;
       let currDateTime = origDateNow();
       if (dateFns.isAfter(datetime, currDateTime)) {
         console.log("Traveling into the future...");
         let dateOffset = datetime - currDateTime;
-        // resetSiteData(datetime);
+        // this._resetSiteData(datetime);
         Date.now = () => { return origDateNow() + dateOffset; };
       } else {
         // Traveling to the past will corrupt the weather service.
         console.log("Traveling into the past...");
         let dateOffset = currDateTime - datetime;
-        resetSiteData(datetime);
+        this._resetSiteData(datetime);
         Date.now = () => { return origDateNow() - dateOffset; };
-        fishWatcher.updateFishes();
+        fishWatcher.updateFishes({earthTime: datetime});
       }
       console.debug("Traveled to %s", dateFns.formatISO(eorzeaTime.toEorzea(datetime)));
     }
 
     restoreTime() {
+      // Prevent running this code unless on the main page.
+      if (ViewModel === undefined) {
+        console.error("The setFishConditions function can only be used on the main page.");
+        return;
+      }
       // Restoring time may corrupt the weather service...
-      resetSiteData(theRealDateNow());
+      this._resetSiteData(theRealDateNow());
       Date.now = theRealDateNow;
     }
 
@@ -71,6 +82,12 @@ let CarbyUtils = function(){
     // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
     setFishConditions(fishName, options={})
     {
+      // ViewModel must exist for this feature to work.
+      if (ViewModel === undefined) {
+        console.error("The setFishConditions function can only be used on the main page.");
+        return;
+      }
+
       // Verify the fish exists in the database first.
       let item_entry = _(DATA.ITEMS).findWhere({name_en: fishName});
       if (item_entry === undefined) {

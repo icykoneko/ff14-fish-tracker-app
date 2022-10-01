@@ -1260,6 +1260,90 @@ var dateFns = (function (exports) {
   }
 
   /**
+   * @name startOfMinute
+   * @category Minute Helpers
+   * @summary Return the start of a minute for the given date.
+   *
+   * @description
+   * Return the start of a minute for the given date.
+   * The result will be in the local timezone.
+   *
+   * ### v2.0.0 breaking changes:
+   *
+   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+   *
+   * @param {Date|Number} date - the original date
+   * @returns {Date} the start of a minute
+   * @throws {TypeError} 1 argument required
+   *
+   * @example
+   * // The start of a minute for 1 December 2014 22:15:45.400:
+   * const result = startOfMinute(new Date(2014, 11, 1, 22, 15, 45, 400))
+   * //=> Mon Dec 01 2014 22:15:00
+   */
+
+  function startOfMinute$1(dirtyDate) {
+    requiredArgs$2(1, arguments);
+    var date = toDate(dirtyDate);
+    date.setSeconds(0, 0);
+    return date;
+  }
+
+  /**
+   * @name eachMinuteOfInterval
+   * @category Interval Helpers
+   * @summary Return the array of minutes within the specified time interval.
+   *
+   * @description
+   * Returns the array of minutes within the specified time interval.
+   *
+   * @param {Interval} interval - the interval. See [Interval]{@link https://date-fns.org/docs/Interval}
+   * @param {Object} [options] - an object with options.
+   * @param {Number} [options.step=1] - the step to increment by. The starts of minutes from the hour of the interval start to the hour of the interval end
+   * @throws {TypeError} 1 argument requie value should be more than 1.
+   * @returns {Date[]} the array withred
+   * @throws {RangeError} `options.step` must be a number equal or greater than 1
+   * @throws {RangeError} The start of an interval cannot be after its end
+   * @throws {RangeError} Date in interval cannot be `Invalid Date`
+   *
+   * @example
+   * // Each minute between 14 October 2020, 13:00 and 14 October 2020, 13:03
+   * const result = eachMinuteOfInterval({
+   *   start: new Date(2014, 9, 14, 13),
+   *   end: new Date(2014, 9, 14, 13, 3)
+   * })
+   * //=> [
+   * //   Wed Oct 14 2014 13:00:00,
+   * //   Wed Oct 14 2014 13:01:00,
+   * //   Wed Oct 14 2014 13:02:00,
+   * //   Wed Oct 14 2014 13:03:00
+   * // ]
+   */
+  function eachMinuteOfInterval(interval, options) {
+    requiredArgs$2(1, arguments);
+    var startDate = startOfMinute$1(toDate(interval.start));
+    var endDate = startOfMinute$1(toDate(interval.end));
+    var startTime = startDate.getTime();
+    var endTime = endDate.getTime();
+
+    if (startTime >= endTime) {
+      throw new RangeError('Invalid interval');
+    }
+
+    var dates = [];
+    var currentDate = startDate;
+    var step = options && 'step' in options ? Number(options.step) : 1;
+    if (step < 1 || isNaN(step)) throw new RangeError('`options.step` must be a number equal or greater than 1');
+
+    while (currentDate.getTime() <= endTime) {
+      dates.push(toDate(currentDate));
+      currentDate = addMinutes$1(currentDate, step);
+    }
+
+    return dates;
+  }
+
+  /**
    * @name startOfYear
    * @category Year Helpers
    * @summary Return the start of a year for the given date.
@@ -5202,6 +5286,7 @@ var dateFns = (function (exports) {
   exports.differenceInMinutes = differenceInMinutes;
   exports.doesIntervalAbutEnd = doesIntervalAbutEnd;
   exports.doesintervalAbutStart = doesintervalAbutStart;
+  exports.eachMinuteOfInterval = eachMinuteOfInterval;
   exports.format = format;
   exports.formatDistanceStrict = formatDistanceStrict;
   exports.formatDuration = formatDuration;
