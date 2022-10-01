@@ -5311,6 +5311,7 @@ var dateFns = (function (exports) {
   exports.normalizeDuration = normalizeDuration;
   exports.setHours = setHours$1;
   exports.startOfHour = startOfHour$1;
+  exports.startOfMinute = startOfMinute$1;
   exports.sub = sub;
   exports.subDays = subDays$1;
   exports.subHours = subHours$1;

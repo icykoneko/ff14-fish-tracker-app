@@ -26,7 +26,12 @@ span.catchtime-minute {
   display: inline-block;
 }
 
-.fish-icon.small.sprite-icon {
+*.ui[class*="middle aligned"] {
+  vertical-align: middle;
+}
+
+.fish-icon.small.sprite-icon,
+.small-fish-icons .fish-icon.sprite-icon {
   transform-origin: center;
   transform: scale(0.50);
   margin: -11px; /* fish-icon sprites are 44x44 */
@@ -56,7 +61,8 @@ span.catchtime-minute {
 }
 
 tr.fish-intuition-row .bait-icon.sprite-icon.hookset-modifier-icon,
-tr.fishtrain-fishentrydetails .bait-icon.sprite-icon.hookset-modifier-icon {
+tr.fishtrain-fishentrydetails .bait-icon.sprite-icon.hookset-modifier-icon,
+#schedule-entry-details .bait-icon.sprite-icon.hookset-modifier-icon {
   transform-origin: center;
   transform: scale(0.375) translate(-33.3%, -25%);
   margin: -13.75px;
@@ -121,7 +127,10 @@ span.bait-span {
 tr.fish-intuition-row .fish-icon.sprite-icon,
 tr.fish-intuition-row .bait-icon.sprite-icon,
 tr.fishtrain-fishentrydetails .fish-icon.sprite-icon,
-tr.fishtrain-fishentrydetails .bait-icon.sprite-icon {
+tr.fishtrain-fishentrydetails .bait-icon.sprite-icon,
+#schedule-entry-details .fish-icon.sprite-icon,
+#schedule-entry-details .bait-icon.sprite-icon
+{
   transform-origin: center;
   transform: scale(0.675);
   margin: -7.15px;
@@ -134,7 +143,8 @@ tr.fish-intuition-row .weather-icon.sprite-icon {
 }
 
 tr.fish-intuition-row .tug-indicator,
-tr.fishtrain-fishentrydetails .tug-indicator {
+tr.fishtrain-fishentrydetails .tug-indicator,
+#schedule-entry-details .tug-indicator {
   /* Attempt to shrink the display a little */
   transform: scale(0.75) translate(-60%, 95%);
 }
@@ -649,11 +659,11 @@ table#fishtrain thead tr > th.sticky {
 }
 table#fishtrain thead tr > th.sticky.col-fish,
 table#fishtrain tbody tr > td.sticky.col-fish {
-  min-width: 25vw;
+  min-width: 22vw;
 }
 table#fishtrain thead tr > th.sticky.col-location,
 table#fishtrain tbody tr > td.sticky.col-location {
-  left: 25vw;
+  left: 22vw;
 }
 table#fishtrain tbody tr > td.sticky {
   position: sticky;
@@ -711,17 +721,120 @@ td.fishtrain-fishentry-interval.has-window {
   padding: .4em .6em
 }
 
-#timeline-window-details > .actions {
+#timeline-window-details > .actions,
+#schedule-entry-details > .actions {
   background: #f9fafb;
   padding: 1rem 1rem;
   border-top: 1px solid rgba(34,36,38,.15);
   text-align: right;
 }
 
-body.dark #timeline-window-details > .actions {
+body.dark #timeline-window-details > .actions,
+body.dark #schedule-entry-details > .actions {
   background: #191a1b;
   border-top: 1px solid rgba(34,36,38,.85);
   color: #fff;
+}
+
+/* Fish Train Schedule Bar Styles */
+
+.ui.fishtrain-schedule.segment {
+  /* max-width: 100%; */
+  position: relative;
+  border-radius: 10px;
+}
+body.dark .ui.fishtrain-schedule.segment > .ui.label {
+  background-color: #2f3032;
+  border-color: #767676;
+  border-bottom-width: 1px;
+  color: #fff;
+}
+.ui.fishtrain-schedule.segment .scroll-context {
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 1200px; /* minimum 3hrs (each minute ~= 6px) */
+  max-width: 100%; /* bounds the contents */
+  height: 85px; /* makes up for interval-marker bounding box not counting for enough */
+  position: relative; /* creates a new box to overlay items on */
+  padding-top: 4px; /* gives a little extra space from the label */
+}
+.ui.fishtrain-schedule.segment .bar {
+  height: 4px;
+  margin-top: 23px;
+  margin-bottom: 23px;
+  background-color: hsl(0, 0%, 85%);
+  border-radius: 2px;
+  position: absolute;
+  width: max-content;
+}
+body.dark .ui.fishtrain-schedule.segment .bar {
+  background-color: hsl(0, 0%, 25%);
+}
+.ui.fishtrain-schedule.segment .bar .interval-marker {
+  display: inline-block;
+  width: 179px; /* 30m minus border */
+  border-right: 1px dashed grey;
+  height: 27px;
+  padding-bottom: 1.2rem;
+}
+body.dark .ui.fishtrain-schedule.segment .bar .interval-marker {
+  border-right: 1px dashed white;
+}
+/* 6px = 1min */
+.ui.fishtrain-schedule.segment .bar.interval-10min .interval-marker {
+  width: 59px;
+}
+.ui.fishtrain-schedule.segment .bar.interval-15min .interval-marker {
+  width: 89px;
+}
+.ui.fishtrain-schedule.segment .bar.interval-20min .interval-marker {
+  width: 119px;
+}
+.ui.fishtrain-schedule.segment .bar.interval-30min .interval-marker {
+  width: 179px;
+}
+.ui.fishtrain-schedule.segment .bar.interval-60min .interval-marker {
+  width: 359px;
+}
+.ui.fishtrain-schedule.segment .bar .interval-marker > .label {
+  margin-left: calc(100% - 2em);
+  width: 4em;
+  text-align: center;
+  font-size: small;
+  margin-top: 27px;
+}
+body.dark .ui.fishtrain-schedule.segment .bar .interval-marker > .label {
+  color: white;
+}
+.ui.fishtrain-schedule.segment .items {
+  height: 50px;
+}
+.ui.fishtrain-schedule.segment .items.small-fish-entries {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.ui.fishtrain-schedule.segment .items .fish-entry {
+  position: absolute;
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  background-color: hsl(0, 0%, 75%);
+  padding: 2px;
+  border-left: black 1px solid;
+  border-right: black 1px solid;
+  cursor: pointer;
+}
+body.dark .ui.fishtrain-schedule.segment .items .fish-entry {
+  background-color: hsl(0, 0%, 40%);
+}
+.ui.fishtrain-schedule.segment .items.small-fish-entries .fish-entry {
+  min-width: 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  background-color: hsl(0, 0%, 75%);
+  padding: 4px;
 }
 
 #site-last-update.update-available {

@@ -198,6 +198,81 @@ let FishTrain = function(){
           </div>
         </td>
       </tr>`,
+
+    scheduleIntervalMarkers:
+     `{{~ _.range(it.intervals.length) :k}}
+        <div class="interval-marker">
+          <div class="label">+{{= it.duration * (k + 1) }}m</div>
+        </div>
+      {{~}}`,
+
+    scheduleFishEntry:
+     `<div class="fish-entry"
+           style="left: {{= it.timeOffset * 6 }}px; width: {{= it.timeDuration * 6 }}px;"
+           data-id="{{=it.id}}">
+        <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
+      </div>`,
+
+    baitInfo:
+     `<div class="ui middle aligned" style="display: inline-block;">
+        {{?it.data.dataMissing !== false || it.data.gig === "UNKNOWN"}}
+          <i class="question circle outline icon" title="Unknown/Incomplete"></i>
+        {{?}}
+        <!-- Put Fishers intuition if fish has at least 1 predetor -->
+        {{?it.data.bait.hasPredators}}
+          <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition{{?it.data.intuitionLength}} has-duration{{?}}" title="Fisher's Intuition">
+            {{?it.data.intuitionLength}}
+              <span>{{var d = it.data.intuitionLength; if (d) { out += Math.floor(d/60) + 'm' + (d % 60); }}}s</span>
+            {{?}}
+          </div>
+        {{?}}
+        {{?it.data.snagging}}
+          <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
+        {{?}}
+        {{?it.data.gig}}
+          {{?it.data.gig === "UNKNOWN"}}
+            <span>Spearfishing</span>
+          {{??}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
+          {{?}}
+        {{?}}
+        <span class="bait-span">
+          {{~it.bait :item:idx}}
+            {{?idx == 0}}
+              <a href="https://garlandtools.org/db/#item/{{=item.id}}" target="cp_gt">
+            {{??}}
+              <div class="bait-badge-container">
+                {{?item.hookset}}
+                  <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
+                        title="{{=item.hookset}} Hookset"></div>
+                {{?}}
+                {{?item.tug}}
+                  <div class="tug-indicator {{=item.tug}}-tug-indicator" title="{{=item.tug}} tug">
+                    {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[item.tug]}}
+                  </div>
+                {{?}}
+              </div>
+              </span><!-- bait-span -->
+              <i class="arrow right icon"></i>
+              <span class="bait-span">
+            {{?}}
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}" data-baitIdx="{{=idx}}"></div>
+            {{?idx == 0}}
+              </a>
+            {{?}}
+          {{~}}
+          <div class="bait-badge-container">
+            {{?it.data.hookset}}
+              <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
+            {{?}}
+            {{?it.data.tug}}
+              <div class="tug-indicator {{=it.data.tug}}-tug-indicator" title="{{=it.data.tug}} tug">
+                {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.data.tug]}}
+              </div>
+            {{?}}
+          </div>
+        </span><!-- bait span -->
+      </div>`,
   };
 
   class BaitEntry {
@@ -378,6 +453,20 @@ let FishTrain = function(){
     }
   }
 
+  class ScheduleEntry {
+    constructor(fish, opts={}) {
+      this.fish = fish;
+      this.adjustable = true;
+      if (opts.crsIdx !== null) {
+        this.crsIdx = opts.crsIdx;
+        this.adjustable = false;
+      }
+      if (opts.range !== null) {
+        this.range = Object.assign({}, opts.range);
+      }
+      this.el = null;
+    }
+  }
 
   class _FishTrain {
     constructor() {
@@ -388,6 +477,9 @@ let FishTrain = function(){
         fishEntry: doT.template(templates.fishEntry, undefined, sub_templates),
         intervalHeadings: doT.template(templates.intervalHeadings),
         fishEntryDetails: doT.template(templates.fishEntryDetails, undefined, sub_templates),
+        scheduleIntervalMarkers: doT.template(templates.scheduleIntervalMarkers),
+        scheduleFishEntry: doT.template(templates.scheduleFishEntry),
+        baitInfo: doT.template(templates.baitInfo),
       };
     }
 
@@ -413,6 +505,8 @@ let FishTrain = function(){
         fish: [],
         intervals: [],
       };
+
+      this.scheduleEntries = [];
 
       this.currentSelection = null;
       this.currentPopup = null;
@@ -447,6 +541,8 @@ let FishTrain = function(){
       // Track certain DOM objects.
       this.fishTrainTableHeader$ = $('table#fishtrain thead tr').first();
       this.fishTrainTableBody$ = $('table#fishtrain tbody');
+      this.scheduleIntervalMarkers$ = $('.fishtrain-schedule .bar');
+      this.scheduleFishEntries$ = $('.fishtrain-schedule .items');
 
       $('.ui.dropdown').dropdown();
       $('#main-menu.dropdown').dropdown({
@@ -486,10 +582,15 @@ let FishTrain = function(){
         'click', 'span.fish-name', this, this.showDetailsInTimeline);
       this.fishTrainTableBody$.on(
         'click', 'span.interval-indicator', this, this.timelineFishEntryIntervalClicked);
+      this.scheduleFishEntries$.on(
+        'click', '.fish-entry', this, this.scheduleEntryClicked);
 
       // Listen for "Add to schedule" events.
       $('#timeline-window-details .approve.button').on(
         'click', this, this.addSelectionToSchedule);
+      // Listen for "Remove from schedule" events.
+      $('#schedule-entry-details .approve.button').on(
+        'click', this, this.removeSelectionFromSchedule);
 
       // We need to awake of resizing...
       $(window).resize(this, this.adjustTimelineDetailsElements);
@@ -500,7 +601,7 @@ let FishTrain = function(){
       var endDate = $('#rangeend').calendar('get date');
 
       if (startDate === null) {
-        startDate = new Date();
+        startDate = dateFns.startOfMinute(new Date());
         endDate = dateFns.addHours(startDate, 3);
       }
 
@@ -530,6 +631,10 @@ let FishTrain = function(){
         .addClass('hidden')
         .appendTo($('#popups-storage'));
       _this.currentPopup = null;
+      $('#schedule-entry-details')
+        .removeClass('visible')
+        .addClass('hidden')
+        .appendTo($('#popups-storage'));
 
       // Clear the table.
       _this.fishTrainTableBody$.empty();
@@ -540,13 +645,19 @@ let FishTrain = function(){
       _this.timeline.start = $('#rangestart').calendar('get date');
       _this.timeline.end = $('#rangeend').calendar('get date');
 
+      // TODO: Maybe don't always clear this?
+      // Clear schedule
+      _this.scheduleIntervalMarkers$.empty();
+      _this.scheduleFishEntries$.empty();
+      _this.scheduleEntries = [];
+
       // Reinitialize the availability data and weather.
       CarbyUtils._resetSiteData(+_this.timeline.start)
 
       // Get intervals but exclude the last entry if it matches an interval.
       // To accomplish this, we subtract one second from the end date.
       var intervals = dateFns.eachMinuteOfInterval(
-        {start: _this.timeline.start, end: _this.timeline.end-1},
+        {start: _this.timeline.start, end: +_this.timeline.end-1},
         {step: _this.settings.timelineInterval});
 
       _this.timeline.intervals = intervals;
@@ -554,6 +665,16 @@ let FishTrain = function(){
       // Update the table headers.
       _this.fishTrainTableHeader$.append(
         _this.templates.intervalHeadings(_(intervals).map(x => dateFns.format(x, 'p'))));
+
+      // Update the schedule interval markers.
+      _this.scheduleIntervalMarkers$
+        .removeClass()
+        .addClass(`bar interval-${_this.settings.timelineInterval}min`)
+        .append(
+          _this.templates.scheduleIntervalMarkers({
+            intervals: intervals,
+            duration: _this.settings.timelineInterval
+      }));
 
       // Mark all existing entries as stale (or not active).
       // Anything that's not active, won't be displayed, and at the end of this
@@ -701,7 +822,8 @@ let FishTrain = function(){
             start: eorzeaTime.toEarth(r.start),
             end: eorzeaTime.toEarth(r.end)
           },
-          adjustable: false
+          adjustable: false,
+          crsIdx: crsIdx,
         };
       } else {
         if (_this.currentPopup == indicator$[0]) {
@@ -721,7 +843,8 @@ let FishTrain = function(){
             start: interval.dt,
             end: dateFns.addMinutes(interval.dt, _this.settings.timelineInterval)
           },
-          adjustable: true
+          adjustable: true,
+          crsIdx: null,
         };
       }
 
@@ -744,6 +867,7 @@ let FishTrain = function(){
         scrollContext: $('#fishtrain').parent(),
         variation: _this.settings.theme == 'dark' ? 'inverted' : '',
         lastResort: true,
+        movePopup: false,
         onHide: function (m) {
           console.debug("Popup hiding:", m);
           _this.currentPopup = null;
@@ -761,10 +885,119 @@ let FishTrain = function(){
     addSelectionToSchedule(e) {
       let _this = e.data;
 
-      console.info("Adding selection to schedule:", _this.currentSelection);
+      console.info("Attempting to add selection to schedule:", _this.currentSelection);
 
       // Close the popup now.
       $(_this.currentPopup).popup('hide');
+
+      // Update the schedule.
+      // MAKE SURE YOU HAVEN'T ALREADY ADDED THIS ENTRY TO THE BAR!!!
+      // For now, we're just going to prevent users from adding the same fish twice
+      if (_(_this.scheduleEntries).find(
+        entry => entry.fish.id == _this.currentSelection.entry.id))
+      {
+        // That fish is already in the schedule.
+        $('body').toast({
+          class: 'error',
+          message: `${_this.currentSelection.entry.data.name} is already in the schedule.`
+        });
+        return;
+      }
+
+      var viewParams = {
+        timeOffset: dateFns.differenceInMinutes(
+          _this.currentSelection.range.start, _this.timeline.start, {roundingMethod: 'floor'}),
+        timeDuration: dateFns.differenceInMinutes(
+          _this.currentSelection.range.end, _this.currentSelection.range.start, {roundingMethod: 'ceil'}),
+        icon: _this.currentSelection.entry.data.icon,
+        id: _this.currentSelection.entry.id,
+        crsIdx: _this.currentSelection.crsIdx,
+      };
+      var scheduleEntry$ =
+        $(_this.templates.scheduleFishEntry(viewParams)).appendTo(_this.scheduleFishEntries$);
+
+      // Add to the list
+      var scheduleEntry = new ScheduleEntry(_this.currentSelection.entry, {
+        crsIdx: _this.currentSelection.crsIdx,
+        range: _this.currentSelection.range
+      });
+      scheduleEntry.el = scheduleEntry$[0];
+      scheduleEntry$.data('model', scheduleEntry);
+      _this.scheduleEntries.push(scheduleEntry);
+    }
+
+    removeSelectionFromSchedule(e) {
+      let _this = e.data;
+
+      console.info("Removing selected entry from schedule:", _this.selectedScheduleEntry);
+
+      // Close the popup now.
+      $(_this.currentPopup).popup('hide');
+
+      // Remove the entry from the list, and from the UI.
+      _this.scheduleEntries.splice(
+        _this.scheduleEntries.findIndex((x) => x === _this.selectedScheduleEntry ), 1);
+      $(_this.selectedScheduleEntry.el).remove();
+
+      // Clean up.
+      delete _this.selectedScheduleEntry;
+      _this.selectedScheduleEntry = null;
+    }
+
+    scheduleEntryClicked(e) {
+      let _this = e.data;
+      let scheduleEntry$ = $(this);
+      let scheduleEntry = scheduleEntry$.data('model');
+
+      if (_this.currentPopup == scheduleEntry$[0]) {
+        // Already selected, ignore.
+        console.debug("Popup already visible:", scheduleEntry$[0]);
+        e.stopPropagation();
+        return;
+      }
+      if (_this.currentPopup !== null) {
+        // Close the current popup first.
+        console.debug("Closing current popup first:", _this.currentPopup);
+        $(_this.currentPopup).popup('hide');
+      }
+      // Store the current popup so UI reacts nicely...
+      _this.currentPopup = scheduleEntry$[0];
+      // Remember our selected entry.
+      _this.selectedScheduleEntry = scheduleEntry;
+
+      // Update the contents for the popup.
+      $('#schedule-entry-details .header').text(scheduleEntry.fish.data.name);
+      var content$ = $('#schedule-entry-details .content');
+      $('.window-start', content$)
+        .text(dateFns.format(scheduleEntry.range.start, 'p'));
+      $('.window-start-ingame', content$)
+        .text(dateFns.format(eorzeaTime.toEorzea(scheduleEntry.range.start), 'HH:mm'));
+      $('.window-end', content$)
+        .text(dateFns.format(scheduleEntry.range.end, 'p'));
+      $('.window-end-ingame', content$)
+        .text(dateFns.format(eorzeaTime.toEorzea(scheduleEntry.range.end), 'HH:mm'));
+      var location = scheduleEntry.fish.data.location;
+      $('.location-name', content$)
+        .text(`${location.name} - ${location.zoneName} (${location.coords[0].toFixed(1)}, ${location.coords[1].toFixed(1)})`);
+      $('.bait-info', content$).html(_this.templates.baitInfo(scheduleEntry.fish));
+
+      scheduleEntry$.popup({
+        popup: '#schedule-entry-details',
+        on: 'manual',
+        variation: _this.settings.theme == 'dark' ? 'inverted' : '',
+        position: 'top center',
+        movePopup: false,
+        onHide: function(m) {
+          console.debug("Popup hiding:", m);
+          _this.currentPopup = null;
+          return true;
+        },
+        onHidden: function(m) {
+          console.debug("Popup hidden:", m);
+        }
+      });
+      console.debug("Showing popup:", scheduleEntry$[0]);
+      scheduleEntry$.popup('show');
     }
 
     isFishFiltered(fish) {
