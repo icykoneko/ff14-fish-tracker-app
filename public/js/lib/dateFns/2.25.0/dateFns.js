@@ -5284,6 +5284,7 @@ var dateFns = (function (exports) {
   exports.defaultLocale = defaultLocale;
   exports.differenceInMilliseconds = differenceInMilliseconds;
   exports.differenceInMinutes = differenceInMinutes;
+  exports.differenceInSeconds = differenceInSeconds;
   exports.doesIntervalAbutEnd = doesIntervalAbutEnd;
   exports.doesintervalAbutStart = doesintervalAbutStart;
   exports.eachMinuteOfInterval = eachMinuteOfInterval;
