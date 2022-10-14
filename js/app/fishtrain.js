@@ -1045,9 +1045,7 @@ let FishTrain = function(){
       console.timeEnd("Generate Timeline");
 
       // Fix the size of the schedule bar as well.
-      let scheduleBarNode$ = $('.ui.fishtrain-schedule.segment .bar');
-      $('.ui.fishtrain-schedule.segment .current-time-indicator-bar').css('width', scheduleBarNode$[0].clientWidth);
-      $('.ui.fishtrain-schedule.segment .scroll-context').css('min-width', 28 + scheduleBarNode$[0].clientWidth);
+      _this.updateScheduleBarScrollContextWidth();
       return;
     }
 
@@ -1204,9 +1202,7 @@ let FishTrain = function(){
       $('.fishtrain-fishentrydetails .contents').css('width', scrollContext.clientWidth);
 
       // Fix the size of the schedule bar as well.
-      let scheduleBarNode$ = $('.ui.fishtrain-schedule.segment .bar');
-      $('.ui.fishtrain-schedule.segment .current-time-indicator-bar').css('width', scheduleBarNode$[0].clientWidth);
-      $('.ui.fishtrain-schedule.segment .scroll-context').css('min-width', 28 + scheduleBarNode$[0].clientWidth);
+      _this.updateScheduleBarScrollContextWidth();
     }
 
     timelineFishEntryIntervalClicked(e) {
@@ -1649,6 +1645,9 @@ let FishTrain = function(){
         }
       }
 
+      if (this.data('controlname') === 'schedulebar') {
+        _this.updateScheduleBarScrollContextWidth();
+      }
       return;
     }
 
@@ -1796,6 +1795,14 @@ let FishTrain = function(){
       } catch (ex) {
         console.warn("Unable to save settings to local storage.");
       }
+    }
+
+    updateScheduleBarScrollContextWidth() {
+      let scheduleBarNode$ = $('.ui.fishtrain-schedule.segment .bar');
+      $('.ui.fishtrain-schedule.segment .current-time-indicator-bar').css('width', scheduleBarNode$[0].clientWidth);
+
+      let scheduleBarContainerNode$ = $('.ui.fishtrain-schedule.segment').parent();
+      $('.ui.fishtrain-schedule.segment .scroll-context').css('width', Math.min(scheduleBarContainerNode$[0].clientWidth, scheduleBarNode$[0].clientWidth + 28));
     }
   }
 
