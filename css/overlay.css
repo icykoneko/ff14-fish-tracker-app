@@ -642,8 +642,43 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   grid-area: fish-meta;
 }
 
+.ui.accordion .title.active .inactive-details {
+  display: none;
+}
+
+/* Fish Train - Fish Table styles */
+
+.fishtrain-fishtable {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+.fishtrain-fishtable .scroll-context {
+  flex-grow: 1;
+  overflow: auto;
+  max-width: min-content;
+  /*
+   * TODO: Configure these to display a min/max of 5/10 rows
+   * Or make the choice user-selectable (5, 10, 20?) We just
+   * don't want the table to take up the entire available
+   * screen, so max should always prevent this, while min (or
+   * plain height) should follow the user's preference.
+   */
+  min-height: 25vh;
+  max-height: 50vh;
+}
+table#fishtrain {
+  /*
+   * prevents the table from being full-sized and ugly
+   * j.k. it's actually pretty ugly looking already but without this
+   * it definitely looks a lot worse when given the default options.
+   */
+  width: unset;
+}
 
 table#fishtrain thead tr > th {
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
   position: sticky;
   top: 0;
   z-index: 2;
@@ -675,8 +710,8 @@ table.inverted#fishtrain tbody tr > td.sticky {
 }
 
 table#fishtrain .fishtrain-fishentry-interval {
-  min-width: 3.33vw;
-  max-width: 3.33vw;
+  min-width: 5rem;
+  max-width: 5rem;
   position: relative;
   padding: 0;
 }
@@ -752,12 +787,30 @@ body.dark .ui.fishtrain-schedule.segment > .ui.label {
 .ui.fishtrain-schedule.segment .scroll-context {
   overflow-x: auto;
   overflow-y: hidden;
-  min-width: 1200px; /* minimum 3hrs (each minute ~= 6px) */
+  /*min-width: 1200px;*/ /* minimum 3hrs (each minute ~= 6px) */
   max-width: 100%; /* bounds the contents */
   height: 85px; /* makes up for interval-marker bounding box not counting for enough */
   position: relative; /* creates a new box to overlay items on */
   padding-top: 4px; /* gives a little extra space from the label */
 }
+
+.ui.fishtrain-schedule.segment .current-time-indicator-bar {
+  width: 100%; /* adjust based on size of bar */
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  overflow: hidden;
+}
+.ui.fishtrain-schedule.segment .current-time-indicator-bar .current-time-indicator {
+  position: relative;
+  left: -100px; /* starts out of view */
+  width: 100px;
+  height: 60px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: linear-gradient(90deg, rgba(252,240,48,0) 0%, rgba(252,240,48,0.25) 75%, rgba(252,240,48,0.5) 100%)
+}
+
 .ui.fishtrain-schedule.segment .bar {
   height: 4px;
   margin-top: 23px;
@@ -835,6 +888,108 @@ body.dark .ui.fishtrain-schedule.segment .items .fish-entry {
   border-radius: 4px;
   background-color: hsl(0, 0%, 75%);
   padding: 4px;
+}
+
+/* Fish Train Schedule List styles */
+/* This is pretty much identical to normal tracker rows */
+.ui.fishtrain-schedule-list.segment {
+  position: relative;
+  border-radius: 10px;
+}
+.ui.fishtrain-schedule-list.segment .scroll-context {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: max-content; /* bounds the contents */
+  max-height: calc(1rem + (5 * 59.5px));
+}
+.fishtrain-schedule-list thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  border-top-left-radius: unset !important;
+  border-top-right-radius: unset !important;
+  background-color: hsla(0, 0%, 100%, 1) !important; /* This should match the page background */
+}
+body.dark .fishtrain-schedule-list thead tr th {
+  background-color: hsla(0, 0%, 15%, 1) !important; /* This should match the page background */
+}
+.fishtrain-schedule-list thead tr th.fish-name-col {
+  min-width: 20rem;
+}
+.fishtrain-schedule-list thead tr th.fish-availability-col {
+  min-width: 8.5rem;
+}
+.fishtrain-schedule-list thead tr th.fish-location-col {
+  min-width: 20rem;
+}
+.fishtrain-schedule-list thead tr th.fish-requirements-col {
+  min-width: 15rem;
+}
+
+/* Styles for fish entries */
+tr.fish-entry td.fish-icon-and-name span.fish-name,
+tr.fish-entry td.fish-icon-and-name span.fish-details {
+  display: block;
+}
+.ui.table > tbody > tr.fish-entry.fish-intuition-row > td.fish-icon-and-name {
+  padding-left: 1.25em;
+}
+tr.fish-entry.fish-intuition-row td.fish-icon-and-name span.fish-name {
+  display: inline-block;
+  vertical-align: middle;
+}
+tr.fish-entry td.fish-location .fishing-spot,
+tr.fish-entry td.fish-location .zone {
+  display: block;
+}
+tr.fish-entry td.fish-location .zone {
+  font-size: smaller;
+}
+
+/* Expired row */
+.fishtrain-schedule-list .ui.table > tr.fish-entry.expired,
+.fishtrain-schedule-list .ui.table > tr.fish-entry.expired td,
+.fishtrain-schedule-list .ui.table tbody tr.fish-entry.expired,
+.fishtrain-schedule-list .ui.table tbody tr.fish-entry.expired td {
+  color: rgba(40,40,40,.3);
+}
+
+body.dark .fishtrain-schedule-list .ui.table > tr.fish-entry.expired,
+body.dark .fishtrain-schedule-list .ui.table > tr.fish-entry.expired td,
+body.dark .fishtrain-schedule-list .ui.table tbody tr.fish-entry.expired,
+body.dark .fishtrain-schedule-list .ui.table tbody tr.fish-entry.expired td {
+  color: hsla(0, 0%, 50%, 0.87) !important;
+}
+
+/* Prevent clicking on links in this row */
+.fishtrain-schedule-list tr.fish-entry.expired {
+  cursor: not-allowed;
+  pointer-events: none !important; /* prevent clicking: it's disabled */
+}
+/* Restore color of links */
+.fishtrain-schedule-list tr.fish-entry.expired a {
+  color: inherit;
+}
+/* Hide extra details */
+.fishtrain-schedule-list tr.fish-entry.expired span.fish-details,
+.fishtrain-schedule-list tr.fish-entry.expired td.fish-availability *,
+.fishtrain-schedule-list tr.fish-entry.expired td.fish-location *,
+.fishtrain-schedule-list tr.fish-entry.expired td.fish-requirements * {
+  display: none;
+}
+/* Use smaller, greyed out fish sprite */
+.fishtrain-schedule-list tr.fish-entry.expired td.fish-icon-and-name .fish-icon.sprite-icon {
+  transform-origin: right;
+  transform: scale(0.50);
+  filter: saturate(0);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* fish-icon sprites are 44x44 */
+  margin-top: -11px;
+  margin-bottom: -11px;
+}
+/* For intuition requirements, just hide them if their main fish is expired. */
+.fishtrain-schedule-list tr.fish-intuition-row.fish-entry.expired {
+  display: none;
 }
 
 #site-last-update.update-available {

@@ -51,11 +51,16 @@ i.icon {
   padding: 0.58928571em 0.58928571em 0.58928571em;
 }
 
-.ui[class*="very compact"].table th {
+.ui[class*="very compact"].table > tr > th,
+.ui[class*="very compact"].table > thead > tr > th,
+.ui[class*="very compact"].table > tbody > tr > th,
+.ui[class*="very compact"].table > tfoot > tr > th {
   padding: 0.2em 0.3em;
 }
 
-.ui[class*="very compact"].table td {
+.ui[class*="very compact"].table > tr > td,
+.ui[class*="very compact"].table > tbody > tr > td,
+.ui[class*="very compact"].table > tfoot > tr > td {
   padding: 0.2em 0.3em;
 }
 
@@ -322,7 +327,6 @@ i.icon.cloud.sun.rain:before {
 .ui.inverted.popup {
   border: rgba(255, 255, 255, 0.15) solid 1px;
 }
-
 
 /* Scrollbar corner */
 

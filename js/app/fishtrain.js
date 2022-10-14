@@ -10,6 +10,16 @@
 
 let FishTrain = function(){
 
+  // Not sure if I want to keep this feature, so we'll just do this.
+  var SCHEDULE_LIST_AND_BAR_MUTUALLY_EXCLUSIVE = false;
+
+  function formatDuration(duration) {
+    if (duration.years || duration.months || duration.days) {
+      return ""; // shouldn't even be running if its that far off...
+    }
+    return `${duration.hours}:${String(duration.minutes).padStart(2, '0')}:${String(duration.seconds).padStart(2, '0')}`;
+  }
+
   var sub_templates = {
     fishEntryInterval: {arg: 'it', text:
      `{{? it.lastDT != it.i.dt }}
@@ -273,6 +283,207 @@ let FishTrain = function(){
           </div>
         </span><!-- bait span -->
       </div>`,
+
+    // it = ScheduleEntry
+    // This is probably the most similar clone of the main tracker's
+    // 'fish-template' format. I really need to unify all of these...
+    scheduleListEntry:
+     `{{ var schedEntry = it; it = schedEntry.fishEntry; }}
+      <tr class="scheduled-fish-entry fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}} data-id="{{=it.id}}">
+        <td class="fish-icon-and-name collapsing">
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
+          <div class="ui middle aligned" style="display: inline-block;">
+            <span class="fish-name"><a class="fish-name" target="_blank" href="{{=it.getExternalLink()}}">{{=it.data.name}}</a></span>
+            <span class="fish-details">
+              <div class="ui tiny circular label">{{=it.data.patch}}</div>
+              {{?it.data.aquarium !== null}}
+                <div class="ui middle aligned sprite-icon sprite-icon-aquarium"
+                     data-tooltip="Tier {{=it.data.aquarium.size}} {{=it.data.aquarium.water}}" data-position="right center" data-variation="mini"></div>
+              {{?}}
+              {{?it.data.folklore !== null}}
+                <div class="ui middle aligned sprite-icon sprite-icon-folklore"
+                     data-tooltip="{{=__p(DATA.FOLKLORE[it.data.folklore],'name')}}" data-position="right center" data-variation="mini"></div>
+              {{?}}
+              {{?it.data.collectable !== null}}
+                <div class="ui middle aligned sprite-icon sprite-icon-collectable"
+                     data-tooltip="Minimum Collectability: {{=it.data.collectable}}" data-position="right center" data-variation="mini"></div>
+              {{?}}
+              {{?it.data.video !== null}}
+                {{~it.getVideoInfo() :videoInfo}}
+                  <a class="plainlink" href="{{=videoInfo.url}}" target="cp_vguide"><i class="{{=videoInfo.iconClass}} icon"></i></a>
+                {{~}}
+              {{?}}
+            </span>
+          </div>
+        </td>
+        <!-- Availability (only displayed while fish is available) -->
+        <td class="fish-availability">
+          {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.timeRestricted || it.data.dataMissing.weatherRestricted}}
+              <i class="question circle outline icon"></i> Unknown
+            {{??}}
+              Always
+            {{?}}
+          {{??it.data.alwaysAvailable && it.data.dataMissing === false}}
+            Always
+          {{??!it.data.alwaysAvailable}}
+            {{?it.data.dataMissing !== false}}
+              <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+            {{?}}
+            <div class="ui active slow tiny inline loader inverted"></div>
+            <span class="fish-availability-current" data-val="{{=schedEntry.range.start}}" data-tooltip="{{var d = schedEntry.range.start; if (d) { out += dateFns.format(d, 'Pp'); } }}"></span>
+          {{?}}
+        </td>
+        <!-- Location -->
+        <td class="fish-location">
+          <span class="fishing-spot">
+            <i class="location-button map icon"></i> <a href="https://ffxivteamcraft.com/db/en/{{?it.data.location.spearfishing}}spearfishing{{??}}fishing{{?}}-spot/{{=it.data.location.id}}" target="cp_gt" class="location-name">{{=it.data.location.name}}</a>
+          </span>
+          <span class="zone">
+            <span class="zone-name">{{=it.data.location.zoneName}}</span>
+            <span class="zone-coordinates">({{=it.data.location.coords[0].toFixed(1)}}, {{=it.data.location.coords[1].toFixed(1)}})</span>
+          </span>
+        </td>
+        <!-- Requirements and Bait -->
+        <td class="fish-requirements">
+          {{?it.data.dataMissing !== false || it.data.gig === "UNKNOWN"}}
+            <i class="question circle outline icon" title="Unknown/Incomplete"></i>
+          {{?}}
+          <!-- Put Fishers intuition if fish has at least 1 predator -->
+          {{?it.data.bait.hasPredators}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-intuition{{?it.data.intuitionLength}} has-duration{{?}}" title="Fisher's Intuition">
+              {{?it.data.intuitionLength}}
+                <span>{{var d = it.data.intuitionLength; if (d) { out += Math.floor(d/60) + 'm' + (d % 60); }}}s</span>
+              {{?}}
+            </div>
+          {{?}}
+          {{?it.data.snagging}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
+          {{?}}
+          {{?it.data.gig}}
+            {{?it.data.gig === "UNKNOWN"}}
+              <span>Spearfishing</span>
+            {{??}}
+              <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
+            {{?}}
+          {{?}}
+          <span class="bait-span">
+            {{~it.bait :item:idx}}
+              {{?idx == 0}}
+                <a href="https://garlandtools.org/db/#item/{{=item.id}}" target="cp_gt">
+              {{??}}
+                <div class="bait-badge-container">
+                  {{?item.hookset}}
+                    <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
+                         title="{{=item.hookset}} Hookset"></div>
+                  {{?}}
+                  {{?item.tug}}
+                    <div class="tug-indicator {{=item.tug}}-tug-indicator" title="{{=item.tug}} tug">
+                      {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[item.tug]}}
+                    </div>
+                  {{?}}
+                </div>
+                </span><!-- bait-span -->
+                <i class="arrow right icon"></i>
+                <span class="bait-span">
+              {{?}}
+              <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}" data-baitIdx="{{=idx}}"></div>
+              {{?idx == 0}}
+                </a>
+              {{?}}
+            {{~}}
+            <div class="bait-badge-container">
+              {{?it.data.hookset}}
+                <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
+              {{?}}
+              {{?it.data.tug}}
+                <div class="tug-indicator {{=it.data.tug}}-tug-indicator" title="{{=it.data.tug}} tug">
+                  {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.data.tug]}}
+                </div>
+              {{?}}
+            </div>
+          </span><!-- bait span -->
+        </td>
+      </tr>`,
+    scheduleListIntuitionEntry:
+     `{{ var schedEntry = it; it = schedEntry.fishEntry; }}
+      <tr class="scheduled-fish-entry fish-intuition-row fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}}" data-id="{{=it.id}}" data-intuitionfor="{{=it.intuitionFor.id}}">
+        <td class="fish-icon-and-name collapsing">
+          <div class="intuition-count">{{=it.intuitionCount}}</div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
+          <span class="fish-name"><a class="fish-name" target="_blank" href="{{=it.getExternalLink()}}">{{=it.data.name}}</a></span>
+        </td>
+        <!-- Availability -->
+        <td class="fish-availability" colspan="2">
+          {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
+            {{?it.data.dataMissing.timeRestricted || it.data.dataMissing.weatherRestricted}}
+              <i class="question circle outline icon"></i> Unknown
+            {{??}}
+              Always
+            {{?}}
+          {{??it.data.alwaysAvailable && it.data.dataMissing === false}}
+            Always
+          {{??!it.data.alwaysAvailable}}
+            {{?it.data.dataMissing !== false}}
+              <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
+            {{?}}
+            <div class="ui active slow tiny inline loader inverted"></div>
+            <span class="fish-availability-current" data-val="0" data-tooltip=""></span>
+          {{?}}
+        </td>
+        <!-- Requirements and Bait -->
+        <td class="fish-requirements">
+          {{?it.data.dataMissing !== false || it.data.gig === "UNKNOWN"}}
+            <i class="question circle outline icon" title="Unknown/Incomplete"></i>
+          {{?}}
+          {{?it.data.snagging}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
+          {{?}}
+          {{?it.data.gig}}
+            {{?it.data.gig === "UNKNOWN"}}
+              <span>Spearfishing</span>
+            {{??}}
+              <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
+            {{?}}
+          {{?}}
+          <span class="bait-span">
+            {{~it.bait :item:idx}}
+              {{?idx == 0}}
+                <a href="https://garlandtools.org/db/#item/{{=item.id}}" target="cp_gt">
+              {{??}}
+                <div class="bait-badge-container">
+                  {{?item.hookset}}
+                    <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=item.hookset.toLowerCase()}}_hookset"
+                         title="{{=item.hookset}} Hookset"></div>
+                  {{?}}
+                  {{?item.tug}}
+                    <div class="tug-indicator {{=item.tug}}-tug-indicator" title="{{=item.tug}} tug">
+                      {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[item.tug]}}
+                    </div>
+                  {{?}}
+                </div>
+                </span><!-- bait-span -->
+                <i class="arrow right icon"></i>
+                <span class="bait-span">
+              {{?}}
+              <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}" data-baitIdx="{{=idx}}"></div>
+              {{?idx == 0}}
+                </a>
+              {{?}}
+            {{~}}
+            <div class="bait-badge-container">
+              {{?it.data.hookset}}
+                <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.data.hookset.toLowerCase()}}_hookset" title="{{=it.data.hookset}} Hookset"></div>
+              {{?}}
+              {{?it.data.tug}}
+                <div class="tug-indicator {{=it.data.tug}}-tug-indicator" title="{{=it.data.tug}} tug">
+                  {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.data.tug]}}
+                </div>
+              {{?}}
+            </div>
+          </span><!-- bait span -->
+        </td>
+      </tr>`
   };
 
   class BaitEntry {
@@ -319,12 +530,29 @@ let FishTrain = function(){
       this.isWeatherRestricted = fish.conditions.weatherSet.length != 0;
       this.bait = _(fish.bestCatchPath).map(x => new BaitEntry(x));
 
+      this.intuitionEntries = [];
+
       // Reference to DOM element in timeline table.
       this.timelineEl = null;
       // Reference to DOM element in schedule table.
       this.scheduleEl = null;
       // Reference to DOM element for more details.
       this.detailsEl = null;
+
+      this.availability = {
+        current: {
+          duration: null,
+          date: null
+        },
+        upcoming: {
+          duration: null,
+          date: null,
+          downtime: null,
+          prevdate: null
+        },
+        upcomingWindows: [],
+      };
+      this.isCatchable = false;
     }
 
     get uptime() { return this.data.uptime(); }
@@ -451,20 +679,88 @@ let FishTrain = function(){
         return null;
       }
     }
+
+    update(earthTime) {
+      let fish = this.data;
+      let crs = fish.catchableRanges;
+      this.isCatchable = fish.isCatchable(fishWatcher.fishEyesEnabled);
+
+      // The rest requires catchable ranges.
+      if (crs.length > 0) {
+        // Cache the dates, they are used A LOT.
+        let currStart = eorzeaTime.toEarth(+crs[0].start);
+        let currEnd = eorzeaTime.toEarth(+crs[0].end);
+        // NOTE: If it has one entry, it'll have 2...
+        if (crs.length < 2) {
+          console.error("Expected at least 2 catchable ranges for " + fish.name);
+          return;
+        }
+        let nextStart = eorzeaTime.toEarth(+crs[1].start);
+
+        if (dateFns.isAfter(currStart, earthTime)) {
+          // The fish is not currently available.
+          this.availability.current.duration =
+            "in " + dateFns.formatDistanceStrict(currStart, earthTime, { roundingMethod: 'floor' });
+          this.availability.current.date = currStart;
+        } else {
+          // The fish is currently available!
+          this.availability.current.duration =
+            "closes in " + dateFns.formatDistanceStrict(currEnd, earthTime, { roundingMethod: 'floor' });
+          this.availability.current.date = currEnd;
+        }
+        this.availability.upcoming.duration =
+          "in " + dateFns.formatDistanceStrict(nextStart, earthTime, { roundingMethod: 'floor' });
+
+        this.availability.upcoming.date = nextStart;
+        this.availability.upcoming.prevdate = currEnd;
+      }
+
+      for (let subEntry of this.intuitionEntries) {
+        subEntry.update(earthTime);
+      }
+    }
+  }
+
+  class IntuitionFishEntry extends FishEntry {
+    // TODO: If we are independently tracking this fish, have IntuitionFishEntry
+    // just point at the main FishEntry for that fish.
+
+    constructor(fish, intuitionForFish, count) {
+      super(fish);
+
+      this.intuitionCount = count;
+      this.intuitionFor = intuitionForFish;
+    }
   }
 
   class ScheduleEntry {
-    constructor(fish, opts={}) {
-      this.fish = fish;
+    constructor(fishEntry, opts={}) {
+      this.fishEntry = fishEntry;
       this.adjustable = true;
       if (opts.crsIdx !== null) {
         this.crsIdx = opts.crsIdx;
         this.adjustable = false;
       }
       if (opts.range !== null) {
+        // Generate a copy to prevent any kind of unintended mutation.
         this.range = Object.assign({}, opts.range);
       }
+      // DOM element hosting this entry in BAR.
       this.el = null;
+      // DOM element hosting this entry in LIST.
+      this.listEl = null;
+
+      this.intuitionEntries = [];
+    }
+  }
+
+  class ScheduleIntuitionEntry {
+    constructor(fishEntry) {
+      // This is the specific intuition requirement fish.
+      this.fishEntry = fishEntry;
+
+      // DOM element hosting this entry in LIST.
+      this.listEl = null;
     }
   }
 
@@ -480,6 +776,8 @@ let FishTrain = function(){
         scheduleIntervalMarkers: doT.template(templates.scheduleIntervalMarkers),
         scheduleFishEntry: doT.template(templates.scheduleFishEntry),
         baitInfo: doT.template(templates.baitInfo),
+        scheduleListEntry: doT.template(templates.scheduleListEntry),
+        scheduleListIntuitionEntry: doT.template(templates.scheduleListIntuitionEntry),
       };
     }
 
@@ -505,6 +803,8 @@ let FishTrain = function(){
         fish: [],
         intervals: [],
       };
+      this.timeline.start = dateFns.startOfMinute(new Date());
+      this.timeline.end = dateFns.addHours(this.timeline.start, 3);
 
       this.scheduleEntries = [];
 
@@ -543,6 +843,16 @@ let FishTrain = function(){
       this.fishTrainTableBody$ = $('table#fishtrain tbody');
       this.scheduleIntervalMarkers$ = $('.fishtrain-schedule .bar');
       this.scheduleFishEntries$ = $('.fishtrain-schedule .items');
+      this.scheduleListEntries$ = $('.fishtrain-schedule-list tbody');
+      this.scheduleBarCurrentTimeIndicator$ = $('.ui.fishtrain-schedule.segment .current-time-indicator');
+
+      $('#fishtrain-controls.ui.accordion').accordion({
+        exclusive: false,
+        onOpening: _(this.onOpeningControlSection).partial(this),
+        onClose: _(this.onCloseControlSection).partial(this),
+      })
+
+      $('#instructions.ui.accordion').accordion();
 
       $('.ui.dropdown').dropdown();
       $('#main-menu.dropdown').dropdown({
@@ -594,6 +904,15 @@ let FishTrain = function(){
 
       // We need to awake of resizing...
       $(window).resize(this, this.adjustTimelineDetailsElements);
+
+      // Configure react.
+      const { interval } = rxjs;
+      const { map, timestamp } = rxjs.operators;
+
+      interval(1000).pipe(
+        timestamp(),
+        map(e => { return {countdown: e.timestamp}})
+      ).subscribe(e =>  this.updateDisplay(e));
     }
 
     reinitCalendarFields(opts={}) {
@@ -601,8 +920,8 @@ let FishTrain = function(){
       var endDate = $('#rangeend').calendar('get date');
 
       if (startDate === null) {
-        startDate = dateFns.startOfMinute(new Date());
-        endDate = dateFns.addHours(startDate, 3);
+        startDate = this.timeline.start;
+        endDate = this.timeline.end;
       }
 
       $('#rangestart').calendar({
@@ -649,6 +968,7 @@ let FishTrain = function(){
       // Clear schedule
       _this.scheduleIntervalMarkers$.empty();
       _this.scheduleFishEntries$.empty();
+      _this.scheduleListEntries$.empty();
       _this.scheduleEntries = [];
 
       // Reinitialize the availability data and weather.
@@ -724,6 +1044,10 @@ let FishTrain = function(){
 
       console.timeEnd("Generate Timeline");
 
+      // Fix the size of the schedule bar as well.
+      let scheduleBarNode$ = $('.ui.fishtrain-schedule.segment .bar');
+      $('.ui.fishtrain-schedule.segment .current-time-indicator-bar').css('width', scheduleBarNode$[0].clientWidth);
+      $('.ui.fishtrain-schedule.segment .scroll-context').css('min-width', 28 + scheduleBarNode$[0].clientWidth);
       return;
     }
 
@@ -743,6 +1067,97 @@ let FishTrain = function(){
         // Just in case there's stale data here...
         entry.detailsEl = null;
       });
+    }
+
+    updateDisplay(reason = null) {
+      if (reason !== null && 'countdown' in reason) {
+        let timestamp = reason.countdown;
+
+        // Update the main header's times.
+        $('#eorzeaClock').text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(timestamp)), "HH:mm"));
+
+        // Update the current time bar in the schedule bar.
+        
+        if (this.scheduleFishEntries$.children().length > 0 &&
+            dateFns.isWithinInterval(timestamp, this.timeline))
+        {
+          let currentTimeOffset = dateFns.differenceInSeconds(timestamp, this.timeline.start);
+          this.scheduleBarCurrentTimeIndicator$.css('left', -100 + ((6/60) * currentTimeOffset));
+        } else {
+          this.scheduleBarCurrentTimeIndicator$.css('left', -1000);
+        }
+
+        _(this.scheduleEntries).each(entry => {
+          let scheduleEntry$ = $(entry.listEl);
+          // Has this record already expired (in the display?)
+          if (scheduleEntry$.hasClass('expired')) {
+            // Then there's nothing to do.
+            return;
+          }
+          // Update the data for this entry first.
+          entry.fishEntry.update(timestamp);
+          // Then apply changes to the view.
+          let currentAvail$ = $('.fish-availability-current', scheduleEntry$);
+          let hasExpired = false;
+
+          // Remove any loader element placeholders first.
+          $('.ui.loader', scheduleEntry$).remove();
+
+          // Update the "isActive" state for the fish based on the range.
+          if (dateFns.isWithinInterval(timestamp, entry.range)) {
+            scheduleEntry$.addClass('fish-active');
+          } else if (dateFns.isAfter(timestamp, entry.range.end)) {
+            scheduleEntry$.removeClass('fish-active').addClass('expired');
+            hasExpired = true;
+          }
+
+          // Update countdown information.
+          if (!hasExpired) {
+            let endDate = entry.range.start;
+            if (scheduleEntry$.hasClass('fish-active')) {
+              endDate = entry.range.end;
+            }
+            let countdownDuration = dateFns.intervalToDuration({start: timestamp, end: endDate});
+            currentAvail$
+              .attr('data-val', endDate)
+              .attr('data-tooltip', dateFns.format(endDate, 'Pp'))
+              .text(
+                (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ' +
+                formatDuration(countdownDuration));
+          } else {
+            currentAvail$.text("");
+          }
+
+          // Update any intuition fish rows as well!
+          for (let subEntry of entry.intuitionEntries) {
+            scheduleEntry$ = $(subEntry.listEl);
+            currentAvail$ = $('.fish-availability-current', scheduleEntry$);
+            // Remove any loader element placeholders first.
+            $('.ui.loader', scheduleEntry$).remove();
+            // If the main fish entry has expired, this is easy...
+            if (hasExpired) {
+              scheduleEntry$.removeClass('fish-active').addClass('expired');
+              currentAvail$.text("");
+            } else if (!subEntry.fishEntry.data.alwaysAvailable) {
+              // Then apply changes to the view.
+              // First, check if the fish's availability changed.
+              if (subEntry.fishEntry.isCatchable != scheduleEntry$.hasClass('fish-active')) {
+                scheduleEntry$.toggleClass('fish-active');
+              }
+              // Update countdown information.
+              let countdownDuration = dateFns.intervalToDuration({
+                start: timestamp,
+                end: subEntry.fishEntry.availability.current.date});
+              currentAvail$
+                .attr('data-val', subEntry.fishEntry.availability.current.date)
+                .attr('data-tooltip', dateFns.format(subEntry.fishEntry.availability.current.date, 'Pp'))
+                .text(
+                  (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ' +
+                  formatDuration(countdownDuration));
+            }
+          }
+        });
+      }
     }
 
     showDetailsInTimeline(e) {
@@ -787,6 +1202,11 @@ let FishTrain = function(){
       let _this = e.data;
       var scrollContext = $('#fishtrain').parent()[0];
       $('.fishtrain-fishentrydetails .contents').css('width', scrollContext.clientWidth);
+
+      // Fix the size of the schedule bar as well.
+      let scheduleBarNode$ = $('.ui.fishtrain-schedule.segment .bar');
+      $('.ui.fishtrain-schedule.segment .current-time-indicator-bar').css('width', scheduleBarNode$[0].clientWidth);
+      $('.ui.fishtrain-schedule.segment .scroll-context').css('min-width', 28 + scheduleBarNode$[0].clientWidth);
     }
 
     timelineFishEntryIntervalClicked(e) {
@@ -894,7 +1314,7 @@ let FishTrain = function(){
       // MAKE SURE YOU HAVEN'T ALREADY ADDED THIS ENTRY TO THE BAR!!!
       // For now, we're just going to prevent users from adding the same fish twice
       if (_(_this.scheduleEntries).find(
-        entry => entry.fish.id == _this.currentSelection.entry.id))
+        entry => entry.fishEntry.id == _this.currentSelection.entry.id))
       {
         // That fish is already in the schedule.
         $('body').toast({
@@ -913,17 +1333,65 @@ let FishTrain = function(){
         id: _this.currentSelection.entry.id,
         crsIdx: _this.currentSelection.crsIdx,
       };
-      var scheduleEntry$ =
-        $(_this.templates.scheduleFishEntry(viewParams)).appendTo(_this.scheduleFishEntries$);
 
       // Add to the list
       var scheduleEntry = new ScheduleEntry(_this.currentSelection.entry, {
         crsIdx: _this.currentSelection.crsIdx,
         range: _this.currentSelection.range
       });
+
+      var scheduleEntry$ =
+        $(_this.templates.scheduleFishEntry(viewParams)).appendTo(_this.scheduleFishEntries$);
       scheduleEntry.el = scheduleEntry$[0];
       scheduleEntry$.data('model', scheduleEntry);
-      _this.scheduleEntries.push(scheduleEntry);
+
+      // Adding to the schedule list requires sorting
+      // Maybe this should be done later?  They're going to age off though,
+      // just sort and add now.
+      // Sort based on WHEN the window begins for this list.
+      var insertAtIdx = _(_this.scheduleEntries).sortedIndex(
+        scheduleEntry, e => e.range.start);
+      var scheduleListEntry$ =
+        $(_this.templates.scheduleListEntry(scheduleEntry));
+      scheduleEntry.listEl = scheduleListEntry$[0];
+      scheduleListEntry$.data('model', scheduleEntry);
+      // Next, select the item that will be AFTER this (if there will be any)
+      // We need to do this because the number of rows in the list varies if the fish
+      // has intuition requirements.
+      if (_this.scheduleEntries.length == insertAtIdx) {
+        // Already at the end, so it's easy!
+        scheduleListEntry$.appendTo(_this.scheduleListEntries$);
+        _this.scheduleEntries.push(scheduleEntry);
+      } else {
+        // Not quite so easy, but still manageable.
+        scheduleListEntry$.insertBefore($(_this.scheduleEntries[insertAtIdx].listEl));
+        _this.scheduleEntries.splice(insertAtIdx, 0, scheduleEntry);
+      }
+
+      if (_this.settings.theme === 'dark') {
+        $('*[data-tooltip]', scheduleListEntry$).attr('data-inverted', '');
+      }
+
+      if (scheduleEntry.fishEntry.intuitionEntries.length > 0) {
+        // Include the intuition entries next.
+        var intuitionEntries$ = $();
+        _(scheduleEntry.fishEntry.intuitionEntries).each(entry => {
+          // Create a new schedule list intuition entry for this fish.
+          var subEntry = new ScheduleIntuitionEntry(entry);
+          var subEntry$ = $(_this.templates.scheduleListIntuitionEntry(subEntry));
+          subEntry.listEl = subEntry$[0];
+          subEntry$.data('model', subEntry);
+          scheduleEntry.intuitionEntries.push(subEntry);
+          intuitionEntries$ = intuitionEntries$.add(subEntry$);
+          if (_this.settings.theme === 'dark') {
+            $('*[data-tooltip]', subEntry$).attr('data-inverted', '');
+          }
+        });
+        // Insert these AFTER the main entry for the fish. Lucky for us, they won't be moving around.
+        intuitionEntries$.insertAfter(scheduleListEntry$);
+      }
+
+      console.log("Added entry to schedule:", scheduleEntry);
     }
 
     removeSelectionFromSchedule(e) {
@@ -938,7 +1406,11 @@ let FishTrain = function(){
       _this.scheduleEntries.splice(
         _this.scheduleEntries.findIndex((x) => x === _this.selectedScheduleEntry ), 1);
       $(_this.selectedScheduleEntry.el).remove();
-
+      $(_this.selectedScheduleEntry.listEl).remove();
+      for (let subEntry in _this.selectedScheduleEntry.intuitionEntries) {
+        $(_this.selectedScheduleEntry.intuitionEntries[subEntry].listEl).remove();
+        delete _this.selectedScheduleEntry.intuitionEntries[subEntry];
+      }
       // Clean up.
       delete _this.selectedScheduleEntry;
       _this.selectedScheduleEntry = null;
@@ -966,7 +1438,7 @@ let FishTrain = function(){
       _this.selectedScheduleEntry = scheduleEntry;
 
       // Update the contents for the popup.
-      $('#schedule-entry-details .header').text(scheduleEntry.fish.data.name);
+      $('#schedule-entry-details .header').text(scheduleEntry.fishEntry.data.name);
       var content$ = $('#schedule-entry-details .content');
       $('.window-start', content$)
         .text(dateFns.format(scheduleEntry.range.start, 'p'));
@@ -976,10 +1448,10 @@ let FishTrain = function(){
         .text(dateFns.format(scheduleEntry.range.end, 'p'));
       $('.window-end-ingame', content$)
         .text(dateFns.format(eorzeaTime.toEorzea(scheduleEntry.range.end), 'HH:mm'));
-      var location = scheduleEntry.fish.data.location;
+      var location = scheduleEntry.fishEntry.data.location;
       $('.location-name', content$)
         .text(`${location.name} - ${location.zoneName} (${location.coords[0].toFixed(1)}, ${location.coords[1].toFixed(1)})`);
-      $('.bait-info', content$).html(_this.templates.baitInfo(scheduleEntry.fish));
+      $('.bait-info', content$).html(_this.templates.baitInfo(scheduleEntry.fishEntry));
 
       scheduleEntry$.popup({
         popup: '#schedule-entry-details',
@@ -1051,10 +1523,26 @@ let FishTrain = function(){
       // Add the new entry to the set of tracked fish entry.
       this.fishEntries[fish.id] = entry;
 
+      // Check if this fish has intuition requirements.
+      for (let intuitionFish of fish.intuitionFish) {
+        let intuitionFishEntry = new IntuitionFishEntry(
+          intuitionFish.data, fish, intuitionFish.count);
+        intuitionFishEntry.active = true;
+        // Initially, FishWatcher only determined if this fish /would/ be up.
+        // It doesn't necessarily compute the ranges.
+        fishWatcher.reinitRangesForFish(intuitionFish.data, {earthTime: earthTime});
+        // Unlike normal entries, this only gets added to the parent fish.
+        entry.intuitionEntries.push(intuitionFishEntry);
+      }
+
       return entry;
     }
 
     removeEntry(entry, k) {
+      // Remove intuition entries as well.
+      for (let subEntry in entry.intuitionEntries) {
+        delete entry.intuitionEntries[subEntry];
+      }
       delete this.fishEntries[k];
     }
 
@@ -1147,7 +1635,33 @@ let FishTrain = function(){
       _this.settings.sortingType = sortingType;
       _this.saveSettings();
     }
-  
+
+    onOpeningControlSection(_this) {
+      console.debug("Opening control section:", this[0]);
+
+      if (SCHEDULE_LIST_AND_BAR_MUTUALLY_EXCLUSIVE) {
+        // While the user may have multiple control sections active, the schedule
+        // bar and detail list sections are mutually exclusive.
+        if (this.data('controlname') === 'schedulebar') {
+          $('#fishtrain-controls').accordion('close', 1);
+        } else if (this.data('controlname') === 'schedulelist') {
+          $('#fishtrain-controls').accordion('close', 2);
+        }
+      }
+
+      return;
+    }
+
+    onCloseControlSection(_this) {
+      // After closing the configuration control, update the title details with
+      // a one-line description of the settings.
+      console.debug("Closed control section:", this);
+      if ($(this).data('controlname') === 'configuration') {
+        $(this).prev('.title').find('.inactive-details').text(
+          `${dateFns.format(_this.timeline.start, 'Pp')} - ${dateFns.format(_this.timeline.end, 'Pp')} (${_this.settings.timelineInterval} minute intervals)`);
+      }
+    }
+
     themeButtonClicked(e) {
       if (e) e.stopPropagation();
       let $this = $(this);
@@ -1181,6 +1695,7 @@ let FishTrain = function(){
       $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
       $('.ui.dropdown').toggleClass('inverted', theme === 'dark');
       $('.ui.input').toggleClass('inverted', theme === 'dark');
+      $('.ui.accordion').toggleClass('inverted', theme === 'dark');
 
       $('.ui.calendar').toggleClass('inverted', theme === 'dark');
       this.reinitCalendarFields();

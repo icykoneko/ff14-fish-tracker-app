@@ -20,7 +20,9 @@ body.dark .ui.table tbody tr td.selectable:hover {
   color: hsla(0, 0%, 90%, 0.87) !important;
 }
 
-body.dark .ui.table {
+body.dark .ui.table,
+body.dark .ui.table tr,
+body.dark .ui.table tr td:not(.active):not(.focus):not(.disabled) {
   color: hsla(0, 0%, 90%, 0.87) !important;
 }
 
