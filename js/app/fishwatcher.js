@@ -6,13 +6,16 @@ class FishWatcher {
     this.fishEyesEnabled = false;
     this.fishEyesChanged = new rxjs.BehaviorSubject(this.fishEyesEnabled);
 
+    // Placeholder for fishEntries.
+    this.fishEntries = null;
+
     // IMPORTANT!!!
     // The new view model does not regenerate templates every time. This means
     // we MUST NOT RACE the view model! We'll still schedule the updateFishes
     // function for every new bell, but let the view model do it please...
   }
 
-  setFishEyes(enabled) {
+  setFishEyes(enabled, opts = {}) {
     // Make sure it'll actually cause a change first...
     if (this.fishEyesEnabled === enabled) {
       return;
@@ -38,7 +41,7 @@ class FishWatcher {
     // STEP 2: Toggle "Fish Eyes" mode.
     this.fishEyesEnabled = enabled;
     // STEP 3: Rebuild catch windows.
-    this.updateFishes();
+    this.updateFishes(opts);
 
     // Notify others of the change.
     this.fishEyesChanged.next(enabled);
@@ -57,7 +60,7 @@ class FishWatcher {
     }
   }
 
-  updateFishes() {
+  updateFishes(opts = {}) {
     console.info("FishWatcher is considering updating fishies >< c> |o.o)>");
     console.time('updateFishes');
 
@@ -68,16 +71,24 @@ class FishWatcher {
     // - Due to this optimization, some fish may go out of scope and miss
     //   getting windows assigned to them.
 
-    let trackedFish = _(ViewModel.fishEntries).reduce((acc, curr) => {
+    let trackedFish = _(this.fishEntries).reduce((acc, curr) => {
       acc.push(curr.data);
       _(curr.data.intuitionFish).each(e => acc.push(e.data));
       return acc;
     }, []);
 
+    var eDate = null;
+    // Allow for time override...
+    if (opts.earthTime !== undefined) {
+      eDate = eorzeaTime.toEorzea(opts.earthTime);
+    } else if (opts.eorzeaTime !== undefined) {
+      eDate = opts.eorzeaTime;
+    } else {
+      eDate = eorzeaTime.getCurrentEorzeaDate();
+    }
 
     // CLEANUP PHASE:
     //   Remove expired windows first.
-    var eDate = eorzeaTime.getCurrentEorzeaDate();
     console.time('cleanupFish');
     for (let fish of trackedFish) {
       // SAFEGUARD: Consume /all/ expired entries.
@@ -97,19 +108,28 @@ class FishWatcher {
       if (this._isFishAlwaysUp(fish)) { continue; }
       if (fish.catchableRanges.length >= this.maxWindows) { continue; }
       // Okay, update it please.
-      this.updateRangesForFish(fish);
+      this.updateRangesForFish(fish, eDate);
     }
     console.timeEnd('updateRanges');
 
     console.timeEnd('updateFishes');
   }
 
-  reinitRangesForFish(fish) {
+  reinitRangesForFish(fish, opts = {}) {
     // Support function to create, or reintegrate a fish into tracking.
+
+    var eDate = null;
+    // Allow for time override...
+    if (opts.earthTime !== undefined) {
+      eDate = eorzeaTime.toEorzea(opts.earthTime);
+    } else if (opts.eorzeaTime !== undefined) {
+      eDate = opts.eorzeaTime;
+    } else {
+      eDate = eorzeaTime.getCurrentEorzeaDate();
+    }
 
     // CLEANUP PHASE:
     //   Remove expired windows first.
-    var eDate = eorzeaTime.getCurrentEorzeaDate();
     while (fish.catchableRanges.length > 0 &&
         dateFns.isSameOrAfter(eDate, fish.catchableRanges[0].end)) {
       // Remove the first entry from the array.
@@ -123,12 +143,12 @@ class FishWatcher {
       if (this._isFishAlwaysUp(fish)) { break; }
       if (fish.catchableRanges.length >= this.maxWindows) { break; }
       // Okay, update it please.
-      this.updateRangesForFish(fish);
+      this.updateRangesForFish(fish, eDate);
     } while (0);
 
   }
 
-  updateRangesForFish(fish) {
+  updateRangesForFish(fish, baseTime) {
     // Need to know if the last range could span periods.
     var lastRangeSpansPeriods = false;
 
@@ -158,7 +178,7 @@ class FishWatcher {
       }
     } else {
       // Use the current date as the start time (first run)
-      startOfWindow = eorzeaTime.getCurrentEorzeaDate();
+      startOfWindow = baseTime;
     }
 
     // Create a new iterator with no limit to get periods with favorable weather.
@@ -176,7 +196,7 @@ class FishWatcher {
         break;
       }
       lastRangeSpansPeriods =
-        this.__checkToAddCatchableRange(fish, _iterItem.value);
+        this.__checkToAddCatchableRange(fish, _iterItem.value, baseTime);
     }
     weatherService.finishedWithIter();
 
@@ -195,18 +215,18 @@ class FishWatcher {
       weatherService.finishedWithIter();
       if (_iterItem.done) { break; }
       lastRangeSpansPeriods =
-        this.__checkToAddCatchableRange(fish, _iterItem.value);
+        this.__checkToAddCatchableRange(fish, _iterItem.value, baseTime);
     }
   }
 
-  __checkToAddCatchableRange(fish, window) {
+  __checkToAddCatchableRange(fish, window, baseTime) {
     // Found a time period where the weather is favorable. Now check if the
     // fish is even up. This really should be the other way around -_-
     // ^^ Who's laughing now? *puts on Fish Eyes shades*
     let spansPeriods = undefined;
     var nextRanges = fish.availableRangeDuring(window, this.fishEyesEnabled);
     for (var nextRange of nextRanges) {
-      spansPeriods = this.__checkToAddCatchableRangeInner(fish, window, nextRange);
+      spansPeriods = this.__checkToAddCatchableRangeInner(fish, window, nextRange, baseTime);
       // If will span periods, we need to double-check if we've already found enough
       // windows. If not, this will cause an infinite loop because of the late
       // side of the fish's window spanning periods.
@@ -219,14 +239,14 @@ class FishWatcher {
     return spansPeriods;
   }
 
-  __checkToAddCatchableRangeInner(fish, window, nextRange) {
+  __checkToAddCatchableRangeInner(fish, window, nextRange, baseTime) {
     if (!dateFns.areIntervalsOverlapping(window, nextRange)) {
       // Oops, this is why you need to optimize this...
       return false;
     }
     // SAFEGUARD! Verify this range hasn't already expired!!!
     // This is more here to prevent any future stupidity...
-    if (dateFns.isSameOrBefore(nextRange.end, eorzeaTime.getCurrentEorzeaDate())) {
+    if (dateFns.isSameOrBefore(nextRange.end, baseTime)) {
       //console.error("Range has already expired:", nextRange.simpleFormat());
       return false;
     }
@@ -282,7 +302,7 @@ class FishWatcher {
         var predRanges = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
         for (var predRange of predRanges) {
           if (!dateFns.areIntervalsOverlapping(predWindow, predRange)) { continue /*nextRange = null*/; }
-          if (dateFns.isSameOrBefore(predRange.end, eorzeaTime.getCurrentEorzeaDate())) {
+          if (dateFns.isSameOrBefore(predRange.end, baseTime)) {
             continue /*nextRange = null*/;
           }
           // Because of the "intuition window" being added, we need to re-constrain the predRange.

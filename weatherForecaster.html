@@ -406,6 +406,9 @@
           $("#eorzeaClock").text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(x.timestamp)), "HH:mm"));
         });
 
+        // Initialize the weather service.
+        weatherService.initializeWeatherTracking();
+
         $nextWindows = $("#nextWindows");
         $nextWindowsLabel = $("#nextWindowsLabel");
         var weatherWindowsTemplate = doT.template($('#weatherWindows-template').text());

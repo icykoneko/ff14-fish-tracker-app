@@ -1,3 +1,15 @@
+var __isFishPinned = (x) => false;
+var __includeVerySoonBin = true;
+
+function configureSorters(opts={}) {
+  if (opts.isFishPinned) {
+    __isFishPinned = opts.isFishPinned;
+  }
+  if (opts.includeVerySoonBin !== undefined) {
+    __includeVerySoonBin = opts.includeVerySoonBin;
+  }
+}
+
 let Sorters = function() {
   function shouldLog(a, b) {
     //fishes = _([a,b]).map((x) => x.name);
@@ -68,8 +80,8 @@ let Sorters = function() {
   function sortByOverallRarity(a, b, baseTime) {
     var result = 0;
     // PINNED FISH ALWAYS COME FIRST!!!
-    var pinnedA = ViewModel.isFishPinned(a.id) ? -1 : 1;
-    var pinnedB = ViewModel.isFishPinned(b.id) ? -1 : 1;
+    var pinnedA = __isFishPinned(a.id) ? -1 : 1;
+    var pinnedB = __isFishPinned(b.id) ? -1 : 1;
     result = compare(pinnedA, pinnedB);
     if (result != 0) {
       return result;
@@ -101,17 +113,19 @@ let Sorters = function() {
         "\n", b.name, isFishUpNow(b, baseTime));
     if (result != 0) return result;
 
-    // If both fish are now up yet, is one of them going to be up soon?
-    if (!isFishUpNow(a, baseTime)) {
-      var aUpSoon = isUpVerySoon(a, baseTime);
-      var bUpSoon = isUpVerySoon(b, baseTime);
-      result = compare(aUpSoon ? -1 : 1,
-                        bUpSoon ? -1 : 1);
-      if (shouldLog(a, b))
-        console.log("Comparing 'is up very soon':", winner(a,b,result), +dateFns.addMinutes(baseTime, 15),
-          "\n", a.name, aUpSoon, a.getNextWindow(fishWatcher.fishEyesEnabled),
-          "\n", b.name, bUpSoon, b.getNextWindow(fishWatcher.fishEyesEnabled));
-      if (result != 0) return result;
+    if (__includeVerySoonBin) {
+      // If both fish are now up yet, is one of them going to be up soon?
+      if (!isFishUpNow(a, baseTime)) {
+        var aUpSoon = isUpVerySoon(a, baseTime);
+        var bUpSoon = isUpVerySoon(b, baseTime);
+        result = compare(aUpSoon ? -1 : 1,
+                          bUpSoon ? -1 : 1);
+        if (shouldLog(a, b))
+          console.log("Comparing 'is up very soon':", winner(a,b,result), +dateFns.addMinutes(baseTime, 15),
+            "\n", a.name, aUpSoon, a.getNextWindow(fishWatcher.fishEyesEnabled),
+            "\n", b.name, bUpSoon, b.getNextWindow(fishWatcher.fishEyesEnabled));
+        if (result != 0) return result;
+      }
     }
 
     // If both are in the same state, compare by rarity (shorter comes first)
@@ -122,10 +136,9 @@ let Sorters = function() {
         "\n", b.name, bUptime);
     if (result != 0) return result;
 
-    // If both are the same, the fish with the longer time till next window
-    // comes first.
-    result = compare(getWindowStart(bRanges, 1) || 0,
-                      getWindowStart(aRanges, 1) || 0);
+    // If both are the same, the fish whose window comes sooner comes first.
+    result = compare(getWindowStart(aRanges, 1) || 0,
+                      getWindowStart(bRanges, 1) || 0);
     if (shouldLog(a, b))
       console.log("Comparing time till next window:", winner(a,b,result),
         "\n", a.name, getWindowStart(aRanges, 1),
@@ -150,8 +163,8 @@ let Sorters = function() {
   function sortByWindowPeriods(a, b, baseTime) {
     var result = 0;
     // PINNED FISH ALWAYS COME FIRST!!!
-    var pinnedA = ViewModel.isFishPinned(a.id) ? -1 : 1;
-    var pinnedB = ViewModel.isFishPinned(b.id) ? -1 : 1;
+    var pinnedA = __isFishPinned(a.id) ? -1 : 1;
+    var pinnedB = __isFishPinned(b.id) ? -1 : 1;
     result = compare(pinnedA, pinnedB);
     if (result != 0) {
       return result;
