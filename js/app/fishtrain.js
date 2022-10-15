@@ -80,11 +80,11 @@ let FishTrain = function(){
   }
 
 
-  function formatDuration(duration) {
-    if (duration.years || duration.months || duration.days) {
-      return ""; // shouldn't even be running if its that far off...
+  function formatDuration(duration, prefix, date) {
+    if (duration.years || duration.months || duration.days || duration.hours > 4) {
+      return dateFns.format(date, 'Pp');
     }
-    return `${duration.hours}:${String(duration.minutes).padStart(2, '0')}:${String(duration.seconds).padStart(2, '0')}`;
+    return `${prefix}${duration.hours}:${String(duration.minutes).padStart(2, '0')}:${String(duration.seconds).padStart(2, '0')}`;
   }
 
   var sub_templates = {
@@ -385,21 +385,8 @@ let FishTrain = function(){
         </td>
         <!-- Availability (only displayed while fish is available) -->
         <td class="fish-availability">
-          {{?it.data.alwaysAvailable && it.data.dataMissing !== false}}
-            {{?it.data.dataMissing.timeRestricted || it.data.dataMissing.weatherRestricted}}
-              <i class="question circle outline icon"></i> Unknown
-            {{??}}
-              Always
-            {{?}}
-          {{??it.data.alwaysAvailable && it.data.dataMissing === false}}
-            Always
-          {{??!it.data.alwaysAvailable}}
-            {{?it.data.dataMissing !== false}}
-              <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-            {{?}}
-            <div class="ui active slow tiny inline loader inverted"></div>
-            <span class="fish-availability-current" data-val="{{=schedEntry.range.start}}" data-tooltip="{{var d = schedEntry.range.start; if (d) { out += dateFns.format(d, 'Pp'); } }}"></span>
-          {{?}}
+          <div class="ui active slow tiny inline loader inverted"></div>
+          <span class="fish-availability-current" data-val="{{=schedEntry.range.start}}" data-tooltip="{{var d = schedEntry.range.start; if (d) { out += dateFns.format(d, 'Pp'); } }}"></span>
         </td>
         <!-- Location -->
         <td class="fish-location">
@@ -786,6 +773,56 @@ let FishTrain = function(){
         subEntry.update(earthTime);
       }
     }
+
+    updateLanguage() {
+      // Handle text in TIMELINE view.
+      if (this.timelineEl !== null) {
+        this.updateLanguageForNode(this, $(this.timelineEl));
+        for (let subEntry of this.intuitionEntries) {
+          this.updateLanguageForNode(subEntry, $(subEntry.timelineEl));
+        }
+      }
+      // Handle text in DETAILS view.
+      if (this.detailsEl !== null) {
+        this.updateLanguageForNode(this, $(this.detailsEl));
+      }
+    }
+
+    updateLanguageForNode(fishEntry, $node) {
+      // Just about all of the displays use the same fields and classes.
+      // jQuery's selectors will let us get away with issues where a selector matches nothing.
+      $('.fish-name', $node)
+        .attr('href', fishEntry.getExternalLink())
+        .text(fishEntry.data.name);
+      if (fishEntry.data.folklore !== null) {
+        $('.sprite-icon-folklore', $node).attr(
+          'data-tooltip', __p(DATA.FOLKLORE[fishEntry.data.folklore], 'name'));
+      }
+      $('.location-name', $node).text(fishEntry.data.location.name);
+      $('.zone-name', $node).text(fishEntry.data.location.zoneName);
+      $('.weather-icon', $node).each((nodeIdx, elem) => {
+        let $elem = $(elem);
+        let idx = $elem.attr('data-prevWeatherIdx');
+        if (idx !== undefined) {
+          $elem.attr('title',
+            __p(fishEntry.data.conditions.previousWeatherSet[idx], 'name'));
+        } else {
+          idx = $elem.attr('data-currWeatherIdx');
+          if (idx !== undefined) {
+            $elem.attr('title',
+              __p(fishEntry.data.conditions.weatherSet[idx], 'name'));
+          }
+        }
+      });
+      $('.bait-icon', $node).each((nodeIdx, elem) => {
+        let $elem = $(elem);
+        let idx = $elem.attr('data-baitIdx');
+        if (idx !== undefined) {
+          // NOTE: BaitEntry automatically returns the correct language name.
+          $elem.attr('title', fishEntry.bait[idx].name);
+        }
+      });
+    }
   }
 
   class IntuitionFishEntry extends FishEntry {
@@ -818,6 +855,17 @@ let FishTrain = function(){
       this.listEl = null;
 
       this.intuitionEntries = [];
+    }
+
+    updateLanguage() {
+      // Handle text in LIST view.
+      if (this.listEl !== null) {
+        this.fishEntry.updateLanguageForNode(this.fishEntry, $(this.listEl));
+        for (let subEntry of this.intuitionEntries) {
+          subEntry.fishEntry.updateLanguageForNode(subEntry.fishEntry, $(subEntry.listEl));
+        }
+      }
+      // Nothing to fix for BAR view.
     }
   }
 
@@ -986,14 +1034,7 @@ let FishTrain = function(){
       }
 
       // Configure react.
-      const { interval } = rxjs;
-      const { map, timestamp } = rxjs.operators;
-
-      interval(1000).pipe(
-        timestamp(),
-        map(e => { return {countdown: e.timestamp}})
-      ).subscribe(e =>  this.updateDisplay(e));
-
+      this.initReact();
     }
 
     addToScheduleList(fishEntry, crsIdx, range) {
@@ -1122,12 +1163,65 @@ let FishTrain = function(){
       $(window).resize(this, this.adjustTimelineDetailsElements);
 
       // Configure react.
-      const { interval } = rxjs;
-      const { map, timestamp } = rxjs.operators;
+      this.initReact();
+    }
 
-      interval(1000).pipe(
-        timestamp(),
-        map(e => { return {countdown: e.timestamp}})
+    initReact() {
+      const { Subject, BehaviorSubject, merge, interval } = rxjs;
+      const { buffer, debounceTime, map, filter, skip, timestamp } = rxjs.operators;
+
+      if (!I_AM_A_PASSENGER) {
+        this.filterExtraSubject = new BehaviorSubject(this.settings.filters.extra);
+        this.filterPatchSubject = new BehaviorSubject(this.settings.filters.patch);
+        this.sortingTypeSubject = new BehaviorSubject(this.settings.sortingType);
+      } else {
+        // These are unused as a passenger.
+        this.filterExtraSubject = new Subject();
+        this.filterPatchSubject = new Subject();
+        this.sortingTypeSubject = new Subject();
+      }
+
+      const filterPatch$ = this.filterPatchSubject.pipe(
+        skip(1),
+        debounceTime(250),
+        map(e => { return {filterPatch: e} })
+      );
+      const filterExtra$ = this.filterExtraSubject.pipe(
+        skip(1),
+        debounceTime(250),
+        map(e => { return {filterExtra: e} })
+      );
+      const sortingType$ = this.sortingTypeSubject.pipe(
+        skip(1),
+        debounceTime(250),
+        map(e => { return {sortingType: e} })
+      );
+      const language$ = localizationHelper.languageChanged.pipe(
+        skip(1),
+        map(e => { return {language: e} })
+      );
+
+      const updateDisplaySources$ = merge(
+        filterPatch$,
+        filterExtra$,
+        sortingType$,
+        language$);
+
+      merge(
+        interval(1000).pipe(
+          timestamp(),
+          map(e => { return {countdown: e.timestamp} })
+        ),
+        updateDisplaySources$.pipe(
+          buffer(updateDisplaySources$.pipe(debounceTime(250))),
+          filter(x => x.length > 0),
+          map(e => {
+            // Combine these into a single object.
+            return e.reduce((acc, curr) => {
+              return Object.assign(acc, curr);
+            }, {});
+          })
+        )
       ).subscribe(e =>  this.updateDisplay(e));
     }
 
@@ -1288,6 +1382,7 @@ let FishTrain = function(){
     }
 
     updateDisplay(reason = null) {
+      // The `countdown` reason is ALWAYS sent alone (due to how merge works).
       if (reason !== null && 'countdown' in reason) {
         let timestamp = reason.countdown;
 
@@ -1347,9 +1442,10 @@ let FishTrain = function(){
             currentAvail$
               .attr('data-val', endDate)
               .attr('data-tooltip', dateFns.format(endDate, 'Pp'))
-              .text(
-                (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ' +
-                formatDuration(countdownDuration));
+              .text(formatDuration(
+                countdownDuration,
+                (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ',
+                endDate));
           } else {
             currentAvail$.text("");
           }
@@ -1377,12 +1473,25 @@ let FishTrain = function(){
               currentAvail$
                 .attr('data-val', subEntry.fishEntry.availability.current.date)
                 .attr('data-tooltip', dateFns.format(subEntry.fishEntry.availability.current.date, 'Pp'))
-                .text(
-                  (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ' +
-                  formatDuration(countdownDuration));
+                .text(formatDuration(
+                  countdownDuration,
+                  (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ',
+                  endDate));
             }
           }
         });
+        return;
+      }
+
+      // For all other reasons, we first need a base timestamp.
+      let timestamp = Date.now();
+
+      if (reason !== null && 'language' in reason) {
+        // First, apply localization to EVERY fish belonging to an active fishEntry!
+        _(this.fishEntries).each(entry => entry.data.applyLocalization());
+        // Then, you can iterate over the fishEntries and scheduleEntries.
+        _(this.fishEntries).each(entry => entry.updateLanguage());
+        _(this.scheduleEntries).each(entry => entry.updateLanguage());
       }
     }
 
