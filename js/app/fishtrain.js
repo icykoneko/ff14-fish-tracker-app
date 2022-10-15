@@ -356,7 +356,7 @@ let FishTrain = function(){
     // 'fish-template' format. I really need to unify all of these...
     scheduleListEntry:
      `{{ var schedEntry = it; it = schedEntry.fishEntry; }}
-      <tr class="scheduled-fish-entry fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}} data-id="{{=it.id}}">
+      <tr class="scheduled-fish-entry fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}}" data-id="{{=it.id}}">
         <td class="fish-icon-and-name collapsing">
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
           <div class="ui middle aligned" style="display: inline-block;">
@@ -966,16 +966,8 @@ let FishTrain = function(){
       this.departureMessage$ = $('#departure-message');
       this.departureCountdown$ = $('#departure-message .departure-countdown');
 
-      // Minimal UI initialization.
-      $('.ui.dropdown').dropdown();
-      $('#main-menu.dropdown').dropdown({
-        action: 'hide'
-      });
-      $('#languageChoice.dropdown')
-      .dropdown('set selected', localizationHelper.getLanguage())
-      .dropdown({
-        onChange: (value, text, $choice) => localizationHelper.setLanguage(value),
-      });
+      this.initCommonView();
+
       this.applyTheme(this.settings.theme);
       $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
 
@@ -1032,6 +1024,9 @@ let FishTrain = function(){
       for (const entry of trainPass.scheduleEntries) {
         this.addToScheduleList(entry.fishEntry, entry.crsIdx, entry.range);
       }
+
+      // Configure common event handlers.
+      this.initCommonEventHandlers();
 
       // Configure react.
       this.initReact();
@@ -1100,26 +1095,15 @@ let FishTrain = function(){
       this.scheduleListEntries$ = $('.fishtrain-schedule-list tbody');
       this.scheduleBarCurrentTimeIndicator$ = $('.ui.fishtrain-schedule.segment .current-time-indicator');
 
+      this.initCommonView();
       $('#fishtrain-controls.ui.accordion').accordion({
         exclusive: false,
         onOpening: _(this.onOpeningControlSection).partial(this),
         onOpen: _(this.onOpenControlSection).partial(this),
         onClose: _(this.onCloseControlSection).partial(this),
-
-      })
-
+      });
       $('#instructions.ui.accordion').accordion();
-
-      $('.ui.dropdown').dropdown();
-      $('#main-menu.dropdown').dropdown({
-        action: 'hide'
-      });
       $('.ui.radio.checkbox').checkbox();
-      $('#languageChoice.dropdown')
-      .dropdown('set selected', localizationHelper.getLanguage())
-      .dropdown({
-        onChange: (value, text, $choice) => localizationHelper.setLanguage(value),
-      });
       $('#sortingType .radio.checkbox').checkbox({
         onChecked: _(this.sortingTypeChecked).partial(this)
       });
@@ -1131,8 +1115,6 @@ let FishTrain = function(){
 
       // Calendar's are special... they need to be reinitialized to pick up inverted class.
       this.reinitCalendarFields();
-
-      $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
 
       $('#updateList').on('click', this, this.updateList);
       $('#generatePass').on('click', this, this.generateTrainPass);
@@ -1162,8 +1144,31 @@ let FishTrain = function(){
       // We need to awake of resizing...
       $(window).resize(this, this.adjustTimelineDetailsElements);
 
+      // Configure common event handlers.
+      this.initCommonEventHandlers();
+
       // Configure react.
       this.initReact();
+    }
+
+    initCommonView() {
+      $('.ui.dropdown').dropdown();
+      $('#main-menu.dropdown').dropdown({
+        action: 'hide'
+      });
+      $('#languageChoice.dropdown')
+      .dropdown('set selected', localizationHelper.getLanguage())
+      .dropdown({
+        onChange: (value, text, $choice) => localizationHelper.setLanguage(value),
+      });
+
+      // Initialize the fishing spot location map modal.
+      FishingSpotMap.initialize();
+    }
+
+    initCommonEventHandlers() {
+      $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
+      $('body').on('click', '.location-button', this, this.onFishEntryShowLocationClicked);
     }
 
     initReact() {
@@ -1885,6 +1890,16 @@ let FishTrain = function(){
         delete entry.intuitionEntries[subEntry];
       }
       delete this.fishEntries[k];
+    }
+
+    onFishEntryShowLocationClicked(e) {
+      e.stopPropagation();
+      let $this = $(this);
+
+      let fishId = $this.closest('.fish-entry, .fishtrain-fishentry').data('id');
+      FishingSpotMap.displayMap(_(Fishes).findWhere({id: fishId}));
+
+      return false;
     }
 
     filterPatchClicked(e) {

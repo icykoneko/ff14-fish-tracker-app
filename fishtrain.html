@@ -66,7 +66,7 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20221015_1701"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20221015_1847"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="js/app/carbyutils.js?20220922_1828"></script>
 
@@ -169,6 +169,15 @@
           <div class="actions">
             <div class="ui red approve button">Remove from schedule</div>
           </div>
+        </div>
+      </div>
+
+      <div class="ui modal" id="fishingSpotMapModal">
+        <div class="content map-container">
+          <canvas height="2048" width="2048"></canvas>
+        </div>
+        <div class="ui active dimmer">
+          <div class="ui text loader">Loading Map...</div>
         </div>
       </div>
 
