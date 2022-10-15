@@ -10,8 +10,75 @@
 
 let FishTrain = function(){
 
+  // Workaround until we switch to FUI 2.9.
+  $.modal = $.fn.modal;
+
   // Not sure if I want to keep this feature, so we'll just do this.
   var SCHEDULE_LIST_AND_BAR_MUTUALLY_EXCLUSIVE = false;
+
+  // This controls whether the user is a passenger, or the conductor making the train.
+  // NOTE: For now, there's no special conductor mode besides the normal fish train page.
+  // When running the actual train, you should all use the passenger mode.
+  var I_AM_A_PASSENGER = false;
+
+  function decode(data) {
+    let MD5 = new Hashes.MD5;
+    let retval = {
+      timeline: {
+        start: null,
+        end: null,
+      },
+      scheduleEntries: []
+    };
+    let verAndCount = data.getUint8(0);
+    if ((verAndCount >> 6) != 0) {
+      console.error("Invalid data");
+      return null;
+    }
+    let startInMinutes = data.getUint32(0) & 0xFFFFFF;
+    let durationAndCsum = data.getUint32(4);
+    let totalEntries = verAndCount & 0x3F;
+    let durationInMinutes = (durationAndCsum >> 20);
+    let csum = durationAndCsum & 0xFFFFF;
+
+    let givenCsum = MD5.raw(data.buffer.slice(8)) & 0xFFFFF;
+
+    retval.timeline.start = new Date((startInMinutes + 0x1800000) * 60 * 1000);
+    retval.timeline.end = new Date(+retval.timeline.start + (durationInMinutes * 60 * 1000));
+
+    // Decode each entry.
+    for (let i = 0; i < totalEntries; i++) {
+      let fishId = data.getUint16(8 + (5 * i) + 0);
+      let crsIdxAndStartOffset = data.getUint16(8 + (5 * i) + 2);
+      let crsIdx = (crsIdxAndStartOffset >> 12) & 0xF;
+      let startOffset = crsIdxAndStartOffset & 0xFFF;
+      let duration = data.getUint8(8 + (5 * i) + 4);
+
+      let scheduleEntry = {
+        fishId: fishId,
+        crsIdx: crsIdx === 0xF ? null : crsIdx,
+        range: {
+          start: new Date(+retval.timeline.start + (startOffset * 60 * 1000)),
+          end: new Date(+retval.timeline.start + ((startOffset + duration) * 60 * 1000))
+        }
+      };
+      retval.scheduleEntries.push(scheduleEntry);
+    }
+
+    return retval;
+  }
+
+  function validatePass(passData) {
+    try {
+      let decodedPassData = new Uint8Array(JSON.parse('['+atob(passData)+']'));
+      return decode(new DataView(decodedPassData.buffer));
+    } catch(err) {
+      // Any error should just be ignored lol.
+      console.error(err);
+      return null;
+    }
+  }
+
 
   function formatDuration(duration) {
     if (duration.years || duration.months || duration.days) {
@@ -837,6 +904,152 @@ let FishTrain = function(){
       this.initializeView();
     }
 
+    initializeForPassenger() {
+      // TOGGLE PASSENGER MODE!!!
+      I_AM_A_PASSENGER = true;
+      // For now, we're just going to use dark mode.
+      this.settings = {
+        theme: 'dark',
+      }
+      this.scheduleEntries = [];
+
+      // Save certain DOM element references.
+      this.scheduleListEntries$ = $('.fishtrain-schedule-list tbody');
+      this.departureMessage$ = $('#departure-message');
+      this.departureCountdown$ = $('#departure-message .departure-countdown');
+
+      // Minimal UI initialization.
+      $('.ui.dropdown').dropdown();
+      $('#main-menu.dropdown').dropdown({
+        action: 'hide'
+      });
+      $('#languageChoice.dropdown')
+      .dropdown('set selected', localizationHelper.getLanguage())
+      .dropdown({
+        onChange: (value, text, $choice) => localizationHelper.setLanguage(value),
+      });
+      this.applyTheme(this.settings.theme);
+      $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
+
+      // Validate the rider's pass first of course.
+      let trainPass = validatePass(location.search.substr(1));
+
+      // If the pass isn't valid... well, you did something wrong.
+      if (trainPass === null) {
+        $.modal({
+          class: 'basic',
+          title: 'Invalid Pass',
+          closable: false,
+          content: '<p>The pass you tried to use was either invalid, expired, or not yet ready</p><p>Please check with your conductor.</p>'
+        }).modal('show');
+      } else {
+        // Initialize FishTrain tool using the pass.
+        this.redeemPass(trainPass);
+      }
+
+    }
+
+    redeemPass(trainPass) {
+      this.timeline = trainPass.timeline;
+      // Initialize the departure message, iif we're early.
+      if (dateFns.isBefore(Date.now(), this.timeline.start)) {
+        this.departureMessage$.addClass('visible');
+        this.departureMessage$.find('.departure-time-exact').text(dateFns.format(this.timeline.start, 'Pp'));
+        this.departureCountdown$.text(dateFns.formatDistance(Date.now(), this.timeline.start, {includeSeconds: true}));
+      }
+
+      // Here's where it starts to get tricky.
+      // Fish Watcher and Weather Service are still not active yet, and we need
+      // them. But first, we need to generate FishEntry's for all of the fish
+      // mentioned in the schedule entries.  Mind you, the entries in the pass
+      // are not real ScheduleEntry objects, but to make those, you need FishEntry
+      // objects. Look, it's gonna work out, trust the process.
+      this.fishEntries = {};
+      // Link it to the fishWatcher.
+      fishWatcher.fishEntries = this.fishEntries;
+
+      for (const entry of trainPass.scheduleEntries) {
+        let fish = _(Fishes).findWhere({id: entry.fishId});
+        let fishEntry = this.activateEntry(fish, +this.timeline.start);
+        entry.fishEntry = fishEntry;
+      }
+
+      // Let FishWatcher know it needs to reinit everything.
+      // This will calculate the catchable ranges of the next 10 windows.
+      // That will take care mostly of our intuition fish stuff, but they are managed
+      // by the IntuitionFishEntry update function anyways...
+      fishWatcher.updateFishes({earthTime: +this.timeline.start});
+
+      // Now to add our fishies to the schedule list.
+      for (const entry of trainPass.scheduleEntries) {
+        this.addToScheduleList(entry.fishEntry, entry.crsIdx, entry.range);
+      }
+
+      // Configure react.
+      const { interval } = rxjs;
+      const { map, timestamp } = rxjs.operators;
+
+      interval(1000).pipe(
+        timestamp(),
+        map(e => { return {countdown: e.timestamp}})
+      ).subscribe(e =>  this.updateDisplay(e));
+
+    }
+
+    addToScheduleList(fishEntry, crsIdx, range) {
+      // FIXME:
+      // This is kinda a duplicate of "addSelectionToSchedule", but I wanted
+      // it done quick. Clean up this mess later please.
+
+      // Create a REAL ScheduleEntry for this record.
+      let scheduleEntry = new ScheduleEntry(fishEntry, {
+        crsIdx: crsIdx,
+        range: range
+      });
+
+      // Determine where this entry goes in the list.
+      let insertAtIdx = _(this.scheduleEntries).sortedIndex(scheduleEntry, e => e.range.start);
+      var scheduleListEntry$ = $(this.templates.scheduleListEntry(scheduleEntry));
+      scheduleEntry.listEl = scheduleListEntry$[0];
+      scheduleListEntry$.data('model', scheduleEntry);
+
+      // Next, select the item that will be AFTER this (if there will be any)
+      // We need to do this because the number of rows in the list varies if the fish
+      // has intuition requirements.
+      if (this.scheduleEntries.length == insertAtIdx) {
+        // Already at the end, so it's easy!
+        scheduleListEntry$.appendTo(this.scheduleListEntries$);
+        this.scheduleEntries.push(scheduleEntry);
+      } else {
+        // Not quite so easy, but still manageable.
+        scheduleListEntry$.insertBefore($(this.scheduleEntries[insertAtIdx].listEl));
+        this.scheduleEntries.splice(insertAtIdx, 0, scheduleEntry);
+      }
+      if (this.settings.theme === 'dark') {
+        $('*[data-tooltip]', scheduleListEntry$).attr('data-inverted', '');
+      }
+      if (scheduleEntry.fishEntry.intuitionEntries.length > 0) {
+        // Include the intuition entries next.
+        var intuitionEntries$ = $();
+        _(scheduleEntry.fishEntry.intuitionEntries).each(entry => {
+          // Create a new schedule list intuition entry for this fish.
+          var subEntry = new ScheduleIntuitionEntry(entry);
+          var subEntry$ = $(this.templates.scheduleListIntuitionEntry(subEntry));
+          subEntry.listEl = subEntry$[0];
+          subEntry$.data('model', subEntry);
+          scheduleEntry.intuitionEntries.push(subEntry);
+          intuitionEntries$ = intuitionEntries$.add(subEntry$);
+          if (this.settings.theme === 'dark') {
+            $('*[data-tooltip]', subEntry$).attr('data-inverted', '');
+          }
+        });
+        // Insert these AFTER the main entry for the fish. Lucky for us, they won't be moving around.
+        intuitionEntries$.insertAfter(scheduleListEntry$);
+      }
+
+      return scheduleEntry;
+    }
+
     initializeView() {
       // Track certain DOM objects.
       this.fishTrainTableHeader$ = $('table#fishtrain thead tr').first();
@@ -881,6 +1094,7 @@ let FishTrain = function(){
       $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
 
       $('#updateList').on('click', this, this.updateList);
+      $('#generatePass').on('click', this, this.generateTrainPass);
 
       $('#filterPatch .button:not(.patch-set)').on({
         click: this.filterPatchClicked,
@@ -1048,6 +1262,10 @@ let FishTrain = function(){
 
       // Fix the size of the schedule bar as well.
       _this.updateScheduleBarScrollContextWidth();
+
+      // Disable the "Generate Train Pass" button too.
+      $('#generatePass.button').addClass('disabled');
+
       return;
     }
 
@@ -1076,15 +1294,23 @@ let FishTrain = function(){
         // Update the main header's times.
         $('#eorzeaClock').text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(timestamp)), "HH:mm"));
 
-        // Update the current time bar in the schedule bar.
-        
-        if (this.scheduleFishEntries$.children().length > 0 &&
-            dateFns.isWithinInterval(timestamp, this.timeline))
-        {
-          let currentTimeOffset = dateFns.differenceInSeconds(timestamp, this.timeline.start);
-          this.scheduleBarCurrentTimeIndicator$.css('left', -100 + ((6/60) * currentTimeOffset));
+        if (!I_AM_A_PASSENGER) {
+          // Update the current time bar in the schedule bar.
+          if (this.scheduleFishEntries$.children().length > 0 &&
+              dateFns.isWithinInterval(timestamp, this.timeline))
+          {
+            let currentTimeOffset = dateFns.differenceInSeconds(timestamp, this.timeline.start);
+            this.scheduleBarCurrentTimeIndicator$.css('left', -100 + ((6/60) * currentTimeOffset));
+          } else {
+            this.scheduleBarCurrentTimeIndicator$.css('left', -1000);
+          }
         } else {
-          this.scheduleBarCurrentTimeIndicator$.css('left', -1000);
+          // For passengers, we need to update the countdown to departure, or remove it.
+          if (dateFns.isBefore(timestamp, this.timeline.start)) {
+            this.departureCountdown$.text(dateFns.formatDistance(timestamp, this.timeline.start, {includeSeconds: true}));
+          } else {
+            this.departureMessage$.removeClass('visible');
+          }
         }
 
         _(this.scheduleEntries).each(entry => {
@@ -1389,6 +1615,9 @@ let FishTrain = function(){
         intuitionEntries$.insertAfter(scheduleListEntry$);
       }
 
+      // Finally, enable the "Generate Train Pass" button if it wasn't already.
+      $('#generatePass.button').removeClass('disabled');
+
       console.log("Added entry to schedule:", scheduleEntry);
     }
 
@@ -1412,6 +1641,11 @@ let FishTrain = function(){
       // Clean up.
       delete _this.selectedScheduleEntry;
       _this.selectedScheduleEntry = null;
+
+      // If there's nothing left in the schedule, disable the "Generate Train Pass" button.
+      if (_this.scheduleEntries.length == 0) {
+        $('#generatePass.button').addClass('disabled');
+      }
     }
 
     scheduleEntryClicked(e) {
@@ -1506,11 +1740,11 @@ let FishTrain = function(){
       if (this.fishEntries[fish.id]) {
         // There is, so just mark it as active and return.
         this.fishEntries[fish.id].active = true;
-        return;
+        return this.fishEntries[fish.id];
       }
 
       // Otherwise, we have to create a new entry for this fish.
-      this.createEntry(fish, earthTime);
+      return this.createEntry(fish, earthTime);
     }
 
     createEntry(fish, earthTime) {
@@ -1706,6 +1940,8 @@ let FishTrain = function(){
     }
 
     loadSettings() {
+      if (I_AM_A_PASSENGER) { return this.settings; }
+
       let settings = this.settings;
       // Load the user's settings from localStorage.
       // These settings are specific to the Fish Train Tool.
@@ -1727,6 +1963,8 @@ let FishTrain = function(){
     }
 
     applySettings(settings) {
+      if (I_AM_A_PASSENGER) { return this.settings; }
+
       if (!(settings.filters)) {
         // Why is `filters` missing?!
         console.warn("Why is filters missing??? Using default then...");
@@ -1792,6 +2030,8 @@ let FishTrain = function(){
     }
 
     saveSettings() {
+      if (I_AM_A_PASSENGER) { return; }
+
       // Save the site settings to localStorage.
       try {
         localStorage.fishTrainToolSettings =
@@ -1809,6 +2049,75 @@ let FishTrain = function(){
       let scheduleBarContainerNode$ = $('.ui.fishtrain-schedule.segment').parent();
       $('.ui.fishtrain-schedule.segment .scroll-context').css('width', Math.min(scheduleBarContainerNode$[0].clientWidth, scheduleBarNode$[0].clientWidth + 28));
     }
+
+    serializeSchedule() {
+      // Total number of fish must not exceed 63.
+      if (this.scheduleEntries.length > 63) {
+        console.warning("Schedule will be truncated");
+      }
+
+      let totalEntries = Math.min(this.scheduleEntries.length, 63);
+      let totalSize = 8 + (5 * totalEntries);
+      let output = new Uint8Array(totalSize);
+
+      output[0] = (totalEntries & 0x3F);
+      let startInMinutes = (this.timeline.start / 60 / 1000) - 0x1800000;
+      output[1] = ((startInMinutes >>> 16) & 0xFF);
+      output[2] = ((startInMinutes >>>  8) & 0xFF);
+      output[3] = ((startInMinutes       ) & 0xFF);
+
+      _(this.scheduleEntries).chain().first(63).each((e, i) => {
+        output[8 + (5 * i) + 0] = ((e.fishEntry.id >>> 8) & 0xFF);
+        output[8 + (5 * i) + 1] = ((e.fishEntry.id      ) & 0xFF);
+        let crsIdx = e.crsIdx !== undefined ? e.crsIdx & 0xF : 0xF;
+        let startOffset = dateFns.differenceInMinutes(e.range.start, this.timeline.start);
+        if (dateFns.isBefore(e.range.start, this.timeline.start)) {
+          // Truncate the start time or it will overflow. For the purposes of the train,
+          // the fish isn't shown as available until the train starts.
+          startOffset = 0;
+        }
+        output[8 + (5 * i) + 2] = (crsIdx << 4) + ((startOffset >>> 8) & 0x0F);
+        output[8 + (5 * i) + 3] = (startOffset & 0xFF);
+        output[8 + (5 * i) + 4] = dateFns.differenceInMinutes(e.range.end, e.range.start) & 0xFF;
+      });
+
+      let encodedOutput = btoa(output);
+      console.log(encodedOutput);
+      return encodedOutput;
+    }
+
+    generateTrainPass(e) {
+      let _this = e.data;
+      let encodedPassData = _this.serializeSchedule();
+
+      let clipboard = new ClipboardJS('#generate-train-pass-copy', {
+        container: document.getElementById('generate-train-pass-modal')
+      });
+      clipboard.on('success', function(e) {
+        console.info("Settings copied to clipboard.");
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        console.error("Failed to copy settings");
+      });
+
+      $('#generate-train-pass-data').val(
+        "https://ff14fish.carbuncleplushy.com/trainpass/?"+encodedPassData);
+
+      // Display the modal.
+      $('#generate-train-pass-modal')
+      .modal({
+        onHidden: function() {
+          // Clean up the clipboard DOM.
+          clipboard.destroy();
+          // Erase displayed data from form please...
+          $('#generate-train-pass-data').val("");
+        }
+      })
+      .modal('show');
+
+    }
+
   }
 
   return new _FishTrain();

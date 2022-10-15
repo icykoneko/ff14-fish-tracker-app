@@ -11,6 +11,7 @@ export {
     differenceInSeconds,
     eachMinuteOfInterval,
     format,
+    formatDistance,
     formatDistanceStrict,
     formatDuration,
     formatISO,
