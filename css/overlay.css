@@ -736,7 +736,7 @@ body.dark table#fishtrain .fishtrain-fishentry-interval .interval-indicator:hove
 td.fishtrain-fishentry-interval.has-window {
   background-color: rgb(0 255 0 / 10%);
 }
-.fishtrain-fishentry .fish-name {
+.fishtrain-fishentry td.sticky.col-fish {
   cursor: pointer;
 }
 

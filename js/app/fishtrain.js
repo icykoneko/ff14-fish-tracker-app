@@ -244,7 +244,7 @@ let FishTrain = function(){
   <td class="sticky col-fish">
     <div class="ui middle aligned small fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
     <div class="ui middle aligned" style="display: inline-block;">
-      <span class="fish-name">{{=it.data.name}}</span>
+      <a class="fish-name" target="_blank" href="{{=it.getExternalLink()}}">{{=it.data.name}}</a>
     </div>
     <div class="ui middle aligned" style="display: inline-block; font-size: smaller; float: right;">
       (<b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%)
@@ -791,7 +791,7 @@ let FishTrain = function(){
     updateLanguageForNode(fishEntry, $node) {
       // Just about all of the displays use the same fields and classes.
       // jQuery's selectors will let us get away with issues where a selector matches nothing.
-      $('.fish-name', $node)
+      $('a.fish-name', $node)
         .attr('href', fishEntry.getExternalLink())
         .text(fishEntry.data.name);
       if (fishEntry.data.folklore !== null) {
@@ -1128,7 +1128,7 @@ let FishTrain = function(){
 
       // Add delegated event listeners to the timeline table.
       this.fishTrainTableBody$.on(
-        'click', 'span.fish-name', this, this.showDetailsInTimeline);
+        'click', 'td.col-fish', this, this.showDetailsInTimeline);
       this.fishTrainTableBody$.on(
         'click', 'span.interval-indicator', this, this.timelineFishEntryIntervalClicked);
       this.scheduleFishEntries$.on(
