@@ -992,6 +992,11 @@ body.dark .fishtrain-schedule-list .ui.table tbody tr.fish-entry.expired td {
   display: none;
 }
 
+
+#departure-message:not(.visible) {
+  display: none;
+}
+
 #site-last-update.update-available {
   color: olive;
 }

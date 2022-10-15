@@ -29,7 +29,7 @@ title: Fish Train Tool
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.3/doT.min.js"></script>
-    <script src="public/js/lib/dateFns/2.25.0/dateFns.min.js?20221014_1905"></script>
+    <script src="public/js/lib/dateFns/2.25.0/dateFns.min.js?20221015_1417"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
@@ -39,7 +39,7 @@ title: Fish Train Tool
 
     <link rel="stylesheet" href="public/images/sprite.css?6.2_20220823_0421" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20221014_1235" />
-    <link rel="stylesheet" href="css/overlay.css?20221014_1633" />
+    <link rel="stylesheet" href="css/overlay.css?20221015_1417" />
     <link rel="stylesheet" href="css/dark_overlay.css?20221014_1235" />
 
     <style>
@@ -70,7 +70,7 @@ title: Fish Train Tool
     <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20221014_2014"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20221015_1417"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="js/app/carbyutils.js?20220922_1828"></script>
 
@@ -122,7 +122,7 @@ title: Fish Train Tool
         Want to plan out a fun fishing trip with a bunch of friends? Need to know what fish will be up during your next stream? The Fish Train Tool is here to help not only with planning, but also guide your friends or community during the event by providing customized itinerary. Just fill in the forms below, and select fish to create a schedule.
       </p>
       <p>
-        Developed by <a target="_blank" href="http://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.
+        Developed by <a target="_blank" href="https://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.
       </p>
 
       <div class="ui icon message">
@@ -131,7 +131,7 @@ title: Fish Train Tool
           <div class="header">
             Beta Version
           </div>
-          <p>This is a beta version of the tool. Certain features such as creating an itinerary are still in development. Some features may have limited capabilities as well. The language options will work, but you must reload the page after selecting a language. It will remember afterwards. For the latest news on this tool, please follow me on <a href="https://twitter.com/CarbunclePlushy" target="#top">Twitter</a>. You may leave feedback there, or via the normal <a href="/feedback.html" target="#top">feedback page.</a></p>
+          <p>This is a beta version of the tool and certain features are still in development or may have limited capabilities. The language options will work, but you must reload the page after selecting a language. It will remember afterwards. For the latest news on this tool, please follow me on <a href="https://twitter.com/CarbunclePlushy" target="#top">Twitter</a>. You may leave feedback there, or via the normal <a href="/feedback.html" target="#top">feedback page.</a></p>
         </div>
       </div>
 
@@ -148,6 +148,9 @@ title: Fish Train Tool
           <p>Adjust the filters by patch and type, and adjust the sorting if you wish. These work the same way as the main tracker. Once you are finished, click the <b>Update List</b> button to populate the Fish Table. In this beta version, if you wish to change any of these settings, you must click the Update List button again. This will also clear out your schedule, so please keep that in mind.</p>
           <p>The green shaded regions indicate the fish is available during that interval of time, and the brighter green box in the middle represents the actual window. Depending on the fish, these can get rather tiny. Clicking on the bright green box will display the exact time that window starts and prompt you to add the fish to your schedule. You can click elsewhere to close the prompt. Please note that in this beta version, you may only add each fish to the schedule once.</p>
           <p>Adding a fish to your schedule will place it in both the <i>Schedule List</i> and <i>Schedule Bar</i>. The bar displays the fish's window with each interval hashed out. From here, you can click on the fish to see more details, and have the option to remove it from your schedule. The list displays the fish in order and resembles the main tracker. Only conditions are omitted, and the availability column always displays a countdown when the fish is less than 1 day from being available. After the scheduled window has passed, the entry in the list will be dimmed and shrunk.</p>
+          <h2>Sharing Train with Others:</h2>
+          <p>Once you are happy with the train, you can click the <b>Generate Train Pass</b> button to create a URL to share with friends and community. I highly recommend taking this link and using a URL shortening service as the link will be <i>very long</i> and any mistakes in the URL could result in an invalid ticket. Have your friends visit the link, and they will see just the schedule list view.</p>
+          <p>Please note that this link is static. If you make changes to the schedule on this page, a new pass needs to be created to have the updated information.</p>
         </div>
       </div>
 
@@ -169,6 +172,25 @@ title: Fish Train Tool
           </div>
           <div class="actions">
             <div class="ui red approve button">Remove from schedule</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal for printing train passes -->
+      <div id="generate-train-pass-modal" class="ui tiny modal">
+        <div class="header">Your Fish Train Boarding Pass</div>
+        <div class="content">
+          <div class="ui form">
+            <p>Share the following URL with friends or community before departure. This URL must be used exactly, and since it can be quite long, I recommend using a URL shortening service to make a smaller URL to share.</p>
+            <div class="field">
+              <textarea rows="8" id="generate-train-pass-data" style="font-family: monospace;"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <div id="generate-train-pass-copy" class="ui labeled icon button" data-clipboard-target="#generate-train-pass-data">
+            <i class="copy icon"></i>
+            Copy
           </div>
         </div>
       </div>
@@ -323,6 +345,7 @@ title: Fish Train Tool
             </div>
             <div class="four wide column">
               <div class="ui /*fluid*/ button" id="updateList">Update List</div>
+              <div class="ui disabled button" id="generatePass">Generate Train Pass</div>
             </div>
           </div>
         </div>
