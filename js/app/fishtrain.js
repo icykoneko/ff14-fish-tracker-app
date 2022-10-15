@@ -849,7 +849,9 @@ let FishTrain = function(){
       $('#fishtrain-controls.ui.accordion').accordion({
         exclusive: false,
         onOpening: _(this.onOpeningControlSection).partial(this),
+        onOpen: _(this.onOpenControlSection).partial(this),
         onClose: _(this.onCloseControlSection).partial(this),
+
       })
 
       $('#instructions.ui.accordion').accordion();
@@ -1644,11 +1646,13 @@ let FishTrain = function(){
           $('#fishtrain-controls').accordion('close', 2);
         }
       }
+      return;
+    }
 
+    onOpenControlSection(_this) {
       if (this.data('controlname') === 'schedulebar') {
         _this.updateScheduleBarScrollContextWidth();
       }
-      return;
     }
 
     onCloseControlSection(_this) {
