@@ -1650,7 +1650,8 @@ let FishTrain = function(){
     }
 
     onOpenControlSection(_this) {
-      if (this.data('controlname') === 'schedulebar') {
+      console.debug("Opened control section:", this);
+      if ($(this).data('controlname') === 'schedulebar') {
         _this.updateScheduleBarScrollContextWidth();
       }
     }
