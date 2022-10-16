@@ -595,7 +595,6 @@ let FishTrain = function(){
 
       this.availability = {
         current: {
-          duration: null,
           date: null
         },
         upcoming: {
@@ -604,7 +603,6 @@ let FishTrain = function(){
           downtime: null,
           prevdate: null
         },
-        upcomingWindows: [],
       };
       this.isCatchable = false;
     }
@@ -736,37 +734,32 @@ let FishTrain = function(){
 
     update(earthTime) {
       let fish = this.data;
-      let crs = fish.catchableRanges;
-      this.isCatchable = fish.isCatchable(fishWatcher.fishEyesEnabled);
+      // Since we cannot use FishWatcher the normal way, we have to manually determine
+      // if the fish is still available WITHOUT modifying the CRS. Since we aren't using
+      // FishEyes for this, it's enough to simply update the `isCatchable` field on
+      // demand.
+      let crs = _(fish.catchableRanges).dropWhile(
+        cr => dateFns.isSameOrAfter(earthTime, eorzeaTime.toEarth(+cr.end)));
 
       // The rest requires catchable ranges.
       if (crs.length > 0) {
         // Cache the dates, they are used A LOT.
         let currStart = eorzeaTime.toEarth(+crs[0].start);
         let currEnd = eorzeaTime.toEarth(+crs[0].end);
-        // NOTE: If it has one entry, it'll have 2...
-        if (crs.length < 2) {
-          console.error("Expected at least 2 catchable ranges for " + fish.name);
-          return;
-        }
-        let nextStart = eorzeaTime.toEarth(+crs[1].start);
-
         if (dateFns.isAfter(currStart, earthTime)) {
           // The fish is not currently available.
-          this.availability.current.duration =
-            "in " + dateFns.formatDistanceStrict(currStart, earthTime, { roundingMethod: 'floor' });
+          this.isCatchable = false;
           this.availability.current.date = currStart;
         } else {
           // The fish is currently available!
-          this.availability.current.duration =
-            "closes in " + dateFns.formatDistanceStrict(currEnd, earthTime, { roundingMethod: 'floor' });
+          this.isCatchable = true;
           this.availability.current.date = currEnd;
         }
-        this.availability.upcoming.duration =
-          "in " + dateFns.formatDistanceStrict(nextStart, earthTime, { roundingMethod: 'floor' });
-
-        this.availability.upcoming.date = nextStart;
-        this.availability.upcoming.prevdate = currEnd;
+      } else if (fish.catchableRanges.length > 0) {
+        // It *was* up, but all recorded windows have been exhausted.
+        // Seriously, how long have you had the page open for?! The train's
+        // come and gone long ago now!
+        this.isCatchable = false;
       }
 
       for (let subEntry of this.intuitionEntries) {
@@ -1481,7 +1474,7 @@ let FishTrain = function(){
                 .text(formatDuration(
                   countdownDuration,
                   (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ',
-                  endDate));
+                  subEntry.fishEntry.availability.current.date));
             }
           }
         });

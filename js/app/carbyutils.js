@@ -25,8 +25,8 @@ let CarbyUtils = function(){
     // CarbyUtils.timeTravel(eorzeaTime.toEarth(Date.UTC(3017,1,26,23,45,0)))
     timeTravel(datetime) {
       // Prevent running this code unless on the main page.
-      if (ViewModel === undefined) {
-        console.error("The setFishConditions function can only be used on the main page.");
+      if (typeof(ViewModel) === 'undefined') {
+        console.error("The timeTravel function can only be used on the main page.");
         return;
       }
 
@@ -51,8 +51,8 @@ let CarbyUtils = function(){
 
     restoreTime() {
       // Prevent running this code unless on the main page.
-      if (ViewModel === undefined) {
-        console.error("The setFishConditions function can only be used on the main page.");
+      if (typeof(ViewModel) === 'undefined') {
+        console.error("The restoreTime function can only be used on the main page.");
         return;
       }
       // Restoring time may corrupt the weather service...
@@ -83,7 +83,7 @@ let CarbyUtils = function(){
     setFishConditions(fishName, options={})
     {
       // ViewModel must exist for this feature to work.
-      if (ViewModel === undefined) {
+      if (typeof(ViewModel) === 'undefined') {
         console.error("The setFishConditions function can only be used on the main page.");
         return;
       }
