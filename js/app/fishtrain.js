@@ -1486,7 +1486,11 @@ let FishTrain = function(){
 
       if (reason !== null && 'language' in reason) {
         // First, apply localization to EVERY fish belonging to an active fishEntry!
-        _(this.fishEntries).each(entry => entry.data.applyLocalization());
+        _(this.fishEntries).each(entry => {
+          entry.data.applyLocalization();
+          _(entry.data.intuitionFish).each(subEntry => {
+            subEntry.data.applyLocalization();
+        })});
         // Then, you can iterate over the fishEntries and scheduleEntries.
         _(this.fishEntries).each(entry => entry.updateLanguage());
         _(this.scheduleEntries).each(entry => entry.updateLanguage());
