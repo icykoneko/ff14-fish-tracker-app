@@ -1036,6 +1036,17 @@ let FishTrain = function(){
         range: range
       });
 
+      if (crsIdx !== null) {
+        // Adjust the range to correctly match the CR.
+        try {
+          let cr = fishEntry.data.catchableRanges[crsIdx];
+          scheduleEntry.range.start = eorzeaTime.toEarth(cr.start);
+          scheduleEntry.range.end = eorzeaTime.toEarth(cr.end);
+        } catch {
+          // Ignore for now...
+        }
+      }
+
       // Determine where this entry goes in the list.
       let insertAtIdx = _(this.scheduleEntries).sortedIndex(scheduleEntry, e => e.range.start);
       var scheduleListEntry$ = $(this.templates.scheduleListEntry(scheduleEntry));
