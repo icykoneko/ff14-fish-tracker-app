@@ -105,5 +105,8 @@ const EXTRA_DATA = {
         "Bigcuda": { video: { youtube: "pi_7oLORVWo" } },
         "Disappirarucu": { video: { youtube: "hcdDz3tQu6s" } },
         "Kitefin Shark": { video: { youtube: "zhD_7V1MaX8" } },
+        "Magic Bucket": { video: { youtube: "LIAUF-pgQQE" } },
+        "Starscryer": { video: { youtube: "nhWi3LFNTNs" } },
+        "Swampsucker Bowfin": { video: { youtube: "EHNDRne7434" } },
     },
 };
