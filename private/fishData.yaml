@@ -11387,7 +11387,7 @@
   snagging:
   patch: 6.0
 - name: Wandering Starscale
-  location: Elegeia
+  location: Abode of the Ea
   startHour: 0
   endHour: 24
   previousWeatherSet:
