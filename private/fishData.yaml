@@ -9516,6 +9516,7 @@
   - Clouds
   - Fog
   weatherSet:
+  - Clear Skies
   - Fair Skies
   bestCatchPath:
   - Robber Ball
@@ -12562,7 +12563,7 @@
   weatherSet:
   - Umbral Wind
   bestCatchPath:
-  - Versatile Lure
+  - Mayfly
   - Albino Loach
   predators:
   tug: heavy
