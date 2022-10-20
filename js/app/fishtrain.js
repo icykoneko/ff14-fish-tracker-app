@@ -602,8 +602,6 @@ let FishTrain = function(){
 
       // Reference to DOM element in timeline table.
       this.timelineEl = null;
-      // Reference to DOM element in schedule table.
-      this.scheduleEl = null;
       // Reference to DOM element for more details.
       this.detailsEl = null;
 
@@ -796,6 +794,11 @@ let FishTrain = function(){
     }
 
     updateLanguageForNode(fishEntry, $node) {
+      // Since it's possible for the fish entries to get out-of-sync,
+      // you need to make sure you've applied the new language to the underlying
+      // data as well. This does mean you might re-run this for the same fish.
+      // Surely there's a better way...
+      fishEntry.data.applyLocalization();
       // Just about all of the displays use the same fields and classes.
       // jQuery's selectors will let us get away with issues where a selector matches nothing.
       $('a.fish-name', $node)
@@ -927,6 +930,7 @@ let FishTrain = function(){
       };
       this.timeline.start = dateFns.startOfMinute(new Date());
       this.timeline.end = dateFns.addHours(this.timeline.start, 3);
+      this.timelineReady = false;
 
       this.scheduleEntries = [];
 
@@ -966,6 +970,7 @@ let FishTrain = function(){
       this.settings = {
         theme: 'dark',
       }
+      this.timelineReady = false;
       this.scheduleEntries = [];
 
       // Save certain DOM element references.
@@ -1275,7 +1280,7 @@ let FishTrain = function(){
       // Reset the main context.
       var _this = e.data;
 
-      console.time("Generate Timeline");
+      _this.timelineReady = false;
 
       // Hide and stash the timeline details popup.
       $('#timeline-window-details')
@@ -1291,6 +1296,9 @@ let FishTrain = function(){
       // Clear the table.
       _this.fishTrainTableBody$.empty();
       _this.fishTrainTableHeader$.find('.interval').remove();
+      for (let k in _this.fishEntries) {
+        _this.removeEntry(_this.fishEntries[k], k);
+      }
 
       // Determine the intervals.
       _this.settings.timelineInterval = $('#timelineInterval').dropdown('get value');
@@ -1329,53 +1337,8 @@ let FishTrain = function(){
             duration: _this.settings.timelineInterval
       }));
 
-      // Mark all existing entries as stale (or not active).
-      // Anything that's not active, won't be displayed, and at the end of this
-      // function, will be removed from the list, making future updates faster.
-      _(_this.fishEntries).each((entry) => entry.active = false);
-
-      // Now it's time to compute the availability for our fishies...
-      // This might take a while...
-      _(Fishes).chain()
-        .reject(fish => _this.isFishFiltered.call(_this, fish))
-        .each(fish => _this.activateEntry.call(_this, fish, +_this.timeline.start));
-
-      // Remove any left-over entries (so we only have fish matching the FILTER).
-      for (let k in _this.fishEntries) {
-        var entry = _this.fishEntries[k];
-        if (!entry.active) {
-          _this.removeEntry.call(_this, entry, k);
-        }
-      }
-
-      // Let FishWatcher know it needs to reinit everything.
-      // This will calculate the catchable ranges of the next 10 windows.
-      // Hopefully, this is more than enough to cover the user's requested duration.
-      fishWatcher.updateFishes({earthTime: +_this.timeline.start});
-
-      // Update the intervals for all active fish entries.
-      // (At this point, there should only be ACTIVE entries)
-      console.time('Updating intervals');
-
-      _(_this.fishEntries).each(
-        entry => entry.updateIntervals(intervals, {minutes: _this.settings.timelineInterval}));
-
-      // Remove any entries which ARE NOT UP during this time period.
-      for (let k in _this.fishEntries) {
-        var entry = _this.fishEntries[k];
-        if (!entry.active) {
-          _this.removeEntry.call(_this, entry, k);
-        }
-      }
-
-      console.timeEnd('Updating intervals');
-
-      // Defer call to redraw the timeline.
-      $(() => {
-        _this.redrawTimeline.call(_this);
-      });
-
-      console.timeEnd("Generate Timeline");
+      _this.timelineReady = true;
+      _this.updateDisplay(null);
 
       // Fix the size of the schedule bar as well.
       _this.updateScheduleBarScrollContextWidth();
@@ -1394,11 +1357,18 @@ let FishTrain = function(){
       });
 
       _(sortedEntries).each(entry => {
-        // Append the DOM for this entry first.
-        let entry$ =
-          $(this.templates.fishEntry(entry)).appendTo(this.fishTrainTableBody$);
-        // Save reference to element on the entry.
-        entry.timelineEl = entry$[0];
+        if (entry.timelineEl !== null) {
+          // Move the existing element into position.
+          this.fishTrainTableBody$.append(entry.timelineEl);
+        }
+        else
+        {
+          // Append the DOM for this entry first.
+          let entry$ =
+            $(this.templates.fishEntry(entry)).appendTo(this.fishTrainTableBody$);
+          // Save reference to element on the entry.
+          entry.timelineEl = entry$[0];
+        }
         // Just in case there's stale data here...
         entry.detailsEl = null;
       });
@@ -1509,14 +1479,67 @@ let FishTrain = function(){
       // For all other reasons, we first need a base timestamp.
       let timestamp = Date.now();
 
+      if (this.timelineReady &&
+          ((reason === null) ||
+           (reason !== null && ('filterPatch' in reason ||
+                                'filterExtra' in reason))))
+      {
+        // Mark all existing entries as stale (or not active).
+        // Anything that's not active, won't be displayed in the table.
+        // Deleting it's entry in 'fishEntries' simply removes it from the
+        // table, but will not affect the real object since it's in the
+        // scheduleEntries.
+        // Keep in mind, this does mean the object will become unsynced with
+        // the schedule entries if you restore the filter without clearing the
+        // schedule.
+        _(this.fishEntries).each((entry) => entry.active = false);
+
+        _(Fishes).chain()
+          .reject(fish => this.isFishFiltered(fish))
+          .each(fish => this.activateEntry(fish, +this.timeline.start));
+
+        // Remove any left-over entries (so we only have fish matching the FILTER).
+        for (let k in this.fishEntries) {
+          var entry = this.fishEntries[k];
+          if (!entry.active) {
+            this.removeEntry(entry, k);
+          }
+        }
+
+        // Let FishWatcher know it needs to reinit everything.
+        // This will calculate the catchable ranges of the next 10 windows.
+        // Hopefully, this is more than enough to cover the user's requested duration.
+        fishWatcher.updateFishes({earthTime: +this.timeline.start});
+
+        // Update the intervals for all active fish entries.
+        // (At this point, there should only be ACTIVE entries)
+        _(this.fishEntries).each(
+          entry => entry.updateIntervals(
+            this.timeline.intervals,
+            {minutes: this.settings.timelineInterval}));
+
+        // Remove any entries which ARE NOT UP during this time period.
+        for (let k in this.fishEntries) {
+          var entry = this.fishEntries[k];
+          if (!entry.active) {
+            this.removeEntry(entry, k);
+          }
+        }
+      }
+
+      if (this.timelineReady &&
+          ((reason === null) ||
+           (reason !== null && ('filterPatch' in reason ||
+                                'filterExtra' in reason ||
+                                'sortingType' in reason))))
+      {
+        // Defer call to redraw the timeline.
+        $(() => {
+          this.redrawTimeline();
+        });
+      }
+
       if (reason !== null && 'language' in reason) {
-        // First, apply localization to EVERY fish belonging to an active fishEntry!
-        _(this.fishEntries).each(entry => {
-          entry.data.applyLocalization();
-          _(entry.data.intuitionFish).each(subEntry => {
-            subEntry.data.applyLocalization();
-        })});
-        // Then, you can iterate over the fishEntries and scheduleEntries.
         _(this.fishEntries).each(entry => entry.updateLanguage());
         _(this.scheduleEntries).each(entry => entry.updateLanguage());
       }
@@ -1841,6 +1864,12 @@ let FishTrain = function(){
     }
 
     isFishFiltered(fish) {
+      // Spearfishing is NOT INCLUDED!
+      // I mean, if you wanna do that, you could, but it's not really the
+      // vibe I'm going for with this tool.
+      if (fish.location.spearfishing)
+      return true;
+
       // Filter by patch.
       // Patches can be... odd sometimes.  Convert to string, and only compare
       // with the first number following the decimal.
@@ -1907,6 +1936,11 @@ let FishTrain = function(){
     }
 
     removeEntry(entry, k) {
+      // If currently showing in the timeline, remove that first.
+      if (entry.timelineEl !== null) {
+        $(entry.timelineEl).remove();
+        entry.timelineEl = null;
+      }
       // Remove intuition entries as well.
       for (let subEntry in entry.intuitionEntries) {
         delete entry.intuitionEntries[subEntry];
@@ -1941,7 +1975,9 @@ let FishTrain = function(){
       var $patchSet = $this.siblings('.patch-set.button');
       var patchSetActive = $patchSet.siblings().not('.disabled').not('.active') == 0;
       $patchSet.toggleClass('active', patchSetActive);
-  
+
+      // Notify others about the change.
+      e.data.filterPatchSubject.next(e.data.settings.filters.patch);
       e.data.saveSettings();
       return false;
     }
@@ -1949,7 +1985,7 @@ let FishTrain = function(){
     filterPatchDblClicked(e) {
       e.stopPropagation();
       var $this = $(this);
-  
+
       // Update the UI making only the selected patch visible.
       $this.addClass('active').siblings().removeClass('active');
       $this.parent().parent().siblings().find('.button').removeClass('active');
@@ -1958,7 +1994,8 @@ let FishTrain = function(){
       // Just this patch is included now.
       e.data.settings.filters.patch.clear();
       e.data.settings.filters.patch.add(patch);
-
+      // Notify others about the change.
+      e.data.filterPatchSubject.next(e.data.settings.filters.patch);
       e.data.saveSettings();
       return false;
     }
@@ -1981,6 +2018,8 @@ let FishTrain = function(){
         });
       }
 
+      // Notify others about the change.
+      e.data.filterPatchSubject.next(e.data.settings.filters.patch);
       e.data.saveSettings();
       return false;
     }
@@ -1993,6 +2032,8 @@ let FishTrain = function(){
       $this.addClass('active').siblings().removeClass('active');
       e.data.settings.filters.extra = $this.data('filter');
 
+      // Notify anyone interested in this change.
+      e.data.filterExtraSubject.next(e.data.settings.filters.extra);
       e.data.saveSettings();
       return false;
     }
@@ -2000,7 +2041,7 @@ let FishTrain = function(){
     sortingTypeChecked(_this) {
       let $this = $(this);
       let sortingType = $this.val();
-  
+
       if (sortingType == 'overallRarity') {
         _this.sorterFunc = Sorters.sortByOverallRarity;
       } else if (sortingType == 'windowPeriods') {
@@ -2009,8 +2050,9 @@ let FishTrain = function(){
         console.error("Invalid sortingType: ", sortingType);
         return;
       }
-  
+
       _this.settings.sortingType = sortingType;
+      _this.sortingTypeSubject.next(sortingType);
       _this.saveSettings();
     }
 
