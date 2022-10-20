@@ -21,8 +21,25 @@ let FishTrain = function(){
   // When running the actual train, you should all use the passenger mode.
   var I_AM_A_PASSENGER = false;
 
+  // FISH TRAIN PASS v0 FORMAT
+  // -------------------------
+  // (Sizes in bits)
+  // +--------+------+----------------------------
+  // | Offset | Size | Field Name
+  // +--------+------+----------------------------
+  // |      0 |    2 | Version (MUST be 0b00)
+  // |      2 |    6 | Entry Count (MAX == 63)
+  // |      8 |   24 | Start Time (expressed in minutes since 2017-11-06 6:24 Z)
+  // |     32 |   12 | Duration in Minutes (max of 68 hours, 15 minutes, close to 3 days)
+  // |     44 |   20 | Reserved (was to be checksum)
+  // |(a)  64 |   40 | Scheduled Fish Entry (see Entry Count)
+  //  =|    0 |   16 | Fish ID
+  //   |   16 |    4 | Range Index (0xF == invalid; range relative Start Time)
+  //   |   20 |   12 | Start Offset (in minutes since Start Time; ignored for valid range)
+  //   |   32 |    8 | Duration (in minutes; ignored for valid range)
+  // +--------+------+----------------------------
+
   function decode(data) {
-    let MD5 = new Hashes.MD5;
     let retval = {
       timeline: {
         start: null,
@@ -36,12 +53,9 @@ let FishTrain = function(){
       return null;
     }
     let startInMinutes = data.getUint32(0) & 0xFFFFFF;
-    let durationAndCsum = data.getUint32(4);
+    let durationAndRsvd = data.getUint32(4);
     let totalEntries = verAndCount & 0x3F;
-    let durationInMinutes = (durationAndCsum >> 20);
-    let csum = durationAndCsum & 0xFFFFF;
-
-    let givenCsum = MD5.raw(data.buffer.slice(8)) & 0xFFFFF;
+    let durationInMinutes = (durationAndRsvd >> 20);
 
     retval.timeline.start = new Date((startInMinutes + 0x1800000) * 60 * 1000);
     retval.timeline.end = new Date(+retval.timeline.start + (durationInMinutes * 60 * 1000));
