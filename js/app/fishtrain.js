@@ -2211,6 +2211,11 @@ let FishTrain = function(){
       output[1] = ((startInMinutes >>> 16) & 0xFF);
       output[2] = ((startInMinutes >>>  8) & 0xFF);
       output[3] = ((startInMinutes       ) & 0xFF);
+      let durationInMinutes = dateFns.differenceInMinutes(this.timeline.end, this.timeline.start);
+      output[4] = ((durationInMinutes >>> 4) & 0xFF);
+      output[5] = ((durationInMinutes      ) & 0xF0) | 0x0C;
+      output[6] = 0xA9;
+      output[7] = 0xB7;
 
       _(this.scheduleEntries).chain().first(63).each((e, i) => {
         output[8 + (5 * i) + 0] = ((e.fishEntry.id >>> 8) & 0xFF);
@@ -2227,8 +2232,11 @@ let FishTrain = function(){
         output[8 + (5 * i) + 4] = dateFns.differenceInMinutes(e.range.end, e.range.start) & 0xFF;
       });
 
+      console.debug(_(output).map(x => x.toString(16).toUpperCase().padStart(2, '0')).join(''));
+
       let encodedOutput = btoa(output);
-      console.log(encodedOutput);
+      console.debug("Train Pass:", encodedOutput);
+      console.log("Train Pass URL:", location.origin + "/trainpass/?" + encodedOutput);
       return encodedOutput;
     }
 
