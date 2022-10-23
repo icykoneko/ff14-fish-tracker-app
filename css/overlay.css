@@ -324,6 +324,13 @@ body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes
   background-color: hsla(0, 0%, 100%, 1) !important; /* This should match the page background */
 }
 
+#fishes.ui.selectable.table > tbody > tr,
+#fishes.ui.selectable.table > tr,
+#fishes.ui.table > tbody > tr > td.selectable,
+#fishes.ui.table > tr > td.selectable {
+  cursor: initial;
+}
+
 body.dark #fishes thead tr th {
   background-color: hsla(0, 0%, 15%, 1) !important; /* This should match the page background */
 }
@@ -544,7 +551,8 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
 .fish-guide .fish-grid-out {
   grid-area: fish-grid-out;
   align-content: flex-start;
-  padding-bottom: 1em;
+  /* This attempts to keep the height fixed */
+  padding-bottom: 1.3em;
 }
 .fish-guide .fish-grid {
   justify-content: center;
@@ -594,6 +602,7 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
 .fish-guide .fish-entry .ui.left.corner.label .icon {
   left: -0.5240714em;
   top: 0.4821429em;
+  right: 0.5240714em;
 }
 .fish-guide .fish-entry.disabled .ui.left.corner.label {
   display: none;
