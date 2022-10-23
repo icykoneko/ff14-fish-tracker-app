@@ -333,3 +333,9 @@ i.icon.cloud.sun.rain:before {
 body ::-webkit-scrollbar-corner {
   display: none;
 }
+
+.ui.accordion.menu .item > .fitted.title,
+.ui.accordion > .fitted.title,
+.ui.accordion .accordion > .fitted.title {
+  width: fit-content;
+}

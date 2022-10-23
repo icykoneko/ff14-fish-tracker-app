@@ -13,9 +13,6 @@ let FishTrain = function(){
   // Workaround until we switch to FUI 2.9.
   $.modal = $.fn.modal;
 
-  // Not sure if I want to keep this feature, so we'll just do this.
-  var SCHEDULE_LIST_AND_BAR_MUTUALLY_EXCLUSIVE = false;
-
   // This controls whether the user is a passenger, or the conductor making the train.
   // NOTE: For now, there's no special conductor mode besides the normal fish train page.
   // When running the actual train, you should all use the passenger mode.
@@ -1119,13 +1116,12 @@ let FishTrain = function(){
       this.scheduleBarCurrentTimeIndicator$ = $('.ui.fishtrain-schedule.segment .current-time-indicator');
 
       this.initCommonView();
-      $('#fishtrain-controls.ui.accordion').accordion({
+      $('.ui.accordion').accordion({
         exclusive: false,
         onOpening: _(this.onOpeningControlSection).partial(this),
         onOpen: _(this.onOpenControlSection).partial(this),
         onClose: _(this.onCloseControlSection).partial(this),
       });
-      $('#instructions.ui.accordion').accordion();
       $('.ui.radio.checkbox').checkbox();
       $('#sortingType .radio.checkbox').checkbox({
         onChecked: _(this.sortingTypeChecked).partial(this)
@@ -2058,16 +2054,6 @@ let FishTrain = function(){
 
     onOpeningControlSection(_this) {
       console.debug("Opening control section:", this[0]);
-
-      if (SCHEDULE_LIST_AND_BAR_MUTUALLY_EXCLUSIVE) {
-        // While the user may have multiple control sections active, the schedule
-        // bar and detail list sections are mutually exclusive.
-        if (this.data('controlname') === 'schedulebar') {
-          $('#fishtrain-controls').accordion('close', 1);
-        } else if (this.data('controlname') === 'schedulelist') {
-          $('#fishtrain-controls').accordion('close', 2);
-        }
-      }
       return;
     }
 
