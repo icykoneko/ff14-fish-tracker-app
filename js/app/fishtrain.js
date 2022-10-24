@@ -2241,7 +2241,7 @@ let FishTrain = function(){
       output[3] = ((startInMinutes       ) & 0xFF);
       let durationInMinutes = dateFns.differenceInMinutes(this.timeline.end, this.timeline.start);
       output[4] = ((durationInMinutes >>> 4) & 0xFF);
-      output[5] = ((durationInMinutes      ) & 0xF0) | 0x0C;
+      output[5] = ((durationInMinutes      ) & 0x0F) | 0x0C;
       output[6] = 0xA9;
       output[7] = 0xB7;
 
