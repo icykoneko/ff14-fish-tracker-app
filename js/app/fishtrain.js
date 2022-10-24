@@ -1137,6 +1137,7 @@ let FishTrain = function(){
 
       $('#updateList').on('click', this, this.updateList);
       $('#generatePass').on('click', this, this.generateTrainPass);
+      $('#editExistingTrain').on('click', this, this.editExistingTrain);
 
       $('#filterPatch .button:not(.patch-set)').on({
         click: this.filterPatchClicked,
@@ -1269,6 +1270,107 @@ let FishTrain = function(){
         initialDate: endDate,
         selectAdjacentDays: true
       });
+    }
+
+    loadExistingTrain(existingSchedule) {
+      this.timelineReady = false;
+      // Clear the table.
+      this.fishTrainTableBody$.empty();
+      this.fishTrainTableHeader$.find('.interval').remove();
+      for (let k in this.fishEntries) {
+        this.removeEntry(this.fishEntries[k], k);
+      }
+
+      // Update the intervals.
+      // NOTE: timelineInterval is not included in train pass data.
+      // so we just continue using whatever the user had originally.
+      this.settings.timelineInterval = $('#timelineInterval').dropdown('get value');
+      $('#rangestart').calendar('set date', existingSchedule.timeline.start);
+      this.timeline.start = existingSchedule.timeline.start;
+      $('#rangeend').calendar('set date', existingSchedule.timeline.end);
+      this.timeline.end = existingSchedule.timeline.end;
+
+      // Clear schedule
+      this.scheduleIntervalMarkers$.empty();
+      this.scheduleFishEntries$.empty();
+      this.scheduleListEntries$.empty();
+      this.scheduleEntries = [];
+
+      // Reinitialize the availability data and weather.
+      CarbyUtils._resetSiteData(+this.timeline.start)
+
+      // Get intervals but exclude the last entry if it matches an interval.
+      // To accomplish this, we subtract one second from the end date.
+      var intervals = dateFns.eachMinuteOfInterval(
+        {start: this.timeline.start, end: +this.timeline.end-1},
+        {step: this.settings.timelineInterval});
+
+      this.timeline.intervals = intervals;
+
+      // Update the table headers.
+      this.fishTrainTableHeader$.append(
+        this.templates.intervalHeadings(_(intervals).map(x => dateFns.format(x, 'p'))));
+
+      // Update the schedule interval markers.
+      this.scheduleIntervalMarkers$
+        .removeClass()
+        .addClass(`bar interval-${this.settings.timelineInterval}min`)
+        .append(
+          this.templates.scheduleIntervalMarkers({
+            intervals: intervals,
+            duration: this.settings.timelineInterval
+      }));
+
+      // Update Display will configure the Fish Table and intervals.
+      this.timelineReady = true;
+      this.updateDisplay(null);
+
+      // But afterwards, we need to re-enable any fish entries associated with
+      // the schedule before we can add them to the list. This is because if the
+      // CURRENT filters don't include a fish in the schedule, the add to schedule
+      // list will fail. I know, I know, you're better than this, but it's late,
+      // I just want it to work.
+      for (const entry of existingSchedule.scheduleEntries) {
+        let fish = _(Fishes).findWhere({id: entry.fishId});
+        let fishEntry = this.activateEntry(fish, +this.timeline.start);
+        entry.fishEntry = fishEntry;
+      }
+
+      // Let FishWatcher know it needs to reinit everything.
+      // This will calculate the catchable ranges of the next 10 windows.
+      // That will take care mostly of our intuition fish stuff, but they are managed
+      // by the IntuitionFishEntry update function anyways...
+      fishWatcher.updateFishes({earthTime: +this.timeline.start});
+
+      // Now you can finally add the scheduled fish from the train pass
+      // to the Schedule List and Schedule Bar components.
+      for (const entry of existingSchedule.scheduleEntries) {
+        let scheduleEntry = this.addToScheduleList(
+          entry.fishEntry, entry.crsIdx, entry.range);
+
+        // Also add to the Schedule Bar.
+        var viewParams = {
+          timeOffset: dateFns.differenceInMinutes(
+            entry.range.start, this.timeline.start, {roundingMethod: 'floor'}),
+          timeDuration: dateFns.differenceInMinutes(
+            entry.range.end, entry.range.start, {roundingMethod: 'ceil'}),
+          icon: entry.fishEntry.data.icon,
+          id: entry.fishEntry.id,
+          crsIdx: entry.crsIdx,
+        };
+        var scheduleEntry$ =
+          $(this.templates.scheduleFishEntry(viewParams)).appendTo(this.scheduleFishEntries$);
+        scheduleEntry.el = scheduleEntry$[0];
+        scheduleEntry$.data('model', scheduleEntry);
+      }
+
+      // Fix the size of the schedule bar as well.
+      this.updateScheduleBarScrollContextWidth();
+
+      // Enable the "Generate Train Pass" button (assuming there's actually fish).
+      $('#generatePass.button').toggleClass('disabled', this.scheduleEntries.length == 0);
+
+      return;
     }
 
     updateList(e) {
@@ -2300,6 +2402,60 @@ let FishTrain = function(){
 
     }
 
+    editExistingTrain(e) {
+      let _this = e.data;
+
+      $('#edit-existing-train-modal')
+        .modal({
+          onApprove: function($element) {
+            $('#edit-existing-train-modal .ui.form').form('remove errors');
+            let trainPassInput = $('#edit-existing-train-data').val();
+            let trainPass = undefined;
+            // Validate the train pass first.
+            try {
+              let url = new URL(trainPassInput);
+              trainPass = url.searchParams.keys().next().value;
+            } catch {
+              // Assume just the pass.
+              // Eat "?" if present.
+              if (trainPassInput.startsWith('?')) {
+                trainPass = trainPassInput.substr(1);
+              } else {
+                trainPass = trainPassInput;
+              }
+            }
+            if (trainPass === undefined ||
+                trainPass == "") {
+              // Mark the URL as invalid.
+              $('#edit-existing-train-modal .ui.form')
+                .form('add errors', ['The Train Pass URL was invalid'])
+                .form('get field', 'edit-existing-train-data')
+                  .closest('.field').addClass('error');
+              return false;
+            }
+            // Otherwise, validate the train pass itself.
+            let existingSchedule = validatePass(trainPass);
+            if (existingSchedule === null) {
+              // The train pass itself is not valid.
+              $('#edit-existing-train-modal .ui.form')
+                .form('add errors', ['The Train Pass is invalid'])
+                .form('get field', 'edit-existing-train-data')
+                  .closest('.field').addClass('error');
+              return false;
+            }
+            // Allow the dialog to close while we load the schedule.
+            $(() => {
+              _this.loadExistingTrain(existingSchedule);
+            });
+            return true;
+          },
+          onHidden: function() {
+            // Reset data and clear errors.
+            $('#edit-existing-train-modal .ui.form').form('clear');
+          }
+        })
+        .modal('show');
+    }
   }
 
   return new _FishTrain();

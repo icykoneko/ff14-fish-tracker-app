@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="public/images/sprite.css?6.2_20220823_0421" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20221023_1904" />
     <link rel="stylesheet" href="css/overlay.css?20221023_1904" />
-    <link rel="stylesheet" href="css/dark_overlay.css?20221014_1235" />
+    <link rel="stylesheet" href="css/dark_overlay.css?20221023_1904" />
 
     <style>
       /* Hide Zone Name to condense display more */
@@ -67,7 +67,7 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20221023_1654"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20221023_2137"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="js/app/carbyutils.js?20221016_1620"></script>
 
@@ -179,6 +179,26 @@
             <i class="copy icon"></i>
             Copy
           </div>
+        </div>
+      </div>
+
+      <!-- Modal for edit an existing train pass -->
+      <div id="edit-existing-train-modal" class="ui tiny modal">
+        <div class="header">Edit an Existing Train</div>
+        <div class="content">
+          <form class="ui form">
+            <p>Need to make a change to an existing train? Enter the train pass data, or the full URL below.</p>
+            <p><b>NOTE:</b> Any changes to the schedule will require a <b>new</b> train pass. You <b>must use</b> the <i>Generate Train Pass</i> again and share the <b>new</b> train pass with your friends or community.</p>
+            <div class="field" id="edit-existing-train-field">
+              <label>Existing Train Pass</label>
+              <textarea name="edit-existing-train-data" rows="8" id="edit-existing-train-data" style="font-family: monospace;"></textarea>
+            </div>
+            <div class="ui error message"></div>
+          </form>
+        </div>
+        <div class="actions">
+          <div id="edit-existing-train-load" class="ui approve button">Load</div>
+          <div class="ui deny button">Cancel</div>
         </div>
       </div>
 
@@ -341,39 +361,41 @@
                 </div>
               </div>
             </div>
-            <div class="fitted title active">
-              <i class="dropdown icon"></i>
-              Schedule List
-            </div>
-            <div class="content active" data-controlname="schedulelist">
-              <div class="ui plain compact segment fishtrain-schedule-list">
-                <div class="scroll-context">
-                  <table class="ui very compact unstackable striped table">
-                    <thead>
-                      <tr>
-                        <th class="fish-name-col">Name</th>
-                        <th class="fish-availability-col">Availability</th>
-                        <th class="fish-location-col">Location</th>
-                        <th class="fish-requirements-col">Bait</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="four wide column">
-          <div class="ui spaced vertical buttons">
+          <div class="ui vertical spaced mini buttons">
             <div class="ui button" id="updateList">Update List</div>
             <div class="ui disabled button" id="generatePass">Generate Train Pass</div>
+            <div class="ui button" id="editExistingTrain">Edit Existing Train</div>
           </div>
         </div>
       </div>
 
       <div class="ui fluid accordion">
+
+        <div class="fitted title active">
+          <i class="dropdown icon"></i>
+          Schedule List
+        </div>
+        <div class="content active" data-controlname="schedulelist">
+          <div class="ui plain compact segment fishtrain-schedule-list">
+            <div class="scroll-context">
+              <table class="ui very compact unstackable striped table">
+                <thead>
+                  <tr>
+                    <th class="fish-name-col">Name</th>
+                    <th class="fish-availability-col">Availability</th>
+                    <th class="fish-location-col">Location</th>
+                    <th class="fish-requirements-col">Bait</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 
         <div class="fitted title active">
           <i class="dropdown icon"></i>
