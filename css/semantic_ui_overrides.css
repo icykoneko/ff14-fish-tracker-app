@@ -91,6 +91,44 @@ i.icon {
   margin-left: 25%;
 }
 
+/* 
+ * Reverts changes made in:
+ * https://github.com/fomantic/Fomantic-UI/commit/1f7160203ee8a4c7c42dad2815113967571e97b9
+ */
+
+.ui.labeled.icon.buttons > .button > .icon:before,
+.ui.labeled.icon.button > .icon:before,
+.ui.labeled.icon.buttons > .button > .icon:after,
+.ui.labeled.icon.button > .icon:after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  text-align: center;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.ui.button > .icon:not(.button) {
+  height: 0.85714286em;
+}
+
+/*
+ * Reverts changes made in:
+ * https://github.com/fomantic/Fomantic-UI/commit/defb29e84339ca69f9f664e07000400b7bceb206
+ */
+.ui.button > .icon:not(.button) {
+  vertical-align: middle;
+}
+
+.ui.button:not(.icon) > .icon:not(.button):not(.dropdown),
+.ui.button:not(.icon) > .icons:not(.button):not(.dropdown) {
+  vertical-align: middle;
+}
+
+.ui.button:not(.icon) > .icons:not(.button):not(.dropdown) > .icon {
+  vertical-align: middle;
+}
 
 /*
  * Prevent transitions for select components.
@@ -234,17 +272,10 @@ i.icon.cloud.sun.rain:before {
   color: #ffffff !important;
 }
 
-/* Flushed Size Modal */
-
 .ui.flushed.modal {
   width: auto;
   max-width: 95%; /* don't exceed 95% of the width though... */
   margin-left: unset;
-  transform: translateX(-50%);
-}
-
-.ui.flushed.modal > .header:not(.ui) {
-  font-size: 1.3em;
 }
 
 .modals.dimmer .ui.flushed.scrolling.modal {
@@ -252,75 +283,6 @@ i.icon.cloud.sun.rain:before {
   position: fixed !important;
   top: unset !important;
   margin-left: unset !important;
-}
-
-/* Due to the use of the transform style, we need to override any animations used... */
-.ui.flushed.modal.scale.transition.in {
-  -webkit-animation-name: scaleInFlushedModal;
-  animation-name: scaleInFlushedModal;
-}
-
-.ui.flushed.modal.scale.transition.out {
-  -webkit-animation-name: scaleOutFlushedModal;
-  animation-name: scaleOutFlushedModal;
-}
-
-@-webkit-keyframes scaleInFlushedModal {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-50%) scale(0.8);
-    transform: translateX(-50%) scale(0.8);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: translateX(-50%) scale(1);
-    transform: translateX(-50%) scale(1);
-  }
-}
-
-@keyframes scaleInFlushedModal {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-50%) scale(0.8);
-    transform: translateX(-50%) scale(0.8);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: translateX(-50%) scale(1);
-    transform: translateX(-50%) scale(1);
-  }
-}
-
-/* Out */
-
-@-webkit-keyframes scaleOutFlushedModal {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateX(-50%) scale(1);
-    transform: translateX(-50%) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    -webkit-transform: translateX(-50%) scale(0.9);
-    transform: translateX(-50%) scale(0.9);
-  }
-}
-
-@keyframes scaleOutFlushedModal {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateX(-50%) scale(1);
-    transform: translateX(-50%) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    -webkit-transform: translateX(-50%) scale(0.9);
-    transform: translateX(-50%) scale(0.9);
-  }
 }
 
 /* Popup */
@@ -332,4 +294,10 @@ i.icon.cloud.sun.rain:before {
 
 body ::-webkit-scrollbar-corner {
   display: none;
+}
+
+.ui.accordion.menu .item > .fitted.title,
+.ui.accordion > .fitted.title,
+.ui.accordion .accordion > .fitted.title {
+  width: fit-content;
 }

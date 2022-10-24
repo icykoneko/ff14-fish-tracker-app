@@ -25,8 +25,8 @@ title: Fish Train Tool
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.8.8/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore-contrib/0.3.0/underscore-contrib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.3/doT.min.js"></script>
@@ -39,9 +39,9 @@ title: Fish Train Tool
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?6.2_20220823_0421" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20221014_1235" />
-    <link rel="stylesheet" href="css/overlay.css?20221015_1944" />
-    <link rel="stylesheet" href="css/dark_overlay.css?20221014_1235" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20221023_1904" />
+    <link rel="stylesheet" href="css/overlay.css?20221023_1904" />
+    <link rel="stylesheet" href="css/dark_overlay.css?20221023_1904" />
 
     <style>
       /* Hide Zone Name to condense display more */
@@ -71,7 +71,7 @@ title: Fish Train Tool
     <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20221020_1835"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20221023_2137"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="js/app/carbyutils.js?20221016_1620"></script>
 
@@ -136,25 +136,6 @@ title: Fish Train Tool
         </div>
       </div>
 
-      <div id="instructions" class="ui fluid accordion">
-        <div class="title">
-          <i class="dropdown icon"></i>
-          Instructions
-        </div>
-        <div class="content">
-          <h2>Before you Begin:</h2>
-          <p>This tool is still in beta testing and under active development. It was designed primarily for desktop users so it may be difficult to use on mobile devices.</p>
-          <h2>Instructions:</h2>
-          <p>Start by selecting the start and end date and an interval. You should try to limit this to about 4 hours. The interval is there to help break up the fish windows, especially fish that are always available.</p>
-          <p>Adjust the filters by patch and type, and adjust the sorting if you wish. These work the same way as the main tracker. Once you are finished, click the <b>Update List</b> button to populate the Fish Table. In this beta version, if you wish to change any of these settings, you must click the Update List button again. This will also clear out your schedule, so please keep that in mind.</p>
-          <p>The green shaded regions indicate the fish is available during that interval of time, and the brighter green box in the middle represents the actual window. Depending on the fish, these can get rather tiny. Clicking on the bright green box will display the exact time that window starts and prompt you to add the fish to your schedule. You can click elsewhere to close the prompt. Please note that in this beta version, you may only add each fish to the schedule once.</p>
-          <p>Adding a fish to your schedule will place it in both the <i>Schedule List</i> and <i>Schedule Bar</i>. The bar displays the fish's window with each interval hashed out. From here, you can click on the fish to see more details, and have the option to remove it from your schedule. The list displays the fish in order and resembles the main tracker. Only conditions are omitted, and the availability column always displays a countdown when the fish is less than 4 hours from being available (otherwise the scheduled time is displayed). After the scheduled window has passed, the entry in the list will be dimmed and shrunk.</p>
-          <h2>Sharing Train with Others:</h2>
-          <p>Once you are happy with the train, you can click the <b>Generate Train Pass</b> button to create a URL to share with friends and community. I highly recommend taking this link and using a URL shortening service as the link will be <i>very long</i> and any mistakes in the URL could result in an invalid ticket. Have your friends visit the link, and they will see just the schedule list view.</p>
-          <p>Please note that this link is static. If you make changes to the schedule on this page, a new pass needs to be created to have the updated information.</p>
-        </div>
-      </div>
-
       <div id="popups-storage">
         <div id="timeline-window-details" class="ui popup hidden">
           <div class="header">Window Details</div>
@@ -205,17 +186,51 @@ title: Fish Train Tool
         </div>
       </div>
 
-      <div id="fishtrain-controls" class="ui fluid accordion">
-
-        <!-- Index 0: Configuration Control -->
-        <div class="title active">
-          <i class="dropdown icon"></i>
-          <span class="static-title">Configuration</span>
-          <span class="inactive-details" style="padding-left: 1em;"></span>
+      <!-- Modal for edit an existing train pass -->
+      <div id="edit-existing-train-modal" class="ui tiny modal">
+        <div class="header">Edit an Existing Train</div>
+        <div class="content">
+          <form class="ui form">
+            <p>Need to make a change to an existing train? Enter the train pass data, or the full URL below.</p>
+            <p><b>NOTE:</b> Any changes to the schedule will require a <b>new</b> train pass. You <b>must use</b> the <i>Generate Train Pass</i> again and share the <b>new</b> train pass with your friends or community.</p>
+            <div class="field" id="edit-existing-train-field">
+              <label>Existing Train Pass</label>
+              <textarea name="edit-existing-train-data" rows="8" id="edit-existing-train-data" style="font-family: monospace;"></textarea>
+            </div>
+            <div class="ui error message"></div>
+          </form>
         </div>
-        <div class="content active" data-controlname="configuration">
-          <div class="ui grid container">
-            <div class="twelve wide column">
+        <div class="actions">
+          <div id="edit-existing-train-load" class="ui approve button">Load</div>
+          <div class="ui deny button">Cancel</div>
+        </div>
+      </div>
+
+      <div class="ui grid">
+        <div class="twelve wide column">
+          <div class="ui fluid accordion">
+            <div class="fitted title">
+              <i class="dropdown icon"></i>
+              Instructions
+            </div>
+            <div class="content" data-controlname="instructions">
+              <h2>Before you Begin:</h2>
+              <p>This tool is still in beta testing and under active development. It was designed primarily for desktop users so it may be difficult to use on mobile devices.</p>
+              <h2>Instructions:</h2>
+              <p>Start by selecting the start and end date and an interval. You should try to limit this to about 4 hours. The interval is there to help break up the fish windows, especially fish that are always available.</p>
+              <p>Adjust the filters by patch and type, and adjust the sorting if you wish. These work the same way as the main tracker. Once you are finished, click the <b>Update List</b> button to populate the Fish Table. In this beta version, if you wish to change any of these settings, you must click the Update List button again. This will also clear out your schedule, so please keep that in mind.</p>
+              <p>The green shaded regions indicate the fish is available during that interval of time, and the brighter green box in the middle represents the actual window. Depending on the fish, these can get rather tiny. Clicking on the bright green box will display the exact time that window starts and prompt you to add the fish to your schedule. You can click elsewhere to close the prompt. Please note that in this beta version, you may only add each fish to the schedule once.</p>
+              <p>Adding a fish to your schedule will place it in both the <i>Schedule List</i> and <i>Schedule Bar</i>. The bar displays the fish's window with each interval hashed out. From here, you can click on the fish to see more details, and have the option to remove it from your schedule. The list displays the fish in order and resembles the main tracker. Only conditions are omitted, and the availability column always displays a countdown when the fish is less than 4 hours from being available (otherwise the scheduled time is displayed). After the scheduled window has passed, the entry in the list will be dimmed and shrunk.</p>
+              <h2>Sharing Train with Others:</h2>
+              <p>Once you are happy with the train, you can click the <b>Generate Train Pass</b> button to create a URL to share with friends and community. I highly recommend taking this link and using a URL shortening service as the link will be <i>very long</i> and any mistakes in the URL could result in an invalid ticket. Have your friends visit the link, and they will see just the schedule list view.</p>
+              <p>Please note that this link is static. If you make changes to the schedule on this page, a new pass needs to be created to have the updated information.</p>
+            </div>
+            <div class="fitted title active">
+              <i class="dropdown icon"></i>
+              <span class="static-title">Configuration</span>
+              <span class="inactive-details" style="padding-left: 1em;"></span>
+            </div>
+            <div class="content active" data-controlname="configuration">
               <div class="ui form">
                 <!--
                   Select time for the event. Rarity will be based on each fish's rarity
@@ -348,20 +363,22 @@ title: Fish Train Tool
                   </div>
 
                 </div>
-
-
-
               </div>
-            </div>
-            <div class="four wide column">
-              <div class="ui /*fluid*/ button" id="updateList">Update List</div>
-              <div class="ui disabled button" id="generatePass">Generate Train Pass</div>
             </div>
           </div>
         </div>
+        <div class="four wide column">
+          <div class="ui vertical spaced mini buttons">
+            <div class="ui button" id="updateList">Update List</div>
+            <div class="ui disabled button" id="generatePass">Generate Train Pass</div>
+            <div class="ui button" id="editExistingTrain">Edit Existing Train</div>
+          </div>
+        </div>
+      </div>
 
-        <!-- Index 1: Schedule List Control (mutually exclusive with Schedule Bar) -->
-        <div class="title active">
+      <div class="ui fluid accordion">
+
+        <div class="fitted title active">
           <i class="dropdown icon"></i>
           Schedule List
         </div>
@@ -384,8 +401,7 @@ title: Fish Train Tool
           </div>
         </div>
 
-        <!-- Index 2: Schedule Bar Control (mutually exclusive with Schedule List) -->
-        <div class="title active">
+        <div class="fitted title active">
           <i class="dropdown icon"></i>
           Schedule Bar
         </div>
@@ -404,8 +420,7 @@ title: Fish Train Tool
           </div>
         </div>
 
-        <!-- Index 3: Fish Table Control -->
-        <div class="title active">
+        <div class="fitted title active">
           <i class="dropdown icon"></i>
           Fish Table
         </div>
@@ -425,7 +440,6 @@ title: Fish Train Tool
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="ui container">
