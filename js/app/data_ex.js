@@ -108,5 +108,8 @@ const EXTRA_DATA = {
         "Magic Bucket": { video: { youtube: "LIAUF-pgQQE" } },
         "Starscryer": { video: { youtube: "nhWi3LFNTNs" } },
         "Swampsucker Bowfin": { video: { youtube: "EHNDRne7434" } },
+        "Moonlight Guppy": { video: { youtube: "Y-C_45RJ2Ic" } },
+        "Starbright": { video: { youtube: "CKESUzQydfo" } },
+        "Planetes": { video: { youtube: "S8GR8BkyBOM" } },
     },
 };
