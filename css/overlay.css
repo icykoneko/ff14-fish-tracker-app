@@ -1001,6 +1001,16 @@ body.dark .fishtrain-schedule-list .ui.table tbody tr.fish-entry.expired td {
   display: none;
 }
 
+/* Unless this is for passengers, do not display the caught status column. */
+.fishtrain-schedule-list:not(.passenger) td.fish-caughtStatus {
+  display: none;
+}
+
+/* For passengers, always allow clicking on the checklist button */
+.fishtrain-schedule-list.passenger tr.fish-entry.expired td.fish-caughtStatus {
+  cursor: auto;
+  pointer-events: auto;
+}
 
 #departure-message:not(.visible) {
   display: none;
