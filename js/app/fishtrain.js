@@ -368,6 +368,11 @@ let FishTrain = function(){
     scheduleListEntry:
      `{{ var schedEntry = it; it = schedEntry.fishEntry; }}
       <tr class="scheduled-fish-entry fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}}" data-id="{{=it.id}}">
+        <td class="fish-caughtStatus">
+          <div class="ui middle aligned mini very compact icon button fishCaught">
+            <i class="checkmark icon"></i>
+          </div>
+        </td>
         <td class="fish-icon-and-name collapsing">
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
           <div class="ui middle aligned" style="display: inline-block;">
@@ -473,6 +478,11 @@ let FishTrain = function(){
     scheduleListIntuitionEntry:
      `{{ var schedEntry = it; it = schedEntry.fishEntry; }}
       <tr class="scheduled-fish-entry fish-intuition-row fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}}" data-id="{{=it.id}}" data-intuitionfor="{{=it.intuitionFor.id}}">
+        <td class="fish-caughtStatus">
+          <div class="ui middle aligned mini very compact icon button fishCaught">
+            <i class="checkmark icon"></i>
+          </div>
+        </td>
         <td class="fish-icon-and-name collapsing">
           <div class="intuition-count">{{=it.intuitionCount}}</div>
           <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
@@ -969,6 +979,7 @@ let FishTrain = function(){
       }
       this.timelineReady = false;
       this.scheduleEntries = [];
+      this.completion = new Set();
 
       // Save certain DOM element references.
       this.scheduleListEntries$ = $('.fishtrain-schedule-list tbody');
@@ -996,6 +1007,7 @@ let FishTrain = function(){
         this.redeemPass(trainPass);
       }
 
+      this.initializeCompletion();
     }
 
     redeemPass(trainPass) {
@@ -1189,6 +1201,10 @@ let FishTrain = function(){
     initCommonEventHandlers() {
       $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
       $('body').on('click', '.location-button', this, this.onFishEntryShowLocationClicked);
+      if (I_AM_A_PASSENGER) {
+        this.scheduleListEntries$.on(
+          'click', '.fishCaught.button', this, this.onFishEntryCaughtClicked);
+      }
     }
 
     initReact() {
@@ -2313,6 +2329,96 @@ let FishTrain = function(){
         localStorage.fishTrainToolSettings =
           JSON.stringify(this.settings,
                         (key, value) => value instanceof Set ? [...value] : value);
+      } catch (ex) {
+        console.warn("Unable to save settings to local storage.");
+      }
+    }
+
+    onFishEntryCaughtClicked(e) {
+      e.stopPropagation();
+      let $this = $(this);
+
+      let model = $this.closest('.fish-entry').data('model');
+      let entry = model.fishEntry;
+      let fishId = entry.id;
+      let listEl = model.listEl;
+
+      if (e.data.completion.has(fishId)) {
+        // Odd... but maybe they clicked it by mistake?!
+        e.data.completion.delete(fishId);
+        $(listEl).find(".button.fishCaught").removeClass('green');
+        $(listEl).removeClass('fish-caught');
+      } else {
+        // Hurray, congrats on the catch!
+        e.data.completion.add(fishId);
+        $(listEl).find(".button.fishCaught").addClass('green');
+        $(listEl).addClass('fish-caught');
+      }
+
+      // Update the local storage.
+      e.data.saveCompletion();
+
+      return false;
+    }
+
+    initializeCompletion() {
+      // Intended for passengers only. Attempt loading the user's existing completion status.
+      // Some users may not have any existing data. We must be very careful not to break
+      // the main page in this case.
+      // KEEP IN MIND, IF THE USER HAS BOTH THE MAIN TRACKER OPEN AND A FISH PASS OPEN, THE
+      // CHANGES WILL NOT BE PROPAGATED!!!
+      // Keeping track of this would be difficult and likely require a transaction log which
+      // kinda just wastes local storage memory...
+
+      this.completion = new Set();
+      try {
+        if (localStorage.getItem('fishTrackerSettings')) {
+          let settings = JSON.parse(localStorage.fishTrackerSettings);
+          if (settings.completed) {
+            // Initialize to saved completed list.
+            this.completion = new Set(settings.completed);
+          }
+        } else {
+          // Legacy mode (or brand new user)
+          if (localStorage.completed) {
+            // Initialize to saved completed list.
+            this.completion = new Set(JSON.parse(localStorage.completed));
+          }
+        }
+      } catch (ex) {
+        // Ignore this. This may happen if localStorage is disabled or private browsing.
+        console.warn("Unable to access localStorage. Settings not restored.");
+      }
+
+      // Update the view with the restored completion status.
+      let alreadyCaughtIds = this.completion;
+      this.scheduleListEntries$.find('tr.fish-entry').each(function() {
+        if (alreadyCaughtIds.has(Number($(this).data('id')))) {
+          $(this).find('.button.fishCaught').addClass('green');
+          $(this).addClass('fish-caught');
+        }
+      });
+    }
+
+    saveCompletion() {
+      // KEEP IN MIND, IF THE USER HAS BOTH THE MAIN TRACKER OPEN AND A FISH PASS OPEN, THE
+      // CHANGES WILL NOT BE PROPAGATED HERE. THIS FUNCTION WILL OVERWRITE THE CHECKLIST!
+      // This function ALWAYS checks if "fishTrackerSettings" exists first!!!
+      console.log("Saving completion status to local storage...");
+      try {
+        if (localStorage.getItem('fishTrackerSettings')) {
+          let settings = JSON.parse(localStorage.fishTrackerSettings);
+          // Just overwrite the `completed` field and save.
+          settings.completed = this.completion;
+          localStorage.fishTrackerSettings =
+            JSON.stringify(settings,
+                           (key, value) => value instanceof Set ? [...value] : value);
+        } else {
+          // Legacy mode (or brand new user)
+          // Save the `completed` field directly to localStorage so when the user tries
+          // out the main tracker, the full settings are created properly.
+          localStorage.completed = JSON.stringify([...this.completion]);
+        }
       } catch (ex) {
         console.warn("Unable to save settings to local storage.");
       }
