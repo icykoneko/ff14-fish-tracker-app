@@ -111,5 +111,6 @@ const EXTRA_DATA = {
         "Moonlight Guppy": { video: { youtube: "Y-C_45RJ2Ic" } },
         "Starbright": { video: { youtube: "CKESUzQydfo" } },
         "Planetes": { video: { youtube: "S8GR8BkyBOM" } },
+        "Argonauta argo": { video: { youtube: "L7riXx4ziS8" } },
     },
 };
