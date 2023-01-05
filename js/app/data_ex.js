@@ -112,5 +112,6 @@ const EXTRA_DATA = {
         "Starbright": { video: { youtube: "CKESUzQydfo" } },
         "Planetes": { video: { youtube: "S8GR8BkyBOM" } },
         "Argonauta argo": { video: { youtube: "L7riXx4ziS8" } },
+        "Lale Crab": { video: { youtube: "HgxUllAscwg" } },
     },
 };
