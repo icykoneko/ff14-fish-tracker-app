@@ -1541,18 +1541,21 @@ let FishTrain = function(){
 
           // Update countdown information.
           if (!hasExpired) {
+            const isActive = scheduleEntry$.hasClass('fish-active');
             let endDate = entry.range.start;
-            if (scheduleEntry$.hasClass('fish-active')) {
+            let windowDuration = dateFns.intervalToDuration(entry.range);
+            if (isActive) {
               endDate = entry.range.end;
             }
             let countdownDuration = dateFns.intervalToDuration({start: timestamp, end: endDate});
+            let txt = formatDuration(countdownDuration, (isActive ? 'closes ' : '') + 'in ', endDate);
+            if (!isActive) {
+              txt += "<br/>Lasting: " + dateFns.formatDuration(windowDuration, {format: ['minutes']});
+            }
             currentAvail$
               .attr('data-val', endDate)
               .attr('data-tooltip', dateFns.format(endDate, 'Pp'))
-              .text(formatDuration(
-                countdownDuration,
-                (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ',
-                endDate));
+              .html(txt);
           } else {
             currentAvail$.text("");
           }
