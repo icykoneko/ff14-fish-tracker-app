@@ -1808,19 +1808,6 @@ let FishTrain = function(){
       $(_this.currentPopup).popup('hide');
 
       // Update the schedule.
-      // MAKE SURE YOU HAVEN'T ALREADY ADDED THIS ENTRY TO THE BAR!!!
-      // For now, we're just going to prevent users from adding the same fish twice
-      if (_(_this.scheduleEntries).find(
-        entry => entry.fishEntry.id == _this.currentSelection.entry.id))
-      {
-        // That fish is already in the schedule.
-        $('body').toast({
-          class: 'error',
-          message: `${_this.currentSelection.entry.data.name} is already in the schedule.`
-        });
-        return;
-      }
-
       var viewParams = {
         timeOffset: dateFns.differenceInMinutes(
           _this.currentSelection.range.start, _this.timeline.start, {roundingMethod: 'floor'}),
