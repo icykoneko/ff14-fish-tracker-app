@@ -1541,18 +1541,21 @@ let FishTrain = function(){
 
           // Update countdown information.
           if (!hasExpired) {
+            const isActive = scheduleEntry$.hasClass('fish-active');
             let endDate = entry.range.start;
-            if (scheduleEntry$.hasClass('fish-active')) {
+            let windowDuration = dateFns.intervalToDuration(entry.range);
+            if (isActive) {
               endDate = entry.range.end;
             }
             let countdownDuration = dateFns.intervalToDuration({start: timestamp, end: endDate});
+            let txt = formatDuration(countdownDuration, (isActive ? 'closes ' : '') + 'in ', endDate);
+            if (!isActive) {
+              txt += "<br/>Lasting: " + dateFns.formatDuration(windowDuration, {format: ['minutes']});
+            }
             currentAvail$
               .attr('data-val', endDate)
               .attr('data-tooltip', dateFns.format(endDate, 'Pp'))
-              .text(formatDuration(
-                countdownDuration,
-                (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ',
-                endDate));
+              .html(txt);
           } else {
             currentAvail$.text("");
           }
@@ -1808,19 +1811,6 @@ let FishTrain = function(){
       $(_this.currentPopup).popup('hide');
 
       // Update the schedule.
-      // MAKE SURE YOU HAVEN'T ALREADY ADDED THIS ENTRY TO THE BAR!!!
-      // For now, we're just going to prevent users from adding the same fish twice
-      if (_(_this.scheduleEntries).find(
-        entry => entry.fishEntry.id == _this.currentSelection.entry.id))
-      {
-        // That fish is already in the schedule.
-        $('body').toast({
-          class: 'error',
-          message: `${_this.currentSelection.entry.data.name} is already in the schedule.`
-        });
-        return;
-      }
-
       var viewParams = {
         timeOffset: dateFns.differenceInMinutes(
           _this.currentSelection.range.start, _this.timeline.start, {roundingMethod: 'floor'}),
@@ -2343,16 +2333,22 @@ let FishTrain = function(){
       let fishId = entry.id;
       let listEl = model.listEl;
 
+      // If this fish appears multiple times in the list, we need to include those
+      // nodes as well.
+      let entryNodes$ = $(listEl).add(
+        $(`.scheduled-fish-entry[data-id="${fishId}"]`));
+
+
       if (e.data.completion.has(fishId)) {
         // Odd... but maybe they clicked it by mistake?!
         e.data.completion.delete(fishId);
-        $(listEl).find(".button.fishCaught").removeClass('green');
-        $(listEl).removeClass('fish-caught');
+        entryNodes$.find(".button.fishCaught").removeClass('green');
+        entryNodes$.removeClass('fish-caught');
       } else {
         // Hurray, congrats on the catch!
         e.data.completion.add(fishId);
-        $(listEl).find(".button.fishCaught").addClass('green');
-        $(listEl).addClass('fish-caught');
+        entryNodes$.find(".button.fishCaught").addClass('green');
+        entryNodes$.addClass('fish-caught');
       }
 
       // Update the local storage.
