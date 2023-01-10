@@ -28,7 +28,7 @@ let FishGuide = function(){
 
     // Fish Grid.
     fishGrid: `<div class="fish-grid" id="fishGuideGrid">
-  {{~ _.range(25) :k}}
+  {{~ _.range(100) :k}}
     {{#def.fishGridEntry}}
   {{~}}
 </div>`,
@@ -67,7 +67,7 @@ let FishGuide = function(){
       this.fishGuideFn = doT.template(fishGuideTmpl, undefined, templates);
 
       // Initialize fields.
-      this.MAX_PAGE = Math.ceil(_(FISH_INFO).keys().length / 25.0);
+      this.MAX_PAGE = Math.ceil(_(FISH_INFO).keys().length / 100.0);
       this.pageNumbers = _.range(1, this.MAX_PAGE + 1);
       this.currentPage = 1;
       this.pageRange = 1;
@@ -264,7 +264,7 @@ let FishGuide = function(){
 
       // Finally, update the page contents.
       // We take advantage of DOM data in order to avoid extra lookups.
-      let fishInfosForPage = FISH_INFO.slice(25 * (page - 1), (25 * (page - 1)) + 25);
+      let fishInfosForPage = FISH_INFO.slice(100 * (page - 1), (100 * (page - 1)) + 100);
       for (i = 0; i < fishInfosForPage.length; i++) {
         $(this.fishGridEntries$[i]).data('fishInfo', fishInfosForPage[i])
                                    .removeClass('disabled')
@@ -296,7 +296,7 @@ let FishGuide = function(){
     toggleFishCaughtState(fishEntry$) {
       let fishInfo = fishEntry$.data('fishInfo');
       // Assuming everything has stayed up-to-date, we can trust the 'caught'
-      // class' presense to determine if the fish is caught or not.
+      // class' presence to determine if the fish is caught or not.
       var isCaught = null;
       if (!fishEntry$.hasClass('caught')) {
         // The fish has been marked as caught now.

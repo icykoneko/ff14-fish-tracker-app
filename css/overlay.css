@@ -531,7 +531,7 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   grid-template-rows: min-content 1fr;
 }
 /* Handle mobile devices in portrait orientation. */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .fish-guide {
     grid-template-areas: "page-selector"
                          "fish-grid-out"
@@ -557,12 +557,12 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
 .fish-guide .fish-grid {
   justify-content: center;
   display: grid;
-  grid-gap: 8px;
-  grid-template-columns: repeat(5, max-content);
+  grid-gap: 2px;
+  grid-template-columns: repeat(10, max-content);
 }
 .fish-guide .fish-entry {
-  height: 60px;
-  width: 60px;
+  height: 46px;
+  width: 46px;
   position: relative;
 }
 .fish-guide .fish-entry:not(.disabled),
@@ -574,9 +574,8 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   background-color: yellow;
 }
 .fish-guide .fish-entry .fish-icon {
-  margin-top: 2px;
-  margin-left: 2px;
-  transform: scale(1.27) translate(5px, 5px);
+  margin-top: 1px;
+  margin-left: 1px;
 }
 
 .fish-guide .fish-entry .ui.left.corner.label {
