@@ -34,3 +34,6 @@
   bait: [Grey Worm, Vacuum Shrimp]
 - name: Antheian Dahlia
   bait: [Mayfly]
+- name: Mossgill Salmon
+  bait: [Sky Spoon Lure]
+  tug: heavy
