@@ -47,23 +47,25 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
   * `git diff -U20 my-current`
   * If necessary, update the `saintcoinach-py` project to reflect any recent changes and comment to the local repo there. (Yes, that's right, I ported SaintCoinach to Python!)
   * Switch to the *my-current* branch, and merge the latest changes from *master*: `git merge master` or use the GitDesktop app to make life easier...
+  * In this repo, use the `git submodule update --recursive --remote` command to checkout the updates.
 * Rebuild the fish data JS file: `python ./private/manageFishData.py rebuild -i ./private/fishData.yaml -o ./js/app/data.js --with-icons`
   * If changes to the SaintCoinach library break the script, fix it, then commit the changes as a separate commit.
   * **NOTE:** Pay attention to the log messages. If the script extracted any new textures, you'll need to update the sprite image.
-  * Update the *cache buster* in `index.html` for `js/app/data.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
+  * Update the *cache buster* in `index.html`, `fishtrain.html`, and `trainpass/index.html` for `js/app/data.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
 * Rebuild the fish guide JS file: `python ./private/rebuildFishGuide.py -o ./js/app/fish_info_data.js --with-icons`
   * If changes to the SaintCoinach library break the script, fix it, then commit the changes as a separate commit.
   * **NOTE:** Pay attention to the log messages. If the script extracted any new textures, you'll need to update the sprite image.
-  * Update the *cache buster* in `index.html` for `js/app/fish_info_data.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
+  * Update the *cache buster* in `index.html`, `fishtrain.html`, and `trainpass/index.html` for `js/app/fish_info_data.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
 * If adding fish for a new patch;
-  * Add the new patch to `SiteSettings::filters::patch` in `viewmodel.js`.
-  * Update the `LATEST_PATCH` to the new patch number (only needed for M.m patches, not M.mm)
+  * Add the new patch to `SiteSettings::filters::patch` in `viewmodel.js` and `fishtrain.js`.
+  * Update the `LATEST_PATCH` to the new patch number (only needed for M.m patches, not M.mm) in `viewmodel.js` only.
     * Set the date for `SHOW_LATEST_PATCH_AFTER` to patch release date, plus 2 weeks to prevent spoilers.
   * Update the *cache buster* in `index.html` for `js/app/viewmodel.js`. Use the format: `?YYYYMMDD_HHMM`.
-  * Replace the `disabled` class from the new patch version with `active` in `index.html`.
+  * Update the *cache buster* in `fishtrain.html` and `trainpass/index.html` for `js/app/fishtrain.js`. Use the format: `?YYYYMMDD_HHMM`.
+  * Replace the `disabled` class from the new patch version with `active` in `index.html` and `fishtrain.html`.
     * **NOTE:** If it's a new expansion, well... make sure it looks nice, and set the patch buttons to `disabled` at first.
 * If new textures were extracted (i.e. new fish images, or new bait images);
-  * Update the *cache buster* in `index.html` for `public/images/sprite.css`. Use the format `?${ver}_YYYYMMDD`.
+  * Update the *cache buster* in `index.html`, `fishtrain.html`, and `trainpass/index.html` for `public/images/sprite.css`. Use the format `?${ver}_YYYYMMDD`.
   * Rebuild the sprite image using: `sprity create ./public/images/ ./private/images/**/*.png -c . -s sprite.css --prefix sprite-icon --margin 2 --orientation binary-tree --engine jimp`
     * **NOTE:** This command **must** be run via CMD, not bash. For some reason, bash will cause the entries in the CSS to be different...
   * Edit the `public/images/sprite.css` file and add a *cache buster* to the main image. Use the format: `?YYYYMMDD`.
@@ -75,7 +77,7 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
 
 ### Updating Video Links
 * Remember to use ENGLISH item names, or Item ID as the key.
-* Update the *cache buster* in `index.html` for `js/app/data_ex.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
+* Update the *cache buster* in `index.html`, `fishtrain.html`, and `trainpass/index.html` for `js/app/data_ex.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
 * Validate changes when testing site locally. Open the console and run `_validate_extra_data()`.
 * **NOTE:** You do not need to rebuild the database if only adding/updating video links.
 * Changes _should_ be commited to master, then merged with gh-pages branch. This will reduce confusion later, maybe...

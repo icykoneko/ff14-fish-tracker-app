@@ -117,8 +117,8 @@ def _build_fish_infos():
             # TODO: These should be normalized to reduce data size
             *_make_localized_field('record', fish, 'FishingRecordType'),
             # TODO: Normalize the two fields by reusing existing data in DATA.[REGIONS|ZONES]
-            *_make_localized_field('region', fish['TerritoryType'].region_place_name, 'Name'),
-            *_make_localized_field('zone', fish['TerritoryType'].place_name, 'Name'),
+            *_make_localized_field('region', fish['FishingSpot'].territory_type.region_place_name, 'Name'),
+            *_make_localized_field('zone', fish['FishingSpot'].territory_type.place_name, 'Name'),
             ])
         fish_infos += [fish_info]
 

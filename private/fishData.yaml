@@ -12598,3 +12598,248 @@
   hookset: Precision
   snagging:
   patch: 6.2
+# Patch 6.3 (2023-01-10)
+- name: Ondo Kelp
+  location: The Eastern Kholusian Coast
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Purpure Cod
+  location: Purpure
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Il Lydha
+  location: The Norvrandt Slope
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Catastrophizer
+  location: Reflecting Pool
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Mossgill Salmon
+  location: The Mover Alpha
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Jhinga
+  location: The Thavnairian Coast
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Vidyutvat Wrasse
+  location: The Great Runoff
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Browned Banana Eel
+  location: Pavana's Remorse
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Frozen Regotoise
+  location: The Frozen Fissure
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Phyllinos
+  location: The Lower Hungering Gardens
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Antheian Dahlia
+  location: Lethe
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Cosmic Haze
+  location: Apohelos 18-γ
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.3
+  dataMissing: true
+- name: Ken Kiln
+  location: Southwestern Isle of Ken
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.3
+  dataMissing: true
+- name: Glorianda's Tear
+  location: The House of the First Light
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.3
+  dataMissing: true
+- name: Verdigris Guppy
+  location: Northeast Bronze Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.3
+  dataMissing: true
+- name: Lakeskipper
+  location: Northeast Bronze Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.3
+  dataMissing: true
+- name: Bronze Eel
+  location: Northeast Bronze Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.3
+  dataMissing: true
+- name: Striped Peacock Bass
+  location: Northeast Bronze Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.3
+  dataMissing: true
+- name: Bronze Trout
+  location: Northeast Bronze Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.3
+  dataMissing: true
+- name: Nosceasaur
+  location: Northeast Bronze Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 6.3
+  dataMissing: true
