@@ -106,22 +106,23 @@ let CarbyUtils = function(){
 
       let fish_entry = _(Fishes).findWhere({id: item_entry._id});
       if (options.weatherSet !== undefined) {
-        fish_entry.weatherSet =
+        fish_entry.weatherSet = DATA.FISH[item_entry._id].weatherSet =
           _(options.weatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
         fish_entry.conditions.weatherSet =
           _(fish_entry.weatherSet).map(w => DATA.WEATHER_TYPES[w]);
+        
       }
       if (options.previousWeatherSet !== undefined) {
-        fish_entry.previousWeatherSet =
+        fish_entry.previousWeatherSet = DATA.FISH[item_entry._id].previousWeatherSet =
           _(options.previousWeatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
         fish_entry.conditions.previousWeatherSet =
           _(fish_entry.previousWeatherSet).map(w => DATA.WEATHER_TYPES[w]);
       }
       if (options.startHour !== undefined) {
-        fish_entry.startHour = options.startHour;
+        fish_entry.startHour = DATA.FISH[item_entry._id].startHour = options.startHour;
       }
       if (options.endHour !== undefined) {
-        fish_entry.endHour = options.endHour;
+        fish_entry.endHour = DATA.FISH[item_entry._id].endHour = options.endHour;
       }
       if ((options.startHour !== undefined) || (options.endHour !== undefined)) {
         let totalHoursUp = Math.abs(fish_entry.endHour - fish_entry.startHour);
