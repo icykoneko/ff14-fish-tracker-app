@@ -59,3 +59,9 @@
   weatherSet: [Rain]
   bait: [Mayfly]
   tug: heavy
+- name: Catastrophizer
+  startHour: 0
+  endHour: 16
+  weatherSet: [Clear Skies]
+  bait: [Mayfly]
+  tug: heavy
