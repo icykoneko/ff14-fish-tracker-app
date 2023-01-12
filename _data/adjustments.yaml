@@ -31,13 +31,31 @@
 - name: Phyllinos
   bait: [Mayfly]
 - name: Cosmic Haze
+  startHour: 16
+  endHour: 8
+  weatherSet: [Astromagnetic Storm]
   bait: [Grey Worm, Vacuum Shrimp]
+  tug: heavy
 - name: Antheian Dahlia
+  startHour: 0
+  endHour: 16
+  previousWeatherSet: [Clouds]
+  weatherSet: [Clear Skies]
   bait: [Mayfly]
+  tug: heavy
 - name: Mossgill Salmon
+  weatherSet: [Rain]
   bait: [Sky Spoon Lure]
   tug: heavy
 - name: Frozen Regotoise
+  startHour: 8
+  endHour: 16
+  weatherSet: [Umbral Wind]
   bait: [Chimera Worm]
+  tug: heavy
 - name: Browned Banana Eel
+  startHour: 16
+  endHour: 8
+  weatherSet: [Rain]
   bait: [Mayfly]
+  tug: heavy
