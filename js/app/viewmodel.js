@@ -215,11 +215,14 @@ class FishEntry {
           downtime = dateFns.formatDistanceStrict(
             eorzeaTime.toEarth(+crs[idx+1].start), end, { roundingMethod: 'floor' });
         }
+        let [previousWeather, weather] = _(weatherService.getWeatherSetForAreaAtTime(fish.location.zoneId, +cr.start)).map((w) => DATA.WEATHER_TYPES[w]);
         return {
           start: start,
           end: end,
           duration: dateFns.formatDistanceStrict(end, start, { roundingMethod: 'floor' }),
-          downtime: downtime
+          downtime: downtime,
+          previousWeather: previousWeather,
+          weather: weather
         };
       });
     }
