@@ -36,7 +36,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?6.3_20230110_0630" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20221023_1904" />
-    <link rel="stylesheet" href="css/overlay.css?20230109_2055" />
+    <link rel="stylesheet" href="css/overlay.css?20230112_1911" />
     <link rel="stylesheet" href="css/dark_overlay.css?20221023_1904" />
 
     <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
@@ -56,7 +56,7 @@
       -->
     <script type="text/javascript" src="js/app/time.js?20111013_2022"></script>
     <script type="text/javascript" src="js/app/fish.js?20220506_1500"></script>
-    <script type="text/javascript" src="js/app/weather.js?20220922_1828"></script>
+    <script type="text/javascript" src="js/app/weather.js?20230112_1911"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20220922_1828"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
@@ -427,6 +427,9 @@
             <b>Next Start</b>
           </div>
           <div class="header">
+            <b>Conditions/Time</b>
+          </div>
+          <div class="header">
             <b>Duration</b>
           </div>
           <div class="header">
@@ -435,6 +438,14 @@
           {{~it.availability.upcomingWindows :nextWindow:idx}}
             <div class="window-start">
               {{=dateFns.formatRelative(nextWindow.start, Date.now())}}
+            </div>
+            <div class="window-weather-and-time">
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=nextWindow.previousWeather.icon}}"
+                   title="{{=__p(nextWindow.previousWeather,'name')}}"></div>
+              <i class="arrow right icon"></i>
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=nextWindow.weather.icon}}"
+                   title="{{=__p(nextWindow.weather,'name')}}"></div>
+              at {{=dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(nextWindow.start)), "HH:mm")}}
             </div>
             <div class="window-duration">
               {{=nextWindow.duration}}
@@ -452,7 +463,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20230110_0639"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20230112_1911"></script>
 
     <script type="text/javascript">
       $(() => {

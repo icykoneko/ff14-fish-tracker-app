@@ -167,6 +167,33 @@ class WeatherService {
     }
     // The end =D
   }
+
+  getWeatherSetForAreaAtTime(area, dateTimeEorzea) {
+    // Compute the start of THIS window period, and the previous period.
+    let currentPeriodDate = startOfPeriod(dateTimeEorzea);
+    let previousPeriodDate = dateFns.utc.subHours(currentPeriodDate, 8);
+    // HOPEFULLY, these entries are still cached?!  They /should/ be if you
+    // are using this right.
+    // Use `findWhere` instead of `sortedIndex` to prevent any possible race-conditions
+    // with the pruning timer. Maybe locks would be nice, but meh...
+    let target = null;
+    let prevTarget = null;
+    let cachedTarget = _(this.__weatherData).findWhere({date: currentPeriodDate})
+    if (cachedTarget) {
+      target = cachedTarget.target;
+      cachedTarget = _(this.__weatherData).findWhere({date: previousPeriodDate})
+      if (cachedTarget) {
+        prevTarget = cachedTarget.target;
+      }
+    }
+    if (target === null) {
+      target = this.calculateForecastTarget(eorzeaTime.toEarth(currentPeriodDate));
+    }
+    if (prevTarget === null) {
+      prevTarget = this.calculateForecastTarget(eorzeaTime.toEarth(previousPeriodDate));
+    }
+    return [weatherForArea(area, prevTarget), weatherForArea(area, target)];
+  }
 }
 
 let weatherService = new WeatherService;
