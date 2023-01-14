@@ -65,3 +65,10 @@
   weatherSet: [Clear Skies]
   bait: [Mayfly]
   tug: heavy
+- name: Vidyutvat Wrasse
+  startHour: 16
+  endHour: 24
+  previousWeatherSet: [Clouds]
+  weatherSet: [Clear Skies]
+  bait: [Shrimp Ball]
+  tug: heavy
