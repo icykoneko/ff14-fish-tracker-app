@@ -20,13 +20,15 @@
       gtag('config', 'UA-142180509-1');
     </script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.css" /> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.3/doT.min.js"></script>
     <script src="public/js/lib/dateFns/2.25.0/dateFns.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.2/rxjs.umd.min.js"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css" />
@@ -306,7 +308,7 @@
       .ui.spinner.input .button.disabled {
           cursor: not-allowed;
       }
-      .ui.spinner.input .buttons .button {
+      .ui.spinner.input .ui.icon.buttons .button {
           /* background-color: #fff;
           border: 1px solid rgba(34, 36, 38, 0.15); */
           border-left: none;
@@ -621,6 +623,7 @@
           $('.ui.list').toggleClass('inverted', theme === 'dark');
           $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
           $('.ui.menu').toggleClass('inverted', theme === 'dark');
+          $('.ui.placeholder').toggleClass('inverted', theme === 'dark');
         }
 
         function themeButtonClicked(e) {
