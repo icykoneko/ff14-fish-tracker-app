@@ -29,24 +29,28 @@
 - name: Jhinga
   bait: [Mackerel Strip]
 - name: Phyllinos
+  startHour: 5
+  endHour: 8
   bait: [Mayfly]
+  tug: light
+  hookset: Precision
 - name: Cosmic Haze
   startHour: 20
   endHour: 4
   weatherSet: [Astromagnetic Storm]
-  bait: [Grey Worm, Vacuum Shrimp]
+  bait: [Chimera Worm, Vacuum Shrimp]
   tug: heavy
   hookset: Powerful
 - name: Antheian Dahlia
   startHour: 4
   endHour: 10
-  previousWeatherSet: [Clouds, Clear Skies]
+  previousWeatherSet: [Clouds]
   weatherSet: [Clear Skies]
   bait: [Mayfly]
   tug: heavy
   hookset: Precision
 - name: Mossgill Salmon
-  previousWeatherSet: [Clouds]
+  previousWeatherSet: [Clouds, Rain]
   weatherSet: [Rain]
   bait: [Sky Spoon Lure]
   tug: heavy
@@ -67,15 +71,16 @@
   hookset: Powerful
 - name: Catastrophizer
   startHour: 8
-  endHour: 16
+  endHour: 14
   weatherSet: [Clear Skies]
   bait: [Mayfly]
   tug: heavy
   hookset: Precision
 - name: Vidyutvat Wrasse
-  startHour: 16
+  startHour: 20
   endHour: 24
-  previousWeatherSet: [Clouds, Showers]
+  previousWeatherSet: [Clouds]
   weatherSet: [Clear Skies]
   bait: [Shrimp Ball]
   tug: heavy
+  hookset: Powerful
