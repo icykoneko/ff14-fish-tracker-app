@@ -112,15 +112,7 @@ git commit
 git push
 ```
 
-## TODOs
-* Automation of sprite generation
-* Better automation of fish data updating...
-* Add filter settings to import/export blob.
-* Provide option for displaying actual time instead of relative time by default.
-* Add GUI that resembles the in-game fishing log, allowing users an easier method of checking off the fish they've caught.
-* Add area filtering?
-
 # Contributing
 There's lots of features waiting to be implemented if you feel you have an idea for tackling them. Please follow existing code patterns with regards to style, and when possible, utilize the Semantic UI widgets so everything meshes nicely. Keep PRs simple to ensure they get merged sooner.
 
-For changes to availability of specific fish, please contact me directly via Discord (via Fish'cord). Please do not open issues here for that purpose.
+For changes to availability of specific fish, please contact me directly via Discord (via [Fish'cord](https://discord.gg/fishcord)). Please do not open issues here for that purpose.
