@@ -919,6 +919,16 @@ let ViewModel = new class {
         $('*[data-tooltip]', $subEntry).attr('data-inverted', '');
       }
 
+      $('.upcoming-windows-button', $subEntry).on('click', e => {
+        console.info("Displaying upcoming windows for %s", intuitionFish.data.name);
+        this.displayUpcomingWindows(intuitionFishEntry);
+      });
+
+      $('.alarm-cmd-button', $subEntry).on('click', e => {
+        console.info("Displaying in-game alarm command for %s", intuitionFish.data.name);
+        this.displayAlarmCommand(intuitionFishEntry);
+      });
+
       // Unlike normal entries, this only gets added to the parent fish.
       entry.intuitionEntries.push(intuitionFishEntry);
     }
@@ -947,7 +957,6 @@ let ViewModel = new class {
       console.info("Displaying in-game alarm command for %s", fish.name);
       this.displayAlarmCommand(entry);
     });
-    
 
     // Connect location button.
     $('.location-button', $entry).on('click', this.onFishEntryShowLocationClicked);
