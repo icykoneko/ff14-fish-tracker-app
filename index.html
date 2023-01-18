@@ -370,12 +370,9 @@ title: Home
             {{?}}
             <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">
               {{=it.availability.current.duration}}
-            </span>
-          {{?}}
-        </td>
-        <td class="fish-availability">
-          {{?!it.data.alwaysAvailable}}
+            </span><br/>
             <span style="font-size: smaller">
+              <i class="upcoming-windows-button calendar icon"></i>
               <span style="white-space: nowrap !important">
                 <b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%
               </span>
@@ -383,8 +380,13 @@ title: Home
                 <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">{{=it.availability.upcoming.downtime}}</span>
               </span>
             </span>
+            <div class="ui longer flushed modal upcoming-windows"></div>
           {{?}}
         </td>
+        <!-- Location (empty for intuition reqs) -->
+        <td>
+        </td>
+        <!-- Conditions -->
         <td>
           {{?it.data.dataMissing !== false}}
             {{?it.data.dataMissing.weatherRestricted}}
@@ -536,7 +538,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20230112_1911"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20230117_1917"></script>
 
     <script type="text/javascript">
       $(() => {
