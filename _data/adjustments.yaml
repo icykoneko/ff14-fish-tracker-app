@@ -50,7 +50,7 @@
   tug: heavy
   hookset: Precision
 - name: Mossgill Salmon
-  previousWeatherSet: [Clouds, Rain]
+  previousWeatherSet: [Clouds]
   weatherSet: [Rain]
   bait: [Sky Spoon Lure]
   tug: heavy
@@ -71,7 +71,8 @@
   hookset: Powerful
 - name: Catastrophizer
   startHour: 8
-  endHour: 14
+  endHour: 16
+  previousWeatherSet: [Fair Skies]
   weatherSet: [Clear Skies]
   bait: [Mayfly]
   tug: heavy
