@@ -12606,12 +12606,12 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Metal Spinner
   predators:
   tug:
   hookset:
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Purpure Cod
   location: Purpure
   startHour: 0
@@ -12619,12 +12619,12 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Metal Spinner
   predators:
   tug:
   hookset:
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Il Lydha
   location: The Norvrandt Slope
   startHour: 0
@@ -12632,38 +12632,42 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Metal Spinner
   predators:
   tug:
   hookset:
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Catastrophizer
   location: Reflecting Pool
-  startHour: 0
-  endHour: 24
+  startHour: 8
+  endHour: 14
   previousWeatherSet:
+  - Fair Skies
   weatherSet:
+  - Clear Skies
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Precision
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Mossgill Salmon
   location: The Mover Alpha
   startHour: 0
   endHour: 24
   previousWeatherSet:
+  - Clouds
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Sky Spoon Lure
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Jhinga
   location: The Thavnairian Coast
   startHour: 0
@@ -12671,90 +12675,98 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Mackerel Strip
   predators:
   tug:
   hookset:
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Vidyutvat Wrasse
   location: The Great Runoff
-  startHour: 0
+  startHour: 20
   endHour: 24
   previousWeatherSet:
+  - Clouds
   weatherSet:
+  - Clear Skies
   bestCatchPath:
+  - Shrimp Ball
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Browned Banana Eel
   location: Pavana's Remorse
-  startHour: 0
-  endHour: 24
+  startHour: 22
+  endHour: 2
   previousWeatherSet:
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Frozen Regotoise
   location: The Frozen Fissure
-  startHour: 0
-  endHour: 24
+  startHour: 10
+  endHour: 13
   previousWeatherSet:
   weatherSet:
+  - Umbral Wind
   bestCatchPath:
+  - Chimera Worm
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Phyllinos
   location: The Lower Hungering Gardens
-  startHour: 0
-  endHour: 24
+  startHour: 5
+  endHour: 8
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Antheian Dahlia
   location: Lethe
-  startHour: 0
-  endHour: 24
+  startHour: 4
+  endHour: 10
   previousWeatherSet:
+  - Clouds
   weatherSet:
+  - Clear Skies
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Precision
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Cosmic Haze
   location: Apohelos 18-γ
-  startHour: 0
-  endHour: 24
+  startHour: 20
+  endHour: 4
   previousWeatherSet:
   weatherSet:
+  - Astromagnetic Storm
   bestCatchPath:
+  - Chimera Worm
+  - Vacuum Shrimp
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.3
-  dataMissing: true
 - name: Ken Kiln
   location: Southwestern Isle of Ken
   startHour: 0
