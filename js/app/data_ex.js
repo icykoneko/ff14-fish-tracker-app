@@ -113,5 +113,6 @@ const EXTRA_DATA = {
         "Planetes": { video: { youtube: "S8GR8BkyBOM" } },
         "Argonauta argo": { video: { youtube: "L7riXx4ziS8" } },
         "Lale Crab": { video: { youtube: "HgxUllAscwg" } },
+        "Phyllinos": { video: { youtube: "UWaQO_15bbg" } },
     },
 };
