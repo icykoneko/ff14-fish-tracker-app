@@ -1019,12 +1019,22 @@ let FishTrain = function(){
         this.departureCountdown$.text(dateFns.formatDistance(Date.now(), this.timeline.start, {includeSeconds: true}));
       }
 
-      // Here's where it starts to get tricky.
-      // Fish Watcher and Weather Service are still not active yet, and we need
-      // them. But first, we need to generate FishEntry's for all of the fish
-      // mentioned in the schedule entries.  Mind you, the entries in the pass
-      // are not real ScheduleEntry objects, but to make those, you need FishEntry
-      // objects. Look, it's gonna work out, trust the process.
+      // Before you do anything else, RESET THE SITE DATA!
+      // This will force the Weather Service to reset any data and begin computing
+      // ranges based on the timeline's start (not the current time).
+      // This is critical because depending on the amount of time between now and
+      // the train start, the catchable range data might be close enough to not
+      // require recomputation, or far enough that pruning doesn't correctly match
+      // the original range indices.
+      // Look, trust the process, believe in the power of the power cycle, and all
+      // the fish will be just fine <><.  See, happy fish. ><> <3
+      CarbyUtils._resetSiteData(+this.timeline.start);
+
+      // The Fish Watcher service is still not active because we need to generate
+      // FishEntry's for all of the fish mentioned in the schedule entries.
+      // Mind you, the entries in the pass are not real ScheduleEntry objects, but
+      // to make those, you need FishEntry objects.
+      // Look, it's gonna work out, trust the process.
       this.fishEntries = {};
       // Link it to the fishWatcher.
       fishWatcher.fishEntries = this.fishEntries;
