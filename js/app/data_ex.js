@@ -114,5 +114,10 @@ const EXTRA_DATA = {
         "Argonauta argo": { video: { youtube: "L7riXx4ziS8" } },
         "Lale Crab": { video: { youtube: "HgxUllAscwg" } },
         "Phyllinos": { video: { youtube: "UWaQO_15bbg" } },
+        "Xenacanthus": { video: { youtube: "PID1bHk7zNc" } },
+        "Catastrophizer": { video: { youtube: "h5wkF9TUIWI" } },
+        "Golden Pipira": { video: { youtube: "YTup694lP8s" } },
+        "Cosmic Haze": { video: { youtube: "AYwVLaOln58" } },
+        "Sweetheart": { video: { youtube: "KQU8ZQ8mjFE" } },
     },
 };
