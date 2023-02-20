@@ -684,9 +684,11 @@ def convert_fish_to_json(fish: Fish):
         weather_keys = list(sorted([WEATHER[x] for x in (db_entry['weather'] or [])]))
         prev_weather_keys = list(sorted([WEATHER[x] for x in (db_entry['prevWeather'] or [])]))
         bait_keys = [ITEM[x] for x in (db_entry['bait'] or [])]
-        intuition_entries = {}
+        # Javascript will auto-sort keys that look like numbers in a dictionary...
+        # So, store each entry as an array instead...
+        intuition_entries = []
         if db_entry.get('intuition') is not None:
-            intuition_entries = dict([(ITEM[x[0]], x[1]) for x in db_entry['intuition'].items()])
+            intuition_entries = list([(ITEM[x[0]], x[1]) for x in db_entry['intuition'].items()])
 
         def get_location_key(spot):
             if isinstance(spot, SpearfishingNode):

@@ -260,9 +260,11 @@ class FishWatcher {
     // If this fish has predators, we have to consider their windows too...
     // Basically, to ensure we get the same number of windows for every fish,
     // we'll intersect this range with the UNION of its predators' ranges.
-    if (_(fish.predators).size() > 0) {
+    if (_(fish.intuitionFish).size() > 0) {
       var overallPredRange = null;
+      var acceptedPredRange = null;
       var predatorsAlwaysAvailable = true;
+      var missingPreReq = false;
       // This key value is in seconds, we will need to convert it to Eorzean time first
       var intuitionLength = fish.intuitionLength;
       // If no key was defined, default to 1 Eorzean hour duration
@@ -270,63 +272,144 @@ class FishWatcher {
       // (e.g. 100 Earth seconds)
       if (intuitionLength !== null && intuitionLength !== undefined) {
         intuitionLength = eorzeaTime.toEorzea(intuitionLength);
-      } else { intuitionLength = 3600; }
-      _(fish.predators).chain().keys().each((predId) => {
-        var predatorFish = _(Fishes).findWhere({id: Number(predId)});
-        if (this._isFishAlwaysUp(predatorFish)) { return nextRange; }
-        predatorsAlwaysAvailable = false;
-        // Once again, we need to check if the weather right now works for
-        // the predator fish.
-        var iter = weatherService.findWeatherPattern(
-          +nextRange.start,
-          predatorFish.location.zoneId,
-          predatorFish.previousWeatherSet,
-          predatorFish.weatherSet,
-          1);
-        var _iterItem = iter.next();
-        weatherService.finishedWithIter();
-        if (_iterItem.done) {
-          // Wait wait wait, try one more thing.
-          // Let's say you catch the fish during the intuition buff period!
-          iter = weatherService.findWeatherPattern(
-            +dateFns.utc.subSeconds(nextRange.start, intuitionLength),
+      } else {
+        intuitionLength = 3600;
+      }
+      var prereqMet = _(fish.intuitionFish).chain()
+        .map(x => x.data)
+        .all(function(predatorFish) {
+          if (this._isFishAlwaysUp(predatorFish)) { return true; }
+          predatorsAlwaysAvailable = false;
+          var predWindow = null;
+          var predRanges = [];
+          // Once again, we need to check if the weather right now works for
+          // the predator fish.
+          var iter = weatherService.findWeatherPattern(
+            +nextRange.start,
             predatorFish.location.zoneId,
             predatorFish.previousWeatherSet,
             predatorFish.weatherSet,
             1);
-          _iterItem = iter.next();
+          var _iterItem = iter.next();
           weatherService.finishedWithIter();
-          if (_iterItem.done) { return; }
-        }
-        var predWindow = _iterItem.value;
-        var predRanges = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
-        for (var predRange of predRanges) {
-          if (!dateFns.areIntervalsOverlapping(predWindow, predRange)) { continue /*nextRange = null*/; }
-          if (dateFns.isSameOrBefore(predRange.end, baseTime)) {
-            continue /*nextRange = null*/;
+          if (!_iterItem.done) {
+            predWindow = _iterItem.value;
+            predRanges = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
           }
-          // Because of the "intuition window" being added, we need to re-constrain the predRange.
-          predRange = dateFns.intervalIntersection(predRange, predWindow);
-          if (overallPredRange === null) {
-            overallPredRange = predRange;
-          } else {
-            // COMBINE this predators range with the others.
-            // This is necessary for fish with multiple predators which have
-            // non-overlapping availability...
-            overallPredRange = dateFns.intervalUnion(overallPredRange, predRange);
+          if (predRanges.length == 0) {
+            // Wait wait wait, try one more thing.
+            // Let's say you catch the fish during the intuition buff period!
+            iter = weatherService.findWeatherPattern(
+              +dateFns.utc.subSeconds(nextRange.start, intuitionLength),
+              predatorFish.location.zoneId,
+              predatorFish.previousWeatherSet,
+              predatorFish.weatherSet,
+              1);
+            _iterItem = iter.next();
+            weatherService.finishedWithIter();
+            if (!_iterItem.done) {
+              predWindow = _iterItem.value;
+              predRanges = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
+            }
+            if (predRanges.length == 0) {
+              // Finally, was this predator fish up during the PREVIOUS weather interval?
+              // NOTE: You still MUST USE WEATHERSERVICE because of the limit on recorded
+              // catchable ranges.
+              iter = weatherService.findWeatherPattern(
+                +dateFns.utc.addHours(startOfPeriod(nextRange.start), -8),
+                predatorFish.location.zoneId,
+                predatorFish.previousWeatherSet,
+                predatorFish.weatherSet,
+                1);
+              _iterItem = iter.next();
+              weatherService.finishedWithIter();
+              if (!_iterItem.done) {
+                predWindow = _iterItem.value;
+                predRanges = predatorFish.availableRangeDuring(predWindow, this.fishEyesEnabled);
+              }
+              if (predRanges.length == 0) {
+                // Well, can't say we didn't try.
+                return false;
+              }
+            }
           }
-        }
-        return nextRange;
-      });
+          var hasValidPredRange = false;
+          for (var predRange of predRanges) {
+            if (!dateFns.areIntervalsOverlapping(predWindow, predRange)) { continue /*nextRange = null*/; }
+            if (dateFns.isSameOrBefore(predRange.end, baseTime)) {
+              console.warn("Window for pre-req fish %s has already expired.", predatorFish.name);
+              continue /*nextRange = null*/;
+            }
+            // Because of the "intuition window" being added, we need to re-constrain the predRange.
+            predRange = dateFns.intervalIntersection(predRange, predWindow);
+            hasValidPredRange = true;
+            if (overallPredRange === null) {
+              overallPredRange = predRange;
+              acceptedPredRange = predRange;
+            } else {
+              // Does this predator's range INTERSECT the currently accepted range?
+              var reducedRange = dateFns.intervalIntersection(predRange, acceptedPredRange);
+
+              // ASSUMPTIONS:
+              // The order of the predator fish is sorted (manually in the YAML file), and preserved
+              // in the JSON/JS file. This order must ensure there will never be a gap between each
+              // pre-req fish otherwise the check for OVERALL range being overlapping or adjacent will
+              // fail too early.
+
+              if (reducedRange === null) {
+                // This is still okay (for now) because fish such as Warden of the Seven Hues
+                // have three pre-reqs which are up at different times. Since the currently
+                // accepted range does not intersect, verify that the intervals at least
+                // adjacent to one another. Take the interval which occurs LATER to become
+                // the new accepted range.
+
+                // FIRST, make sure this predator's window OVERLAPS or IS ADJACENT TO the
+                // current OVERALL predator window.
+                var mergedRange = dateFns.intervalMerge([overallPredRange, predRange]);
+                if (mergedRange.length != 1) {
+                  // Do not accept this range since it's not adjacent to any of the ranges already identified.
+                  hasValidPredRange = false;
+                }
+                else {
+                  // NEXT, since this predator was outside the ACCEPTED range, but ADJACENT to the OVERALL
+                  // range, we must determine if it came BEFORE or AFTER. If it comes AFTER, it replaces
+                  // the ACCEPTED range. If it comes BEFORE, nothing changes.
+                  if (dateFns.doesIntervalAbutEnd(predRange, overallPredRange)) {
+                    // NOTE: Intersection not necessary because the entire new range occurred after the
+                    // previously accepted range.
+                    acceptedPredRange = predRange;
+                  }
+                  // FINALLY, replace the OVERALL range with the new merged result.
+                  overallPredRange = mergedRange[0];
+                }
+              } else {
+                // REDUCE the ACCEPTED range.
+                acceptedPredRange = reducedRange;
+                // MERGE the range with the OVERALL range.
+                var mergedRange = dateFns.intervalMerge([overallPredRange, predRange]);
+                if (mergedRange.length != 1) {
+                  console.error("Expected ranges to be overlapping or adjacent!");
+                }
+                overallPredRange = mergedRange[0];
+              }
+            }
+          }
+          return hasValidPredRange;
+        }, this)
+        .value();
+      // The above loop MUST FIND EVERY PRE-REQ FISH otherwise do not consider this window!
+      if (!prereqMet) {
+        nextRange = null;
+      }
       // Reduce the next range by intersecting with OVERALL predator's range.
-      if (predatorsAlwaysAvailable) {
+      else if (predatorsAlwaysAvailable) {
         // Do nothing; keep nextRange intact
       } else if (overallPredRange === null) {
         nextRange = null;
       } else {
         // Increase the pred range by intuition buff time first.
-        overallPredRange = { start: overallPredRange.start, end: dateFns.utc.addSeconds(overallPredRange.end, intuitionLength) };
-        nextRange = dateFns.intervalIntersection(nextRange, overallPredRange);
+        acceptedPredRange = { start: acceptedPredRange.start, end: dateFns.utc.addSeconds(acceptedPredRange.end, intuitionLength) };
+        nextRange = dateFns.intervalIntersection(nextRange, acceptedPredRange);
       }
     }
     if (nextRange === null) {

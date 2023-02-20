@@ -6653,8 +6653,8 @@
   bestCatchPath:
   - Stonefly Larva
   predators:
-    Firelight Goldfish: 3
     Indigo Prismfish: 3
+    Firelight Goldfish: 3
     Green Prismfish: 5
   intuitionLength: 175
   tug: Legendary

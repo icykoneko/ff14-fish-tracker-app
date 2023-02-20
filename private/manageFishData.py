@@ -391,9 +391,11 @@ def _convert_fish_to_json(item):
     else:
         location = None  # Some fish, we simply don't care about their location.
     catch_path = [lookup_fish_by_name(x).key for x in item['bestCatchPath'] or []]
-    predators = {}
+    # Javascript will auto-sort keys that look like numbers in a dictionary...
+    # So, store each entry as an array instead...
+    predators = []
     if item.get('predators') is not None:
-        predators = dict([(lookup_fish_by_name(x[0]).key, x[1]) for x in item['predators'].items()])
+        predators = list([(lookup_fish_by_name(x[0]).key, x[1]) for x in item['predators'].items()])
 
     # Aquarium information:
     # - Just pull this from the DATs. Sometimes they add support for old fish.
