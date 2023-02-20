@@ -54,11 +54,11 @@ class Fish {
     };
     this.bait = {
       hasPredators: _(this.predators).size() > 0,
-      predators: _(this.predators).map((v, k) => {
-        return { id: Number(k),
-                 count: v,
-                 name: __p(DATA.ITEMS[k], "name"),
-                 icon: DATA.ITEMS[k].icon };
+      predators: _(this.predators).map(x => {
+        return { id: Number(x[0]),
+                 count: x[1],
+                 name: __p(DATA.ITEMS[x[0]], "name"),
+                 icon: DATA.ITEMS[x[0]].icon };
       }),
       path: _(this.bestCatchPath).map((x) => DATA.ITEMS[x])
     };
