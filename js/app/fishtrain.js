@@ -1525,6 +1525,13 @@ let FishTrain = function(){
           }
         }
 
+        var nth_upcoming = 0;
+
+        let remove_upcoming_nth_classes = function(index, className) {
+          let classNames = className.split(' ');
+          return classNames.filter(v => v.startsWith('upcoming-nth-'));
+        };
+
         _(this.scheduleEntries).each(entry => {
           let scheduleEntry$ = $(entry.listEl);
           // Has this record already expired (in the display?)
@@ -1537,16 +1544,21 @@ let FishTrain = function(){
           // Then apply changes to the view.
           let currentAvail$ = $('.fish-availability-current', scheduleEntry$);
           let hasExpired = false;
+          let addUpcomingClass = false;
 
           // Remove any loader element placeholders first.
           $('.ui.loader', scheduleEntry$).remove();
 
           // Update the "isActive" state for the fish based on the range.
           if (dateFns.isWithinInterval(timestamp, entry.range)) {
-            scheduleEntry$.addClass('fish-active');
+            scheduleEntry$.addClass('fish-active').removeClass('upcoming').removeClass(remove_upcoming_nth_classes);
           } else if (dateFns.isAfter(timestamp, entry.range.end)) {
             scheduleEntry$.removeClass('fish-active').addClass('expired');
             hasExpired = true;
+          } else {
+            nth_upcoming += 1;
+            scheduleEntry$.addClass('upcoming').removeClass(remove_upcoming_nth_classes).addClass(`upcoming-nth-${nth_upcoming}`);
+            addUpcomingClass = true;
           }
 
           // Update countdown information.
@@ -1578,7 +1590,7 @@ let FishTrain = function(){
             $('.ui.loader', scheduleEntry$).remove();
             // If the main fish entry has expired, this is easy...
             if (hasExpired) {
-              scheduleEntry$.removeClass('fish-active').addClass('expired');
+              scheduleEntry$.removeClass('fish-active').removeClass('upcoming').addClass('expired');
               currentAvail$.text("");
             } else if (!subEntry.fishEntry.data.alwaysAvailable) {
               // Then apply changes to the view.
@@ -1597,6 +1609,11 @@ let FishTrain = function(){
                   countdownDuration,
                   (scheduleEntry$.hasClass('fish-active') ? 'closes ' : '') + 'in ',
                   subEntry.fishEntry.availability.current.date));
+            }
+            if (addUpcomingClass) {
+              scheduleEntry$.addClass('upcoming').removeClass(remove_upcoming_nth_classes).addClass(`upcoming-nth-${nth_upcoming}`);
+            } else {
+              scheduleEntry$.removeClass('upcoming').removeClass(remove_upcoming_nth_classes);
             }
           }
         });
