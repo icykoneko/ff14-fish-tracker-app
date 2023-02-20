@@ -1218,6 +1218,21 @@ let FishTrain = function(){
     }
 
     initReact() {
+      var resumeTime = null;
+      $('#eorzeaClock').on('click', () => {
+        if (resumeTime !== null) {
+          resumeTime();
+        } else {
+          eorzeaTime.zawarudo(resolve => {
+            $('#eorzeaClock').css({filter: 'drop-shadow(orange 2px 2px 2px)', color: 'yellow'}).text("ザ・ワールド");
+            resumeTime = resolve;
+          }).then(() => {
+            $('#eorzeaClock').css({filter: '', color: ''});
+            resumeTime = null;
+          });
+        }
+      });
+
       const { Subject, BehaviorSubject, merge, interval } = rxjs;
       const { buffer, debounceTime, map, filter, skip, timestamp } = rxjs.operators;
 
@@ -1260,6 +1275,7 @@ let FishTrain = function(){
 
       merge(
         interval(1000).pipe(
+          filter(() => resumeTime === null),
           timestamp(),
           map(e => { return {countdown: e.timestamp} })
         ),
@@ -2589,3 +2605,22 @@ let FishTrain = function(){
 
   return new _FishTrain();
 }();
+
+function debug_adjustTime(interval) {
+  // Time travel using the specified interval.
+  CarbyUtils.timeTravel(dateFns.add(Date.now(), interval));
+  // Reset classes on fish entries.
+  _(FishTrain.scheduleEntries).each(entry => {
+    let scheduleEntry$ = $(entry.listEl);
+    scheduleEntry$.removeClass('expired').removeClass('upcoming').removeClass('fish-active').removeClass(function(index, className) {
+      return className.startsWith('upcoming-nth-') ? className : null;
+    });
+    // Update any intuition fish rows as well!
+    for (let subEntry of entry.intuitionEntries) {
+      scheduleEntry$ = $(subEntry.listEl);
+      scheduleEntry$.removeClass('expired').removeClass('upcoming').removeClass('fish-active').removeClass(function(index, className) {
+        return className.startsWith('upcoming-nth-') ? className : null;
+      });
+    }
+  });
+}

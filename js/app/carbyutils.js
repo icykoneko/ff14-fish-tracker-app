@@ -27,7 +27,7 @@ let CarbyUtils = function(){
       // Prevent running this code unless on the main page.
       if (typeof(ViewModel) === 'undefined') {
         console.error("The timeTravel function can only be used on the main page.");
-        return;
+        // return;
       }
 
       // Don't worry if it's the real Date.now...
@@ -53,7 +53,7 @@ let CarbyUtils = function(){
       // Prevent running this code unless on the main page.
       if (typeof(ViewModel) === 'undefined') {
         console.error("The restoreTime function can only be used on the main page.");
-        return;
+        // return;
       }
       // Restoring time may corrupt the weather service...
       this._resetSiteData(theRealDateNow());
