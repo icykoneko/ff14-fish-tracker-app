@@ -119,5 +119,6 @@ const EXTRA_DATA = {
         "Golden Pipira": { video: { youtube: "YTup694lP8s" } },
         "Cosmic Haze": { video: { youtube: "AYwVLaOln58" } },
         "Sweetheart": { video: { youtube: "KQU8ZQ8mjFE" } },
+        "Browned Banana Eel": { video: { youtube: "t19RNEOJLFQ" } },
     },
 };
