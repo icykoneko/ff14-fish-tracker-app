@@ -12,6 +12,7 @@ let FishTrain = function(){
 
   // Workaround until we switch to FUI 2.9.
   $.modal = $.fn.modal;
+  $.toast = $.fn.toast;
 
   // This controls whether the user is a passenger, or the conductor making the train.
   // NOTE: For now, there's no special conductor mode besides the normal fish train page.
@@ -1486,6 +1487,10 @@ let FishTrain = function(){
       // Disable the "Generate Train Pass" button too.
       $('#generatePass.button').addClass('disabled');
 
+      // Mark schedule as dirty and clear any existing Teamcraft ID.
+      _this.scheduleDirty = true;
+      _this.teamcraftId = null;
+
       return;
     }
 
@@ -1924,6 +1929,9 @@ let FishTrain = function(){
       // Finally, enable the "Generate Train Pass" button if it wasn't already.
       $('#generatePass.button').removeClass('disabled');
 
+      // Mark the schedule as dirty.
+      _this.scheduleDirty = true;
+
       console.log("Added entry to schedule:", scheduleEntry);
     }
 
@@ -1952,6 +1960,9 @@ let FishTrain = function(){
       if (_this.scheduleEntries.length == 0) {
         $('#generatePass.button').addClass('disabled');
       }
+
+      // Mark the schedule as dirty.
+      _this.scheduleDirty = true;
     }
 
     scheduleEntryClicked(e) {
@@ -2471,6 +2482,26 @@ let FishTrain = function(){
       $('.ui.fishtrain-schedule.segment .scroll-context').css('width', Math.min(scheduleBarContainerNode$[0].clientWidth, scheduleBarNode$[0].clientWidth + 28));
     }
 
+    serializeScheduleForTC() {
+      // All times encoded as EARTH time!
+      let schedule = {
+        start: +this.timeline.start,
+        // HARD CODED: Make train "discoverable" in Teamcraft 12 hours prior to actual start.
+        validAfter: +dateFns.addHours(this.timeline.start, -12),
+        // HARD CODED: Allow user to provide a "name" for the fish train.
+        name: "Carby Test Train",
+        fish: [],
+      };
+      for (const e of this.scheduleEntries) {
+        schedule.fish.push({
+          id: e.fishEntry.id,
+          start: +e.range.start,
+          end: +e.range.end,
+        });
+      }
+      return schedule;
+    }
+
     serializeSchedule() {
       // Total number of fish must not exceed 63.
       if (this.scheduleEntries.length > 63) {
@@ -2515,10 +2546,7 @@ let FishTrain = function(){
       return encodedOutput;
     }
 
-    generateTrainPass(e) {
-      let _this = e.data;
-      let encodedPassData = _this.serializeSchedule();
-
+    displayTrainPassModal() {
       let clipboard = new ClipboardJS('#generate-train-pass-copy', {
         container: document.getElementById('generate-train-pass-modal')
       });
@@ -2531,7 +2559,10 @@ let FishTrain = function(){
       });
 
       $('#generate-train-pass-data').val(
-        "https://ff14fish.carbuncleplushy.com/trainpass/?"+encodedPassData);
+        "https://ff14fish.carbuncleplushy.com/trainpass/?id="+this.teamcraftId);
+      $('#generate-train-pass-tclink')
+        .attr('href', `https://ffxivteamcraft.com/fish-train/${this.teamcraftId}`)
+        .text(`https://ffxivteamcraft.com/fish-train/${this.teamcraftId}`);
 
       // Display the modal.
       $('#generate-train-pass-modal')
@@ -2541,10 +2572,51 @@ let FishTrain = function(){
           clipboard.destroy();
           // Erase displayed data from form please...
           $('#generate-train-pass-data').val("");
+          $('#generate-train-pass-tclink').attr('href', '').text('');
         }
       })
       .modal('show');
+    }
 
+    generateTrainPass(e) {
+      let _this = e.data;
+      let encodedPassData = _this.serializeSchedule();
+
+      // Check if the schedule is dirty before submitting it to Teamcraft (again).
+      if (!_this.scheduleDirty && _this.teamcraftId !== null) {
+        _this.displayTrainPassModal();
+        return;
+      }
+
+      // Serialize fish train for Teamcraft.
+      let tcPayload = _this.serializeScheduleForTC();
+      // POST the fish train to Teamcraft to get an ID.
+      fetch("https://api.ffxivteamcraft.com/fish-train", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tcPayload)
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error communicating with Teamcraft server! Status: ${response.status}`);
+        }
+        return response.json();
+      }).then((data) => {
+        console.log("Teamcraft Response: ", data);
+        // Prevent multiple requests if the train configuration hasn't been modified.
+        // Cache the ID response from Teamcraft.
+        _this.teamcraftId = data.id;
+        _this.scheduleDirty = false;
+        _this.displayTrainPassModal();
+      }).catch((error) => {
+        console.error(error);
+        $.toast({
+          position: 'top attached',
+          class: 'error',
+          message: 'An error occurred communicating with Teamcraft'
+        });
+      });
     }
 
     editExistingTrain(e) {
