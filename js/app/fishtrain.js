@@ -971,6 +971,22 @@ let FishTrain = function(){
       this.initializeView();
     }
 
+    validatePassWithTC(tcid) {
+      // NOTE: Passing through value in querystring directly! Sanitize and verify no illegal characters.
+      if (!tcid.match(/[0-9a-zA-Z]{20}/)) {
+        // The ID doesn't seem to be well-formed...
+        console.warn("TCID seems malformed, but Miu says you're allowed to try it... You better not be messing with us.");
+      }
+      return fetch(`https://api.ffxivteamcraft.com/fish-train/${tcid}`, {
+        method: 'GET',
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error communicating with Teamcraft server! Status: ${response.status}`);
+        }
+        return response.json();
+      });
+    }
+
     initializeForPassenger() {
       // TOGGLE PASSENGER MODE!!!
       I_AM_A_PASSENGER = true;
@@ -993,25 +1009,55 @@ let FishTrain = function(){
       $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
 
       // Validate the rider's pass first of course.
-      let trainPass = validatePass(location.search.substr(1));
+      var tcid = null;
+      let trainPassPromise = null;
+      let url = new URL(window.location);
+      if (url.searchParams.has('tcid')) {
+        tcid = url.searchParams.get('tcid');
+        trainPassPromise = this.validatePassWithTC(tcid);
+      } else {
+        trainPassPromise = Promise.reject(new Error("Missing train pass ID"));
+      }
 
-      // If the pass isn't valid... well, you did something wrong.
-      if (trainPass === null) {
+      trainPassPromise.then((data) => {
+        console.debug("Teamcraft Fish Train Data: ", data);
+        // Save the ID (just in case)
+        this.teamcraftId = tcid;
+        // Decode the Teamcraft trainpass.
+        let trainPass = {
+          timeline: {
+            start: new Date(data.start),
+            end: null,
+          },
+          scheduleEntries: data.fish.map((fish) => {
+            return {
+              fishId: fish.id,
+              crsIdx: null,
+              range: {
+                start: new Date(fish.start),
+                end: new Date(fish.end)
+              }};
+          }),
+        };
+        // Initialize FishTrain tool using the pass.
+        this.redeemPass(trainPass);
+      }).catch((error) => {
+        console.error(error);
+        // If the pass isn't valid... well, you did something wrong (or TC is down).
         $.modal({
           class: 'basic',
           title: 'Invalid Pass',
           closable: false,
-          content: '<p>The pass you tried to use was either invalid, expired, or not yet ready</p><p>Please check with your conductor.</p>'
+          content: `<p>The pass you tried to use was either invalid, expired, or not yet ready</p><p>Please check with your conductor.</p><p><b>Error Message:</b> ${_.escape(error)}</p>`
         }).modal('show');
-      } else {
-        // Initialize FishTrain tool using the pass.
-        this.redeemPass(trainPass);
-      }
-
-      this.initializeCompletion();
+      }).finally(() => {
+        this.initializeCompletion();
+      });
     }
 
     redeemPass(trainPass) {
+      console.debug("Redeeming Train Pass:", trainPass);
+
       this.timeline = trainPass.timeline;
       // Initialize the departure message, iif we're early.
       if (dateFns.isBefore(Date.now(), this.timeline.start)) {
@@ -2490,15 +2536,14 @@ let FishTrain = function(){
         validAfter: +dateFns.addHours(this.timeline.start, -12),
         // HARD CODED: Allow user to provide a "name" for the fish train.
         name: "Carby Test Train",
-        fish: [],
+        fish: this.scheduleEntries.map((e) => {
+          return {
+            id: e.fishEntry.id,
+            start: +e.range.start,
+            end: +e.range.end
+          };
+        })
       };
-      for (const e of this.scheduleEntries) {
-        schedule.fish.push({
-          id: e.fishEntry.id,
-          start: +e.range.start,
-          end: +e.range.end,
-        });
-      }
       return schedule;
     }
 
@@ -2559,7 +2604,7 @@ let FishTrain = function(){
       });
 
       $('#generate-train-pass-data').val(
-        "https://ff14fish.carbuncleplushy.com/trainpass/?id="+this.teamcraftId);
+        "https://ff14fish.carbuncleplushy.com/trainpass/?tcid="+this.teamcraftId);
       $('#generate-train-pass-tclink')
         .attr('href', `https://ffxivteamcraft.com/fish-train/${this.teamcraftId}`)
         .text(`https://ffxivteamcraft.com/fish-train/${this.teamcraftId}`);
@@ -2580,7 +2625,6 @@ let FishTrain = function(){
 
     generateTrainPass(e) {
       let _this = e.data;
-      let encodedPassData = _this.serializeSchedule();
 
       // Check if the schedule is dirty before submitting it to Teamcraft (again).
       if (!_this.scheduleDirty && _this.teamcraftId !== null) {
