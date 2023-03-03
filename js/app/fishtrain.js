@@ -19,79 +19,6 @@ let FishTrain = function(){
   // When running the actual train, you should all use the passenger mode.
   var I_AM_A_PASSENGER = false;
 
-  // FISH TRAIN PASS v0 FORMAT
-  // -------------------------
-  // (Sizes in bits)
-  // +--------+------+----------------------------
-  // | Offset | Size | Field Name
-  // +--------+------+----------------------------
-  // |      0 |    2 | Version (MUST be 0b00)
-  // |      2 |    6 | Entry Count (MAX == 63)
-  // |      8 |   24 | Start Time (expressed in minutes since 2017-11-06 6:24 Z)
-  // |     32 |   12 | Duration in Minutes (max of 68 hours, 15 minutes, close to 3 days)
-  // |     44 |   20 | Reserved (was to be checksum)
-  // |(a)  64 |   40 | Scheduled Fish Entry (see Entry Count)
-  //  =|    0 |   16 | Fish ID
-  //   |   16 |    4 | Range Index (0xF == invalid; range relative Start Time)
-  //   |   20 |   12 | Start Offset (in minutes since Start Time; ignored for valid range)
-  //   |   32 |    8 | Duration (in minutes; ignored for valid range)
-  // +--------+------+----------------------------
-
-  function decode(data) {
-    let retval = {
-      timeline: {
-        start: null,
-        end: null,
-      },
-      scheduleEntries: []
-    };
-    let verAndCount = data.getUint8(0);
-    if ((verAndCount >> 6) != 0) {
-      console.error("Invalid data");
-      return null;
-    }
-    let startInMinutes = data.getUint32(0) & 0xFFFFFF;
-    let durationAndRsvd = data.getUint32(4);
-    let totalEntries = verAndCount & 0x3F;
-    let durationInMinutes = (durationAndRsvd >> 20);
-
-    retval.timeline.start = new Date((startInMinutes + 0x1800000) * 60 * 1000);
-    retval.timeline.end = new Date(+retval.timeline.start + (durationInMinutes * 60 * 1000));
-
-    // Decode each entry.
-    for (let i = 0; i < totalEntries; i++) {
-      let fishId = data.getUint16(8 + (5 * i) + 0);
-      let crsIdxAndStartOffset = data.getUint16(8 + (5 * i) + 2);
-      let crsIdx = (crsIdxAndStartOffset >> 12) & 0xF;
-      let startOffset = crsIdxAndStartOffset & 0xFFF;
-      let duration = data.getUint8(8 + (5 * i) + 4);
-
-      let scheduleEntry = {
-        fishId: fishId,
-        crsIdx: crsIdx === 0xF ? null : crsIdx,
-        range: {
-          start: new Date(+retval.timeline.start + (startOffset * 60 * 1000)),
-          end: new Date(+retval.timeline.start + ((startOffset + duration) * 60 * 1000))
-        }
-      };
-      retval.scheduleEntries.push(scheduleEntry);
-    }
-
-    return retval;
-  }
-
-  function validatePass(passData) {
-    try {
-      let decodedPassData = new Uint8Array(JSON.parse('['+atob(passData)+']'));
-      return decode(new DataView(decodedPassData.buffer));
-    } catch(err) {
-      // Any error should just be ignored lol.
-      console.error(err);
-      return null;
-    }
-  }
-
-
   function formatDuration(duration, prefix, date) {
     if (duration.years || duration.months || duration.days || duration.hours > 4) {
       return dateFns.format(date, 'Pp');
@@ -1041,6 +968,12 @@ let FishTrain = function(){
         };
         // Initialize FishTrain tool using the pass.
         this.redeemPass(trainPass);
+        // Set the train title if present.
+        if (data.name) {
+          $('#fish-train-title').text(data.name);
+        }
+        // Update the TC link.
+        $('#tc-link').attr('href', `https://ffxivteamcraft.com/fish-train/${tcid}`);
       }).catch((error) => {
         console.error(error);
         // If the pass isn't valid... well, you did something wrong (or TC is down).
@@ -2538,14 +2471,13 @@ let FishTrain = function(){
       $('.ui.fishtrain-schedule.segment .scroll-context').css('width', Math.min(scheduleBarContainerNode$[0].clientWidth, scheduleBarNode$[0].clientWidth + 28));
     }
 
-    serializeScheduleForTC() {
+    serializeSchedule() {
       // All times encoded as EARTH time!
       let schedule = {
         start: +this.timeline.start,
         // HARD CODED: Make train "discoverable" in Teamcraft 12 hours prior to actual start.
         validAfter: +dateFns.addHours(this.timeline.start, -12),
-        // HARD CODED: Allow user to provide a "name" for the fish train.
-        name: "Carby Test Train",
+        name: $('input[name="fishTrainTitle"]').val(),
         conductorToken: this.settings.conductorToken,
         fish: this.scheduleEntries.map((e) => {
           return {
@@ -2556,50 +2488,6 @@ let FishTrain = function(){
         })
       };
       return schedule;
-    }
-
-    serializeSchedule() {
-      // Total number of fish must not exceed 63.
-      if (this.scheduleEntries.length > 63) {
-        console.warning("Schedule will be truncated");
-      }
-
-      let totalEntries = Math.min(this.scheduleEntries.length, 63);
-      let totalSize = 8 + (5 * totalEntries);
-      let output = new Uint8Array(totalSize);
-
-      output[0] = (totalEntries & 0x3F);
-      let startInMinutes = (this.timeline.start / 60 / 1000) - 0x1800000;
-      output[1] = ((startInMinutes >>> 16) & 0xFF);
-      output[2] = ((startInMinutes >>>  8) & 0xFF);
-      output[3] = ((startInMinutes       ) & 0xFF);
-      let durationInMinutes = dateFns.differenceInMinutes(this.timeline.end, this.timeline.start);
-      output[4] = ((durationInMinutes >>> 4) & 0xFF);
-      output[5] = ((durationInMinutes      ) & 0x0F) | 0x0C;
-      output[6] = 0xA9;
-      output[7] = 0xB7;
-
-      _(this.scheduleEntries).chain().first(63).each((e, i) => {
-        output[8 + (5 * i) + 0] = ((e.fishEntry.id >>> 8) & 0xFF);
-        output[8 + (5 * i) + 1] = ((e.fishEntry.id      ) & 0xFF);
-        let crsIdx = e.crsIdx !== undefined ? e.crsIdx & 0xF : 0xF;
-        let startOffset = dateFns.differenceInMinutes(e.range.start, this.timeline.start);
-        if (dateFns.isBefore(e.range.start, this.timeline.start)) {
-          // Truncate the start time or it will overflow. For the purposes of the train,
-          // the fish isn't shown as available until the train starts.
-          startOffset = 0;
-        }
-        output[8 + (5 * i) + 2] = (crsIdx << 4) + ((startOffset >>> 8) & 0x0F);
-        output[8 + (5 * i) + 3] = (startOffset & 0xFF);
-        output[8 + (5 * i) + 4] = dateFns.differenceInMinutes(e.range.end, e.range.start) & 0xFF;
-      });
-
-      console.debug(_(output).map(x => x.toString(16).toUpperCase().padStart(2, '0')).join(''));
-
-      let encodedOutput = btoa(output);
-      console.debug("Train Pass:", encodedOutput);
-      console.log("Train Pass URL:", location.origin + "/trainpass/?" + encodedOutput);
-      return encodedOutput;
     }
 
     displayTrainPassModal() {
@@ -2649,7 +2537,7 @@ let FishTrain = function(){
       }
 
       // Serialize fish train for Teamcraft.
-      let tcPayload = _this.serializeScheduleForTC();
+      let tcPayload = _this.serializeSchedule();
       // POST the fish train to Teamcraft to get an ID.
       fetch("https://api.ffxivteamcraft.com/fish-train", {
         method: "POST",

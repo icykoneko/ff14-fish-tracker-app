@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="public/images/sprite.css?6.3_20230110_0630" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20230115_0956" />
     <link rel="stylesheet" href="css/overlay.css?20230112_1911" />
-    <link rel="stylesheet" href="css/dark_overlay.css?20221023_1904" />
+    <link rel="stylesheet" href="css/dark_overlay.css?20230303_1745" />
 
     <style>
       /* Hide Zone Name to condense display more */
@@ -67,7 +67,7 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?20230220_1437"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20230302_2212"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20230303_1745"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="js/app/carbyutils.js?20230220_1437"></script>
 
@@ -225,7 +225,8 @@
               <p>The green shaded regions indicate the fish is available during that interval of time, and the brighter green box in the middle represents the actual window. Depending on the fish, these can get rather tiny. Clicking on the bright green box will display the exact time that window starts and prompt you to add the fish to your schedule. You can click elsewhere to close the prompt. Please note that in this beta version, you may only add each fish to the schedule once.</p>
               <p>Adding a fish to your schedule will place it in both the <i>Schedule List</i> and <i>Schedule Bar</i>. The bar displays the fish's window with each interval hashed out. From here, you can click on the fish to see more details, and have the option to remove it from your schedule. The list displays the fish in order and resembles the main tracker. Only conditions are omitted, and the availability column always displays a countdown when the fish is less than 4 hours from being available (otherwise the scheduled time is displayed). After the scheduled window has passed, the entry in the list will be dimmed and shrunk.</p>
               <h2>Sharing Train with Others:</h2>
-              <p>Once you are happy with the train, you can click the <b>Generate Train Pass</b> button to create a URL to share with friends and community. I highly recommend taking this link and using a URL shortening service as the link will be <i>very long</i> and any mistakes in the URL could result in an invalid ticket. Have your friends visit the link, and they will see just the schedule list view.</p>
+              <p>You can assign a name for your fish train too, or accept the default "Fish Train" title. A good example would be your streamer handle, or an event name. This will be displayed on the train pass.</p>
+              <p>Once you are happy with the train, you can click the <b>Generate Train Pass</b> button to create a URL to share with friends and community. Have your friends visit the link, and they will see just the schedule list view.</p>
               <p>Please note that this link is static. If you make changes to the schedule on this page, a new pass needs to be created to have the updated information.</p>
               <h2>Streaming Overlay Support:</h2>
               <p>It's possible to add the schedule list as an overlay on your stream. Please see the Wiki article on <a target="_blank" href="https://github.com/icykoneko/ff14-fish-tracker-app/wiki/Fish-Train-Streaming-Tips">Fish Train Streaming Tips</a> for more details.</p>
@@ -237,6 +238,12 @@
             </div>
             <div class="content active" data-controlname="configuration">
               <div class="ui form">
+                <div class="field">
+                  <label>Title</label>
+                  <div class="ui input">
+                    <input type="text" name="fishTrainTitle" placeholder="Fish Train" />
+                  </div>
+                </div>
                 <!--
                   Select time for the event. Rarity will be based on each fish's rarity
                   as of the beginning of the event itself.
@@ -274,6 +281,9 @@
                         <div class="item" data-value="60">1 hour</div>
                       </div>
                     </div>
+                  </div>
+                  <div style="flex: 1 0 auto; align-self: center; place-content: end; display: flex;">
+                    <div class="ui button" id="updateList">Update List</div>
                   </div>
                 </div>
 
@@ -374,9 +384,8 @@
         </div>
         <div class="four wide column">
           <div class="ui vertical spaced mini buttons">
-            <div class="ui button" id="updateList">Update List</div>
             <div class="ui disabled button" id="generatePass">Generate Train Pass</div>
-            <div class="ui button" id="editExistingTrain">Edit Existing Train</div>
+            <div class="ui disabled button" id="editExistingTrain">Edit Existing Train</div>
           </div>
         </div>
       </div>

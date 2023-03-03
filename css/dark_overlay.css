@@ -158,7 +158,8 @@ body.dark .ui.striped.table tbody tr.section-divider:not(.fish-entry) {
 .ui.inverted.input {
   color: hsl(0, 0%, 90%);
 }
-.ui.inverted.input > input {
+.ui.inverted.input > input,
+.ui.inverted.form input[type=text] {
   background-color: /*hsla(0, 0%, 15%, 1)*/ #1b1c1d;
   color: hsl(0, 0%, 90%);
   border: 1px solid hsla(0, 0%, 90%, 0.15);
