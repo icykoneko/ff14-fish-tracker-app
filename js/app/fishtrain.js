@@ -12,84 +12,12 @@ let FishTrain = function(){
 
   // Workaround until we switch to FUI 2.9.
   $.modal = $.fn.modal;
+  $.toast = $.fn.toast;
 
   // This controls whether the user is a passenger, or the conductor making the train.
   // NOTE: For now, there's no special conductor mode besides the normal fish train page.
   // When running the actual train, you should all use the passenger mode.
   var I_AM_A_PASSENGER = false;
-
-  // FISH TRAIN PASS v0 FORMAT
-  // -------------------------
-  // (Sizes in bits)
-  // +--------+------+----------------------------
-  // | Offset | Size | Field Name
-  // +--------+------+----------------------------
-  // |      0 |    2 | Version (MUST be 0b00)
-  // |      2 |    6 | Entry Count (MAX == 63)
-  // |      8 |   24 | Start Time (expressed in minutes since 2017-11-06 6:24 Z)
-  // |     32 |   12 | Duration in Minutes (max of 68 hours, 15 minutes, close to 3 days)
-  // |     44 |   20 | Reserved (was to be checksum)
-  // |(a)  64 |   40 | Scheduled Fish Entry (see Entry Count)
-  //  =|    0 |   16 | Fish ID
-  //   |   16 |    4 | Range Index (0xF == invalid; range relative Start Time)
-  //   |   20 |   12 | Start Offset (in minutes since Start Time; ignored for valid range)
-  //   |   32 |    8 | Duration (in minutes; ignored for valid range)
-  // +--------+------+----------------------------
-
-  function decode(data) {
-    let retval = {
-      timeline: {
-        start: null,
-        end: null,
-      },
-      scheduleEntries: []
-    };
-    let verAndCount = data.getUint8(0);
-    if ((verAndCount >> 6) != 0) {
-      console.error("Invalid data");
-      return null;
-    }
-    let startInMinutes = data.getUint32(0) & 0xFFFFFF;
-    let durationAndRsvd = data.getUint32(4);
-    let totalEntries = verAndCount & 0x3F;
-    let durationInMinutes = (durationAndRsvd >> 20);
-
-    retval.timeline.start = new Date((startInMinutes + 0x1800000) * 60 * 1000);
-    retval.timeline.end = new Date(+retval.timeline.start + (durationInMinutes * 60 * 1000));
-
-    // Decode each entry.
-    for (let i = 0; i < totalEntries; i++) {
-      let fishId = data.getUint16(8 + (5 * i) + 0);
-      let crsIdxAndStartOffset = data.getUint16(8 + (5 * i) + 2);
-      let crsIdx = (crsIdxAndStartOffset >> 12) & 0xF;
-      let startOffset = crsIdxAndStartOffset & 0xFFF;
-      let duration = data.getUint8(8 + (5 * i) + 4);
-
-      let scheduleEntry = {
-        fishId: fishId,
-        crsIdx: crsIdx === 0xF ? null : crsIdx,
-        range: {
-          start: new Date(+retval.timeline.start + (startOffset * 60 * 1000)),
-          end: new Date(+retval.timeline.start + ((startOffset + duration) * 60 * 1000))
-        }
-      };
-      retval.scheduleEntries.push(scheduleEntry);
-    }
-
-    return retval;
-  }
-
-  function validatePass(passData) {
-    try {
-      let decodedPassData = new Uint8Array(JSON.parse('['+atob(passData)+']'));
-      return decode(new DataView(decodedPassData.buffer));
-    } catch(err) {
-      // Any error should just be ignored lol.
-      console.error(err);
-      return null;
-    }
-  }
-
 
   function formatDuration(duration, prefix, date) {
     if (duration.years || duration.months || duration.days || duration.hours > 4) {
@@ -970,6 +898,22 @@ let FishTrain = function(){
       this.initializeView();
     }
 
+    validatePassWithTC(tcid) {
+      // NOTE: Passing through value in querystring directly! Sanitize and verify no illegal characters.
+      if (!tcid.match(/[0-9a-zA-Z]{20}/)) {
+        // The ID doesn't seem to be well-formed...
+        console.warn("TCID seems malformed, but Miu says you're allowed to try it... You better not be messing with us.");
+      }
+      return fetch(`https://api.ffxivteamcraft.com/fish-train/${tcid}`, {
+        method: 'GET',
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error communicating with Teamcraft server! Status: ${response.status}`);
+        }
+        return response.json();
+      });
+    }
+
     initializeForPassenger() {
       // TOGGLE PASSENGER MODE!!!
       I_AM_A_PASSENGER = true;
@@ -992,25 +936,61 @@ let FishTrain = function(){
       $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
 
       // Validate the rider's pass first of course.
-      let trainPass = validatePass(location.search.substr(1));
+      var tcid = null;
+      let trainPassPromise = null;
+      let url = new URL(window.location);
+      if (url.searchParams.has('tcid')) {
+        tcid = url.searchParams.get('tcid');
+        trainPassPromise = this.validatePassWithTC(tcid);
+      } else {
+        trainPassPromise = Promise.reject(new Error("Missing train pass ID"));
+      }
 
-      // If the pass isn't valid... well, you did something wrong.
-      if (trainPass === null) {
+      trainPassPromise.then((data) => {
+        console.debug("Teamcraft Fish Train Data: ", data);
+        // Save the ID (just in case)
+        this.teamcraftId = tcid;
+        // Decode the Teamcraft trainpass.
+        let trainPass = {
+          timeline: {
+            start: new Date(data.start),
+            end: null,
+          },
+          scheduleEntries: data.fish.map((fish) => {
+            return {
+              fishId: fish.id,
+              crsIdx: null,
+              range: {
+                start: new Date(fish.start),
+                end: new Date(fish.end)
+              }};
+          }),
+        };
+        // Initialize FishTrain tool using the pass.
+        this.redeemPass(trainPass);
+        // Set the train title if present.
+        if (data.name) {
+          $('#fish-train-title').text(data.name);
+        }
+        // Update the TC link.
+        $('#tc-link').attr('href', `https://ffxivteamcraft.com/fish-train/${tcid}`);
+      }).catch((error) => {
+        console.error(error);
+        // If the pass isn't valid... well, you did something wrong (or TC is down).
         $.modal({
           class: 'basic',
           title: 'Invalid Pass',
           closable: false,
-          content: '<p>The pass you tried to use was either invalid, expired, or not yet ready</p><p>Please check with your conductor.</p>'
+          content: `<p>The pass you tried to use was either invalid, expired, or not yet ready</p><p>Please check with your conductor.</p><p><b>Error Message:</b> ${_.escape(error)}</p>`
         }).modal('show');
-      } else {
-        // Initialize FishTrain tool using the pass.
-        this.redeemPass(trainPass);
-      }
-
-      this.initializeCompletion();
+      }).finally(() => {
+        this.initializeCompletion();
+      });
     }
 
     redeemPass(trainPass) {
+      console.debug("Redeeming Train Pass:", trainPass);
+
       this.timeline = trainPass.timeline;
       // Initialize the departure message, iif we're early.
       if (dateFns.isBefore(Date.now(), this.timeline.start)) {
@@ -1486,6 +1466,10 @@ let FishTrain = function(){
       // Disable the "Generate Train Pass" button too.
       $('#generatePass.button').addClass('disabled');
 
+      // Mark schedule as dirty and clear any existing Teamcraft ID.
+      _this.scheduleDirty = true;
+      _this.teamcraftId = null;
+
       return;
     }
 
@@ -1924,6 +1908,9 @@ let FishTrain = function(){
       // Finally, enable the "Generate Train Pass" button if it wasn't already.
       $('#generatePass.button').removeClass('disabled');
 
+      // Mark the schedule as dirty.
+      _this.scheduleDirty = true;
+
       console.log("Added entry to schedule:", scheduleEntry);
     }
 
@@ -1952,6 +1939,9 @@ let FishTrain = function(){
       if (_this.scheduleEntries.length == 0) {
         $('#generatePass.button').addClass('disabled');
       }
+
+      // Mark the schedule as dirty.
+      _this.scheduleDirty = true;
     }
 
     scheduleEntryClicked(e) {
@@ -2290,6 +2280,16 @@ let FishTrain = function(){
     applySettings(settings) {
       if (I_AM_A_PASSENGER) { return this.settings; }
 
+      if (!(settings.conductorToken)) {
+        // Generate a new Conductor Token for use with Teamcraft.
+        if (window.isSecureContext) {
+          settings.conductorToken = crypto.randomUUID();
+          console.info("Generated Conductor Token: ", settings.conductorToken);
+        } else {
+          console.warn("Unable to generate conductor token securely...");
+        }
+      }
+
       if (!(settings.filters)) {
         // Why is `filters` missing?!
         console.warn("Why is filters missing??? Using default then...");
@@ -2472,79 +2472,99 @@ let FishTrain = function(){
     }
 
     serializeSchedule() {
-      // Total number of fish must not exceed 63.
-      if (this.scheduleEntries.length > 63) {
-        console.warning("Schedule will be truncated");
-      }
-
-      let totalEntries = Math.min(this.scheduleEntries.length, 63);
-      let totalSize = 8 + (5 * totalEntries);
-      let output = new Uint8Array(totalSize);
-
-      output[0] = (totalEntries & 0x3F);
-      let startInMinutes = (this.timeline.start / 60 / 1000) - 0x1800000;
-      output[1] = ((startInMinutes >>> 16) & 0xFF);
-      output[2] = ((startInMinutes >>>  8) & 0xFF);
-      output[3] = ((startInMinutes       ) & 0xFF);
-      let durationInMinutes = dateFns.differenceInMinutes(this.timeline.end, this.timeline.start);
-      output[4] = ((durationInMinutes >>> 4) & 0xFF);
-      output[5] = ((durationInMinutes      ) & 0x0F) | 0x0C;
-      output[6] = 0xA9;
-      output[7] = 0xB7;
-
-      _(this.scheduleEntries).chain().first(63).each((e, i) => {
-        output[8 + (5 * i) + 0] = ((e.fishEntry.id >>> 8) & 0xFF);
-        output[8 + (5 * i) + 1] = ((e.fishEntry.id      ) & 0xFF);
-        let crsIdx = e.crsIdx !== undefined ? e.crsIdx & 0xF : 0xF;
-        let startOffset = dateFns.differenceInMinutes(e.range.start, this.timeline.start);
-        if (dateFns.isBefore(e.range.start, this.timeline.start)) {
-          // Truncate the start time or it will overflow. For the purposes of the train,
-          // the fish isn't shown as available until the train starts.
-          startOffset = 0;
-        }
-        output[8 + (5 * i) + 2] = (crsIdx << 4) + ((startOffset >>> 8) & 0x0F);
-        output[8 + (5 * i) + 3] = (startOffset & 0xFF);
-        output[8 + (5 * i) + 4] = dateFns.differenceInMinutes(e.range.end, e.range.start) & 0xFF;
-      });
-
-      console.debug(_(output).map(x => x.toString(16).toUpperCase().padStart(2, '0')).join(''));
-
-      let encodedOutput = btoa(output);
-      console.debug("Train Pass:", encodedOutput);
-      console.log("Train Pass URL:", location.origin + "/trainpass/?" + encodedOutput);
-      return encodedOutput;
+      // All times encoded as EARTH time!
+      let schedule = {
+        start: +this.timeline.start,
+        // HARD CODED: Make train "discoverable" in Teamcraft 12 hours prior to actual start.
+        validAfter: +dateFns.addHours(this.timeline.start, -12),
+        name: $('input[name="fishTrainTitle"]').val(),
+        conductorToken: this.settings.conductorToken,
+        fish: this.scheduleEntries.map((e) => {
+          return {
+            id: e.fishEntry.id,
+            start: +e.range.start,
+            end: +e.range.end
+          };
+        })
+      };
+      return schedule;
     }
 
-    generateTrainPass(e) {
-      let _this = e.data;
-      let encodedPassData = _this.serializeSchedule();
-
-      let clipboard = new ClipboardJS('#generate-train-pass-copy', {
+    displayTrainPassModal() {
+      let clipboardLink = new ClipboardJS('#generate-train-pass-copy-link', {
         container: document.getElementById('generate-train-pass-modal')
       });
-      clipboard.on('success', function(e) {
-        console.info("Settings copied to clipboard.");
+      clipboardLink.on('success', function(e) {
         e.clearSelection();
       });
-      clipboard.on('error', function(e) {
-        console.error("Failed to copy settings");
+      let clipboardToken = new ClipboardJS('#generate-train-pass-copy-conductorToken', {
+        container: document.getElementById('generate-train-pass-modal')
+      });
+      clipboardToken.on('success', function(e) {
+        e.clearSelection();
       });
 
       $('#generate-train-pass-data').val(
-        "https://ff14fish.carbuncleplushy.com/trainpass/?"+encodedPassData);
+        "https://ff14fish.carbuncleplushy.com/trainpass/?tcid="+this.teamcraftId);
+      $('#generate-train-pass-tclink')
+        .attr('href', `https://ffxivteamcraft.com/fish-train/${this.teamcraftId}`)
+        .text(`https://ffxivteamcraft.com/fish-train/${this.teamcraftId}`);
+      $('#generate-train-pass-conductorToken').text(this.settings.conductorToken);
 
       // Display the modal.
       $('#generate-train-pass-modal')
       .modal({
         onHidden: function() {
           // Clean up the clipboard DOM.
-          clipboard.destroy();
+          clipboardLink.destroy();
+          clipboardToken.destroy();
           // Erase displayed data from form please...
           $('#generate-train-pass-data').val("");
+          $('#generate-train-pass-tclink').attr('href', '').text('');
+          $('#generate-train-pass-conductorToken').text("");
         }
       })
       .modal('show');
+    }
 
+    generateTrainPass(e) {
+      let _this = e.data;
+
+      // Check if the schedule is dirty before submitting it to Teamcraft (again).
+      if (!_this.scheduleDirty && _this.teamcraftId !== null) {
+        _this.displayTrainPassModal();
+        return;
+      }
+
+      // Serialize fish train for Teamcraft.
+      let tcPayload = _this.serializeSchedule();
+      // POST the fish train to Teamcraft to get an ID.
+      fetch("https://api.ffxivteamcraft.com/fish-train", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(tcPayload)
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error communicating with Teamcraft server! Status: ${response.status}`);
+        }
+        return response.json();
+      }).then((data) => {
+        console.log("Teamcraft Response: ", data);
+        // Prevent multiple requests if the train configuration hasn't been modified.
+        // Cache the ID response from Teamcraft.
+        _this.teamcraftId = data.id;
+        _this.scheduleDirty = false;
+        _this.displayTrainPassModal();
+      }).catch((error) => {
+        console.error(error);
+        $.toast({
+          position: 'top attached',
+          class: 'error',
+          message: 'An error occurred communicating with Teamcraft'
+        });
+      });
     }
 
     editExistingTrain(e) {
