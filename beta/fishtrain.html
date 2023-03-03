@@ -177,13 +177,18 @@ title: Fish Train Tool
               <textarea rows="2" id="generate-train-pass-data" style="font-family: monospace;"></textarea>
             </div>
             <p>You can also use this URL as a Browser Source in OBS to display as an overlay during your stream. Please see the Wiki article on <a target="_blank" href="https://github.com/icykoneko/ff14-fish-tracker-app/wiki/Fish-Train-Streaming-Tips">Fish Train Streaming Tips</a> for more details.</p>
-            <p>Access this fish train via Teamcraft: <a id="generate-train-pass-tclink" href="" target="_blank"></a>.</p>
+            <p>Access this fish train via Teamcraft: <a style="white-space: nowrap;" id="generate-train-pass-tclink" href="" target="_blank"></a>.</p>
+            <p>Your <b>Conductor Token</b> is: <span style="font-size: larger; font-family: monospace; font-weight: bold; white-space: nowrap;" id="generate-train-pass-conductorToken"></span>. You will need to enter this into Teamcraft to <i>claim</i> this train when it starts.</p>
           </div>
         </div>
         <div class="actions">
-          <div id="generate-train-pass-copy" class="ui labeled icon button" data-clipboard-target="#generate-train-pass-data">
+          <div id="generate-train-pass-copy-conductorToken" class="ui labeled icon button" data-clipboard-target="#generate-train-pass-conductorToken">
             <i class="copy icon"></i>
-            Copy
+            Copy Token
+          </div>
+          <div id="generate-train-pass-copy-link" class="ui labeled icon button" data-clipboard-target="#generate-train-pass-data">
+            <i class="copy icon"></i>
+            Copy Link
           </div>
         </div>
       </div>
