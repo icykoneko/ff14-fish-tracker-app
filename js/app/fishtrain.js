@@ -2347,6 +2347,16 @@ let FishTrain = function(){
     applySettings(settings) {
       if (I_AM_A_PASSENGER) { return this.settings; }
 
+      if (!(settings.conductorToken)) {
+        // Generate a new Conductor Token for use with Teamcraft.
+        if (window.isSecureContext) {
+          settings.conductorToken = crypto.randomUUID();
+          console.info("Generated Conductor Token: ", settings.conductorToken);
+        } else {
+          console.warn("Unable to generate conductor token securely...");
+        }
+      }
+
       if (!(settings.filters)) {
         // Why is `filters` missing?!
         console.warn("Why is filters missing??? Using default then...");
@@ -2536,6 +2546,7 @@ let FishTrain = function(){
         validAfter: +dateFns.addHours(this.timeline.start, -12),
         // HARD CODED: Allow user to provide a "name" for the fish train.
         name: "Carby Test Train",
+        conductorToken: this.settings.conductorToken,
         fish: this.scheduleEntries.map((e) => {
           return {
             id: e.fishEntry.id,
@@ -2592,15 +2603,17 @@ let FishTrain = function(){
     }
 
     displayTrainPassModal() {
-      let clipboard = new ClipboardJS('#generate-train-pass-copy', {
+      let clipboardLink = new ClipboardJS('#generate-train-pass-copy-link', {
         container: document.getElementById('generate-train-pass-modal')
       });
-      clipboard.on('success', function(e) {
-        console.info("Settings copied to clipboard.");
+      clipboardLink.on('success', function(e) {
         e.clearSelection();
       });
-      clipboard.on('error', function(e) {
-        console.error("Failed to copy settings");
+      let clipboardToken = new ClipboardJS('#generate-train-pass-copy-conductorToken', {
+        container: document.getElementById('generate-train-pass-modal')
+      });
+      clipboardToken.on('success', function(e) {
+        e.clearSelection();
       });
 
       $('#generate-train-pass-data').val(
@@ -2608,16 +2621,19 @@ let FishTrain = function(){
       $('#generate-train-pass-tclink')
         .attr('href', `https://ffxivteamcraft.com/fish-train/${this.teamcraftId}`)
         .text(`https://ffxivteamcraft.com/fish-train/${this.teamcraftId}`);
+      $('#generate-train-pass-conductorToken').text(this.settings.conductorToken);
 
       // Display the modal.
       $('#generate-train-pass-modal')
       .modal({
         onHidden: function() {
           // Clean up the clipboard DOM.
-          clipboard.destroy();
+          clipboardLink.destroy();
+          clipboardToken.destroy();
           // Erase displayed data from form please...
           $('#generate-train-pass-data').val("");
           $('#generate-train-pass-tclink').attr('href', '').text('');
+          $('#generate-train-pass-conductorToken').text("");
         }
       })
       .modal('show');
