@@ -67,7 +67,7 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?20230220_1437"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20230303_1745"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20230303_2112"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="js/app/carbyutils.js?20230220_1437"></script>
 
@@ -122,16 +122,6 @@
         Developed by <a target="_blank" href="https://na.finalfantasyxiv.com/lodestone/character/221572/">Carbuncle Plushy</a> of Balmung.
       </p>
 
-      <div class="ui icon message">
-        <i class="exclamation icon"></i>
-        <div class="content">
-          <div class="header">
-            Beta Version
-          </div>
-          <p>This is a beta version of the tool and certain features are still in development or may have limited capabilities. For the latest news on this tool, please follow me on <a href="https://twitter.com/CarbunclePlushy" target="#top">Twitter</a>. You may leave feedback there, or via the normal <a href="/feedback.html" target="#top">feedback page.</a></p>
-        </div>
-      </div>
-
       <div id="popups-storage">
         <div id="timeline-window-details" class="ui popup hidden">
           <div class="header">Window Details</div>
@@ -165,6 +155,7 @@
 
       <!-- Modal for printing train passes -->
       <div id="generate-train-pass-modal" class="ui tiny modal">
+        <i class="close icon"></i>
         <div class="header">Your Fish Train Boarding Pass</div>
         <div class="content">
           <div class="ui form">
@@ -174,7 +165,7 @@
             </div>
             <p>You can also use this URL as a Browser Source in OBS to display as an overlay during your stream. Please see the Wiki article on <a target="_blank" href="https://github.com/icykoneko/ff14-fish-tracker-app/wiki/Fish-Train-Streaming-Tips">Fish Train Streaming Tips</a> for more details.</p>
             <p>Access this fish train via Teamcraft: <a style="white-space: nowrap;" id="generate-train-pass-tclink" href="" target="_blank"></a>.</p>
-            <p>Your <b>Conductor Token</b> is: <span style="font-size: larger; font-family: monospace; font-weight: bold; white-space: nowrap;" id="generate-train-pass-conductorToken"></span>. You will need to enter this into Teamcraft to <i>claim</i> this train when it starts.</p>
+            <p>Your <b>Conductor Token</b> is: <span style="font-size: larger; font-family: monospace; font-weight: bold; white-space: nowrap;" id="generate-train-pass-conductorToken"></span>. You will need to enter this into Teamcraft to <i>claim</i> this train when it starts, or to make edits later. DO NOT LOSE IT!</p>
           </div>
         </div>
         <div class="actions">
@@ -194,11 +185,11 @@
         <div class="header">Edit an Existing Train</div>
         <div class="content">
           <form class="ui form">
-            <p>Need to make a change to an existing train? Enter the train pass data, or the full URL below.</p>
-            <p><b>NOTE:</b> Any changes to the schedule will require a <b>new</b> train pass. You <b>must use</b> the <i>Generate Train Pass</i> again and share the <b>new</b> train pass with your friends or community.</p>
+            <p>Need to make a change to an existing train? Enter the train pass ID, or the full URL below.</p>
+            <p>NOTE: In order to submit changes, you must have the original Conductor Token used to create this train. You'll need to enter that once you're finished editing.</p>
             <div class="field" id="edit-existing-train-field">
               <label>Existing Train Pass</label>
-              <textarea name="edit-existing-train-data" rows="8" id="edit-existing-train-data" style="font-family: monospace;"></textarea>
+              <textarea name="edit-existing-train-data" rows="2" id="edit-existing-train-data" style="font-family: monospace;"></textarea>
             </div>
             <div class="ui error message"></div>
           </form>
@@ -206,6 +197,33 @@
         <div class="actions">
           <div id="edit-existing-train-load" class="ui approve button">Load</div>
           <div class="ui deny button">Cancel</div>
+        </div>
+      </div>
+
+      <!-- Modal for updating an existing train pass -->
+      <div id="update-existing-train-modal" class="ui tiny modal">
+        <div class="header">Update an Existing Train</div>
+        <div class="content">
+          <form class="ui form">
+            <p>All done making changes to your train? In order to edit it on Teamcraft, you must provide the original Conductor Token used to create this train. Your token which was associated with <i>this device</i> has been pre-filled. If you originally created this train using another device or browser, you'll need to edit it, then click Submit.</p>
+            <div class="field" id="update-existing-train-token">
+              <label>Conductor Token</label>
+              <div class="ui input">
+                <input type="text" name="conductorToken" placeholder="Enter your conductorToken here" />
+              </div>
+            </div>
+            <div class="ui error message"></div>
+          </form>
+        </div>
+        <div class="actions">
+          <div id="update-existing-train-submit" class="ui approve button">Submit Changes</div>
+          <div class="ui deny button">Cancel</div>
+        </div>
+      </div>
+
+      <div id="existing-train-information" class="ui attached message hidden">
+        <div class="content">
+          <p>Current editing existing train <b><span id="existing-train-tcid">TCID</span></b>.</p>
         </div>
       </div>
 
@@ -385,7 +403,7 @@
         <div class="four wide column">
           <div class="ui vertical spaced mini buttons">
             <div class="ui disabled button" id="generatePass">Generate Train Pass</div>
-            <div class="ui disabled button" id="editExistingTrain">Edit Existing Train</div>
+            <div class="ui button" id="editExistingTrain">Edit Existing Train</div>
           </div>
         </div>
       </div>
