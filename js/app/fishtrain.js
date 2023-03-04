@@ -914,6 +914,32 @@ let FishTrain = function(){
       });
     }
 
+    convertTrainData(data, tcid) {
+      console.debug("Teamcraft Fish Train Data: ", data);
+      // Save the ID (just in case)
+      this.teamcraftId = tcid;
+      // Decode the Teamcraft trainpass.
+      let trainPass = {
+        timeline: {
+          start: new Date(data.start),
+          end: null,
+        },
+        scheduleEntries: data.fish.map((fish) => {
+          return {
+            fishId: fish.id,
+            crsIdx: null,
+            range: {
+              start: new Date(fish.start),
+              end: new Date(fish.end)
+            }};
+        }),
+        name: data.name || null,
+        tcid: tcid,
+      };
+      console.debug("Train Pass Data: ", trainPass);
+      return trainPass;
+    }
+
     initializeForPassenger() {
       // TOGGLE PASSENGER MODE!!!
       I_AM_A_PASSENGER = true;
@@ -947,33 +973,9 @@ let FishTrain = function(){
       }
 
       trainPassPromise.then((data) => {
-        console.debug("Teamcraft Fish Train Data: ", data);
-        // Save the ID (just in case)
-        this.teamcraftId = tcid;
-        // Decode the Teamcraft trainpass.
-        let trainPass = {
-          timeline: {
-            start: new Date(data.start),
-            end: null,
-          },
-          scheduleEntries: data.fish.map((fish) => {
-            return {
-              fishId: fish.id,
-              crsIdx: null,
-              range: {
-                start: new Date(fish.start),
-                end: new Date(fish.end)
-              }};
-          }),
-        };
+        let trainPass = convertTrainData(data, tcid);
         // Initialize FishTrain tool using the pass.
         this.redeemPass(trainPass);
-        // Set the train title if present.
-        if (data.name) {
-          $('#fish-train-title').text(data.name);
-        }
-        // Update the TC link.
-        $('#tc-link').attr('href', `https://ffxivteamcraft.com/fish-train/${tcid}`);
       }).catch((error) => {
         console.error(error);
         // If the pass isn't valid... well, you did something wrong (or TC is down).
@@ -998,6 +1000,12 @@ let FishTrain = function(){
         this.departureMessage$.find('.departure-time-exact').text(dateFns.format(this.timeline.start, 'Pp'));
         this.departureCountdown$.text(dateFns.formatDistance(Date.now(), this.timeline.start, {includeSeconds: true}));
       }
+      // Set the train title if present.
+      if (trainPass.name) {
+        $('#fish-train-title').text(trainPass.name);
+      }
+      // Update the TC link.
+      $('#tc-link').attr('href', `https://ffxivteamcraft.com/fish-train/${trainPass.tcid}`);
 
       // Before you do anything else, RESET THE SITE DATA!
       // This will force the Weather Service to reset any data and begin computing
@@ -1309,8 +1317,11 @@ let FishTrain = function(){
       this.settings.timelineInterval = $('#timelineInterval').dropdown('get value');
       $('#rangestart').calendar('set date', existingSchedule.timeline.start);
       this.timeline.start = existingSchedule.timeline.start;
-      $('#rangeend').calendar('set date', existingSchedule.timeline.end);
-      this.timeline.end = existingSchedule.timeline.end;
+      // NOTE: Teamcraft doesn't record the END time, so derive it as one interval after
+      // the last fish in the list.
+      this.timeline.end = dateFns.addMinutes(
+        _(existingSchedule.scheduleEntries).last().range.end, this.settings.timelineInterval);
+      $('#rangeend').calendar('set date', this.timeline.end);
 
       // Clear schedule
       this.scheduleIntervalMarkers$.empty();
@@ -1392,6 +1403,12 @@ let FishTrain = function(){
       // Enable the "Generate Train Pass" button (assuming there's actually fish).
       $('#generatePass.button').toggleClass('disabled', this.scheduleEntries.length == 0);
 
+      // DO NOT MARK THE TRAIN AS DIRTY!
+      this.scheduleDirty = false;
+      $('#existing-train-information').removeClass('hidden').addClass('visible');
+      $('#existing-train-tcid').text(this.teamcraftId);
+      $('input[name="fishTrainTitle"]').val(existingSchedule.name);
+
       return;
     }
 
@@ -1467,8 +1484,13 @@ let FishTrain = function(){
       $('#generatePass.button').addClass('disabled');
 
       // Mark schedule as dirty and clear any existing Teamcraft ID.
+      if (_this.teamcraftId) {
+        $('input[name="fishTrainTitle"]').val("");
+        _this.teamcraftId = null;
+      }
       _this.scheduleDirty = true;
-      _this.teamcraftId = null;
+      $('#existing-train-information').removeClass('visible').addClass('hidden');
+      $('#existing-train-tcid').text("");
 
       return;
     }
@@ -2522,6 +2544,60 @@ let FishTrain = function(){
           $('#generate-train-pass-data').val("");
           $('#generate-train-pass-tclink').attr('href', '').text('');
           $('#generate-train-pass-conductorToken').text("");
+        },
+        closeIcon: true,
+        closable: false,
+      })
+      .modal('show');
+    }
+
+    displayUpdateTrainPassModal() {
+      // Display the modal.
+      let _this = this;
+
+      $('#update-existing-train-modal')
+      .modal({
+        onShow: function() {
+          // Prepopulate the user's conductorToken field.
+          $('#update-existing-train-token input').val(_this.settings.conductorToken);
+
+        },
+        onApprove: function($element) {
+          $('#update-existing-train-modal .ui.form').form('remove errors');
+          // Attempt to update the train on Teamcraft.
+          // Serialize fish train for Teamcraft.
+          let tcPayload = _this.serializeSchedule();
+          tcPayload.conductorToken = $('#update-existing-train-token input').val();
+          // POST the fish train to Teamcraft to get an ID.
+          fetch(`https://api.ffxivteamcraft.com/fish-train/${_this.teamcraftId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(tcPayload)
+          }).then((response) => {
+            if (!response.ok) {
+              throw new Error(`Error communicating with Teamcraft server! Status: ${response.status}`);
+            }
+            return response.json();
+          }).then((data) => {
+            console.log("Teamcraft Response: ", data);
+            // Clear the dirty flag.
+            _this.scheduleDirty = false;
+            // Hide this modal now!
+            $('#update-existing-train-modal').modal('hide');
+            // Redisplay the train pass information.
+            _this.displayTrainPassModal();
+          }).catch((error) => {
+              // The train pass itself is not valid.
+              $('#update-existing-train-modal .ui.form').form('add errors', [error.toString()]);
+          })
+
+          // Async, so always return false.
+          return false;
+        },
+        onHidden: function() {
+          $('#update-existing-train-modal .ui.form').form('clear');
         }
       })
       .modal('show');
@@ -2533,6 +2609,12 @@ let FishTrain = function(){
       // Check if the schedule is dirty before submitting it to Teamcraft (again).
       if (!_this.scheduleDirty && _this.teamcraftId !== null) {
         _this.displayTrainPassModal();
+        return;
+      }
+
+      // Check if a Teamcraft ID has already been associated with this train.
+      if (_this.teamcraftId !== null) {
+        _this.displayUpdateTrainPassModal();
         return;
       }
 
@@ -2579,15 +2661,12 @@ let FishTrain = function(){
             // Validate the train pass first.
             try {
               let url = new URL(trainPassInput);
-              trainPass = url.searchParams.keys().next().value;
+              if (url.searchParams.has('tcid')) {
+                trainPass = url.searchParams.get('tcid');
+              }
             } catch {
               // Assume just the pass.
-              // Eat "?" if present.
-              if (trainPassInput.startsWith('?')) {
-                trainPass = trainPassInput.substr(1);
-              } else {
-                trainPass = trainPassInput;
-              }
+              trainPass = trainPassInput;
             }
             if (trainPass === undefined ||
                 trainPass == "") {
@@ -2598,21 +2677,35 @@ let FishTrain = function(){
                   .closest('.field').addClass('error');
               return false;
             }
+            // // Make sure they entered their ConductorToken.
+            // let conductorToken = $('#edit-existing-train-token').val();
+            // if (conductorToken == "") {
+            //   $('#edit-existing-train-modal .ui.form')
+            //     .form('add errors', ['You must enter your Conductor Token'])
+            //     .form('get field', 'edit-existing-train-token')
+            //       .closest('.field').addClass('error');
+            //   return false;
+            // }
+
+            // NOTE: Since the rest of this is async, you need to return false.
+            // Have the internal functions forcefully close the modal if needed.
             // Otherwise, validate the train pass itself.
-            let existingSchedule = validatePass(trainPass);
-            if (existingSchedule === null) {
+            _this.validatePassWithTC(trainPass).then((data) => {
+              // Allow the dialog to close while we load the schedule.
+              $('#edit-existing-train-modal').modal('hide');
+              $(() => {
+                let existingSchedule = _this.convertTrainData(data, trainPass);
+                _this.loadExistingTrain(existingSchedule);
+              });
+            }).catch((error) => {
               // The train pass itself is not valid.
               $('#edit-existing-train-modal .ui.form')
                 .form('add errors', ['The Train Pass is invalid'])
                 .form('get field', 'edit-existing-train-data')
                   .closest('.field').addClass('error');
               return false;
-            }
-            // Allow the dialog to close while we load the schedule.
-            $(() => {
-              _this.loadExistingTrain(existingSchedule);
             });
-            return true;
+            return false;
           },
           onHidden: function() {
             // Reset data and clear errors.
