@@ -120,5 +120,6 @@ const EXTRA_DATA = {
         "Cosmic Haze": { video: { youtube: "AYwVLaOln58" } },
         "Sweetheart": { video: { youtube: "KQU8ZQ8mjFE" } },
         "Browned Banana Eel": { video: { youtube: "t19RNEOJLFQ" } },
+        "Vidyutvat Wrasse": { video: { youtube: "j2Ciiwl6eGw" } },
     },
 };
