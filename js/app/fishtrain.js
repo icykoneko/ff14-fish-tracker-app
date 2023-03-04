@@ -839,6 +839,9 @@ let FishTrain = function(){
         scheduleListEntry: doT.template(templates.scheduleListEntry),
         scheduleListIntuitionEntry: doT.template(templates.scheduleListIntuitionEntry),
       };
+
+      this.teamcraftId = null;
+      this.scheduleDirty = false;
     }
 
     initialize() {
@@ -973,7 +976,7 @@ let FishTrain = function(){
       }
 
       trainPassPromise.then((data) => {
-        let trainPass = convertTrainData(data, tcid);
+        let trainPass = this.convertTrainData(data, tcid);
         // Initialize FishTrain tool using the pass.
         this.redeemPass(trainPass);
       }).catch((error) => {
