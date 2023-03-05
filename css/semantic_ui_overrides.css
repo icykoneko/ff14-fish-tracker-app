@@ -153,6 +153,39 @@ i.icon {
   padding: calc(1em + 1px);
 }
 
+.ui.ui.inverted.bordered.dropdown {
+  border: 1px solid rgba(255,255,255,.15);
+  background: #1b1c1d;
+  color: rgba(255,255,255,.8);
+}
+
+.ui.ui.bordered.dropdown {
+  line-height: 1em;
+  white-space: normal;
+  outline: 0;
+  /* -webkit-transform: rotateZ(0);
+  transform: rotateZ(0); */
+  min-width: 14em;
+  min-height: 2.71428571em;
+  background: #fff;
+  /* display: inline-block; */
+  display: flex;
+  padding: 0.78571429em 1em;
+  color: rgba(0,0,0,.87);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 0.28571429rem;
+  /* -webkit-transition: width .1s ease, -webkit-box-shadow .1s ease;
+  transition: width .1s ease, -webkit-box-shadow .1s ease;
+  transition: box-shadow .1s ease, width .1s ease;
+  transition: box-shadow .1s ease, width .1s ease, -webkit-box-shadow .1s ease; */
+}
+
+.ui.ui.bordered.dropdown > .text {
+  flex-grow: 1;
+}
+
 
 /*!
  * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com

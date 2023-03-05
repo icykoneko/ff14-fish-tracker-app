@@ -164,3 +164,7 @@ body.dark .ui.striped.table tbody tr.section-divider:not(.fish-entry) {
   color: hsl(0, 0%, 90%);
   border: 1px solid hsla(0, 0%, 90%, 0.15);
 }
+
+.ui.inverted.basic.nohover.label:hover {
+  color: inherit;
+}
