@@ -2609,8 +2609,6 @@ let FishTrain = function(){
             console.log("Teamcraft Response: ", data);
             // Clear the dirty flag.
             _this.scheduleDirty = false;
-            // Hide this modal now!
-            $('#update-existing-train-modal').modal('hide');
             // Redisplay the train pass information.
             _this.displayTrainPassModal();
           }).catch((error) => {
