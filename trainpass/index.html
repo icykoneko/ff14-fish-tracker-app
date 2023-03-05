@@ -31,9 +31,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 
     <link rel="stylesheet" href="/public/images/sprite.css?6.3_20230110_0630" />
-    <link rel="stylesheet" href="/css/semantic_ui_overrides.css?20230115_0956" />
+    <link rel="stylesheet" href="/css/semantic_ui_overrides.css?20230305_1820" />
     <link rel="stylesheet" href="/css/overlay.css?20230112_1911" />
-    <link rel="stylesheet" href="/css/dark_overlay.css?20230303_1745" />
+    <link rel="stylesheet" href="/css/dark_overlay.css?20230305_1820" />
 
     <!-- <link rel="stylesheet" href="/css/fishtrain_stream_overlay.css" /> -->
 
@@ -42,7 +42,7 @@
 
     <!-- Include the data -->
     <script type="text/javascript" src="/js/app/data.js?6.3_20230220_1437"></script>
-    <script type="text/javascript" src="/js/app/data_ex.js?20230304_1556"></script>
+    <script type="text/javascript" src="/js/app/data_ex.js?20230305_1820"></script>
     <script type="text/javascript" src="/js/app/fish_info_data.js?6.3_20230220_0959"></script>
     <!--
       - Scripts
@@ -56,7 +56,7 @@
     <script type="text/javascript" src="/js/app/fishwatcher.js?20230220_1437"></script>
     <script type="text/javascript" src="/js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="/js/app/fishtrain.js?20230304_1538"></script>
+    <script type="text/javascript" src="/js/app/fishtrain.js?20230305_1820"></script>
     <script type="text/javascript" src="/js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="/js/app/carbyutils.js?20230220_1437"></script>
 
@@ -119,10 +119,24 @@
         <span id="departure-message">Your train is scheduled for departure at <span class="departure-time-exact"></span>, in <span class="departure-countdown"></span>.</span>
         Please follow along with your conductor. You may also <a id="tc-link" target="_blank" href="">join the train via Teamcraft</a> to unlock even more exciting features!
       </p>
+
       <p>
         You can update your completion list from this page. <b>CLOSE ANY TABS WITH THE MAIN TRACKER FIRST!</b> Otherwise, please remember to <b>REFRESH</b> the main tracker tab <b>AFTER</b> your train or your settings may get overwritten later.
       </p>
+      
       <div class="ui plain compact segment passenger fishtrain-schedule-list">
+        <div class="ui top attached basic fitted segment" style="padding-bottom: 1em;">
+          <div class="ui basic nohover label" style="border: none;">
+            <i class="server icon"></i>
+            Data Center:
+            <div class="detail"><span class="data-center-name"></span></div>
+          </div>
+          <div class="ui basic nohover label" style="border: none;">
+            <i class="globe icon"></i>
+            World:
+            <div class="detail"><span class="world-name"></span></div>
+          </div>
+        </div>
         <div class="scroll-context">
           <table class="ui very compact unstackable striped table">
             <thead>

@@ -937,6 +937,7 @@ let FishTrain = function(){
             }};
         }),
         name: data.name || null,
+        world: data.world || null,
         tcid: tcid,
       };
       console.debug("Train Pass Data: ", trainPass);
@@ -994,8 +995,6 @@ let FishTrain = function(){
     }
 
     redeemPass(trainPass) {
-      console.debug("Redeeming Train Pass:", trainPass);
-
       this.timeline = trainPass.timeline;
       // Initialize the departure message, iif we're early.
       if (dateFns.isBefore(Date.now(), this.timeline.start)) {
@@ -1006,6 +1005,18 @@ let FishTrain = function(){
       // Set the train title if present.
       if (trainPass.name) {
         $('#fish-train-title').text(trainPass.name);
+      }
+      // Set the world if present.
+      if (trainPass.world) {
+        try
+        {
+          let dataCenter = _(EXTRA_DATA.WORLDS).findKey(v => _(v).chain().map(z => z.toLowerCase()).contains(trainPass.world.toLowerCase()).value());
+          let worldName = _(EXTRA_DATA.WORLDS[dataCenter]).find(v => v.toLowerCase() == trainPass.world.toLowerCase());
+          $('.data-center-name').text(dataCenter);
+          $('.world-name').text(worldName);
+        } catch (error) {
+          console.error("Something went wrong trying to lookup data center and world names.", error);
+        }
       }
       // Update the TC link.
       $('#tc-link').attr('href', `https://ffxivteamcraft.com/fish-train/${trainPass.tcid}`);
@@ -1139,6 +1150,11 @@ let FishTrain = function(){
       $('#sortingType .radio.checkbox').checkbox({
         onChecked: _(this.sortingTypeChecked).partial(this)
       });
+      $('#fish-train-worldName').dropdown({
+        values: _(EXTRA_DATA.WORLDS).reduce((a,v,k) => {
+          return a.concat({type: 'menu', name: k, values: v.map((e) => { return {name: e, value: e.toLowerCase()}; })})}, []),
+        onChange: () => { this.scheduleDirty = true },
+      });
 
       // Apply theme to elements now.
       // DO NOT ADD ANY MORE UI ELEMENTS AFTER THIS LINE OR THEY WILL
@@ -1147,6 +1163,8 @@ let FishTrain = function(){
 
       // Calendar's are special... they need to be reinitialized to pick up inverted class.
       this.reinitCalendarFields();
+
+      $('input[name="fishTrainTitle"]').on('change', () => { this.scheduleDirty = true });
 
       $('#updateList').on('click', this, this.updateList);
       $('#generatePass').on('click', this, this.generateTrainPass);
@@ -1411,6 +1429,7 @@ let FishTrain = function(){
       $('#existing-train-information').removeClass('hidden').addClass('visible');
       $('#existing-train-tcid').text(this.teamcraftId);
       $('input[name="fishTrainTitle"]').val(existingSchedule.name);
+      $('#fish-train-worldName').dropdown('set selected', existingSchedule.world);
 
       return;
     }
@@ -1489,6 +1508,7 @@ let FishTrain = function(){
       // Mark schedule as dirty and clear any existing Teamcraft ID.
       if (_this.teamcraftId) {
         $('input[name="fishTrainTitle"]').val("");
+        $('#fish-train-worldName').dropdown('clear', true);
         _this.teamcraftId = null;
       }
       _this.scheduleDirty = true;
@@ -2274,6 +2294,7 @@ let FishTrain = function(){
       $('.ui.dropdown').toggleClass('inverted', theme === 'dark');
       $('.ui.input').toggleClass('inverted', theme === 'dark');
       $('.ui.accordion').toggleClass('inverted', theme === 'dark');
+      $('.ui.basic.label').toggleClass('inverted', theme === 'dark');
 
       $('.ui.calendar').toggleClass('inverted', theme === 'dark');
       this.reinitCalendarFields();
@@ -2503,6 +2524,7 @@ let FishTrain = function(){
         // HARD CODED: Make train "discoverable" in Teamcraft 12 hours prior to actual start.
         validAfter: +dateFns.addHours(this.timeline.start, -12),
         name: $('input[name="fishTrainTitle"]').val(),
+        world: $('input[name="worldName"]').val(),
         conductorToken: this.settings.conductorToken,
         fish: this.scheduleEntries.map((e) => {
           return {

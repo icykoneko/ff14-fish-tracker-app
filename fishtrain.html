@@ -35,9 +35,9 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="public/images/sprite.css?6.3_20230110_0630" />
-    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20230115_0956" />
+    <link rel="stylesheet" href="css/semantic_ui_overrides.css?20230305_1820" />
     <link rel="stylesheet" href="css/overlay.css?20230112_1911" />
-    <link rel="stylesheet" href="css/dark_overlay.css?20230303_1745" />
+    <link rel="stylesheet" href="css/dark_overlay.css?20230305_1820" />
 
     <style>
       /* Hide Zone Name to condense display more */
@@ -53,7 +53,7 @@
 
     <!-- Include the data -->
     <script type="text/javascript" src="js/app/data.js?6.3_20230220_1437"></script>
-    <script type="text/javascript" src="js/app/data_ex.js?20230304_1556"></script>
+    <script type="text/javascript" src="js/app/data_ex.js?20230305_1820"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?6.3_20230220_0959"></script>
     <!--
       - Scripts
@@ -67,7 +67,7 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?20230220_1437"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20230304_1538"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20230305_1820"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="js/app/carbyutils.js?20230220_1437"></script>
 
@@ -256,10 +256,20 @@
             </div>
             <div class="content active" data-controlname="configuration">
               <div class="ui form">
-                <div class="field">
-                  <label>Title</label>
-                  <div class="ui input">
-                    <input type="text" name="fishTrainTitle" placeholder="Fish Train" />
+                <div class="two fields">
+                  <div class="field">
+                    <label>Title</label>
+                    <div class="ui input">
+                      <input type="text" name="fishTrainTitle" placeholder="Fish Train" />
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label>World</label>
+                    <div class="ui bordered dropdown" id="fish-train-worldName">
+                      <input type="hidden" name="worldName" value=""/>
+                      <div class="default text">Select World</div>
+                      <i class="dropdown icon"></i>
+                    </div>
                   </div>
                 </div>
                 <!--

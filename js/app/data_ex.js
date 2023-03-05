@@ -19,6 +19,20 @@ function _validate_extra_data() {
 }
 
 const EXTRA_DATA = {
+    WORLDS: {
+        "Aether": ["Adamantoise","Cactuar","Faerie","Gilgamesh","Jenova","Midgardsormr","Sargatanas","Siren"],
+        "Chaos":["Cerberus","Louisoix","Moogle","Omega","Phantom","Ragnarok","Sagittarius","Spriggan"],
+        "Crystal":["Balmung","Brynhildr","Coeurl","Diabolos","Goblin","Malboro","Mateus","Zalera"],
+        "Dynamis":["Halicarnassus","Maduin","Marilith","Seraph"],
+        "Elemental":["Aegis","Atomos","Carbuncle","Garuda","Gungnir","Kujata","Tonberry","Typhon"],
+        "Gaia":["Alexander","Bahamut","Durandal","Fenrir","Ifrit","Ridill","Tiamat","Ultima"],
+        "Korea":["\ucd08\ucf54\ubcf4","\ubaa8\uadf8\ub9ac","\uce74\ubc99\ud074","\ud1a4\ubca0\ub9ac","\ud39c\ub9ac\ub974"],
+        "Light":["Alpha","Lich","Odin","Phoenix","Raiden","Shiva","Twintania","Zodiark"],
+        "Mana":["Anima","Asura","Chocobo","Hades","Ixion","Masamune","Pandaemonium","Titan"],
+        "Materia":["Bismarck","Ravana","Sephirot","Sophia","Zurvan"],
+        "Meteor":["Belias","Mandragora","Ramuh","Shinryu","Unicorn","Valefor","Yojimbo","Zeromus"],
+        "Primal":["Behemoth","Excalibur","Exodus","Famfrit","Hyperion","Lamia","Leviathan","Ultros"]
+    },
     FISH: {
         "Navigator's Brand": { video: { youtube: "d8AM8-vkLOc" } },
         "Titanic Sawfish": { video: { youtube: "5KKdB9TGjPk" } },
