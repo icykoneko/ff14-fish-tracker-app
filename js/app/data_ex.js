@@ -43,7 +43,7 @@ const EXTRA_DATA = {
         "Nepto Dragon": { video: { youtube: "AGL8XN87a5U" } },
         "Endoceras": { video: { youtube: "dCEMM6Lken0" } },
         "Ealad Skaan": { video: { youtube: "bX9eOTayZBA" } },
-        "The Ruby Dragon": { video: { youtube: "F3bz7LG4AlQ" } },
+        "The Ruby Dragon": { video: { youtube: "njT4tjy93IM" } },
         "The Unconditional": { video: { youtube: "ryL0LcKYjKM" } },
         "Helicoprion": { video: { youtube: "NI_eCIn4uoE" } },
         "Stethacanthus": { video: { youtube: "02btuCpUpiU" } },
