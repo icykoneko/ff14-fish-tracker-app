@@ -10,6 +10,14 @@ let CarbyUtils = function(){
   var WEATHER_NAME_TO_INDEX = _(DATA.WEATHER_TYPES).chain()
     .pairs().map(x => [x[1]['name_en'], Number(x[0])]).object().value();
 
+  function parseTimeString(s) {
+    let hoursDec = Date.parse("1970 " + s + "Z") / 1000 / 60 / 60;
+    if (isNaN(hoursDec)) {
+      throw new Error("Invalid time string. Must be HH:mm format.");
+    }
+    return hoursDec;
+  }
+
   class _CarbyUtils {
     constructor() {
     }
@@ -62,11 +70,17 @@ let CarbyUtils = function(){
     //   weatherSet: [<WEATHER_NAME_EN>,<WEATHER_NAME_EN>*]
     //   startHour: [0-23]
     //   endHour: [1-24]
+    //   startTime: "hh:mm" format (24-hr time)
+    //   endTime: "hh:mm" format (24-hr time)
+    // NOTE: If you want to enter a string for start and end times, please use
+    // the `startTime` and `endTime` options instead of `startHour` and
+    // `endHour`.
     ///////////////////////////////////////////////////////////////////////////
     // WEATHER_NAME_EN: ["Clear Skies", "Fair Skies", "Clouds", "Fog", "Wind",
     //                   "Gales", "Rain", "Showers", "Thunder", "Thunderstorms",
     //                   "Dust Storms", "Heat Waves", "Show", "Blizzards",
-    //                   "Gloom", "Umbral Wind", "Umbral Static"]
+    //                   "Gloom", "Umbral Wind", "Umbral Static", "Moon Dust",
+    //                   "Astromagnetic Storm"]
     ///////////////////////////////////////////////////////////////////////////
     // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
     // PLEASE USE CAUTION CALLING THIS! DO NOT INPUT AN INVALID VALUE OR THE
@@ -110,13 +124,22 @@ let CarbyUtils = function(){
         fish_entry.conditions.previousWeatherSet =
           _(fish_entry.previousWeatherSet).map(w => DATA.WEATHER_TYPES[w]);
       }
+      let timeSpecified = false;
       if (options.startHour !== undefined) {
         fish_entry.startHour = options.startHour;
+        timeSpecified = true;
+      } else if (options.startTime !== undefined) {
+        fish_entry.startHour = parseTimeString(options.startTime);
+        timeSpecified = true;
       }
       if (options.endHour !== undefined) {
         fish_entry.endHour = options.endHour;
+        timeSpecified = true;
+      } else if (options.endTime !== undefined) {
+        fish_entry.endHour = parseTimeString(options.endTime);
+        timeSpecified = true;
       }
-      if ((options.startHour !== undefined) || (options.endHour !== undefined)) {
+      if (timeSpecified) {
         let totalHoursUp = Math.abs(fish_entry.endHour - fish_entry.startHour);
         fish_entry.dailyDuration = dateFns.normalizeDuration({
           hours: fish_entry.endHour < fish_entry.startHour ? 24 - totalHoursUp : totalHoursUp });
