@@ -194,9 +194,9 @@
               <i class="clock icon"></i> Time Restricted
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
                 -
-                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
+                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
               {{?}}
             {{?}}
           {{??}}
@@ -204,9 +204,9 @@
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
               -
-              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
+              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
             {{?}}
           {{?}}
         </td>
@@ -343,9 +343,9 @@
               <i class="clock icon"></i> Time Restricted
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
                 -
-                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
+                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
               {{?}}
             {{?}}
           {{??}}
@@ -353,9 +353,9 @@
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.startHour % 1) * 60}}</span>{{?}}
+              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
               -
-              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=(it.data.endHour % 1) * 60}}</span>{{?}}
+              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
             {{?}}
           {{?}}
         </td>
@@ -499,14 +499,14 @@
       $(() => {
         // Document is ready, initialize the view model now.
         ViewModel.initialize();
-        // There shouldn't be anything more to do.  Any logic controling the
+        // There shouldn't be anything more to do.  Any logic controlling the
         // display belongs in the ViewModel or Layout classes.
         // DO NOT ADD CODE AFTER THIS POINT!!!
       });
     </script>
 
     <!-- DEV MODE EXTRAS -->
-    <script type="text/javascript" src="js/app/carbyutils.js?20230220_1437"></script>
+    <script type="text/javascript" src="js/app/carbyutils.js?20230326_1801"></script>
   </head>
   <body>
     <div id="topmenu" class="ui text top fixed menu">
