@@ -497,9 +497,42 @@ important_fish = sorted(list(filter(is_important_fish, catchable_fish.values()))
 import yaml
 from yaml import CLoader as Loader
 from yaml import CDumper as Dumper
+from yaml.resolver import Resolver
+
+# Remove implicit parser for sexagesimal (base 60) to int.
+# Otherwise, the YAML parser will convert strings such as "01:15"
+# into the integer 75. Technically, it will not convert "00:15"
+# into the integer 15; however, I'd rather not have to deal with
+# the craziness at all.
+for ch in list('-+0123456789'):
+    # Get the INDEX of the resolver for yaml ints.
+    for idx in map(lambda x: x[0],
+                   filter(lambda x: x[1][0] == 'tag:yaml.org,2002:int',
+                          enumerate(Resolver.yaml_implicit_resolvers[ch]))):
+        del Resolver.yaml_implicit_resolvers[ch][idx]
+Resolver.add_implicit_resolver(
+    'tag:yaml.org,2002:int',
+    re.compile(r'''^(?:[-+]?0b[0-1_]+
+                |[-+]?0[0-7_]+
+                |[-+]?(?:0|[1-9][0-9_]*)
+                |[-+]?0x[0-9a-fA-F_]+)$''', re.X),
+    list('-+0123456789'))
+
+
+def ensure_hour_is_decimal(item):
+    # Check if startHour and/or endHour is a string and convert to decimal.
+    if 'startHour' in item and isinstance(item['startHour'], str):
+        h, m = map(int, item['startHour'].split(':'))
+        item['startHour'] = h + (m / 60.0)
+    if 'endHour' in item and isinstance(item['endHour'], str):
+        h, m = map(int, item['endHour'].split(':'))
+        item['endHour'] = h + (m / 60.0)
 
 # Import the OLD data...
 fishes = yaml.load(open("private/fishData.yaml", 'r', encoding='utf-8'), Loader=Loader)
+# Adjust any start/end times expressed as time string instead of decimal.
+for fish in fishes:
+    ensure_hour_is_decimal(fish)
 known_fishes = dict([(fish['name'], fish) for fish in fishes])
 
 

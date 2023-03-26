@@ -10,6 +10,8 @@ try:
     from yaml import CDumper as Dumper
 except ImportError:
     from yaml import Dumper
+from yaml.resolver import Resolver
+import re
 import json
 from operator import itemgetter, add
 from collections import OrderedDict, namedtuple, deque
@@ -39,6 +41,26 @@ REGIONS = {}
 ZONES = {}
 LANGUAGES = []
 GATHERING_SUB_CATEGORIES = None
+
+
+# Remove implicit parser for sexagesimal (base 60) to int.
+# Otherwise, the YAML parser will convert strings such as "01:15"
+# into the integer 75. Technically, it will not convert "00:15"
+# into the integer 15; however, I'd rather not have to deal with
+# the craziness at all.
+for ch in list('-+0123456789'):
+    # Get the INDEX of the resolver for yaml ints.
+    for idx in map(lambda x: x[0],
+                   filter(lambda x: x[1][0] == 'tag:yaml.org,2002:int',
+                          enumerate(Resolver.yaml_implicit_resolvers[ch]))):
+        del Resolver.yaml_implicit_resolvers[ch][idx]
+Resolver.add_implicit_resolver(
+    'tag:yaml.org,2002:int',
+    re.compile(r'''^(?:[-+]?0b[0-1_]+
+                |[-+]?0[0-7_]+
+                |[-+]?(?:0|[1-9][0-9_]*)
+                |[-+]?0x[0-9a-fA-F_]+)$''', re.X),
+    list('-+0123456789'))
 
 
 def nth(iterable, n, default=None):
@@ -365,6 +387,16 @@ def get_min_collectability(fish_id, default=None):
     return 1
 
 
+def ensure_hour_is_decimal(item):
+    # Check if startHour and/or endHour is a string and convert to decimal.
+    if 'startHour' in item and isinstance(item['startHour'], str):
+        h, m = map(int, item['startHour'].split(':'))
+        item['startHour'] = h + (m / 60.0)
+    if 'endHour' in item and isinstance(item['endHour'], str):
+        h, m = map(int, item['endHour'].split(':'))
+        item['endHour'] = h + (m / 60.0)
+
+
 def convert_fish_to_json(item):
     try:
         return _convert_fish_to_json(item)
@@ -379,6 +411,8 @@ def _convert_fish_to_json(item):
     item.setdefault('weatherSet', [])
     item.setdefault('previousWeatherSet', [])
     item.setdefault('bestCatchPath', [])
+
+    ensure_hour_is_decimal(item)
 
     key = lookup_fish_by_name(item['name']).key
     weather_set = [lookup_weather_by_name(x).key for x in item['weatherSet'] or []]
@@ -629,6 +663,8 @@ def check_data_integrity(args):
         fish.setdefault('weatherSet', [])
         fish.setdefault('previousWeatherSet', [])
         fish.setdefault('bestCatchPath', [])
+
+        ensure_hour_is_decimal(fish)
 
         # Check for hookset definition.
         # For fish that require mooching, Patience is almost always used. Knowing
