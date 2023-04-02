@@ -568,35 +568,6 @@ title: Home
     </script>
 
     <script type="text/javascript">
-      _(Fishes).each(x => {
-        x.__icon = x.icon;
-        x.icon = "029021";
-      });
-      $(() => {
-        setTimeout(() => {
-          let $augerItem = $('#auger');
-          $augerItem.transition({displayType: 'flex', duration: '15s'});
-          $augerItem.on('click', () => {
-            $augerItem.transition("stop");
-            _(Fishes).each(x => {
-              x.icon = x.__icon;
-            });
-            let visibleIds = _(ViewModel.fishEntries).keys();
-            for (let fishId of visibleIds) {
-              ViewModel.removeEntry(ViewModel.fishEntries[fishId], fishId);
-              let fishEntry = ViewModel.fishMap[fishId];
-              ViewModel.activateEntry(fishEntry, Date.now());
-            }
-            ViewModel.updateDisplay();
-            $augerItem.transition({duration: '1s', onComplete: () => {
-              $augerItem.remove();
-            }});
-          });
-        }, 5000);
-      });
-    </script>
-
-    <script type="text/javascript">
       const octokit = new Octokit();
       $(() => {
         // Document is ready, initialize the view model now.
@@ -624,11 +595,6 @@ title: Home
           </div>
         </div>
         <div class="header item">FFX|V Fish Tracker App</div>
-        <div class="ui center borderless menu">
-          <div class="item hidden" id="auger">
-            <img style="height: 24px; width: 24px;" src="https://xivapi.com/i/061000/061271.png"/>
-          </div>
-        </div>
         <div class="ui right borderless menu">
           <!-- Eorzea Time (realtime updated) -->
           <div class="item" id="eorzeaClock" title="Eorzea Time">##:##</div>
