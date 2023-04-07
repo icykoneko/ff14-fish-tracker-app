@@ -194,9 +194,7 @@
               <i class="clock icon"></i> Time Restricted
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-                -
-                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+                {{#def.fishTimeRestriction:it.data}}
               {{?}}
             {{?}}
           {{??}}
@@ -204,9 +202,7 @@
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-              -
-              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+              {{#def.fishTimeRestriction:it.data}}
             {{?}}
           {{?}}
         </td>
@@ -343,9 +339,7 @@
               <i class="clock icon"></i> Time Restricted
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-                -
-                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+                {{#def.fishTimeRestriction:it.data}}
               {{?}}
             {{?}}
           {{??}}
@@ -353,9 +347,7 @@
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-              -
-              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+              {{#def.fishTimeRestriction:it.data}}
             {{?}}
           {{?}}
         </td>
@@ -461,7 +453,7 @@
     </script>
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20230407_1652"></script>
+    <script type="text/javascript" src="js/app/layout.js?20230407_1739"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
