@@ -42,6 +42,12 @@ let FishTrain = function(){
       {{?}}`
     },
 
+    fishTimeRestriction: {arg: 'it', text:
+    `<span class="catchtime-hour">{{=Math.floor(it.startHour)}}</span>{{?it.startHour % 1 !== 0}}<span class="catchtime-minute">{{=String(Math.round((it.startHour % 1) * 60)).padStart(2, '0')}}</span>{{?}}
+     -
+     <span class="catchtime-hour">{{=Math.floor(it.endHour)}}</span>{{?it.endHour % 1 !== 0}}<span class="catchtime-minute">{{=String(Math.round((it.endHour % 1) * 60)).padStart(2, '0')}}</span>{{?}}`
+    },
+
     fishEntryDetailsInner: {arg: 'it', text:
      `<span><b>Details:</b></span>
       <!-- Additional Details -->
@@ -98,9 +104,7 @@ let FishTrain = function(){
             <i class="clock icon"></i> Time Restricted
             {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
               <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-              -
-              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+              {{#def.fishTimeRestriction:it.data}}
             {{?}}
           {{?}}
         {{??}}
@@ -108,9 +112,7 @@ let FishTrain = function(){
           {{? it.data.startHour === 0 && it.data.endHour === 24}}
             All Day
           {{??}}
-            <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-            -
-            <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+            {{#def.fishTimeRestriction:it.data}}
           {{?}}
         {{?}}
       </div>

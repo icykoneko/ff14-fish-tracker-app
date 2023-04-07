@@ -1,10 +1,20 @@
 class FishTableLayout {
+  __sub_templates = {
+    fishTimeRestriction: {arg: 'it', text:
+    `<span class="catchtime-hour">{{=Math.floor(it.startHour)}}</span>{{?it.startHour % 1 !== 0}}<span class="catchtime-minute">{{=String(Math.round((it.startHour % 1) * 60)).padStart(2, '0')}}</span>{{?}}
+     -
+     <span class="catchtime-hour">{{=Math.floor(it.endHour)}}</span>{{?it.endHour % 1 !== 0}}<span class="catchtime-minute">{{=String(Math.round((it.endHour % 1) * 60)).padStart(2, '0')}}</span>{{?}}`
+    },
+  }
+
   constructor() {
+    // Fix bug in doT.js template regex.
+    doT.templateSettings.use = /\{\{#([\s\S\}]+?)\}\}/g;
     // Initialize the doT templates.
     this.templates = {
       fishTable: doT.template($('#fish-table-template').text()),
-      fishEntry: doT.template($('#fish-template').text()),
-      intuitionFishEntry: doT.template($('#fish-intuition-template').text()),
+      fishEntry: doT.template($('#fish-template').text(), undefined, this.__sub_templates),
+      intuitionFishEntry: doT.template($('#fish-intuition-template').text(), undefined, this.__sub_templates),
       upcomingWindows: doT.template($('#upcoming-windows-template').text()),
       sectionDivider: doT.template($('#table-section-divider-template').text())
     };
@@ -133,7 +143,7 @@ class FishTableLayout {
     // First, check if the fish's availability changed.
     // YES, you still want to do this because of Fish Eyes.
     if (fishEntry.isCatchable != $fishEntry.hasClass('fish-active')) {
-      $fishEntry.toggleClass('fish-active');
+      $fishEntry.toggleClass('fish-active').addClass('fish-availability-transitioning');
       console.debug(`${fishEntry.id} "${fishEntry.data.name}" has changed availability.`);
       hasFishAvailabilityChanged = true;
     }
@@ -295,6 +305,9 @@ class FishTableLayout {
 
       this.append(entry);
     }
+
+    // Remove the 'fish-availability-transitioning' class after sorting!
+    $('.fish-entry', this.fishTable).removeClass('fish-availability-transitioning');
 
     console.timeEnd('Sorting');
   }

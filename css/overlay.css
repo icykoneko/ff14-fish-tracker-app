@@ -350,6 +350,11 @@ body.dark #fishes thead tr th {
   pointer-events: none;
 }
 
+/* Prevent displaying the availability while the list is pending resort. */
+tr.fish-entry.fish-availability-transitioning .fish-availability-current {
+  filter: opacity(0); /* still needs to take up space, just not be visible */
+}
+
 /*
  * These rules match the Intuition status requirement when a duration is present.
  * CSS4 would allow us to use :has(> span) instead... but it's not ready yet :(

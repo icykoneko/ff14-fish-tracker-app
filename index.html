@@ -40,7 +40,7 @@ title: Home
 
     <link rel="stylesheet" href="public/images/sprite.css?6.3_20230110_0630" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20230305_1820" />
-    <link rel="stylesheet" href="css/overlay.css?20230112_1911" />
+    <link rel="stylesheet" href="css/overlay.css?20230407_1652" />
     <link rel="stylesheet" href="css/dark_overlay.css?20230305_1820" />
 
     <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
@@ -266,9 +266,7 @@ title: Home
               <i class="clock icon"></i> Time Restricted
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-                -
-                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+                {{#def.fishTimeRestriction:it.data}}
               {{?}}
             {{?}}
           {{??}}
@@ -276,9 +274,7 @@ title: Home
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-              -
-              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+              {{#def.fishTimeRestriction:it.data}}
             {{?}}
           {{?}}
         </td>
@@ -415,9 +411,7 @@ title: Home
               <i class="clock icon"></i> Time Restricted
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
-                <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-                -
-                <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+                {{#def.fishTimeRestriction:it.data}}
               {{?}}
             {{?}}
           {{??}}
@@ -425,9 +419,7 @@ title: Home
             {{? it.data.startHour === 0 && it.data.endHour === 24}}
               All Day
             {{??}}
-              <span class="catchtime-hour">{{=Math.floor(it.data.startHour)}}</span>{{?it.data.startHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.startHour % 1) * 60)}}</span>{{?}}
-              -
-              <span class="catchtime-hour">{{=Math.floor(it.data.endHour)}}</span>{{?it.data.endHour % 1 !== 0}}<span class="catchtime-minute">{{=Math.round((it.data.endHour % 1) * 60)}}</span>{{?}}
+              {{#def.fishTimeRestriction:it.data}}
             {{?}}
           {{?}}
         </td>
@@ -534,11 +526,11 @@ title: Home
     {% endraw %}
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20111013_2022"></script>
+    <script type="text/javascript" src="js/app/layout.js?20230407_1739"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20230117_1917"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20230407_1652"></script>
 
     <script type="text/javascript">
       $(() => {
