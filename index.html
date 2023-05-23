@@ -38,7 +38,7 @@ title: Home
             integrity="sha512-uiSucQ5TdEImoU68Gp+mxXJ54l4lQm5bTd+T0tj7KcCupCDrKr+FdmgXipF+2Exfc6xDAcnPbr5rXB5bEZS0bw=="
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?6.3_20230110_0630" />
+    <link rel="stylesheet" href="public/images/sprite.css?6.4_20230523_0636" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20230305_1820" />
     <link rel="stylesheet" href="css/overlay.css?20230407_1652" />
     <link rel="stylesheet" href="css/dark_overlay.css?20230305_1820" />
@@ -49,9 +49,9 @@ title: Home
     <script type="text/javascript" src="js/app/localization.js?20111013_2022"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?6.3_20230327_1727"></script>
+    <script type="text/javascript" src="js/app/data.js?6.4_20230523_0636"></script>
     <script type="text/javascript" src="js/app/data_ex.js?20230319_1430"></script>
-    <script type="text/javascript" src="js/app/fish_info_data.js?6.3_20230220_0959"></script>
+    <script type="text/javascript" src="js/app/fish_info_data.js?6.4_20230523_0636"></script>
     <!--
       - Scripts
       - * NOTE: The order is somewhat important. Care must be taken to avoid
@@ -241,7 +241,7 @@ title: Home
           <!-- Weather -->
           {{?it.data.dataMissing !== false}}
             {{?it.data.dataMissing.weatherRestricted}}
-              <i class="cloud icon"></i> Weather Restricted
+              <i class="cloud icon"></i> Weather Unknown
               {{?it.data.conditions.weatherSet.length > 0}}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
               {{?}}
@@ -263,7 +263,7 @@ title: Home
           <br/>
           {{?it.data.dataMissing !== false}}
             {{?it.data.dataMissing.timeRestricted}}
-              <i class="clock icon"></i> Time Restricted
+              <i class="clock icon"></i> Time Unknown
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
                 {{#def.fishTimeRestriction:it.data}}
@@ -386,7 +386,7 @@ title: Home
         <td>
           {{?it.data.dataMissing !== false}}
             {{?it.data.dataMissing.weatherRestricted}}
-              <i class="cloud icon"></i> Weather Restricted
+              <i class="cloud icon"></i> Weather Unknown
               {{?it.data.conditions.weatherSet.length > 0}}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
               {{?}}
@@ -408,7 +408,7 @@ title: Home
           <br/>
           {{?it.data.dataMissing !== false}}
             {{?it.data.dataMissing.timeRestricted}}
-              <i class="clock icon"></i> Time Restricted
+              <i class="clock icon"></i> Time Unknown
               {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
                 <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
                 {{#def.fishTimeRestriction:it.data}}
@@ -530,7 +530,7 @@ title: Home
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20230407_1652"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20230523_0022"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -857,7 +857,7 @@ title: Home
                     <div class="ui active button" data-filter="6.1">6.1</div>
                     <div class="ui active button" data-filter="6.2">6.2</div>
                     <div class="ui active button" data-filter="6.3">6.3</div>
-                    <div class="ui disabled button" data-filter="6.4">6.4</div>
+                    <div class="ui active button" data-filter="6.4">6.4</div>
                     <div class="ui disabled button" data-filter="6.5">6.5</div>
                   </div>
                 </div>
