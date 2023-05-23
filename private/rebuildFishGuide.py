@@ -15,6 +15,15 @@ except:
 _HELPER_LIBS_PATH = _SCRIPT_PATH
 
 
+def first(iterable, pred, default=None):
+    """Returns the first item for which pred(item) is true.
+
+    If no true value is found, returns *default*
+
+    """
+    return next(filter(pred, iterable), default)
+
+
 def _init_saintcoinach(args):
     global XIV
 
@@ -103,6 +112,8 @@ def _build_fish_infos():
 
     fish_infos = []
     for fish in fish_in_log:
+        fish_notes = first(XIV.game_data.get_sheet('FishingNoteInfo'),
+                           lambda r: r.get_raw('Item') == fish.item.key)
         fish_info = dict([
             ('id', fish.item.key),
             *_make_localized_field('name', fish.item, 'Name'),
@@ -110,8 +121,9 @@ def _build_fish_infos():
             ('icon', '%06u' % fish.item.get_raw('Icon')),
             ('extra_icon', '%06u' % (fish.item.get_raw('Icon') + 50000)),
             ('level', [x for x in fish['GatheringItemLevel'].column_values]),
-            ('time_restricted', fish.time_restricted),
-            ('weather_restricted', fish.weather_restricted),
+            ('time_restricted', fish_notes['TimeRestriction']),
+            ('weather_restricted', fish_notes['WeatherRestriction']),
+            ('special_conditions', fish_notes['SpecialConditions']),
             ('collectable', fish.item.is_collectable),
             ('rarity', fish.item.rarity),
             # TODO: These should be normalized to reduce data size

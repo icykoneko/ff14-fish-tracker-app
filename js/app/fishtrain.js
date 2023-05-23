@@ -78,7 +78,7 @@ let FishTrain = function(){
         <!-- Weather -->
         {{?it.data.dataMissing !== false}}
           {{?it.data.dataMissing.weatherRestricted}}
-            <i class="cloud icon"></i> Weather Restricted
+            <i class="cloud icon"></i> Weather Unknown
             {{?it.data.conditions.weatherSet.length > 0}}
               <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
             {{?}}
@@ -101,7 +101,7 @@ let FishTrain = function(){
         <!-- Time -->
         {{?it.data.dataMissing !== false}}
           {{?it.data.dataMissing.timeRestricted}}
-            <i class="clock icon"></i> Time Restricted
+            <i class="clock icon"></i> Time Unknown
             {{? it.data.startHour !== 0 || it.data.endHour !== 24 }}
               <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
               {{#def.fishTimeRestriction:it.data}}
@@ -854,7 +854,7 @@ let FishTrain = function(){
                           3, 3.1, 3.2, 3.3, 3.4, 3.5,
                           4, 4.1, 4.2, 4.3, 4.4, 4.5,
                           5, 5.1, 5.2, 5.3, 5.4, 5.5,
-                          6, 6.1, 6.2, 6.3]),
+                          6, 6.1, 6.2, 6.3, 6.4]),
           extra: 'all',
         },
         sortingType: 'overallRarity',

@@ -12854,3 +12854,134 @@
   gig: UNKNOWN
   patch: 6.3
   dataMissing: true
+# Patch 6.4 (2023-05-23)
+- name: Platinum Seahorse
+  location: The Source
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: Clavekeeper
+  location: Seagazer Shoals
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: Mirror Image
+  location: Handmirror Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: Spangled Pirarucu
+  location: Lake Tusi Mek'ta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: The Fury's Aegis
+  location: The Mover Beta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: Onyx Knifefish
+  location: The Mover Beta
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: Wakeful Warden
+  location: The Wakeful Torana
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: Basilosaurus Rex
+  location: The Perfumed Tides
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: Gilt Dermogenys
+  location: The Lower Hungering Gardens
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true
+- name: Eehs Fan
+  location: Apohelos 18-α
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.4
+  dataMissing: true

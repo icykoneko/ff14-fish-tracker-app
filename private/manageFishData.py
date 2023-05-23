@@ -342,7 +342,7 @@ def lookup_spearfishing_spot_by_name(name):
     return KeyValuePair(*result)
 
 
-def supports_fish_eyes(fish_id, location_id, fish_params, patch):
+def supports_fish_eyes(fish_id, location_id, fish_notes, patch):
     from pysaintcoinach.ex.language import Language
 
     # The fish must not be legendary: i.e. not include the phase: "オオヌシ".
@@ -363,7 +363,7 @@ def supports_fish_eyes(fish_id, location_id, fish_params, patch):
     # While technically any other fish does support Fish Eyes, only fish with
     # time restrictions truly can use it.
     # NOTE: Disabled because... well, run integrity checks and you'll see -_-
-    # return fish_params is not None and fish_params.time_restricted
+    # return fish_notes is not None and fish_notes['TimeRestriction']
     return True
 
 
@@ -445,7 +445,9 @@ def _convert_fish_to_json(item):
     data_missing = None
     fish_parameter = first(XIV.game_data.get_sheet('FishParameter'),
                            lambda r: r.get_raw('Item') == key)
-    if fish_parameter is not None:
+    fish_notes = first(XIV.game_data.get_sheet('FishingNoteInfo'),
+                       lambda r: r.get_raw('Item') == key)
+    if fish_parameter is not None and fish_notes is not None:
         folklore = fish_parameter['GatheringSubCategory']
         if folklore is not None:
             # Convert to raw key to allow for localization (and less duplication)
@@ -453,12 +455,17 @@ def _convert_fish_to_json(item):
         # If the entry is marked as "dataMissing", then populate the time and weather
         # restriction values. Also, display a warning in the logs so we know we need
         # to resolve the missing information in the future.
+        # NOTE: As of Patch 6.4, the TimeRestriction and WeatherRestriction fields
+        # are no longer reliable. We're not yet sure if these fields even exist
+        # anymore in the DATs.
         if item.get('dataMissing', False):
-            data_missing = {'weatherRestricted': fish_parameter.weather_restricted,
-                            'timeRestricted': fish_parameter.time_restricted}
+            # data_missing = {'weatherRestricted': fish_notes.as_boolean('WeatherRestriction'),
+            #                 'timeRestricted': fish_notes.as_boolean('TimeRestriction')}
+            data_missing = {'weatherRestricted': True,
+                            'timeRestricted': True}
             logging.warning('%s still needs conditions verified', item['name'])
     elif item.get('gig') is None:
-        logging.warning('%s does not have an entry in FishParameter?!', item['name'])
+        logging.warning('%s does not have an entry in FishingNoteInfo?!', item['name'])
 
     is_collectable = XIV.game_data.get_sheet('Item')[key].as_boolean('IsCollectable')
 
@@ -480,7 +487,7 @@ def _convert_fish_to_json(item):
     # Instead, the action is now a buff that enables non-legendary fish with
     # only a time restriction to be caught whenever.
     if item.get('gig') is None:
-        fish_eyes = supports_fish_eyes(key, location, fish_parameter, item.get('patch'))
+        fish_eyes = supports_fish_eyes(key, location, fish_notes, item.get('patch'))
     else:
         # Fish Eyes doesn't affect spearfishing.
         fish_eyes = False
@@ -684,7 +691,9 @@ def check_data_integrity(args):
         # For each fish, verify time and weather restrictions have been recorded.
         fish_params = first(XIV.game_data.get_sheet('FishParameter'),
                             lambda x: x['Item'] is not None and x['Item']['Name'] == fish['name'])
-        if fish_params is None:
+        fish_notes = first(XIV.game_data.get_sheet('FishingNoteInfo'),
+                           lambda x: x['Item'] is not None and x['Item']['Name'] == fish['name'])
+        if fish_params is None or fish_notes is None:
             continue
 
         # VERY IMPORTANT NOTE:
@@ -696,23 +705,27 @@ def check_data_integrity(args):
         #   over to the target fish. This should be revisted once the UI allows
         #   better display of mooch fish (similar to intuition fish).
 
+        # NOTE: As of Patch 6.4, the TimeRestriction and WeatherRestriction fields
+        # are no longer reliable. We're not yet sure if these fields even exist
+        # anymore in the DATs.
+
         # Check if time restricted.
-        if fish_params.time_restricted and \
+        if fish_notes.as_boolean('TimeRestriction') and \
                 fish['startHour'] == 0 and fish['endHour'] == 24:
             has_errors = True
             logging.error('%s should be time restricted', fish['name'])
-        elif not fish_params.time_restricted and \
+        elif not fish_notes.as_boolean('TimeRestriction') and \
                 not (fish['startHour'] == 0 and fish['endHour'] == 24):
             has_errors = True
             logging.error('%s should not be time restricted', fish['name'])
 
         # Check if weather restricted.
-        if fish_params.weather_restricted and \
+        if fish_notes.as_boolean('WeatherRestriction') and \
                 len(fish['previousWeatherSet'] or []) == 0 and \
                 len(fish['weatherSet'] or []) == 0:
             has_errors = True
             logging.error('%s should be weather restricted', fish['name'])
-        elif not fish_params.weather_restricted and \
+        elif not fish_notes.as_boolean('WeatherRestriction') and \
                 (len(fish['weatherSet'] or []) != 0 or
                  len(fish['previousWeatherSet'] or []) != 0):
             has_errors = True
@@ -726,7 +739,9 @@ def check_data_integrity(args):
         # table to undergo significant changes in 5.2... Please look forward to it.
         fish_eyes_needed = fish.get('fishEyes') or False
         snagging_needed = fish.get('snagging') or False
-        if not fish_params['IsHidden'] and fish_params[5]:  # Rare = index: 5
+        # As of Patch 6.4, the "Rare" field has been deleted. I think it might have been moved to
+        # FishingNoteInfo as "SpecialConditions".
+        if not fish_params['IsHidden'] and fish_notes['SpecialConditions']:
             if fish_eyes_needed is False and snagging_needed is False:
                 has_errors = True
                 logging.error('%s should require Fish Eyes or Snagging', fish['name'])
