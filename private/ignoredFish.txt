@@ -521,3 +521,8 @@ Seedtoad
 Auroral Clam
 Holier-than Mogpom
 Chalky Coral
+# Patch 6.35
+Platinum Seahorse
+Clavekeeper
+Mirror Image
+Spangled Pirarucu
