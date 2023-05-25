@@ -43,6 +43,7 @@
   - Puff-paya
   - Basilosaurus
   tug: heavy
+  hookset: Powerful
 - name: Eehs Fan
   startHour: 12
   endHour: 20
