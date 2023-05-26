@@ -50,6 +50,7 @@
   previousWeatherSet: [Astromagnetic Storm]
   weatherSet: [Umbral Wind]
   bait: [Chimera Worm]
+  tug: heavy
 - name: The Fury's Aegis
   startHour: 16
   endHour: 19
