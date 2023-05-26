@@ -61,6 +61,6 @@
   startHour: 20
   endHour: 22
   previousWeatherSet: [Umbral Wind]
-  weatherSet: [Fair Skies]
+  weatherSet: [Clear Skies, Fair Skies]
   bait: [Sky Spoon Lure]
   tug: heavy
