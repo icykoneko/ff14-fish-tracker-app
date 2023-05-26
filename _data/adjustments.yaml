@@ -56,3 +56,10 @@
   bait: [Leech]
   tug: medium
   hookset: Powerful
+- name: Gilt Dermogenys
+  startHour: 20
+  endHour: 22
+  previousWeatherSet: [Umbral Wind]
+  weatherSet: [Fair Skies]
+  bait: [Sky Spoon Lure]
+  tug: heavy
