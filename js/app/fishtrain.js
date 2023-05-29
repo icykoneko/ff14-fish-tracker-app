@@ -563,6 +563,8 @@ let FishTrain = function(){
         },
       };
       this.isCatchable = false;
+
+      this.refCount = 1;
     }
 
     get uptime() { return this.data.uptime(); }
@@ -807,6 +809,8 @@ let FishTrain = function(){
   class ScheduleEntry {
     constructor(fishEntry, opts={}) {
       this.fishEntry = fishEntry;
+      // Up ref count to prevent deletion due to filtering.
+      this.fishEntry.refCount++;
       this.adjustable = true;
       if (opts.crsIdx !== null) {
         this.crsIdx = opts.crsIdx;
@@ -840,6 +844,8 @@ let FishTrain = function(){
     constructor(fishEntry) {
       // This is the specific intuition requirement fish.
       this.fishEntry = fishEntry;
+      // Up ref count to prevent deletion due to filtering.
+      this.fishEntry.refCount++;
 
       // DOM element hosting this entry in LIST.
       this.listEl = null;
@@ -2024,9 +2030,13 @@ let FishTrain = function(){
       $(_this.selectedScheduleEntry.listEl).remove();
       for (let subEntry in _this.selectedScheduleEntry.intuitionEntries) {
         $(_this.selectedScheduleEntry.intuitionEntries[subEntry].listEl).remove();
+        // Decrement refCount for wraped FishEntry object. [REF-TRACKING]
+        --_this.selectedScheduleEntry.intuitionEntries[subEntry].fishEntry.refCount;
         delete _this.selectedScheduleEntry.intuitionEntries[subEntry];
       }
       // Clean up.
+      // Decrement refCount for wraped FishEntry object. [REF-TRACKING]
+      --_this.selectedScheduleEntry.fishEntry.refCount;
       delete _this.selectedScheduleEntry;
       _this.selectedScheduleEntry = null;
 
@@ -2179,7 +2189,20 @@ let FishTrain = function(){
       }
       // Remove intuition entries as well.
       for (let subEntry in entry.intuitionEntries) {
-        delete entry.intuitionEntries[subEntry];
+        // IMPORTANT: Only remove the link to this fish entry from the fish train object itself.
+        // There _may_ be other objects referencing this data. Yes, this will likely result in
+        // a memory leak if the user toggles between filters excessively.
+        if (--entry.intuitionEntries[subEntry].refCount == 0) {
+          delete entry.intuitionEntries[subEntry];
+        } else {
+          // Help, the aquarium may have a leak.
+          console.debug("Aquarium may leak:", entry.intuitionEntries[subEntry]);
+        }
+      }
+      // FIXME: Instead of unlinking, use refCounter to determine if the entry needs to stay alive.
+      // This will require changing other code to ignore non-active entries... -_-
+      if (--entry.refCount != 0) {
+        console.debug("Aquarium may leak:", entry);
       }
       delete this.fishEntries[k];
     }
