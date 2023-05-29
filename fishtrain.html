@@ -67,9 +67,9 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?20230220_1437"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="js/app/fishtrain.js?20230523_0022"></script>
+    <script type="text/javascript" src="js/app/fishtrain.js?20230529_1604"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
-    <script type="text/javascript" src="js/app/carbyutils.js?20230326_1801"></script>
+    <script type="text/javascript" src="js/app/carbyutils.js?20230529_1604"></script>
 
     <script type="text/javascript">
       const octokit = new Octokit();
@@ -238,7 +238,7 @@
               <h2>Before you Begin:</h2>
               <p>This tool is still in beta testing and under active development. It was designed primarily for desktop users so it may be difficult to use on mobile devices.</p>
               <h2>Instructions:</h2>
-              <p>Start by selecting the start and end date and an interval. You should try to limit this to about 4 hours. The interval is there to help break up the fish windows, especially fish that are always available.</p>
+              <p>Start by selecting the start and end date. You should try to limit this to about 4 hours. Each interval displayed is 8 Eorzean bells (hours), aligned to 0, 8, and 16.</p>
               <p>Adjust the filters by patch and type, and adjust the sorting if you wish. These work the same way as the main tracker. Once you are finished, click the <b>Update List</b> button to populate the Fish Table. In this beta version, if you wish to change any of these settings, you must click the Update List button again. This will also clear out your schedule, so please keep that in mind.</p>
               <p>The green shaded regions indicate the fish is available during that interval of time, and the brighter green box in the middle represents the actual window. Depending on the fish, these can get rather tiny. Clicking on the bright green box will display the exact time that window starts and prompt you to add the fish to your schedule. You can click elsewhere to close the prompt. Please note that in this beta version, you may only add each fish to the schedule once.</p>
               <p>Adding a fish to your schedule will place it in both the <i>Schedule List</i> and <i>Schedule Bar</i>. The bar displays the fish's window with each interval hashed out. From here, you can click on the fish to see more details, and have the option to remove it from your schedule. The list displays the fish in order and resembles the main tracker. Only conditions are omitted, and the availability column always displays a countdown when the fish is less than 4 hours from being available (otherwise the scheduled time is displayed). After the scheduled window has passed, the entry in the list will be dimmed and shrunk.</p>
@@ -295,18 +295,17 @@
                       </div>
                     </div>
                   </div>
-                  <div class="field">
+                  <div class="disabled field">
                     <label>Interval</label>
                     <div class="ui compact selection dropdown" id="timelineInterval">
-                      <input type="hidden" name="timelineInterval" value="30"/>
+                      <input type="hidden" name="timelineInterval" value="8"/>
                       <i class="dropdown icon"></i>
                       <div class="default text">Interval</div>
                       <div class="menu">
-                        <div class="item" data-value="10">10 minutes</div>
-                        <div class="item" data-value="15">15 minutes</div>
-                        <div class="item" data-value="20">20 minutes</div>
-                        <div class="item" data-value="30">30 minutes</div>
-                        <div class="item" data-value="60">1 hour</div>
+                        <div class="item" data-value="8">8 bells</div>
+                        <div class="item" data-value="4">4 bells</div>
+                        <div class="item" data-value="2">2 bells</div>
+                        <div class="item" data-value="1">1 bell</div>
                       </div>
                     </div>
                   </div>
@@ -468,8 +467,37 @@
         </div>
         <div class="content active" data-controlname="fishtable">
           <div class="fishtrain-fishtable">
+            <div class="ui form" id="fishTableWeatherSetting">
+              <div class="inline fields">
+                <label>Display Weather:</label>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="fishTableWeather" value="none">
+                    <label>Disabled</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="fishTableWeather" value="currentOnly">
+                    <label>Only Current</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="fishTableWeather" checked="checked" value="firstPrevious">
+                    <label>First Previous</label>
+                  </div>
+                </div>
+                <div class="field">
+                  <div class="ui radio checkbox">
+                    <input type="radio" name="fishTableWeather" value="both">
+                    <label>Current & Previous</label>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="scroll-context">
-              <table id="fishtrain" class="ui very compact single line unstackable table">
+              <table id="fishtrain" class="ui very compact single line unstackable table show-weather show-previous-weather-first">
                 <thead>
                   <tr>
                     <th class="sticky col-fish">Fish</th>
