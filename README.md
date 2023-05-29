@@ -80,7 +80,13 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
 * Update the *cache buster* in `index.html`, `fishtrain.html`, and `trainpass/index.html` for `js/app/data_ex.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
 * Validate changes when testing site locally. Open the console and run `_validate_extra_data()`.
 * **NOTE:** You do not need to rebuild the database if only adding/updating video links.
-* Changes _should_ be commited to master, then merged with gh-pages branch. This will reduce confusion later, maybe...
+* Changes _should_ be committed to master, then merged with gh-pages branch. This will reduce confusion later, maybe...
+
+### Using Cache-Buster Update Script
+Instead of manually updating the pages each time, before committing changes, you can use the updateCacheBuster Python script on the list of modified files.
+```bash
+python ./private/updateCacheBusters.py -p ${ver} $(git status -uno --porcelain=v1 | cut -c4-)
+```
 
 ### Updating the website
 * Rebuild any changes made to `date-fns` using the `npm run build` command.
