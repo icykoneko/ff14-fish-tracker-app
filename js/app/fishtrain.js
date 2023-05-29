@@ -29,7 +29,16 @@ let FishTrain = function(){
   var sub_templates = {
     fishEntryInterval: {arg: 'it', text:
      `{{? it.lastDT != it.i.dt }}
-        <td class="fishtrain-fishentry-interval {{? !it.i.skip}}has-window{{?}}">
+        <td class="{{? it.idx == 0}}first {{?}}fishtrain-fishentry-interval{{? !it.i.skip}} has-window{{?}}">
+          <div class="weather-indicator-outer">
+            <span class="previous-weather">
+              <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=it.i.previousWeather.icon}}"
+                   title="{{=__p(it.i.previousWeather,'name')}}"></div>
+              <i class="arrow right icon"></i>
+            </span>
+            <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=it.i.weather.icon}}"
+                 title="{{=__p(it.i.weather,'name')}}"></div>
+          </div>
       {{?}}
       {{? !it.i.skip }}
         <span class="interval-indicator"
@@ -218,9 +227,9 @@ let FishTrain = function(){
       </tr>`,
 
     scheduleIntervalMarkers:
-     `{{~ _.range(it.intervals.length) :k}}
-        <div class="interval-marker">
-          <div class="label">+{{= it.duration * (k + 1) }}m</div>
+     `{{~ it.intervals :k:idx}}
+        <div class="interval-marker" style="left: {{= (idx * it.duration) * 6 }}px">
+          <div class="label">{{= dateFns.format(dateFns.toDate(+k + (it.duration * 60 * 1000)), 'p')}}</div>
         </div>
       {{~}}`,
 
@@ -565,8 +574,16 @@ let FishTrain = function(){
       let durationMS = dateFns.milliseconds(duration);
 
       if (fish.alwaysAvailable == true) {
-        this.intervals = _(intervals).map(start => { 
-          return { dt: +start, skip: false, indicatorLeft: 0, indicatorWidth: 100 };
+        this.intervals = _(intervals).map(start => {
+          let [previousWeather, weather] = _(weatherService.getWeatherSetForAreaAtTime(fish.location.zoneId, eorzeaTime.toEorzea(+start))).map((w) => DATA.WEATHER_TYPES[w]);
+          return {
+            dt: +start,
+            skip: false,
+            indicatorLeft: 0,
+            indicatorWidth: 100,
+            weather: weather,
+            previousWeather: previousWeather
+          };
         });
         return;
       }
@@ -584,9 +601,10 @@ let FishTrain = function(){
       }
 
       this.intervals = _(intervals).reduce((memo, start) => {
-        let eStart = eorzeaTime.toEorzea(start);
-        let eEnd = eorzeaTime.toEorzea(dateFns.add(start, duration));
+        let eStart = eorzeaTime.toEorzea(+start);
+        let eEnd = eorzeaTime.toEorzea(+dateFns.add(start, duration));
         let hit = false;
+        let [previousWeather, weather] = _(weatherService.getWeatherSetForAreaAtTime(fish.location.zoneId, eStart)).map((w) => DATA.WEATHER_TYPES[w]);
         while (crs_idx < crs.length) {
           // Does the next catchable range start AFTER this interval ends?
           if (dateFns.isSameOrAfter(crs[crs_idx].start, eEnd)) {
@@ -594,7 +612,7 @@ let FishTrain = function(){
             if (hit) {
               return memo;
             } else {
-              return memo.concat({ dt: +start, skip: true });
+              return memo.concat({ dt: +start, skip: true, weather: weather, previousWeather: previousWeather });
             }
           }
           // Try intersecting this catchable range first.
@@ -604,7 +622,7 @@ let FishTrain = function(){
             if (hit) {
               return memo;
             } else {
-              return memo.concat({ dt: +start, skip: true });
+              return memo.concat({ dt: +start, skip: true, weather: weather, previousWeather: previousWeather });
             }
           } else {
             // At least part of this catchable range is during this interval.
@@ -622,9 +640,11 @@ let FishTrain = function(){
               indicatorLeft: Math.round(offsetMS / durationMS * 100),
               indicatorWidth: Math.round(totalMS / durationMS * 100),
               crsIdx: crs_idx,
+              weather: weather,
+              previousWeather: previousWeather,
             });
             hit = true;
-            if (dateFns.isBefore(crs[crs_idx].end, eEnd)) {
+            if (dateFns.isSameOrBefore(crs[crs_idx].end, eEnd)) {
               // The catchable range ends BEFORE the interval; check for multiple ranges.
               crs_idx++;
             }
@@ -859,7 +879,7 @@ let FishTrain = function(){
         },
         sortingType: 'overallRarity',
         theme: 'dark',
-        timelineInterval: 30,
+        timelineInterval: /*30*/ 1400/60,
       };
 
       this.timeline = {
@@ -1140,6 +1160,7 @@ let FishTrain = function(){
       this.scheduleFishEntries$ = $('.fishtrain-schedule .items');
       this.scheduleListEntries$ = $('.fishtrain-schedule-list tbody');
       this.scheduleBarCurrentTimeIndicator$ = $('.ui.fishtrain-schedule.segment .current-time-indicator');
+      this.fishTrainTable$ = $('table#fishtrain');
 
       this.initCommonView();
       $('.ui.accordion').accordion({
@@ -1151,6 +1172,9 @@ let FishTrain = function(){
       $('.ui.radio.checkbox').checkbox();
       $('#sortingType .radio.checkbox').checkbox({
         onChecked: _(this.sortingTypeChecked).partial(this)
+      });
+      $('#fishTableWeatherSetting .radio.checkbox').checkbox({
+        onChecked: _(this.fishTableWeatherSettingChecked).partial(this)
       });
       $('#fish-train-worldName').dropdown({
         values: _(EXTRA_DATA.WORLDS).reduce((a,v,k) => {
@@ -1337,13 +1361,16 @@ let FishTrain = function(){
       // Update the intervals.
       // NOTE: timelineInterval is not included in train pass data.
       // so we just continue using whatever the user had originally.
-      this.settings.timelineInterval = $('#timelineInterval').dropdown('get value');
+      // this.settings.timelineInterval = $('#timelineInterval').dropdown('get value');
+      this.settings.timelineInterval = 1400/60; /* Force using 8 Eorzean Bells */
       $('#rangestart').calendar('set date', existingSchedule.timeline.start);
       this.timeline.start = existingSchedule.timeline.start;
       // NOTE: Teamcraft doesn't record the END time, so derive it as one interval after
       // the last fish in the list.
-      this.timeline.end = dateFns.addMinutes(
-        _(existingSchedule.scheduleEntries).last().range.end, this.settings.timelineInterval);
+      // this.timeline.end = dateFns.addMinutes(
+      //   _(existingSchedule.scheduleEntries).last().range.end, this.settings.timelineInterval);
+      this.timeline.end = eorzeaTime.toEarth(dateFns.addHours(startOfPeriod(
+        eorzeaTime.toEorzea(_(existingSchedule.scheduleEntries).last().range.end)), 8));
       $('#rangeend').calendar('set date', this.timeline.end);
 
       // Clear schedule
@@ -1357,9 +1384,15 @@ let FishTrain = function(){
 
       // Get intervals but exclude the last entry if it matches an interval.
       // To accomplish this, we subtract one second from the end date.
-      var intervals = dateFns.eachMinuteOfInterval(
-        {start: this.timeline.start, end: +this.timeline.end-1},
-        {step: this.settings.timelineInterval});
+      // var intervals = dateFns.eachMinuteOfInterval(
+      //   {start: this.timeline.start, end: +this.timeline.end-1},
+      //   {step: this.settings.timelineInterval});
+      var intervals = [];
+      let currentIntervalStart = +this.timeline.start;
+      while (currentIntervalStart <= +this.timeline.end-1) {
+        intervals.push(dateFns.toDate(currentIntervalStart));
+        currentIntervalStart += (this.settings.timelineInterval * 60 * 1000);
+      }
 
       this.timeline.intervals = intervals;
 
@@ -1370,7 +1403,8 @@ let FishTrain = function(){
       // Update the schedule interval markers.
       this.scheduleIntervalMarkers$
         .removeClass()
-        .addClass(`bar interval-${this.settings.timelineInterval}min`)
+        // .addClass(`bar interval-${this.settings.timelineInterval}min`)
+        .addClass('bar interval-8bells')
         .append(
           this.templates.scheduleIntervalMarkers({
             intervals: intervals,
@@ -1406,10 +1440,10 @@ let FishTrain = function(){
 
         // Also add to the Schedule Bar.
         var viewParams = {
-          timeOffset: dateFns.differenceInMinutes(
-            entry.range.start, this.timeline.start, {roundingMethod: 'floor'}),
-          timeDuration: dateFns.differenceInMinutes(
-            entry.range.end, entry.range.start, {roundingMethod: 'ceil'}),
+          timeOffset: dateFns.differenceInSeconds(
+            entry.range.start, this.timeline.start, {roundingMethod: 'floor'}) / 60.0,
+          timeDuration: dateFns.differenceInSeconds(
+            entry.range.end, entry.range.start, {roundingMethod: 'ceil'}) / 60.0,
           icon: entry.fishEntry.data.icon,
           id: entry.fishEntry.id,
           crsIdx: entry.crsIdx,
@@ -1462,9 +1496,14 @@ let FishTrain = function(){
       }
 
       // Determine the intervals.
-      _this.settings.timelineInterval = $('#timelineInterval').dropdown('get value');
+      // _this.settings.timelineInterval = $('#timelineInterval').dropdown('get value');
+      _this.settings.timelineInterval = 1400/60; /* Force using 8 Eorzean Bells */
       _this.timeline.start = $('#rangestart').calendar('get date');
       _this.timeline.end = $('#rangeend').calendar('get date');
+
+      // Adjust start and end to fully contain weather intervals.
+      _this.timeline.start = eorzeaTime.toEarth(startOfPeriod(eorzeaTime.toEorzea(_this.timeline.start)));
+      _this.timeline.end = eorzeaTime.toEarth(dateFns.addHours(startOfPeriod(eorzeaTime.toEorzea(_this.timeline.end)), 8));
 
       // TODO: Maybe don't always clear this?
       // Clear schedule
@@ -1478,9 +1517,15 @@ let FishTrain = function(){
 
       // Get intervals but exclude the last entry if it matches an interval.
       // To accomplish this, we subtract one second from the end date.
-      var intervals = dateFns.eachMinuteOfInterval(
-        {start: _this.timeline.start, end: +_this.timeline.end-1},
-        {step: _this.settings.timelineInterval});
+      // var intervals = dateFns.eachMinuteOfInterval(
+      //   {start: _this.timeline.start, end: +_this.timeline.end-1},
+      //   {step: _this.settings.timelineInterval});
+      var intervals = [];
+      let currentIntervalStart = +_this.timeline.start;
+      while (currentIntervalStart <= +_this.timeline.end-1) {
+        intervals.push(dateFns.toDate(currentIntervalStart));
+        currentIntervalStart += (_this.settings.timelineInterval * 60 * 1000);
+      }
 
       _this.timeline.intervals = intervals;
 
@@ -1491,7 +1536,8 @@ let FishTrain = function(){
       // Update the schedule interval markers.
       _this.scheduleIntervalMarkers$
         .removeClass()
-        .addClass(`bar interval-${_this.settings.timelineInterval}min`)
+        // .addClass(`bar interval-${_this.settings.timelineInterval}min`)
+        .addClass('bar interval-8bells')
         .append(
           _this.templates.scheduleIntervalMarkers({
             intervals: intervals,
@@ -1707,7 +1753,7 @@ let FishTrain = function(){
         _(this.fishEntries).each(
           entry => entry.updateIntervals(
             this.timeline.intervals,
-            {minutes: this.settings.timelineInterval}));
+            { seconds: this.settings.timelineInterval * 60 }));
 
         // Remove any entries which ARE NOT UP during this time period.
         for (let k in this.fishEntries) {
@@ -1835,7 +1881,7 @@ let FishTrain = function(){
           entry: entry,
           range: {
             start: interval.dt,
-            end: dateFns.addMinutes(interval.dt, _this.settings.timelineInterval)
+            end: +dateFns.add(interval.dt, { seconds: _this.settings.timelineInterval * 60.0 })
           },
           adjustable: true,
           crsIdx: null,
@@ -1886,14 +1932,16 @@ let FishTrain = function(){
 
       // Update the schedule.
       var viewParams = {
-        timeOffset: dateFns.differenceInMinutes(
-          _this.currentSelection.range.start, _this.timeline.start, {roundingMethod: 'floor'}),
-        timeDuration: dateFns.differenceInMinutes(
-          _this.currentSelection.range.end, _this.currentSelection.range.start, {roundingMethod: 'ceil'}),
+        timeOffset: dateFns.differenceInSeconds(
+          _this.currentSelection.range.start, _this.timeline.start, {roundingMethod: 'floor'}) / 60.0,
+        timeDuration: dateFns.differenceInSeconds(
+          _this.currentSelection.range.end, _this.currentSelection.range.start, {roundingMethod: 'ceil'}) / 60.0,
         icon: _this.currentSelection.entry.data.icon,
         id: _this.currentSelection.entry.id,
         crsIdx: _this.currentSelection.crsIdx,
       };
+
+      console.info("Generating schedule entry DOM element from:", viewParams);
 
       // Add to the list
       var scheduleEntry = new ScheduleEntry(_this.currentSelection.entry, {
@@ -2018,11 +2066,11 @@ let FishTrain = function(){
       $('.window-start', content$)
         .text(dateFns.format(scheduleEntry.range.start, 'p'));
       $('.window-start-ingame', content$)
-        .text(dateFns.format(eorzeaTime.toEorzea(scheduleEntry.range.start), 'HH:mm'));
+        .text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(scheduleEntry.range.start)), 'HH:mm'));
       $('.window-end', content$)
         .text(dateFns.format(scheduleEntry.range.end, 'p'));
       $('.window-end-ingame', content$)
-        .text(dateFns.format(eorzeaTime.toEorzea(scheduleEntry.range.end), 'HH:mm'));
+        .text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(scheduleEntry.range.end)), 'HH:mm'));
       var location = scheduleEntry.fishEntry.data.location;
       $('.location-name', content$)
         .text(`${location.name} - ${location.zoneName} (${location.coords[0].toFixed(1)}, ${location.coords[1].toFixed(1)})`);
@@ -2124,6 +2172,10 @@ let FishTrain = function(){
       if (entry.timelineEl !== null) {
         $(entry.timelineEl).remove();
         entry.timelineEl = null;
+      }
+      if (entry.detailsEl !== null) {
+        $(entry.detailsEl).remove();
+        entry.detailsEl = null;
       }
       // Remove intuition entries as well.
       for (let subEntry in entry.intuitionEntries) {
@@ -2238,6 +2290,36 @@ let FishTrain = function(){
       _this.settings.sortingType = sortingType;
       _this.sortingTypeSubject.next(sortingType);
       _this.saveSettings();
+    }
+
+    fishTableWeatherSettingChecked(_this) {
+      let $this = $(this);
+      let weatherSettingPref = $this.val();
+
+      if (weatherSettingPref == 'none') {
+        _this.fishTrainTable$
+          .removeClass('show-weather')
+          .removeClass('show-previous-weather-first')
+          .removeClass('show-previous-weather-all');
+      } else if (weatherSettingPref == 'currentOnly') {
+        _this.fishTrainTable$
+          .addClass('show-weather')
+          .removeClass('show-previous-weather-first')
+          .removeClass('show-previous-weather-all');
+      } else if (weatherSettingPref == 'firstPrevious') {
+        _this.fishTrainTable$
+          .addClass('show-weather')
+          .addClass('show-previous-weather-first')
+          .removeClass('show-previous-weather-all');
+      } else if (weatherSettingPref == 'both') {
+        _this.fishTrainTable$
+          .addClass('show-weather')
+          .removeClass('show-previous-weather-first')
+          .addClass('show-previous-weather-all');
+      } else {
+        console.error("Invalid weather setting: ", weatherSettingPref);
+        return;
+      }
     }
 
     onOpeningControlSection(_this) {
@@ -2516,7 +2598,7 @@ let FishTrain = function(){
       $('.ui.fishtrain-schedule.segment .current-time-indicator-bar').css('width', scheduleBarNode$[0].clientWidth);
 
       let scheduleBarContainerNode$ = $('.ui.fishtrain-schedule.segment').parent();
-      $('.ui.fishtrain-schedule.segment .scroll-context').css('width', Math.min(scheduleBarContainerNode$[0].clientWidth, scheduleBarNode$[0].clientWidth + 28));
+      $('.ui.fishtrain-schedule.segment .scroll-context').css('width', Math.min(scheduleBarContainerNode$[0].clientWidth, scheduleBarNode$[0].clientWidth + 35));
     }
 
     serializeSchedule() {

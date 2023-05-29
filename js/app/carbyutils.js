@@ -89,8 +89,13 @@ let CarbyUtils = function(){
     // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
     setFishConditions(fishName, options={})
     {
-      // ViewModel must exist for this feature to work.
-      if (typeof(ViewModel) === 'undefined') {
+      let view = null;
+      // A compatible view model must exist for this feature to work.
+      if (typeof(ViewModel) !== 'undefined') {
+        view = ViewModel;
+      } else if (typeof(FishTrain) !== 'undefined') {
+        view = FishTrain;
+      } else {
         console.error("The setFishConditions function can only be used on the main page.");
         return;
       }
@@ -105,9 +110,9 @@ let CarbyUtils = function(){
       // IMPORTANT:
       // Check if the fish is currently active in the view model.
       // None of these changes will take effect unless it's removed first.
-      let view_entry = ViewModel.fishEntries[item_entry._id];
+      let view_entry = view.fishEntries[item_entry._id];
       if (view_entry !== undefined) {
-        ViewModel.removeEntry(view_entry, item_entry._id);
+        view.removeEntry(view_entry, item_entry._id);
         view_entry = true;
       }
 
@@ -153,10 +158,11 @@ let CarbyUtils = function(){
       // that could happen... filters and such.
       fish_entry.catchableRanges = [];
       fish_entry.incompleteRanges = [];
+      fish_entry.__uptimeDirty = true;
       if (view_entry === true) {
         // Recreate the viewmodel entry for this fish.
-        ViewModel.activateEntry(fish_entry, Date.now());
-        ViewModel.updateDisplay();
+        view.activateEntry(fish_entry, Date.now());
+        view.updateDisplay();
       }
     }
   }

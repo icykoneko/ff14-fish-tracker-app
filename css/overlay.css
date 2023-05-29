@@ -737,6 +737,30 @@ table#fishtrain .fishtrain-fishentry-interval {
   position: relative;
   padding: 0;
 }
+table#fishtrain .fishtrain-fishentry-interval .weather-indicator-outer {
+  text-align: center;
+  display: none;
+}
+table#fishtrain.show-weather .fishtrain-fishentry-interval .weather-indicator-outer {
+  display: block;
+}
+table#fishtrain.show-weather .fishtrain-fishentry-interval .weather-indicator-outer .weather-icon {
+  margin-bottom: 5.85px;
+}
+table#fishtrain.show-weather .fishtrain-fishentry-interval .weather-indicator-outer .previous-weather {
+  display: none;
+}
+table#fishtrain.show-weather .fishtrain-fishentry-interval .weather-indicator-outer .previous-weather i.icon {
+  display: inline;
+  top: -3px;
+  position: relative;
+}
+table#fishtrain.show-weather.show-previous-weather-all .fishtrain-fishentry-interval .weather-indicator-outer .previous-weather {
+  display: inline-block;
+}
+table#fishtrain.show-weather.show-previous-weather-first .first.fishtrain-fishentry-interval .weather-indicator-outer .previous-weather {
+  display: inline-block;
+}
 table#fishtrain .fishtrain-fishentry-interval .interval-indicator {
   height: 50%;
   background-color: lightgreen;
@@ -745,6 +769,10 @@ table#fishtrain .fishtrain-fishentry-interval .interval-indicator {
   left: 0px;
   top: 25%;
   cursor: pointer;
+}
+table#fishtrain.show-weather .fishtrain-fishentry-interval .interval-indicator {
+  height: 40%;
+  top: 60%;
 }
 table#fishtrain .fishtrain-fishentry-interval .interval-indicator:hover {
   background-color: darkgoldenrod;
@@ -851,6 +879,7 @@ body.dark .ui.fishtrain-schedule.segment .bar {
   border-right: 1px dashed grey;
   height: 27px;
   padding-bottom: 1.2rem;
+  margin-right: -0.185em; /* this seems to fix space between intervals... */
 }
 body.dark .ui.fishtrain-schedule.segment .bar .interval-marker {
   border-right: 1px dashed white;
@@ -871,9 +900,12 @@ body.dark .ui.fishtrain-schedule.segment .bar .interval-marker {
 .ui.fishtrain-schedule.segment .bar.interval-60min .interval-marker {
   width: 359px;
 }
+.ui.fishtrain-schedule.segment .bar.interval-8bells .interval-marker {
+  width: 139px;
+}
 .ui.fishtrain-schedule.segment .bar .interval-marker > .label {
-  margin-left: calc(100% - 2em);
-  width: 4em;
+  margin-left: calc(100% - 2.5em);
+  width: 5em;
   text-align: center;
   font-size: small;
   margin-top: 27px;
