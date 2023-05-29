@@ -12857,79 +12857,91 @@
 # Patch 6.4 (2023-05-23)
 - name: The Fury's Aegis
   location: The Mover Beta
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 19
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Leech
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   snagging:
   patch: 6.4
-  dataMissing: true
 - name: Onyx Knifefish
   location: The Mover Beta
-  startHour: 0
-  endHour: 24
+  startHour: 22
+  endHour: 2
   previousWeatherSet:
+  - Rain
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.4
-  dataMissing: true
 - name: Wakeful Warden
   location: The Wakeful Torana
-  startHour: 0
+  startHour: 8
   endHour: 24
   previousWeatherSet:
+  - Fog
   weatherSet:
+  - Clouds
   bestCatchPath:
+  - Leech
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.4
-  dataMissing: true
 - name: Basilosaurus Rex
   location: The Perfumed Tides
   startHour: 0
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Mackerel Strip
+  - Puff-paya
+  - Basilosaurus
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   snagging:
   patch: 6.4
-  dataMissing: true
 - name: Gilt Dermogenys
   location: The Lower Hungering Gardens
-  startHour: 0
-  endHour: 24
+  startHour: 20
+  endHour: 22
   previousWeatherSet:
+  - Umbral Wind
   weatherSet:
+  - Clear Skies
+  - Fair Skies
   bestCatchPath:
+  - Sky Spoon Lure
   predators:
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.4
-  dataMissing: true
 - name: Eehs Fan
   location: Apohelos 18-α
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 20
   previousWeatherSet:
+  - Astromagnetic Storm
   weatherSet:
+  - Umbral Wind
   bestCatchPath:
+  - Chimera Worm
   predators:
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.4
-  dataMissing: true
