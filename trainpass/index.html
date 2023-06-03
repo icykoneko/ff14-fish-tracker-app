@@ -119,24 +119,6 @@
       </div>
     </div>
     <div class="ui main container">
-      <div class="ui modal" id="fishingSpotMapModal">
-        <div class="content map-container">
-          <canvas height="2048" width="2048"></canvas>
-        </div>
-        <div class="ui active dimmer">
-          <div class="ui text loader">Loading Map...</div>
-        </div>
-      </div>
-
-      <div class="ui small modal" id="tackleBoxModal">
-        <i class="close icon"></i>
-        <div class="header">Tackle Box</div>
-        <div class="scrolling content">
-          <div class="ui three column very compact grid bait-items">
-          </div>
-        </div>
-      </div>
-
       <h1>Welcome Aboard <span id="fish-train-title">the Fish Train</span></h1>
       <p>
         Welcome aboard!
@@ -147,7 +129,24 @@
       <p>
         You can update your completion list from this page. <b>CLOSE ANY TABS WITH THE MAIN TRACKER FIRST!</b> Otherwise, please remember to <b>REFRESH</b> the main tracker tab <b>AFTER</b> your train or your settings may get overwritten later.
       </p>
-      
+
+      <div class="ui modal" id="fishingSpotMapModal">
+        <div class="content map-container">
+          <canvas height="2048" width="2048"></canvas>
+        </div>
+        <div class="ui active dimmer">
+          <div class="ui text loader">Loading Map...</div>
+        </div>
+      </div>
+
+      <div class="ui small modal" id="tackleBoxModal">
+        <div class="header">Tackle Box</div>
+        <div class="scrolling content">
+          <div class="ui three column very compact grid bait-items">
+          </div>
+        </div>
+      </div>
+
       <div class="ui plain compact segment passenger fishtrain-schedule-list">
         <div class="ui top attached basic fitted segment" style="padding-bottom: 1em;">
           <div class="ui basic nohover label" style="border: none;">
