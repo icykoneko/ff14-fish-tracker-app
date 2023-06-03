@@ -497,7 +497,16 @@ let FishTrain = function(){
             </div>
           </span><!-- bait span -->
         </td>
-      </tr>`
+      </tr>`,
+    tackleBoxBaitItems:
+     `{{~it :item}}
+        <div class="column">
+          <div class="content">
+            <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=item.icon}}" title="{{=item.name}}" style="margin-right: 0px;"></div>
+            {{=item.name}}
+          </div>
+        </div>
+      {{~}}`
   };
 
   class BaitEntry {
@@ -866,6 +875,7 @@ let FishTrain = function(){
         baitInfo: doT.template(templates.baitInfo),
         scheduleListEntry: doT.template(templates.scheduleListEntry),
         scheduleListIntuitionEntry: doT.template(templates.scheduleListIntuitionEntry),
+        tackleBoxBaitItems: doT.template(templates.tackleBoxBaitItems),
       };
 
       this.teamcraftId = null;
@@ -992,6 +1002,8 @@ let FishTrain = function(){
 
       this.applyTheme(this.settings.theme);
       $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
+
+      $('#viewBaitButton').on('click', this, this.viewBaitClicked);
 
       // Validate the rider's pass first of course.
       var tcid = null;
@@ -2205,6 +2217,27 @@ let FishTrain = function(){
         console.debug("Aquarium may leak:", entry);
       }
       delete this.fishEntries[k];
+    }
+
+    getTackleBoxContents() {
+      return _(this.scheduleEntries).chain()
+        .map(x => x.fishEntry)
+        .reduce((memo, fish) => _.union(memo, [fish], fish.intuitionEntries), [])
+        .map((fish) => fish.bait[0])
+        .filter(x => x)
+        .sortBy(x => x.id)
+        .unique(x => x.id)
+        .value();
+    }
+
+    viewBaitClicked(e) {
+      e.stopPropagation();
+      let _this = e.data;
+
+      let baitItems = _this.getTackleBoxContents();
+
+      $('#tackleBoxModal .bait-items').empty().append($(_this.templates.tackleBoxBaitItems(baitItems)));
+      $('#tackleBoxModal').modal('show');
     }
 
     onFishEntryShowLocationClicked(e) {
