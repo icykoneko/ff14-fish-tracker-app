@@ -35,6 +35,21 @@
     <link rel="stylesheet" href="/css/overlay.css?20230407_1652" />
     <link rel="stylesheet" href="/css/dark_overlay.css?20230305_1820" />
 
+    <style type="text/css">
+      #viewBaitButton {
+        display: inline-block;
+        float: right;
+        vertical-align: middle;
+        font-size: .85714286rem;
+        font-weight: 700;
+        margin-right: 1em;
+      }
+
+      #viewBaitButton:hover {
+        cursor: pointer;
+      }
+    </style>
+
     <!-- <link rel="stylesheet" href="/css/fishtrain_stream_overlay.css" /> -->
 
     <!-- Localization Support script -->
@@ -56,7 +71,7 @@
     <script type="text/javascript" src="/js/app/fishwatcher.js?20230220_1437"></script>
     <script type="text/javascript" src="/js/app/sorters.js?20221001_0144"></script>
 
-    <script type="text/javascript" src="/js/app/fishtrain.js?20230529_1842"></script>
+    <script type="text/javascript" src="/js/app/fishtrain.js?20230603_1827"></script>
     <script type="text/javascript" src="/js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="/js/app/carbyutils.js?20230529_1604"></script>
 
@@ -113,6 +128,15 @@
         </div>
       </div>
 
+      <div class="ui small modal" id="tackleBoxModal">
+        <i class="close icon"></i>
+        <div class="header">Tackle Box</div>
+        <div class="scrolling content">
+          <div class="ui three column very compact grid bait-items">
+          </div>
+        </div>
+      </div>
+
       <h1>Welcome Aboard <span id="fish-train-title">the Fish Train</span></h1>
       <p>
         Welcome aboard!
@@ -135,6 +159,9 @@
             <i class="globe icon"></i>
             World:
             <div class="detail"><span class="world-name"></span></div>
+          </div>
+          <div id="viewBaitButton">
+            <img src="/public/images/Bait.png" width="24" height="24"> View Bait
           </div>
         </div>
         <div class="scroll-context">
