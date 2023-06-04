@@ -2220,14 +2220,21 @@ let FishTrain = function(){
     }
 
     getTackleBoxContents() {
-      return _(this.scheduleEntries).chain()
+      function compareBaitEntries(a, b) {
+        if (a.itemData.ilvl == b.itemData.ilvl) {
+          return a.id < b.id ? -1 : 1;
+        } else {
+          return a.itemData.ilvl < b.itemData.ilvl ? 1 : -1;
+        }
+      }
+      let baitEntries = _(this.scheduleEntries).chain()
         .map(x => x.fishEntry)
         .reduce((memo, fish) => _.union(memo, [fish], fish.intuitionEntries), [])
         .map((fish) => fish.bait[0])
         .filter(x => x)
-        .sortBy(x => x.id)
         .unique(x => x.id)
         .value();
+      return baitEntries.toSorted(compareBaitEntries);
     }
 
     viewBaitClicked(e) {

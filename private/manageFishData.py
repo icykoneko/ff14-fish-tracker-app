@@ -542,7 +542,8 @@ def rebuild_fish_data(args):
         fish_and_tackle_data[item.key] = dict([
             ('_id', item.key),
             *_make_localized_field('name', item, 'Name'),
-            ('icon', '%06u' % item.get_raw('Icon'))])
+            ('icon', '%06u' % item.get_raw('Icon')),
+            ('ilvl', item.get_raw('Level{Item}'))])
 
     # Verify nothing's missing.
     diffs = set(fish_and_tackle_names) - \
