@@ -12885,7 +12885,7 @@
   patch: 6.4
 - name: Wakeful Warden
   location: The Wakeful Torana
-  startHour: 8
+  startHour: 0
   endHour: 24
   previousWeatherSet:
   - Fog
@@ -12927,7 +12927,7 @@
   - Sky Spoon Lure
   predators:
   tug: heavy
-  hookset:
+  hookset: Precision
   snagging:
   patch: 6.4
 - name: Eehs Fan
@@ -12942,6 +12942,6 @@
   - Chimera Worm
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   snagging:
   patch: 6.4
