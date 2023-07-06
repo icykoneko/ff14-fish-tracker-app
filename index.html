@@ -676,7 +676,7 @@ title: Home
           {%- assign expires = post.date | date: "%s" | plus: 1209600 | date: "%s" -%}
           {%- assign current = site.time | date: "%s" -%}
           {%- if expires > current -%}
-            <div class="ui message announcement">
+            <div class="ui message announcement" data-postdate="{{ post.date | date: "%s" }}">
               <span class="ui blue label" style="float: right;">{{ post.date | date: "%F" }}</span>
               <div class="content">
                 <div class="header">{{ post.title }}</div>
