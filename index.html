@@ -560,6 +560,27 @@ title: Home
     </script>
 
     <script type="text/javascript">
+      // Make sure announcements expire when they should (2 weeks after posting).
+      // Unless an update is pushed to this branch, the announcement block never
+      // gets removed, even though it should have expired. This script runs after
+      // the page is ready, removes those expired announcements, then makes the
+      // block visible again. This reduces the flickering.
+      $(() => {
+        var now = Date.now();
+        let $announcements = $('.announcements .announcement');
+        for (let el of $announcements) {
+          let $announcement = $(el);
+          let postdate = $announcement.data('postdate') * 1000;
+
+          if (now > dateFns.add(postdate, {days: 14})) {
+            $announcement.remove();
+          }
+        }
+        $('.announcements').css('display', '');
+      });
+    </script>
+
+    <script type="text/javascript">
       const octokit = new Octokit();
       $(() => {
         // Document is ready, initialize the view model now.
@@ -671,7 +692,7 @@ title: Home
       </div>
 
       <!-- ANNOUNCEMENT MESSAGES -->
-      <div class="announcements">
+      <div class="announcements" style="display: none;">
         {% for post in site.posts %}
           {%- assign expires = post.date | date: "%s" | plus: 1209600 | date: "%s" -%}
           {%- assign current = site.time | date: "%s" -%}
