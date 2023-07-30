@@ -11,7 +11,7 @@ class Fish {
     }
     _(this).extend(fishData);
     this.id = fishData._id;
-    this.name = __p(DATA.ITEMS[this.id], "name");
+    this.name = "Alright Alright Alright"; //__p(DATA.ITEMS[this.id], "name");
     this.icon = DATA.ITEMS[this.id].icon;
     this.logging = shouldLogForFish(this);
     if (fishData.location !== null) {
