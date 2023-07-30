@@ -129,6 +129,7 @@ class FishEntry {
     // fields... This really only helps when the fish is displayed initially
     // though...
     this.data.applyLocalization();
+    this.data.name = "Alright Alright Alright";
 
     // Set up the remaining data structure...
     this.isUpSoon = '';
