@@ -6754,6 +6754,7 @@
   - Marble Nymph
   predators:
   hookset:
+  tug: light
   snagging:
   gig:
   fishEyes: false
@@ -12676,8 +12677,8 @@
   bestCatchPath:
   - Mackerel Strip
   predators:
-  tug:
-  hookset:
+  tug: light
+  hookset: Precision
   snagging:
   patch: 6.3
 - name: Vidyutvat Wrasse
