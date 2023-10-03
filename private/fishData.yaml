@@ -12947,58 +12947,6 @@
   snagging:
   patch: 6.4
 # Patch 6.5 (2023-10-03)
-- name: Forgiven Melancholy
-  location: The Isle of Ken
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
-  patch: 6.5
-  dataMissing: true
-- name: Oil Slick
-  location: White Oil Falls
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
-  patch: 6.5
-  dataMissing: true
-- name: Gold Dustfish
-  location: The Nabaath Severance
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
-  patch: 6.5
-  dataMissing: true
-- name: Gonzalo's Grace
-  location: West Caliban Gap
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
-  patch: 6.5
-  dataMissing: true
 - name: Circuit Tilapia
   location: Deepmoat
   startHour: 0
