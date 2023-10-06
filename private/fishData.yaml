@@ -12949,132 +12949,147 @@
 # Patch 6.5 (2023-10-03)
 - name: Circuit Tilapia
   location: Deepmoat
-  startHour: 0
-  endHour: 24
+  startHour: 8
+  endHour: 12
   previousWeatherSet:
+  - Clouds
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Leech
+  - Astacus Aetherius
   predators:
-  tug:
+  tug: heavy
   hookset:
-  snagging:
   patch: 6.5
   dataMissing: true
 - name: Durdina Fish
   location: The Thavnairian Coast
   startHour: 0
-  endHour: 24
+  endHour: 4
   previousWeatherSet:
+  # - Fair Skies
   weatherSet:
+  - Clear Skies
   bestCatchPath:
+  - Shrimp Ball
+  - Shadowdart Sardine
   predators:
-  tug:
+  tug: heavy
   hookset:
-  snagging:
   patch: 6.5
   dataMissing: true
-- name: Sarikuyruk
-  location: The Great Runoff
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
-  patch: 6.5
-  dataMissing: true
+# - name: Sarikuyruk
+#   location: The Great Runoff
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bestCatchPath:
+#   predators:
+#   tug:
+#   hookset:
+#   snagging:
+#   patch: 6.5
+#   dataMissing: true
 - name: Mayaman
   location: The Font of Maya
-  startHour: 0
-  endHour: 24
+  startHour: 4
+  endHour: 8
   previousWeatherSet:
+  # - Clouds
   weatherSet:
+  - Fair Skies
   bestCatchPath:
   predators:
-  tug:
-  hookset:
-  snagging:
+    Thavnairian Caiman: 5
+  intuitionLength: 180
+  tug: heavy
+  hookset: Powerfull
   patch: 6.5
   dataMissing: true
-- name: Kitty Herring
-  location: The Stainless Course
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
-  patch: 6.5
-  dataMissing: true
-- name: Ossicula
-  location: Greatest Endsvale
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
-  patch: 6.5
-  dataMissing: true
+# - name: Kitty Herring
+#   location: The Stainless Course
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bestCatchPath:
+#   predators:
+#   tug:
+#   hookset:
+#   snagging:
+#   patch: 6.5
+#   dataMissing: true
+# - name: Ossicula
+#   location: Greatest Endsvale
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bestCatchPath:
+#   predators:
+#   tug:
+#   hookset:
+#   snagging:
+#   patch: 6.5
+#   dataMissing: true
 - name: Chlorophos Deathworm
   location: The Chlorophospond
-  startHour: 0
-  endHour: 24
+  startHour: 2
+  endHour: 8
   previousWeatherSet:
+  # - Fair Skies
   weatherSet:
+  - Moon Dust
   bestCatchPath:
+  - Chimera Worm
+  - Calicia
   predators:
-  tug:
+  tug: heavy
   hookset:
-  snagging:
   patch: 6.5
   dataMissing: true
 - name: Stargilt Lobster
   location: Apohelos 18-α
-  startHour: 0
-  endHour: 24
+  startHour: 19
+  endHour: 22
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Grey Worm
   predators:
-  tug:
-  hookset:
-  snagging:
+  tug: medium
+  hookset: Powerful
   patch: 6.5
-  dataMissing: true
 - name: Starscale Ephemeris
   location: Abode of the Ea
-  startHour: 0
-  endHour: 24
+  startHour: 18
+  endHour: 22
   previousWeatherSet:
+  - Astromagnetic Storm
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Mayfly
   predators:
-  tug:
+  tug: heavy
   hookset:
-  snagging:
   patch: 6.5
   dataMissing: true
 - name: E.B.E.-852738
   location: Limne 3-β
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 16
   previousWeatherSet:
+  - Fair Skies
   weatherSet:
+  - Umbral Wind
   bestCatchPath:
+  - Stardust
   predators:
-  tug:
+  tug: heavy
   hookset:
-  snagging:
   patch: 6.5
   dataMissing: true
 - name: Empyreal Spiral
