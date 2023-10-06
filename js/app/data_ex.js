@@ -135,5 +135,6 @@ const EXTRA_DATA = {
         "Sweetheart": { video: { youtube: "KQU8ZQ8mjFE" } },
         "Browned Banana Eel": { video: { youtube: "t19RNEOJLFQ" } },
         "Vidyutvat Wrasse": { video: { youtube: "j2Ciiwl6eGw" } },
+        "Stargilt Lobster": { video: { youtube: "q1xJNuhNh0U" } },
     },
 };
