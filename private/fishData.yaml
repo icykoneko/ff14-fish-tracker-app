@@ -10388,7 +10388,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - Mayfly
   predators:
   tug: medium
   hookset: Powerful
@@ -10782,7 +10782,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Sky Spoon Lure
+  - Mayfly
   # or Mayfly
   predators:
   tug: medium
@@ -12956,7 +12956,7 @@
   weatherSet:
   - Fair Skies
   bestCatchPath:
-  - Leech
+  - Mayfly
   - Astacus Aetherius
   predators:
   tug: heavy
@@ -12968,7 +12968,7 @@
   startHour: 0
   endHour: 4
   previousWeatherSet:
-  # - Fair Skies
+  - Fair Skies
   weatherSet:
   - Clear Skies
   bestCatchPath:
@@ -12997,15 +12997,16 @@
   startHour: 4
   endHour: 8
   previousWeatherSet:
-  # - Clouds
+  - Clouds
   weatherSet:
   - Fair Skies
   bestCatchPath:
+  - Mayfly
   predators:
     Thavnairian Caiman: 5
   intuitionLength: 180
   tug: heavy
-  hookset: Powerfull
+  hookset: Powerful
   patch: 6.5
   dataMissing: true
 # - name: Kitty Herring
@@ -13039,7 +13040,7 @@
   startHour: 2
   endHour: 8
   previousWeatherSet:
-  # - Fair Skies
+  - Fair Skies
   weatherSet:
   - Moon Dust
   bestCatchPath:
