@@ -12960,9 +12960,8 @@
   - Astacus Aetherius
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   patch: 6.5
-  dataMissing: true
 - name: Durdina Fish
   location: The Thavnairian Coast
   startHour: 0
@@ -12976,22 +12975,8 @@
   - Shadowdart Sardine
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   patch: 6.5
-  dataMissing: true
-# - name: Sarikuyruk
-#   location: The Great Runoff
-#   startHour: 0
-#   endHour: 24
-#   previousWeatherSet:
-#   weatherSet:
-#   bestCatchPath:
-#   predators:
-#   tug:
-#   hookset:
-#   snagging:
-#   patch: 6.5
-#   dataMissing: true
 - name: Mayaman
   location: The Font of Maya
   startHour: 4
@@ -13008,33 +12993,6 @@
   tug: heavy
   hookset: Powerful
   patch: 6.5
-  dataMissing: true
-# - name: Kitty Herring
-#   location: The Stainless Course
-#   startHour: 0
-#   endHour: 24
-#   previousWeatherSet:
-#   weatherSet:
-#   bestCatchPath:
-#   predators:
-#   tug:
-#   hookset:
-#   snagging:
-#   patch: 6.5
-#   dataMissing: true
-# - name: Ossicula
-#   location: Greatest Endsvale
-#   startHour: 0
-#   endHour: 24
-#   previousWeatherSet:
-#   weatherSet:
-#   bestCatchPath:
-#   predators:
-#   tug:
-#   hookset:
-#   snagging:
-#   patch: 6.5
-#   dataMissing: true
 - name: Chlorophos Deathworm
   location: The Chlorophospond
   startHour: 2
@@ -13048,9 +13006,8 @@
   - Calicia
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   patch: 6.5
-  dataMissing: true
 - name: Stargilt Lobster
   location: Apohelos 18-α
   startHour: 19
@@ -13075,9 +13032,8 @@
   - Mayfly
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   patch: 6.5
-  dataMissing: true
 - name: E.B.E.-852738
   location: Limne 3-β
   startHour: 12
@@ -13090,9 +13046,8 @@
   - Stardust
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   patch: 6.5
-  dataMissing: true
 - name: Empyreal Spiral
   location: Saibai Cavern
   startHour: 0

@@ -531,3 +531,7 @@ Gold Dustfish
 Forgiven Melancholy
 Oil Slick
 Gonzalo's Grace
+# Patch 6.5
+Sarikuyruk
+Kitty Herring
+Ossicula

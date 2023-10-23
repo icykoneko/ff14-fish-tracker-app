@@ -136,5 +136,7 @@ const EXTRA_DATA = {
         "Browned Banana Eel": { video: { youtube: "t19RNEOJLFQ" } },
         "Vidyutvat Wrasse": { video: { youtube: "j2Ciiwl6eGw" } },
         "Stargilt Lobster": { video: { youtube: "q1xJNuhNh0U" } },
+        "E.B.E.-852738": { video: { youtube: "sS3BTppus1Y" } },
+        "Circuit Tilapia": { video: { youtube: "riZ90Q-ujiE" } },
     },
 };
