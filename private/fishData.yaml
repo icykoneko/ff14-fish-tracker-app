@@ -13079,6 +13079,8 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Astacus Aetherius: 3
+  intuitionLength: 90
   tug:
   hookset:
   snagging:
@@ -13092,6 +13094,8 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Basilosaurus: 12
+  intuitionLength: 300
   tug:
   hookset:
   snagging:
@@ -13105,6 +13109,8 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Cerule Core: 3
+  intuitionLength: 35
   tug:
   hookset:
   snagging:
@@ -13144,6 +13150,10 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Phallaina: 1
+    Unbegotten: 2
+    E.B.E.-9318: 4
+  intuitionLength: 600
   tug:
   hookset:
   snagging:
