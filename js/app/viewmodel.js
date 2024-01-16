@@ -7,9 +7,9 @@
 // need to wrap the data model to support all of its fields.
 
 // Update this whenever a new patch is released.
-const LATEST_PATCH = 6.5;
+const LATEST_PATCH = 6.55;
 // Set this to the date at which new patch fishes are displayed by default.
-const SHOW_LATEST_PATCH_AFTER = dateFns.add(new Date(2023, 9, 3), { weeks: 2 });
+const SHOW_LATEST_PATCH_AFTER = dateFns.add(new Date(2024, 0, 16), { weeks: 2 });
 
 class SiteSettings {
   constructor() {

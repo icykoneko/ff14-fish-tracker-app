@@ -13070,3 +13070,82 @@
   gig: UNKNOWN
   patch: 6.5
   dataMissing: true
+# Patch 6.55 (2024-01-16)
+- name: Hyphalosaurus
+  location: Deepmoat
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.55
+  dataMissing: true
+- name: Gharlichthys
+  location: The Perfumed Tides
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.55
+  dataMissing: true
+- name: Snowy Parexus
+  location: The Eblan Thaw
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.55
+  dataMissing: true
+- name: Lopoceras Elegans
+  location: The Chlorophospond
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.55
+  dataMissing: true
+- name: Furcacauda
+  location: Lethe
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.55
+  dataMissing: true
+- name: Sidereal Whale
+  location: Limne 3-β
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 6.55
+  dataMissing: true
