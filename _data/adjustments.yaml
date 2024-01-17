@@ -23,6 +23,11 @@
 - name: Lopoceras Elegans
   startHour: 8
   endHour: 10
+  previousWeatherSet: [Moon Dust]
   weatherSet: [Fair Skies]
   bait: [Chimera Worm]
+  tug: heavy
+- name: Snowy Parexus
+  weatherSet: [Snow]
+  bait: [Mayfly]
   tug: heavy
