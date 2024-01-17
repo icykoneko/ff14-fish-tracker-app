@@ -21,5 +21,8 @@
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
 - name: Lopoceras Elegans
+  startHour: 8
+  endHour: 10
+  weatherSet: [Fair Skies]
   bait: [Chimera Worm]
   tug: heavy
