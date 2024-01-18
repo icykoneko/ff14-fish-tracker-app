@@ -72,6 +72,7 @@ let CarbyUtils = function(){
     //   endHour: [1-24]
     //   startTime: "hh:mm" format (24-hr time)
     //   endTime: "hh:mm" format (24-hr time)
+    //   bestCatchPath: [<TACKLE_NAME_EN>,<FISH_NAME_EN>*]
     // NOTE: If you want to enter a string for start and end times, please use
     // the `startTime` and `endTime` options instead of `startHour` and
     // `endHour`.
@@ -129,6 +130,14 @@ let CarbyUtils = function(){
         fish_entry.conditions.previousWeatherSet =
           _(fish_entry.previousWeatherSet).map(w => DATA.WEATHER_TYPES[w]);
       }
+
+      if (options.bestCatchPath !== undefined) {
+        fish_entry.bestCatchPath =
+          _(options.bestCatchPath).map(x => _(DATA.ITEMS).findWhere({name_en: x})._id);
+        fish_entry.bait.path =
+          _(fish_entry.bestCatchPath).map(x => DATA.ITEMS[x]);
+      }
+
       let timeSpecified = false;
       if (options.startHour !== undefined) {
         fish_entry.startHour = options.startHour;
