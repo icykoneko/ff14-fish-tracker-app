@@ -45,3 +45,9 @@
   weatherSet: [Fair Skies]
   bait: [Chimera Worm]
   tug: heavy
+- name: Furcacauda
+  # startHour: 8
+  # endHour: 16
+  # weatherSet: [Umbral Wind],
+  bait: [Sky Spoon Lure]
+  tug: heavy
