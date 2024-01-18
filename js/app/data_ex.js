@@ -143,5 +143,6 @@ const EXTRA_DATA = {
         "Antheian Dahlia": { video: { youtube: "jYS0TXb9E-I" } },
         "The Ondotaker": { video: { youtube: "ut9Nb1Qg1sM" } },
         "Ondo Sigh": { video: { youtube: "lzP_fV9vZP0" } },
+        "Lopoceras Elegans": { video: { youtube: "FwMD-e44idk" } },
     },
 };
