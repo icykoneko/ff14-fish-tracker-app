@@ -21,20 +21,22 @@
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
 - name: Hyphalosaurus
-  # startHour: 8
-  # endHour: 16
-  # weatherSet: [Fair Skies]
+  startHour: 8
+  endHour: 16
+  previousWeatherSet: [Clear Skies]
+  weatherSet: [Fair Skies]
   bait: [Mayfly, Astacus Aetherius]
   tug: heavy
 - name: Gharlichthys
-  # startHour: 8
-  # endHour: 16
-  # weatherSet: [Fair Skies]
+  startHour: 14
+  endHour: 16
+  previousWeatherSet: [Showers, Rain]
+  weatherSet: [Fair Skies]
   bait: [Mackerel Strip]
   tug: heavy
 - name: Snowy Parexus
-  # startHour: 16
-  # endHour: 24
+  startHour: 16
+  endHour: 24
   # weatherSet: [Snow]
   bait: [Mayfly]
   tug: heavy
@@ -46,8 +48,16 @@
   bait: [Chimera Worm]
   tug: heavy
 - name: Furcacauda
-  # startHour: 8
-  # endHour: 16
-  # weatherSet: [Umbral Wind],
+  startHour: 15.5
+  endHour: 16.5
+  previousWeatherSet: [Fair Skies]
+  weatherSet: [Umbral Wind]
   bait: [Sky Spoon Lure]
+  tug: heavy
+- name: Sidereal Whale
+  startHour: 0
+  endHour: 8
+  previousWeatherSet: [Umbral Wind]
+  weatherSet: [Astromagnetic Storm]
+  bait: [Stardust, Horizon Event]
   tug: heavy
