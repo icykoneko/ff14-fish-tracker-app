@@ -30,13 +30,14 @@
 - name: Gharlichthys
   startHour: 14
   endHour: 16
-  previousWeatherSet: [Showers, Rain]
-  weatherSet: [Fair Skies]
+  # previousWeatherSet: [Showers, Rain]
+  # weatherSet: [Fair Skies]
   bait: [Mackerel Strip]
   tug: heavy
 - name: Snowy Parexus
   startHour: 16
-  endHour: 24
+  endHour: 8
+  # previousWeatherSet: [Fair Skies]
   # weatherSet: [Snow]
   bait: [Mayfly]
   tug: heavy
@@ -50,14 +51,14 @@
 - name: Furcacauda
   startHour: 15.5
   endHour: 16.5
-  # previousWeatherSet: [Fair Skies]
-  # weatherSet: [Umbral Wind]
+  previousWeatherSet: [Fair Skies]
+  weatherSet: [Umbral Wind]
   bait: [Sky Spoon Lure]
   tug: heavy
 - name: Sidereal Whale
   startHour: 0
-  endHour: 8
+  endHour: 24
   # previousWeatherSet: [Umbral Wind]
-  # weatherSet: [Astromagnetic Storm]
+  weatherSet: [Astromagnetic Storm]
   bait: [Stardust, Horizon Event]
   tug: heavy
