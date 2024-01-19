@@ -50,8 +50,8 @@
 - name: Furcacauda
   startHour: 15.5
   endHour: 16.5
-  previousWeatherSet: [Fair Skies]
-  weatherSet: [Umbral Wind]
+  # previousWeatherSet: [Fair Skies]
+  # weatherSet: [Umbral Wind]
   bait: [Sky Spoon Lure]
   tug: heavy
 - name: Sidereal Whale
