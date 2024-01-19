@@ -57,7 +57,7 @@
 - name: Sidereal Whale
   startHour: 0
   endHour: 8
-  previousWeatherSet: [Umbral Wind]
-  weatherSet: [Astromagnetic Storm]
+  # previousWeatherSet: [Umbral Wind]
+  # weatherSet: [Astromagnetic Storm]
   bait: [Stardust, Horizon Event]
   tug: heavy
