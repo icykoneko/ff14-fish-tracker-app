@@ -41,20 +41,6 @@
   # weatherSet: [Snow]
   bait: [Mayfly]
   tug: heavy
-- name: Lopoceras Elegans
-  startHour: 8
-  endHour: 10
-  previousWeatherSet: [Moon Dust]
-  weatherSet: [Fair Skies]
-  bait: [Chimera Worm]
-  tug: heavy
-- name: Furcacauda
-  startHour: 15.5
-  endHour: 16.5
-  previousWeatherSet: [Fair Skies]
-  weatherSet: [Umbral Wind]
-  bait: [Sky Spoon Lure]
-  tug: heavy
 - name: Sidereal Whale
   startHour: 0
   endHour: 24
