@@ -13118,30 +13118,34 @@
   dataMissing: true
 - name: Lopoceras Elegans
   location: The Chlorophospond
-  startHour: 0
-  endHour: 24
+  startHour: 8
+  endHour: 10
   previousWeatherSet:
+  - Moon Dust
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Chimera Worm
   predators:
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.55
-  dataMissing: true
 - name: Furcacauda
   location: Lethe
-  startHour: 0
-  endHour: 24
+  startHour: 15.5
+  endHour: 16.5
   previousWeatherSet:
+  - Fair Skies
   weatherSet:
+  - Umbral Wind
   bestCatchPath:
+  - Sky Spoon Lure
   predators:
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.55
-  dataMissing: true
 - name: Sidereal Whale
   location: Limne 3-β
   startHour: 0
