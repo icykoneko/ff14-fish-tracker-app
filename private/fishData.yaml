@@ -13073,49 +13073,56 @@
 # Patch 6.55 (2024-01-16)
 - name: Hyphalosaurus
   location: Deepmoat
-  startHour: 0
-  endHour: 24
+  startHour: 9
+  endHour: 12
   previousWeatherSet:
+  - Clear Skies
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Mayfly
+  - Astacus Aetherius
   predators:
     Astacus Aetherius: 3
   intuitionLength: 90
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.55
-  dataMissing: true
 - name: Gharlichthys
   location: The Perfumed Tides
-  startHour: 0
-  endHour: 24
+  startHour: 14
+  endHour: 16
   previousWeatherSet:
+  - Showers
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Mackerel Strip
   predators:
     Basilosaurus: 12
   intuitionLength: 300
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.55
-  dataMissing: true
 - name: Snowy Parexus
   location: The Eblan Thaw
-  startHour: 0
+  startHour: 16
   endHour: 24
   previousWeatherSet:
+  - Fair Skies
   weatherSet:
+  - Snow
   bestCatchPath:
+  - Mayfly
   predators:
     Cerule Core: 3
   intuitionLength: 35
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.55
-  dataMissing: true
 - name: Lopoceras Elegans
   location: The Chlorophospond
   startHour: 8
@@ -13149,17 +13156,20 @@
 - name: Sidereal Whale
   location: Limne 3-β
   startHour: 0
-  endHour: 24
+  endHour: 8
   previousWeatherSet:
+  - Umbral Wind
   weatherSet:
+  - Astromagnetic Storm
   bestCatchPath:
+  - Stardust
+  - Horizon Event
   predators:
     Phallaina: 1
     Unbegotten: 2
     E.B.E.-9318: 3
   intuitionLength: 600
-  tug:
+  tug: heavy
   hookset:
   snagging:
   patch: 6.55
-  dataMissing: true
