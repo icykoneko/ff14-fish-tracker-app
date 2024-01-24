@@ -215,8 +215,10 @@ class FishTableLayout {
 
     // Update any intuition fish rows as well!
     for (let subEntry of fishEntry.intuitionEntries) {
-      if (!subEntry.data.alwaysAvailable)
-        this.update(subEntry, baseTime, needsFullUpdate);
+      if (!subEntry.data.alwaysAvailable) {
+        let changed = this.update(subEntry, baseTime, needsFullUpdate);
+        hasFishAvailabilityChanged ||= changed;
+      }
     }
 
     // Let the caller know this fish changed availability or bins.
