@@ -20,31 +20,3 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
-- name: Hyphalosaurus
-  startHour: 8
-  endHour: 16
-  previousWeatherSet: [Clear Skies]
-  weatherSet: [Fair Skies]
-  bait: [Mayfly, Astacus Aetherius]
-  tug: heavy
-- name: Gharlichthys
-  startHour: 14
-  endHour: 16
-  # previousWeatherSet: [Showers, Rain]
-  # weatherSet: [Fair Skies]
-  bait: [Mackerel Strip]
-  tug: heavy
-- name: Snowy Parexus
-  startHour: 16
-  endHour: 8
-  # previousWeatherSet: [Fair Skies]
-  # weatherSet: [Snow]
-  bait: [Mayfly]
-  tug: heavy
-- name: Sidereal Whale
-  startHour: 0
-  endHour: 24
-  # previousWeatherSet: [Umbral Wind]
-  weatherSet: [Astromagnetic Storm]
-  bait: [Stardust, Horizon Event]
-  tug: heavy
