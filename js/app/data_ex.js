@@ -144,5 +144,6 @@ const EXTRA_DATA = {
         "The Ondotaker": { video: { youtube: "ut9Nb1Qg1sM" } },
         "Ondo Sigh": { video: { youtube: "lzP_fV9vZP0" } },
         "Lopoceras Elegans": { video: { youtube: "FwMD-e44idk" } },
+        "Hyphalosaurus": { video: { youtube: "6BpB8Mu9HC0" } },
     },
 };
