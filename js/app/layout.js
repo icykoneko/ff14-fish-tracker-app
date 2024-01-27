@@ -143,7 +143,7 @@ class FishTableLayout {
     // First, check if the fish's availability changed.
     // YES, you still want to do this because of Fish Eyes.
     if (fishEntry.isCatchable != $fishEntry.hasClass('fish-active')) {
-      $fishEntry.toggleClass('fish-active').addClass('fish-availability-transitioning');
+      $fishEntry.toggleClass('fish-active');
       console.debug(`${fishEntry.id} "${fishEntry.data.name}" has changed availability.`);
       hasFishAvailabilityChanged = true;
     }
@@ -305,9 +305,6 @@ class FishTableLayout {
 
       this.append(entry);
     }
-
-    // Remove the 'fish-availability-transitioning' class after sorting!
-    $('.fish-entry', this.fishTable).removeClass('fish-availability-transitioning');
 
     console.timeEnd('Sorting');
   }
