@@ -145,5 +145,15 @@ const EXTRA_DATA = {
         "Ondo Sigh": { video: { youtube: "lzP_fV9vZP0" } },
         "Lopoceras Elegans": { video: { youtube: "FwMD-e44idk" } },
         "Hyphalosaurus": { video: { youtube: "6BpB8Mu9HC0" } },
-    },
+        "Chlorophos Deathworm": { video: { youtube: "WLkr4kA-hs0" } },
+        "Mayaman": { video: { youtube: "5O_uhVte9jU" } },
+        "Mossgill Salmon": { video: { youtube: "6eAAveK-lv8" } },
+        "Greatsword Snook": { video: { youtube: "VSvEK9xMdzU" } },
+        "Verdigris Guppy": { video: { youtube: "47CdOemlfug" } },
+        "Jhinga": { video: { youtube: "ql64knkY11k" } },
+        "Furcacauda": { video: { youtube: "MOINnjpcA04" } },
+        "Snowy Parexus": { video: { youtube: "EyneCL9gcvM" } },
+        "Armorer": { video: { youtube: "7Z3NPy1gxqc" } },
+        "Gharlichthys": { video: { youtube: "xOPwUALAImQ" } },
+    }
 };
