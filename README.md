@@ -77,10 +77,8 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
 
 ### Updating Video Links
 * Remember to use ENGLISH item names, or Item ID as the key.
-* Update the *cache buster* in `index.html`, `fishtrain.html`, and `trainpass/index.html` for `js/app/data_ex.js`. Use the format: `?${ver}_YYYYMMDD_HHMM`.
-* Validate changes when testing site locally. Open the console and run `_validate_extra_data()`.
-* **NOTE:** You do not need to rebuild the database if only adding/updating video links.
-* Changes _should_ be committed to master, then merged with gh-pages branch. This will reduce confusion later, maybe...
+* Add to the `gh-pages` branch under `_data/videoGuides.yaml`.
+* Validate changes via Jekyll locally before pushing branch please! You should not see any errors in the console.
 
 ### Using Cache-Buster Update Script
 Instead of manually updating the pages each time, before committing changes, you can use the updateCacheBuster Python script on the list of modified files.
@@ -102,7 +100,7 @@ npm run build
 cd dist
 # Merge master branch (deal with any "missing" files...)
 git merge master
-git status --porcelain | grep "^DU" | cut -f2 -d' ' | xargs git rm
+for f in $(git status --porcelain | grep "^DU" | cut -f2 -d' '); do git rm $f; done
 # In case anything changed, copy files from public into the branch too.
 cp -vrf ../public/images/sprite.* ./public/images/
 cp -vrf ../public/js/* ./public/js/
