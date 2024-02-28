@@ -71,6 +71,33 @@
     <script type="text/javascript" src="/js/app/fishwatcher.js?20230220_1437"></script>
     <script type="text/javascript" src="/js/app/sorters.js?20221001_0144"></script>
 
+    {% if site.data.videoGuides.size > 0 %}
+      <script type="text/javascript">
+        (function () {
+          function AddVideoGuideForFish(name, videoId) {
+            let item_entry = _.findWhere(DATA.ITEMS, {name_en: name});
+            if (item_entry === undefined) {
+              try {
+                item_entry = {_id: Number(name)};
+              } catch {
+                console.error(`FISH NOT FOUND: ${name}`);
+                return;
+              }
+            }
+            try {
+              let fish_entry = _.findWhere(Fishes, {id: item_entry._id});
+              _(fish_entry).extend({video: { youtube: videoId } });
+            } catch {
+              console.error(`Failed to add video guide for fish: ${name}`);
+            }
+          }
+          {%- for e in site.data.videoGuides %}
+          AddVideoGuideForFish("{{ e[0] }}", "{{ e[1] }}");
+          {%- endfor %}
+        })();
+      </script>
+    {% endif %}
+
     <script type="text/javascript" src="/js/app/fishtrain.js?20231003_0652"></script>
     <script type="text/javascript" src="/js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="/js/app/carbyutils.js?20240117_2324"></script>

@@ -131,6 +131,33 @@ title: Home
       </script>
     {% endif %}
 
+    {% if site.data.videoGuides.size > 0 %}
+      <script type="text/javascript">
+        (function () {
+          function AddVideoGuideForFish(name, videoId) {
+            let item_entry = _.findWhere(DATA.ITEMS, {name_en: name});
+            if (item_entry === undefined) {
+              try {
+                item_entry = {_id: Number(name)};
+              } catch {
+                console.error(`FISH NOT FOUND: ${name}`);
+                return;
+              }
+            }
+            try {
+              let fish_entry = _.findWhere(Fishes, {id: item_entry._id});
+              _(fish_entry).extend({video: { youtube: videoId } });
+            } catch {
+              console.error(`Failed to add video guide for fish: ${name}`);
+            }
+          }
+          {%- for e in site.data.videoGuides %}
+          AddVideoGuideForFish("{{ e[0] }}", "{{ e[1] }}");
+          {%- endfor %}
+        })();
+      </script>
+    {% endif %}
+
     <!--
       - SUPER IMPORTANT!!!!!!
       - The remaining scripts are for view and layout logic. Due to document load
