@@ -264,6 +264,7 @@ class FishWatcher {
       var overallPredRange = null;
       var acceptedPredRange = null;
       var predatorsAlwaysAvailable = true;
+      var atLeastOnePredatorAlwaysAvailable = false;
       var missingPreReq = false;
       // This key value is in seconds, we will need to convert it to Eorzean time first
       var intuitionLength = fish.intuitionLength;
@@ -278,7 +279,10 @@ class FishWatcher {
       var prereqMet = _(fish.intuitionFish).chain()
         .map(x => x.data)
         .all(function(predatorFish) {
-          if (this._isFishAlwaysUp(predatorFish)) { return true; }
+          if (this._isFishAlwaysUp(predatorFish)) {
+            atLeastOnePredatorAlwaysAvailable = true;
+            return true;
+          }
           predatorsAlwaysAvailable = false;
           var predWindow = null;
           var predRanges = [];
@@ -407,6 +411,11 @@ class FishWatcher {
       } else if (overallPredRange === null) {
         nextRange = null;
       } else {
+        // If at least one of the predators is up all day, extend the accepted range to the
+        // end of this window. Leave the start time alone though.
+        if (atLeastOnePredatorAlwaysAvailable) {
+          acceptedPredRange.end = nextRange.end;
+        }
         // Increase the pred range by intuition buff time first.
         acceptedPredRange = { start: acceptedPredRange.start, end: dateFns.utc.addSeconds(acceptedPredRange.end, intuitionLength) };
         nextRange = dateFns.intervalIntersection(nextRange, acceptedPredRange);
