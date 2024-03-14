@@ -64,8 +64,8 @@ tr.fish-intuition-row .bait-icon.sprite-icon.hookset-modifier-icon,
 tr.fishtrain-fishentrydetails .bait-icon.sprite-icon.hookset-modifier-icon,
 #schedule-entry-details .bait-icon.sprite-icon.hookset-modifier-icon {
   transform-origin: center;
-  transform: scale(0.375) translate(-33.3%, -25%);
-  margin: -13.75px;
+  transform: scale(0.50) translate(-33.3%, -50%);
+  margin: -11px; /* hookset-modifier-icon sprites are 44x44 */
 }
 
 /* Prevent hookset modifier from being separated. */
@@ -96,17 +96,18 @@ span.bait-span {
 .bait-badge-container .tug-indicator {
   position: absolute;
   display: inline-block;
-  transform: translate(-40%, 80%);
+  transform: translate(-40%, 60%);
 
   padding: 0.5em 0.3em 0.5em 0.5em;
   line-height: 1em;
   text-align: center;
-  font-size: 0.64285714rem;
+  font-size: 0.75rem;
   border-top-left-radius: 250rem;
   border-top-right-radius: 75rem;
   border-bottom-right-radius: 125rem;
   vertical-align: bottom;
   width: 2.5em; /* this seems to line up nicely with hooksets */
+  font-family: sans-serif; /* this helps separate the !s better when small */
   font-weight: bolder;
 
   color: black;
@@ -147,7 +148,7 @@ tr.fish-intuition-row .tug-indicator,
 tr.fishtrain-fishentrydetails .tug-indicator,
 #schedule-entry-details .tug-indicator {
   /* Attempt to shrink the display a little */
-  transform: scale(0.75) translate(-60%, 95%);
+  font-size: 0.675rem;
 }
 
 img {
