@@ -1,4 +1,4 @@
-construct~=2.9.45
-Pillow~=6.2
-PyYAML~=5.1
+construct
+Pillow
+PyYAML
 tqdm
