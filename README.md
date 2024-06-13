@@ -21,9 +21,11 @@ pyvirt\Scripts\activate
 pip install -r private/python-requirements.txt
 ```
 
-The webapp itself is completely static. At this time, some of the development environment functions are manually driven. Recommended you install [NVM](https://github.com/nvm-sh/nvm).
+The webapp itself is completely static. At this time, some of the development environment functions are manually driven. Recommended you install [FNM](https://github.com/Schniz/fnm).
 
-* Install Node.JS and NPM via NVM: `nvm install lts/dubnium` _(Yes, you need to use v10 for reasons...)_
+* Install FNM: `winget install Schniz.fnm`
+* Configure your shell environment (see https://github.com/Schniz/fnm#shell-setup).
+* When switching into the checkout, it should automatically load `lts-dubnium`.
 * Install the webapp package requirements first: `npm install`
 * You need to install sprity-cli globally to get access to the CLI `sprity`.
   * `npm i sprity-cli -g`
