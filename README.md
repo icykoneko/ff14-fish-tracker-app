@@ -9,9 +9,9 @@ This repo makes use of submodules. When cloning, please include the `--recurse-s
 git clone --recurse-submodules https://github.com/icykoneko/ff14-fish-tracker-app.git
 ```
 
-If you forgot to include the submodules during cloning, don't worry. Assuming you haven't checked them out yet, running `git submodules update --recursive --init` should take care of it.
+If you forgot to include the submodules during cloning, don't worry. Assuming you haven't checked them out yet, running `git submodule update --recursive --init` should take care of it.
 
-If you've already checked out the submodules and are running into issues with the SaintCoinach module, the repo address recently changed. Unfortunately, it's a pain to fix... You'll most likely need to run `git submodules sync --recursive` after pulling the latest changes. After that, the `git submodules update --recursive` command should work right. Sorry it's such a pain.
+If you've already checked out the submodules and are running into issues with the SaintCoinach module, the repo address recently changed. Unfortunately, it's a pain to fix... You'll most likely need to run `git submodule sync --recursive` after pulling the latest changes. After that, the `git submodule update --recursive` command should work right. Sorry it's such a pain.
 
 ### Setup
 The management of fish data is done using Python. It's recommended you create a virtual environment.
