@@ -7,9 +7,9 @@
 // need to wrap the data model to support all of its fields.
 
 // Update this whenever a new patch is released.
-const LATEST_PATCH = 6.55;
+const LATEST_PATCH = 7;
 // Set this to the date at which new patch fishes are displayed by default.
-const SHOW_LATEST_PATCH_AFTER = dateFns.add(new Date(2024, 0, 16), { weeks: 2 });
+const SHOW_LATEST_PATCH_AFTER = dateFns.add(new Date(2024, 5, 28), { weeks: 4 });
 
 class SiteSettings {
   constructor() {
@@ -26,7 +26,8 @@ class SiteSettings {
                       3, 3.1, 3.2, 3.3, 3.4, 3.5,
                       4, 4.1, 4.2, 4.3, 4.4, 4.5,
                       5, 5.1, 5.2, 5.3, 5.4, 5.5,
-                      6, 6.1, 6.2, 6.3, 6.4, 6.5]),
+                      6, 6.1, 6.2, 6.3, 6.4, 6.5,
+                      7,]),
       // Extra filtering:
       // * all: Display all fish, regardless of extra status.
       // * collectable: Display only collectable fish.
@@ -1250,7 +1251,14 @@ let ViewModel = new class {
       // But let's prevent spoiling any brand new content by checking first.
       if (dateFns.isBefore(Date.now(), SHOW_LATEST_PATCH_AFTER)) {
         settings.filters.patch.delete(LATEST_PATCH);
+        // This will ensure the user is asked whether the site should show the new fish.
+        settings.latestPatch = null;
+        $('#new-fish-available-modal .content .returner').css('display', 'none');
+        $('#new-fish-available-modal .content .firsttime').css('display', 'inline');
       }
+    } else {
+      $('#new-fish-available-modal .content .returner').css('display', 'inline');
+      $('#new-fish-available-modal .content .firsttime').css('display', 'none');
     }
 
     // Now, apply the settings to the current page, committing them if all is well.
@@ -1308,6 +1316,11 @@ let ViewModel = new class {
         console.info("Welcome back! There's new fishies to be caught!");
         // Rather than force the new patch into the filters, display a message
         // for the user so they are aware there's new fish to track.
+        var patchStr = LATEST_PATCH.toString();
+        if (patchStr.indexOf(".") === -1) {
+          patchStr += ".0";
+        }
+        $('#new-fish-available-modal .patch').text(patchStr);
         $('#new-fish-available-modal').modal({
           onApprove: function($element) {
             // Approval means they want the latest patch's fish displayed, NOW!

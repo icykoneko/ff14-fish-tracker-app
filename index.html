@@ -457,7 +457,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20240116_0812"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20240619_1404"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -771,6 +771,17 @@
                     <div class="ui active button" data-filter="6.5">6.5</div>
                   </div>
                 </div>
+                <div class="row" style="padding-top: 6px;">
+                  <div class="ui mini very compact buttons">
+                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="7">Dawntrail (7.x)</div>
+                    <div class="ui active button" data-filter="7">7.0</div>
+                    <div class="ui disabled button" data-filter="7.1">7.1</div>
+                    <div class="ui disabled button" data-filter="7.2">7.2</div>
+                    <div class="ui disabled button" data-filter="7.3">7.3</div>
+                    <div class="ui disabled button" data-filter="7.4">7.4</div>
+                    <div class="ui disabled button" data-filter="7.5">7.5</div>
+                  </div>
+                </div>
               </div><!-- column -->
               <div class="column" style="width: unset;">
                 <div class="row" style="padding-bottom: 0.5rem;">Display:</div>
@@ -831,10 +842,10 @@
 
       <!-- Modal for displaying alert about new patch -->
       <div id="new-fish-available-modal" class="ui tiny modal new-fish-available">
-        <div class="header">New Fish Available</div>
+        <div class="header">New Fish Available (Patch <span class="patch">?.?</span>)</div>
         <div class="content">
           <p>
-            Welcome back! New fish have been added since your last visit. In order to avoid possible spoilers, this patch is not displayed automatically.
+            Welcome<span class="returner"> back</span>! New fish have been added <span class="returner">since your last visit</span><span class="firsttime">recently</span>. In order to avoid possible spoilers, these fish are not displayed automatically.
           </p>
           <p>
             Would you like the new fish to be displayed now?
