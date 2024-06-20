@@ -919,6 +919,9 @@ let FishTrain = function(){
       // Load the settings for this tool.
       this.loadSettings();
 
+      // Apply templates.
+      Templates.applyTemplates();
+
       // Fish entries for the timeline.
       // In order to calculate rarity, we need to check everything (otherwise
       // you could always guestimate.)

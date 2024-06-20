@@ -388,6 +388,9 @@ let ViewModel = new class {
       includeVerySoonBin: true,
     });
 
+    // Apply templates.
+    Templates.applyTemplates();
+
     // Finally, initialize the display.
     this.initializeDisplay();
   }
