@@ -338,6 +338,8 @@
     <script type="text/javascript" src="js/app/time.js"></script>
     <script type="text/javascript" src="js/app/weather.js"></script>
 
+    <script type="text/javascript" src="/js/app/templates.js?20240619_2325"></script>
+
     <style type="text/css">
       span.window-qualifier-text {
         font-size: 125%;
@@ -407,6 +409,8 @@
           // Update the main header's earth and eorzea times.
           $("#eorzeaClock").text(dateFns.format(dateFns.utc.toDate(eorzeaTime.toEorzea(x.timestamp)), "HH:mm"));
         });
+
+        Templates.applyTemplates();
 
         // Initialize the weather service.
         weatherService.initializeWeatherTracking();
@@ -754,25 +758,10 @@
           </div>
         </div>
       </div>
-      <div class="ui container">
-        <p>
-          FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
-          FINAL FANTASY XIV © 2010 - 2024 SQUARE ENIX CO., LTD. All Rights Reserved.
-        </p>
-      </div>
+      <materialsFooter></materialsFooter>
     </div>
     <div class="ui bottom fixed menu">
-      <div class="right menu">
-        <a class="icon item" href="https://discord.gg/fishcord" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
-          <i class="discord icon"></i>
-        </a>
-        <a class="icon item" href="https://twitter.com/CarbunclePlushy" data-tooltip="Twitter" data-position="top right" target="_blank">
-          <i class="twitter icon"></i>
-        </a>
-        <a class="icon item" href="https://github.com/icykoneko/ff14-fish-tracker-app" data-tooltip="Github" data-position="top right" target="_blank">
-          <i class="github icon"></i>
-        </a>
-      </div>
+      <siteFooterLinks></siteFooterLinks>
     </div>
   </body>
 </html>
