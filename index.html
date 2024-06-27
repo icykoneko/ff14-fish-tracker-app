@@ -34,7 +34,7 @@
             integrity="sha512-uiSucQ5TdEImoU68Gp+mxXJ54l4lQm5bTd+T0tj7KcCupCDrKr+FdmgXipF+2Exfc6xDAcnPbr5rXB5bEZS0bw=="
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?6.55_20240116_0812" />
+    <link rel="stylesheet" href="public/images/sprite.css?7.0_20240627_1750" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20230305_1820" />
     <link rel="stylesheet" href="css/overlay.css?20240313_2045" />
     <link rel="stylesheet" href="css/dark_overlay.css?20230305_1820" />
@@ -45,9 +45,9 @@
     <script type="text/javascript" src="js/app/localization.js?20111013_2022"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?6.55_20240618_1630"></script>
+    <script type="text/javascript" src="js/app/data.js?7.0_20240627_1750"></script>
     <script type="text/javascript" src="js/app/data_ex.js?20240227_1941"></script>
-    <script type="text/javascript" src="js/app/fish_info_data.js?6.55_20240618_1650"></script>
+    <script type="text/javascript" src="js/app/fish_info_data.js?7.0_20240627_1750"></script>
     <!--
       - Scripts
       - * NOTE: The order is somewhat important. Care must be taken to avoid
@@ -74,6 +74,9 @@
       - prevent excessive load requests, the templates are stored in individual
       - <script> elements. This is where the bulk of the HTML lives.
       -->
+
+    <script type="text/javascript" src="js/app/templates.js?20240619_2325"></script>
+
     <script id="fish-table-template" type="text/html;x-dot-template">
       <table id="fishes" class="ui selectable striped very basic very compact unstackable table">
         <thead>
@@ -457,7 +460,7 @@
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20240116_0812"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20240619_2325"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -716,61 +719,7 @@
                 <div class="row" style="padding-bottom: 0.5rem;">
                   Filter by Expansion or Patch:
                 </div>
-                <div class="row">
-                  <div class="ui mini very compact buttons">
-                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="2">ARR (2.x)</div>
-                    <div class="ui active button" data-filter="2">2.0</div>
-                    <div class="ui active button" data-filter="2.1">2.1</div>
-                    <div class="ui active button" data-filter="2.2">2.2</div>
-                    <div class="ui active button" data-filter="2.3">2.3</div>
-                    <div class="ui active button" data-filter="2.4">2.4</div>
-                    <div class="ui active button" data-filter="2.5">2.5</div>
-                  </div>
-                </div>
-                <div class="row" style="padding-top: 6px;">
-                  <div class="ui mini very compact buttons">
-                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="3">Heavensward (3.x)</div>
-                    <div class="ui active button" data-filter="3">3.0</div>
-                    <div class="ui active button" data-filter="3.1">3.1</div>
-                    <div class="ui active button" data-filter="3.2">3.2</div>
-                    <div class="ui active button" data-filter="3.3">3.3</div>
-                    <div class="ui active button" data-filter="3.4">3.4</div>
-                    <div class="ui active button" data-filter="3.5">3.5</div>
-                  </div>
-                </div>
-                <div class="row" style="padding-top: 6px;">
-                  <div class="ui mini very compact buttons">
-                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="4">Stormblood (4.x)</div>
-                    <div class="ui active button" data-filter="4">4.0</div>
-                    <div class="ui active button" data-filter="4.1">4.1</div>
-                    <div class="ui active button" data-filter="4.2">4.2</div>
-                    <div class="ui active button" data-filter="4.3">4.3</div>
-                    <div class="ui active button" data-filter="4.4">4.4</div>
-                    <div class="ui active button" data-filter="4.5">4.5</div>
-                  </div>
-                </div>
-                <div class="row" style="padding-top: 6px;">
-                  <div class="ui mini very compact buttons">
-                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="5">Shadowbringers (5.x)</div>
-                    <div class="ui active button" data-filter="5">5.0</div>
-                    <div class="ui active button" data-filter="5.1">5.1</div>
-                    <div class="ui active button" data-filter="5.2">5.2</div>
-                    <div class="ui active button" data-filter="5.3">5.3</div>
-                    <div class="ui active button" data-filter="5.4">5.4</div>
-                    <div class="ui active button" data-filter="5.5">5.5</div>
-                  </div>
-                </div>
-                <div class="row" style="padding-top: 6px;">
-                  <div class="ui mini very compact buttons">
-                    <div class="ui active primary patch-set button" style="width: 12.5em;" data-filter="6">Endwalker (6.x)</div>
-                    <div class="ui active button" data-filter="6">6.0</div>
-                    <div class="ui active button" data-filter="6.1">6.1</div>
-                    <div class="ui active button" data-filter="6.2">6.2</div>
-                    <div class="ui active button" data-filter="6.3">6.3</div>
-                    <div class="ui active button" data-filter="6.4">6.4</div>
-                    <div class="ui active button" data-filter="6.5">6.5</div>
-                  </div>
-                </div>
+                <expansionSelectors></expansionSelectors>
               </div><!-- column -->
               <div class="column" style="width: unset;">
                 <div class="row" style="padding-bottom: 0.5rem;">Display:</div>
@@ -831,10 +780,10 @@
 
       <!-- Modal for displaying alert about new patch -->
       <div id="new-fish-available-modal" class="ui tiny modal new-fish-available">
-        <div class="header">New Fish Available</div>
+        <div class="header">New Fish Available (Patch <span class="patch">?.?</span>)</div>
         <div class="content">
           <p>
-            Welcome back! New fish have been added since your last visit. In order to avoid possible spoilers, this patch is not displayed automatically.
+            Welcome<span class="returner"> back</span>! New fish have been added <span class="returner">since your last visit</span><span class="firsttime">recently</span>. In order to avoid possible spoilers, these fish are not displayed automatically.
           </p>
           <p>
             Would you like the new fish to be displayed now?
@@ -856,29 +805,14 @@
         </div>
       </div>
 
-      <div class="ui container">
-        <p>
-          FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.<br/>
-          FINAL FANTASY XIV © 2010 - 2024 SQUARE ENIX CO., LTD. All Rights Reserved.
-        </p>
-      </div>
+      <materialsFooter></materialsFooter>
     </div>
     <div class="ui bottom fixed menu">
       <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version"></span></div>
       <script>
         CheckForUpdates.checkForUpdates("");
       </script>
-      <div class="right menu">
-        <a class="icon item" href="https://discord.gg/fishcord" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
-          <i class="discord icon"></i>
-        </a>
-        <a class="icon item" href="https://twitter.com/CarbunclePlushy" data-tooltip="Twitter" data-position="top right" target="_blank">
-          <i class="twitter icon"></i>
-        </a>
-        <a class="icon item" href="https://github.com/icykoneko/ff14-fish-tracker-app" data-tooltip="Github" data-position="top right" target="_blank">
-          <i class="github icon"></i>
-        </a>
-      </div>
+      <siteFooterLinks></siteFooterLinks>
     </div>
   </body>
 </html>
