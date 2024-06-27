@@ -12440,7 +12440,7 @@
   endHour: 12
   previousWeatherSet:
   weatherSet:
-  - Astromagnetic Storm
+  - Astromagnetic Storms
   bestCatchPath:
   - Stardust
   predators:
@@ -12576,7 +12576,7 @@
   endHour: 4
   previousWeatherSet:
   weatherSet:
-  - Astromagnetic Storm
+  - Astromagnetic Storms
   bestCatchPath:
   - Mayfly
   predators:
@@ -12758,7 +12758,7 @@
   endHour: 4
   previousWeatherSet:
   weatherSet:
-  - Astromagnetic Storm
+  - Astromagnetic Storms
   bestCatchPath:
   - Chimera Worm
   - Vacuum Shrimp
@@ -12936,7 +12936,7 @@
   startHour: 12
   endHour: 20
   previousWeatherSet:
-  - Astromagnetic Storm
+  - Astromagnetic Storms
   weatherSet:
   - Umbral Wind
   bestCatchPath:
@@ -13025,7 +13025,7 @@
   startHour: 18
   endHour: 22
   previousWeatherSet:
-  - Astromagnetic Storm
+  - Astromagnetic Storms
   weatherSet:
   - Fair Skies
   bestCatchPath:
@@ -13160,7 +13160,7 @@
   previousWeatherSet:
   - Umbral Wind
   weatherSet:
-  - Astromagnetic Storm
+  - Astromagnetic Storms
   bestCatchPath:
   - Stardust
   - Horizon Event
@@ -13173,3 +13173,2331 @@
   hookset:
   snagging:
   patch: 6.55
+# DAWNTRAIL - Patch 7.0 (2024-06-28)
+- name: Mosquito Fish
+  location: Downripple
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Pel Frog
+  location: Downripple
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Petticoat Tetra
+  location: Downripple
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Reasonscale Silverside
+  location: The For'ard Cabins
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Stardust Shrimp
+  location: The For'ard Cabins
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Shallows Sot
+  location: The For'ard Cabins
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Ghostfish
+  location: The For'ard Cabins
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Permit
+  location: The For'ard Cabins
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Floating Fife
+  location: High Tide Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Blue Purse
+  location: High Tide Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Goldfin Cavalli
+  location: High Tide Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: King Puffer
+  location: High Tide Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Sea Alpaca
+  location: Sunken Stars
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Marbled Hatchetfish
+  location: Sunken Stars
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Starsnipper
+  location: Sunken Stars
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Urqotrout
+  location: Sunken Stars
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Yok Huy Stonecutter
+  location: Sunken Stars
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Chirwagur Loach
+  location: Chirwagur Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Alright Alright Alright
+  location: Chirwagur Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Zorlortor
+  location: Chirwagur Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Shooting Starscale
+  location: Chirwagur Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: First Feastfish
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Urqofrog
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Zeh Tortoh
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Morsel Trout
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Deepwarden
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Qor Pirarucu
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Kozama'uka Skipper
+  location: Bopo'uihih
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Bopo'u Sleeper
+  location: Bopo'uihih
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Poison Dyefrog
+  location: Bopo'uihih
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Pleated Matamata
+  location: Bopo'uihih
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Uyuy Xage
+  location: Bopo'uihih
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Plattershell
+  location: Waters Hanu
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Yok Huy Pleco
+  location: Waters Hanu
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Candiru
+  location: Miyakabek'zu
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Trahira
+  location: Miyakabek'zu
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Driftwood Catfish
+  location: Miyakabek'zu
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Oho Hunu
+  location: The Dewspun Bank
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Bronze Pleco
+  location: The Dewspun Bank
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Crenicichla
+  location: The Dewspun Bank
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Hunu Peacock Bass
+  location: Peaks Poga
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Pelubane
+  location: Peaks Poga
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Giant Trahira
+  location: Peaks Poga
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Ku'uxage Bitterling
+  location: Ku'uxage
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Tonguesnatcher
+  location: Ku'uxage
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Corn Dace
+  location: Ku'uxage
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Ka Puyhu
+  location: Ku'uxage
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Ligaka Guppy
+  location: Miyakabek'zoma
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Dumplingfish
+  location: Miyakabek'zoma
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Banded Candiru
+  location: Miyakabek'zoma
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Oxydoras
+  location: Miyakabek'zoma
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Spotted Stingray
+  location: Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Yellow Peacock Bass
+  location: Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Shovelnose Catfish
+  location: Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Shimmering Shadow
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Ut'ohmu Dawnfish
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Belonesox
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Xd'aa Talat Cichlid
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Iq Br'aax Sailfin
+  location: Iq Br'aax Reservoir
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Hunmu Ob
+  location: Iq Br'aax Reservoir
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Apoda
+  location: Yak Awak Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Mirror Carp
+  location: Yak Awak Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Tsoly Mu
+  location: Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Iq Rrax Leaffish
+  location: Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Archmatron Angelfish
+  location: Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Yak T'el Salamander
+  location: Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Shadowtongue
+  location: Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Cloud-eye Carp
+  location: Xobr'it Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Xobr'it Lobster
+  location: Xobr'it Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Sunbright Axolotl
+  location: Xobr'it Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Horned Frog
+  location: Xobr'it Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Mudfish
+  location: Ankledeep
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Turali Beaded Lizard
+  location: Ankledeep
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Yak T'el Catfish
+  location: Ankledeep
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Ankledeep Catfish
+  location: Ankledeep
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Checkered Cichlid
+  location: Cenote Moxutural
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Moxutural Gar
+  location: Cenote Moxutural
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Variatus
+  location: Cenote Jayunja
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Welkin Catfish
+  location: Cenote Jayunja
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Flawless Saucer
+  location: Cenote Jayunja
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Glittergill
+  location: Sapsweet Cenote
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Twig Catfish
+  location: Sapsweet Cenote
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Blind Brotula
+  location: Bitterbark Cenote
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Yak T'el Caiman
+  location: Bitterbark Cenote
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Ut'ohmu Tiika
+  location: Xty'iinbek Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Sharknose Goby
+  location: Xty'iinbek Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Yak T'el Crab
+  location: Xty'iinbek Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Xty'iinbek Sleeper
+  location: Xty'iinbek Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Chain Shark
+  location: Xty'iinbek Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Bonytail Chub
+  location: Niikwerepi
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Niikwerepi Trout
+  location: Niikwerepi
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Pyariyoanaan Cichlid
+  location: Niikwerepi
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Shaaloani Salmon
+  location: Niikwerepi
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Trailtrout
+  location: Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Toari Sucker
+  location: Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Turali Paddlefish
+  location: Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Zorgor Core
+  location: Westbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Cloudribbon
+  location: Westbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Zorgor Scorpion
+  location: Westbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Vagrant Cascade
+  location: Westbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Zorgor Condor
+  location: Westbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Cloud Wasp
+  location: Eastbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Azure Glider
+  location: Eastbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Hellsnow Shark
+  location: Eastbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Raging Hanuhead
+  location: Eastbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Heritage Loach
+  location: Outskirts Shallows
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Outskirts Sniffer
+  location: Outskirts Shallows
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Pumpkin Perch
+  location: Outskirts Shallows
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Tiger Muskellunge
+  location: Outskirts Shallows
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Moon Croppie
+  location: The Driftdowns
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Driftdowns Trout
+  location: The Driftdowns
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Electrobetta
+  location: Crackling Canyons
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Thundering Redbelly
+  location: Crackling Canyons
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Yyasulani Bowfin
+  location: Crackling Canyons
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Crackling Flounder
+  location: Crackling Canyons
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Goldgrouper
+  location: Alexandrian Ruins
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Everkeep Yabby
+  location: Residential Sector
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Stickleback
+  location: Residential Sector
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Custodian Carp
+  location: Residential Sector
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Mosaic Loach
+  location: Residential Sector
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Rosebud Frog
+  location: The Knowable
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Knight Goby
+  location: The Knowable
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Windspath Eel
+  location: The Knowable
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Harlequin Lancer
+  location: The Knowable
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Cleyran Carp
+  location: Mu Springs Eternal
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Giant Snakehead
+  location: Mu Springs Eternal
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Datnioides
+  location: Leynode Aero
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Neo Arowana
+  location: Leynode Aero
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Canal Bream
+  location: Canal Town South
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Iris Wrasse
+  location: Canal Town South
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Canal Drum
+  location: Canal Town South
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Butterfly Ray
+  location: Canal Town South
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Hydro Louvar
+  location: Canal Town South
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Devotion Clam
+  location: Canal Town North
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Forgotten One
+  location: Canal Town North
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Copper Shark
+  location: Canal Town North
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Golden Day
+  location: Proto Alexandria
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Starglass Gibel
+  location: Proto Alexandria
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Scarlet Queen
+  location: Proto Alexandria
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+- name: Ultimoat Carp
+  location: Proto Alexandria
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  snagging:
+  patch: 7.0
+  dataMissing: true
+# DAWNTRAIL SPEARFISHING
+- name: Turali Loach
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Yok Huy Toad
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Stone Pleco
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Shark Catfish
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Zeh Lar Dor
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Karvarichthys
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Severum
+  location: Eastern Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Ligaka Blossom
+  location: Eastern Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Potglaze Stingray
+  location: Eastern Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Emberwisp
+  location: Eastern Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Ihuyka Colossoma
+  location: Eastern Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Torchtail
+  location: Eastern Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Variegated Sisterscale
+  location: Western Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Kozama'uka Characin
+  location: Western Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Charcoal Eel
+  location: Western Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Rainbow Pipira
+  location: Western Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Lau Lau
+  location: Western Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Ligaka Pirarucu
+  location: Western Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Turali Land Crab
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Crested Goby
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Tsoly Turtle
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Viperfish
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Horizon Crocodile
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Tsoly Gar
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Sunlit Prism
+  location: Western Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Fategazer
+  location: Western Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Frillfin Goby
+  location: Western Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Black Ibruq
+  location: Western Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Speckled Peacock Bass
+  location: Western Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Golden Characin
+  location: Western Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Deadleaf Minnow
+  location: Eastern Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Glistening Discus
+  location: Eastern Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Lightning Eel
+  location: Eastern Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Longwhisker Lungfish
+  location: Eastern Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Minted Arowana
+  location: Eastern Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Br'aaxfish
+  location: Eastern Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Warmouth
+  location: Northern Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Shaaloani Goby
+  location: Northern Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Sauger
+  location: Northern Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Niikwerepi Bass
+  location: Northern Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Longnose Gar
+  location: Northern Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Midnight Carp
+  location: Northern Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Piraputanga
+  location: Marsh Ligaka Depths
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Purussaurus
+  location: Marsh Ligaka Depths
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Iq Rrax Crab
+  location: Iq Rrax Tsoly Depths
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
+- name: Wivre Cod
+  location: Iq Rrax Tsoly Depths
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  gig: UNKNOWN
+  patch: 7.0
+  dataMissing: true
