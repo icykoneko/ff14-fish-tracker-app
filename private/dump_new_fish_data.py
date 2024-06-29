@@ -550,8 +550,8 @@ def supports_fish_eyes(fish):
     # The fish must not be legendary: i.e. not include the phase: "オオヌシ".
     if "オオヌシ" in fish.item.source_row['Description', Language.japanese]:
         return False
-    # As of 6.0, Fish Eyes only works on fish in areas prior to Shadowbringers.
-    if fish.expansion.key >= 3:
+    # As of 7.0, Fish Eyes only works on fish in areas prior to Endwalker.
+    if fish.expansion.key >= 4:
         return False
 
     # While technically any other fish does support Fish Eyes, only fish with
