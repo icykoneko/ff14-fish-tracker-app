@@ -5,6 +5,42 @@ class FishTableLayout {
      -
      <span class="catchtime-hour">{{=Math.floor(it.endHour)}}</span>{{?it.endHour % 1 !== 0}}<span class="catchtime-minute">{{=String(Math.round((it.endHour % 1) * 60)).padStart(2, '0')}}</span>{{?}}`
     },
+    baitEntry: {arg: 'it', text:
+     `<span class="bait-span">
+        {{?it.item.linked}}
+          <a href="https://garlandtools.org/db/#item/{{=it.item.id}}" target="cp_gt">
+        {{?}}
+        <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.item.icon}}"
+             title="{{=it.item.name}}" data-baitIdx="{{=it.idx}}"></div>
+        {{?it.item.linked}}
+          </a>
+        {{?}}
+        <div class="bait-badge-container">
+          {{?it.item.hookset}}
+            <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.item.hookset.toLowerCase()}}_hookset"
+                  title="{{=it.item.hookset}} Hookset"></div>
+          {{?}}
+          {{?it.item.tug}}
+            <div class="tug-indicator {{=it.item.tug}}-tug-indicator" title="{{=it.item.tug}} tug">
+              {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.item.tug]}}
+            </div>
+          {{?}}
+        </div>
+      </span>`
+    },
+    baitEntries: {arg: 'it', text:
+     `{{~it.bait :item:idx}}
+        {{?idx != 0}}<i class="arrow right icon"></i>{{?}}
+        {{ var linked = idx == 0; }}
+        {{#def.baitEntry:{item:item,idx:idx,linked:linked} }}
+        {{?idx == 0 && item.alternatives !== null}}
+          {{~item.alternatives :altItem:altIdx}}
+            ,
+            {{#def.baitEntry:{item:altItem,idx:idx,linked:linked} }}
+          {{~}}
+        {{?}}
+      {{~}}`
+    },
   }
 
   constructor() {

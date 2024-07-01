@@ -2,6 +2,23 @@ function shouldLogForFish(fish) {
   return false;
 }
 
+function _convertBait(baitList) {
+  // The FIRST entry MIGHT be an array. If so, the FIRST entry is the preferred, all
+  // remaining entries are considered alternative baits.
+  if (baitList === undefined || baitList === null) {
+    return [];
+  }
+  if (Array.isArray(baitList[0])) {
+    if (window.ALLOW_MULTI_BAIT === true) {
+      return [baitList[0].map(x => DATA.ITEMS[x])].concat(baitList.slice(1).map(x => DATA.ITEMS[x]));
+    } else {
+      return [DATA.ITEMS[baitList[0][0]]].concat(baitList.slice(1).map(x => DATA.ITEMS[x]));
+    }
+  } else {
+    return baitList.map(x => DATA.ITEMS[x]);
+  }
+}
+
 class Fish {
   constructor(fishData) {
     // Copy constructor version.
@@ -60,7 +77,7 @@ class Fish {
                  name: __p(DATA.ITEMS[x[0]], "name"),
                  icon: DATA.ITEMS[x[0]].icon };
       }),
-      path: _(this.bestCatchPath).map((x) => DATA.ITEMS[x])
+      path: _convertBait(this.bestCatchPath)
     };
     this.alwaysAvailable =
       this.weatherSet.length == 0 && this.startHour == 0 && this.endHour == 24;

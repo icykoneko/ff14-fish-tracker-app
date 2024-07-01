@@ -13,10 +13,11 @@ except ImportError:
 from yaml.resolver import Resolver
 import re
 import json
-from operator import itemgetter, add
-from collections import OrderedDict, namedtuple, deque
+from operator import itemgetter, attrgetter, add
+from collections import OrderedDict, namedtuple
 from functools import reduce
 from itertools import islice, repeat
+from more_itertools import flatten, nth, first, consume
 import logging
 
 try:
@@ -61,28 +62,6 @@ Resolver.add_implicit_resolver(
                 |[-+]?(?:0|[1-9][0-9_]*)
                 |[-+]?0x[0-9a-fA-F_]+)$''', re.X),
     list('-+0123456789'))
-
-
-def nth(iterable, n, default=None):
-    """Returns the nth item or a default value"""
-    return next(islice(iterable, n, None), default)
-
-
-def first(iterable, pred, default=None):
-    """Returns the first item for which pred(item) is true.
-
-    If no true value is found, returns *default*
-
-    """
-    return next(filter(pred, iterable), default)
-
-
-def consume(iterator, n=None):
-    if n is None:
-        deque(iterator, maxlen=0)
-    else:
-        next(islice(iterator, n, n), None)
-    return iterator
 
 
 def load_dats(args):
@@ -287,6 +266,9 @@ def initialize_data(args):
 
 
 def lookup_fish_by_name(name):
+    if isinstance(name, list):
+        return [lookup_fish_by_name(x) for x in name]
+
     result = nth(filter(lambda item: item[1]['name_en'] == name,
                         fish_and_tackle_data.items()), 0)
     if result is None:
@@ -405,6 +387,17 @@ def convert_fish_to_json(item):
         raise
 
 
+def isiter(x):
+    return hasattr(x, '__iter__') and not isinstance(x, (str, bytes))
+
+
+def apply_recursively(x, func, args=[], kwargs={}):
+    if not isiter(x):
+        return func(x, *args, **kwargs)
+    else:
+        return type(x)([apply_recursively(item, func, args, kwargs) for item in x])
+
+
 def _convert_fish_to_json(item):
     item.setdefault('startHour', 0)
     item.setdefault('endHour', 24)
@@ -424,7 +417,8 @@ def _convert_fish_to_json(item):
             location = lookup_fishing_spot_by_name(item['location']).key
     else:
         location = None  # Some fish, we simply don't care about their location.
-    catch_path = [lookup_fish_by_name(x).key for x in item['bestCatchPath'] or []]
+    catch_path = [apply_recursively(x, lambda y: lookup_fish_by_name(y).key)
+                  for x in item['bestCatchPath'] or []]
     # Javascript will auto-sort keys that look like numbers in a dictionary...
     # So, store each entry as an array instead...
     predators = []
@@ -521,6 +515,10 @@ def _unformated_name(obj):
     return obj['name_en'].strip().lower()
 
 
+def _flatten_lite(l):
+    return list(flatten(map(lambda x: [x] if not isinstance(x, list) else x, l)))
+
+
 def rebuild_fish_data(args):
     global fish_and_tackle_data
     # Parse the fish data in the YAML file.
@@ -530,7 +528,7 @@ def rebuild_fish_data(args):
     fish_and_tackle_names = list(set(filter(None, reduce(
         add, [[fish['name']] +
               list((fish.get('predators', {}) or {}).keys()) +
-              (fish['bestCatchPath'] or [])
+              (_flatten_lite(fish['bestCatchPath'] or []))
               for fish in fishes], []))))
     # Match these with Item records.
     fish_and_tackle_data = OrderedDict()

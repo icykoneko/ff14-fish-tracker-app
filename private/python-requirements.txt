@@ -2,3 +2,4 @@ construct
 Pillow
 PyYAML
 tqdm
+more-itertools

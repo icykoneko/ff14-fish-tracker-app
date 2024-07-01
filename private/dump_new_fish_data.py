@@ -5,6 +5,7 @@ import sys
 import os
 import re
 from itertools import chain, filterfalse, islice, repeat
+from more_itertools import nth, first, flatten, unique_everseen
 from functools import reduce
 from operator import add, itemgetter
 import timeit
@@ -36,45 +37,6 @@ from pysaintcoinach.xiv.weather import Weather
 from pysaintcoinach.xiv.placename import PlaceName
 
 # logging.basicConfig(level=logging.INFO, stream=sys.stderr)
-
-
-def nth(iterable, n, default=None):
-    """Returns the nth item or a default value"""
-    return next(islice(iterable, n, None), default)
-
-
-def first(iterable, pred, default=None):
-    """Returns the first item for which pred(item) is true.
-
-    If no true value is found, returns *default*
-
-    """
-    return next(filter(pred, iterable), default)
-
-
-def flatten(listOfLists):
-    """Flatten one level of nesting"""
-    return chain.from_iterable(listOfLists)
-
-
-def unique_everseen(iterable, key=None):
-    """
-    List unique elements, preserving order. Remember all elements ever seen.
-    """
-    # unique_everseen('AAAABBBCCDAABBB') --> A B C D
-    # unique_everseen('ABBCcAD', str.lower) --> A B C D
-    seen = set()
-    seen_add = seen.add
-    if key is None:
-        for element in filterfalse(seen.__contains__, iterable):
-            seen_add(element)
-            yield element
-    else:
-        for element in iterable:
-            k = key(element)
-            if k not in seen:
-                seen_add(k)
-                yield element
 
 
 _start_time = timeit.default_timer()
@@ -301,7 +263,7 @@ def scan_recipes(orig_stdout, n=None):
     for recipe in tracked_iter(realm.game_data.get_sheet('Recipe'),
                                'Scanning recipes',
                                file=orig_stdout, position=n):
-        for i in range(10):
+        for i in range(8):
             ingredient = recipe.get_raw(XivRow.build_column_name('Item{Ingredient}', i))
             if ingredient in catchable_fish:
                 catchable_fish[ingredient].craft.append(recipe)
@@ -453,11 +415,11 @@ def is_important_fish(fish):
         return True
 
     # SUPER IMPORTANT FISH
-    if fish.params is not None:
-        if fish.params.time_restricted:
-            return True
-        if fish.params.weather_restricted:
-            return True
+    # if fish.params is not None:
+    #     if fish.params.time_restricted:
+    #         return True
+    #     if fish.params.weather_restricted:
+    #         return True
     if fish.spearfishing:
         if all(map(lambda x: x.hidden, fish.spots)):
             return True
@@ -484,8 +446,9 @@ def is_important_fish(fish):
     if fish.aquarium is not None:
         return True
 
-    # Otherwise... it's unimportant...
-    return False
+    # # Otherwise... it's unimportant...
+    # return False
+    return True
 
 
 important_fish = sorted(list(filter(is_important_fish, catchable_fish.values())),
@@ -569,6 +532,10 @@ def is_big_fish(fish):
     return False
 
 
+def _flatten_lite(l):
+    return list(flatten(map(lambda x: [x] if not isinstance(x, list) else x, l)))
+
+
 new_fishes = {}
 for fish in tracked_iter(important_fish,
                          'Generating new fish database'):
@@ -594,8 +561,8 @@ for fish in tracked_iter(important_fish,
         'patch': None,
         'computed': {
             'locations': [get_spot(spot) for spot in fish.spots],
-            'timeRestricted': fish.params.time_restricted if fish.params is not None else False,
-            'weatherRestricted': fish.params.weather_restricted if fish.params is not None else False,
+            # 'timeRestricted': fish.params.time_restricted if fish.params is not None else False,
+            # 'weatherRestricted': fish.params.weather_restricted if fish.params is not None else False,
             'folklore': folklore,
             'spearfishing': fish.spearfishing,
             'bigfish': fish.item.rarity >= 2,
@@ -622,7 +589,7 @@ for fish in tracked_iter(important_fish,
                 'end': known_fish.get('endHour', 24),
                 'prevWeather': known_fish.get('previousWeatherSet', []),
                 'weather': known_fish.get('weatherSet', []),
-                'bait': (known_fish.get('bestCatchPath', []) or [])[-1:],
+                'bait': _flatten_lite((known_fish.get('bestCatchPath', []) or [])[-1:]),
                 'intuition': known_fish.get('predators', None),
                 'intuitionLength': known_fish.get('intuitionLength', None),
                 'hookset': known_fish.get('hookset', None),
@@ -642,23 +609,23 @@ for fish in tracked_iter(new_fishes.values(),
                          'Integrity Checking'):
     errors = []
 
-    # Check if time restricted.
-    if fish['computed']['timeRestricted'] and \
-            fish['start'] == 0 and fish['end'] == 24:
-        errors += ['should be time restricted']
-    elif not fish['computed']['timeRestricted'] and \
-            not (fish['start'] == 0 and fish['end'] == 24):
-        errors += ['should not be time restricted']
+    # # Check if time restricted.
+    # if fish['computed']['timeRestricted'] and \
+    #         fish['start'] == 0 and fish['end'] == 24:
+    #     errors += ['should be time restricted']
+    # elif not fish['computed']['timeRestricted'] and \
+    #         not (fish['start'] == 0 and fish['end'] == 24):
+    #     errors += ['should not be time restricted']
 
-    # Check if weather restricted.
-    if fish['computed']['weatherRestricted'] and \
-            len(fish['prevWeather'] or []) == 0 and \
-            len(fish['weather'] or []) == 0:
-        errors += ['should be weather restricted']
-    elif not fish['computed']['weatherRestricted'] and \
-            (len(fish['weather'] or []) != 0 or \
-             len(fish['prevWeather'] or []) != 0):
-        errors += ['should not be weather restricted']
+    # # Check if weather restricted.
+    # if fish['computed']['weatherRestricted'] and \
+    #         len(fish['prevWeather'] or []) == 0 and \
+    #         len(fish['weather'] or []) == 0:
+    #     errors += ['should be weather restricted']
+    # elif not fish['computed']['weatherRestricted'] and \
+    #         (len(fish['weather'] or []) != 0 or \
+    #          len(fish['prevWeather'] or []) != 0):
+    #     errors += ['should not be weather restricted']
 
     if len(errors) > 0:
         if 'dataMissing' in fish and fish['dataMissing']:
@@ -671,7 +638,7 @@ def _get_item_lookup_dict_entries():
     fish_and_tackle_names = list(set(filter(None, reduce(
         add, [[fish['name']] +
               list((fish.get('intuition', {}) or {}).keys()) +
-              (fish['bait'] or [])
+              (_flatten_lite(fish['bait'] or []))
               for fish in new_fishes.values()], []))))
     # Match these with records in the Item sheet.
     for item in tracked_iter(realm.game_data.get_sheet(Item),
@@ -693,7 +660,7 @@ with open("private/fishDataNew.yaml", 'w', encoding='utf-8') as f:
     def transformed_fish_pair(fish):
         fish_entry = dict(fish)
         del fish_entry['name']
-        del fish_entry['computed']
+        # del fish_entry['computed']
         return fish['name'], fish_entry
 
     Dumper.add_representer(type(None), represent_none)
@@ -702,6 +669,21 @@ with open("private/fishDataNew.yaml", 'w', encoding='utf-8') as f:
               allow_unicode=True, encoding='utf-8')
     # f.write('---\n')
     # f.writelines(['%s\n' % str(fish['name']) for fish in list(new_fishes.values())])
+
+
+def _lookup_item_by_name_fuzzy(name):
+    # Why you do this SE? Mahi-mahi =_= Also fish with an extra space at the end?!
+    result = ITEM.get(name, None)
+    if result is None:
+        result = next(filter(lambda x: x.strip().lower() == name.lower(), ITEM), None)
+        if result is not None:
+            logging.warning('The formatting of "%s" has changed in the DATs to: "%s"',
+                            name, result)
+        else:
+            result = ITEM[result]
+    if result is None:
+        raise KeyError(name)
+    return result
 
 
 def convert_fish_to_json(fish: Fish):
@@ -716,12 +698,12 @@ def convert_fish_to_json(fish: Fish):
 
         weather_keys = list(sorted([WEATHER[x] for x in (db_entry['weather'] or [])]))
         prev_weather_keys = list(sorted([WEATHER[x] for x in (db_entry['prevWeather'] or [])]))
-        bait_keys = [ITEM[x] for x in (db_entry['bait'] or [])]
+        bait_keys = [_lookup_item_by_name_fuzzy(x) for x in _flatten_lite(db_entry['bait'] or [])]
         # Javascript will auto-sort keys that look like numbers in a dictionary...
         # So, store each entry as an array instead...
         intuition_entries = []
         if db_entry.get('intuition') is not None:
-            intuition_entries = list([(ITEM[x[0]], x[1]) for x in db_entry['intuition'].items()])
+            intuition_entries = list([(_lookup_item_by_name_fuzzy(x[0]), x[1]) for x in db_entry['intuition'].items()])
 
         def get_location_key(spot):
             if isinstance(spot, SpearfishingNode):
@@ -757,8 +739,8 @@ def convert_fish_to_json(fish: Fish):
             'patch': db_entry['patch'],
             # Information sourced via DATs
             'location': [get_location_key(x) for x in fish.spots],
-            'timeRestricted': fish.params.time_restricted if fish.params is not None else False,
-            'weatherRestricted': fish.params.weather_restricted if fish.params is not None else False,
+            # 'timeRestricted': fish.params.time_restricted if fish.params is not None else False,
+            # 'weatherRestricted': fish.params.weather_restricted if fish.params is not None else False,
             'folklore': folklore_key,
             'spearfishing': fish.spearfishing,
             'bigfish': fish.item.rarity >= 2,

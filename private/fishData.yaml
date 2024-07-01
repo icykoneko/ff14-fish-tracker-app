@@ -11562,7 +11562,8 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Panic Jig
+  - - Stardust
+    - Panic Jig
   predators:
   tug: medium
   hookset: Powerful
@@ -13162,7 +13163,8 @@
   weatherSet:
   - Astromagnetic Storms
   bestCatchPath:
-  - Stardust
+  - - Stardust
+    - Panic Jig
   - Horizon Event
   predators:
     Phallaina: 1
@@ -13176,43 +13178,27 @@
 # DAWNTRAIL - Patch 7.0 (2024-06-28)
 - name: Mosquito Fish
   location: Downripple
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Pel Frog
   location: Downripple
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Petticoat Tetra
   location: Downripple
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Golden Stonefly Nymph
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Reasonscale Silverside
   location: The For'ard Cabins
   startHour: 0
