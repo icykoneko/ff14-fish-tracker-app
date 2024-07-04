@@ -15,28 +15,31 @@ class FishTableLayout {
         {{?it.item.linked}}
           </a>
         {{?}}
-        <div class="bait-badge-container">
-          {{?it.item.hookset}}
-            <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.item.hookset.toLowerCase()}}_hookset"
-                  title="{{=it.item.hookset}} Hookset"></div>
-          {{?}}
-          {{?it.item.tug}}
-            <div class="tug-indicator {{=it.item.tug}}-tug-indicator" title="{{=it.item.tug}} tug">
-              {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.item.tug]}}
-            </div>
-          {{?}}
-        </div>
+        {{?it.nextBait !== undefined}}
+          <div class="bait-badge-container">
+            {{?it.nextBait.hookset}}
+              <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.nextBait.hookset.toLowerCase()}}_hookset"
+                    title="{{=it.nextBait.hookset}} Hookset"></div>
+            {{?}}
+            {{?it.nextBait.tug}}
+              <div class="tug-indicator {{=it.nextBait.tug}}-tug-indicator" title="{{=it.nextBait.tug}} tug">
+                {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.nextBait.tug]}}
+              </div>
+            {{?}}
+          </div>
+        {{?}}
       </span>`
     },
     baitEntries: {arg: 'it', text:
      `{{~it.bait :item:idx}}
         {{?idx != 0}}<i class="arrow right icon"></i>{{?}}
         {{ var linked = idx == 0; }}
-        {{#def.baitEntry:{item:item,idx:idx,linked:linked} }}
+        {{ var nextBait = (idx + 1) < it.bait.length ? it.bait[idx + 1] : it.data; }}
+        {{#def.baitEntry:{item:item,idx:idx,linked:linked,nextBait:nextBait} }}
         {{?idx == 0 && item.alternatives !== null}}
           {{~item.alternatives :altItem:altIdx}}
-            ,
-            {{#def.baitEntry:{item:altItem,idx:idx,linked:linked} }}
+            <i class="ellipsis vertical icon"></i>
+            {{#def.baitEntry:{item:altItem,idx:idx,linked:linked,nextBait:nextBait} }}
           {{~}}
         {{?}}
       {{~}}`
