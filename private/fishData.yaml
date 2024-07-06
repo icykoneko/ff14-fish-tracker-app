@@ -13182,663 +13182,406 @@
 - name: Mosquito Fish
   location: Downripple
   bestCatchPath:
-  - - Honeybee
-    - Golden Stonefly Nymph
+  - - Golden Stonefly Nymph
+    - Honeybee
   tug: light
   hookset: Precision
   patch: 7.0
 - name: Pel Frog
   location: Downripple
   bestCatchPath:
-  - - Honeybee
-    - Golden Stonefly Nymph
+  - - Golden Stonefly Nymph
+    - Honeybee
   tug: light
   hookset: Precision
   patch: 7.0
 - name: Petticoat Tetra
   location: Downripple
   bestCatchPath:
-  - Golden Stonefly Nymph
+  - - Golden Stonefly Nymph
+    - Honeybee
   tug: light
   hookset: Precision
   patch: 7.0
 - name: Reasonscale Silverside
   location: The For'ard Cabins
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Stardust Shrimp
   location: The For'ard Cabins
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Shallows Sot
   location: The For'ard Cabins
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Ghostfish
   location: The For'ard Cabins
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Permit
   location: The For'ard Cabins
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Floating Fife
   location: High Tide Harbor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Blue Purse
   location: High Tide Harbor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Goldfin Cavalli
   location: High Tide Harbor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: King Puffer
   location: High Tide Harbor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Crimson Lugworm
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Sea Alpaca
   location: Sunken Stars
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Marbled Hatchetfish
   location: Sunken Stars
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Starsnipper
   location: Sunken Stars
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Urqotrout
   location: Sunken Stars
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Yok Huy Stonecutter
   location: Sunken Stars
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Chirwagur Loach
   location: Chirwagur Lake
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Alright Alright Alright
   location: Chirwagur Lake
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Zorlortor
   location: Chirwagur Lake
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Shooting Starscale
   location: Chirwagur Lake
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Silkmoth Pupa
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: First Feastfish
   location: Karvarhur the First
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Urqofrog
   location: Karvarhur the First
-  startHour: 0
+  startHour: 20
   endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Red Maggots
+  tug: light
+  hookset: Precision
+  lure: Modest
   patch: 7.0
-  dataMissing: true
 - name: Zeh Tortoh
   location: Karvarhur the First
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Morsel Trout
   location: Karvarhur the First
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Deepwarden
   location: Karvarhur the First
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Qor Pirarucu
   location: Karvarhur the First
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Kozama'uka Skipper
   location: Bopo'uihih
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Bopo'u Sleeper
   location: Bopo'uihih
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Poison Dyefrog
   location: Bopo'uihih
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Pleated Matamata
   location: Bopo'uihih
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  - Poison Dyefrog
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Uyuy Xage
   location: Bopo'uihih
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  - Poison Dyefrog
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Plattershell
   location: Waters Hanu
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Yok Huy Pleco
   location: Waters Hanu
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Candiru
   location: Miyakabek'zu
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Trahira
   location: Miyakabek'zu
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Driftwood Catfish
   location: Miyakabek'zu
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Oho Hunu
   location: The Dewspun Bank
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Bronze Pleco
   location: The Dewspun Bank
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Crenicichla
   location: The Dewspun Bank
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Hunu Peacock Bass
   location: Peaks Poga
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Pelubane
   location: Peaks Poga
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Giant Trahira
   location: Peaks Poga
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Ku'uxage Bitterling
   location: Ku'uxage
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Tonguesnatcher
   location: Ku'uxage
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Corn Dace
   location: Ku'uxage
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Ka Puyhu
   location: Ku'uxage
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Ligaka Guppy
   location: Miyakabek'zoma
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Dumplingfish
   location: Miyakabek'zoma
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Banded Candiru
   location: Miyakabek'zoma
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  - Dumplingfish
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Oxydoras
   location: Miyakabek'zoma
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  - Dumplingfish
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Spotted Stingray
   location: Marsh Ligaka
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  - Dumplingfish
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Yellow Peacock Bass
   location: Marsh Ligaka
   startHour: 0
@@ -13846,25 +13589,20 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  - Dumplingfish
+  tug: medium
+  hookset: Powerful
   patch: 7.0
   dataMissing: true
 - name: Shovelnose Catfish
   location: Marsh Ligaka
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Shimmering Shadow
   location: Xd'aa Talat Tsoly
   startHour: 0

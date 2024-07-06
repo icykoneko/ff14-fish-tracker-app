@@ -20,6 +20,12 @@
       gtag('config', 'G-XYY4Q1MGX8');
     </script>
 
+    <!-- Experimental Feature: Multi-Bait (Enable with "?multibait") -->
+    <script>
+      let __url = new URL(window.location);
+      window.ALLOW_MULTI_BAIT = __url.searchParams.has('multibait');
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.js"></script>
@@ -34,7 +40,7 @@
             integrity="sha512-uiSucQ5TdEImoU68Gp+mxXJ54l4lQm5bTd+T0tj7KcCupCDrKr+FdmgXipF+2Exfc6xDAcnPbr5rXB5bEZS0bw=="
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="public/images/sprite.css?7.0_20240627_1750" />
+    <link rel="stylesheet" href="public/images/sprite.css?7.0_20240706_1217" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20230305_1820" />
     <link rel="stylesheet" href="css/overlay.css?20240313_2045" />
     <link rel="stylesheet" href="css/dark_overlay.css?20230305_1820" />
@@ -45,7 +51,7 @@
     <script type="text/javascript" src="js/app/localization.js?20111013_2022"></script>
 
     <!-- Include the data -->
-    <script type="text/javascript" src="js/app/data.js?7.0_20240629_0655"></script>
+    <script type="text/javascript" src="js/app/data.js?7.0_20240706_1217"></script>
     <script type="text/javascript" src="js/app/data_ex.js?20240227_1941"></script>
     <script type="text/javascript" src="js/app/fish_info_data.js?7.0_20240627_1750"></script>
     <!--
@@ -55,7 +61,7 @@
       -   to other classes until an initialization method can be called safely.
       -->
     <script type="text/javascript" src="js/app/time.js?20111013_2022"></script>
-    <script type="text/javascript" src="js/app/fish.js?20230220_1437"></script>
+    <script type="text/javascript" src="js/app/fish.js?20240706_1217"></script>
     <script type="text/javascript" src="js/app/weather.js?20230112_1911"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20240313_1943"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
@@ -225,6 +231,9 @@
           {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
+          {{?it.data.lure}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-action-{{=it.data.lure.toLowerCase()}}_lure" title="{{=it.data.lure}} Lure"></div>
+          {{?}}
           {{?it.data.gig}}
             {{?it.data.gig === "UNKNOWN"}}
               <span>Spearfishing</span>
@@ -327,6 +336,9 @@
           {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
+          {{?it.data.lure}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-action-{{=it.data.lure.toLowerCase()}}_lure" title="{{=it.data.lure}} Lure"></div>
+          {{?}}
           {{?it.data.gig}}
             <div class="ui middle aligned bait-icon sprite-icon sprite-icon-action-{{=it.data.gig.toLowerCase()}}_gig" title="{{=it.data.gig}} Gig"></div>
           {{?}}
@@ -386,11 +398,11 @@
     </script>
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20240127_1005"></script>
+    <script type="text/javascript" src="js/app/layout.js?20240706_1217"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20240619_2325"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20240706_1217"></script>
 
     <script type="text/javascript">
       $(() => {

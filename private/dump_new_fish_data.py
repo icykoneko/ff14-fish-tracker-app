@@ -565,6 +565,7 @@ for fish in tracked_iter(important_fish,
         'hookset': None,
         'tug': None,
         'snagging': None,
+        'lure': None,
         'gig': None,
         'patch': None,
         'computed': {
@@ -603,6 +604,7 @@ for fish in tracked_iter(important_fish,
                 'hookset': known_fish.get('hookset', None),
                 'tug': known_fish.get('tug', None),
                 'snagging': known_fish.get('snagging', None),
+                'lure': known_fish.get('lure', None),
                 'gig': known_fish.get('gig', None),
                 'patch': known_fish.get('patch', None)
             })
@@ -744,6 +746,7 @@ def convert_fish_to_json(fish: Fish):
             'hookset': db_entry['hookset'],
             'tug': db_entry['tug'],
             'snagging': db_entry['snagging'],
+            'lure': db_entry['lure'],
             'patch': db_entry['patch'],
             # Information sourced via DATs
             'location': [get_location_key(x) for x in fish.spots],

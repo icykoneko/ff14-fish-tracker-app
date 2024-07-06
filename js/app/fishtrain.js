@@ -141,6 +141,9 @@ let FishTrain = function(){
         {{?it.data.snagging}}
           <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
         {{?}}
+        {{?it.data.lure}}
+          <div class="ui middle aligned status-icon sprite-icon sprite-icon-action-{{=it.data.lure.toLowerCase()}}_lure" title="{{=it.data.lure}} Lure"></div>
+        {{?}}
         {{?it.data.gig}}
           {{?it.data.gig === "UNKNOWN"}}
             <span>Spearfishing</span>
@@ -256,6 +259,9 @@ let FishTrain = function(){
         {{?it.data.snagging}}
           <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
         {{?}}
+        {{?it.data.lure}}
+          <div class="ui middle aligned status-icon sprite-icon sprite-icon-action-{{=it.data.lure.toLowerCase()}}_lure" title="{{=it.data.lure}} Lure"></div>
+        {{?}}
         {{?it.data.gig}}
           {{?it.data.gig === "UNKNOWN"}}
             <span>Spearfishing</span>
@@ -369,6 +375,9 @@ let FishTrain = function(){
           {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
           {{?}}
+          {{?it.data.lure}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-action-{{=it.data.lure.toLowerCase()}}_lure" title="{{=it.data.lure}} Lure"></div>
+          {{?}}
           {{?it.data.gig}}
             {{?it.data.gig === "UNKNOWN"}}
               <span>Spearfishing</span>
@@ -452,6 +461,9 @@ let FishTrain = function(){
           {{?}}
           {{?it.data.snagging}}
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-snagging" title="Snagging"></div>
+          {{?}}
+          {{?it.data.lure}}
+            <div class="ui middle aligned status-icon sprite-icon sprite-icon-action-{{=it.data.lure.toLowerCase()}}_lure" title="{{=it.data.lure}} Lure"></div>
           {{?}}
           {{?it.data.gig}}
             {{?it.data.gig === "UNKNOWN"}}

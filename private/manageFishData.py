@@ -513,6 +513,7 @@ def _convert_fish_to_json(item):
                          'fishEyes': fish_eyes,
                          'bigFish': big_fish,
                          'snagging': item.get('snagging', False),
+                         'lure': item.get('lure', None),
                          'hookset': item.get('hookset', None),
                          'tug': tug_type,
                          'gig': item.get('gig', None),
@@ -812,6 +813,7 @@ def add_new_fish_data(args):
                     'predators': None,
                     'tug': None,
                     'hookset': None,
+                    'lure': None,
                     'snagging': None,
                     'patch': float(args.patch),
                     'dataMissing': True
