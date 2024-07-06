@@ -5,6 +5,45 @@ class FishTableLayout {
      -
      <span class="catchtime-hour">{{=Math.floor(it.endHour)}}</span>{{?it.endHour % 1 !== 0}}<span class="catchtime-minute">{{=String(Math.round((it.endHour % 1) * 60)).padStart(2, '0')}}</span>{{?}}`
     },
+    baitEntry: {arg: 'it', text:
+     `<span class="bait-span">
+        {{?it.item.linked}}
+          <a href="https://garlandtools.org/db/#item/{{=it.item.id}}" target="cp_gt">
+        {{?}}
+        <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.item.icon}}"
+             title="{{=it.item.name}}" data-baitIdx="{{=it.idx}}"></div>
+        {{?it.item.linked}}
+          </a>
+        {{?}}
+        {{?it.nextBait !== undefined}}
+          <div class="bait-badge-container">
+            {{?it.nextBait.hookset}}
+              <div class="ui middle aligned bait-icon hookset-modifier-icon sprite-icon sprite-icon-action-{{=it.nextBait.hookset.toLowerCase()}}_hookset"
+                    title="{{=it.nextBait.hookset}} Hookset"></div>
+            {{?}}
+            {{?it.nextBait.tug}}
+              <div class="tug-indicator {{=it.nextBait.tug}}-tug-indicator" title="{{=it.nextBait.tug}} tug">
+                {{={'light': '!', 'medium': '!!', 'heavy': '!!!'}[it.nextBait.tug]}}
+              </div>
+            {{?}}
+          </div>
+        {{?}}
+      </span>`
+    },
+    baitEntries: {arg: 'it', text:
+     `<span class="bait-entries">{{~it.bait :item:idx}}
+        {{?idx != 0}}<i class="arrow right icon"></i>{{?}}
+        {{ var linked = idx == 0; }}
+        {{ var nextBait = (idx + 1) < it.bait.length ? it.bait[idx + 1] : it.data; }}
+        {{#def.baitEntry:{item:item,idx:idx,linked:linked,nextBait:nextBait} }}
+        {{?idx == 0 && item.alternatives !== null}}
+          <span class="alternative-bait-entries">{{~item.alternatives :altItem:altIdx}}
+            <span style="font-size: 22px; vertical-align: middle; margin-left: 6px; margin-right: 2px;">⁄</span>
+            {{#def.baitEntry:{item:altItem,idx:idx,linked:linked,nextBait:nextBait} }}
+          {{~}}</span>
+        {{?}}
+      {{~}}</span>`
+    },
   }
 
   constructor() {
