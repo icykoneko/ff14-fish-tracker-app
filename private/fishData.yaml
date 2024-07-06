@@ -11577,7 +11577,8 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Panic Jig
+  - - Stardust
+    - Panic Jig
   predators:
   tug: medium
   hookset: Powerful
@@ -11590,7 +11591,8 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Panic Jig
+  - - Stardust
+    - Panic Jig
   - Horizon Event
   predators:
   tug: medium
@@ -11604,7 +11606,8 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Stardust  # Panic Jig works too
+  - - Stardust
+    - Panic Jig
   - Horizon Event
   predators:
   tug: heavy

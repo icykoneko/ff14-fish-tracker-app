@@ -31,18 +31,18 @@ class FishTableLayout {
       </span>`
     },
     baitEntries: {arg: 'it', text:
-     `{{~it.bait :item:idx}}
+     `<span class="bait-entries">{{~it.bait :item:idx}}
         {{?idx != 0}}<i class="arrow right icon"></i>{{?}}
         {{ var linked = idx == 0; }}
         {{ var nextBait = (idx + 1) < it.bait.length ? it.bait[idx + 1] : it.data; }}
         {{#def.baitEntry:{item:item,idx:idx,linked:linked,nextBait:nextBait} }}
         {{?idx == 0 && item.alternatives !== null}}
-          {{~item.alternatives :altItem:altIdx}}
-            <i class="ellipsis vertical icon"></i>
+          <span class="alternative-bait-entries">{{~item.alternatives :altItem:altIdx}}
+            <span style="font-size: 22px; vertical-align: middle; margin-left: 6px; margin-right: 2px;">⁄</span>
             {{#def.baitEntry:{item:altItem,idx:idx,linked:linked,nextBait:nextBait} }}
-          {{~}}
+          {{~}}</span>
         {{?}}
-      {{~}}`
+      {{~}}</span>`
     },
   }
 

@@ -74,12 +74,12 @@ class BaitEntry {
   constructor(itemId) {
     // CHECK IF INPUT IS AN ARRAY FIRST!!!
     // TODO: Dedup with Fish object?!
+    this.alternatives = null;
     if (Array.isArray(itemId)) {
-      // For now, only use THE FIRST element. All others are alternatives.
-      this.alternatives = itemId.slice(1).map(x => new BaitEntry(x));
+      if (window.ALLOW_MULTI_BAIT === true) {
+        this.alternatives = itemId.slice(1).map(x => new BaitEntry(x));
+      }
       itemId = itemId[0];
-    } else {
-      this.alternatives = null;
     }
 
     this.id = itemId;
