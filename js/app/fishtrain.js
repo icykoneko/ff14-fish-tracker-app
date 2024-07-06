@@ -511,6 +511,16 @@ let FishTrain = function(){
 
   class BaitEntry {
     constructor(itemId) {
+      // CHECK IF INPUT IS AN ARRAY FIRST!!!
+      // TODO: Dedup with Fish object?!
+      this.alternatives = null;
+      if (Array.isArray(itemId)) {
+        if (window.ALLOW_MULTI_BAIT === true) {
+          this.alternatives = itemId.slice(1).map(x => new BaitEntry(x));
+        }
+        itemId = itemId[0];
+      }
+
       this.id = itemId;
       // Wrap the item data using reference.
       this.itemData = DATA.ITEMS[itemId];
