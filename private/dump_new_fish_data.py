@@ -5,7 +5,7 @@ import sys
 import os
 import re
 from itertools import chain, filterfalse, islice, repeat
-from more_itertools import nth, first, flatten, unique_everseen
+from more_itertools import nth, flatten, unique_everseen
 from functools import reduce
 from operator import add, itemgetter
 import timeit
@@ -37,6 +37,14 @@ from pysaintcoinach.xiv.weather import Weather
 from pysaintcoinach.xiv.placename import PlaceName
 
 # logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+
+def first(iterable, pred, default=None):
+    """Returns the first item for which pred(item) is true.
+
+    If no true value is found, returns *default*
+
+    """
+    return next(filter(pred, iterable), default)
 
 
 _start_time = timeit.default_timer()

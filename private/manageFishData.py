@@ -17,7 +17,7 @@ from operator import itemgetter, attrgetter, add
 from collections import OrderedDict, namedtuple
 from functools import reduce
 from itertools import islice, repeat
-from more_itertools import flatten, nth, first, consume
+from more_itertools import flatten, nth, consume
 import logging
 
 try:
@@ -62,6 +62,15 @@ Resolver.add_implicit_resolver(
                 |[-+]?(?:0|[1-9][0-9_]*)
                 |[-+]?0x[0-9a-fA-F_]+)$''', re.X),
     list('-+0123456789'))
+
+
+def first(iterable, pred, default=None):
+    """Returns the first item for which pred(item) is true.
+
+    If no true value is found, returns *default*
+
+    """
+    return next(filter(pred, iterable), default)
 
 
 def load_dats(args):
