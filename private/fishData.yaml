@@ -13774,54 +13774,39 @@
   dataMissing: true
 - name: Cloud-eye Carp
   location: Xobr'it Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Xobr'it Lobster
   location: Xobr'it Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Sunbright Axolotl
   location: Xobr'it Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  - Cloud-eye Carp
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Horned Frog
   location: Xobr'it Tsoly
   startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
+  endHour: 2
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  - Cloud-eye Carp
+  tug: medium
+  hookset: Powerful
   patch: 7.0
   dataMissing: true
 - name: Mudfish
@@ -13995,67 +13980,52 @@
   dataMissing: true
 - name: Ut'ohmu Tiika
   location: Xty'iinbek Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Crimson Lugworm
+    - Ghost Nipper
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Sharknose Goby
   location: Xty'iinbek Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Crimson Lugworm
+    - Ghost Nipper
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Yak T'el Crab
   location: Xty'iinbek Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Crimson Lugworm
+    - Ghost Nipper
+  - Sharknose Goby
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Xty'iinbek Sleeper
   location: Xty'iinbek Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Crimson Lugworm
+    - Ghost Nipper
+  - Sharknose Goby
+  - Yak T'el Crab
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Chain Shark
   location: Xty'iinbek Tsoly
-  startHour: 0
-  endHour: 24
+  startHour: 18
+  endHour: 20
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Crimson Lugworm
+    - Ghost Nipper
+  - Sharknose Goby
+  - Yak T'el Crab
+  tug: medium
+  hookset: Powerful
   patch: 7.0
   dataMissing: true
 - name: Bonytail Chub
@@ -14151,121 +14121,70 @@
   dataMissing: true
 - name: Zorgor Core
   location: Westbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Cactuar Jig
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Cloudribbon
   location: Westbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Cactuar Jig
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Zorgor Scorpion
   location: Westbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Cactuar Jig
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Vagrant Cascade
   location: Westbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Cactuar Jig
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Zorgor Condor
   location: Westbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Cactuar Jig
+    - Dragonfly
+  tug: medium
+  hookset: Powerful
+  lure: Ambitious
   patch: 7.0
-  dataMissing: true
 - name: Cloud Wasp
   location: Eastbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Dragonfly
+  tug: light
+  hookset: Precision
+  lure: Modest
   patch: 7.0
-  dataMissing: true
 - name: Azure Glider
   location: Eastbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Cactuar Jig
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Hellsnow Shark
   location: Eastbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Cactuar Jig
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Raging Hanuhead
   location: Eastbound Zorgor
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Cactuar Jig
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Heritage Loach
   location: Outskirts Shallows
   startHour: 0
@@ -14398,15 +14317,11 @@
   dataMissing: true
 - name: Goldgrouper
   location: Alexandrian Ruins
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
+  lure: Ambitious
   patch: 7.0
   dataMissing: true
 - name: Everkeep Yabby
@@ -14520,10 +14435,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
+  lure: Ambitious
   patch: 7.0
   dataMissing: true
 - name: Giant Snakehead
@@ -14632,17 +14547,12 @@
   dataMissing: true
 - name: Devotion Clam
   location: Canal Town North
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Versatile Lure
+  tug: light
+  hookset: Precision
+  snagging: true
   patch: 7.0
-  dataMissing: true
 - name: Forgotten One
   location: Canal Town North
   startHour: 0
@@ -14658,17 +14568,15 @@
   dataMissing: true
 - name: Copper Shark
   location: Canal Town North
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
   weatherSet:
+  - Clouds
+  - Fog
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Ghost Nipper
+  tug: medium
+  hookset: Powerful
+  lure: Ambitious
   patch: 7.0
-  dataMissing: true
 - name: Golden Day
   location: Proto Alexandria
   startHour: 0
