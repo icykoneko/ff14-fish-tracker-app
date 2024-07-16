@@ -13605,173 +13605,110 @@
   patch: 7.0
 - name: Shimmering Shadow
   location: Xd'aa Talat Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Ut'ohmu Dawnfish
   location: Xd'aa Talat Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Belonesox
   location: Xd'aa Talat Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Popper Lure
+    - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Xd'aa Talat Cichlid
   location: Xd'aa Talat Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Popper Lure
+    - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Iq Br'aax Sailfin
   location: Iq Br'aax Reservoir
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Hunmu Ob
   location: Iq Br'aax Reservoir
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Apoda
   location: Yak Awak Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Mirror Carp
   location: Yak Awak Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Tsoly Mu
   location: Iq Rrax Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Iq Rrax Leaffish
   location: Iq Rrax Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Golden Stonefly Nymph
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Archmatron Angelfish
   location: Iq Rrax Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Yak T'el Salamander
   location: Iq Rrax Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Shadowtongue
   location: Iq Rrax Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Cloud-eye Carp
   location: Xobr'it Tsoly
   bestCatchPath:
@@ -13808,176 +13745,108 @@
   tug: medium
   hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Mudfish
   location: Ankledeep
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Turali Beaded Lizard
   location: Ankledeep
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Yak T'el Catfish
   location: Ankledeep
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Ankledeep Catfish
   location: Ankledeep
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Checkered Cichlid
   location: Cenote Moxutural
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Moxutural Gar
   location: Cenote Moxutural
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Variatus
   location: Cenote Jayunja
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Welkin Catfish
   location: Cenote Jayunja
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Flawless Saucer
   location: Cenote Jayunja
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Honeybee
+    - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Glittergill
   location: Sapsweet Cenote
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Popper Lure
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Twig Catfish
   location: Sapsweet Cenote
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Popper Lure
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Blind Brotula
   location: Bitterbark Cenote
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Popper Lure
+    - Honeybee
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Yak T'el Caiman
   location: Bitterbark Cenote
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Popper Lure
+    - Honeybee
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Ut'ohmu Tiika
   location: Xty'iinbek Tsoly
   bestCatchPath:
@@ -14027,98 +13896,55 @@
   tug: medium
   hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Bonytail Chub
   location: Niikwerepi
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Niikwerepi Trout
   location: Niikwerepi
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Pyariyoanaan Cichlid
   location: Niikwerepi
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Shaaloani Salmon
   location: Niikwerepi
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Trailtrout
   location: Lake Toari
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Toari Sucker
   location: Lake Toari
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Turali Paddlefish
   location: Lake Toari
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Zorgor Core
   location: Westbound Zorgor
   bestCatchPath:
@@ -14181,140 +14007,81 @@
 - name: Raging Hanuhead
   location: Eastbound Zorgor
   bestCatchPath:
-  - Cactuar Jig
+  - - Cactuar Jig
+    - Dragonfly
   tug: medium
   hookset: Powerful
   patch: 7.0
 - name: Heritage Loach
   location: Outskirts Shallows
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Outskirts Sniffer
   location: Outskirts Shallows
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Pumpkin Perch
   location: Outskirts Shallows
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Tiger Muskellunge
   location: Outskirts Shallows
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Moon Croppie
   location: The Driftdowns
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Driftdowns Trout
   location: The Driftdowns
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Electrobetta
   location: Crackling Canyons
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Thundering Redbelly
   location: Crackling Canyons
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Yyasulani Bowfin
   location: Crackling Canyons
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Crackling Flounder
   location: Crackling Canyons
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Goldgrouper
   location: Alexandrian Ruins
   bestCatchPath:
@@ -14323,59 +14090,34 @@
   hookset: Powerful
   lure: Ambitious
   patch: 7.0
-  dataMissing: true
 - name: Everkeep Yabby
   location: Residential Sector
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Stickleback
   location: Residential Sector
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Custodian Carp
   location: Residential Sector
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Mosaic Loach
   location: Residential Sector
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Rosebud Frog
   location: The Knowable
   startHour: 0
