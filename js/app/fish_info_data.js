@@ -51800,7 +51800,7 @@ const FISH_INFO = [
       "name_ko": "Banded Candiru",
       "desc_en": "This variety of candiru is wreathed in scales of black and yellow─a common coloration observed in venomous wavekin. Though these hues advise predators to think twice before eating it, banded candirus are, in fact, scrumptious and completely devoid of toxins.",
       "desc_ja": "黄色と黒のまだら模様のカンディル。有毒生物特有の警戒色を真似ることで捕食を避けているが、実は毒はなく美味である",
-      "desc_de": "Eine Candiru-Art, die für ihre gelb-schwarze Streifung bekannt ist. Ihre warnenden Farben imitieren jene Färbung hochgiftiger Lebewesen und schreckt so Fressfeinde ab, doch in Wahrheit ist dieser Fisch vollkommen ungefährlich und eine wahre Delikatesse.",
+      "desc_de": "Eine Candiru-Art, die für ihre gelb-schwarze Streifung bekannt ist. Ihre warnenden Farben imitieren jene Färbung hochgiftiger Lebewesen und schrecken so Fressfeinde ab, doch in Wahrheit ist dieser Fisch vollkommen ungefährlich und eine wahre Delikatesse.",
       "desc_fr": "Les couleurs de ce candiru ressemblent à celles d'autres espèces vénéneuses, ce qui lui permet de repousser sans problème tout prédateur. En réalité, sa chair est délicieuse et ne pose aucun danger à la consommation.",
       "desc_ko": "This variety of candiru is wreathed in scales of black and yellow─a common coloration observed in venomous wavekin. Though these hues advise predators to think twice before eating it, banded candirus are, in fact, scrumptious and completely devoid of toxins.",
       "icon": "028585",
