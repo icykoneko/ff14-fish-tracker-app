@@ -13584,10 +13584,8 @@
   patch: 7.0
 - name: Yellow Peacock Bass
   location: Marsh Ligaka
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
+  startHour: 12
+  endHour: 13
   bestCatchPath:
   - - Golden Stonefly Nymph
     - Honeybee
@@ -13595,7 +13593,6 @@
   tug: medium
   hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Shovelnose Catfish
   location: Marsh Ligaka
   bestCatchPath:
@@ -14120,194 +14117,117 @@
   patch: 7.0
 - name: Rosebud Frog
   location: The Knowable
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Knight Goby
   location: The Knowable
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Windspath Eel
   location: The Knowable
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Harlequin Lancer
   location: The Knowable
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Cleyran Carp
   location: Mu Springs Eternal
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
   - Popper Lure
   tug: medium
   hookset: Powerful
   lure: Ambitious
   patch: 7.0
-  dataMissing: true
 - name: Giant Snakehead
   location: Mu Springs Eternal
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Datnioides
   location: Leynode Aero
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Popper Lure
+    - Red Maggots
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Neo Arowana
   location: Leynode Aero
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Popper Lure
+    - Red Maggots
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Canal Bream
   location: Canal Town South
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Shucked Clam
+    - Ghost Nipper
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Iris Wrasse
   location: Canal Town South
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Shucked Clam
+    - Ghost Nipper
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Canal Drum
   location: Canal Town South
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Ghost Nipper
+    - Shucked Clam
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Butterfly Ray
   location: Canal Town South
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - - Ghost Nipper
+    - Shucked Clam
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Hydro Louvar
   location: Canal Town South
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Ghost Nipper
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Devotion Clam
   location: Canal Town North
   bestCatchPath:
-  - Versatile Lure
+  - Shucked Clam
   tug: light
   hookset: Precision
   snagging: true
   patch: 7.0
 - name: Forgotten One
   location: Canal Town North
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Ghost Nipper
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Copper Shark
   location: Canal Town North
   weatherSet:
@@ -14321,56 +14241,32 @@
   patch: 7.0
 - name: Golden Day
   location: Proto Alexandria
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Starglass Gibel
   location: Proto Alexandria
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: light
+  hookset: Precision
   patch: 7.0
-  dataMissing: true
 - name: Scarlet Queen
   location: Proto Alexandria
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Popper Lure
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 - name: Ultimoat Carp
   location: Proto Alexandria
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
   bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  snagging:
+  - Red Maggots
+  tug: medium
+  hookset: Powerful
   patch: 7.0
-  dataMissing: true
 # DAWNTRAIL SPEARFISHING
 - name: Turali Loach
   location: Karvarhur the First
