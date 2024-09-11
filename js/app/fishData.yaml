@@ -12856,6 +12856,7 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Verdigris Guppy: 4  # spawn on current node
   gig: UNKNOWN
   patch: 6.3
   dataMissing: true
