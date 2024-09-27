@@ -12543,7 +12543,7 @@
   - Mayfly
   predators:
   tug: heavy
-  hookset: Precision
+  hookset: Powerful
   snagging:
   patch: 6.2
 - name: Disappirarucu
@@ -12585,7 +12585,7 @@
   - Mayfly
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   snagging:
   patch: 6.2
 - name: Argonauta argo
@@ -12599,7 +12599,7 @@
   - Stardust
   predators:
   tug: heavy
-  hookset: Precision
+  hookset: Powerful
   snagging:
   patch: 6.2
 # Patch 6.3 (2023-01-10)
@@ -12885,7 +12885,7 @@
   - Mayfly
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   snagging:
   patch: 6.4
 - name: Wakeful Warden
@@ -13107,7 +13107,7 @@
     Basilosaurus: 12
   intuitionLength: 300
   tug: heavy
-  hookset:
+  hookset: Powerful
   snagging:
   patch: 6.55
 - name: Snowy Parexus
@@ -13124,7 +13124,7 @@
     Cerule Core: 3
   intuitionLength: 35
   tug: heavy
-  hookset:
+  hookset: Powerful
   snagging:
   patch: 6.55
 - name: Lopoceras Elegans
@@ -13139,7 +13139,7 @@
   - Chimera Worm
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   snagging:
   patch: 6.55
 - name: Furcacauda
@@ -13154,7 +13154,7 @@
   - Sky Spoon Lure
   predators:
   tug: heavy
-  hookset:
+  hookset: Precision
   snagging:
   patch: 6.55
 - name: Sidereal Whale
