@@ -66,179 +66,6 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?20240313_1943"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
-    
-
-    
-      <script type="text/javascript">
-        (function () {
-          function AddVideoGuideForFish(name, videoId) {
-            let item_entry = _.findWhere(DATA.ITEMS, {name_en: name});
-            if (item_entry === undefined) {
-              try {
-                item_entry = {_id: Number(name)};
-              } catch {
-                console.error(`FISH NOT FOUND: ${name}`);
-                return;
-              }
-            }
-            try {
-              let fish_entry = _.findWhere(Fishes, {id: item_entry._id});
-              _(fish_entry).extend({video: { youtube: videoId } });
-            } catch {
-              console.error(`Failed to add video guide for fish: ${name}`);
-            }
-          }
-          AddVideoGuideForFish("Navigator's Brand", "d8AM8-vkLOc");
-          AddVideoGuideForFish("Titanic Sawfish", "5KKdB9TGjPk");
-          AddVideoGuideForFish("Giant Aetherlouse", "LKRstQ4qFTE");
-          AddVideoGuideForFish("Othardian Lumpsucker", "qAudlN20LuY");
-          AddVideoGuideForFish("Namitaro", "P67TIWOK6So");
-          AddVideoGuideForFish("Lunar Deathworm", "DGKwbWEdO3s");
-          AddVideoGuideForFish("Nepto Dragon", "AGL8XN87a5U");
-          AddVideoGuideForFish("Endoceras", "dCEMM6Lken0");
-          AddVideoGuideForFish("Ealad Skaan", "bX9eOTayZBA");
-          AddVideoGuideForFish("The Ruby Dragon", "KupLbR_Gk2Q");
-          AddVideoGuideForFish("The Unconditional", "ryL0LcKYjKM");
-          AddVideoGuideForFish("Helicoprion", "NI_eCIn4uoE");
-          AddVideoGuideForFish("Stethacanthus", "Exd9ch9an2Y");
-          AddVideoGuideForFish("Fleeting Brand", "G7hHN5NnN0s");
-          AddVideoGuideForFish("Lancetfish", "q2tlJvcN6A4");
-          AddVideoGuideForFish("Mora Tecta", "q2tlJvcN6A4");
-          AddVideoGuideForFish("Greater Serpent of Ronka", "t3q1VNhweJc");
-          AddVideoGuideForFish("Priest of Yx'Lokwa", "t3q1VNhweJc");
-          AddVideoGuideForFish("Warden of the Seven Hues", "_tSbRKjum54");
-          AddVideoGuideForFish("Gilled Topknot", "bbLSUxOrBJs");
-          AddVideoGuideForFish("Garjana Wrasse", "ZDvGdnaja_U");
-          AddVideoGuideForFish("Thavnairian Calamari", "So7h1pBw8tc");
-          AddVideoGuideForFish("Cinder Surprise", "2S1OHYIcZrk");
-          AddVideoGuideForFish("Shonisaurus", "SWpVtVvrCTo");
-          AddVideoGuideForFish("Tebqeyiq Smelt", "ORMy9NntwhE");
-          AddVideoGuideForFish("Ninja Betta", "dpcINZEA2Y4");
-          AddVideoGuideForFish("Smaragdos", "_ITgW5s3P8Q");
-          AddVideoGuideForFish("Foun Myhk", "4gSGeh2KVo0");
-          AddVideoGuideForFish("Garlean Clam", "NtqYO4-p4bU");
-          AddVideoGuideForFish("Aquamaton", "VdbZNOYRKbQ");
-          AddVideoGuideForFish("Shadeshifter", "VdbZNOYRKbQ");
-          AddVideoGuideForFish("Aapoak", "xg1QtYIuF5g");
-          AddVideoGuideForFish("Alnairan Salmon", "08ajs0JE-cE");
-          AddVideoGuideForFish("36521", "tD0E7nQLq18");
-          AddVideoGuideForFish("Sea Butterfly", "0fhLgkPTtcQ");
-          AddVideoGuideForFish("Cupfish", "8Smzp2u2m44");
-          AddVideoGuideForFish("Kuno the Killer", "mWsoPslH90I");
-          AddVideoGuideForFish("Canavan", "mWsoPslH90I");
-          AddVideoGuideForFish("Listracanthus", "gQUbgScFOYU");
-          AddVideoGuideForFish("The Jaws of Undeath", "gQUbgScFOYU");
-          AddVideoGuideForFish("Mangar", "goy8ztqckMQ");
-          AddVideoGuideForFish("Lunar Lamenter", "hdkBV2-rCjs");
-          AddVideoGuideForFish("Ponderer", "lmG_rVuWADc");
-          AddVideoGuideForFish("Opabinia", "R4-BVctjX3g");
-          AddVideoGuideForFish("Placodus", "ysGZ0IBZ-v4");
-          AddVideoGuideForFish("Pearl Pipira", "zTYy8diQDao");
-          AddVideoGuideForFish("Raimdellopterus", "N9CAsGXVBvU");
-          AddVideoGuideForFish("Basilosaurus", "4DflDXXZeP0");
-          AddVideoGuideForFish("Aster Trivi", "ifRPcjV4i3w");
-          AddVideoGuideForFish("Problematicus", "pWQbh47dThg");
-          AddVideoGuideForFish("Henodus Grandis", "K14DQ4eZGvM");
-          AddVideoGuideForFish("Deephaunt", "W_Wcvu5HdXo");
-          AddVideoGuideForFish("Magic Carpet", "AiLZkB6TyDU");
-          AddVideoGuideForFish("Nabaath Saw", "sFkJ3V-WUHU");
-          AddVideoGuideForFish("Octomammoth", "iX3oSCX1FsI");
-          AddVideoGuideForFish("The Mother of All Pancakes", "t7KgGicZWyY");
-          AddVideoGuideForFish("Armor Fish", "nmltaqnPbXY");
-          AddVideoGuideForFish("Celestial", "Q4cVeBfupyA");
-          AddVideoGuideForFish("Maru Crab", "nor__VGBkFM");
-          AddVideoGuideForFish("The Salter", "snWqOHysfgA");
-          AddVideoGuideForFish("Twitchbeard", "fMPI6JlXghc");
-          AddVideoGuideForFish("Charibenet", "fI6DhGY-BqY");
-          AddVideoGuideForFish("Loose Pendant", "LjwJHmR4x40");
-          AddVideoGuideForFish("Red Bowfin", "v0sdSGYjNkY");
-          AddVideoGuideForFish("Merlthor Goby", "ShAxKAjxtH4");
-          AddVideoGuideForFish("Steel Razor", "VUN4dkhL9AQ");
-          AddVideoGuideForFish("Labyrinthos Tilapia", "_ub2AihmNSU");
-          AddVideoGuideForFish("Rimepike", "s55BuOveMSI");
-          AddVideoGuideForFish("Python Discus", "nBDBfK9_8ts");
-          AddVideoGuideForFish("Bobgoblin Bass", "Q-YcAcXsz9w");
-          AddVideoGuideForFish("Aetherolectric Guitarfish", "gZUhT4k0hb0");
-          AddVideoGuideForFish("Glarramundi", "hHvQa-ifFWU");
-          AddVideoGuideForFish("The Sinsteeped", "91kA82wd2O4");
-          AddVideoGuideForFish("Rakshasa", "COrTexMOscU");
-          AddVideoGuideForFish("Madam Butterfly", "Ajg7o_gBxgQ");
-          AddVideoGuideForFish("Forbiddingway", "8oLcTi53xbU");
-          AddVideoGuideForFish("Earful", "vxML0lnas1c");
-          AddVideoGuideForFish("Jumbo Snook", "Sn86CTFPMcc");
-          AddVideoGuideForFish("Foun Ahlm", "4_LOm8VzKBI");
-          AddVideoGuideForFish("Drepanaspis", "ObesgoS8szY");
-          AddVideoGuideForFish("Hippo Frog", "H4tjuH9cafA");
-          AddVideoGuideForFish("Mayashell", "9bqf7Qd_a-4");
-          AddVideoGuideForFish("Bigcuda", "pi_7oLORVWo");
-          AddVideoGuideForFish("Disappirarucu", "UvJ_64KNxRA");
-          AddVideoGuideForFish("Kitefin Shark", "zhD_7V1MaX8");
-          AddVideoGuideForFish("Magic Bucket", "LIAUF-pgQQE");
-          AddVideoGuideForFish("Starscryer", "nhWi3LFNTNs");
-          AddVideoGuideForFish("Swampsucker Bowfin", "EHNDRne7434");
-          AddVideoGuideForFish("Moonlight Guppy", "Y-C_45RJ2Ic");
-          AddVideoGuideForFish("Starbright", "CKESUzQydfo");
-          AddVideoGuideForFish("Planetes", "S8GR8BkyBOM");
-          AddVideoGuideForFish("Argonauta argo", "L7riXx4ziS8");
-          AddVideoGuideForFish("Lale Crab", "HgxUllAscwg");
-          AddVideoGuideForFish("Phyllinos", "UWaQO_15bbg");
-          AddVideoGuideForFish("Xenacanthus", "PID1bHk7zNc");
-          AddVideoGuideForFish("Catastrophizer", "h5wkF9TUIWI");
-          AddVideoGuideForFish("Golden Pipira", "YTup694lP8s");
-          AddVideoGuideForFish("Cosmic Haze", "AYwVLaOln58");
-          AddVideoGuideForFish("Sweetheart", "KQU8ZQ8mjFE");
-          AddVideoGuideForFish("Browned Banana Eel", "t19RNEOJLFQ");
-          AddVideoGuideForFish("Vidyutvat Wrasse", "j2Ciiwl6eGw");
-          AddVideoGuideForFish("Stargilt Lobster", "q1xJNuhNh0U");
-          AddVideoGuideForFish("E.B.E.-852738", "sS3BTppus1Y");
-          AddVideoGuideForFish("Circuit Tilapia", "riZ90Q-ujiE");
-          AddVideoGuideForFish("Starscale Ephemeris", "_tF0sB7LBpM");
-          AddVideoGuideForFish("Durdina Fish", "4THUzV5A0eY");
-          AddVideoGuideForFish("Antheian Dahlia", "jYS0TXb9E-I");
-          AddVideoGuideForFish("The Ondotaker", "ut9Nb1Qg1sM");
-          AddVideoGuideForFish("Ondo Sigh", "lzP_fV9vZP0");
-          AddVideoGuideForFish("Lopoceras Elegans", "FwMD-e44idk");
-          AddVideoGuideForFish("Hyphalosaurus", "6BpB8Mu9HC0");
-          AddVideoGuideForFish("Chlorophos Deathworm", "WLkr4kA-hs0");
-          AddVideoGuideForFish("Mayaman", "5O_uhVte9jU");
-          AddVideoGuideForFish("Mossgill Salmon", "6eAAveK-lv8");
-          AddVideoGuideForFish("Greatsword Snook", "VSvEK9xMdzU");
-          AddVideoGuideForFish("Verdigris Guppy", "47CdOemlfug");
-          AddVideoGuideForFish("Jhinga", "ql64knkY11k");
-          AddVideoGuideForFish("Furcacauda", "69i5_Z1_Vgs");
-          AddVideoGuideForFish("Snowy Parexus", "EyneCL9gcvM");
-          AddVideoGuideForFish("Armorer", "7Z3NPy1gxqc");
-          AddVideoGuideForFish("Gharlichthys", "xOPwUALAImQ");
-          AddVideoGuideForFish("Sidereal Whale", "X5DJDS5Iy1g");
-          AddVideoGuideForFish("The Grinner", "8XLjRg6AkuM");
-          AddVideoGuideForFish("Sovereign Shadow", "lPrLWzbjB0U");
-          AddVideoGuideForFish("Eehs Fan", "pXipq-E3pZo");
-          AddVideoGuideForFish("Basilosaurus Rex", "goEKlQ-q2HQ");
-          AddVideoGuideForFish("Onyx Knifefish", "WsDY3z5WVoM");
-          AddVideoGuideForFish("Frozen Regotoise", "CgHNy8Z6LeU");
-          AddVideoGuideForFish("Wakeful Warden", "3AmTu3FKo9E");
-          AddVideoGuideForFish("Gilt Dermogenys", "PsY3YGBxakQ");
-          AddVideoGuideForFish("Blue Widow", "oTBRPDiUxMY");
-          AddVideoGuideForFish("King Puffer", "HxwTlhrx-g8");
-          AddVideoGuideForFish("Alright Alright Alright", "msG-FcWTMf0");
-          AddVideoGuideForFish("Yok Huy Pleco", "gsN69WtNiyc");
-          AddVideoGuideForFish("Qor Pirarucu", "GmR8YQjSwGs");
-          AddVideoGuideForFish("Raging Hanuhead", "C15qECLEaT0");
-          AddVideoGuideForFish("Sunlit Prism", "qcXurOThCDE");
-          AddVideoGuideForFish("Copper Shark", "6Dih5jNWcaY");
-          AddVideoGuideForFish("Goldgrouper", "Jk0NOIwX4eI");
-          AddVideoGuideForFish("Zorgor Condor", "Te0bYY9_Pl8");
-          AddVideoGuideForFish("Urqofrog", "aCMuzj51IOM");
-          AddVideoGuideForFish("Longnose Gar", "vaY_peHSXCU");
-          AddVideoGuideForFish("Horned Frog", "jKMjSYfgq34");
-          AddVideoGuideForFish("Chain Shark", "Pf-Sm2aA1e0");
-          AddVideoGuideForFish("Yellow Peacock Bass", "9GJivD1fsl4");
-          AddVideoGuideForFish("Cleyran Carp", "-FPDr-CMMMM");
-          AddVideoGuideForFish("Zalera", "z96iwqnepV4");
-        })();
-      </script>
-    
-
     <!--
       - SUPER IMPORTANT!!!!!!
       - The remaining scripts are for view and layout logic. Due to document load
@@ -255,8 +82,6 @@
       -->
 
     <script type="text/javascript" src="js/app/templates.js?20240619_2325"></script>
-
-    
 
     <script id="fish-table-template" type="text/html;x-dot-template">
       <table id="fishes" class="ui selectable striped very basic very compact unstackable table">
@@ -571,7 +396,6 @@
         </div>
       </div>
     </script>
-    
 
     <!-- At last, we can load the layout and view model code. -->
     <script type="text/javascript" src="js/app/layout.js?20240706_1217"></script>
@@ -604,27 +428,6 @@
             });
           }
         }
-      });
-    </script>
-
-    <script type="text/javascript">
-      // Make sure announcements expire when they should (2 weeks after posting).
-      // Unless an update is pushed to this branch, the announcement block never
-      // gets removed, even though it should have expired. This script runs after
-      // the page is ready, removes those expired announcements, then makes the
-      // block visible again. This reduces the flickering.
-      $(() => {
-        var now = Date.now();
-        let $announcements = $('.announcements .announcement');
-        for (let el of $announcements) {
-          let $announcement = $(el);
-          let postdate = $announcement.data('postdate') * 1000;
-
-          if (now > dateFns.add(postdate, {days: 14})) {
-            $announcement.remove();
-          }
-        }
-        $('.announcements').css('display', '');
       });
     </script>
 
@@ -663,10 +466,10 @@
           <div class="link item" id="fish-eyes-button" title="Toggle Fish Eyes">
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes"></div>
           </div>
-          <!-- Bait list -->
+          <!-- Bait tally button -->
           <div class="link icon item" id="bait-button" title="View bait">
             <img class="ui middle aligned status-icon" src="/public/images/Bait.png" style="  width: 26px; height: 26px;">
-          </div>
+          </div>            
           <!-- Settings Popup Button -->
           <div class="link icon item" id="settings-button" title="Advanced Settings">
             <i class="cogs icon"></i>
@@ -741,11 +544,6 @@
             You may change this setting in the site settings (click the <i class="cogs icon"></i> icon in the upper right).
           </p>
         </div>
-      </div>
-
-      <!-- ANNOUNCEMENT MESSAGES -->
-      <div class="announcements" style="display: none;">
-        
       </div>
 
       <div class="ui longer modal" id="tips-and-tricks-modal">
@@ -858,12 +656,11 @@
         </div>
       </div>
 
-
       <div id="bait-modal" class="ui small longer modal">
         <div class="header">Baits required for listed fish</div>
         <div class="content">
-		<p>This is a tally of the number of fishes currently being displayed (including intuition fishes) and the baits they require.<br />
-        Fish from spearfishing are not included.</p>
+          <p>This is a tally of the number of fishes currently being displayed (including intuition fishes) and the baits they require.<br />
+          Fish from spearfishing are not included.</p>
           <div id="bait-tally-div"></div>
         </div>
       </div>
@@ -966,10 +763,9 @@
       <materialsFooter></materialsFooter>
     </div>
     <div class="ui bottom fixed menu">
-      
-      <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version">2024-09-27 21:24:44 UTC</span></div>
+      <div id="site-last-update" class="item"><b>Last Update: &ZeroWidthSpace;</b> <span id="site-version"></span></div>
       <script>
-        CheckForUpdates.checkForUpdates("242172cc3208ad2ec3ad1e058789b521876f9170");
+        CheckForUpdates.checkForUpdates("");
       </script>
       <siteFooterLinks></siteFooterLinks>
     </div>
