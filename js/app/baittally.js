@@ -1,8 +1,6 @@
 let BaitTally = function(){
 
     // Template
-    // For each map entry - value baitFishObj, key baitId
-    //    For each baitFishObj.fish - value fish, key fishId
     const tableTextTemplate =
         `<table class='ui selectable striped very basic very compact unstackable table inverted'>
           <tr>
@@ -38,11 +36,12 @@ let BaitTally = function(){
   
     class _BaitTallyTable {
       render(elem, fishEntrySet) {
-        //Helper method for tallying
+        //Helper method for tallying.
+        //Whenever a bait or fish is added to a map, it is also copied to an array. The arrays are then used
+        //as data for the above doT template.
         function mapFish(fish, map, arr) {
           if (fish.bait.length > 0) {
             let bait = fish.bait[0];
-            
             if (!map.has(bait.id)) {
               var baitFishObj = {bait: bait, fishMap: new Map(), fishArr: []};
               map.set(bait.id, baitFishObj);
@@ -63,27 +62,8 @@ let BaitTally = function(){
           entry.intuitionEntries.forEach((intuitionFish) => mapFish(intuitionFish, baitMap));
         });
         this.fishGuideFn = doT.template(tableTextTemplate);
-        // console.log("fes:");
-        // console.log(fishEntrySet);
-        // var someArr = [{bait:1,fishes:2},{bait:3,fishes:4}]
-        // console.log(Array.from(baitMap.entries()));
-        // console.log(baitMap.entries());
-        elem.innerHTML = this.fishGuideFn(baitArray); 
-      //  elem.innerHTML = this.fishGuideFn(baitMap); //
-
-        //And finally, put together the data and template
-        // console.log("bait tally elem's inner html?");
-        // console.log(elem.innerHTML)
-  
-        // // Now we can save the selector.
-        // this.fishGuideContainer$ = $(elem);
-        // this.pageSelector$ = $('.fish-guide .page-selector', elem);
-        // this.fishGrid$ = $('.fish-guide .fish-grid', elem);
-        // this.fishGridEntries$ = $('.fish-entry', this.fishGrid$);
-        // this.fishInfo$ = $('.fish-guide .fish-info', elem);
+        elem.innerHTML = this.fishGuideFn(baitArray);
       }
-
-      
     };
   
     return new _BaitTallyTable();

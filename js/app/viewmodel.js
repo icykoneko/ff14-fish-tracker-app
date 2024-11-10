@@ -468,72 +468,9 @@ let ViewModel = new class {
       $('#tips-and-tricks-modal').modal('show');
     });
 
-
     $('#bait-button').on('click', function(e) {
       if (e) e.stopPropagation();
-
-      //new code
-      BaitTally.render(document.getElementById('bait-tally-div-doT'), _(fishWatcher.fishEntries));
-      // BaitTally.render(document.getElementById('bait-tally-div-doT'));
-      // $('#bait-modal').modal({
-      //   onShow: function() {
-      //     BaitTally.preShowHandler();
-      //   }
-      // });
-
-      //Helper method	for tallying fishes and their intuition fish
-      function mapFish(fish, map) {
-        if (fish.bait.length > 0) {
-          let bait = fish.bait[0];
-          
-          if (!map.has(bait.id)) {
-            map.set(bait.id, {bait: bait, fishes: new Map()});
-          }
-          let fishMap = map.get(bait.id).fishes;
-          if (!fishMap.has(fish.id)) {
-            fishMap.set(fish.id, fish);
-          }
-        }
-      }
-
-		const baitMap = new Map();
-		_(fishWatcher.fishEntries).each((entry) => {
-			mapFish(entry, baitMap);
-			entry.intuitionEntries.forEach((intuitionFish) => mapFish(intuitionFish, baitMap));
-		});
-		
-		let tableText = "<table class='ui selectable striped very basic very compact unstackable table inverted'><th colspan=2>Bait</th><th>Count</th><th>Fishes</th>"
-        baitMap.forEach(function(baitFishObj, baitId) {
-            tableText += `<tr>
-			<td>
-				<div style="vertical-align: middle;" class="fish-icon sprite-icon sprite-icon-fish_n_tackle-${baitFishObj.bait.icon}"></div>
-			</td>
-			<td>
-				<p>
-					<a class="fish-name" target="_blank" href="https://garlandtools.org/db/#item/${baitId}">
-					${baitFishObj.bait.name}
-					</a>
-				</p>
-			</td>
-			<td>
-				${baitFishObj.fishes.size}</td>
-			<td>`;
-			
-			baitFishObj.fishes.forEach(function(fish, fishId) {
-				tableText += `
-				<a class="fish-name" target="_blank" href="https://ffxivteamcraft.com/db/en/item/${fishId}">
-				<div style="vertical-align: middle; width: 44px; height: 44px;" class="fish-icon sprite-icon sprite-icon-fish_n_tackle-${fish.data.icon}"
-				title="${fish.data.name}"></div>
-				</a>
-				`;
-			})
-			
-			tableText += `</td></tr>`;
-        })
-
-        tableText += "</table>";
-        document.getElementById('bait-tally-div').innerHTML = tableText;
-			  
+      BaitTally.render(document.getElementById('bait-tally-div'), _(fishWatcher.fishEntries));
       $('#bait-modal').modal('show');
     });
 
