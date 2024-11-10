@@ -56,10 +56,10 @@ let BaitTally = function(){
         }
 
         const baitMap = new Map();  //for keeping track
-        const baitArray = [];       //for actual use in the template
+        var baitArray = [];         //for actual use in the template
         fishEntrySet.each((entry) => {
           mapFish(entry, baitMap, baitArray);
-          entry.intuitionEntries.forEach((intuitionFish) => mapFish(intuitionFish, baitMap));
+          entry.intuitionEntries.forEach((intuitionFish) => mapFish(intuitionFish, baitMap, baitArray));
         });
         this.fishGuideFn = doT.template(tableTextTemplate);
         elem.innerHTML = this.fishGuideFn(baitArray);
