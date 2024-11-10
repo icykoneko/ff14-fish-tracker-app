@@ -10,24 +10,22 @@ let BaitTally = function(){
             <th>Count</th>
             <th>Fishes</th>
           </tr>
-
-          {{~ it :baitFishObj:baitId}}
+          {{~ it :baitFishObj}}
           <tr>
-            {{=baitId}}
             <td>
               <div style="vertical-align: middle;" class="fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=baitFishObj.bait.icon}}"></div>
             </td>
             <td>
-              <p><a class="fish-name" target="_blank" href="https://garlandtools.org/db/#item/{{=baitId}}">
+              <p><a class="fish-name" target="_blank" href="https://garlandtools.org/db/#item/{{=baitFishObj.bait.id}}">
                 {{=baitFishObj.bait.name}}
               </a></p>
             </td>
             <td>
-              {{=baitFishObj.fishes.size}}}
+              {{=baitFishObj.fishArr.length}}
             </td>
             <td>
-              {{~ baitFishObj.fish :fish:fishId}}
-              <a class="fish-name" target="_blank" href="https://ffxivteamcraft.com/db/en/item/{{=fishId}}">
+              {{~ baitFishObj.fishArr :fish}}
+              <a class="fish-name" target="_blank" href="https://ffxivteamcraft.com/db/en/item/{{=fish.id}}">
               <div style="vertical-align: middle; width: 44px; height: 44px;" class="fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=fish.data.icon}}"
               title="{{=fish.data.name}}">
               </div>
@@ -39,52 +37,43 @@ let BaitTally = function(){
     </table>`;
   
     class _BaitTallyTable {
-      constructor() {
-        
-      }
-  
-      preShowHandler() {
-        console.log("preshowhandler for bait tally========");
-        // Before the guide is displayed, we must refresh the current page's
-        // entries, in particular, the caught state for the fish entries.
-        // this.fishGridEntries$.filter(':not(.disabled)').each(function(idx, elem) {
-        //   let fishInfo = $(elem).data('fishInfo');
-        //   $(elem).toggleClass('caught', ViewModel.isFishCaught(fishInfo.id));
-        // });
-      }
-
-
       render(elem, fishEntrySet) {
         //Helper method for tallying
-        function mapFish(fish, map) {
+        function mapFish(fish, map, arr) {
           if (fish.bait.length > 0) {
             let bait = fish.bait[0];
             
             if (!map.has(bait.id)) {
-              map.set(bait.id, {bait: bait, fishes: new Map()});
+              var baitFishObj = {bait: bait, fishMap: new Map(), fishArr: []};
+              map.set(bait.id, baitFishObj);
+              arr.push(baitFishObj);
             }
-            let fishMap = map.get(bait.id).fishes;
-            if (!fishMap.has(fish.id)) {
-              fishMap.set(fish.id, fish);
+            let _fishMap = map.get(bait.id).fishMap;
+            if (!_fishMap.has(fish.id)) {
+              _fishMap.set(fish.id, fish);
+              map.get(bait.id).fishArr.push(fish);
             }
           }
         }
 
-        const baitMap = new Map();
+        const baitMap = new Map();  //for keeping track
+        const baitArray = [];       //for actual use in the template
         fishEntrySet.each((entry) => {
-          mapFish(entry, baitMap);
+          mapFish(entry, baitMap, baitArray);
           entry.intuitionEntries.forEach((intuitionFish) => mapFish(intuitionFish, baitMap));
         });
         this.fishGuideFn = doT.template(tableTextTemplate);
-        console.log("baitmap:");
-        var someArr = [{a:1,b:2},{a:3,b:4}]
+        // console.log("fes:");
+        // console.log(fishEntrySet);
+        // var someArr = [{bait:1,fishes:2},{bait:3,fishes:4}]
+        // console.log(Array.from(baitMap.entries()));
         // console.log(baitMap.entries());
-        elem.innerHTML = this.fishGuideFn(someArr); 
-//        elem.innerHTML = this.fishGuideFn(baitMap.entries()); //
+        elem.innerHTML = this.fishGuideFn(baitArray); 
+      //  elem.innerHTML = this.fishGuideFn(baitMap); //
 
         //And finally, put together the data and template
-        console.log("bait tally elem's inner html?");
-        console.log(elem.innerHTML)
+        // console.log("bait tally elem's inner html?");
+        // console.log(elem.innerHTML)
   
         // // Now we can save the selector.
         // this.fishGuideContainer$ = $(elem);
