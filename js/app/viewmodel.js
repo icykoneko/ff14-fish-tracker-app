@@ -468,22 +468,33 @@ let ViewModel = new class {
       $('#tips-and-tricks-modal').modal('show');
     });
 
+
     $('#bait-button').on('click', function(e) {
-		//Helper method	for tallying fishes and their intuition fish
-		function mapFish(fish, map) {
-			if (fish.bait.length > 0) {
-				let bait = fish.bait[0];
-				
-				if (!map.has(bait.id)) {
-					const fishMap = new Map();
-					map.set(bait.id, {bait: bait, fishes: new Map()});
-				}
-				let fishMap = map.get(bait.id).fishes;
-				if (!fishMap.has(fish.id)) {
-					fishMap.set(fish.id, fish);
-				}
-			}
-		}
+      if (e) e.stopPropagation();
+
+      //new code
+      BaitTally.render(document.getElementById('bait-tally-div-doT'), _(fishWatcher.fishEntries));
+      // BaitTally.render(document.getElementById('bait-tally-div-doT'));
+      // $('#bait-modal').modal({
+      //   onShow: function() {
+      //     BaitTally.preShowHandler();
+      //   }
+      // });
+
+      //Helper method	for tallying fishes and their intuition fish
+      function mapFish(fish, map) {
+        if (fish.bait.length > 0) {
+          let bait = fish.bait[0];
+          
+          if (!map.has(bait.id)) {
+            map.set(bait.id, {bait: bait, fishes: new Map()});
+          }
+          let fishMap = map.get(bait.id).fishes;
+          if (!fishMap.has(fish.id)) {
+            fishMap.set(fish.id, fish);
+          }
+        }
+      }
 
 		const baitMap = new Map();
 		_(fishWatcher.fishEntries).each((entry) => {
@@ -523,7 +534,6 @@ let ViewModel = new class {
         tableText += "</table>";
         document.getElementById('bait-tally-div').innerHTML = tableText;
 			  
-      if (e) e.stopPropagation();
       $('#bait-modal').modal('show');
     });
 
