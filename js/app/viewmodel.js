@@ -468,6 +468,12 @@ let ViewModel = new class {
       $('#tips-and-tricks-modal').modal('show');
     });
 
+    $('#bait-button').on('click', function(e) {
+      if (e) e.stopPropagation();
+      BaitTally.render(document.getElementById('bait-tally-div'), _(fishWatcher.fishEntries));
+      $('#bait-modal').modal('show');
+    });
+
     $('#settings-button').on('click', function(e) {
       if (e) e.stopPropagation();
       $('#advanced-settings-modal').modal('show');
