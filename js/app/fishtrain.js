@@ -1029,7 +1029,11 @@ let FishTrain = function(){
       this.applyTheme(this.settings.theme);
       $('#theme-toggle .toggle').on('click', this, this.themeButtonClicked);
 
-      $('#viewBaitButton').on('click', this, this.viewBaitClicked);
+      $('#viewBaitButton').on('click', function(e) {
+        if (e) e.stopPropagation();
+        BaitTally.render(document.getElementById('bait-tally-div'), _(fishWatcher.fishEntries));
+        $('#bait-modal').modal('show');
+      });
 
       // Validate the rider's pass first of course.
       var tcid = null;

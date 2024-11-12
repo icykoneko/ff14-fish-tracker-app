@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" href="/public/images/sprite.css?7.0_20240827_1738" />
     <link rel="stylesheet" href="/css/semantic_ui_overrides.css?20230305_1820" />
-    <link rel="stylesheet" href="/css/overlay.css?20240313_2045" />
+    <link rel="stylesheet" href="/css/overlay.css?20241111_1910" />
     <link rel="stylesheet" href="/css/dark_overlay.css?20230305_1820" />
 
     <style type="text/css">
@@ -72,7 +72,8 @@
     <script type="text/javascript" src="/js/app/sorters.js?20221001_0144"></script>
     <script type="text/javascript" src="/js/app/templates.js?20240619_2325"></script>
 
-    <script type="text/javascript" src="/js/app/fishtrain.js?20240706_1217"></script>
+    <script type="text/javascript" src="/js/app/fishtrain.js?20241111_1910"></script>
+    <script type="text/javascript" src="/js/app/baittally.js?20241111_1910"></script>
     <script type="text/javascript" src="/js/app/map.js?20201031_2321"></script>
     <script type="text/javascript" src="/js/app/carbyutils.js?20240117_2324"></script>
 
@@ -146,6 +147,15 @@
         <div class="scrolling content">
           <div class="ui three column very compact grid bait-items">
           </div>
+        </div>
+      </div>
+
+      <div id="bait-modal" class="ui small longer modal">
+        <div class="header">Baits required for listed fish</div>
+        <div class="scrolling content">
+          <p>This is a tally of the number of fishes currently being displayed (including intuition fishes) and the baits they require.<br />
+          Fish from spearfishing are not included.</p>
+          <div id="bait-tally-div"></div>
         </div>
       </div>
 

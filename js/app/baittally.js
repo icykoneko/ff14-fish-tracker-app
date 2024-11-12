@@ -3,11 +3,13 @@ let BaitTally = function(){
     // Template
     const tableTextTemplate =
         `<table class='ui selectable striped very basic very compact unstackable table inverted'>
-          <tr>
-            <th colspan=2>Bait</th>
-            <th>Count</th>
-            <th>Fishes</th>
-          </tr>
+          <thead>
+            <tr>
+              <th colspan=2>Bait</th>
+              <th>Count</th>
+              <th>Fishes</th>
+            </tr>
+          </thead>
           {{~ it :baitFishObj}}
           <tr>
             <td>
