@@ -664,6 +664,16 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   display: none;
 }
 
+/* Tackle Box styles */
+
+#bait-tally-div table thead tr > th {
+  position: sticky;
+  top: -21px; /* matches the padding of parent */
+  z-index: 2;
+  white-space: normal;
+  background-color: hsla(0, 0%, 15%, 1) !important; /* This should match the page background */
+}
+
 /* Fish Train - Fish Table styles */
 
 .fishtrain-fishtable {

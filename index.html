@@ -46,7 +46,7 @@ title: Home
 
     <link rel="stylesheet" href="public/images/sprite.css?7.0_20240827_1738" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20230305_1820" />
-    <link rel="stylesheet" href="css/overlay.css?20240313_2045" />
+    <link rel="stylesheet" href="css/overlay.css?20241111_1910" />
     <link rel="stylesheet" href="css/dark_overlay.css?20230305_1820" />
 
     <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
@@ -501,9 +501,10 @@ title: Home
     <!-- At last, we can load the layout and view model code. -->
     <script type="text/javascript" src="js/app/layout.js?20240706_1217"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20230109_2055"></script>
+    <script type="text/javascript" src="js/app/baittally.js?20241111_1910"></script>
     <script type="text/javascript" src="js/app/map.js?20201031_2321"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20240706_1217"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20241111_1910"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -588,6 +589,10 @@ title: Home
           <div class="link item" id="fish-eyes-button" title="Toggle Fish Eyes">
             <div class="ui middle aligned status-icon sprite-icon sprite-icon-status-fish_eyes"></div>
           </div>
+          <!-- Bait tally button -->
+          <div class="link icon item" id="bait-button" title="View bait">
+            <img class="ui middle aligned status-icon" src="public/images/Bait.png" style="  width: 26px; height: 26px;">
+          </div>            
           <!-- Settings Popup Button -->
           <div class="link icon item" id="settings-button" title="Advanced Settings">
             <i class="cogs icon"></i>
@@ -788,6 +793,15 @@ title: Home
         </div>
         <div class="actions">
           <div id="import-settings-load" class="ui approve button">Load</div>
+        </div>
+      </div>
+
+      <div id="bait-modal" class="ui small longer modal">
+        <div class="header">Baits required for listed fish</div>
+        <div class="scrolling content">
+          <p>This is a tally of the number of fishes currently being displayed (including intuition fishes) and the baits they require.<br />
+          Fish from spearfishing are not included.</p>
+          <div id="bait-tally-div"></div>
         </div>
       </div>
 
