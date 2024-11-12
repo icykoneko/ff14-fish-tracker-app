@@ -323,13 +323,15 @@ def lookup_spearfishing_spot_by_name(name):
     if isinstance(name, list):
         name = name[0]
     if name is None:
-        return KeyValuePair()
+        return KeyValuePair(None, None)
     if isinstance(name, int):
         return KeyValuePair(name, None)
     result = nth(filter(lambda item: item[1]['name_en'] == name,
                         SPEARFISHING_NODES.items()), 0)
     if result is None:
-        raise ValueError(name)
+        logging.warning("Spearfishing Spot lookup failed: %s", name)
+        # raise ValueError(name)
+        return KeyValuePair(None, None)
     return KeyValuePair(*result)
 
 
