@@ -21,7 +21,7 @@ let Templates = function(){
       <expansionSelector style="padding-top: 6px;" data-num="4" data-name="Stormblood" data-patches="[0,1,2,3,4,5,55]"></expansionSelector>
       <expansionSelector style="padding-top: 6px;" data-num="5" data-name="Shadowbringers" data-patches="[0,1,2,3,4,5,55]"></expansionSelector>
       <expansionSelector style="padding-top: 6px;" data-num="6" data-name="Endwalker" data-patches="[0,1,2,3,4,5,55]"></expansionSelector>
-      <expansionSelector style="padding-top: 6px;" data-num="7" data-name="Dawntrail" data-patches="[0]"></expansionSelector>`,
+      <expansionSelector style="padding-top: 6px;" data-num="7" data-name="Dawntrail" data-patches="[0,1]"></expansionSelector>`,
     materialsFooter:
      `<div class="ui container">
         <p>
