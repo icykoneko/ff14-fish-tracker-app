@@ -43,7 +43,7 @@ class Fish {
         spearfishing = false;
         coords = fishingSpot.map_coords;
       }
-      if (fishingSpot.territory_id !== 0){
+      if (fishingSpot !== undefined && fishingSpot.territory_id !== undefined && fishingSpot.territory_id !== 0){
         this.location = {
           id: fishingSpot._id,
           name: __p(fishingSpot, "name"),
