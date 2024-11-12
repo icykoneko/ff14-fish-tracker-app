@@ -64,8 +64,9 @@ Sometimes you forget how to do this after several months... Clearly the TODO lis
     * Set the date for `SHOW_LATEST_PATCH_AFTER` to patch release date, plus 2 weeks to prevent spoilers.
   * Update the *cache buster* in `index.html` for `js/app/viewmodel.js`. Use the format: `?YYYYMMDD_HHMM`.
   * Update the *cache buster* in `fishtrain.html` and `trainpass/index.html` for `js/app/fishtrain.js`. Use the format: `?YYYYMMDD_HHMM`.
-  * Replace the `disabled` class from the new patch version with `active` in `index.html` and `fishtrain.html`.
-    * **NOTE:** If it's a new expansion, well... make sure it looks nice, and set the patch buttons to `disabled` at first.
+  * Add the new patch number to the `expansionSelectors` in `js/app/templates.js`.
+    * **NOTE:** If it's a new expansion, add a new `expansionSelector` element to the template and only include `[0]` for the `data-patches` attribute.
+  * Update the *cache buster* in `index.html`, `fishtrain.html`, and `trainpass/index.html` for `js/app/templates.js`. Use the format: `?YYYYMMDD_HHMM`.
 * If new textures were extracted (i.e. new fish images, or new bait images);
   * Update the *cache buster* in `index.html`, `fishtrain.html`, and `trainpass/index.html` for `public/images/sprite.css`. Use the format `?${ver}_YYYYMMDD`.
   * Rebuild the sprite image using: `sprity create ./public/images/ ./private/images/**/*.png -c . -s sprite.css --prefix sprite-icon --margin 2 --orientation binary-tree --engine jimp`

@@ -14774,3 +14774,130 @@
   gig: UNKNOWN
   patch: 7.0
   dataMissing: true
+# Patch 7.1 (2024-11-12)
+- name: Icuvlo's Barter
+  location: Downripple
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
+- name: Moongripper
+  location: Sunken Stars
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
+- name: Cazuela Crab
+  location: Waters Hanu
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
+- name: Ilyon Asoh Cichlid
+  location: Xd'aa Talat Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
+- name: Stardust Sleeper
+  location: Xty'iinbek Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
+- name: Hwittayoanaan Cichlid
+  location: Niikwerepi
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
+- name: Cloudsail
+  location: Eastbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
+- name: Thunderswift Trout
+  location: The Driftdowns
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
+- name: Pixel Loach
+  location: Residential Sector
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.1
+  dataMissing: true
