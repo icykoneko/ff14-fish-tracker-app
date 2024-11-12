@@ -74,6 +74,7 @@ title: Home
       <script type="text/javascript">
         {% for e in site.data.adjustments %}
           // Apply updates to: {{ e.name }}
+          try {
           (function () {
             let item_entry = _.findWhere(DATA.ITEMS, {name_en: "{{ e.name }}"});
             if (item_entry === undefined) {
@@ -133,6 +134,9 @@ title: Home
             fish_entry.alwaysAvailable =
               fish_entry.weatherSet.length == 0 && fish_entry.startHour == 0 && fish_entry.endHour == 24;
           })();
+          } catch {
+            console.error(`FAILED TO MAKE ADJUSTMENTS TO: {{  e.name }}`);
+          }
         {% endfor %}
       </script>
     {% endif %}
