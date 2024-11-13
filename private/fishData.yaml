@@ -14782,9 +14782,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Precision
   lure:
   snagging:
   patch: 7.1
@@ -14796,10 +14797,11 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - White Worm
   predators:
-  tug:
-  hookset:
-  lure:
+  tug: heavy
+  hookset: Precision
+  lure: Modest
   snagging:
   patch: 7.1
   dataMissing: true
@@ -14810,8 +14812,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
+  tug: heavy
   hookset:
   lure:
   snagging:
@@ -14824,9 +14827,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.1
@@ -14838,8 +14842,12 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - - Crimson Lugworm
+    - Ghost Nipper
+  - Sharknose Goby
+  - Yak T'el Crab
   predators:
-  tug:
+  tug: heavy
   hookset:
   lure:
   snagging:
@@ -14852,8 +14860,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
+  tug: heavy
   hookset:
   lure:
   snagging:
@@ -14866,6 +14875,7 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Cactuar Jig
   predators:
   tug:
   hookset:
@@ -14880,10 +14890,11 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
-  lure:
+  tug: heavy
+  hookset: Powerful
+  lure: Ambitious
   snagging:
   patch: 7.1
   dataMissing: true
@@ -14894,9 +14905,10 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.1
