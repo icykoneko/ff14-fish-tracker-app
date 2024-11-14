@@ -14781,6 +14781,7 @@
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Fog
   bestCatchPath:
   - Red Maggots
   predators:
@@ -14789,11 +14790,10 @@
   lure:
   snagging:
   patch: 7.1
-  dataMissing: true
 - name: Moongripper
   location: Sunken Stars
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 14
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
@@ -14804,18 +14804,19 @@
   lure: Modest
   snagging:
   patch: 7.1
-  dataMissing: true
 - name: Cazuela Crab
   location: Waters Hanu
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 20
   previousWeatherSet:
   weatherSet:
+  - Clouds
+  - Fog
   bestCatchPath:
   - Red Maggots
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.1
@@ -14826,6 +14827,7 @@
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Clear Skies
   bestCatchPath:
   - Red Maggots
   predators:
@@ -14837,7 +14839,7 @@
   dataMissing: true
 - name: Stardust Sleeper
   location: Xty'iinbek Tsoly
-  startHour: 0
+  startHour: 20
   endHour: 24
   previousWeatherSet:
   weatherSet:
@@ -14848,26 +14850,27 @@
   - Yak T'el Crab
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.1
   dataMissing: true
 - name: Hwittayoanaan Cichlid
   location: Niikwerepi
-  startHour: 0
-  endHour: 24
+  startHour: 4
+  endHour: 8
   previousWeatherSet:
   weatherSet:
+  - Clear Skies
+  - Fair Skies
   bestCatchPath:
   - Red Maggots
   predators:
   tug: heavy
-  hookset:
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.1
-  dataMissing: true
 - name: Cloudsail
   location: Eastbound Zorgor
   startHour: 0
@@ -14877,16 +14880,15 @@
   bestCatchPath:
   - Cactuar Jig
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.1
-  dataMissing: true
 - name: Thunderswift Trout
   location: The Driftdowns
-  startHour: 0
-  endHour: 24
+  startHour: 9
+  endHour: 11
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
@@ -14897,11 +14899,10 @@
   lure: Ambitious
   snagging:
   patch: 7.1
-  dataMissing: true
 - name: Pixel Loach
   location: Residential Sector
   startHour: 0
-  endHour: 24
+  endHour: 4
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
@@ -14912,4 +14913,3 @@
   lure:
   snagging:
   patch: 7.1
-  dataMissing: true
