@@ -20,39 +20,3 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
-- name: Icuvlo's Barter
-  bait: Red Maggots
-  tug: heavy
-  hookset: Precision
-- name: Moongripper
-  bait: White Worm
-  tug: heavy
-  hookset: Precision
-  lure: Modest
-- name: Cazuela Crab
-  bait: Red Maggots
-  tug: heavy
-- name: Ilyon Asoh Cichlid
-  bait: Red Maggots
-  tug: heavy
-  hookset: Powerful
-- name: Stardust Sleeper
-  bait: [Crimson Lugworm, Sharknose Goby, Yak T'el Crab]
-  tug: heavy
-- name: Hwittayoanaan Cichlid
-  bait: Red Maggots
-  tug: heavy
-- name: Thunderswift Trout
-  bait: Red Maggots
-  tug: heavy
-  hookset: Powerful
-  lure: Ambitious
-- name: Pixel Loach
-  bait: Red Maggots
-  tug: heavy
-  hookset: Powerful
-- name: Cloudsail
-  bait: Cactuar Jig
-  startHour: 0
-  endHour: 24
-  weatherSet: []
