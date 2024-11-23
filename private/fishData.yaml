@@ -14820,7 +14820,6 @@
   lure:
   snagging:
   patch: 7.1
-  dataMissing: true
 - name: Ilyon Asoh Cichlid
   location: Xd'aa Talat Tsoly
   startHour: 0
@@ -14836,7 +14835,6 @@
   lure:
   snagging:
   patch: 7.1
-  dataMissing: true
 - name: Stardust Sleeper
   location: Xty'iinbek Tsoly
   startHour: 20
@@ -14854,7 +14852,6 @@
   lure:
   snagging:
   patch: 7.1
-  dataMissing: true
 - name: Hwittayoanaan Cichlid
   location: Niikwerepi
   startHour: 4
