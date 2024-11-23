@@ -1410,10 +1410,28 @@ let ViewModel = new class {
     }
     this.applyTheme(settings.theme);
 
+    // EXTRA FEATURE
+    // If user enters "?resetfilters" in the URL, we'll remove all patches from
+    // the active filter and only display uncaught fish, and hide always
+    // available. The user should see the "New Fish Available" popup on reload.
+    let __url = new URL(window.location);
+    if (__url.searchParams.has('resetfilters')) {
+      settings.filters.patch = [];
+      settings.filters.hideAlwaysAvailable = true;
+      settings.filters.completion = 'uncaught';
+      settings.latestPatch = 0;
+    }
+
     // Save the settings to the model.
     this.settings = settings;
     // And update local storage.
     this.saveSettings();
+
+    if (__url.searchParams.has('resetfilters')) {
+      // Now that settings have been saved, reload page (without "resetfilters" in URL)
+      __url.searchParams.delete("resetfilters");
+      window.location.href = __url.toString();
+    }
 
     return settings;
   }
