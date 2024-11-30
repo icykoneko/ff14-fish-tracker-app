@@ -1,4 +1,5 @@
 from datetime import datetime
+from datetime import timezone
 from pathlib import Path
 from argparse import ArgumentParser
 import logging
@@ -18,7 +19,7 @@ def _update_cache_busters(assets=[], patch=None, all=False, timestamp=None):
     logging.info("Assets to update: %r", assets)
 
     if timestamp is None:
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M')
+        timestamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M')
 
     JS_ASSET_PAT = re.compile(r'<script type="text/javascript" src="/?([^?]+)\?([^"]+)"></script>')
     CSS_ASSET_PAT = re.compile(r'<link ref="stylesheet" href="/?([^?]+)?([^"]+)"\s*/>')
