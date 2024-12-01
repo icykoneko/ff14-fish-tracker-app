@@ -23,7 +23,7 @@ const EXTRA_DATA = {
         "Aether": ["Adamantoise","Cactuar","Faerie","Gilgamesh","Jenova","Midgardsormr","Sargatanas","Siren"],
         "Chaos":["Cerberus","Louisoix","Moogle","Omega","Phantom","Ragnarok","Sagittarius","Spriggan"],
         "Crystal":["Balmung","Brynhildr","Coeurl","Diabolos","Goblin","Malboro","Mateus","Zalera"],
-        "Dynamis":["Halicarnassus","Maduin","Marilith","Seraph"],
+        "Dynamis":["Cuchulainn","Golem","Halicarnassus","Kraken","Maduin","Marilith","Rafflesia","Seraph"],
         "Elemental":["Aegis","Atomos","Carbuncle","Garuda","Gungnir","Kujata","Tonberry","Typhon"],
         "Gaia":["Alexander","Bahamut","Durandal","Fenrir","Ifrit","Ridill","Tiamat","Ultima"],
         "Korea":["\ucd08\ucf54\ubcf4","\ubaa8\uadf8\ub9ac","\uce74\ubc99\ud074","\ud1a4\ubca0\ub9ac","\ud39c\ub9ac\ub974"],
