@@ -827,6 +827,27 @@ body.dark #schedule-entry-details > .actions {
   color: #fff;
 }
 
+#fish-train-table-reserved-intervals-container {
+  position: absolute;
+  /* forces the actual bounding box start to the top-left of first row */
+  left: 0px;
+  top: 100%;
+  /* height must be abjusted in real-time to ensure interval highlights display right... */
+  height: 20px;
+  /* no width */
+}
+
+.fishtrain-reserved-interval {
+  position: absolute;
+  top: 0px;
+  left: calc(3px * 0); /* set for specific interval */
+  width: calc(3px * 0); /* set for specific interval */
+  height: 100%;
+  background-clip: content-box;
+  background-color: #ffd70020;
+  z-index: 0;
+}
+
 /* Fish Train Schedule Bar Styles */
 
 .ui.fishtrain-schedule.segment {
