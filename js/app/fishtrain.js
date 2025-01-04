@@ -938,11 +938,11 @@ let FishTrain = function(){
 
       this.sorterFunc = (a, b) => a < b;
 
-      // Load the settings for this tool.
-      this.loadSettings();
-
       // Apply templates.
       Templates.applyTemplates();
+
+      // Load the settings for this tool.
+      this.loadSettings();
 
       // Fish entries for the timeline.
       // In order to calculate rarity, we need to check everything (otherwise
