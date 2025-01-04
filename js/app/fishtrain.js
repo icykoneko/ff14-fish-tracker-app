@@ -31,13 +31,17 @@ let FishTrain = function(){
      `{{? it.lastDT != it.i.dt }}
         <td class="{{? it.idx == 0}}first {{?}}fishtrain-fishentry-interval{{? !it.i.skip}} has-window{{?}}">
           <div class="weather-indicator-outer">
+            {{?it.i.previousWeather}}
             <span class="previous-weather">
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=it.i.previousWeather.icon}}"
                    title="{{=__p(it.i.previousWeather,'name')}}"></div>
               <i class="arrow right icon"></i>
             </span>
+            {{?}}
+            {{?it.i.weather}}
             <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=it.i.weather.icon}}"
                  title="{{=__p(it.i.weather,'name')}}"></div>
+            {{?}}
           </div>
       {{?}}
       {{? !it.i.skip }}
@@ -242,6 +246,11 @@ let FishTrain = function(){
            data-id="{{=it.id}}">
         <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.icon}}"></div>
       </div>`,
+
+    reservedIntervalEntry:
+     `<span class="fishtrain-reserved-interval"
+            style="left: {{= it.timeOffset * 3 }}px; width: {{= it.timeDuration * 3 }}px;"
+            data-id="{{=it.id}}"></span>`,
 
     baitInfo:
      `<div class="ui middle aligned" style="display: inline-block;">
@@ -855,6 +864,8 @@ let FishTrain = function(){
       this.el = null;
       // DOM element hosting this entry in LIST.
       this.listEl = null;
+      // DOM element representing the reserved interval in TABLE.
+      this.tableEl = null;
 
       this.intuitionEntries = [];
     }
@@ -894,6 +905,7 @@ let FishTrain = function(){
         fishEntryDetails: doT.template(templates.fishEntryDetails, undefined, sub_templates),
         scheduleIntervalMarkers: doT.template(templates.scheduleIntervalMarkers),
         scheduleFishEntry: doT.template(templates.scheduleFishEntry),
+        reservedIntervalEntry: doT.template(templates.reservedIntervalEntry),
         baitInfo: doT.template(templates.baitInfo),
         scheduleListEntry: doT.template(templates.scheduleListEntry),
         scheduleListIntuitionEntry: doT.template(templates.scheduleListIntuitionEntry),
@@ -938,11 +950,11 @@ let FishTrain = function(){
 
       this.sorterFunc = (a, b) => a < b;
 
-      // Load the settings for this tool.
-      this.loadSettings();
-
       // Apply templates.
       Templates.applyTemplates();
+
+      // Load the settings for this tool.
+      this.loadSettings();
 
       // Fish entries for the timeline.
       // In order to calculate rarity, we need to check everything (otherwise
@@ -1175,6 +1187,7 @@ let FishTrain = function(){
         scheduleListEntry$.insertBefore($(this.scheduleEntries[insertAtIdx].listEl));
         this.scheduleEntries.splice(insertAtIdx, 0, scheduleEntry);
       }
+
       if (this.settings.theme === 'dark') {
         $('*[data-tooltip]', scheduleListEntry$).attr('data-inverted', '');
       }
@@ -1448,6 +1461,11 @@ let FishTrain = function(){
       this.fishTrainTableHeader$.append(
         this.templates.intervalHeadings(_(intervals).map(x => dateFns.format(x, 'p'))));
 
+      // Add in a special SPAN element to the FIRST interval of the table header. This is where
+      // we'll generate column long indicators for intervals currently in the schedule.
+      $('.interval', this.fishTrainTableHeader$).first().append('<span id="fish-train-table-reserved-intervals-container"></span>');
+      this.fishTrainTableReservedIntervalsContainer$ = $("#fish-train-table-reserved-intervals-container");
+
       // Update the schedule interval markers.
       this.scheduleIntervalMarkers$
         .removeClass()
@@ -1500,6 +1518,14 @@ let FishTrain = function(){
           $(this.templates.scheduleFishEntry(viewParams)).appendTo(this.scheduleFishEntries$);
         scheduleEntry.el = scheduleEntry$[0];
         scheduleEntry$.data('model', scheduleEntry);
+
+        // Overlay this interval on the table as reserved so the user doesn't double-book.
+        var reservedIntervalEntry$ = $(this.templates.reservedIntervalEntry(viewParams));
+        scheduleEntry.tableEl = reservedIntervalEntry$[0];
+        reservedIntervalEntry$.data('model', scheduleEntry);
+        // Luckily, the reserved entry elements don't need to be inserted in any particular order.
+        // Afterall, if they DID overlap, it means you double-booked.
+        reservedIntervalEntry$.appendTo(this.fishTrainTableReservedIntervalsContainer$);
       }
 
       // Fix the size of the schedule bar as well.
@@ -1581,6 +1607,11 @@ let FishTrain = function(){
       _this.fishTrainTableHeader$.append(
         _this.templates.intervalHeadings(_(intervals).map(x => dateFns.format(x, 'p'))));
 
+      // Add in a special SPAN element to the FIRST interval of the table header. This is where
+      // we'll generate column long indicators for intervals currently in the schedule.
+      $('.interval', _this.fishTrainTableHeader$).first().append('<span id="fish-train-table-reserved-intervals-container"></span>');
+      _this.fishTrainTableReservedIntervalsContainer$ = $("#fish-train-table-reserved-intervals-container");
+
       // Update the schedule interval markers.
       _this.scheduleIntervalMarkers$
         .removeClass()
@@ -1637,6 +1668,9 @@ let FishTrain = function(){
         // Just in case there's stale data here...
         entry.detailsEl = null;
       });
+
+      // Fix the height of the reserved intervals container.
+      this.updateReservedIntervalsContainerHeight();
     }
 
     updateDisplay(reason = null) {
@@ -1866,6 +1900,9 @@ let FishTrain = function(){
       } else {
         $(entry.detailsEl).removeClass('hidden').addClass('visible');
       }
+
+      // Fix the height of the reserved intervals container as well.
+      _this.updateReservedIntervalsContainerHeight();
     }
 
     adjustTimelineDetailsElements(e) {
@@ -2025,6 +2062,14 @@ let FishTrain = function(){
         _this.scheduleEntries.splice(insertAtIdx, 0, scheduleEntry);
       }
 
+      // Overlay this interval on the table as reserved so the user doesn't double-book.
+      var reservedIntervalEntry$ = $(_this.templates.reservedIntervalEntry(viewParams));
+      scheduleEntry.tableEl = reservedIntervalEntry$[0];
+      reservedIntervalEntry$.data('model', scheduleEntry);
+      // Luckily, the reserved entry elements don't need to be inserted in any particular order.
+      // Afterall, if they DID overlap, it means you double-booked.
+      reservedIntervalEntry$.appendTo(_this.fishTrainTableReservedIntervalsContainer$);
+
       if (_this.settings.theme === 'dark') {
         $('*[data-tooltip]', scheduleListEntry$).attr('data-inverted', '');
       }
@@ -2070,6 +2115,7 @@ let FishTrain = function(){
         _this.scheduleEntries.findIndex((x) => x === _this.selectedScheduleEntry ), 1);
       $(_this.selectedScheduleEntry.el).remove();
       $(_this.selectedScheduleEntry.listEl).remove();
+      $(_this.selectedScheduleEntry.tableEl).remove();
       for (let subEntry in _this.selectedScheduleEntry.intuitionEntries) {
         $(_this.selectedScheduleEntry.intuitionEntries[subEntry].listEl).remove();
         // Decrement refCount for wraped FishEntry object. [REF-TRACKING]
@@ -2413,6 +2459,9 @@ let FishTrain = function(){
         console.error("Invalid weather setting: ", weatherSettingPref);
         return;
       }
+
+      // Fix the height of the reserved intervals container as well.
+      _this.updateReservedIntervalsContainerHeight();
     }
 
     onOpeningControlSection(_this) {
@@ -2692,6 +2741,12 @@ let FishTrain = function(){
 
       let scheduleBarContainerNode$ = $('.ui.fishtrain-schedule.segment').parent();
       $('.ui.fishtrain-schedule.segment .scroll-context').css('width', Math.min(scheduleBarContainerNode$[0].clientWidth, scheduleBarNode$[0].clientWidth + 35));
+    }
+
+    updateReservedIntervalsContainerHeight() {
+      let reservedIntervalsContainerNode$ = $('#fish-train-table-reserved-intervals-container');
+      let fishTrainTableBodyNode$ = $('#fishtrain tbody');
+      reservedIntervalsContainerNode$.css('height', fishTrainTableBodyNode$[0].clientHeight);
     }
 
     serializeSchedule() {
