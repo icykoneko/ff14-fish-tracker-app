@@ -31,13 +31,17 @@ let FishTrain = function(){
      `{{? it.lastDT != it.i.dt }}
         <td class="{{? it.idx == 0}}first {{?}}fishtrain-fishentry-interval{{? !it.i.skip}} has-window{{?}}">
           <div class="weather-indicator-outer">
+            {{?it.i.previousWeather}}
             <span class="previous-weather">
               <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=it.i.previousWeather.icon}}"
                    title="{{=__p(it.i.previousWeather,'name')}}"></div>
               <i class="arrow right icon"></i>
             </span>
+            {{?}}
+            {{?it.i.weather}}
             <div class="ui middle aligned weather-icon sprite-icon sprite-icon-weather-{{=it.i.weather.icon}}"
                  title="{{=__p(it.i.weather,'name')}}"></div>
+            {{?}}
           </div>
       {{?}}
       {{? !it.i.skip }}
