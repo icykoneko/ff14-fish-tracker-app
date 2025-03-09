@@ -105,12 +105,12 @@ let FishingSpotMap = function(){
       }
       // Determine the URL.
       var jqxhr = $.getJSON(
-        "https://xivapi.com/map/" + map_id, { columns: 'ID,MapFilename' });
+        "https://v2.xivapi.com/api/sheet/Map/" + map_id, { fields: 'Id' });
       // Chain promise.
       return jqxhr.then(function(data) {
-        console.info("XIVAPI Map: ", data.MapFilename);
+        console.info("XIVAPI Map: ", data.fields.Id);
         // Cache the result for later lookups.
-        self.mapUrls[map_id] = "https://xivapi.com" + data.MapFilename;
+        self.mapUrls[map_id] = "https://v2.xivapi.com/api/asset/map/" + data.fields.Id;
         return self.mapUrls[map_id];
       });
     }
