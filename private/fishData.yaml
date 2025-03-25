@@ -14911,36 +14911,8 @@
   snagging:
   patch: 7.1
 # Patch 7.2 (2025-03-25)
-- name: Inktopus
-  location: The For'ard Cabins
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  lure:
-  snagging:
-  patch: 7.2
-  dataMissing: true
 - name: Cabinkeep Permit
   location: The For'ard Cabins
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  lure:
-  snagging:
-  patch: 7.2
-  dataMissing: true
-- name: Oily Ropefish
-  location: Bopo'uihih
   startHour: 0
   endHour: 24
   previousWeatherSet:
@@ -14981,20 +14953,6 @@
   snagging:
   patch: 7.2
   dataMissing: true
-- name: Honeycomb Sponge
-  location: Miyakabek'zoma
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  lure:
-  snagging:
-  patch: 7.2
-  dataMissing: true
 - name: Deep Canopy
   location: Iq Br'aax Reservoir
   startHour: 0
@@ -15009,36 +14967,8 @@
   snagging:
   patch: 7.2
   dataMissing: true
-- name: Yak Awak Core
-  location: Yak Awak Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  lure:
-  snagging:
-  patch: 7.2
-  dataMissing: true
 - name: Awaksbane Apoda
   location: Yak Awak Tsoly
-  startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bestCatchPath:
-  predators:
-  tug:
-  hookset:
-  lure:
-  snagging:
-  patch: 7.2
-  dataMissing: true
-- name: Cenote Oyster
-  location: Bitterbark Cenote
   startHour: 0
   endHour: 24
   previousWeatherSet:
