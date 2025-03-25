@@ -130,6 +130,9 @@ title: Home
             {% if e.snagging %}
               fish_entry.snagging = {{ e.snagging }};
             {% endif %}
+            {% if e.lure %}
+              fish_entry.lure = "{{ e.lure }}";
+            {% endif %}
             // Reset the "alwaysAvailable" flag.
             fish_entry.alwaysAvailable =
               fish_entry.weatherSet.length == 0 && fish_entry.startHour == 0 && fish_entry.endHour == 24;
