@@ -541,3 +541,9 @@ Saint Fathric's Face
 Golding
 Deadwood Shadow
 Ronkan Bullion
+# Patch 7.2
+Inktopus
+Oily Ropefish
+Honeycomb Sponge
+Yak Awak Core
+Cenote Oyster
