@@ -25,6 +25,10 @@
   bait: Ghost Nipper
   tug: heavy
   hookset: Powerful
+- name: Muttering Matamata
+  bait: [Honeybee, Poison Dyefrog]
+  tug: heavy
+#- name: Riverlong Candiru
 - name: Deep Canopy
   bait: Red Maggots
   tug: heavy
@@ -35,6 +39,8 @@
   hookset: Powerful
 - name: Ttokatoa
   bait: [Popper Lure, Niikwerepi Trout]
+  tug: heavy
+  hookset: Powerful
 - name: Thunderous Flounder
   bait: Red Maggots
   tug: heavy
