@@ -28,7 +28,9 @@
 - name: Muttering Matamata
   bait: [Honeybee, Poison Dyefrog]
   tug: heavy
-#- name: Riverlong Candiru
+- name: Riverlong Candiru
+  bait: Red Maggots
+  tug: heavy
 - name: Deep Canopy
   bait: Red Maggots
   tug: heavy
