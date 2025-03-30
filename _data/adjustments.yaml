@@ -21,34 +21,44 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
-- name: Cabinkeep Permit
-  bait: Ghost Nipper
-  tug: heavy
-  hookset: Powerful
+# - name: Cabinkeep Permit
+#   bait: Ghost Nipper
+#   tug: heavy
+#   hookset: Powerful
 - name: Muttering Matamata
+  startHour: 12
+  endHour: 14
   bait: [Honeybee, Poison Dyefrog]
+  weatherSet: [Clear Skies]
   tug: heavy
 - name: Riverlong Candiru
+  startHour: 0
+  endHour: 4
+  weatherSet: [Clouds]
   bait: Red Maggots
   tug: heavy
-- name: Deep Canopy
-  bait: Red Maggots
-  tug: heavy
-  hookset: Powerful
-- name: Awaksbane Apoda
-  bait: Red Maggots
-  tug: heavy
-  hookset: Powerful
+# - name: Deep Canopy
+#   bait: Red Maggots
+#   tug: heavy
+#   hookset: Powerful
+# - name: Awaksbane Apoda
+#   bait: Red Maggots
+#   tug: heavy
+#   hookset: Powerful
 - name: Ttokatoa
+  startHour: 20
+  endHour: 24
+  weatherSet: [Dust Storms]
   bait: [Popper Lure, Niikwerepi Trout]
   tug: heavy
   hookset: Powerful
 - name: Thunderous Flounder
+  weatherSet: [Rain]
   bait: Red Maggots
   tug: heavy
   hookset: Powerful
-- name: Harlequin Queen
-  bait: Red Maggots
-  tug: heavy
-  hookset: Powerful
-  lure: Ambitious
+# - name: Harlequin Queen
+#   bait: Red Maggots
+#   tug: heavy
+#   hookset: Powerful
+#   lure: Ambitious
