@@ -14913,18 +14913,18 @@
 # Patch 7.2 (2025-03-25)
 - name: Cabinkeep Permit
   location: The For'ard Cabins
-  startHour: 0
-  endHour: 24
+  startHour: 5
+  endHour: 7
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Ghost Nipper
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.2
-  dataMissing: true
 - name: Muttering Matamata
   location: Bopo'uihih
   startHour: 0
@@ -14955,32 +14955,34 @@
   dataMissing: true
 - name: Deep Canopy
   location: Iq Br'aax Reservoir
-  startHour: 0
-  endHour: 24
+  startHour: 10
+  endHour: 12
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.2
-  dataMissing: true
 - name: Awaksbane Apoda
   location: Yak Awak Tsoly
   startHour: 0
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Clouds
+  - Fog
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.2
-  dataMissing: true
 - name: Ttokatoa
   location: Lake Toari
   startHour: 0
@@ -15011,15 +15013,16 @@
   dataMissing: true
 - name: Harlequin Queen
   location: The Knowable
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 18
   previousWeatherSet:
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
-  lure:
+  tug: heavy
+  hookset: Powerful
+  lure: Ambitious
   snagging:
   patch: 7.2
-  dataMissing: true
