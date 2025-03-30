@@ -102,7 +102,7 @@ npm run build
 # Assuming you've created a "workspace" folder dist that's tied to the gh-pages branch...
 cd dist
 # Merge master branch (deal with any "missing" files...)
-git merge master
+git merge master --no-commit
 for f in $(git status --porcelain | grep "^DU" | cut -f2 -d' '); do git rm $f; done
 # In case anything changed, copy files from public into the branch too.
 cp -vrf ../public/images/sprite.* ./public/images/
