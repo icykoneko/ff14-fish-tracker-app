@@ -14927,32 +14927,37 @@
   patch: 7.2
 - name: Muttering Matamata
   location: Bopo'uihih
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 14
   previousWeatherSet:
   weatherSet:
+  - Clear Skies
   bestCatchPath:
+  - - Honeybee
+    - Golden Stonefly Nymph
+  - Poison Dyefrog
   predators:
-  tug:
+  tug: heavy
   hookset:
   lure:
   snagging:
   patch: 7.2
-  dataMissing: true
 - name: Riverlong Candiru
   location: Miyakabek'zu
   startHour: 0
-  endHour: 24
+  endHour: 4
   previousWeatherSet:
+  - Fair Skies
   weatherSet:
+  - Clouds
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.2
-  dataMissing: true
 - name: Deep Canopy
   location: Iq Br'aax Reservoir
   startHour: 10
@@ -14985,32 +14990,36 @@
   patch: 7.2
 - name: Ttokatoa
   location: Lake Toari
-  startHour: 0
+  startHour: 20
   endHour: 24
   previousWeatherSet:
+  - Fair Skies
   weatherSet:
+  - Dust Storms
   bestCatchPath:
+  - Popper Lure
+  - Niikwerepi Trout
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.2
-  dataMissing: true
 - name: Thunderous Flounder
   location: Crackling Canyons
   startHour: 0
   endHour: 24
   previousWeatherSet:
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.2
-  dataMissing: true
 - name: Harlequin Queen
   location: The Knowable
   startHour: 16
