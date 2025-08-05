@@ -547,3 +547,164 @@ Oily Ropefish
 Honeycomb Sponge
 Yak Awak Core
 Cenote Oyster
+# Patch 7.21 - Brace yourself... COSMIC EXPLORATION
+Aetherial Sword
+Ammoonite
+Argonauta Lunaris
+Arsenic Axolotl
+Arsenic Flower
+Arsenic Salamander
+Arsenical Proto-hropken
+Astacus Lamentorum
+Ataxite
+Atolla Jellyfish
+Atopodentatus
+Blue Cichlid
+Bluemoon Loach
+Blue-peppered Platy
+Bright Cobalt Eel
+Broodingway
+Cobalt Eel
+Cobalt Fish
+Corydoras Lunaris
+Crenicichla Lunaris
+Crowntail Betta
+Ctenophora Lunaris
+Culter Arsenici
+Dark Carp
+Dark Crowntail Betta
+Darkside Bass
+Darkside Shrimp
+Deepmoon Cabomba
+Deepmoon Seadragon
+Eolactoria Arsenici
+Eolactoria
+Etheirys Croppie
+Eyeballingway
+Fishingway
+Full Moon Catfish
+Fullmoon Ray
+Galactic Flarefish
+Galactic Haze
+Galactic Noise
+Gleaming Deathworm
+Gleamingray
+Glimmerfish
+Gold Hopping Fish
+Goldcheek
+Grand Atopodentatus
+Grand Crowntail Betta
+Harbor Fang
+Harpagofututor
+Heavy Ataxite 
+High Noontide Oscar
+Hollow Eel
+Hopped-on Leaffish
+Hopping Fish
+Hopping Flounder
+Hopping Goby
+Hopping Lungfish
+Hopping Star
+Hop-shrimp
+Inanity Eel
+Lamentorum Garpike
+Lamentorum Geayi
+Lamentorum Regotoise
+Leanchoilia
+Leaping Loach
+Lepopredator
+Lover's Staff
+Lunar Academician
+Lunar Aetherlouse
+Lunar Anemone
+Lunar Axolotl
+Lunar Bichir
+Lunar Blue Guppy
+Lunar Bronze Pleco
+Lunar Butterfly
+Lunar Cabomba
+Lunar Catfish
+Lunar Coelacanth
+Lunar Discus
+Lunar Eel
+Lunar Glassfish
+Lunar Goldfish
+Lunar Grass Carp
+Lunar Hemiodus
+Lunar Longhair
+Lunar Lungfish
+Lunar Minnow
+Lunar Oil Eel
+Lunar Peacock Bass
+Lunar Pirarucu
+Lunar Platyfish
+Lunar Prismfish
+Lunar Raiamas
+Lunar Salmon
+Lunar Scorpion
+Lunar Seagrapes
+Lunar Sisterscale
+Lunar Sole
+Lunar Sturgeon
+Lunar Tadpole
+Lunar Tilapia
+Lunar Turtle
+Lunar Wolffish
+Lunar Yellowfin
+Lunarsword Snook
+Lunastone Pleco
+Macrobrachium Lunaris
+Macropinna
+Melancholia
+Moon Bluetail
+Moon Manta
+Moon Mora
+Moonbeam
+Mooncrystal Perch
+Moongate Cod
+Moongill
+Moonlight Pleco
+Moonlit Carp
+Moonlit Snakehead
+Moonrock Candy
+Moonwhip
+Nadir Ambulocetus
+Nadirichthys
+Nightscale
+Onychodictyon
+Opal Eel
+Opal Guppy
+Pinkmoon Cichlid
+Platinum Bichir
+Polypus Arsenici
+Polypus Sulfuris
+Preceptor Betta
+Prismatic Fish
+Protomyke #721
+Rainbow Tear
+Raw Lunar Tourmaline
+Raw Moonbright Tourmaline
+Silver Sturgeon
+Silvermoon Tilapia
+Skipping Star
+Solar Flarefish
+Soliclymenia
+Southeastern Pike
+Speckled Pike
+Star Pleco
+Starcrier
+Starcrystal Knife
+Stardust Octopus
+Starry Stingray
+Sunken Drone
+Sunny Jellyfish
+Teardrop Knifefish
+Universal Darkfin
+Waxscale
+Wayeater
+Weeping Cichlid
+Weeping Crab
+Weeping Minnow
+Weepingeye
+Wiwaxia
+Yellowcheek
