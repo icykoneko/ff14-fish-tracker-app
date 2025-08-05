@@ -34,6 +34,9 @@ let Templates = function(){
         <a class="icon item" href="https://discord.gg/fishcord" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
           <i class="discord icon"></i>
         </a>
+        <a class="icon item" href="https://carbuncleplushy.bsky.social" data-tooltip="Bluesky" data-position="top right" target="_blank">
+          <i class="bluesky icon"></i>
+        </a>
         <a class="icon item" href="https://twitter.com/CarbunclePlushy" data-tooltip="Twitter" data-position="top right" target="_blank">
           <i class="twitter icon"></i>
         </a>
