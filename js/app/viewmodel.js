@@ -7,9 +7,9 @@
 // need to wrap the data model to support all of its fields.
 
 // Update this whenever a new patch is released.
-const LATEST_PATCH = 7.2;
+const LATEST_PATCH = 7.3;
 // Set this to the date at which new patch fishes are displayed by default.
-const SHOW_LATEST_PATCH_AFTER = dateFns.add(new Date(2025, 2, 25), { weeks: 2 });
+const SHOW_LATEST_PATCH_AFTER = dateFns.add(new Date(2025, 7, 5), { weeks: 2 });
 
 class SiteSettings {
   constructor() {
@@ -27,7 +27,7 @@ class SiteSettings {
                       4, 4.1, 4.2, 4.3, 4.4, 4.5,
                       5, 5.1, 5.2, 5.3, 5.4, 5.5,
                       6, 6.1, 6.2, 6.3, 6.4, 6.5,
-                      7, 7.1, 7.2,]),
+                      7, 7.1, 7.2, 7.3,]),
       // Extra filtering:
       // * all: Display all fish, regardless of extra status.
       // * collectable: Display only collectable fish.

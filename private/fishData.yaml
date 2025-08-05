@@ -15035,3 +15035,158 @@
   lure: Ambitious
   snagging:
   patch: 7.2
+# Patch 7.3 (2025-08-05)
+- name: Prime Adjudicator
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Crenicichla Miyaka
+  location: The Dewspun Bank
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Purple Palate
+  location: Ku'uxage
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Iron Shadowtongue
+  location: Iq Rrax Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Lotl-in-waiting
+  location: Xobr'it Tsoly
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Sunray Ray
+  location: Westbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Azure Diver
+  location: Eastbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Sprouting Perch
+  location: Outskirts Shallows
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Goldentail
+  location: Crackling Canyons
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Gigagiant Snakehead
+  location: Mu Springs Eternal
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
+- name: Gondola Louvar
+  location: Canal Town South
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.3
+  dataMissing: true
