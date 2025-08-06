@@ -21,7 +21,85 @@
 # DON'T FORGET TO INCORPORATE THESE CHANGES INTO REAL fishData.yaml.
 # Just... ignore the fact that file lives on the master branch, while this one
 # lives in the gh-pages branch... Carby says it's fine.
-# - name: Cabinkeep Permit
-#   bait: Ghost Nipper
-#   tug: heavy
-#   hookset: Powerful
+# - name: NAME
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bait:
+#   tug:
+#   hookset:
+#   lure:
+
+# - name: Prime Adjudicator
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bait:
+#   tug:
+#   hookset:
+#   lure:
+- name: Crenicichla Miyaka
+  startHour: 6
+  endHour: 8
+  previousWeatherSet:
+  weatherSet: [Rain]
+  bait: [Red Maggots]
+  tug: heavy
+  hookset: Powerful
+  lure: Ambitious
+- name: Iron Shadowtongue
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bait:
+  tug:
+  hookset:
+  lure:
+- name: Lotl-in-waiting
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bait:
+  tug:
+  hookset:
+  lure:
+- name: Azure Diver
+  startHour: 18
+  endHour: 24
+  previousWeatherSet:
+  weatherSet: [Gales]
+  bait: [Dragonfly]
+  tug: heavy
+  hookset: Precision
+  lure:
+- name: Sprouting Perch
+  startHour: 16
+  endHour: 24
+  previousWeatherSet:
+  weatherSet: [Thunderstorms]
+  bait: [Red Maggots]
+  tug: heavy
+  hookset: Powerful
+  lure:
+- name: Gigagiant Snakehead
+  startHour: 0
+  endHour: 8
+  previousWeatherSet:
+  weatherSet: [Rain]
+  bait: [Red Maggots]
+  tug: heavy
+  hookset:
+  lure:
+- name: Gondola Louvar
+  startHour: 8
+  endHour: 16
+  previousWeatherSet: [Rain]
+  weatherSet: [Fair Skies]
+  bait: [Ghost Nipper]
+  tug:
+  hookset:
+  lure:
