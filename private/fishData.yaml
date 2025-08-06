@@ -15071,13 +15071,13 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.3
-  dataMissing: true
 - name: Iron Shadowtongue
   location: Iq Rrax Tsoly
   startHour: 0
@@ -15113,13 +15113,13 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Dragonfly
   predators:
-  tug:
+  tug: heavy
   hookset:
   lure:
   snagging:
   patch: 7.3
-  dataMissing: true
 - name: Azure Diver
   location: Eastbound Zorgor
   startHour: 0
@@ -15155,13 +15155,13 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: medium
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.3
-  dataMissing: true
 - name: Gigagiant Snakehead
   location: Mu Springs Eternal
   startHour: 0
@@ -15170,6 +15170,7 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Knight Goby: 3
   tug:
   hookset:
   lure:
