@@ -31,15 +31,15 @@
 #   hookset:
 #   lure:
 
-# - name: Prime Adjudicator
-#   startHour: 0
-#   endHour: 24
-#   previousWeatherSet:
-#   weatherSet:
-#   bait:
-#   tug:
-#   hookset:
-#   lure:
+- name: Prime Adjudicator
+  startHour: 8
+  endHour: 16
+  previousWeatherSet:
+  weatherSet: [Fog]
+  bait: [Red Maggots]
+  tug: heavy
+  hookset:
+  lure:
 - name: Crenicichla Miyaka
   startHour: 6
   endHour: 8
@@ -50,13 +50,13 @@
   hookset: Powerful
   lure: Ambitious
 - name: Iron Shadowtongue
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 18
   previousWeatherSet:
-  weatherSet:
-  bait:
-  tug:
-  hookset:
+  weatherSet: [Rain]
+  bait: [Red Maggots]
+  tug: heavy
+  hookset: Powerful
   lure:
 - name: Lotl-in-waiting
   startHour: 0
