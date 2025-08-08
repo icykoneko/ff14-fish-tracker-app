@@ -60,11 +60,11 @@
   lure:
 - name: Lotl-in-waiting
   startHour: 0
-  endHour: 24
-  previousWeatherSet:
-  weatherSet:
-  bait:
-  tug:
+  endHour: 8
+  previousWeatherSet: [Fair Skies]
+  weatherSet: [Clouds]
+  bait: [Golden Stonefly Nymph, Cloud-eye Carp]
+  tug: heavy
   hookset:
   lure:
 - name: Azure Diver
