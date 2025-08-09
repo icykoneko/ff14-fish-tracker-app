@@ -32,7 +32,7 @@
 #   lure:
 
 - name: Prime Adjudicator
-  startHour: 8
+  startHour: 12
   endHour: 16
   previousWeatherSet:
   weatherSet: [Fog]
@@ -77,7 +77,7 @@
   hookset: Precision
   lure:
 - name: Sprouting Perch
-  startHour: 16
+  startHour: 20
   endHour: 24
   previousWeatherSet:
   weatherSet: [Thunderstorms]
@@ -86,8 +86,8 @@
   hookset: Powerful
   lure:
 - name: Gigagiant Snakehead
-  startHour: 0
-  endHour: 8
+  startHour: 4
+  endHour: 6
   previousWeatherSet:
   weatherSet: [Rain]
   bait: [Red Maggots]
@@ -96,7 +96,7 @@
   lure:
 - name: Gondola Louvar
   startHour: 8
-  endHour: 16
+  endHour: 12
   previousWeatherSet: [Rain]
   weatherSet: [Fair Skies]
   bait: [Ghost Nipper]
