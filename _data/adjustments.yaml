@@ -34,7 +34,7 @@
 - name: Prime Adjudicator
   startHour: 12
   endHour: 16
-  previousWeatherSet:
+  previousWeatherSet: [Fair Skies, Snow]
   weatherSet: [Fog]
   bait: [Red Maggots]
   tug: heavy
@@ -60,7 +60,7 @@
   lure:
 - name: Lotl-in-waiting
   startHour: 0
-  endHour: 8
+  endHour: 4
   previousWeatherSet: [Fair Skies]
   weatherSet: [Clouds]
   bait: [Golden Stonefly Nymph, Cloud-eye Carp]
@@ -70,7 +70,7 @@
 - name: Azure Diver
   startHour: 18
   endHour: 24
-  previousWeatherSet:
+  previousWeatherSet: [Clear Skies, Fair Skies, Gales]
   weatherSet: [Gales]
   bait: [Dragonfly]
   tug: heavy
