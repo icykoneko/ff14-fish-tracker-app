@@ -30,7 +30,3 @@
 #   tug:
 #   hookset:
 #   lure:
-
-- name: Gondola Louvar
-  previousWeatherSet: [Rain]
-  weatherSet: [Fair Skies, Rain]  # Tenative
