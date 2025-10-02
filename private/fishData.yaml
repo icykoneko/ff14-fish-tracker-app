@@ -15160,7 +15160,6 @@
   lure:
   snagging:
   patch: 7.3
-  dataMissing: true
 - name: Goldentail
   location: Crackling Canyons
   startHour: 0
@@ -15191,7 +15190,6 @@
   lure:
   snagging:
   patch: 7.3
-  dataMissing: true
 - name: Gondola Louvar
   location: Canal Town South
   startHour: 8
@@ -15208,4 +15206,3 @@
   lure:
   snagging:
   patch: 7.3
-  dataMissing: true

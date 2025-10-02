@@ -56324,7 +56324,7 @@ const FISH_INFO = [
       "name_ko": "Crenicichla Miyaka",
       "desc_en": "This large specimen of crenicichla dominates the shoreline waters of Miyakabek'zoma, boasting the elegant and unmarred fins of an absolute victor.",
       "desc_ja": "ミヤカ・ベック上流域沿岸を統べるヌシ。その優美に広がるヒレは、無傷で同族との戦いを勝利してきた事実を証明している",
-      "desc_de": "Dieser Kapitalfisch herrscht über die Ufergewässer des Miyakabek'zoma. Seine anmutig gespreizten Flossen zeugen von vielen, unverletzt gewonnenen Kämpfen gegen seine Artgenossen.",
+      "desc_de": "Dieser Kapitalfisch herrscht über die Ufergewässer der Taustaden. Seine anmutig gespreizten Flossen zeugen von vielen, unverletzt gewonnenen Kämpfen gegen seine Artgenossen.",
       "desc_fr": "Cet énorme crenicichla règne en maître dans les eaux de Miyakabek'zoma. Ses nageoires élégantes sont vierges de toute cicatrice, ce qui prouve sa domination sans partage sur ses semblables.",
       "desc_ko": "This large specimen of crenicichla dominates the shoreline waters of Miyakabek'zoma, boasting the elegant and unmarred fins of an absolute victor.",
       "icon": "028719",
