@@ -15,7 +15,7 @@ let BaitTally = function(){
             <td>
               <div style="vertical-align: middle;" class="fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=baitFishObj.bait.icon}}"></div>
             </td>
-            <td>
+            <td class="bait-tally-table-entry-name">
               <p><a class="fish-name" target="_blank" href="https://garlandtools.org/db/#item/{{=baitFishObj.bait.id}}">
                 {{=baitFishObj.bait.name}}
               </a></p>
@@ -63,8 +63,9 @@ let BaitTally = function(){
           mapFish(entry, baitMap, baitArray);
           entry.intuitionEntries.forEach((intuitionFish) => mapFish(intuitionFish, baitMap, baitArray));
         });
+        var sortedBaitArray = _.sortBy(baitArray.reverse(), (obj) => obj.fishArr.length).reverse();
         this.fishGuideFn = doT.template(tableTextTemplate);
-        elem.innerHTML = this.fishGuideFn(baitArray);
+        elem.innerHTML = this.fishGuideFn(sortedBaitArray);
       }
     };
   

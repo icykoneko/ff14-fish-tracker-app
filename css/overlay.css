@@ -674,6 +674,11 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   background-color: hsla(0, 0%, 15%, 1) !important; /* This should match the page background */
 }
 
+#bait-tally-div tbody td.bait-tally-table-entry-name {
+  /* Prevent the bait name column from wrapping in JP/KR versions */
+  white-space: nowrap;
+}
+
 /* Fish Train - Fish Table styles */
 
 .fishtrain-fishtable {
