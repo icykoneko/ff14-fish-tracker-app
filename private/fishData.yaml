@@ -15206,3 +15206,116 @@
   lure:
   snagging:
   patch: 7.3
+# Patch 7.4 (2025-12-16)
+- name: Purse of Riches
+  location: High Tide Harbor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.4
+  dataMissing: true
+- name: Punutiy Pain
+  location: Peaks Poga
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.4
+  dataMissing: true
+- name: Shuckfin Dace
+  location: Ku'uxage
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.4
+  dataMissing: true
+- name: Shin Snuffler
+  location: Ankledeep
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.4
+  dataMissing: true
+- name: Moxutural Greatgar
+  location: Cenote Moxutural
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.4
+  dataMissing: true
+- name: Heirloom Goldgrouper
+  location: Alexandrian Ruins
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.4
+  dataMissing: true
+- name: Datnioides Aeroplanos
+  location: Leynode Aero
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.4
+  dataMissing: true
+- name: Esperance Carp
+  location: Proto Alexandria
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.4
+  dataMissing: true

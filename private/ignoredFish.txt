@@ -919,3 +919,7 @@ Trailing Snailfish
 Bursting Anemone
 Midnight Impression
 Blue Starburst
+# Patch 7.4 (actually 7.41?)
+Stellar Skink
+Soda-lime Sunrise
+Chthonic Tapestry
