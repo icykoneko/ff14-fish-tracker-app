@@ -15257,6 +15257,7 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Ankledeep Catfish: 3
   tug:
   hookset:
   lure:
@@ -15313,6 +15314,8 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Golden Day: 3
+    Scarlet Queen: 3
   tug:
   hookset:
   lure:
