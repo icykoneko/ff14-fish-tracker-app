@@ -30,3 +30,76 @@
 #   tug:
 #   hookset:
 #   lure:
+
+# - name: Purse of Riches
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bait:
+#   tug:
+#   hookset:
+#   lure:
+- name: Punutiy Pain
+  startHour: 8
+  endHour: 16
+  previousWeatherSet:
+  weatherSet: [Rain]
+  bait: [Honeybee, Hunu Peacock Bass]
+  tug:
+  hookset:
+  lure:
+- name: Shuckfin Dace
+  startHour: 0
+  endHour: 8
+  previousWeatherSet:
+  weatherSet: [Rain]
+  bait: [Red Maggots]
+  tug:
+  hookset:
+  lure:
+- name: Shin Snuffler
+  startHour: 0
+  endHour: 2
+  previousWeatherSet:
+  weatherSet: [Fog]
+  bait: [Red Maggots]
+  tug:
+  hookset:
+  lure:
+- name: Moxutural Greatgar
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bait: [Popper Lure, Checkered Cichlid]
+  tug:
+  hookset:
+  lure:
+# - name: Heirloom Goldgrouper
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bait:
+#   tug:
+#   hookset:
+#   lure:
+# - name: Datnioides Aeroplanos
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bait:
+#   tug:
+#   hookset:
+#   lure:
+# - name: Esperance Carp
+#   startHour: 0
+#   endHour: 24
+#   previousWeatherSet:
+#   weatherSet:
+#   bait:
+#   tug:
+#   hookset:
+#   lure:
