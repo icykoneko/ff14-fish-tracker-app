@@ -43,15 +43,15 @@
 - name: Punutiy Pain
   startHour: 8
   endHour: 16
-  previousWeatherSet:
+  previousWeatherSet: [Clouds]
   weatherSet: [Rain]
   bait: [Honeybee, Hunu Peacock Bass]
   tug:
   hookset:
   lure:
 - name: Shuckfin Dace
-  startHour: 0
-  endHour: 8
+  startHour: 4
+  endHour: 6
   previousWeatherSet:
   weatherSet: [Rain]
   bait: [Red Maggots]
@@ -68,10 +68,10 @@
   hookset:
   lure:
 - name: Moxutural Greatgar
-  startHour: 0
+  startHour: 16
   endHour: 24
   previousWeatherSet:
-  weatherSet:
+  weatherSet: [Rain]
   bait: [Popper Lure, Checkered Cichlid]
   tug:
   hookset:
