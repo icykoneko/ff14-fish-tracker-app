@@ -42,11 +42,11 @@
 #   lure:
 - name: Punutiy Pain
   startHour: 8
-  endHour: 16
+  endHour: 12
   previousWeatherSet: [Clouds]
   weatherSet: [Rain]
   bait: [Honeybee, Hunu Peacock Bass]
-  tug:
+  tug: heavy
   hookset:
   lure:
 - name: Shuckfin Dace
@@ -55,8 +55,8 @@
   previousWeatherSet:
   weatherSet: [Rain]
   bait: [Red Maggots]
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
 - name: Shin Snuffler
   startHour: 0
@@ -64,36 +64,36 @@
   previousWeatherSet:
   weatherSet: [Fog]
   bait: [Red Maggots]
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
 - name: Moxutural Greatgar
-  startHour: 16
-  endHour: 24
+  startHour: 20
+  endHour: 22
   previousWeatherSet:
   weatherSet: [Rain]
   bait: [Popper Lure, Checkered Cichlid]
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
-# - name: Heirloom Goldgrouper
-#   startHour: 0
-#   endHour: 24
-#   previousWeatherSet:
-#   weatherSet:
-#   bait:
-#   tug:
-#   hookset:
-#   lure:
-# - name: Datnioides Aeroplanos
-#   startHour: 0
-#   endHour: 24
-#   previousWeatherSet:
-#   weatherSet:
-#   bait:
-#   tug:
-#   hookset:
-#   lure:
+- name: Heirloom Goldgrouper
+  startHour: 8
+  endHour: 16
+  previousWeatherSet: [Fog]
+  weatherSet: [Fair Skies]
+  bait: [Popper Lure]
+  tug: heavy
+  hookset: Powerful
+  lure:
+- name: Datnioides Aeroplanos
+  startHour: 2
+  endHour: 4
+  previousWeatherSet: [Fog]
+  weatherSet: [Rain]
+  bait: [Red Maggots]
+  tug: heavy
+  hookset: Powerful
+  lure: Ambitious
 # - name: Esperance Carp
 #   startHour: 0
 #   endHour: 24
