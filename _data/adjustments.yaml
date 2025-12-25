@@ -77,7 +77,7 @@
   hookset: Powerful
   lure:
 - name: Heirloom Goldgrouper
-  startHour: 8
+  startHour: 12
   endHour: 16
   previousWeatherSet: [Fog]
   weatherSet: [Fair Skies]
@@ -94,12 +94,12 @@
   tug: heavy
   hookset: Powerful
   lure: Ambitious
-# - name: Esperance Carp
-#   startHour: 0
-#   endHour: 24
-#   previousWeatherSet:
-#   weatherSet:
-#   bait:
-#   tug:
-#   hookset:
-#   lure:
+- name: Esperance Carp
+  startHour: 16
+  endHour: 24
+  previousWeatherSet: [Rain]
+  weatherSet: [Clouds]
+  bait: [Red Maggots]
+  tug:
+  hookset:
+  lure:
