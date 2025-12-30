@@ -9547,8 +9547,8 @@
 # Patch 5.3 (2020-08-11)
 - name: The Sinsteeped
   location: The Quadrivium
-  startHour: 22
-  endHour: 24
+  startHour: 22:30
+  endHour: 23:30
   previousWeatherSet:
   weatherSet:
   - Clear Skies
