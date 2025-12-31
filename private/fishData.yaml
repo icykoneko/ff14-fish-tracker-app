@@ -15237,47 +15237,51 @@
   dataMissing: true
 - name: Shuckfin Dace
   location: Ku'uxage
-  startHour: 0
-  endHour: 24
+  startHour: 4
+  endHour: 6
   previousWeatherSet:
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.4
-  dataMissing: true
 - name: Shin Snuffler
   location: Ankledeep
   startHour: 0
-  endHour: 24
+  endHour: 2
   previousWeatherSet:
   weatherSet:
+  - Fog
   bestCatchPath:
+  - Red Maggots
   predators:
     Ankledeep Catfish: 3
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.4
-  dataMissing: true
 - name: Moxutural Greatgar
   location: Cenote Moxutural
-  startHour: 0
-  endHour: 24
+  startHour: 20
+  endHour: 22
   previousWeatherSet:
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Popper Lure
+  - Checkered Cichlid
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.4
-  dataMissing: true
 - name: Heirloom Goldgrouper
   location: Alexandrian Ruins
   startHour: 0
@@ -15294,31 +15298,35 @@
   dataMissing: true
 - name: Datnioides Aeroplanos
   location: Leynode Aero
-  startHour: 0
-  endHour: 24
+  startHour: 2
+  endHour: 4
   previousWeatherSet:
+  - Fog
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Red Maggots
   predators:
-  tug:
-  hookset:
-  lure:
+  tug: heavy
+  hookset: Powerful
+  lure: Ambitious
   snagging:
   patch: 7.4
-  dataMissing: true
 - name: Esperance Carp
   location: Proto Alexandria
-  startHour: 0
+  startHour: 22
   endHour: 24
   previousWeatherSet:
+  - Rain
   weatherSet:
+  - Clouds
   bestCatchPath:
+  - Red Maggots
   predators:
     Golden Day: 3
     Scarlet Queen: 3
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.4
-  dataMissing: true
