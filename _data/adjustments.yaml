@@ -49,33 +49,6 @@
   tug: heavy
   hookset:
   lure:
-- name: Shuckfin Dace
-  startHour: 4
-  endHour: 6
-  previousWeatherSet:
-  weatherSet: [Rain]
-  bait: [Red Maggots]
-  tug: heavy
-  hookset: Powerful
-  lure:
-- name: Shin Snuffler
-  startHour: 0
-  endHour: 2
-  previousWeatherSet:
-  weatherSet: [Fog]
-  bait: [Red Maggots]
-  tug: heavy
-  hookset: Powerful
-  lure:
-- name: Moxutural Greatgar
-  startHour: 20
-  endHour: 22
-  previousWeatherSet:
-  weatherSet: [Rain]
-  bait: [Popper Lure, Checkered Cichlid]
-  tug: heavy
-  hookset: Powerful
-  lure:
 - name: Heirloom Goldgrouper
   startHour: 12
   endHour: 16
@@ -84,22 +57,4 @@
   bait: [Popper Lure]
   tug: heavy
   hookset: Powerful
-  lure:
-- name: Datnioides Aeroplanos
-  startHour: 2
-  endHour: 4
-  previousWeatherSet: [Fog]
-  weatherSet: [Rain]
-  bait: [Red Maggots]
-  tug: heavy
-  hookset: Powerful
-  lure: Ambitious
-- name: Esperance Carp
-  startHour: 16
-  endHour: 24
-  previousWeatherSet: [Rain]
-  weatherSet: [Clouds]
-  bait: [Red Maggots]
-  tug:
-  hookset:
   lure:
