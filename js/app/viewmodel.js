@@ -1005,23 +1005,53 @@ let ViewModel = new class {
     delete this.fishEntries[k];
   }
 
-  onFishEntryCaughtClicked(e) {
-    e.stopPropagation();
-    let $this = $(this);
+  toggleFishEntryCatchState(entry) {
+    // Helper function for managing the catch state of fish and providing
+    // user with option to undo the action.
 
-    let entry = $this.closest('.fish-entry').data('view');
     if (entry.isCaught) {
       ViewModel.settings.completed.delete(entry.id);
     } else {
       ViewModel.settings.completed.add(entry.id);
     }
     entry.isCaught = !entry.isCaught;
+    console.debug("%s marked as %s", entry.data.name, entry.isCaught ? "caught" : "uncaught");
     ViewModel.saveSettings();
 
     // TODO: Determine if this fish should still be displayed efficiently.
     ViewModel.layout.updateCaughtState(entry);
     ViewModel.updateDisplay();
+  }
 
+  onFishEntryCaughtClicked(e) {
+    e.stopPropagation();
+    let $this = $(this);
+
+    let entry = $this.closest('.fish-entry').data('view');
+
+    ViewModel.toggleFishEntryCatchState(entry);
+
+    // Display a message to allow user a chance to undo their action.
+    $.toast({
+      message: 'You marked ' + entry.data.name + ' as ' + (entry.isCaught ? '' : 'un') + 'caught',
+      displayTime: 5000,
+      showProgress: 'top',
+      class: 'black',
+      actions: [{
+        text: 'Undo',
+        icon: 'undo',
+        class: 'red',
+        click: function() {
+          // Reverse the action, but this time without notification.
+          // Since you've already flipped it, we just need to re-run the toggle function.
+          // Until Carby breaks this assumption, but he'd NEVER do that, right?!
+          ViewModel.toggleFishEntryCatchState(entry);
+        }
+      },{
+        icon: 'check',
+        class: 'icon green'
+      }]
+    });
     return false;
   }
 
