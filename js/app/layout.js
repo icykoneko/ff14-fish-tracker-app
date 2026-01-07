@@ -7,12 +7,12 @@ class FishTableLayout {
     },
     baitEntry: {arg: 'it', text:
      `<span class="bait-span">
-        {{?it.item.linked}}
+        {{?it.linked}}
           <a href="https://garlandtools.org/db/#item/{{=it.item.id}}" target="cp_gt">
         {{?}}
         <div class="ui middle aligned bait-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.item.icon}}"
              title="{{=it.item.name}}" data-baitIdx="{{=it.idx}}"></div>
-        {{?it.item.linked}}
+        {{?it.linked}}
           </a>
         {{?}}
         {{?it.nextBait !== undefined}}
