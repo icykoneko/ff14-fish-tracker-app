@@ -31,15 +31,15 @@
 #   hookset:
 #   lure:
 
-# - name: Purse of Riches
-#   startHour: 0
-#   endHour: 24
-#   previousWeatherSet:
-#   weatherSet:
-#   bait:
-#   tug:
-#   hookset:
-#   lure:
+- name: Purse of Riches
+  startHour: 16
+  endHour: 18
+  previousWeatherSet: [Clouds]
+  weatherSet: [Rain]
+  bait: [Ghost Nipper]
+  tug: heavy
+  hookset: Powerful
+  lure:
 - name: Punutiy Pain
   startHour: 8
   endHour: 12
@@ -47,7 +47,7 @@
   weatherSet: [Rain]
   bait: [Honeybee, Hunu Peacock Bass]
   tug: heavy
-  hookset:
+  hookset: Powerful
   lure:
 - name: Heirloom Goldgrouper
   startHour: 12
