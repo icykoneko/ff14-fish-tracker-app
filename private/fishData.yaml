@@ -15209,32 +15209,37 @@
 # Patch 7.4 (2025-12-16)
 - name: Purse of Riches
   location: High Tide Harbor
-  startHour: 0
-  endHour: 24
+  startHour: 16
+  endHour: 18
   previousWeatherSet:
+  - Clouds
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Ghost Nipper
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.4
-  dataMissing: true
 - name: Punutiy Pain
   location: Peaks Poga
-  startHour: 0
-  endHour: 24
+  startHour: 8
+  endHour: 12
   previousWeatherSet:
+  - Clouds
   weatherSet:
+  - Rain
   bestCatchPath:
+  - Honeybee
+  - Hunu Peacock Bass
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.4
-  dataMissing: true
 - name: Shuckfin Dace
   location: Ku'uxage
   startHour: 4
@@ -15284,18 +15289,20 @@
   patch: 7.4
 - name: Heirloom Goldgrouper
   location: Alexandrian Ruins
-  startHour: 0
-  endHour: 24
+  startHour: 12
+  endHour: 16
   previousWeatherSet:
+  - Fog
   weatherSet:
+  - Fair Skies
   bestCatchPath:
+  - Popper Lure
   predators:
-  tug:
-  hookset:
+  tug: heavy
+  hookset: Powerful
   lure:
   snagging:
   patch: 7.4
-  dataMissing: true
 - name: Datnioides Aeroplanos
   location: Leynode Aero
   startHour: 2
