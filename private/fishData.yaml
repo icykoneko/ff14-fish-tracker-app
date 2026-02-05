@@ -6464,7 +6464,6 @@
   startHour: 16
   endHour: 24
   previousWeatherSet:
-  - Fair Skies
   weatherSet:
   - Showers
   bestCatchPath:
@@ -13090,7 +13089,7 @@
     Astacus Aetherius: 3
   intuitionLength: 90
   tug: heavy
-  hookset:
+  hookset: Powerful
   snagging:
   patch: 6.55
 - name: Gharlichthys
@@ -13175,7 +13174,7 @@
     E.B.E.-9318: 3
   intuitionLength: 600
   tug: heavy
-  hookset:
+  hookset: Powerful
   snagging:
   patch: 6.55
 # DAWNTRAIL - Patch 7.0 (2024-06-28)
