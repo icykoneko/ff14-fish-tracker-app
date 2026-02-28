@@ -6107,6 +6107,7 @@
   previousWeatherSet:
   weatherSet:
   - Clouds
+  - Fog
   bestCatchPath:
   - Salmon Roe
   - Balloon Frog
@@ -6263,6 +6264,8 @@
   startHour: 0
   endHour: 24
   previousWeatherSet:
+  - Fair Skies
+  - Clear Skies
   weatherSet:
   - Wind
   bestCatchPath:
@@ -9311,7 +9314,7 @@
 - name: Winged Dame
   location: The Derelicts
   startHour: 12
-  endHour: 19
+  endHour: 20
   previousWeatherSet:
   weatherSet:
   - Clear Skies
