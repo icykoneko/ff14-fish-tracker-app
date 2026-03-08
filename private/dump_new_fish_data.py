@@ -36,7 +36,9 @@ from pysaintcoinach.xiv.gathering_point import GatheringPoint
 from pysaintcoinach.xiv.weather import Weather
 from pysaintcoinach.xiv.placename import PlaceName
 
-# logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+if os.environ.get('SILENCE_PYSAINTCOINACH'):
+    logging.getLogger('pysaintcoinach').setLevel(logging.WARNING)
 
 def first(iterable, pred, default=None):
     """Returns the first item for which pred(item) is true.

@@ -29,6 +29,8 @@ except:
 _HELPER_LIBS_PATH = _SCRIPT_PATH
 
 logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+if os.environ.get('SILENCE_PYSAINTCOINACH'):
+    logging.getLogger('pysaintcoinach').setLevel(logging.WARNING)
 
 fish_and_tackle_data = {}
 XIV = None  # type: 'pysaintcoinach.ARealmReversed'

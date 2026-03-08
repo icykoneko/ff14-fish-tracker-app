@@ -4,6 +4,9 @@ import logging
 import json
 
 logging.basicConfig(level=logging.INFO, stream=sys.stderr)
+if os.environ.get('SILENCE_PYSAINTCOINACH'):
+    logging.getLogger('pysaintcoinach').setLevel(logging.WARNING)
+
 XIV = None  # type: 'pysaintcoinach.ARealmReversed'
 
 try:
