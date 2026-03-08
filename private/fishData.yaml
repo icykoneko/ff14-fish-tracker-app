@@ -15234,7 +15234,8 @@
   weatherSet:
   - Rain
   bestCatchPath:
-  - Honeybee
+  - - Golden Stonefly Nymph
+    - Honeybee
   - Hunu Peacock Bass
   predators:
   tug: heavy
