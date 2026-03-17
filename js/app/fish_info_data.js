@@ -50242,7 +50242,7 @@ const FISH_INFO = [
       "desc_ja": "反射の強い白銀色の鱗を持ち、ときに透き通るようにも見える海水魚。人懐こく人影に寄ってくることもある",
       "desc_de": "Die silbrigen Schuppen dieses Salz­was­ser­fisches spiegeln sehr stark und lassen ihn beinahe durchsichtig erscheinen. Er ist sehr zutraulich und schwimmt oft zur Was­ser­o­ber­flä­che, wenn er dort jemanden sieht.",
       "desc_fr": "Ce poisson possède des écailles argentées si réfléchissantes qu'il semble parfois disparaître. Peu farouche, il approche souvent l'ombre des baigneurs.",
-      "desc_ko": "반사가 심은 은백색 비늘 때문에 때로는 투명하게 보이는 바닷물고기. 사람을 잘 따라 사람을 보면 다가오기도 한다.",
+      "desc_ko": "반사가 심한 은백색 비늘 때문에 때로는 투명하게 보이는 바닷물고기. 사람을 잘 따라 사람을 보면 다가오기도 한다.",
       "icon": "028118",
       "extra_icon": "078118",
       "level": [
