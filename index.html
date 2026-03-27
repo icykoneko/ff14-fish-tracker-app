@@ -29,8 +29,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
             integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.0/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.4/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.4/semantic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore-contrib/0.3.0/underscore-contrib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.3/doT.min.js"></script>
@@ -86,6 +86,13 @@
     <script type="text/javascript" src="js/app/templates.js?20260205_0048"></script>
 
     <script id="fish-table-template" type="text/html;x-dot-template">
+      <div id="fish-search" class="ui search">
+        <div class="ui icon input" style="width: 100%;">
+          <input class="prompt" type="text" placeholder="Search fish...">
+          <i class="search icon"></i>
+          <i class="remove icon"></i>
+        </div>
+      </div>
       <table id="fishes" class="ui selectable striped very basic very compact unstackable table">
         <thead>
           <tr>
@@ -405,7 +412,7 @@
     <script type="text/javascript" src="js/app/baittally.js?20251111_1551"></script>
     <script type="text/javascript" src="js/app/map.js?20250310_2300"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20260102_1639"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20260327_1428"></script>
 
     <script type="text/javascript">
       $(() => {

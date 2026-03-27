@@ -27,7 +27,7 @@ body.dark .ui.table tr td:not(.active):not(.focus):not(.disabled) {
 }
 
 body.dark .ui.checkbox label {
-  color: white;
+  color: white !important;
 }
 
 body.dark table a {
@@ -167,4 +167,29 @@ body.dark .ui.striped.table tbody tr.section-divider:not(.fish-entry) {
 
 .ui.inverted.basic.nohover.label:hover {
   color: inherit;
+}
+
+/* Search overrides */
+
+.ui.inverted.search .prompt {
+  background-color: /*hsla(0, 0%, 15%, 1)*/ #1b1c1d;
+  color: hsl(0, 0%, 90%);
+  border: 1px solid hsla(0, 0%, 90%, 0.15);
+}
+
+.ui.inverted.search .results {
+  background-color: /*hsla(0, 0%, 15%, 1)*/ #1b1c1d;
+  color: hsl(0, 0%, 90%);
+}
+
+.ui.inverted.search>.results .result,
+.ui.inverted.search>.results .result .title,
+.ui.inverted.search>.results>.message .header,
+.ui.inverted.search>.results>.message .description {
+  color: hsl(0, 0%, 90%);
+}
+
+.ui.inverted.category.search>.results .category .result:hover,.ui.inverted.search>.results .result:hover,
+.ui.inverted.category.search>.results .category .result.active,.ui.inverted.search>.results .result.active {
+    background: hsla(0, 0%, 90%, 0.15) !important;
 }
