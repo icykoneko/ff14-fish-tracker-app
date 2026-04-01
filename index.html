@@ -192,134 +192,6 @@ title: Home
 
     {% raw %}
 
-    <style>
-
-.fish-entry .buttons-and-icon {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.fish-entry .buttons-and-icon > div {
-  margin-inline-start: 0.15em;
-}
-
-/* Styles for the button group in each fish entry row. */
-.fish-entry .buttonGroup {
-  display: -ms-inline-grid;
-  display: -moz-inline-grid;
-  display: inline-grid;
-}
-
-.fish-entry .buttonGroup .button {
-  display: block;
-  float: none;
-  width: 100%;
-  margin: 0px;
-  border-radius: 0em;
-  font-size: 0.78571429rem;
-}
-
-.fish-entry .buttonGroup .fishCaught.button {
-  /* Grid location: Row 1, Col 1 */
-  grid-row: 1;
-  grid-column: 1;
-  /* Rounded edges */
-  border-top-left-radius: 0.28571429rem;
-}
-
-.fish-entry .buttonGroup .fishPinned.button {
-  /* Grid location: Row 2, Col 1 */
-  grid-row: 2;
-  grid-column: 1;
-  /* Rounded edges */
-  border-bottom-left-radius: 0.28571429rem;
-  /* Shrink padding even more */
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-}
-
-.fish-entry .buttonGroup .fishAlarm.button {
-  /* Grid location: Row 1-2, Col 2 */
-  grid-row: 1 / span 2;
-  grid-column: 2;
-  /* Rounded edges */
-  border-top-right-radius: 0.28571429rem;
-  border-bottom-right-radius: 0.28571429rem;
-  /* Shrink padding even more */
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-  /* Golden color */
-  background-color: #ffd700;
-}
-    </style>
-
-    <script type="text/javascript">
-      (function(){
-        // Show connecting modal for a given fish name
-        window.catchItNow = function(fish_name){
-          var $modal = $('#ffxiv-connecting-modal');
-          var $msg = $('#ffxiv-connecting-message');
-          var $progress = $('#ffxiv-connecting-progress');
-          $msg.text('Connecting to FFXIV to catch ' + fish_name);
-          // initialize semantic UI progress
-          $progress.progress({percent: 0, text: {
-            active: 'Connecting...',
-            error: 'A system error occurred during event movement.'
-          }});
-
-          $modal.modal({
-            closable: false,
-            onHidden: function(){
-              // reset progress when hidden
-              $progress.progress('reset');
-              $progress.progress('remove error');
-              $('#ffxiv-connecting-cancel').text('Cancel');
-            }
-          }).modal('show');
-
-          var percent = 0;
-          var interval = null;
-
-          // slow increase to ~50%
-          startSlowTo = function(target, stepMs, stepAmount, callback){
-            clearInterval(interval);
-            interval = setInterval(function(){
-              percent = Math.min(target, percent + stepAmount);
-              $progress.progress({percent: Math.floor(percent)});
-              if(percent >= target){
-                clearInterval(interval);
-                if(callback) callback();
-              }
-            }, stepMs);
-          }
-
-          // sequence: slow -> 50, jump to 90, slow -> 99, then uh... you know
-          startSlowTo(50, 300, 1, function(){
-            setTimeout(function(){
-              percent = 90;
-              $progress.progress({percent: 90});
-              startSlowTo(99, 400, 0.5, function(){
-                $progress.progress('set error', 'A system error occurred during event movement.');
-                $('#ffxiv-connecting-cancel').text('I knew it was too good to be true');
-              });
-            }, 600);
-          });
-
-          // allow cancel to close everything
-          $('#ffxiv-connecting-cancel').off('click').on('click', function(){
-            clearInterval(interval);
-            $modal.modal('hide');
-          });
-        };
-      })();
-    </script>
-
     <script id="fish-table-template" type="text/html;x-dot-template">
       <table id="fishes" class="ui selectable striped very basic very compact unstackable table">
         <thead>
@@ -340,20 +212,15 @@ title: Home
       <tr class="fish-entry{{?it.isWeatherRestricted}} fish-weather-restricted{{?}}{{?it.isCatchable}} fish-active{{?}}{{?it.isCaught || false}} fish-caught{{?}}{{?it.isPinned || false}} fish-pinned{{?}}{{?it.isUpSoon}} fish-bin-15{{?}}" data-id="{{=it.id}}">
         <!-- Buttons to marking fish as caught or pinned, etc -->
         <td class="collapsing">
-          <div class="buttons-and-icon">
-            <div class="buttonGroup">
-              <div class="ui very compact icon button fishCaught {{?it.isCaught || false}}green{{?}}">
-                <i class="checkmark icon"></i>
-              </div>
-              <div class="ui very compact icon button fishPinned {{?it.isPinned || false}}red{{?}}">
-                <i class="pin icon"></i>
-              </div>
-              <div class="ui very compact icon button fishAlarm jokeCatch" onClick="catchItNow('{{=it.data.name}}')">
-                <i class="shopping cart icon"></i>
-              </div>
+          <div class="ui middle aligned vertical mini very compact icon buttons">
+            <div class="ui button fishCaught {{?it.isCaught || false}}green{{?}}">
+              <i class="checkmark icon"></i>
             </div>
-            <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
+            <div class="ui button fishPinned {{?it.isPinned || false}}red{{?}}">
+              <i class="pin icon"></i>
+            </div>
           </div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
@@ -1038,20 +905,6 @@ title: Home
         <div class="actions">
           <div id="show-the-new-fishies" class="ui approve positive button">Yes</div>
           <div id="hide-the-new-fishies" class="ui cancel negative button">No</div>
-        </div>
-      </div>
-
-      <div id="ffxiv-connecting-modal" class="ui tiny modal">
-        <div class="header">Catch it Now</div>
-        <div class="content">
-          <p id="ffxiv-connecting-message">Connecting to FFXIV to catch ${fish_name}</p>
-          <div class="ui inverted indicating progress" id="ffxiv-connecting-progress" style="margin-top:1rem">
-            <div class="bar"><div class="progress"></div></div>
-            <div class="label">Connecting...</div>
-          </div>
-        </div>
-        <div class="actions">
-          <div class="ui button" id="ffxiv-connecting-cancel">Cancel</div>
         </div>
       </div>
 
