@@ -381,6 +381,10 @@ let ViewModel = new class {
 
     // The entry being used for upcoming windows modal.
     this.upcomingWindowsEntry = null;
+
+    // Is search currently active?
+    this.searchActive = false;
+    this.cachedSearchQuery = '';
   }
 
   initialize() {
@@ -490,6 +494,14 @@ let ViewModel = new class {
       .dropdown({
         onChange: (value, text, $choice) => localizationHelper.setLanguage(value),
       });
+
+    $('#fish-search').search({
+      cache: false,
+      source: _.reduce(Fishes, (memo, fish) => {
+        memo.push({ title: fish.name });
+        return memo;
+      }, [])
+    });
 
     const { Subject, BehaviorSubject, merge, interval } = rxjs;
     const { buffer, debounceTime, map, filter, skip, timestamp } = rxjs.operators;
@@ -686,7 +698,28 @@ let ViewModel = new class {
         this.layout.sort(this.sorterFunc, eorzeaTime.toEorzea(timestamp));
       }
       // console.timeEnd('updateDisplay[countdown]');
-      return;
+
+      // Continue with the rest if search is active.
+      let searchQuery = $('#fish-search').search('get value');
+      if (searchQuery === '') {
+        if (this.searchActive) {
+          // Search has been cleared. Run the display update again to reset everything.
+          this.searchActive = false;
+          reason = null;
+        } else {
+          // Nothing more to do.
+          return;
+        }
+      } else {
+        // Search is still active, check if the query has changed. If not, no need to run the update again.
+        this.searchActive = true;
+        if (this.cachedSearchQuery === searchQuery) {
+          return;
+        }
+        // Update the cached search query and continue with the update.
+        this.cachedSearchQuery = searchQuery
+        reason = null;
+      }
     }
 
     console.info("Updating display...", reason);
@@ -772,6 +805,16 @@ let ViewModel = new class {
     // which are language-dependent.
     if (reason !== null && 'language' in reason) {
       _(this.fishEntries).each(entry => this.layout.updateLanguage(entry));
+      
+      // Need to update the search source as well!
+      _(Fishes).each(fish => fish.applyLocalization());
+      $('#fish-search').search({
+        cache: false,
+        source: _.reduce(Fishes, (memo, fish) => {
+          memo.push({ title: fish.name });
+          return memo;
+        }, [])
+      });
     }
 
     console.timeEnd('updateDisplay');
@@ -789,6 +832,17 @@ let ViewModel = new class {
     // Pinned fish are NEVER filtered out!
     if (this.isFishPinned(fish.id))
       return false;
+
+    // Filter by search query.
+    let searchQuery = $('#fish-search').search('get value');
+    if (searchQuery !== '') {
+      // For all remaining fish, only display those which match the search query.
+      if (!fish.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+        return true;
+      }
+      // Hide all the others.
+      return false;
+    }
 
     // Filter by patch.
     // Patches can be... odd sometimes.  Convert to string, and only compare
@@ -1258,6 +1312,8 @@ let ViewModel = new class {
     $('.ui.table').toggleClass('inverted', theme === 'dark');
     $('.ui.list').toggleClass('inverted', theme === 'dark');
     $('.ui.top.attached.label').toggleClass('black', theme === 'dark');
+    $('.ui.search').toggleClass('inverted', theme === 'dark');
+    $('.ui.input').toggleClass('inverted', theme === 'dark');
   }
 
   loadSettings() {
