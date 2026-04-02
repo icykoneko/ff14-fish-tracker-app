@@ -246,6 +246,27 @@ body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes
   cursor: pointer;
 }
 
+:root {
+  --topmenu-height: 2.8rem;
+  --fish-search-height: 3rem;
+}
+
+#fish-search {
+  position: sticky;
+  top: var(--topmenu-height);
+  z-index: 999;
+  background-color: hsla(0, 0%, 15%, 1);
+  backdrop-filter: blur(6px);
+  padding: 0.25rem 0.5rem;
+}
+
+#fishes thead {
+  position: sticky;
+  top: calc(var(--topmenu-height) + var(--fish-search-height));
+  z-index: 998;
+  background: inherit;
+}
+
 .upcoming-windows-grid {
   display: grid;
   grid-template-columns: 3fr 2fr 1fr 1fr;
