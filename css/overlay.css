@@ -246,27 +246,6 @@ body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes
   cursor: pointer;
 }
 
-:root {
-  --topmenu-height: 2.8rem;
-  --fish-search-height: 3rem;
-}
-
-#fish-search {
-  position: sticky;
-  top: var(--topmenu-height);
-  z-index: 999;
-  background-color: hsla(0, 0%, 15%, 1);
-  backdrop-filter: blur(6px);
-  padding: 0.25rem 0.5rem;
-}
-
-#fishes thead {
-  position: sticky;
-  top: calc(var(--topmenu-height) + var(--fish-search-height));
-  z-index: 998;
-  background: inherit;
-}
-
 .upcoming-windows-grid {
   display: grid;
   grid-template-columns: 3fr 2fr 1fr 1fr;
@@ -349,10 +328,18 @@ body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes
 
 #fishes thead tr th {
   position: sticky;
-  top: 40px; /* This needs to sync with the top menu */
+  top: 5.8rem; /* This needs to sync with the top menu */
   z-index: 3;
   border-radius: unset;
   background-color: hsla(0, 0%, 100%, 1) !important; /* This should match the page background */
+}
+
+#fish-search {
+  position: sticky;
+  top: 2.8rem;
+  z-index: 4;
+  background-color: hsla(0, 0%, 100%, 1); /* This should match the page background */
+  padding: 0.25rem 0.5rem;
 }
 
 #fishes.ui.selectable.table > tbody > tr,
