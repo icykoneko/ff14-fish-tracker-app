@@ -171,6 +171,10 @@ body.dark .ui.striped.table tbody tr.section-divider:not(.fish-entry) {
 
 /* Search overrides */
 
+.ui.inverted.search {
+  background-color: hsla(0, 0%, 15%, 1) !important; /* This should match the page background */
+}
+
 .ui.inverted.search .prompt {
   background-color: /*hsla(0, 0%, 15%, 1)*/ #1b1c1d;
   color: hsl(0, 0%, 90%);
