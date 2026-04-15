@@ -328,10 +328,18 @@ body.dark #fish-eyes-button.link.item.active:hover .sprite-icon-status-fish_eyes
 
 #fishes thead tr th {
   position: sticky;
-  top: 40px; /* This needs to sync with the top menu */
+  top: 5.8rem; /* This needs to sync with the top menu */
   z-index: 3;
   border-radius: unset;
   background-color: hsla(0, 0%, 100%, 1) !important; /* This should match the page background */
+}
+
+#fish-search {
+  position: sticky;
+  top: 2.8rem;
+  z-index: 4;
+  background-color: hsla(0, 0%, 100%, 1); /* This should match the page background */
+  padding: 0.25rem 0.5rem;
 }
 
 #fishes.ui.selectable.table > tbody > tr,
