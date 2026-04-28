@@ -15390,6 +15390,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - - Popper Lure
+    - Honeybee
+  - Flawless Saucer
   predators:
   tug:
   hookset:
@@ -15418,6 +15421,9 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
+  - - Popper Lure
+    - Honeybee
+  - Blind Brotula
   predators:
   tug:
   hookset:
@@ -15433,6 +15439,7 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Vagrant Cascade: 3
   tug:
   hookset:
   lure:
