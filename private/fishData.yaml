@@ -15340,3 +15340,116 @@
   lure:
   snagging:
   patch: 7.4
+# Patch 7.5 (2026-04-28)
+- name: Ole Ole Ole
+  location: Chirwagur Lake
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.5
+  dataMissing: true
+- name: Iron Oxydoras
+  location: Miyakabek'zoma
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.5
+  dataMissing: true
+- name: Excavator Catfish
+  location: Marsh Ligaka
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.5
+  dataMissing: true
+- name: Moonmarking Saucer
+  location: Cenote Jayunja
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.5
+  dataMissing: true
+- name: Autarch's Supper
+  location: Sapsweet Cenote
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.5
+  dataMissing: true
+- name: Bitterbark Caiman
+  location: Bitterbark Cenote
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.5
+  dataMissing: true
+- name: Vagrant Keeper
+  location: Westbound Zorgor
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.5
+  dataMissing: true
+- name: Shined Copper Shark
+  location: Canal Town North
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.5
+  dataMissing: true
