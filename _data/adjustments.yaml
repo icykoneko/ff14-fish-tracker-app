@@ -34,8 +34,11 @@
 - name: Iron Oxydoras
 - name: Excavator Catfish
 - name: Moonmarking Saucer
+  bait: [Popper Lure, Flawless Saucer]
 - name: Autarch's Supper
+  bait: [Red Maggots]
 - name: 'Bitterbark Caiman '
 - name: Vagrant Keeper
+  bait: [Dragonfly]
 - name: Shined Copper Shark
   bait: [Ghost Nipper]
