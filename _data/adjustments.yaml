@@ -31,14 +31,23 @@
 #   hookset:
 #   lure:
 - name: Ole Ole Ole
+  bait: [White Worm]
+  tug: heavy
+  hookset: Powerful
+  lure: Ambitious
 - name: Iron Oxydoras
 - name: Excavator Catfish
 - name: Moonmarking Saucer
   bait: [Popper Lure, Flawless Saucer]
+  tug: heavy
+  hookset: Powerful
 - name: Autarch's Supper
   bait: [Red Maggots]
+  tug: heavy
 - name: 'Bitterbark Caiman '
 - name: Vagrant Keeper
   bait: [Dragonfly]
 - name: Shined Copper Shark
   bait: [Ghost Nipper]
+  tug: heavy
+  hookset: Powerful
