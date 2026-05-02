@@ -100,6 +100,7 @@ class WeatherService {
   }
 
   *findWeatherPattern(date, area, previousWeatherSet, currentWeatherSet, limit = 10000) {
+    let initialLimit = limit;
     // If a previous weather set is provided, yield the next period matching
     // the provided current weather set where the previous period matched the
     // provided previous weather set.
@@ -163,6 +164,10 @@ class WeatherService {
       if (currentWeatherSet.length == 0 || _(currentWeatherSet).contains(currentWeather)) {
         // Yield a date range for this weather period.
         yield dateFns.intervalAfter(+lastDate, {hours: 8});
+        // Refresh limit (because of Purse of Riches)
+        // NOTE: This might lead to some lag in the initial load. But without it, the tracker will
+        // just refuse to keep displaying windows.
+        limit = initialLimit;
       }
     }
     // The end =D
