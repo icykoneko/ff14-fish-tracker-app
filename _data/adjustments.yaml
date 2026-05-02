@@ -37,6 +37,8 @@
   lure: Ambitious
 - name: Iron Oxydoras
 - name: Excavator Catfish
+  bait: [Popper Lure]
+  tug: heavy
 - name: Moonmarking Saucer
   bait: [Popper Lure, Flawless Saucer]
   tug: heavy
@@ -44,9 +46,12 @@
 - name: Autarch's Supper
   bait: [Red Maggots]
   tug: heavy
+  hookset: Powerful
 - name: 'Bitterbark Caiman '
 - name: Vagrant Keeper
   bait: [Dragonfly]
+  tug: heavy
+  hookset: Powerful
 - name: Shined Copper Shark
   bait: [Ghost Nipper]
   tug: heavy
