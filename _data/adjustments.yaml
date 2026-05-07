@@ -60,7 +60,7 @@
   endHour: 21
   previousWeatherSet: [Clear Skies, Rain]  # probably just Clear Skies
   weatherSet: [Rain]
-  bait: [Popper Lure, Flawless Saucer]
+  bait: [Red Maggots, Flawless Saucer]
   tug: heavy
   hookset: Powerful
 - name: Autarch's Supper
