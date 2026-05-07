@@ -36,9 +36,13 @@
   hookset: Powerful
   lure: Ambitious
 - name: Iron Oxydoras
+  bait: [Golden Stonefly Nymph, Dumplingfish]
+  tug: heavy
+  hookset: Powerful
 - name: Excavator Catfish
   bait: [Popper Lure]
   tug: heavy
+  hookset: Powerful
 - name: Moonmarking Saucer
   bait: [Popper Lure, Flawless Saucer]
   tug: heavy
@@ -48,6 +52,9 @@
   tug: heavy
   hookset: Powerful
 - name: 'Bitterbark Caiman '
+  bait: [Red Maggots, Blind Brotula]
+  tug: heavy
+  hookset: Powerful
 - name: Vagrant Keeper
   bait: [Dragonfly]
   tug: heavy
