@@ -464,6 +464,7 @@
             <a class="item" target="_blank" href="fishtrain.html"><i class="train icon"></i> Fish Train Tool</a>
             <a class="item" id="fish-guide-button"><i class="fish icon"></i> Fish Guide</a>
             <a class="item" target="_blank" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
+            <a class="item" id="testing-windows-button"><i class="vial icon"></i> Testing Windows</a>
             <a class="item" id="tips-and-tricks-button"><i class="lightbulb icon"></i> Tips and Tricks</a>
             <a class="item" target="_blank" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
           </div>
@@ -766,6 +767,28 @@
         <div class="actions">
           <div id="show-the-new-fishies" class="ui approve positive button">Yes</div>
           <div id="hide-the-new-fishies" class="ui cancel negative button">No</div>
+        </div>
+      </div>
+
+      <!-- Modal for displaying testing windows -->
+      <div id="testing-windows-modal" class="ui tiny modal testing-windows">
+        <div class="header">Load Testing Windows</div>
+        <div class="content">
+          <div class="ui form">
+            <p>
+              This feature is for applying the latest test windows data, which may be incomplete or inaccurate. Some windows may be actual testing, while others may be narrowed down.
+              If you still want to use this feature, there's a link to the current patch test data on the Fishcord server. Enter the Pastebin code in the box below, then click OK.
+              You may open this dialog again later to update the data, and it will remember the last code you entered.
+            </p>
+            <div class="field">
+              <label>Pastebin Code</label>
+              <input type="text" id="testing-windows-pastebin-code" placeholder="e.g. 1234abcd" />
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui approve positive button">OK</div>
+          <div class="ui cancel negative button">Cancel</div>
         </div>
       </div>
 
