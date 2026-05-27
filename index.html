@@ -42,6 +42,11 @@
             integrity="sha512-uiSucQ5TdEImoU68Gp+mxXJ54l4lQm5bTd+T0tj7KcCupCDrKr+FdmgXipF+2Exfc6xDAcnPbr5rXB5bEZS0bw=="
             crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"
+            integrity="sha512-CSBhVREyzHAjAFfBlIBakjoRUKp5h7VSweP0InR/pAJyptH7peuhCsqAI/snV+TwZmXZqoUklpXp6R6wMnYf5Q=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
     <link rel="stylesheet" href="public/images/sprite.css?7.5_20260428_1005" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20250805_0942" />
     <link rel="stylesheet" href="css/overlay.css?20260414_2133" />
@@ -777,18 +782,22 @@
           <div class="ui form">
             <p>
               This feature is for applying the latest test windows data, which may be incomplete or inaccurate. Some windows may be actual testing, while others may be narrowed down.
-              If you still want to use this feature, there's a link to the current patch test data on the Fishcord server. Enter the Pastebin code in the box below, then click OK.
-              You may open this dialog again later to update the data, and it will remember the last code you entered.
+            </p><p>
+              If you still want to use this feature, the Fishcord server usually has a pinned post in the #discover-and-testing channel. Copy the exact data from there, and paste it in the field below.
             </p>
             <div class="field">
-              <label>Pastebin Code</label>
-              <input type="text" id="testing-windows-pastebin-code" placeholder="e.g. 1234abcd" />
+              <label>Testing Windows Data</label>
+              <textarea id="testing-windows-data" placeholder="Paste the testing windows data here..." rows="4"></textarea>
             </div>
           </div>
         </div>
         <div class="actions">
           <div class="ui approve positive button">OK</div>
           <div class="ui cancel negative button">Cancel</div>
+        </div>
+        <div class="ui bottom attached error hidden message" id="testing-windows-error">
+          <i class="exclamation triangle icon"></i>
+          <span class="content"></span>
         </div>
       </div>
 

@@ -478,6 +478,8 @@ let ViewModel = new class {
       $('#bait-modal').modal('show');
     });
 
+    $('#testing-windows-button').on('click', this.onTestingWindowsClicked);
+
     $('#settings-button').on('click', function(e) {
       if (e) e.stopPropagation();
       $('#advanced-settings-modal').modal('show');
@@ -1306,6 +1308,7 @@ let ViewModel = new class {
     $('.ui.menu').toggleClass('inverted', theme === 'dark');
     $('.ui.modal').toggleClass('inverted', theme === 'dark');
     $('.ui.message.announcement').toggleClass('inverted', theme === 'dark');
+    $('.ui.message').toggleClass('inverted', theme === 'dark');
     $('.ui.container').toggleClass('inverted', theme === 'dark');
     $('.ui.form').toggleClass('inverted', theme === 'dark');
     $('.ui.segment').toggleClass('inverted', theme === 'dark');
@@ -1619,5 +1622,144 @@ let ViewModel = new class {
       ViewModel.importSiteSettings();
     }
     return false;
+  }
+
+  applyTestingWindowsData(strData) {
+    const data = jsyaml.load(strData, {schema: jsyaml.FAILSAFE_SCHEMA});
+    console.info("Parsed data: ", data);
+
+    const WEATHER_NAME_TO_INDEX = _(DATA.WEATHER_TYPES).chain()
+      .pairs().map(x => [x[1]['name_en'], Number(x[0])]).object().value();
+
+    // If the data parsed correctly, blow away any existing test entries before continuing.
+    // We need to do this step first to make our life a lot simpler. Basically, you can only
+    // replace the test windows, not update. This should also make updating the view a lot
+    // easier. Since the test IDs are all starting at 0x80000000 and sequential, we can just
+    // iterate until you can't find anymore, removing each entry from the view, and from
+    // Fishes.
+
+    for (const fishName in data) {
+      if (!Object.hasOwn(data, fishName)) continue;
+      let testWindows = data[fishName];
+      // Element can be a single object, or an array of objects.
+      // Promote to an array.
+      if (!Array.isArray(testWindows)) {
+        testWindows = [testWindows];
+      }
+
+      // Each test fish needs to have a new, test-related ID. We're going to use
+      // 0x80000000 values to easily identify these fish as test records.
+      let nextTestId = 0x80000000;
+
+      // First we need the ORIGINAL entry from the database to get the ID. Then,
+      // since we still want to preserve the ADJUSTMENTS data, we need to locate the
+      // FishEntry for this fish in `Fishes`.
+      let itemEntry = _(DATA.ITEMS).findWhere({name_en: fishName});
+      if (itemEntry === undefined) {
+        console.error("FISH NOT FOUND: %s", fishName);
+        return;
+      }
+      let origFishEntry = _(Fishes).findWhere({id: itemEntry._id});
+
+      testWindows.forEach(element => {
+        console.log("Handling test window for %s:", fishName, element)
+        // Now we can actually process each test window record individually.
+        // Start by creating a CLONE of the FishEntry.
+        let newFishEntry = Fish.from(origFishEntry);
+        newFishEntry._id = nextTestId++;
+        newFishEntry.id = newFishEntry._id;
+        newFishEntry.origId = origFishEntry.id;
+
+        // Now, override the conditions
+        if (element.weatherSet !== undefined) {
+          newFishEntry.weatherSet =
+            _(element.weatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
+          newFishEntry.conditions.weatherSet =
+            _(newFishEntry.weatherSet).map(w => DATA.WEATHER_TYPES[w]);
+        }
+        if (element.previousWeatherSet !== undefined) {
+          newFishEntry.previousWeatherSet =
+            _(element.previousWeatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
+          newFishEntry.conditions.previousWeatherSet =
+            _(newFishEntry.previousWeatherSet).map(w => DATA.WEATHER_TYPES[w]);
+        }
+
+        if (element.bestCatchPath !== undefined) {
+          newFishEntry.bestCatchPath =
+            _(element.bestCatchPath).map(x => _(DATA.ITEMS).findWhere({name_en: x})._id);
+          newFishEntry.bait.path =
+            _(newFishEntry.bestCatchPath).map(x => DATA.ITEMS[x]);
+        }
+
+        let timeSpecified = false;
+        if (element.startHour !== undefined) {
+          newFishEntry.startHour = element.startHour;
+          timeSpecified = true;
+        } else if (element.startTime !== undefined) {
+          newFishEntry.startHour = parseTimeString(element.startTime);
+          timeSpecified = true;
+        }
+        if (element.endHour !== undefined) {
+          newFishEntry.endHour = element.endHour;
+          timeSpecified = true;
+        } else if (element.endTime !== undefined) {
+          newFishEntry.endHour = parseTimeString(element.endTime);
+          timeSpecified = true;
+        }
+        if (timeSpecified) {
+          let totalHoursUp = Math.abs(newFishEntry.endHour - newFishEntry.startHour);
+          newFishEntry.dailyDuration = dateFns.normalizeDuration({
+            hours: newFishEntry.endHour < newFishEntry.startHour ? 24 - totalHoursUp : totalHoursUp });
+        }
+        newFishEntry.alwaysAvailable =
+          newFishEntry.weatherSet.length == 0 && newFishEntry.startHour == 0 && newFishEntry.endHour == 24;
+
+        // Update the windows for this fish now (unless it wasn't being displayed)
+        // Of course, confuzzled carbuncles would really like to know why you'd call this
+        // function if you didn't have the fish displayed in the first place... but maybe
+        // that could happen... filters and such.
+        newFishEntry.catchableRanges = [];
+        newFishEntry.incompleteRanges = [];
+        newFishEntry.__uptimeDirty = true;
+
+        // Add the entry to the Fishes and View.
+        Fishes.push(newFishEntry);
+        ViewModel.activateEntry(newFishEntry, Date.now());
+      });
+    }
+
+    // Now that we're finished, we can ask the view model to update the display.
+    ViewModel.updateDisplay();
+
+    // Testing Window Data Format:
+    // Single YAML document using ENGLISH NAME of the fish as the key with one or more
+    // objects containing the conditions to override.
+    // Each object will generate a unique test fish record
+    // Iron Oxydoras: {previousWeatherSet: ["Fog"], weatherSet: ["Fog"], startHour: 13, endHour: 15}
+  }
+
+  onTestingWindowsClicked(e) {
+    if (e) e.stopPropagation();
+    $('#main-menu.dropdown').dropdown('hide');
+    $('#testing-windows-modal')
+      .modal({
+        onApprove: function($element) {
+          try {
+            ViewModel.applyTestingWindowsData($('#testing-windows-data').val());
+            return true;
+          } catch (ex) {
+            console.error("Failed to process testing windows data.", ex);
+            $('#testing-windows-error .content').text("Failed to process testing windows data. Please check the input and try again.");
+            $('#testing-windows-error').removeClass('hidden');
+            return false;
+          }
+        },
+        onHidden: function() {
+          // Clear any error messages
+          $('#testing-windows-error .content').text("");
+          $('#testing-windows-error').addClass('hidden');
+        }
+      })
+      .modal('show');
   }
 };
