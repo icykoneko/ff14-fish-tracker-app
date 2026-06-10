@@ -6559,6 +6559,8 @@
   - Fair Skies
   weatherSet:
   - Fog
+  - Clouds
+  - Wind
   bestCatchPath:
   - Nightcrawler
   - Zagas Khaal
@@ -9724,7 +9726,7 @@
   endHour: 24
   previousWeatherSet:
   - Clouds
-  # - Fog  # may want to double-check on this.
+  - Fog
   weatherSet:
   - Fog
   bestCatchPath:
