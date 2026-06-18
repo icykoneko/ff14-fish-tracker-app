@@ -114,7 +114,11 @@ def _build_fish_infos():
                    if x.get_raw('Item') != 0 and x.is_in_log]
 
     fish_infos = []
-    for fish in fish_in_log:
+
+    # The fishing guide in game has some funky ordering going on. It's primarily
+    # sorted by FishPaarameter[7], and then by FishParameter.key...
+
+    for fish in sorted(fish_in_log, key=lambda x: (x[7], x.key)):
         fish_notes = first(XIV.game_data.get_sheet('FishingNoteInfo'),
                            lambda r: r.get_raw('Item') == fish.item.key)
         fish_info = dict([
