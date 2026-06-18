@@ -10910,7 +10910,8 @@
   previousWeatherSet:
   weatherSet:
   bestCatchPath:
-  - Leech
+  - - Mayfly
+    - Leech
   predators:
   tug: medium
   hookset: Powerful
