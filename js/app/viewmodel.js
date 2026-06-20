@@ -1624,6 +1624,23 @@ let ViewModel = new class {
     return false;
   }
 
+  removeExistingTestingWindows() {
+    // NOTE: No error checking so I hope you didn't mess anything else up.
+    console.debug("Removing existing testing windows...");
+    let existingTestIds = _(ViewModel.fishEntries).chain().filter((entry) => entry.id >= 0x80000000).map(e => e.id).value();
+    for (let k of existingTestIds) {
+      console.debug("Removing ID:", k);
+      let entry = this.fishEntries[k];
+      let fish = entry.data;
+      // Remove the FishEntry from the view model.
+      console.debug("Removing FishEntry object:", this.fishEntries[k]);
+      this.removeEntry(this.fishEntries[k], k);
+      // Remove the Fish object from the "database".
+      console.debug("Removing Fish object:", fish);
+      Fishes.splice(Fishes.indexOf(fish), 1);
+    }
+  }
+
   applyTestingWindowsData(strData) {
     const data = jsyaml.load(strData, {schema: jsyaml.FAILSAFE_SCHEMA});
     console.info("Parsed data: ", data);
@@ -1637,6 +1654,9 @@ let ViewModel = new class {
     // easier. Since the test IDs are all starting at 0x80000000 and sequential, we can just
     // iterate until you can't find anymore, removing each entry from the view, and from
     // Fishes.
+
+    // PHASE 1: Remove existing test fish entries
+    this.removeExistingTestingWindows();
 
     for (const fishName in data) {
       if (!Object.hasOwn(data, fishName)) continue;
@@ -1659,72 +1679,72 @@ let ViewModel = new class {
         console.error("FISH NOT FOUND: %s", fishName);
         return;
       }
-      let origFishEntry = _(Fishes).findWhere({id: itemEntry._id});
+      let origFishObj = _(Fishes).findWhere({id: itemEntry._id});
 
       testWindows.forEach(element => {
         console.log("Handling test window for %s:", fishName, element)
         // Now we can actually process each test window record individually.
         // Start by creating a CLONE of the FishEntry.
-        let newFishEntry = Fish.from(origFishEntry);
-        newFishEntry._id = nextTestId++;
-        newFishEntry.id = newFishEntry._id;
-        newFishEntry.origId = origFishEntry.id;
+        let newFishObj = Fish.from(origFishObj);
+        newFishObj._id = nextTestId++;
+        newFishObj.id = newFishObj._id;
+        newFishObj.origId = origFishObj.id;
 
         // Now, override the conditions
         if (element.weatherSet !== undefined) {
-          newFishEntry.weatherSet =
+          newFishObj.weatherSet =
             _(element.weatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
-          newFishEntry.conditions.weatherSet =
-            _(newFishEntry.weatherSet).map(w => DATA.WEATHER_TYPES[w]);
+          newFishObj.conditions.weatherSet =
+            _(newFishObj.weatherSet).map(w => DATA.WEATHER_TYPES[w]);
         }
         if (element.previousWeatherSet !== undefined) {
-          newFishEntry.previousWeatherSet =
+          newFishObj.previousWeatherSet =
             _(element.previousWeatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
-          newFishEntry.conditions.previousWeatherSet =
-            _(newFishEntry.previousWeatherSet).map(w => DATA.WEATHER_TYPES[w]);
+          newFishObj.conditions.previousWeatherSet =
+            _(newFishObj.previousWeatherSet).map(w => DATA.WEATHER_TYPES[w]);
         }
 
         if (element.bestCatchPath !== undefined) {
-          newFishEntry.bestCatchPath =
+          newFishObj.bestCatchPath =
             _(element.bestCatchPath).map(x => _(DATA.ITEMS).findWhere({name_en: x})._id);
-          newFishEntry.bait.path =
-            _(newFishEntry.bestCatchPath).map(x => DATA.ITEMS[x]);
+          newFishObj.bait.path =
+            _(newFishObj.bestCatchPath).map(x => DATA.ITEMS[x]);
         }
 
         let timeSpecified = false;
         if (element.startHour !== undefined) {
-          newFishEntry.startHour = element.startHour;
+          newFishObj.startHour = Number(element.startHour);
           timeSpecified = true;
         } else if (element.startTime !== undefined) {
-          newFishEntry.startHour = parseTimeString(element.startTime);
+          newFishObj.startHour = parseTimeString(element.startTime);
           timeSpecified = true;
         }
         if (element.endHour !== undefined) {
-          newFishEntry.endHour = element.endHour;
+          newFishObj.endHour = Number(element.endHour);
           timeSpecified = true;
         } else if (element.endTime !== undefined) {
-          newFishEntry.endHour = parseTimeString(element.endTime);
+          newFishObj.endHour = parseTimeString(element.endTime);
           timeSpecified = true;
         }
         if (timeSpecified) {
-          let totalHoursUp = Math.abs(newFishEntry.endHour - newFishEntry.startHour);
-          newFishEntry.dailyDuration = dateFns.normalizeDuration({
-            hours: newFishEntry.endHour < newFishEntry.startHour ? 24 - totalHoursUp : totalHoursUp });
+          let totalHoursUp = Math.abs(newFishObj.endHour - newFishObj.startHour);
+          newFishObj.dailyDuration = dateFns.normalizeDuration({
+            hours: newFishObj.endHour < newFishObj.startHour ? 24 - totalHoursUp : totalHoursUp });
         }
-        newFishEntry.alwaysAvailable =
-          newFishEntry.weatherSet.length == 0 && newFishEntry.startHour == 0 && newFishEntry.endHour == 24;
+        newFishObj.alwaysAvailable =
+          newFishObj.weatherSet.length == 0 && newFishObj.startHour == 0 && newFishObj.endHour == 24;
 
         // Update the windows for this fish now (unless it wasn't being displayed)
         // Of course, confuzzled carbuncles would really like to know why you'd call this
         // function if you didn't have the fish displayed in the first place... but maybe
         // that could happen... filters and such.
-        newFishEntry.catchableRanges = [];
-        newFishEntry.incompleteRanges = [];
-        newFishEntry.__uptimeDirty = true;
+        newFishObj.catchableRanges = [];
+        newFishObj.incompleteRanges = [];
+        newFishObj.__uptimeDirty = true;
 
         // Add the entry to the Fishes and View.
-        Fishes.push(newFishEntry);
-        ViewModel.activateEntry(newFishEntry, Date.now());
+        Fishes.push(newFishObj);
+        ViewModel.activateEntry(newFishObj, Date.now());
       });
     }
 
