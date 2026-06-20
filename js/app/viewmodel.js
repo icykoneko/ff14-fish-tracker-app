@@ -1028,8 +1028,17 @@ let ViewModel = new class {
     });
 
     // Connect the new entry's events.
-    $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
-    $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
+
+    if ((fish.id & 0x80000000) == 0) {
+      $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
+      $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
+    } else {
+      // Disable the caught and pinned options for test fish.
+      // As of 6/20/2026, the logic used to toggle these settings is heavily coupled to the
+      // fish entry, making it very difficult to just mark the original fish ID as caught or
+      // pinned.
+      $('.fishCaught.button, .fishPinned.button', $entry).addClass('disabled');
+    }
 
     $('.upcoming-windows-button', $entry).on('click', e => {
       console.info("Displaying upcoming windows for %s", fish.name);

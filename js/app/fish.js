@@ -122,7 +122,7 @@ class Fish {
 
     if ((this.id & 0x80000000) != 0) {
       // This is a TEST FISH, and you need to use the origId instead...
-      this.name = __p(DATA.ITEMS[this.origId], "name");
+      this.name = "[TEST] " + __p(DATA.ITEMS[this.origId], "name");
     } else {
       this.name = __p(DATA.ITEMS[this.id], "name");
     }
