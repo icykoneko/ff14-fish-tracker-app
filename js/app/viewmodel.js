@@ -1539,6 +1539,8 @@ let ViewModel = new class {
     // themselves...
     console.info("Overwriting checklist...\nWas:", [...this.settings.completed], "\nNow:", checklist);
     this.settings.completed = new Set(checklist);
+    // Update local storage (no going back -- unless you read the console log)
+    this.saveSettings();
   }
 
   exportSiteSettings() {
