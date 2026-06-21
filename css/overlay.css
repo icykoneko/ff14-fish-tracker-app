@@ -603,10 +603,10 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   width: 3em;
   border-color: rgba(232, 232, 232, 0.20);
   /* 
-    The triangle can be slightly hard to get your mouse to
-    110% allows the users a bit easier time hitting it
+   * The triangle can be slightly hard to get your mouse to
+   * 115% allows the users a bit easier time hitting it
    */
-  clip-path: polygon(0 0, 110% 0, 0 110%);
+  clip-path: polygon(0 0, 115% 0, 0 115%);
 }
 .fish-guide .fish-entry .ui.left.corner.label.hovering {
   border-color: rgba(232, 232, 232, 0.50);
