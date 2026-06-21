@@ -602,11 +602,10 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   height: 3em;
   width: 3em;
   border-color: rgba(232, 232, 232, 0.20);
-  /* Clip the corner label to its triangle so the WHOLE visible triangle is the
-     hover/click target (the 110% pushes the hit edge slightly past the visible
-     wedge for forgiving clicks). The clipped-away lower-right half passes clicks
-     through to the fish-entry, so the rest of the tile still selects the fish.
-     The mark/hover handler is bound to this label in fishguide.js. */
+  /* 
+    The triangle can be slightly hard to get your mouse to
+    110% allows the users a bit easier time hitting it
+   */
   clip-path: polygon(0 0, 110% 0, 0 110%);
 }
 .fish-guide .fish-entry .ui.left.corner.label.hovering {
