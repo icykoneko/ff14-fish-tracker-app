@@ -6,6 +6,7 @@
 __pycache__
 *.pyc
 pyvirt/
+.venv
 
 # NPM
 node_modules/
