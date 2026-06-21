@@ -584,7 +584,7 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   position: relative;
 }
 .fish-guide .fish-entry:not(.disabled),
-.fish-guide .fish-entry:not(.disabled) .ui.left.corner.label {
+.fish-guide .fish-entry:not(.disabled) .ui.left.corner.label .icon {
   cursor: pointer;
 }
 .fish-guide .fish-entry.selected {
