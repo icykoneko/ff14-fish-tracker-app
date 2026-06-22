@@ -111,19 +111,19 @@ let FishGuide = function(){
         self.displayFishGuidePage(newPage);
       });
 
-      $('.label .icon', this.fishGridEntries$).on({
+      $('.ui.left.corner.label', this.fishGridEntries$).on({
         mouseenter: function() {
-          $(this).parents('.fish-entry .label').addClass('hovering');
+          $(this).addClass('hovering');
         },
         mouseleave: function() {
-          $(this).parents('.fish-entry .label').removeClass('hovering');
+          $(this).removeClass('hovering');
         },
         click: function() {
           // Okay, this gets tricky because if the fish isn't displayed, it's
           // more complicated. Either way, we need to update the ViewModel's
           // settings at a minimum...
           // TODO: The completion list really needs to be a set...
-          self.toggleFishCaughtState($(this).parents('.fish-entry'));
+          self.toggleFishCaughtState($(this).closest('.fish-entry'));
         }
       });
 
