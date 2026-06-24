@@ -22,7 +22,7 @@ def _update_cache_busters(assets=[], patch=None, all=False, timestamp=None):
         timestamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M')
 
     JS_ASSET_PAT = re.compile(r'<script type="text/javascript" src="/?([^?]+)\?([^"]+)"></script>')
-    CSS_ASSET_PAT = re.compile(r'<link rel="stylesheet" href="/?([^?]+)?([^"]+)"\s*/>')
+    CSS_ASSET_PAT = re.compile(r'<link rel="stylesheet" href="/?([^?]+)\?([^"]+)"\s*/>')
 
     for page in PAGES:
         output = ''
