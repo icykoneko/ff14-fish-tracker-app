@@ -54,8 +54,8 @@ let FishGuide = function(){
 
     // Bulk actions for the current page.
     bulkActions: `<div class="fish-guide-bulk-actions">
-  <div class="ui mini compact button" id="fishGuideMarkAll">Mark all</div>
-  <div class="ui mini compact button" id="fishGuideUnmarkAll">Unmark all</div>
+  <div class="ui mini compact green button" id="fishGuideMarkAll">Mark page as caught</div>
+  <div class="ui mini compact button" id="fishGuideUnmarkAll">Unmark page</div>
 </div>`
   };
 
