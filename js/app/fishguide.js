@@ -350,7 +350,6 @@ let FishGuide = function(){
       this.fishGridEntries$.filter(':not(.disabled)').each(function(idx, elem) {
         let entry$ = $(elem);
         let fishInfo = entry$.data('fishInfo');
-        if (fishInfo === undefined) return;
 
         if (isCaught) {
           ViewModel.settings.completed.add(fishInfo.id);
