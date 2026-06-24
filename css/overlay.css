@@ -584,10 +584,6 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   gap: 0.5em;
   margin-top: 0.75em;
 }
-/*
- * Two standalone buttons: drop Fomantic's default right margin so `gap`
- * controls spacing and the group sits flush with the grid's right edge.
- */
 .fish-guide .fish-grid-out .fish-guide-bulk-actions .ui.button {
   margin: 0;
 }
