@@ -54,8 +54,8 @@ let FishGuide = function(){
 
     // Bulk actions for the current page.
     bulkActions: `<div class="fish-guide-bulk-actions">
-  <div class="ui mini compact green button" id="fishGuideMarkAll">Mark page as caught</div>
-  <div class="ui mini compact button" id="fishGuideUnmarkAll">Unmark page</div>
+  <div class="ui mini compact green button" id="fishGuideMarkAll" data-tooltip="This can not be reverted! Do not click unless sure!">Mark page as caught</div>
+  <div class="ui mini compact button" id="fishGuideUnmarkAll" data-tooltip="This can not be reverted! Do not click unless sure!">Unmark page</div>
 </div>`
   };
 
@@ -367,7 +367,6 @@ let FishGuide = function(){
         entry$.toggleClass('caught', isCaught);
       });
 
-      // Persist + re-render once for the whole page.
       ViewModel.saveSettings();
       ViewModel.updateDisplay();
     }
