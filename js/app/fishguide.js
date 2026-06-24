@@ -274,7 +274,8 @@ let FishGuide = function(){
       // Deselect the current fish, and fixup other properties.
       this.fishGridEntries$.removeClass('selected')
                            .addClass('disabled')
-                           .removeClass('caught');
+                           .removeClass('caught')
+                           .removeAttr('data-tooltip');
       this.fishInfo$.addClass('hidden');
       // This resets the icons since they are controlled by unique style classes.
       $('.fish-icon', this.fishGridEntries$).attr('class', 'fish-icon sprite-icon');
@@ -286,6 +287,7 @@ let FishGuide = function(){
         $(this.fishGridEntries$[i]).data('fishInfo', fishInfosForPage[i])
                                    .removeClass('disabled')
                                    .toggleClass('caught', ViewModel.isFishCaught(fishInfosForPage[i].id))
+                                   .attr('data-tooltip', __p(fishInfosForPage[i], 'name'))
                                    .children('.fish-icon').addClass('sprite-icon-fish_n_tackle-' + fishInfosForPage[i].icon);
       }
     }
