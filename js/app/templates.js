@@ -31,6 +31,9 @@ let Templates = function(){
       </div>`,
     siteFooterLinks:
      `<div class="right menu">
+        <a class="icon item" href="https://ko-fi.com/carbuncleplushy" data-tooltip="Send Tip" data-position="top right" target="_blank">
+          <i class="ko-fi icon"></i>
+        </a>
         <a class="icon item" href="https://discord.gg/fishcord" data-tooltip="Fisherman's Horizon Discord" data-position="top right" target="_blank">
           <i class="discord icon"></i>
         </a>
