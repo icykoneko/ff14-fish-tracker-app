@@ -578,6 +578,15 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   grid-gap: 2px;
   grid-template-columns: repeat(10, max-content);
 }
+.fish-guide .fish-grid-out .fish-guide-bulk-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5em;
+  margin-top: 0.75em;
+}
+.fish-guide .fish-grid-out .fish-guide-bulk-actions .ui.button {
+  margin: 0;
+}
 .fish-guide .fish-entry {
   height: 46px;
   width: 46px;
