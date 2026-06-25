@@ -50,6 +50,12 @@ let FishGuide = function(){
   <div class="fish-meta">
     <!-- TODO: Include things like, when is it up next, bait, etc. -->
   </div>
+</div>`,
+
+    // Bulk actions for the current page.
+    bulkActions: `<div class="fish-guide-bulk-actions">
+  <div class="ui mini compact green button" id="fishGuideMarkAll" data-tooltip="This can not be reverted! Do not click unless sure!">Mark page as caught</div>
+  <div class="ui mini compact button" id="fishGuideUnmarkAll" data-tooltip="This can not be reverted! Do not click unless sure!">Unmark page</div>
 </div>`
   };
 
@@ -57,6 +63,7 @@ let FishGuide = function(){
   {{#def.pageSelector}}
   <div class="fish-grid-out">
     {{#def.fishGrid}}
+    {{#def.bulkActions}}
   </div>
   {{#def.fishInfo}}
 </div>`;
@@ -155,6 +162,16 @@ let FishGuide = function(){
         // Deselect the current fish.
         self.fishGridEntries$.removeClass('selected');
         self.fishInfo$.addClass('hidden');
+      });
+
+      // Bulk caught-state actions for the current page.
+      $('#fishGuideMarkAll', elem).on('click', function(e) {
+        e.stopPropagation();
+        self.setAllFishCaughtOnPage(true);
+      });
+      $('#fishGuideUnmarkAll', elem).on('click', function(e) {
+        e.stopPropagation();
+        self.setAllFishCaughtOnPage(false);
       });
 
       // Finally, initialize the menu selector by "displaying" the first page.
@@ -257,7 +274,8 @@ let FishGuide = function(){
       // Deselect the current fish, and fixup other properties.
       this.fishGridEntries$.removeClass('selected')
                            .addClass('disabled')
-                           .removeClass('caught');
+                           .removeClass('caught')
+                           .removeAttr('data-tooltip');
       this.fishInfo$.addClass('hidden');
       // This resets the icons since they are controlled by unique style classes.
       $('.fish-icon', this.fishGridEntries$).attr('class', 'fish-icon sprite-icon');
@@ -269,6 +287,7 @@ let FishGuide = function(){
         $(this.fishGridEntries$[i]).data('fishInfo', fishInfosForPage[i])
                                    .removeClass('disabled')
                                    .toggleClass('caught', ViewModel.isFishCaught(fishInfosForPage[i].id))
+                                   .attr('data-tooltip', __p(fishInfosForPage[i], 'name'))
                                    .children('.fish-icon').addClass('sprite-icon-fish_n_tackle-' + fishInfosForPage[i].icon);
       }
     }
@@ -326,6 +345,32 @@ let FishGuide = function(){
 
       // Toggle the visible check mark.
       fishEntry$.toggleClass('caught');
+    }
+
+    setAllFishCaughtOnPage(isCaught) {
+      // Only the entries belonging to the current page are :not(.disabled).
+      this.fishGridEntries$.filter(':not(.disabled)').each(function(idx, elem) {
+        let entry$ = $(elem);
+        let fishInfo = entry$.data('fishInfo');
+
+        if (isCaught) {
+          ViewModel.settings.completed.add(fishInfo.id);
+        } else {
+          ViewModel.settings.completed.delete(fishInfo.id);
+        }
+
+        // Keep the main-list entry in sync if this fish is currently tracked.
+        let fishEntry = ViewModel.fishEntries[fishInfo.id];
+        if (fishEntry !== undefined && fishEntry.isCaught !== isCaught) {
+          fishEntry.isCaught = isCaught;
+          ViewModel.layout.updateCaughtState(fishEntry);
+        }
+
+        entry$.toggleClass('caught', isCaught);
+      });
+
+      ViewModel.saveSettings();
+      ViewModel.updateDisplay();
     }
 
     preShowHandler() {
