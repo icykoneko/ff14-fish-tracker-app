@@ -46,6 +46,11 @@ title: Home
             integrity="sha512-uiSucQ5TdEImoU68Gp+mxXJ54l4lQm5bTd+T0tj7KcCupCDrKr+FdmgXipF+2Exfc6xDAcnPbr5rXB5bEZS0bw=="
             crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"
+            integrity="sha512-CSBhVREyzHAjAFfBlIBakjoRUKp5h7VSweP0InR/pAJyptH7peuhCsqAI/snV+TwZmXZqoUklpXp6R6wMnYf5Q=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
     <link rel="stylesheet" href="public/images/sprite.css?7.5_20260428_1005" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20260625_2159" />
     <link rel="stylesheet" href="css/overlay.css?20260624_2020" />
@@ -67,7 +72,7 @@ title: Home
       -   to other classes until an initialization method can be called safely.
       -->
     <script type="text/javascript" src="js/app/time.js?20111013_2022"></script>
-    <script type="text/javascript" src="js/app/fish.js?20240706_1217"></script>
+    <script type="text/javascript" src="js/app/fish.js?20260627_2315"></script>
     <script type="text/javascript" src="js/app/weather.js?20260502_1420"></script>
     <script type="text/javascript" src="js/app/fishwatcher.js?20240313_1943"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
@@ -520,7 +525,7 @@ title: Home
     <script type="text/javascript" src="js/app/baittally.js?20251111_1551"></script>
     <script type="text/javascript" src="js/app/map.js?20250310_2300"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20260620_1501"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20260627_2315"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -593,6 +598,7 @@ title: Home
             <a class="item" target="_blank" href="fishtrain.html"><i class="train icon"></i> Fish Train Tool</a>
             <a class="item" id="fish-guide-button"><i class="fish icon"></i> Fish Guide</a>
             <a class="item" target="_blank" href="weatherForecaster.html"><i class="cloud sun rain icon"></i> Weather Forecaster</a>
+            <a class="item" id="testing-windows-button"><i class="vial icon"></i> Testing Windows</a>
             <a class="item" id="tips-and-tricks-button"><i class="lightbulb icon"></i> Tips and Tricks</a>
             <a class="item" target="_blank" href="feedback.html"><i class="comment outline icon"></i> Feedback</a>
           </div>
@@ -912,6 +918,32 @@ title: Home
         <div class="actions">
           <div id="show-the-new-fishies" class="ui approve positive button">Yes</div>
           <div id="hide-the-new-fishies" class="ui cancel negative button">No</div>
+        </div>
+      </div>
+
+      <!-- Modal for displaying testing windows -->
+      <div id="testing-windows-modal" class="ui tiny modal testing-windows">
+        <div class="header">Load Testing Windows</div>
+        <div class="content">
+          <div class="ui form">
+            <p>
+              This feature is for applying the latest test windows data, which may be incomplete or inaccurate. Some windows may be actual testing, while others may be narrowed down.
+            </p><p>
+              If you still want to use this feature, the Fishcord server usually has a pinned post in the #discover-and-testing channel. Copy the exact data from there, and paste it in the field below.
+            </p>
+            <div class="field">
+              <label>Testing Windows Data</label>
+              <textarea id="testing-windows-data" placeholder="Paste the testing windows data here..." rows="4"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui approve positive button">OK</div>
+          <div class="ui cancel negative button">Cancel</div>
+        </div>
+        <div class="ui bottom attached error hidden message" id="testing-windows-error">
+          <i class="exclamation triangle icon"></i>
+          <span class="content"></span>
         </div>
       </div>
 

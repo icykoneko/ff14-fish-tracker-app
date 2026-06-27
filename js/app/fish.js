@@ -20,6 +20,14 @@ function _convertBait(baitList) {
 }
 
 class Fish {
+  static from(other) {
+    if (other instanceof Fish) {
+      let newFish = new Fish(other);
+      _(newFish).extend(_.clone(other));
+      return newFish;
+    }
+  }
+
   constructor(fishData) {
     // Copy constructor version.
     if (fishData instanceof Fish) {
@@ -111,7 +119,13 @@ class Fish {
     // This function allows for runtime language swapping.
     // Really, stuff like this belongs in the viewmodel, but there's a lot of
     // code in here that doesn't make sense lol. One day...
-    this.name = __p(DATA.ITEMS[this.id], "name");
+
+    if ((this.id & 0x80000000) != 0) {
+      // This is a TEST FISH, and you need to use the origId instead...
+      this.name = "[TEST] " + __p(DATA.ITEMS[this.origId], "name");
+    } else {
+      this.name = __p(DATA.ITEMS[this.id], "name");
+    }
     if (this.location.id != 0) {
       if (this.location.spearfishing) {
         this.location.name = __p(DATA.SPEARFISHING_SPOTS[this.location.id], "name");

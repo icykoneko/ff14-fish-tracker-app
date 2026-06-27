@@ -305,17 +305,25 @@ class FishEntry {
   }
 
   getExternalLink(site = 'TC') {
+    // FIXME: FishEntry object might be "clones" or "test objects". You can identify this because
+    // their IDs will be 0x8xxxxxxx. The REAL fish ID is buried in the .data.origId
+    let fishId = this.id;
+    if ((fishId & 0x80000000) != 0) {
+      // It's a test fish, get the REAL id.
+      fishId = this.data.origId;
+    }
+
     // 'site': Must be 'CBH', 'GT', or 'TC'.
     if (site == 'TC') {
       // Teamcraft
       // NOTE: While the language code does not seem to change the site's language, it
       // is required in the URL. I suppose I could technically throw whatever into this
       // but I like Miu, and I don't want to crash their site :)
-      return "https://ffxivteamcraft.com/db/" + localizationHelper.getLanguage() + "/item/" + this.id;
+      return "https://ffxivteamcraft.com/db/" + localizationHelper.getLanguage() + "/item/" + fishId;
     }
     else if (site == 'GT') {
       // Garland Tools
-      return "https://garlandtools.org/db/#item/" + this.id;
+      return "https://garlandtools.org/db/#item/" + fishId;
     }
     else if (site == 'CBH') {
       // CBH doesn't standardize their fish info pages on the game's IDs so we must use search.
@@ -477,6 +485,8 @@ let ViewModel = new class {
       BaitTally.render(document.getElementById('bait-tally-div'), _(fishWatcher.fishEntries));
       $('#bait-modal').modal('show');
     });
+
+    $('#testing-windows-button').on('click', this.onTestingWindowsClicked);
 
     $('#settings-button').on('click', function(e) {
       if (e) e.stopPropagation();
@@ -1026,8 +1036,17 @@ let ViewModel = new class {
     });
 
     // Connect the new entry's events.
-    $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
-    $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
+
+    if ((fish.id & 0x80000000) == 0) {
+      $('.fishCaught.button', $entry).on('click', this.onFishEntryCaughtClicked);
+      $('.fishPinned.button', $entry).on('click', this.onFishEntryPinnedClicked);
+    } else {
+      // Disable the caught and pinned options for test fish.
+      // As of 6/20/2026, the logic used to toggle these settings is heavily coupled to the
+      // fish entry, making it very difficult to just mark the original fish ID as caught or
+      // pinned.
+      $('.fishCaught.button, .fishPinned.button', $entry).addClass('disabled');
+    }
 
     $('.upcoming-windows-button', $entry).on('click', e => {
       console.info("Displaying upcoming windows for %s", fish.name);
@@ -1306,6 +1325,7 @@ let ViewModel = new class {
     $('.ui.menu').toggleClass('inverted', theme === 'dark');
     $('.ui.modal').toggleClass('inverted', theme === 'dark');
     $('.ui.message.announcement').toggleClass('inverted', theme === 'dark');
+    $('.ui.message').toggleClass('inverted', theme === 'dark');
     $('.ui.container').toggleClass('inverted', theme === 'dark');
     $('.ui.form').toggleClass('inverted', theme === 'dark');
     $('.ui.segment').toggleClass('inverted', theme === 'dark');
@@ -1621,5 +1641,164 @@ let ViewModel = new class {
       ViewModel.importSiteSettings();
     }
     return false;
+  }
+
+  removeExistingTestingWindows() {
+    // NOTE: No error checking so I hope you didn't mess anything else up.
+    console.debug("Removing existing testing windows...");
+    let existingTestIds = _(ViewModel.fishEntries).chain().filter((entry) => entry.id >= 0x80000000).map(e => e.id).value();
+    for (let k of existingTestIds) {
+      console.debug("Removing ID:", k);
+      let entry = this.fishEntries[k];
+      let fish = entry.data;
+      // Remove the FishEntry from the view model.
+      console.debug("Removing FishEntry object:", this.fishEntries[k]);
+      this.removeEntry(this.fishEntries[k], k);
+      // Remove the Fish object from the "database".
+      console.debug("Removing Fish object:", fish);
+      Fishes.splice(Fishes.indexOf(fish), 1);
+    }
+  }
+
+  applyTestingWindowsData(strData) {
+    const data = jsyaml.load(strData, {schema: jsyaml.FAILSAFE_SCHEMA});
+    console.info("Parsed data: ", data);
+
+    const WEATHER_NAME_TO_INDEX = _(DATA.WEATHER_TYPES).chain()
+      .pairs().map(x => [x[1]['name_en'], Number(x[0])]).object().value();
+
+    // If the data parsed correctly, blow away any existing test entries before continuing.
+    // We need to do this step first to make our life a lot simpler. Basically, you can only
+    // replace the test windows, not update. This should also make updating the view a lot
+    // easier. Since the test IDs are all starting at 0x80000000 and sequential, we can just
+    // iterate until you can't find anymore, removing each entry from the view, and from
+    // Fishes.
+
+    // PHASE 1: Remove existing test fish entries
+    this.removeExistingTestingWindows();
+
+    for (const fishName in data) {
+      if (!Object.hasOwn(data, fishName)) continue;
+      let testWindows = data[fishName];
+      // Element can be a single object, or an array of objects.
+      // Promote to an array.
+      if (!Array.isArray(testWindows)) {
+        testWindows = [testWindows];
+      }
+
+      // Each test fish needs to have a new, test-related ID. We're going to use
+      // 0x80000000 values to easily identify these fish as test records.
+      let nextTestId = 0x80000000;
+
+      // First we need the ORIGINAL entry from the database to get the ID. Then,
+      // since we still want to preserve the ADJUSTMENTS data, we need to locate the
+      // FishEntry for this fish in `Fishes`.
+      let itemEntry = _(DATA.ITEMS).findWhere({name_en: fishName});
+      if (itemEntry === undefined) {
+        console.error("FISH NOT FOUND: %s", fishName);
+        return;
+      }
+      let origFishObj = _(Fishes).findWhere({id: itemEntry._id});
+
+      testWindows.forEach(element => {
+        console.log("Handling test window for %s:", fishName, element)
+        // Now we can actually process each test window record individually.
+        // Start by creating a CLONE of the FishEntry.
+        let newFishObj = Fish.from(origFishObj);
+        newFishObj._id = nextTestId++;
+        newFishObj.id = newFishObj._id;
+        newFishObj.origId = origFishObj.id;
+
+        // Now, override the conditions
+        if (element.weatherSet !== undefined) {
+          newFishObj.weatherSet =
+            _(element.weatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
+          newFishObj.conditions.weatherSet =
+            _(newFishObj.weatherSet).map(w => DATA.WEATHER_TYPES[w]);
+        }
+        if (element.previousWeatherSet !== undefined) {
+          newFishObj.previousWeatherSet =
+            _(element.previousWeatherSet).map(w => WEATHER_NAME_TO_INDEX[w]);
+          newFishObj.conditions.previousWeatherSet =
+            _(newFishObj.previousWeatherSet).map(w => DATA.WEATHER_TYPES[w]);
+        }
+
+        if (element.bestCatchPath !== undefined) {
+          newFishObj.bestCatchPath =
+            _(element.bestCatchPath).map(x => _(DATA.ITEMS).findWhere({name_en: x})._id);
+          newFishObj.bait.path =
+            _(newFishObj.bestCatchPath).map(x => DATA.ITEMS[x]);
+        }
+
+        let timeSpecified = false;
+        if (element.startHour !== undefined) {
+          newFishObj.startHour = Number(element.startHour);
+          timeSpecified = true;
+        } else if (element.startTime !== undefined) {
+          newFishObj.startHour = parseTimeString(element.startTime);
+          timeSpecified = true;
+        }
+        if (element.endHour !== undefined) {
+          newFishObj.endHour = Number(element.endHour);
+          timeSpecified = true;
+        } else if (element.endTime !== undefined) {
+          newFishObj.endHour = parseTimeString(element.endTime);
+          timeSpecified = true;
+        }
+        if (timeSpecified) {
+          let totalHoursUp = Math.abs(newFishObj.endHour - newFishObj.startHour);
+          newFishObj.dailyDuration = dateFns.normalizeDuration({
+            hours: newFishObj.endHour < newFishObj.startHour ? 24 - totalHoursUp : totalHoursUp });
+        }
+        newFishObj.alwaysAvailable =
+          newFishObj.weatherSet.length == 0 && newFishObj.startHour == 0 && newFishObj.endHour == 24;
+
+        // Update the windows for this fish now (unless it wasn't being displayed)
+        // Of course, confuzzled carbuncles would really like to know why you'd call this
+        // function if you didn't have the fish displayed in the first place... but maybe
+        // that could happen... filters and such.
+        newFishObj.catchableRanges = [];
+        newFishObj.incompleteRanges = [];
+        newFishObj.__uptimeDirty = true;
+
+        // Add the entry to the Fishes and View.
+        Fishes.push(newFishObj);
+        ViewModel.activateEntry(newFishObj, Date.now());
+      });
+    }
+
+    // Now that we're finished, we can ask the view model to update the display.
+    ViewModel.updateDisplay();
+
+    // Testing Window Data Format:
+    // Single YAML document using ENGLISH NAME of the fish as the key with one or more
+    // objects containing the conditions to override.
+    // Each object will generate a unique test fish record
+    // Iron Oxydoras: {previousWeatherSet: ["Fog"], weatherSet: ["Fog"], startHour: 13, endHour: 15}
+  }
+
+  onTestingWindowsClicked(e) {
+    if (e) e.stopPropagation();
+    $('#main-menu.dropdown').dropdown('hide');
+    $('#testing-windows-modal')
+      .modal({
+        onApprove: function($element) {
+          try {
+            ViewModel.applyTestingWindowsData($('#testing-windows-data').val());
+            return true;
+          } catch (ex) {
+            console.error("Failed to process testing windows data.", ex);
+            $('#testing-windows-error .content').text("Failed to process testing windows data. Please check the input and try again.");
+            $('#testing-windows-error').removeClass('hidden');
+            return false;
+          }
+        },
+        onHidden: function() {
+          // Clear any error messages
+          $('#testing-windows-error .content').text("");
+          $('#testing-windows-error').addClass('hidden');
+        }
+      })
+      .modal('show');
   }
 };
