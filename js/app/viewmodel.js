@@ -305,17 +305,25 @@ class FishEntry {
   }
 
   getExternalLink(site = 'TC') {
+    // FIXME: FishEntry object might be "clones" or "test objects". You can identify this because
+    // their IDs will be 0x8xxxxxxx. The REAL fish ID is buried in the .data.origId
+    let fishId = this.id;
+    if ((fishId & 0x80000000) != 0) {
+      // It's a test fish, get the REAL id.
+      fishId = this.data.origId;
+    }
+
     // 'site': Must be 'CBH', 'GT', or 'TC'.
     if (site == 'TC') {
       // Teamcraft
       // NOTE: While the language code does not seem to change the site's language, it
       // is required in the URL. I suppose I could technically throw whatever into this
       // but I like Miu, and I don't want to crash their site :)
-      return "https://ffxivteamcraft.com/db/" + localizationHelper.getLanguage() + "/item/" + this.id;
+      return "https://ffxivteamcraft.com/db/" + localizationHelper.getLanguage() + "/item/" + fishId;
     }
     else if (site == 'GT') {
       // Garland Tools
-      return "https://garlandtools.org/db/#item/" + this.id;
+      return "https://garlandtools.org/db/#item/" + fishId;
     }
     else if (site == 'CBH') {
       // CBH doesn't standardize their fish info pages on the game's IDs so we must use search.
