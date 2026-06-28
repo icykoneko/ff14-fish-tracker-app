@@ -1677,6 +1677,10 @@ let ViewModel = new class {
     // PHASE 1: Remove existing test fish entries
     this.removeExistingTestingWindows();
 
+    // Each test fish needs to have a new, test-related ID. We're going to use
+    // 0x80000000 values to easily identify these fish as test records.
+    let nextTestId = 0x80000000;
+
     for (const fishName in data) {
       if (!Object.hasOwn(data, fishName)) continue;
       let testWindows = data[fishName];
@@ -1685,10 +1689,6 @@ let ViewModel = new class {
       if (!Array.isArray(testWindows)) {
         testWindows = [testWindows];
       }
-
-      // Each test fish needs to have a new, test-related ID. We're going to use
-      // 0x80000000 values to easily identify these fish as test records.
-      let nextTestId = 0x80000000;
 
       // First we need the ORIGINAL entry from the database to get the ID. Then,
       // since we still want to preserve the ADJUSTMENTS data, we need to locate the
