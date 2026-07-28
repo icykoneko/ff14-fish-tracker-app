@@ -15475,3 +15475,88 @@
   lure:
   snagging:
   patch: 7.5
+# Patch 7.55 (2026-07-28)
+- name: Ner Lar Dor
+  location: Karvarhur the First
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.55
+  dataMissing: true
+- name: Xehabopo'u
+  location: Miyakabek'zu
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.55
+  dataMissing: true
+- name: Skyfrond
+  location: Cenote Jayunja
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.55
+  dataMissing: true
+- name: Rroneek Bichir
+  location: Lake Toari
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.55
+  dataMissing: true
+- name: Great Ball of Lightning
+  location: Alexandrian Ruins
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.55
+  dataMissing: true
+- name: Triple Threat
+  location: Canal Town North
+  startHour: 0
+  endHour: 24
+  previousWeatherSet:
+  weatherSet:
+  bestCatchPath:
+  predators:
+  tug:
+  hookset:
+  lure:
+  snagging:
+  patch: 7.55
+  dataMissing: true
