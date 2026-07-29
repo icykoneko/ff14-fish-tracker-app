@@ -33,7 +33,14 @@
 # - name: Ner Lar Dor
 - name: Xehabopo'u
   bait: [Golden Stonefly Nymph, Driftwood Catfish]
-# - name: Skyfrond
+- name: Skyfrond
+  startHour: 16
+  endHour: 24
+  previousWeatherSet:
+  - Clear Skies
+  weatherSet:
+  - Rain
+  bait: [Popper Lure, Flawless Saucer]
 - name: Rroneek Bichir
   startHour: 20
   endHour: 24
