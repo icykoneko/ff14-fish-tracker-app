@@ -40,7 +40,7 @@
   - Clear Skies
   weatherSet:
   - Rain
-  bait: [Popper Lure, Flawless Saucer]
+  bait: [Red Maggots, Flawless Saucer]
 - name: Rroneek Bichir
   startHour: 20
   endHour: 24
