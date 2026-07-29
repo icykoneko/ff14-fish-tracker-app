@@ -35,6 +35,12 @@
   bait: [Golden Stonefly Nymph, Driftwood Catfish]
 # - name: Skyfrond
 - name: Rroneek Bichir
+  startHour: 20
+  endHour: 24
+  previousWeatherSet:
+  - Fair Skies
+  weatherSet:
+  - Dust Storms
   bait: [Popper Lure, Niikwerepi Trout, Ttokatoa]
 # - name: Great Ball of Lightning
 # - name: Triple Threat
