@@ -55,5 +55,6 @@
   - Dust Storms
   bait: [Popper Lure, Niikwerepi Trout, Ttokatoa]
   hookset: Powerful
-# - name: Great Ball of Lightning
+- name: Great Ball of Lightning
+  bait: [Red Maggots]
 # - name: Triple Threat
