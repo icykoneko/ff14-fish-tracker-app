@@ -30,9 +30,13 @@
 #   tug:
 #   hookset:
 #   lure:
-# - name: Ner Lar Dor
+- name: Ner Lar Dor
+  bait: [Red Maggots]
+  hookset: Precision
+  lure: Modest
 - name: Xehabopo'u
   bait: [Golden Stonefly Nymph, Driftwood Catfish]
+  hookset: Powerful
 - name: Skyfrond
   startHour: 16
   endHour: 24
@@ -41,6 +45,7 @@
   weatherSet:
   - Rain
   bait: [Red Maggots, Flawless Saucer]
+  hookset: Powerful
 - name: Rroneek Bichir
   startHour: 20
   endHour: 24
@@ -49,5 +54,6 @@
   weatherSet:
   - Dust Storms
   bait: [Popper Lure, Niikwerepi Trout, Ttokatoa]
+  hookset: Powerful
 # - name: Great Ball of Lightning
 # - name: Triple Threat
