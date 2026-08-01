@@ -57,4 +57,13 @@
   hookset: Powerful
 - name: Great Ball of Lightning
   bait: [Red Maggots]
-# - name: Triple Threat
+  hookset: Powerful
+- name: Triple Threat
+  startHour: 8
+  endHour: 16
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Fog
+  bait: [Ghost Nipper]
+  hookset: Powerful
