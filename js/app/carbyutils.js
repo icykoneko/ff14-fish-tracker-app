@@ -73,6 +73,7 @@ let CarbyUtils = function(){
     //   startTime: "hh:mm" format (24-hr time)
     //   endTime: "hh:mm" format (24-hr time)
     //   bestCatchPath: [<TACKLE_NAME_EN>,<FISH_NAME_EN>*]
+    //   lure: "Modest" | "Ambitious"
     // NOTE: If you want to enter a string for start and end times, please use
     // the `startTime` and `endTime` options instead of `startHour` and
     // `endHour`.
@@ -160,6 +161,11 @@ let CarbyUtils = function(){
       }
       fish_entry.alwaysAvailable =
         fish_entry.weatherSet.length == 0 && fish_entry.startHour == 0 && fish_entry.endHour == 24;
+
+      // Accepts short or full name (e.g., "Modest" or "Modest Lure")
+      if (options.lure !== undefined) {
+        fish_entry.lure = options.lure.split(/\s+/)[0];
+      }
 
       // Update the windows for this fish now (unless it wasn't being displayed)
       // Of course, confuzzled carbuncles would really like to know why you'd call this
