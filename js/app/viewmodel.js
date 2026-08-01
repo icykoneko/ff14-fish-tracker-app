@@ -276,13 +276,21 @@ class FishEntry {
 
       if (dateFns.isAfter(currStart, earthTime)) {
         // The fish is not currently available.
+        // Up soon means less than 15 minutes away!
         this.isUpSoon = dateFns.differenceInMinutes(currStart, earthTime) < 15;
+        let weeksUntilUp = dateFns.differenceInWeeks(currStart, earthTime);
+        // On vacation is anything beyond a week.
+        this.isOnVacation = weeksUntilUp >= 1;
+        // On hiatus is anything beyond 4 weeks.
+        this.isOnHiatus = weeksUntilUp >= 4;
         this.availability.current.duration =
           "in " + dateFns.formatDistanceStrict(currStart, earthTime, { roundingMethod: 'floor' });
         this.availability.current.date = currStart;
       } else {
         // The fish is currently available!
         this.isUpSoon = false; // It's already up! XD
+        this.isOnVacation = false;
+        this.isOnHiatus = false;
         this.availability.current.duration =
           "closes in " + dateFns.formatDistanceStrict(currEnd, earthTime, { roundingMethod: 'floor' });
         this.availability.current.date = currEnd;

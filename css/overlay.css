@@ -533,6 +533,22 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
   border-top: 2px solid black !important;
 }
 
+/* Entry rules when fish is on vacation */
+.ui.table tr.fish-entry.fish-vacation {
+    filter: sepia(0.5);
+}
+.ui.table tr.fish-entry.fish-vacation td .fish-icon {
+    filter: grayscale();
+}
+
+/* Entry rules when fish is on hiatus */
+.ui.table tr.fish-entry.fish-hiatus {
+    filter: grayscale();
+}
+.ui.table tr.fish-entry.fish-hiatus td .fish-icon {
+    filter: brightness(0.5);
+}
+
 /*
  * Fish Guide style rules
  * NOTE: All rules MUST be bounded to .fish-guide to prevent matching against

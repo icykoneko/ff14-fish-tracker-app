@@ -246,6 +246,15 @@ class FishTableLayout {
       }
     }
 
+    // Is this fish on vacation or hiatus?
+    if (fishEntry.isOnHiatus) {
+      $fishEntry.addClass('fish-hiatus').removeClass('fish-vacation');
+    } else if (fishEntry.isOnVacation) {
+      $fishEntry.addClass('fish-vacation').removeClass('fish-hiatus');
+    } else {
+      $fishEntry.removeClass('fish-vacation').removeClass('fish-hiatus');
+    }
+
     // During Fish Eyes, we want to hide the availability text when it doesn't matter.
     // We have to be deliberate about it.
     // This class will only get assigned to fish which do not have natural alwaysAvailable
