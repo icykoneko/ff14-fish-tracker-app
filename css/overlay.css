@@ -534,18 +534,18 @@ tr.fishtrain-fishentrydetails .sprite-icon-status-intuition.has-duration > span 
 }
 
 /* Entry rules when fish is on vacation */
-.ui.table tr.fish-entry.fish-vacation {
+#fishes.option-dimVacation tr.fish-entry.fish-vacation {
     filter: sepia(0.5);
 }
-.ui.table tr.fish-entry.fish-vacation td .fish-icon {
+#fishes.option-dimVacation tr.fish-entry.fish-vacation td .fish-icon {
     filter: grayscale();
 }
 
 /* Entry rules when fish is on hiatus */
-.ui.table tr.fish-entry.fish-hiatus {
+#fishes.option-dimVacation tr.fish-entry.fish-hiatus {
     filter: grayscale();
 }
-.ui.table tr.fish-entry.fish-hiatus td .fish-icon {
+#fishes.option-dimVacation tr.fish-entry.fish-hiatus td .fish-icon {
     filter: brightness(0.5);
 }
 
