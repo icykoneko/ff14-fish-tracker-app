@@ -1322,7 +1322,7 @@ let ViewModel = new class {
     let $this = $(this);
     // Update the settings.
     ViewModel.settings.dimFishOnVacation = $this.closest('.checkbox').checkbox('is checked');
-    $('#fishes').toggleClass('option-dimVacation', ViewModel.settings.dimFishOnVacation);
+    $('#fish-table-container').toggleClass('option-dimVacation', ViewModel.settings.dimFishOnVacation);
     ViewModel.saveSettings();
   }
 
@@ -1549,10 +1549,10 @@ let ViewModel = new class {
     }
     if (settings.dimFishOnVacation) {
       $('#dimFishOnVacationCheckbox').checkbox('set checked');
-      $('#fishes').addClass('option-dimVacation');
+      $('#fish-table-container').addClass('option-dimVacation');
     } else {
       $('#dimFishOnVacationCheckbox').checkbox('set unchecked');
-      $('#fishes').removeClass('option-dimVacation');
+      $('#fish-table-container').removeClass('option-dimVacation');
     }
 
     // EXTRA FEATURE
