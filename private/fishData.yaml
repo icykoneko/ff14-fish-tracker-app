@@ -13813,7 +13813,7 @@
   location: Cenote Jayunja
   bestCatchPath:
   - - Honeybee
-    - Popper Lure
+    - Red Maggots
   tug: medium
   hookset: Powerful
   patch: 7.0
@@ -15558,6 +15558,8 @@
   weatherSet:
   bestCatchPath:
   predators:
+    Shined Copper Shark: 1
+    Copper Shark: 2
   tug:
   hookset:
   lure:
