@@ -49,7 +49,7 @@
 
     <link rel="stylesheet" href="public/images/sprite.css?7.5_20260428_1005" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20260625_2159" />
-    <link rel="stylesheet" href="css/overlay.css?20260801_1538" />
+    <link rel="stylesheet" href="css/overlay.css?20260801_1929" />
     <link rel="stylesheet" href="css/dark_overlay.css?20260414_2133" />
 
     <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
@@ -417,7 +417,7 @@
     <script type="text/javascript" src="js/app/baittally.js?20251111_1551"></script>
     <script type="text/javascript" src="js/app/map.js?20250310_2300"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20260801_1538"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20260801_1929"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -699,7 +699,7 @@
                 <expansionSelectors></expansionSelectors>
               </div><!-- column -->
               <div class="column" style="width: unset;">
-                <div class="row" style="padding-bottom: 0.5rem;">Display:</div>
+                <div class="row" style="padding-bottom: 0.5rem;">Display Options:</div>
                 <div class="row">
                   <div class="ui mini compact buttons" id="filterCompletion">
                     <div class="ui active button" data-filter="all">All</div>
@@ -739,7 +739,18 @@
                       <label>Overall Rarity</label>
                     </div>
                   </div>
+                </div> <!-- </sortingOptions> -->
+                <div class="row" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+                  Visual Options:
                 </div>
+                <div class="row" id="visualOptions">
+                  <div class="field">
+                    <div id="dimFishOnVacationCheckbox" class="ui checked checkbox">
+                      <input type="checkbox" name="dimFishOnVacation" checked="checked" class="hidden" value="dimFishOnVacation"/>
+                      <label>Dim Fish on Vacation</label>
+                    </div>
+                  </div>
+                </div><!-- </visualOptions> -->
               </div><!-- column -->
             </div><!-- row -->
             <div class="centered row">

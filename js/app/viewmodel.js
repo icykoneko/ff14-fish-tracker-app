@@ -57,6 +57,11 @@ class SiteSettings {
     // * light: Light mode...
     this.theme = 'dark';
 
+    // Visual Options:
+    // - dimFishOnVacation: Fish which are not going to be up again for extended
+    //                      periods of time are visually dimmed to indicate.
+    this.dimFishOnVacation = true;
+
     // Recorded information:
     // * completed: A set of fish ids which have been caught.
     // * pinned: A set of fish ids which should be pinned.
@@ -552,7 +557,10 @@ let ViewModel = new class {
     $('#filterPatch .button.patch-set').on('click', this.filterPatchSetClicked);
     $('#theme-toggle .toggle').on('click', this.themeButtonClicked);
     $('#checklist .button').on('click', this.onChecklistButtonClicked);
-    $('#fish-eyes-button').on('click', this.onFishEyesButtonClicked)
+    $('#fish-eyes-button').on('click', this.onFishEyesButtonClicked);
+    $('#dimFishOnVacationCheckbox.checkbox').checkbox({
+      onChange: this.dimFishOnVacationChanged
+    });
 
     // Initialize import/export modals.
     $('#export-settings-modal').modal();
@@ -1309,6 +1317,15 @@ let ViewModel = new class {
     });
   }
 
+  dimFishOnVacationChanged(e) {
+    if (e) e.stopPropagation();
+    let $this = $(this);
+    // Update the settings.
+    ViewModel.settings.dimFishOnVacation = $this.closest('.checkbox').checkbox('is checked');
+    $('#fishes').toggleClass('option-dimVacation', ViewModel.settings.dimFishOnVacation);
+    ViewModel.saveSettings();
+  }
+
   themeButtonClicked(e) {
     if (e) e.stopPropagation();
     let $this = $(this);
@@ -1523,6 +1540,20 @@ let ViewModel = new class {
       settings.theme = this.settings.theme;
     }
     this.applyTheme(settings.theme);
+
+    // Visual options:
+
+    if (settings.dimFishOnVacation === undefined) {
+      // The `dimFishOnVacation` setting was added 2026-08-01.
+      settings.dimFishOnVacation = this.settings.dimFishOnVacation;
+    }
+    if (settings.dimFishOnVacation) {
+      $('#dimFishOnVacationCheckbox').checkbox('set checked');
+      $('#fishes').addClass('option-dimVacation');
+    } else {
+      $('#dimFishOnVacationCheckbox').checkbox('set unchecked');
+      $('#fishes').removeClass('option-dimVacation');
+    }
 
     // EXTRA FEATURE
     // If user enters "?resetfilters" in the URL, we'll remove all patches from
