@@ -31,10 +31,22 @@
 #   hookset:
 #   lure:
 - name: Ner Lar Dor
+  startHour: 14
+  endHour: 16
+  previousWeatherSet:
+  - Fog
+  weatherSet:
+  - Wind
   bait: [Red Maggots]
   hookset: Precision
   lure: Modest
 - name: Xehabopo'u
+  startHour: 12
+  endHour: 15
+  previousWeatherSet:
+  - Clouds
+  weatherSet:
+  - Showers
   bait: [Golden Stonefly Nymph, Driftwood Catfish]
   hookset: Powerful
 - name: Skyfrond
@@ -47,7 +59,7 @@
   bait: [Red Maggots, Flawless Saucer]
   hookset: Powerful
 - name: Rroneek Bichir
-  startHour: 20
+  startHour: 22
   endHour: 24
   previousWeatherSet:
   - Fair Skies
@@ -56,6 +68,12 @@
   bait: [Popper Lure, Niikwerepi Trout, Ttokatoa]
   hookset: Powerful
 - name: Great Ball of Lightning
+  startHour: 2
+  endHour: 4
+  previousWeatherSet:
+  - Thunderstorms
+  weatherSet:
+  - Umbral Static
   bait: [Red Maggots]
   hookset: Powerful
 - name: Triple Threat
