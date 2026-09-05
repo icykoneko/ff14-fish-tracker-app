@@ -294,6 +294,19 @@ class Fish {
          nextRange: dateFns.formatISO(nextRange.start) + " - " + dateFns.formatISO(nextRange.end)});
       return;
     }
+
+    var lastPreparationStart = lastRange.preparationStart || lastRange.start;
+    var nextPreparationStart = nextRange.preparationStart || nextRange.start;
+    // Re-adding the custom "preparationStart" timestamp after the internalXor strips it by using the earliest prep
+    // time from either fish window
+    if (merged.length === 1) {
+      merged[0].preparationStart = new Date(Math.min(
+        +lastPreparationStart, +nextPreparationStart));
+    } else {
+      merged[0].preparationStart = lastPreparationStart;
+      merged[merged.length - 1].preparationStart = nextPreparationStart;
+    }
+
     this.catchableRanges.splice.apply(
       this.catchableRanges, [-1, 1].concat(merged) );
     this.notifyCatchableRangesUpdated();

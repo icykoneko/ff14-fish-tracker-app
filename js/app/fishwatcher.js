@@ -219,6 +219,57 @@ class FishWatcher {
     }
   }
 
+  getPrepFor(fish, targetRange) {
+    const preparation = {
+      start: targetRange.preparationStart === undefined
+        ? targetRange.start
+        : targetRange.preparationStart,
+      moochFish: null
+    };
+    const catchPath = fish.bestCatchPath || [];
+    const moochId = _(catchPath).last();
+    if (moochId === undefined || Array.isArray(moochId)) {
+      return preparation;
+    }
+
+    const moochFish = _(Fishes).findWhere({id: moochId});
+    if (!moochFish || (moochFish.startHour === 0 && moochFish.endHour === 24)) {
+      return preparation;
+    }
+
+    const targetStart = +targetRange.start;
+    let moochStart = targetStart;
+    // Move availability back to the daily window opening or a weather change.
+    while (true) {
+      const window = dateFns.intervalAfter(startOfPeriod(moochStart - 1), {hours: 8});
+      const [previousWeather, currentWeather] = weatherService.getWeatherSetForAreaAtTime(
+        fish.location.zoneId, window.start);
+
+      const previousWeatherIsDifferent = (moochFish.previousWeatherSet.length > 0 &&
+          !_(moochFish.previousWeatherSet).contains(previousWeather));
+      const currentWeatherIsDifferent = (moochFish.weatherSet.length > 0 &&
+          !_(moochFish.weatherSet).contains(currentWeather));
+      if (previousWeatherIsDifferent || currentWeatherIsDifferent) {
+        break;
+      }
+
+      const moochRange = _(moochFish.availableRangeDuring(window, false))
+        .find(range => +range.start < moochStart && +range.end >= moochStart);
+      if (moochRange === undefined) {
+        break;
+      }
+      const availableRange = dateFns.intervalIntersection(moochRange, window);
+      moochStart = +availableRange.start;
+    }
+
+    // Move the start date back earlier to account for needing to be there for the mooch fish
+    if (moochStart < targetStart) {
+      preparation.start = new Date(Math.min(+preparation.start, moochStart));
+      preparation.moochFish = moochFish;
+    }
+    return preparation;
+  }
+
   __checkToAddCatchableRange(fish, window, baseTime) {
     // Found a time period where the weather is favorable. Now check if the
     // fish is even up. This really should be the other way around -_-
@@ -256,6 +307,7 @@ class FishWatcher {
     // getting set to the same value. To solve this, we'll intersect nextRange with window.
     var origNextRange = nextRange;
     nextRange = dateFns.intervalIntersection(nextRange, window);
+    var preparationStart = null;
 
     // If this fish has predators, we have to consider their windows too...
     // Basically, to ensure we get the same number of windows for every fish,
@@ -411,6 +463,7 @@ class FishWatcher {
       } else if (overallPredRange === null) {
         nextRange = null;
       } else {
+        preparationStart = overallPredRange.start;
         // If at least one of the predators is up all day, extend the accepted range to the
         // end of this window. Leave the start time alone though.
         if (atLeastOnePredatorAlwaysAvailable) {
@@ -426,10 +479,16 @@ class FishWatcher {
       return false;
     }
 
+    var catchableRange = dateFns.intervalIntersection(nextRange, window);
+    if (preparationStart === null) {
+      preparationStart = catchableRange.start;
+    }
+    catchableRange.preparationStart = preparationStart;
+
     // Now for the complicated part...
     // Update the catchable ranges using the intersection of the next range
     // and the window itself. Merge together bordering windows.
-    fish.addCatchableRange(dateFns.intervalIntersection(nextRange, window));
+    fish.addCatchableRange(catchableRange);
     return dateFns.isWithinInterval(+window.end + 1, origNextRange);
   }
 }

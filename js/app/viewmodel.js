@@ -233,6 +233,7 @@ class FishEntry {
         }
         let [previousWeather, weather] = _(weatherService.getWeatherSetForAreaAtTime(fish.location.zoneId, +cr.start)).map((w) => DATA.WEATHER_TYPES[w]);
         return {
+          range: cr,
           start: start,
           end: end,
           duration: dateFns.formatDistanceStrict(end, start, { roundingMethod: 'floor' }),
@@ -951,12 +952,17 @@ let ViewModel = new class {
       this.$upcomingWindows.modal('hide');
     }
 
+    // Ensuring the rows are up to date for when the modal opens
+    entry.updateNextWindowData();
+    const upcomingWindows = entry.availability.upcomingWindows;
+
     // First, we need to update the contents of the modal. It may already be empty,
     // but either way, we're going to clear out, and start fresh.
     // We also want to remember which fish is being displayed.
     this.upcomingWindowsEntry = entry;
     this.$upcomingWindows.empty().append(
       this.layout.templates.upcomingWindows(entry));
+    this.initializeUpcomingWindowCalendarActions(entry, upcomingWindows);
 
     // Now we can display the modal. If it wasn't already initialized, this should
     // take can of that too.
@@ -967,8 +973,113 @@ let ViewModel = new class {
   onHideUpcomingWindows($element) {
     // Since the modal is now hidden, let's remove the setting too.
     ViewModel.upcomingWindowsEntry = null;
+    $('.window-calendar-menu').remove();
     // Always allow the modal to hide.
     return true;
+  }
+
+  resolveUpcomingWindowCalendarAction(entry, upcomingWindow) {
+    const unavailableTooltip = 'Calendar details are unavailable for this window';
+    if (upcomingWindow === undefined) {
+      return {
+        event: null,
+        disabledTooltip: unavailableTooltip
+      };
+    }
+
+    if (!dateFns.isAfter(upcomingWindow.start, Date.now())) {
+      return {
+        event: null,
+        disabledTooltip: 'This window is already underway'
+      };
+    }
+
+    const event = CalendarExport.buildFishEvent(entry.data, upcomingWindow.range);
+    return {
+      event: event,
+      disabledTooltip: event === null ? unavailableTooltip : null
+    };
+  }
+
+  updateCalendarActionState($dropdown, resolveAction) {
+    const action = resolveAction();
+    const enabled = action.event !== null;
+    const $tooltipTarget = $dropdown.parent();
+    const tooltip = enabled ? 'Add this window to calendar' : action.disabledTooltip;
+    $dropdown
+      .toggleClass('disabled', !enabled)
+      .attr('aria-disabled', String(!enabled))
+      .attr('tabindex', enabled ? '0' : '-1');
+    $tooltipTarget.attr('data-content', tooltip);
+    return action.event;
+  }
+
+  initializeCalendarAction($dropdown, resolveAction) {
+    const $tooltipTarget = $dropdown.parent();
+    const $scrollContext = $('.scrolling.content', this.$upcomingWindows);
+    const $menu = $dropdown.children('.window-calendar-menu').appendTo(document.body);
+    const resolveEvent = () => this.updateCalendarActionState($dropdown, resolveAction);
+    resolveEvent();
+
+    $tooltipTarget.popup({
+      exclusive: true,
+      movePopup: false,
+      position: 'left center',
+      scrollContext: $scrollContext,
+      variation: this.settings.theme === 'dark'
+        ? 'mini inverted window-calendar-tooltip'
+        : 'mini window-calendar-tooltip',
+      onShow: () => {
+        resolveEvent();
+        $tooltipTarget.popup('change content', $tooltipTarget.attr('data-content'));
+        return true;
+      }
+    });
+
+    $dropdown.popup({
+      context: 'body',
+      exclusive: true,
+      movePopup: false,
+      on: 'click',
+      popup: $menu,
+      position: 'right center',
+      onShow: () => resolveEvent() !== null
+    });
+    $menu.add($menu.children('.ui.menu'))
+      .toggleClass('inverted', this.settings.theme === 'dark');
+
+    $('.google-calendar-action', $menu).on('click', e => {
+      const event = resolveEvent();
+      if (event === null) {
+        e.preventDefault();
+        return;
+      }
+      e.currentTarget.href = CalendarExport.createGoogleCalendarUrl(event);
+    });
+
+    $('.ics-calendar-action', $menu).on('click', e => {
+      e.preventDefault();
+      const event = resolveEvent();
+      if (event === null) return;
+
+      const targetStart = new Date(event.targetStart)
+          .toISOString()
+          .replace(/[-:]/g, '')
+          .replace(/\.\d{3}/, '');
+      const filename = 'ffxiv-fish-' + event.fishId + '-' + targetStart + '.ics';
+      CalendarExport.downloadICalendar(event, filename);
+      $dropdown.popup('hide');
+    });
+  }
+
+  initializeUpcomingWindowCalendarActions(entry, upcomingWindows) {
+    $('.window-calendar-action', this.$upcomingWindows).each((idx, element) => {
+      const $dropdown = $(element);
+      const upcomingWindow = upcomingWindows[idx];
+      this.initializeCalendarAction(
+        $dropdown,
+        () => this.resolveUpcomingWindowCalendarAction(entry, upcomingWindow));
+    });
   }
 
   activateEntry(fish, earthTime) {

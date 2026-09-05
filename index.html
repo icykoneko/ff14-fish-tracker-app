@@ -53,7 +53,7 @@ title: Home
 
     <link rel="stylesheet" href="public/images/sprite.css?7.5_20260428_1005" />
     <link rel="stylesheet" href="css/semantic_ui_overrides.css?20260625_2159" />
-    <link rel="stylesheet" href="css/overlay.css?20260801_1940" />
+    <link rel="stylesheet" href="css/overlay.css?20260829_0910" />
     <link rel="stylesheet" href="css/dark_overlay.css?20260414_2133" />
 
     <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
@@ -74,7 +74,8 @@ title: Home
     <script type="text/javascript" src="js/app/time.js?20111013_2022"></script>
     <script type="text/javascript" src="js/app/fish.js?20260627_2315"></script>
     <script type="text/javascript" src="js/app/weather.js?20260502_1420"></script>
-    <script type="text/javascript" src="js/app/fishwatcher.js?20240313_1943"></script>
+    <script type="text/javascript" src="js/app/fishwatcher.js?20260823_1607"></script>
+    <script type="text/javascript" src="js/app/calendar_export.js?20260824_1811"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
 
     {% if site.data.adjustments.size > 0 %}
@@ -483,6 +484,9 @@ title: Home
       </div>
       <div class="scrolling content">
         <div class="upcoming-windows-grid">
+          <div>
+            <!-- Add to Calendar Button -->
+          </div>
           <div class="header">
             <b>Next Start</b>
           </div>
@@ -496,6 +500,22 @@ title: Home
             <b>Downtime</b>
           </div>
           {{~it.availability.upcomingWindows :nextWindow:idx}}
+            <div class="window-calendar">
+              <div class="window-calendar-action"
+                   role="button" tabindex="0" aria-label="Add this window to calendar">
+                <i class="calendar plus outline icon"></i>
+                <div class="ui mini popup window-calendar-menu">
+                  <div class="ui mini compact vertical menu" role="menu">
+                    <a class="item google-calendar-action" href="#" target="_blank" rel="noopener" role="menuitem">
+                      <i class="google icon"></i> Google Calendar
+                    </a>
+                    <a class="item ics-calendar-action" href="#" role="menuitem">
+                      <i class="download icon"></i> Download .ics
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="window-start">
               {{=dateFns.formatRelative(nextWindow.start, Date.now())}}
             </div>
@@ -520,12 +540,12 @@ title: Home
     {% endraw %}
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20260801_1538"></script>
+    <script type="text/javascript" src="js/app/layout.js?20260903_0001"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20260624_2056"></script>
     <script type="text/javascript" src="js/app/baittally.js?20251111_1551"></script>
     <script type="text/javascript" src="js/app/map.js?20250310_2300"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20260801_1940"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20260829_0900"></script>
 
     <script type="text/javascript">
       $(() => {
@@ -587,7 +607,7 @@ title: Home
     </script>
 
     <!-- DEV MODE EXTRAS -->
-    <script type="text/javascript" src="js/app/carbyutils.js?20260731_2127"></script>
+    <script type="text/javascript" src="js/app/carbyutils.js?20260823_1417"></script>
   </head>
   <body>
     <div id="topmenu" class="ui text top fixed menu">
