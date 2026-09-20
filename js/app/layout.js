@@ -78,9 +78,11 @@ class FishTableLayout {
 
   remove(fishEntry) {
     // Removes a new fish entry from the layout.
+    $('.fish-table-hover-tip-elem', fishEntry.element).popup('destroy');
     fishEntry.element.remove();
     // Also remove any intuition elements.
     for (let subEntry of fishEntry.intuitionEntries) {
+      $('.fish-table-hover-tip-elem', subEntry.element).popup('destroy');
       subEntry.element.remove();
     }
   }
@@ -202,11 +204,11 @@ class FishTableLayout {
 
       $currentAvail
         .attr('data-val', fishEntry.availability.current.date)
-        .attr('data-tooltip', dateFns.formatRelative(fishEntry.availability.current.date, baseTime));
+        .attr('data-content', dateFns.formatRelative(fishEntry.availability.current.date, baseTime));
       $upcomingAvail
         .attr('data-val', fishEntry.availability.upcoming.date)
         .attr('data-prevclose', fishEntry.availability.upcoming.prevdate)
-        .attr('data-tooltip', dateFns.formatRelative(fishEntry.availability.upcoming.date, baseTime))
+        .attr('data-content', dateFns.formatRelative(fishEntry.availability.upcoming.date, baseTime))
         .text(fishEntry.availability.upcoming.downtime);
       
       // If this fish is currently being displayed in the upcoming windows, update it now!
@@ -351,6 +353,8 @@ class FishTableLayout {
         }
       }
 
+      // Need to explicitly hide any popups that were visible prior to resorting.
+      $('.fish-table-hover-tip-elem', $entryElem).popup('hide');
       this.append(entry);
     }
 

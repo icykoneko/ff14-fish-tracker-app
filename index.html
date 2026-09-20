@@ -274,7 +274,7 @@ title: Home
             {{?it.data.dataMissing !== false}}
               <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
             {{?}}
-            <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">
+            <span class="fish-availability-current fish-table-hover-tip-elem" data-val="{{=it.availability.current.date}}" data-content="{{var d = it.availability.current.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">
               {{=it.availability.current.duration}}
             </span><br/>
             <span style="font-size: smaller">
@@ -283,7 +283,7 @@ title: Home
                 <b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%
               </span>
               <span style="white-space: nowrap !important">
-                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">{{=it.availability.upcoming.downtime}}</span>
+                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming fish-table-hover-tip-elem" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-content="{{var d = it.availability.upcoming.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">{{=it.availability.upcoming.downtime}}</span>
               </span>
             </span>
             <div class="ui longer flushed modal upcoming-windows"></div>
@@ -391,7 +391,7 @@ title: Home
             {{?it.data.dataMissing !== false}}
               <i class="exclamation triangle icon" title="Unknown/Incomplete"></i>
             {{?}}
-            <span class="fish-availability-current" data-val="{{=it.availability.current.date}}" data-tooltip="{{var d = it.availability.current.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">
+            <span class="fish-availability-current fish-table-hover-tip-elem" data-val="{{=it.availability.current.date}}" data-content="{{var d = it.availability.current.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">
               {{=it.availability.current.duration}}
             </span><br/>
             <span style="font-size: smaller">
@@ -400,7 +400,7 @@ title: Home
                 <b>Uptime:</b>&nbsp;<span class="fish-availability-uptime">{{=(it.uptime * 100.0).toFixed(1)}}</span>%
               </span>
               <span style="white-space: nowrap !important">
-                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-tooltip="{{var d = it.availability.upcoming.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">{{=it.availability.upcoming.downtime}}</span>
+                <b>Next:</b>&nbsp;<span class="fish-availability-upcoming fish-table-hover-tip-elem" data-val="{{=it.availability.upcoming.date}}" data-prevclose="{{=it.availability.upcoming.prevdate}}" data-content="{{var d = it.availability.upcoming.date; if (d) { out += dateFns.formatRelative(d, Date.now()); } }}">{{=it.availability.upcoming.downtime}}</span>
               </span>
             </span>
             <div class="ui longer flushed modal upcoming-windows"></div>
@@ -540,12 +540,12 @@ title: Home
     {% endraw %}
 
     <!-- At last, we can load the layout and view model code. -->
-    <script type="text/javascript" src="js/app/layout.js?20260903_0001"></script>
+    <script type="text/javascript" src="js/app/layout.js?20260920_2309"></script>
     <script type="text/javascript" src="js/app/fishguide.js?20260624_2056"></script>
     <script type="text/javascript" src="js/app/baittally.js?20251111_1551"></script>
     <script type="text/javascript" src="js/app/map.js?20250310_2300"></script>
     <!-- NOTE: The ViewModel should be the last script loaded. -->
-    <script type="text/javascript" src="js/app/viewmodel.js?20260829_0900"></script>
+    <script type="text/javascript" src="js/app/viewmodel.js?20260920_2309"></script>
 
     <script type="text/javascript">
       $(() => {

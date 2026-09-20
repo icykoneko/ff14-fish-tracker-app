@@ -1133,6 +1133,20 @@ let ViewModel = new class {
       $subEntry.data('view', intuitionFishEntry);
       intuitionFishEntry.element = $subEntry[0];
 
+      // Configure custom tooltip so it is owned by `body` prevent filter glitches.
+      $('.fish-table-hover-tip-elem', $subEntry).popup({
+        context: 'body',
+        inline: false,
+        position: $('.fish-table-hover-tip-elem', $subEntry).attr('data-position') || 'top center',
+        on: 'hover',
+        preserve: false,
+        observeChanges: false,
+        onShow: (elem) => {
+          $(elem).popup('get popup')
+            .toggleClass('inverted', $('body').hasClass('dark'));
+        }
+      });
+
       if (this.settings.theme === 'dark') {
         $('*[data-tooltip]', $subEntry).attr('data-inverted', '');
       }
@@ -1187,6 +1201,20 @@ let ViewModel = new class {
 
     // Connect location button.
     $('.location-button', $entry).on('click', this.onFishEntryShowLocationClicked);
+
+    // Configure custom tooltip so it is owned by `body` prevent filter glitches.
+    $('.fish-table-hover-tip-elem', $entry).popup({
+      context: 'body',
+      inline: false,
+      position: $('.fish-table-hover-tip-elem', $entry).attr('data-position') || 'top center',
+      on: 'hover',
+      preserve: false,
+      observeChanges: false,
+      onShow: (elem) => {
+        $(elem).popup('get popup')
+          .toggleClass('inverted', $('body').hasClass('dark'));
+      }
+    });
 
     if (this.settings.theme === 'dark') {
       $('*[data-tooltip]', $entry).attr('data-inverted', '');
