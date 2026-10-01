@@ -25,10 +25,14 @@ let BaitTally = function(){
             </td>
             <td>
               {{~ baitFishObj.fishArr :fish}}
-              <a class="fish-name" target="_blank" href="https://ffxivteamcraft.com/db/en/item/{{=fish.id}}">
-              <div style="vertical-align: middle; width: 44px; height: 44px;" class="fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=fish.data.icon}}"
-              title="{{=fish.data.name}}">
+              {{? (typeof ViewModel !== 'undefined') && ((fish.id & 0x80000000) == 0) && !fish.intuitionFor }}
+              <div style="padding-left: 1px; padding-right: 2px; border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: -8px; height: 40px; vertical-align: middle;" class="ui middle aligned mini very compact icon button fishPinned" data-id="{{=fish.id}}">
+                <i class="pin icon"></i>
               </div>
+              {{?}}
+              <a class="fish-name" target="_blank" href="https://ffxivteamcraft.com/db/en/item/{{=fish.id}}">
+                <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=fish.data.icon}}"
+              title="{{=fish.data.name}}"></div>
               </a>
               {{~}}
             </td>
@@ -66,6 +70,50 @@ let BaitTally = function(){
         var sortedBaitArray = _.sortBy(baitArray.reverse(), (obj) => obj.fishArr.length).reverse();
         this.fishGuideFn = doT.template(tableTextTemplate);
         elem.innerHTML = this.fishGuideFn(sortedBaitArray);
+        if (typeof ViewModel !== 'undefined') {
+          // Connect pin/unpin to ViewModel.
+          $('.fishPinned.button', elem).each(function() {
+            let $this = $(this);
+            const fishId = $this.data('id');
+            let entry = ViewModel.fishEntries[fishId];
+            if (entry.isPinned) {
+              $this.addClass('red');
+            }
+          });
+          $(elem).on('click', '.fishPinned.button', function() {
+            let $this = $(this);
+            const fishId = $this.data('id');
+            let entry = ViewModel.fishEntries[fishId];
+            if (entry === undefined) {
+              // [!] DANGER: This can happen if the user unpinned the fish earlier,
+              // thus removing it from the view model's filters!
+              // To resolve this, we have to change the ordering just a little...
+              ViewModel.settings.pinned.add(fishId);
+              $this.addClass('red');
+              ViewModel.saveSettings();
+              // Updating the display /should/ bring the fish entry back.
+              ViewModel.updateDisplay();
+              // The model should be correct as well.
+            }
+            else
+            {
+              if (entry.isPinned) {
+                ViewModel.settings.pinned.delete(entry.id);
+                $this.removeClass('red');
+              } else {
+                ViewModel.settings.pinned.add(entry.id);
+                $this.addClass('red');
+              }
+              entry.isPinned = !entry.isPinned;
+              ViewModel.saveSettings();
+
+              // TODO: Determine if this fish should still be displayed efficiently.
+              ViewModel.layout.updatePinnedState(entry);
+              ViewModel.updateDisplay();
+            }
+          });
+          
+        }
       }
     };
   
