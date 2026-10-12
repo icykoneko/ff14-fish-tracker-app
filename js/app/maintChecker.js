@@ -12,16 +12,20 @@ let MaintChecker = function() {
       // Still... that's per server, not per use.
 
       this.cachedInfo = null;
+      this.cacheExpiration = 0;
 
       // Prime the cache immediately.
       this.promisedCache = this.getMaintenanceInfo();
     }
 
     async getMaintenanceInfo() {
-      if (this.promisedCache !== undefined) {
+      if (this.promisedCache !== undefined && !dateFns.isAfter(new Date(), this.cacheExpiration)) {
         return this.promisedCache;
       }
-      return fetch(new Request(CURRENT_MAINTENANCE_URL))
+
+      console.info("Checking for maintenance via lodestonenews.com");
+      this.cacheExpiration = dateFns.addHours(new Date(), 24); // wait a day before asking again
+      this.promisedCache = fetch(new Request(CURRENT_MAINTENANCE_URL))
         .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP Error: ${response.status}`);
@@ -69,6 +73,7 @@ let MaintChecker = function() {
           // Don't keep trying
           this.cachedInfo = [];
         });
+      return this.promisedCache;
     }
 
     isWindowBlocked(range) {
