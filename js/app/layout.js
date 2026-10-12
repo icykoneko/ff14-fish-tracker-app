@@ -67,12 +67,38 @@ class FishTableLayout {
     this.fishTable = $('tbody', $fishTable);
   }
 
+  applyMaintenanceChecks(fishEntry) {
+    // Apply maintenance updates to /limited availability/ fish only.
+    // Only call this when an entry is APPENDED to the table!
+    let hasLimitedAvailability = fishEntry.data.catchableRanges.length != 0;
+    if (hasLimitedAvailability) {
+      let $fishEntry = $(fishEntry.element);
+      let $availability = $('.fish-availability', $fishEntry);
+      try {
+        maintChecker.isWindowBlockedAsync(fishEntry.availability.upcomingWindows[0]).then(blocked => {
+          $('.blocked-maintenance-current', $availability).css("display", blocked ? "" : "none");
+        });
+      } catch (err) {
+        ; // ignored
+      }
+      try {
+        maintChecker.isWindowBlockedAsync(fishEntry.availability.upcomingWindows[1]).then(blocked => {
+          $('.blocked-maintenance-upcoming', $availability).css("display", blocked ? "" : "none");
+        });
+      } catch (err) {
+        ; // ignored
+      }
+    }
+  }
+
   append(fishEntry) {
     // Appends a new fish entry to the layout.
     this.fishTable[0].appendChild(fishEntry.element);
+    this.applyMaintenanceChecks(fishEntry);
     // Include any intuition elements as well.
     for (let subEntry of fishEntry.intuitionEntries) {
       this.fishTable[0].appendChild(subEntry.element);
+      this.applyMaintenanceChecks(subEntry);
     }
   }
 
@@ -205,11 +231,25 @@ class FishTableLayout {
       $currentAvail
         .attr('data-val', fishEntry.availability.current.date)
         .attr('data-content', dateFns.formatRelative(fishEntry.availability.current.date, baseTime));
+      try {
+        maintChecker.isWindowBlockedAsync(fishEntry.availability.upcomingWindows[0]).then(blocked => {
+          $('.blocked-maintenance-current', $availability).css("display", blocked ? "" : "none");
+        });
+      } catch (err) {
+        ; // ignored
+      }
       $upcomingAvail
         .attr('data-val', fishEntry.availability.upcoming.date)
         .attr('data-prevclose', fishEntry.availability.upcoming.prevdate)
         .attr('data-content', dateFns.formatRelative(fishEntry.availability.upcoming.date, baseTime))
         .text(fishEntry.availability.upcoming.downtime);
+      try {
+        maintChecker.isWindowBlockedAsync(fishEntry.availability.upcomingWindows[1]).then(blocked => {
+          $('.blocked-maintenance-upcoming', $availability).css("display", blocked ? "" : "none");
+        });
+      } catch (err) {
+        ; // ignored
+      }
       
       // If this fish is currently being displayed in the upcoming windows, update it now!
       if (ViewModel.upcomingWindowsEntry === fishEntry) {

@@ -84,6 +84,15 @@ let MaintChecker = function() {
 
       return blocked;
     }
+
+    async isWindowBlockedAsync(range) {
+      return this.getMaintenanceInfo().then(info => {
+        let blocked = info.some(r =>
+          null != dateFns.intervalIntersection(r.earth, range)
+        );
+        return blocked;
+      });
+    }
   }
 
   return new _MaintChecker();
