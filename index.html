@@ -73,6 +73,7 @@
     <script type="text/javascript" src="js/app/fishwatcher.js?20260823_1607"></script>
     <script type="text/javascript" src="js/app/calendar_export.js?20260824_1811"></script>
     <script type="text/javascript" src="js/app/sorters.js?20221001_0144"></script>
+    <script type="text/javascript" src="js/app/maintChecker.js?20261012_1218"></script>
 
     <!--
       - SUPER IMPORTANT!!!!!!
@@ -410,6 +411,9 @@
               </div>
             </div>
             <div class="window-start">
+              {{?maintChecker.isWindowBlocked(nextWindow)}}
+                🚧
+              {{?}}
               {{=dateFns.formatRelative(nextWindow.start, Date.now())}}
             </div>
             <div class="window-weather-and-time">
