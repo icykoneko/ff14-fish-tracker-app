@@ -25,15 +25,17 @@ let BaitTally = function(){
             </td>
             <td>
               {{~ baitFishObj.fishArr :fish}}
-              {{? (typeof ViewModel !== 'undefined') && ((fish.id & 0x80000000) == 0) && !fish.intuitionFor }}
-              <div style="padding-left: 1px; padding-right: 2px; border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: -8px; height: 40px; vertical-align: middle;" class="ui middle aligned mini very compact icon button fishPinned" data-id="{{=fish.id}}">
-                <i class="pin icon"></i>
+              <div style="display: inline-block">
+                {{? (typeof ViewModel !== 'undefined') && ((fish.id & 0x80000000) == 0) && !fish.intuitionFor }}
+                <div style="padding-left: 1px; padding-right: 2px; border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: -8px; height: 40px; vertical-align: middle;" class="ui middle aligned mini very compact icon button fishPinned" data-id="{{=fish.id}}">
+                  <i class="pin icon"></i>
+                </div>
+                {{?}}
+                <a class="fish-name" target="_blank" href="https://ffxivteamcraft.com/db/en/item/{{=fish.id}}">
+                  <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=fish.data.icon}}"
+                title="{{=fish.data.name}}"></div>
+                </a>
               </div>
-              {{?}}
-              <a class="fish-name" target="_blank" href="https://ffxivteamcraft.com/db/en/item/{{=fish.id}}">
-                <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=fish.data.icon}}"
-              title="{{=fish.data.name}}"></div>
-              </a>
               {{~}}
             </td>
           </tr>
