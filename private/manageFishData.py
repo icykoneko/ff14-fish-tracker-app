@@ -220,7 +220,7 @@ def initialize_data(args):
                ('placename_id', spot.key),
                ('map_coords', [spot.map_x, spot.map_y, spot.radius])]))
         for spot in XIV.game_data.get_sheet('FishingSpot')
-        if spot.get_raw('PlaceName{Main}') == 0 and spot.get_raw('TerritoryType') != 0])
+        if spot.get_raw('PlaceNameMain') == 0 and spot.get_raw('TerritoryType') != 0])
 
     SPEARFISHING_NODES = dict([
         (x['GatheringPointBase'].key,
@@ -555,7 +555,7 @@ def rebuild_fish_data(args):
             ('_id', item.key),
             *_make_localized_field('name', item, 'Name'),
             ('icon', '%06u' % item.get_raw('Icon')),
-            ('ilvl', item.get_raw('Level{Item}'))])
+            ('ilvl', item.get_raw('LevelItem'))])
 
     # Verify nothing's missing.
     diffs = set(fish_and_tackle_names) - \
@@ -789,7 +789,7 @@ def add_new_fish_data(args):
     for fishing_spot in XIV.game_data.get_sheet(FishingSpot):
         if fishing_spot.place_name.key == 0:
             continue
-        if fishing_spot.get_raw("PlaceName{Main}") != 0:
+        if fishing_spot.get_raw("PlaceNameMain") != 0:
             # TODO: For now, exclude Ocean Fishing nodes.
             continue
         for fish in fishing_spot.items:

@@ -234,22 +234,22 @@ def scan_scrip_turnins(orig_stdout, n=None):
     return True
 
 
-@scan_task
-def scan_gc_supply_duties(orig_stdout, n=None):
-    for duty in tracked_iter(realm.game_data.get_sheet('GCSupplyDuty'),
-                             'Scanning GC supply duties',
-                             file=orig_stdout, position=n):
-        # There are 3 possible items for each duty. FSH is index 10.
-        for i in range(3):
-            item = duty[('Item', i, 10)]
-            if item.key in catchable_fish:
-                reward = realm.game_data.get_sheet('GCSupplyDutyReward')[duty.key]
-                catchable_fish[item.key].gc = GCSupplyDutyTurnin(
-                    duty[('ItemCount', i, 10)],
-                    reward['Experience{Provisioning}'],
-                    reward['Seals{Provisioning}'])
+# @scan_task
+# def scan_gc_supply_duties(orig_stdout, n=None):
+#     for duty in tracked_iter(realm.game_data.get_sheet('GCSupplyDuty'),
+#                              'Scanning GC supply duties',
+#                              file=orig_stdout, position=n):
+#         # There are 3 possible items for each duty. FSH is index 10.
+#         for i in range(3):
+#             item = duty[('Item', i, 10)]
+#             if item.key in catchable_fish:
+#                 reward = realm.game_data.get_sheet('GCSupplyDutyReward')[duty.key]
+#                 catchable_fish[item.key].gc = GCSupplyDutyTurnin(
+#                     duty[('ItemCount', i, 10)],
+#                     reward['ExperienceProvisioning'],
+#                     reward['SealsProvisioning'])
 
-    return True
+#     return True
 
 
 @scan_task
@@ -268,17 +268,17 @@ def scan_leves(orig_stdout, n=None):
     return True
 
 
-@scan_task
-def scan_recipes(orig_stdout, n=None):
-    for recipe in tracked_iter(realm.game_data.get_sheet('Recipe'),
-                               'Scanning recipes',
-                               file=orig_stdout, position=n):
-        for i in range(8):
-            ingredient = recipe.get_raw(XivRow.build_column_name('Item{Ingredient}', i))
-            if ingredient in catchable_fish:
-                catchable_fish[ingredient].craft.append(recipe)
+# @scan_task
+# def scan_recipes(orig_stdout, n=None):
+#     for recipe in tracked_iter(realm.game_data.get_sheet('Recipe'),
+#                                'Scanning recipes',
+#                                file=orig_stdout, position=n):
+#         for i in range(8):
+#             ingredient = recipe.get_raw(XivRow.build_column_name('ItemIngredient', i))
+#             if ingredient in catchable_fish:
+#                 catchable_fish[ingredient].craft.append(recipe)
 
-    return True
+#     return True
 
 
 @scan_task
@@ -329,25 +329,25 @@ def scan_satisfaction(orig_stdout, n=None):
     return True
 
 
-@scan_task
-def scan_quests(orig_stdout, n=None):
-    for quest in tracked_iter(realm.game_data.get_sheet('Quest'),
-                              'Scanning quests',
-                              file=orig_stdout, position=n):
-        # Quests are a ROYAL PAIN!
-        # We're looking for the Script{Instruction} fields named "RITEM#".
-        # These will have corresponding Script{Arg} fields with item ids.
-        if 'FSH' not in [str(job.abbreviation) for job in quest[('ClassJobCategory', 0)].class_jobs]:
-            continue
+# @scan_task
+# def scan_quests(orig_stdout, n=None):
+#     for quest in tracked_iter(realm.game_data.get_sheet('Quest'),
+#                               'Scanning quests',
+#                               file=orig_stdout, position=n):
+#         # Quests are a ROYAL PAIN!
+#         # We're looking for the Script{Instruction} fields named "RITEM#".
+#         # These will have corresponding Script{Arg} fields with item ids.
+#         if 'FSH' not in [str(job.abbreviation) for job in quest[('ClassJobCategory', 0)].class_jobs]:
+#             continue
 
-        for i in range(50):
-            if not str(quest[('Script{Instruction}', i)]).startswith('RITEM'):
-                continue
-            item = quest.as_T(Item, 'Script{Arg}', i)
-            if item is not None and item.key in catchable_fish:
-                catchable_fish[item.key].quest += [(quest.key, str(quest))]
+#         for i in range(50):
+#             if not str(quest[('ScriptInstruction', i)]).startswith('RITEM'):
+#                 continue
+#             item = quest.as_T(Item, 'ScriptArg', i)
+#             if item is not None and item.key in catchable_fish:
+#                 catchable_fish[item.key].quest += [(quest.key, str(quest))]
 
-    return True
+#     return True
 
 
 @scan_task
@@ -579,7 +579,7 @@ for fish in tracked_iter(important_fish,
             'bigfish': fish.item.rarity >= 2,
             'quest': len(fish.quest) > 0,
             # 'shop': len(fish.shop) > 0,
-            'satisfaction': fish.satisfaction['Collectability{High}'] if fish.satisfaction else None,
+            'satisfaction': fish.satisfaction['CollectabilityHigh'] if fish.satisfaction else None,
             'craft': len(fish.craft) > 0,
             'gc': fish.gc is not None,
             'leve': len(fish.leve) > 0,
@@ -759,7 +759,7 @@ def convert_fish_to_json(fish: Fish):
             'bigfish': fish.item.rarity >= 2,
             'quest': len(fish.quest) > 0,
             # 'shop': len(fish.shop) > 0,
-            'satisfaction': fish.satisfaction['Collectability{High}'] if fish.satisfaction else None,
+            'satisfaction': fish.satisfaction['CollectabilityHigh'] if fish.satisfaction else None,
             'craft': len(fish.craft) > 0,
             'gc': fish.gc is not None,
             'leve': len(fish.leve) > 0,
