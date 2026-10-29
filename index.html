@@ -52,6 +52,22 @@
     <link rel="stylesheet" href="css/overlay.css?20260829_0910" />
     <link rel="stylesheet" href="css/dark_overlay.css?20260414_2133" />
 
+    <style>
+      .pumpkin-fish-overlay {
+        background-image: url("/public/images/pumpkin_cookie.png");
+        width: 44px;
+        height: 44px;
+        background-size: cover;
+        filter: opacity(0.1);
+      }
+      tr.fish-entry:hover .pumpkin-fish-overlay {
+        filter: opacity(0.25);
+      }
+      tr.fish-entry:hover .pumpkin-fish-overlay:hover {
+        filter: opacity(0.6667);
+      }
+    </style>
+
     <script type="text/javascript" src="js/app/checkForUpdates.js?20221001_1235"></script>
 
     <!-- Localization Support script -->
@@ -127,7 +143,9 @@
               <i class="pin icon"></i>
             </div>
           </div>
-          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}"></div>
+          <div class="ui middle aligned fish-icon sprite-icon sprite-icon-fish_n_tackle-{{=it.data.icon}}">
+            <div class="pumpkin-fish-overlay"></div>
+          </div>
         </td>
         <td>
           <div class="ui middle aligned" style="display: inline-block;">
